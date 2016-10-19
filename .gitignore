@@ -36,3 +36,10 @@
 ehthumbs.db
 Thumbs.db
 *.sage-chat
+
+# LATEX temp files #
+####################
+*.aux
+*.synctex*
+*.toc
+*.bbl
