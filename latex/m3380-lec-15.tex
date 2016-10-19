@@ -1,0 +1,453 @@
+\documentclass[m3380-lec-main.tex]{subfiles}
+\setcounter{chapter}{14}
+
+%\DeclareMathOperator{\R}{\mathbb{R}}
+
+\definecolor{vc0}{rgb}{1,1,1}
+\definecolor{ec0}{rgb}{0.500000000000000,0.500000000000000,0.500000000000000}
+
+
+\begin{document}
+
+
+\chapter{Maximum flow in a capacitated network}
+
+\section*{Goals}
+\begin{enumerate}[1.~]\setlength{\itemsep}{0pt}
+\item Define a \emph{capacitated network}.
+\item Introduce the maximum flow and minimum cut problems and the max-flow, min-cut theorem.
+\item Introduce Dinitz' Algorithm to solve the max-flow/min-cut problem.
+\end{enumerate}
+
+\section{Capacitated networks}
+All information flows over some sort of network, whether it be electronic or otherwise; you can think of communicating person-to-person as a pair of nodes and a regular graph edge connecting them, while a person lecturing to a group might be modeled more accurately by a hypergraph\footnote{Remember that a \emph{hypergraph} permits edges to contain more than two vertices.}. Similarly, the logistic problem of transporting goods and services across the country can be modeled using a transportation network.
+
+In both of these cases, there is a sort of maximum capacity for the transfer, and this gives us the concept of a \emph{capacitated network.} This is much like a weighted graph, but we tend to think of networks as directed. Additionally we must consider that not ever connection in a network can be utilized to its full capacity at all times; hence we have two numbers associated with each edge, the \emph{flow} and the \emph{capacity}. 
+
+A capacitated network also has two special vertices: the \emph{source}, $s$, and \emph{target} (or sink), $t$. The flow begins form the source and terminates at the sink -- a flow is valid if and only if the flow into each vertex is equal to the flow out of the vertex, with exceptions at $s$ and $t$, and the flow across each directed edge is less than or equal to the capacity of that edge.
+
+\section{Max flow}
+In nearly every application, the desire is to maximize the flow from $s$ to $t$ across the network; since what is flowing across most networks is not a physical fluid, the problem of maximizing flow is discrete-mathematical rather than a problem of physics solved by differential equations.
+
+\begin{defn} Suppose $\Delta = (V,E,s,t)$ is a directed graph with \emph{source vertex} $s$ and \emph{target vertex} $t$. A \emph{capacity function} $c:E\to\R^+$ for $\Delta$ is the maximum amount of flow which can pass across an edge; this is denoted $c(u,v)$ for the directed edge $uv\in E$. A \emph{flow function} $f:E\to \R^+$ for $\Delta$ is a function satisfying the following two constraints:
+\begin{enum}
+\item (Capacity Constraint) $f(u,v) \leq c(u,v)$ for all $uv\in E$, and
+\item (Conservation of Flow) for each $v\in V\setminus\set{s,t}$, \[\sum_{uv\in E}f(u,v) = \sum_{vu\in E}f(v,u).\]
+\end{enum}
+The \emph{value of flow} for a flow function $f$ is defined by 
+\[ \abs{f} = \sum_{v\in V}f(s,v) .\]
+Generally, we wish to maximize the value $\abs{f}$ over all possible flows.
+\end{defn}
+
+\begin{defn} Suppose $\Delta = (V,E,c,s,t)$ is a capacitated network with source $s$ and target $t$. An $s-t cut$ is a partition $C=(S,T)$ such that $s\in S$ and $t\in T$. The \emph{cut-set} of $C$ is the set of edges $\set{uv\in E:u\in S, v\in T}$. We notice that if a flow of $0$ is put on all edges in the cur-set of $C$, then $\abs{f}=0$. The \emph{capacity} of the cut $C=(S,T)$ is 
+\[c(S,T) = \sum_{\set{uv\in E: u\in S, v\in T}}c(u,v). \]
+Just as it is interesting to determine a maximum flow over a network, there are applications when finding a minimum-capacity cut-set is desirable.
+\end{defn}
+
+\begin{thm}[Max-flow Min-cut Theorem] The maximum value of an $s$-$t$ flow is equal to the minimum capacity of an $s$-$t$ cut.
+\end{thm}
+
+\section{Dinitz' Algorithm}
+The original solution to the problem of calculating a maximum flow was published in 1956 by {L. R. Ford, Jr. and D. R. Fulkerson}. The modified version presented here was produced by Yefim Dinitz as a ``response to a pre-class exercise in Adel'son Vel'sky's Algorithm class." According to Dinitz, he was at the time unaware of the basic details of the Ford-Fulkerson algorithm upon which his algorithm improves.
+
+Both algorithms proceed in this general fashion: given a flow, determine which edges have ``residual capacity." In the residual graph, try to find a flow which can augment the current flow. When no such flow can be found, a maximum flow has been found.
+
+The foremost reason an improvement was needed to the Ford-Fulkerson algorithm is its failure to terminate in certain cases of networks with irrational capacities. As the algorithm is successful in constructing a maximum flow whenever it terminates, an improvement to the algorithm was more likely than a replacement. Dinitz' improvement utilized shortest paths to overcome the conceptual flaw in Ford-Fulkerson during the step of finding an augmenting path. Hence we will first discuss the modification to Dikstra's algorithm which produces the necessary ``shortest path graph." 
+
+The modification to Dijkstra's algorithm to construct a subgraph consisting of all shortest paths from $s$ to $t$ is conceptually deep but easy to implement. Suppose $v\in V$ with $d(s,v)=k$, where $s$ is the source vertex. Rather than recording a single $s,v$-path, we records every vertex $u\in V$ such that $d(s,u)=k-1$ and there is an arc\footnote{Recall that we are working over directed graphs now.} from $u$ to $v$.
+
+\begin{alg}[All Shortest Paths from $s$ (Modified Dijkstra)]\label{alg:mod_dijkstra} Suppose that $\Delta_f=(V,E_f,c_f,s,t)$ is a capacitated network with source vertex $s$ and target vertex $t$.
+\begin{enum}
+\item Initialize the distance and predecessor functions,
+\begin{align*}
+d(s,v) &= \begin{cases} 0, & v=s \\ \infty, &v\neq s \end{cases} 
+&
+p(v) &= \set{}
+\end{align*}
+for each $v\in V$. Also, define a set $V'=\set{}$ of visited vertices.
+\item While $\abs{V'}<\abs{V}$, repeat the following steps:
+\begin{enuma}
+\item Let $u\in V\setminus V'$ be an unvisited vertex nearest to $s$; that is, \[d(s,u)=\min\set{d(s,v):v\in V\setminus V'}.\]
+\item For each $v\in V\setminus V'$ such that $uv\in E_f$, $d(s,u)+1\leq d(s,v)$, and $c_f(u,v)>0$:
+\begin{enumerate}[i.~]
+\item update the distance to $v$ by setting $d(s,v)=d(s,u)+1$, and
+\item update the set of predecessors of $v$, $p(v)$, to include $u$.
+\end{enumerate} 
+\item Add $u$ to $V'$.
+\end{enuma}
+\item Return the values of $d(s,v)$ and $p(v)$ for each $v\in V$.
+\end{enum}
+\end{alg}
+
+The true ``secret" to Dinitz' algorithm is not in its use of this shortest path algorithm once, but twice: if the output $p(v)$ is used to define a new set of arrows $E_b=\set{uv:v\in p(u)}$ we can use the modified shortest path algorithm now on the graph with edge set $E_b$ and source $t$ to ensure that the only shortest paths we retain are paths from $s$ to $t$.
+
+
+\begin{figure}[hbt]
+\begin{center}
+\begin{tikzpicture}[scale=2, node font=\tiny]
+\foreach \n/\x/\y in {1/0.0/0.0, 2/1.0/0.0, 3/0.0/1.0, 4/1.0/1.0, 5/1.0/2.0, 6/0.0/2.0} ,
+	\node (\n) at (\x,\y) {};
+
+\draw[-{Latex[]}, ec0]
+    (1) edge node [red, fill=white] {50} node [black, below=10pt] {\normalsize (A)} (2) 
+    (1) edge node [red, fill=white] {10} (3)
+    (2) edge [bend left=15] node [red, fill=white] {10} (3)
+    (2) edge node [red, fill=white] {5} (4)
+    (2) edge [bend right=30] node [red, fill=white] {8} (5)
+    (3) edge [bend left=15] node [red, fill=white] {20} (2)
+    (3) edge node [red, fill=white] {10} (4)
+    (3) edge node [red, fill=white] {20} (5)
+    (3) edge node [red, fill=white] {20} (6)
+    (4) edge node [red, fill=white] {13} (5)
+    (6) edge node [red, fill=white] {20} (5);
+
+\path \foreach \n in {1, 2, 3, 4, 5, 6} { (\n) node [fill=vc0, draw=black, circle, inner sep=1pt, outer sep=0pt] {\texttt{\n}}};
+\node [left=5pt] at (1) {Source};
+\node [right=5pt] at (5) {Target};
+%%%%%%%%%%%%%
+\foreach \n/\x/\y in {1/2.0/0.0, 2/3.0/0.0, 3/2.0/1.0, 4/3.0/1.0, 5/3.0/2.0, 6/2.0/2.0} ,
+	\node (u\n) at (\x,\y) {};
+
+\draw[{Latex[]}-, ec0]
+    (u1) edge node [red, fill=white] {50} node [black, below=10pt] {\normalsize (B)} (u2) 
+    (u1) edge node [red, fill=white] {10} (u3)
+    (u2) edge node [red, fill=white] {5} (u4)
+    (u2) edge [bend right=30] node [red, fill=white] {8} (u5)
+    (u3) edge node [red, fill=white] {10} (u4)
+    (u3) edge node [red, fill=white] {20} (u5)
+    (u3) edge node [red, fill=white] {20} (u6)
+;
+
+\path \foreach \n in {1, 2, 3, 4, 5, 6} { (u\n) node [fill=vc0, draw=black, circle, inner sep=1pt, outer sep=0pt] {\texttt{\n}}};
+\node [left=5pt] at (u1) {Source};
+\node [right=5pt] at (u5) {Target};
+%%%%%%%%%%%%%%%%
+\foreach \n/\x/\y in {1/4.0/0.0, 2/5.0/0.0, 3/4.0/1.0, 4/5.0/1.0, 5/5.0/2.0, 6/4.0/2.0} ,
+	\node (v\n) at (\x,\y) {};
+
+\draw[-{Latex[]}, ec0]
+    (v1) edge node [red, fill=white] {50} node [black, below=10pt] {\normalsize (C)} (v2) 
+    (v1) edge node [red, fill=white] {10} (v3)
+    (v2) edge [bend right=30] node [red, fill=white] {8} (v5)
+    (v3) edge node [red, fill=white] {20} (v5)
+;
+
+\path \foreach \n in {1, 2, 3, 4, 5, 6} { (v\n) node [fill=vc0, draw=black, circle, inner sep=1pt, outer sep=0pt] {\texttt{\n}}};
+\node [left=5pt] at (v1) {Source};
+\node [right=5pt] at (v5) {Target};
+\end{tikzpicture}
+\end{center}
+\caption{\label{fig:capnet_1}(A) A capacitated network, $\Delta=(V,E,c,v_1,v_5)$; (B) the result $\Delta'$ of applying Algorithm \ref{alg:mod_dijkstra} on $\Delta$; (C) the ``layered graph" $\Lambda=(V,E_\ell,c_\ell,v_1,v_5)$ resulting from the application of Algorithm \ref{alg:mod_dijkstra} on $\Delta'$.}
+\end{figure}
+
+\begin{exmp}\label{exmp:capnet_1}
+The graph in \autoref{fig:capnet_1}(A) is a capacitated network $\Delta=(V,E,c,s,t)$ with $V=\set{v_1,v_2,\ldots,v_6}$; only the indices of vertices are shown in the figure. Suppose we wish to apply Dijkstra's algorithm to this graph rooted at $v_1$. The neighbors of $v_1$ are $N(v_1)=\set{v_2,v_3}$; visiting each of these in turn we see that the neighbors of $v_2$ are $N(v_2)=\set{v_3,v_4,v_5}$; however, $d(v_1,v_3)=1<2=d(v_1,v_2)+1$, so we do not update the predecessors of $v_3$. Likewise, $N(v_3) = \set{v_4,v_5,v_6}$. As this provides new paths of the same length to both $v_4$ and $v_5$, we add $v_3$ as a predecessor of each of those vertices. Recalling that the modified Dijkstra's algorithm provides a sort of ``predecessor graph," we have obtained the capacitated network shown in \autoref{fig:capnet_1}(B). The second step of producing the layered data structure is to apply Dijkstra's algorithm on this intermediate graph, rooted now at the target vertex $v_5$. As the graph is directed, we see that vertices $v_4$ and $v_6$ are unreachable in the intermediate graph when rooted at $v_5$; hence the resulting layered graph of \autoref{fig:capnet_1}(C) with vertex $v_1$ at distance $0$, vertices $v_2$ and $v_3$ at distance $1$, and vertex $v_5$ at distance $2$.
+\end{exmp}
+
+It is important to make a note about the structure of $\Lambda = (V,E_\ell,c_\ell,s,t)$ produced from two successive applications of Algorithm \ref{alg:mod_dijkstra}. We first produced $\Delta'$ from $\Delta$ by including the reverse edges of exactly those edges lying on shortest paths emanating from $s$; we then construct $\Lambda$ from $\Delta'$ by including only those edges on shortest paths terminating at $t$. Hence \emph{every path in $\Lambda$ beginning at $s$ will terminate at $t$ and will be a shortest such path}. This structure must be maintained as we augment the flow across the network, for two reasons: as edges become saturated\footnote{An edge $uv$ is \emph{saturated} when $f(u,v)=c(u,v)$, where $f$ is the flow and $c$ is the capacity.} they must be removed from the residual capacity graph, just as residual capacities of unsaturated edges must be decreased. When saturated edges are removed, this can result in a vertex with no successors or with no predecessors, and both of these types of vertex lie on no $s,t$-path in $\Lambda$.
+
+The graph $\Lambda$ is referred to as a layered structure since we can think of the vertices as lying in distance layers away from $s$ such that any edge $uv\in E_\ell$ has the property $d(s,v)=d(s(u)+1$. Thus maintaining those layers means we need no special algorithm to find augmenting paths: any path emanating from $s$ in a well-maintained layered graph will eventually terminate at $t$. The order in which paths are followed can change the final assignment of flow to edges, but interestingly cannot change the total final value of the flow. The flow assigned along the path is the minimum residual capacity along any edge of the path.
+
+\begin{alg}[Pathfinding]\label{alg:pathfind} Suppose $\Lambda = (V,E_\ell,c_\ell,s,t)$ is the result of two applications of Algorithm \ref{alg:mod_dijkstra} on a capacitated network $\Delta=(V,E,c,s,t)$.
+\begin{enum}
+\item Let $u_0=s$.
+\item Inductively choose $u_{i+1}$ for $i\geq 0$ such that $u_iu_{i+1}\in E_\ell$, until $u_n=t$.
+\item Let $f^* = \min\set{c_\ell(u_i,u_{i+1}):i=1,2,\ldots,n-1}$.
+\item The augmenting path to be returned is the path $(u_0,u_1,u_2,\ldots,u_n)$ and the augmenting flow is $f^*$ on each of those edges.
+\end{enum}
+\end{alg}
+
+\begin{figure}[hbt]
+\begin{center}
+\begin{tikzpicture}[scale=2, node font=\tiny]
+\foreach \n/\x/\y in {1/0.0/0.0, 2/1.0/0.0, 3/0.0/1.0, 4/1.0/1.0, 5/1.0/2.0, 6/0.0/2.0} ,
+	\node (\n) at (\x,\y) {};
+
+\draw[-{Latex[]}, ec0]
+    (1) edge [blue, thick] node [red, fill=white] {50} node [black, below=10pt] {\normalsize(A)} (2) 
+    (1) edge node [red, fill=white] {10} (3)
+    (2) edge [bend right=30, blue, thick] node [red, fill=white] {8} (5)
+    (3) edge node [red, fill=white] {20} (5);
+
+\path \foreach \n in {1, 2, 3, 4, 5, 6} { (\n) node [fill=vc0, draw=black, circle, inner sep=1pt, outer sep=0pt] {\texttt{\n}}};
+\node [left=5pt] at (1) {Source};
+\node [right=5pt] at (5) {Target};
+%%%%%%%%%%%%%
+\foreach \n/\x/\y in {1/2.0/0.0, 2/3.0/0.0, 3/2.0/1.0, 4/3.0/1.0, 5/3.0/2.0, 6/2.0/2.0} ,
+	\node (u\n) at (\x,\y) {};
+
+\draw[-{Latex[]}, ec0]
+    (u1) edge[red, thick] node [red, fill=white] {42} node [black, below=10pt] {\normalsize(B)} (u2) 
+    (u1) edge node [red, fill=white] {10} (u3)
+    (u3) edge node [red, fill=white] {20} (u5)
+;
+
+\path \foreach \n in {1, 2, 3, 4, 5, 6} { (u\n) node [fill=vc0, draw=black, circle, inner sep=1pt, outer sep=0pt] {\texttt{\n}}};
+\node [left=5pt] at (u1) {Source};
+\node [right=5pt] at (u5) {Target};
+%%%%%%%%%%%%%%%%
+\foreach \n/\x/\y in {1/4.0/0.0, 2/5.0/0.0, 3/4.0/1.0, 4/5.0/1.0, 5/5.0/2.0, 6/4.0/2.0} ,
+	\node (v\n) at (\x,\y) {};
+
+\draw[-{Latex[]}, ec0]
+    (v1) edge[white] node [black, below=10pt] {\normalsize(C)} (v2) 
+    (v1) edge node [red, fill=white] {10} (v3)
+    (v3) edge node [red, fill=white] {20} (v5)
+;
+
+\path \foreach \n in {1, 2, 3, 4, 5, 6} { (v\n) node [fill=vc0, draw=black, circle, inner sep=1pt, outer sep=0pt] {\texttt{\n}}};
+\node [left=5pt] at (v1) {Source};
+\node [right=5pt] at (v5) {Target};
+\end{tikzpicture}
+\end{center}
+\caption{(A) An augmenting path with flow value $f^*=8$ in $\Lambda$ from Example \ref{exmp:capnet_1}. (B) After updating the residual capacities of edges in $E_\ell$, the edge $v_2v_5$ was saturated and therefore removed. This leaves $v_2$ with no successor vertices, so the edge $v_1v_2$ (shown with reduced capacity) must also be removed as no additional flow can move from $v_1$ to $v_5$ along $v_1v_2$. (C) The graph $\Lambda$ after maintenance.}
+\end{figure}
+
+\begin{exmp}[Continued from previous example.]
+In our graph $\Lambda$, $u_0=s=v_1$ has only two successors: $v_2$ and $v_3$. Choosing $u_1=v_2$, we see that the only successor of $u_1$ in $\Lambda$ is $v_5=t$, so $u_2=v_5$. Our augmenting path is then $(v_1,v_2,v_5)$; as this flow only consists of two edges of capacities $50$ and $8$ respectively, it is clear that $f^*=\min\set{50,8}=8$.
+
+The current flow in our graph is $f(u,v)=0$ for all $uv\in E$, and we now have an augmenting path and flow. So we update the flow value to accommodate the augmentation:
+\[f(u,v) = \begin{cases}8, & uv\in\set{v_1v_2,v_2v_5} \\ 0, &uv\in E\setminus\set{v_1v_2,v_2v_5}. \end{cases}\]
+We update our residual capacities and see that edge $v_2v_5$ is now saturated; removing this edge from $E_\ell$ we find that now $v_2$ has no successors and so all edges terminating at $v_2$ must also be removed in graph maintenance.
+
+Having maintained the graph, we see that the path $(v_1,v_3,v_5)$ remains and permits another augmenting flow of $f^*=10$. Again updating, we have
+\[f(u,v) = \begin{cases}
+    8, & uv\in\set{v_1v_2,v_2v_5} \\
+    10, & uv\in\set{v_1v_3,v_3v_5} \\
+    0, &uv\in E\setminus\set{v_1v_2,v_1v_3,v_2v_5,v_3v_5}.
+    \end{cases}
+\]
+Now no augmenting flows remain in $\Lambda$ after maintenance, as $v_1v_3$ is saturated and hence $v_3$ has no predecessors in $\Lambda$. 
+
+In order to continue to augment the flow, we must again determine the residual capacities and build a new residual graph $\Delta_f$ taking into account the current flow $f$.
+\end{exmp}
+
+\begin{rem} About graph maintenance: there are several different ways that this can be handled, all with the same result but different in individual process. Dinitz originally kept track of the endpoints of edges which became saturated as the algorithm updated the residual capacities along an augmenting path. After these capacities were updated, the algorithm processed through lists of vertices which might have been left with either no successors or no predecessors. In our implementation, we opt for a recursive solution: when an edge $uv\in E_\ell$ becomes saturated, we  call a process \verb|clean_to_source| on its head vertex $u$ and then a process \verb|clean_to_target| on its tail vertex $v$. These two processes behave similarly, but in opposite directions. The first, \verb|clean_to_source|, determines whether $u$ has any successors; if not, \verb|clean_to_source| is run on each predecessor $w$ of $u$. Likewise \verb|clean_to_target| checks whether $v$ has any predecessors, and if not, \verb|clean_to_target| is run on each successor $w$ of $v$.
+\end{rem}
+
+\begin{alg}[Maintenance of layered graph]\label{alg:maint}
+Suppose $\Lambda = (V,E_\ell,c_\ell,s,t)$ is the layered graph structure output from two successive applications of Algorithm \ref{alg:mod_dijkstra}, that $P=\set{s=u_0,u_1,\ldots,u_{n-1},u_n=t}$ is an augmenting path with augmenting flow value $f^*$.
+\begin{enum}
+\item For each $i\in\set{0,1,2,\ldots,n-1}$, update $c_\ell(u_i,u_{i+1})$ by subtracting from it the value $f^*$.
+\item For an edge $uv\in E_\ell$ where after updating, $c_\ell(u,v)=0$, do the following:\medskip
+
+\textbf{Clean to source from a vertex $u$:}
+\begin{enuma}
+\item The vertex $u$ has no successors in $\Lambda$ precisely when \[\set{w\in V: c_\ell(u,w)>0}=\set{}.\] 
+\item If $u$ has no successors and is not the source vertex $s$, consider the set ${P=\set{w\in V:c_\ell(w,u)>0}}$ of predecessors of $u$. 
+\item For each $w\in P$, set $c_\ell(w,u)=0$. For each $w\in P$ with no successors other than $u$, \textbf{clean to source from the vertex $w$}.
+\end{enuma}
+\newpage
+
+\textbf{Clean to target from a vertex $v$:}
+\begin{enuma}
+\item The vertex $v$ has no predecessors in $\Lambda$ precisely when \[\set{w\in V:c_\ell(w,v)>0}=\set{}.\]
+\item If $v$ has no sucessors and is not the target vertex $t$, consider the set $S=\set{w\in V:c_\ell(v,w)>0}$ of successors of $v$.
+\item For each $w\in S$, set $c_\ell(v,w)=0$. For each $w\in S$ with no predecessors other than $v$, \textbf{clean to target from the vertex $w$}.
+\end{enuma}
+
+\item After both cleaning processes have finished for all saturated edges, remove from $E_\ell$ any edge $uv$ with $c_\ell(u,v)=0$.
+\end{enum}
+\end{alg}
+
+We now have all the pieces in place to actually state Dinitz' algorithm.
+
+\begin{alg}[Dinitz' Max Flow Algorithm]
+Suppose we are given a capacitated network $\Delta = (V,E,c,s,t)$ with capacity function $c:E\to\R^+$, source $s$, and target $t$.
+\begin{enum}
+\item Define the initial flow $f(u,v)=0$ for $uv\in E$ or $vu\in E$.
+\item Repeat the following:
+\begin{enuma}
+\item Calculate the \emph{residual capacity function} $c_f:V\times V\to \R^+$, given by:
+\[c_f(u,v) = \begin{cases}
+    c(u,v) - f(u,v), & uv\in E \\
+    f(u,v), & vu\in E
+    \end{cases}. \]
+We remark that a positive flow of $f(u,v)$ provides exactly that much capacity to the reverse edge $vu$.
+\item Let $\Delta_f=(V,E_f,c_f,s,t)$ be the \emph{residual graph} with \[E_f=\set{uv\in E:c_f(u,v)>0}.\]
+\item Apply Algorithm \ref{alg:mod_dijkstra} to $\Delta$ to produce $\Delta'$; apply Algorithm \ref{alg:mod_dijkstra} again to $\Delta'$ to obtain the layered graph $\Lambda = (V,E_\ell,c_\ell,s,t)$. \textbf{When no shortest paths from $s$ to $t$ are found in constructing $\Delta'$, the flow is optimal.}
+\item Repeat the following:
+\begin{enumerate}[i.~]
+\item Use Algorithm \ref{alg:pathfind} to find an augmenting path $P$ with flow value $f^*$ in $\Lambda$. If no augmenting path exists, return to step a.
+\item Update $f$ by adding $f^*$ to the flow for each edge $u_iu_{i+1}$ where $u_i,u_{i+1}$ are adjacent vertices in $P$.
+\item Perform Algorithm \ref{alg:maint} upon $\Lambda$.
+\end{enumerate}
+\end{enuma}
+\end{enum}
+\end{alg}
+
+\section{Implementing Dinitz' Algorithm}
+One caveat to the implementation of Dinitz algorithm is that in several places, we need to have a comparison value which is always going to be bigger than present in the graph. For instance, the initial distance to a vertex $v\neq s$ in the modified Dijkstra's code should be $\infty$, but Python has no built-in mathematical understanding of $\infty$! In those instances, we will define a variable \verb|infty| which is larger than the largest value which we should ever see in that context.
+
+
+%%%%%%%%%%%%%% CODE LISTING OF DINITZ
+%%%%%%%%%%%%%% CODE LISTING OF DINITZ
+%%%%%%%%%%%%%% CODE LISTING OF DINITZ
+%%%%%%%%%%%%%% CODE LISTING OF DINITZ
+\bc
+\begin{verbatim}
+def dinitz(cap_dic, source, target):
+    
+    #Our helper functions:
+    # This removes 0-weight edges and cleans entries for vertices with no 
+    # out-edges from the dictionary.
+    clean = lambda weighted_graph: {u:{v:w for v,w in nbrs.items() if w>0} 
+                                    for u, nbrs in weighted_graph.items() 
+                                    if nbrs != {} and sum(nbrs.values())>0}
+    
+    # This is the modified Dijkstra's algorithm
+    def all_shortest_paths(weight_dic, source, vertex_set):
+        # The longest path on n vertices has n-1 edges, so properly bigger than 
+        # the longest path is
+        infty = len(vertex_set)+1 
+        dist = {v:(infty if v!=source else 0) for v in V}
+        pred = {v:{} for v in V}
+        visited = []
+        max_dist = 0
+        is_pred = set([])
+        while len(visited)<len(V):
+            temp = sorted((d,v) for v,d in dist.items() if v not in visited)
+            if temp == [] or temp[0][0]==infty:
+                break
+            else:
+                u = temp[0][1]
+                visited += [u]
+                try:
+                    for v,w in weight_dic[u].items(): 
+                        if w>0 and dist[v] >= dist[u]+1:
+                            dist[v] = dist[u]+1
+                            if dist[v]>max_dist:
+                                max_dist = dist[v]
+                            pred[v][u]=w
+                            is_pred.add(u)
+                except KeyError:
+                    continue
+        return ({v:d for v,d in dist.items() if d<infty},
+                {v:p for v,p in pred.items() if v in dist.keys() 
+                 and dist[v]<infty})
+
+    # The pathfinding algorithm, with error handling which takes care of the 
+    # special terminate cases.
+    def path_find(layers):
+        # 1 more than the highest capacity in the layered graph is effectively 
+        # infinite
+        infty = 1+max([w for d, layer in layers.items() 
+                       for u,nbrs in layer.items() 
+                       for v,w in nbrs.items()])
+        if any(layer=={} for layer in layers.values()):
+            raise RuntimeError('No augmenting path! Empty layer in graph.')
+        try:
+            path = [ list(layers[0].keys())[0] ]
+            flow_amount = infty
+            for d in sorted(layers.keys())[:-1]:
+                u = path[-1]
+                v = list(layers[d][u].keys())[0]
+                flow_amount = min(flow_amount, layers[d][u][v])
+                path += [v]
+            
+            return (flow_amount, path)
+        except KeyError:
+            raise RuntimeError('No augmenting path remains in layered graph.')
+            
+    def clean_to_source(layers, u, d):
+        if layers[d][u] == {}:
+            if d>0:
+                for w,w_nbrs in layers[d-1].items():
+                    if u in w_nbrs.keys():
+                        layers[d-1][w].pop(u)
+                        if len(w_nbrs)==0:
+                            layers = clean_to_source(layers, w, d-1)
+            layers[d].pop(u)
+        return layers
+    
+    def clean_to_target(layers, v, d):
+        maxd = max(layers.keys())
+        if not any(v in layers[d-1][w].keys() for w in layers[d-1].keys()):
+            for w in layers[d][v].keys():
+                layers[d][v].pop(w)
+                if d<maxd:
+                    layers = clean_to_target(layers, w, d+1)
+            layers[d].pop(v)
+        return layers
+
+    def maintain_layers(layers, source, target, weight, path):
+        for d,(u,v) in enumerate(zip(path[:-1],path[1:])):
+            try:
+                layers[d][u][v] -= weight
+                if layers[d][u][v] == 0:
+                    zero = layers[d][u].pop(v)
+                    layers = clean_to_source(layers, u, d)
+                    layers = clean_to_target(layers,v,d+1)
+            except KeyError:
+                continue
+        return layers
+    
+    # end of helper functions
+    # This is the main routine of the dinitz function
+    
+    V = set(v for u in cap_dic.keys() for v in [u]+list(cap_dic[u].keys()))
+    # Minor error handling
+    if not (source in V and target in V):
+        raise ValueError('Invalid choice of source and/or target vertices.')
+        
+    #initalize flow
+    flow = {u:{v:0 for v in V if v!=u} for u in V}
+    a
+    # This is the main loop.
+    while True:
+        # res_cap is the capacity dictionary for Delta_f
+        res_cap = {u:{v:0 for v in V if v!=u} for u in V}
+        for u, nbrs in cap_dic.items():
+            for v, c in nbrs.items():
+                res_cap[u][v] += c-flow[u][v]
+                res_cap[v][u] += flow[u][v]
+        res_cap = clean(res_cap)
+        
+        # modified Dijkstra first
+        dist, pred = all_shortest_paths(res_cap, source, V)
+        # modified Dijkstra second
+        dist, succ = all_shortest_paths(pred, target, V)
+        # maxd is the length of a shortest path in Lambda
+        maxd = max(d for d in dist.values() if d<len(dist.keys()))
+
+        if target not in [v for u,nbrs in succ.items() for v in nbrs.keys()]:
+            # if target is not reachable via Dijkstra's algorithm, we terminate 
+            # the main loop.
+            break
+
+        layers = {maxd-d:{u:n for u,n in succ.items() if dist[u]==d} 
+                  for d in dist.values() if d <= maxd}
+
+        # iterate through finding augmenting flows in the layered structure
+        try:
+            while not all(val=={} for val in layers.values()):
+                # use path_find to find an augmenting path; this may generate 
+                # a RuntimeError.
+                flow_val, path = path_find(layers)
+
+                # add the flow amount to every edge in the path.
+                for i,v in enumerate(path[:-1]):
+                    flow[v][path[i+1]] += flow_val
+                    
+                # prune the layered data structure; this is equivalent to 
+                # recalculating the residual capacity but uses the calculated 
+                # union of shortest paths, until no path from source to target 
+                # remains. Edges of residual capacity 0 are removed, as are 
+                # vertices with no outflow or no inflow.
+
+                layers = maintain_layers(layers, source, target, flow_val, path)
+        except RuntimeError:
+            # If the RuntimeError was generated, then no more augmenting flows 
+            # exist. Go to the next iteration of the main loop.
+            continue
+    # Once the code reaches this point, we've broken out of the main loop, so no 
+    # more augmenting paths are possible.
+    # The sum of flows out of the source is the value of the flow.
+    flow_val = sum(f for f in flow[source].values())
+    
+    # return the value of the flow and the dictionary of edges with positive flow.
+    return flow_val, clean(flow)
+\end{verbatim}
+\ec
+
+\end{document}

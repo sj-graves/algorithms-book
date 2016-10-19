@@ -1,0 +1,250 @@
+\documentclass[m3380-lec-main.tex]{subfiles}
+\setcounter{chapter}{4}
+\begin{document}
+
+
+
+\chapter{Matrices and their operations}
+
+\section*{Goals}
+
+\section*{Special Instructions}
+
+\section{What is a matrix?}
+A \emph{matrix} is a rectangular grid of elements\footnote{There's a much more technical definition, but for our purposes this is sufficient.}; in our investigation, we will limit the elements to real numbers. For instance, and by way of demonstrating the form we will use to write a matrix, 
+\[A=\begin{bmatrix} \pi& e& 6.2 \\ \frac13 & 7 & -42\end{bmatrix}\]
+and
+\[B = \begin{bmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}\]
+are matrices. Neither
+\[ C = \begin{bmatrix} 5 & 8 & \\ 2 & 3 & 0 \end{bmatrix}\] nor
+\[ D = \begin{bmatrix} \text{Eric} & \text{John} \\ \text{Graham} & \text{Terry} \end{bmatrix}\]
+are matrices, the first because it is non-rectangular and the second because the names of members of Monty Python are not numbers.
+
+Matrices have many, many interesting properties. These can be investigated at length in a course on Matrix Theory (like Math 3203: Matrix Methods) or better yet in a course on Linear Algebra (like Math 3315: Linear Algebra). We will take an approach much more like Matrix Theory than Linear Algebra so that we can avoid most or all of the ``proofiness."
+
+\section{How would a computer best represent a matrix?}
+There is a sort of natural way to represent a matrix algorithmically, which arises from the way we refer to elements of a matrix. For instance, if we are working with a matrix $A$ and are interested in the element of $A$ in the $i^\text{th}$ row and $j^\text{th}$ column\footnote{By convention rows are horizontal and columns vertical.}, we might logically refer to it mathematically as the element $a_{i,j}$. The number of rows of $A$ is its \emph{row dimension}, and the number of columns of $A$ is its \emph{column dimension}. Hence if we have 
+\[A=\begin{bmatrix} \pi& e& 6.2 \\ \frac13 & 7 & -42\end{bmatrix}\]
+we would say that $A$ has row dimension $2$ and column dimension $3$, or more concisely say that $A$ is a $2\times 3$ matrix. Row dimension is always listed first in this notation.
+
+Since we index the element in the $i^\text{th}$ row and $j^\text{th}$ column as $a_{i,j}$, it seems natural that the $i^\text{th}$ row should be something like a list. In fact, since we won't want to overwrite individual elements of a matrix, we'll use a tuple of tuples to store the elements. Without any validation of input, this would be easy enough. However, if we want to be careful, there are many things which could go wrong in trying to input a matrix which we want to protect against -- after all, we might use this matrix class later for something more fun!
+
+Here's a brief list of what could be incorrect input for a matrix:
+\begin{enum}
+\item The value input could not be have any elements (not a compound data type).
+\item The elements of the input value could not be compound types.
+\item The first element of the input could be an empty container, like \verb|[ ]|.
+\item The length of the elements of the inputs could be different.
+\item The innermost elements could be non-numeric.
+\end{enum}
+All of these errors are addressed in the following code, which you should save as \verb|Matrix.py|.
+
+\smallskip{\fn\begin{verbatim}
+class Matrix:
+    """A matrix class.
+"""
+    def __init__(self, grid):
+        input_err = '\n\nMatrix class requires rectangular grid of numbers '+\
+                    'as input.\n\n'
+        try:
+            # will raise error if not compound
+            self._coldim = len(grid[0])
+            if self._coldim==0: # empty first row
+                raise ValueError(input_err) 
+            self._data = []
+            for row in grid:
+                # check row length and that all row elements are numbers
+                if (len(row)!=self._coldim) or \
+                   not all([type(x) in [float,int] for x in row]):
+                    raise ValueError(input_err[2:-2]) 
+                else:
+                    self._data.append(tuple(row))
+        except:
+            print(input_err)
+            raise
+        self._data = tuple(self._data)
+        self._rowdim = len(grid)
+        
+    def __repr__(self):
+        return str(self._data)
+\end{verbatim}
+}\smallskip\noindent
+
+This code, like many, introduces a new command, \verb|all|. This is a special boolean function which takes a compound object as its only argument. The effect of running \verb|all| on a list \verb|spam| would be to return \verb|True| if and only if \verb|bool(x)| returns \verb|True| for every \verb|x| in \verb|spam|. We won't worry about producing a prettier output than provided by \verb|Matrix.__repr__| at this point, so we'll leave \verb|Matrix.__str__| undefined.
+
+\section{Beginning matrix operations}
+%The technical name for the set of possible elements of a matrix is the \emph{field of scalars} of the matrix. A \emph{field} is a sophisticated type of set, studied extensively in abstract algebra (Math 4336 and graduate school). There are many things important about fields, but the basic idea is that all of the standard arithmetic operations learned in grade school require that the set of numbers be a field. For our purposes, this matters because the first matrix operation for which we want to create an algorithm is \emph{scalar multiplication}.
+
+%\begin{thm} Let $k$ be a number and 
+The first matrix operations we will define are more about getting information from a matrix that we have represented than about combining matrices or changing their contents. First, we discussed above the notation of $m\times n$ to denote that a matrix has $m$ rows and $n$ columns. It will be necessary for many of our other methods that we be able to determine the \emph{dimensions} of a matrix, and we don't want to access the ``hidden" variables directly.
+
+\begin{exc} Write a method \verb|dims| in the \verb|Matrix| class which returns the dimensions of the matrix as a \verb|tuple|, and add the function to \verb|Matrix.py|.
+\end{exc}
+
+A slight problem between the notation for matrices in mathematics and the implementation of matrices in Python has to do with indexing of the dimensions. Specifically, the $a_{i,j}$ element of a matrix $A$ would be stored as \verb|A._data[i-1][j-1]|. The builtin method which allows us to use the ``bracket notation" for indexing of lists, strings, etc., is \verb|__getitem__|. Likewise, those compound data types which are \emph{mutable} have another method defined, \verb|__setitem__|. We want to define only the first of these, and we will use Python indexing -- in fact, the element $a_{i,j}$ will be indexed as \verb|A[i-1,j-1]|. Add the following to \verb|Matrix.py|.
+
+\smallskip{\fn\begin{verbatim}
+    def __getitem__(self, coords):
+        if type(coords)!=type( (1,1) ):
+            raise TypeError('Matrices require a tuple for indexing.')
+        i,j = coords
+        return self._data[i][j]
+\end{verbatim}
+}\smallskip\noindent
+
+Now that we can both determine the dimensions of a matrix and read off its elements directly, we are ready to start building new matrices from old. The first way we will do this is via \emph{scalar multiplication}. A \emph{scalar} is a member of the set of numbers with which the matrix is filled -- for our purposes, these are \emph{real numbers}, implemented as \verb|int|s and \verb|float|s. As a matter of notation, we will refer to a matrix $A$ whose element in the $i^\text{th}$ row and $j^\text{th}$ column is $a_{i,j}$ by writing $A=[a_{i,j}]$.
+
+\begin{defn} Let $k$ be a real number and $A=[a_{i,j}]$ a real matrix. Then the \emph{scalar product of $A$ by $k$} is the real matrix $kA = [k\cdot a_{i,j}]$. That is, the elements of $kA$ are the elements of $A$, each multiplied by $k$.
+\end{defn}
+
+\begin{exmp} As an example, consider
+\[
+A = \begin{bmatrix} 3 & 4 & 6 \\ 5 & 9 & 12 \end{bmatrix}\text{ and } k =\frac12. \] Then 
+\[A\cdot k = \begin{bmatrix} \frac32 & 2 & 3 \\ \frac52 & \frac92 & 6\end{bmatrix}= k\cdot A .\]
+
+
+\end{exmp}
+
+Unfortunately, we're going to want to use the same operator (\verb|*|, defined in \verb|__mul__| and \verb|__rmul__|) for scalar multiplication, which we've just defined, and \emph{matrix multiplication}, which is much more complicated. We'll handle this inside the \verb|__mul__| method by an \verb|if| statement, and we'll let the case where both \verb|Self| and \verb|other| have type \verb|Matrix| just \verb|pass| for now.
+
+\begin{exc} Here's the code for scalar multiplication, with an important piece missing. Notice the \verb|pass| statement inside the first \verb|if| block -- this will be replaced later when we define an algorithm for matric multiplication. 
+
+\smallskip{\fn\begin{verbatim}
+    def __mul__(self, other):
+        mult_err = 'Matrices may only be multiplied by scalars, or '+\
+                            'by matrices of appropriate dimensions.'
+        if type(self) == type(other):
+            pass
+        elif type(other) in [type(1), type(0.1)]:
+            new_grid = """AN IMPORTANT PIECE IS MISSING RIGHT HERE!!""" # <======
+            return Matrix(new_grid)
+        else:
+            raise TypeError(mult_err)
+\end{verbatim}
+}\smallskip\noindent
+Correct the missing piece with a nested list comprehension. Put your corrected version into \verb|Matrix.py|.
+\end{exc}
+
+Now we'll move to the first way to combine two matrices: matrix addition. A critical piece which cannot be overlooked is that only matrices of the same dimensions can be added -- addition of matrices with different dimensions is ``nonsense," since it is not defined.
+
+\begin{defn} Suppose $A=[a_{i,j}]$ and $B=[b_{i,j}]$ are both $m\times n$ matrices. Then their \emph{sum} is the $m\times n$ matrix $A+B = [a_{i,j}+b_{i,j}]$. That is, addition is carried out element-wise.
+\end{defn}
+
+\begin{exmp} Suppose we have the following three matrices:
+\begin{align*} 
+A &= \begin{bmatrix} 3 & 4 & 6 \\ 5 & 9 & 12 \end{bmatrix} &
+B &= \begin{bmatrix} \pi & -4 & -5 \\ 2 & 2 & -2 \end{bmatrix} &
+C &= \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+\end{align*}
+Then $A+B$ exists but neither $A+C$ nor $B+C$ is defined. The sum of $A$ and $B$ is 
+\begin{align*} A+B &= 
+\begin{bmatrix} 3 & 4 & 6 \\ 5 & 9 & 12 \end{bmatrix} + 
+\begin{bmatrix} \pi & -4 & -5 \\ 2 & 2 & -2 \end{bmatrix} \\
+&= \begin{bmatrix} 3+\pi & 4-4 & 6-5 \\ 5+2 & 9+2 & 12-2\end{bmatrix} \\
+&= \begin{bmatrix}3+\pi & 0 & 1 \\ 7 & 11 & 10\end{bmatrix}.
+\end{align*}
+\end{exmp}
+
+Since we have the ability to index \verb|other| when it is a \verb|Matrix|, this should be straightforward to implement as a method. Moreover, matrix addition is \emph{commutative}: if $A$ and $B$ are matrices such that $A+B$ exists, then $A+B=B+A$. This allows us to define \verb|Matrix.__radd__| as a call to \verb|Matrix.__add__| like we did in class with \verb|ComplexNumber| in Lesson 4.
+
+\begin{exc} Here's the code for matrix addition, with an important piece missing.
+
+\smallskip{\fn\begin{verbatim}
+    def __add__(self, other):
+        if type(self) == type(other):
+            if self.dims() != other.dims():
+                raise ValueError('Cannot add matrices of different dimensions.')
+            new_grid = """AN IMPORTANT PIECE IS MISSING RIGHT HERE!!""" # <======
+            return Matrix(new_grid)
+
+    def __radd__(self, other):
+        return self.__add__(other)
+\end{verbatim}
+}\smallskip\noindent
+Correct the missing piece with a nested list comprehension. Put your corrected version into \verb|Matrix.py|.
+\end{exc}
+
+\begin{exc} Subtraction of matrices is a combination of addition and scalar multiplication: $A-B=A+(-1)B$. The builtin for subtraction using the ``minus sign" is \verb|__sub__|. Define \verb|Matrix.sub| and add it to \verb|Matrix.py|.
+\end{exc}
+
+\section{Matrix Multiplication} While multiplying two matrices together is not too much more complicated than either addition or scalar multiplication, we need to be very careful. We also will get to introduce another builtin command, \verb|sum|.
+
+\begin{defn} Suppose $A$ is a $m\times n$ matrix and $B$ is a $p\times q$ matrix. Then the \emph{matrix product $AB$} is defined if and only if $n=p$. In this case, $AB$ is a $m\times q$ matrix given by
+\[AB = \left[\sum_{k=0}^n a_{i,k}b_{k,j}\right]. \] That is, the element in the $i^\text{th}$ row and $j^\text{th}$ column of the product matrix $AB$ is the sum of the element-wise product of the $i^\text{th}$ row of $A$ and the $j^\text{th}$ column of $B$.
+\end{defn}
+
+\begin{exmp} Suppose we have the following matrices:
+\begin{align*}
+A &= \begin{bmatrix}2 & 3 & \frac12 \\ 1 & -1 & 0 \end{bmatrix}, &
+B &= \begin{bmatrix}3 & 0 & 1 \\ -1 & -1 & 0 \\ 2 & 4 & 6 \end{bmatrix}, &
+C &= \begin{bmatrix}1 & 4 \\ \pi & 6 \\ 2 & 1\end{bmatrix}.
+\end{align*}
+Then $A$ is a $2\times 3$ matrix, $B$ is a $3\times 3$ matrix, and $C$ is a $3\times 2$ matrix. Here are the possible products, and if they exist, the dimensions of the product matrix:
+\[\begin{array}{ccr@{~\to~}l}
+\textbf{Product} & \textbf{Exists?} & \multicolumn{2}{c}{\textbf{Dimensions}} \\ \toprule
+AB & \text{Yes} & (2\times 3)\cdot(3\times 3)& 2\times 3 \\ 
+BA & \text{No}  & (3\times 3)\cdot(2\times 3) & \emptyset\\
+AC & \text{Yes} & (2\times 3)\cdot(3\times 2) & 2\times 2\\
+CA & \text{Yes} & (3\times 2)\cdot(2\times 3) & 3\times 3\\
+BC & \text{Yes} & (3\times 3)\cdot(3\times 2) & 3\times 2\\
+CB & \text{No}  & (3\times 2)\cdot(3\times 3) & \emptyset \\
+\end{array}\]
+Since the dimensions of $AC$ and $CA$ are different, we see that even if both $AC$ and $CA$ exist, they need not be equal! This is a simple demonstration of the fact that matrix multiplication is \emph{not commutative.} So we can see the process of multiplying in action, 
+\begin{align*}
+AC &= 
+	\begin{bmatrix}2 & 3 & \frac12 \\ 1 & -1 & 0 \end{bmatrix}
+	\begin{bmatrix}1 & 4 \\ \pi & 6 \\ 2 & 1\end{bmatrix} \\
+&=	\begin{bmatrix} 
+		2(1)+3(\pi)+\frac12(2) & 2(4)+3(6)+\frac12(1) \\
+		1(1)-1(\pi)+0(2) & 1(4)-1(6)+0(1)
+	\end{bmatrix} \\
+&=	\begin{bmatrix}
+		3+3\pi & \frac{53}2 \\
+		1-\pi & -2
+	\end{bmatrix},
+\end{align*}
+but in the other order
+\begin{align*}
+CA &=
+	\begin{bmatrix}1 & 4 \\ \pi & 6 \\ 2 & 1\end{bmatrix}
+	\begin{bmatrix}2 & 3 & \frac12 \\ 1 & -1 & 0 \end{bmatrix} \\
+&=	\begin{bmatrix}
+		1(2)+4(1) & 1(3)+4(-1) & 1\left(\frac12\right)+4(0) \\
+		\pi(2)+6(1) & \pi(3)+6(-1) & \pi\left(\frac12\right)+6(0) \\
+		2(2)+1(1) & 2(3)+1(-1) & 2\left(\frac12\right)+1(0)
+	\end{bmatrix} \\
+&=	\begin{bmatrix}
+		6 & -1 & \frac92 \\
+		6+2\pi & -6+3\pi & \frac{\pi}2 \\
+		5 & 5 & 1
+	\end{bmatrix}.
+\end{align*}
+\end{exmp}
+
+To think about this algorithmically, let's say $A$ is a $m\times n$ matrix and $B$ is a $n\times q$ matrix. Then $C = AB$ is a $m\times q$ matrix; if $C = [c_{i,j}]$, then 
+\[ c_{i,j} = \sum_{k=0}^n a_{i,k}b_{k,j}. \]
+So for each pair \verb|i,j| where \verb|i in range(m)| and \verb|j in range(q)| we will need to take the sum over a list \verb|[A[i,k] * B[k,j] for k in range(n)]|. This is precisely the result of the \verb|sum| command: it computes the sum of numbers in a list. The most efficient way to implement this is as a list comprehension of a list comprehension of a sum of a list comprehension!
+Here's an updated form of \verb|Matrix.__mul__|, again with the list comprehension for \verb|new_grid| missing.
+
+\smallskip{\fn\begin{verbatim}
+    def __mul__(self, other):
+        mult_err = 'Matrices may only be multiplied by scalars, or '+\
+                            'by matrices of appropriate dimensions.'
+        if type(self) == type(other): # matrix multiplication
+            m,n = self.dims()
+            p,q = other.dims()
+            if n != p:
+                raise ValueError(mult_err)
+            new_grid = """AN IMPORTANT PIECE IS MISSING RIGHT HERE!!""" # <======
+            return Matrix(new_grid)
+        elif type(other) in [type(1), type(0.1)]: # scalar multiplication
+            new_grid = """AN IMPORTANT PIECE IS MISSING RIGHT HERE!!""" # <======
+            return Matrix(new_grid)
+        else:
+            raise TypeError(mult_err)
+\end{verbatim}
+}\smallskip\noindent
+\begin{exc} Finish the implementation of \verb|Matrix.__mul__| to enable matrix multiplication. Save it in \verb|Matrix.py|.
+\end{exc}
+
+\end{document}

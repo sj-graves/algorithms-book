@@ -1,0 +1,166 @@
+\documentclass[m3380-lec-main.tex]{subfiles}
+\setcounter{chapter}{2}
+\begin{document}
+
+\chapter{Conditioning and error handling}
+
+\section*{Goals}
+\begin{enumerate}[1.~]\setlength{\itemsep}{0pt}
+\item Define the \verb|bool| data type.
+\item Discuss conditional statements.
+\item Discuss error handling via \verb|try:... except:...| blocks.
+\end{enumerate}
+
+\section{Boolean values}
+In the language of mathematics, a \emph{statement} is any expression which may be either true or false. These two values, \verb|True| and \verb|False| are the fundamental values of data type \verb|bool|, and are likewise the fundamental values of \emph{Boolean algebra}\footnote{Name after George Boole, author of \emph{The Laws of Thought} (1854).}. Boolean algebra is an algebraic system formalizing the same concepts as propositional calculus, which is in turn the formal language of logic and proof taught in Foundations (Math 3425). Here we use a very simple subset of Boolean algebra: expressions in Python which evalute to \verb|True| or \verb|False| are the basis of all \emph{branching processes}, by which computers are instructed on how to make decisions.
+
+There are many, many Python commans which return \verb|bool| values. The comparison operators are first among them.
+\begin{center}
+\begin{tabular}{c|l}
+\textbf{Operator} & \textbf{Meaning} \\ \hline
+\verb|x == y| & Is $x$ formally equivalent to $y$? \\
+\verb|x != y| & is $x$ formally different from $y$? \\
+\verb|x < y| & Less than \\
+\verb|x <= y| & Less than or equal to \\
+\verb|x > y| & Greater than \\
+\verb|x >= y| & greater than or equal to
+\end{tabular}\end{center}
+For the ordered comparison operators to work, the objects to be compared must have an order. It may be surprising what data types are ordered in Python and thus can be compared using \verb|<| and \verb|>|.
+
+Additionally, Boolean statements may be combined and modified using the logical operations. Assume in the following table that \verb|x| and \verb|y| are of type \verb|bool|.
+\begin{center}\begin{tabular}{l|l}
+\textbf{Name} & \textbf{Usage} \\ \hline
+Negation & \verb|not x| \\
+Conjuction & \verb|x and y|\\
+Disjunction & \verb|x or y| \\
+\end{tabular}\end{center}
+These may be combined using parentheses to follow all the rules of logic.
+ 
+\section{Conditional statements}
+\subsection{\texttt{while} loops}
+The first type of conditional statement we will consider is the ``other" kind of iteration: the \verb|while| loop. It is much, much easier to enter an infinite while loop, but they generally create less memory pressure than infinite for loops. Here's the easiest do-nothing infinite while loop:
+
+\smallskip{\fn\begin{verbatim}
+>>> while True:
+        None
+\end{verbatim}
+}\smallskip\noindent
+The structure of a \verb|while| loop is uncomplicated, and its meaning follows immediately from its structure: while some statement evaluates to \verb|True|, execute an indented block of code. Upon reaching the end of the indented block, check if the statement is still true; if so, repeat the block, and if not, move on beyond the loop. We can use a while loop to compose an annoying SMS by counting until we run out of room. Since text messages (prior to smart phones) were limited to 160 characters, we save the following as \verb|les3_ex1.py| and execute it.
+
+\smallskip{\fn\begin{verbatim}
+s = ''
+i = 1
+limit = 160
+while len(str(i))+len(s)+1 < limit:
+    s = s + str(i) + ' '
+    i = i + 1
+print(s)
+\end{verbatim}
+}\smallskip\noindent
+A common error when using while loops in this way is failure to \emph{increment your counter}. This is the \verb|i = i + 1| line. What would happen if we left it off? Would this loop run forever? There is a shorthand for incrementing a variable: for every data type where addition makes sense, you can use \verb|oldvar += newvar| instead of \verb|oldvar = oldvar + newvar| as long as the data types of \verb|oldvar| and \verb|newvar| match. This means I could have written the above example as follows.
+
+\smallskip{\fn\begin{verbatim}
+s = ''
+i = 1
+limit = 160
+while len(str(i))+len(s)+1 < limit:
+    s += str(i) + ' '
+    i += 1
+print(s)
+\end{verbatim}
+}\smallskip\noindent
+
+\subsection{\texttt{if} statements} Often we only wish to execute a block of code if some condition is met. The natural language way that this would be expressed is something like ``If the condition is met, then do task A. Otherwise, do task B." This is available in Python using \verb|if:... else:...| blocks. Here's an example which you should save as \verb|les3_ex2.py|.
+
+\smallskip{\fn\begin{verbatim}
+s = input('Please type something here and then press return: ')
+if len(s)%2==0:
+    t='even'
+else:
+    t='odd'
+print('You typed an '+t+' number of characters.')
+\end{verbatim}
+}\smallskip\noindent
+Just like loops, \verb|if...:| statements are block structures; the block is complete when the level of indentation returns to the same level as the original if statement.
+
+It is frequently the case that \verb|if| blocks need to be nested, and just as often the case where if the test fails, we want to test something else. This is called an \emph{else if}, implemented in Python by the \verb|elif| command. We'll use the following code, \verb|les3_ex3.py|, to demonstrate this and to introduce another type of conditional statement.
+
+\smallskip{\fn\begin{verbatim}
+while True:
+    try:
+        s = input('Please type an integer: ')
+        n = int(s)
+        if n%3==1:
+            t='one greater than '
+        elif n%3==2:
+            t='one less than '
+        else:
+            t=''
+        print('Your number is '+t+'a multiple of 3.')
+        break
+    except ValueError as err:
+        print('!!! That is not an integer!!!!',err)
+    except:
+        raise
+\end{verbatim}
+}\smallskip\noindent
+
+\section{Errors, error handling, and the \texttt{try} statement}
+There are several ways that executing a program can go wrong. The best type of error is a \emph{syntax error}, usually caused by a typo in your code. These won't even run, and IDLE is very good at detecting them. The second best type of error is an \emph{exception}. Exceptions are errors which are \verb|raise|d by doing something which is syntactically correct in code but violates something about the way Python works. Here's a simple demonstration -- you can't add a string and an integer.
+
+\smallskip{\fn\begin{verbatim}
+>>> s='123'
+>>> t=4
+>>> s+t
+Traceback (most recent call last):
+  File "<pyshell#23>", line 1, in <module>
+    s+t
+TypeError: Can't convert 'int' object to str implicitly
+>>> t+s
+Traceback (most recent call last):
+  File "<pyshell#24>", line 1, in <module>
+    t+s
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+\end{verbatim}
+}\smallskip\noindent
+How these errors occurs is actually built in to the definitions of type \verb|int| and type \verb|str|. Somewhere in the \verb|builtin| code for these types, a command reading \verb|raise(TypeError('...'))| occurs. The \emph{exception} is a \emph{type error}, where you are trying to combine data types which are incompatible. There are lots of predefined exceptions: \verb|TypeError|, \verb|ValueError|, and \verb|NameError| are the three you will most commonly see, followed by \verb|ZeroDivisionError| when you aren't careful in your programming.
+
+In \verb|les3_ex3.py|, I used the \verb|ValueError| which is raised by trying to force the conversion of a non-integer string to an integer. Python is able to correctly handle the conversion of a string like \verb|'12345'| to an integer, but to ask ``what is the integer form of \verb|'abc'|?'' is a meaningless question. The \verb|try: ... except: ...| block is a very specialized type of \verb|if...then| structure. Python will run the code inside a \verb|try:| block, and if an error is \verb|raise|d will jump to the first \verb|except... :| statement. If the type of the exception matches, that block will execute. The final block of \verb|les3_ex3.py| is
+
+\smallskip{\fn\begin{verbatim}
+    except:
+        raise
+\end{verbatim}
+}\smallskip\noindent
+which terminates the \verb|try:... except:...| structure by \emph{re-raising any unhandled exception}. This allows you to press Ctrl-C to exit the \verb|while True:| loop, for instance. This is also the behavior of the \verb|break| command: it makes the program immediately exit the innermost enclosing loop.
+
+The raising and handling of exceptions is often treated as an advanced programming topic, but is a useful tool even at the introductory level to help understand how programming errors are made, and how to avoid or mitigate them.
+
+\section{\texttt{break} and \texttt{pass}}
+Two special commands to mention explicitly are \verb|break| and \verb|pass|. The first of these, \verb|break|, causes the Python interpreter to immediately exit the current loop. If \verb|break| is called outside a loop, a \verb|SyntaxError| arises:
+
+\smallskip{\fn\begin{verbatim}
+>>> break
+SyntaxError: 'break' outside loop
+\end{verbatim}
+}\smallskip\noindent
+We often use this to prematurely exit \verb|for| or \verb|while| loops. Sometimes the test condition for a \verb|while| loop is not easy to explain, and \verb|break| can be used to exit the loop at the appropriate time. In these cases, you can usually come up with some sort of way to avoid using \verb|break| if you desire. 
+
+\smallskip{\fn\begin{verbatim}
+>>> while True:
+        break
+
+>>>
+\end{verbatim}
+}\smallskip\noindent
+
+On the other hand, sometimes while writing code you need some ``placeholder" code -- for instance, you're trying to write a complicated if-else block, and you want to work on the \verb|else:| part first. The \verb|pass| command is a do-nothing command. In fact, it does so little that you can't even get \verb|help| on it:
+
+\smallskip{\fn\begin{verbatim}
+>>> help(pass)
+SyntaxError: invalid syntax
+\end{verbatim}
+}\smallskip\noindent
+
+Again, there are other ways to effect the same thing (often just \verb|print|ing a debug message, for instance), but \verb|pass| is still occasionally useful.
+\end{document}

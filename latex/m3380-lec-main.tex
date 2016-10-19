@@ -1,0 +1,211 @@
+\documentclass[openright]{memoir}
+\usepackage{amsmath,amssymb,amsthm,amsfonts}
+%\usepackage{mathpazo}
+\usepackage{subfiles}
+\usepackage{tikz}
+\usetikzlibrary{graphs, quotes, arrows.meta}
+
+\usepackage[framemethod=tikz]{mdframed}
+\usepackage{mathabx}
+\usepackage{enumerate}
+\usepackage[pageanchor=true, frenchlinks=false, colorlinks=false]{hyperref}
+\usepackage{booktabs}
+\usepackage{systeme}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+
+\usepackage{tocloft}
+\renewcommand{\cftdot}{\ensuremath{\cdot}}
+\setlength{\cftpartnumwidth}{2em}
+\setlength{\cftchapternumwidth}{2em}
+\setlength{\cftsectionindent}{2em}
+
+%\usepackage{fancyhdr}
+%\usepackage{hyperref}
+%\usepackage{graphicx}
+
+%\usepackage{layout}
+
+\settrimmedsize{11in}{210mm}{*}
+\setlength{\trimtop}{0pt}
+\setlength{\trimedge}{\stockwidth}
+\addtolength{\trimedge}{-\paperwidth}
+\settypeblocksize{7.75in}{33pc}{*}
+\setulmargins{4cm}{*}{*}
+\setlrmargins{1.25in}{*}{*}
+\setmarginnotes{17pt}{51pt}{\onelineskip}
+\setheadfoot{\onelineskip}{2\onelineskip}
+\setheaderspaces{*}{2\onelineskip}{*}
+\checkandfixthelayout
+
+\makeatletter 
+\renewcommand{\@pnumwidth}{3em}
+\renewcommand{\@tocrmarg}{4em}
+\makeatother
+
+\aliaspagestyle{title}{empty}
+\aliaspagestyle{part}{empty}
+
+\newcommand{\bc}{\smallskip \begingroup \fn}
+\newcommand{\ec}{\endgroup\smallskip\noindent}
+
+\newenvironment{enum}{\begin{enumerate}[\quad 1.~]\setlength{\itemsep}{0pt}}{\end{enumerate}}
+\newenvironment{enuma}{\begin{enumerate}[\quad a.~]\setlength{\itemsep}{0pt}}{\end{enumerate}}
+\newenvironment{bmr}{\begingroup \renewcommand*{\arraystretch}{1.3}\begin{bmatrix*}[r]}{\end{bmatrix*}\endgroup}
+\newenvironment{abmr}[1]{\begingroup \renewcommand*{\arraystretch}{1.3}\left[\begin{array}{@{}*{#1}{r}|r@{}} }{\end{array}\right]\endgroup}
+\newenvironment{abmc}[1]{\begingroup \renewcommand*{\arraystretch}{1.3}\left[\begin{array}{@{}*{#1}{c}|c@{}} }{\end{array}\right]\endgroup}
+
+\newenvironment{augbmr}[2]{\begingroup \renewcommand*{\arraystretch}{1.3}\left[\begin{array}{@{}*{#1}{r}|@{~}@{}*{#2}{r}@{}} }{\end{array}\right]\endgroup}
+\newenvironment{augbmc}[2]{\begingroup \renewcommand*{\arraystretch}{1.3}\left[\begin{array}{@{}*{#1}{c}|@{~}@{}*{#2}{c}@{}} }{\end{array}\right]\endgroup}
+
+% The three arguments are: 
+% 1 the name of the permutation, e.g. \sigma_1
+% 2 the number of symbols being permuted
+% 3 the permutation string in the format 0/1/sig(1), 1/2/sig(2), etc., which must contain all entries. 
+% 	Generate it using Python
+\newenvironment{tlp}[3]{\begin{tikzpicture}[scale=12/26]\node [left] at (0,0) {\( #1 = \)};{\footnotesize\draw[anchor=mid] (0,-1) grid (#2,1) \foreach \x/\y/\z in {#3}{(\x+1/2,1/2) node {\y} (\x+1/2,-1/2) node {\z}};}}{\end{tikzpicture}}
+
+%\newcommand{twoline}[3]{\begin{twolinepermutation}{#1}{#2}{#3}~\end{twolinepermutation}}
+
+\newcommand{\scr}[1]{\mathscr{#1}}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[chapter]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{exc}[thm]{Exercise}
+
+\theoremstyle{definition}
+\newtheorem{alg}[thm]{Algorithm}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{examp}[thm]{Example}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+
+\newenvironment{exmp}{\begin{examp}}{\hfill$\lhd$\end{examp}}
+
+
+\newcommand{\ds}[1]{\displaystyle{#1}} \newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\set}[1]{\ds{\left\{#1\right\}}} \newcommand{\less}{\setminus}
+%\newcommand{\smaller}{\footnotesize }
+
+\newcommand{\lecture}[1]{\subfile{#1}\newpage}
+
+\DeclareMathOperator{\lspan}{span}
+\DeclareMathOperator{\Mod}{mod}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\fix}{fix}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\Aut}{Aut}
+
+\newcommand{\car}{~\fbox{$\dlsh$}}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\renewcommand{\mod}{~\Mod~}
+\renewcommand{\bar}[1]{\overline{#1}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\vc}[1]{\left\langle#1\right\rangle}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\xto}[1]{\xrightarrow{#1}}
+
+\renewcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\fn}{\footnotesize}
+
+\surroundwithmdframed[userdefinedwidth=.94\textwidth, align=center]{verbatim}
+\newenvironment{ipython}{ }{ }
+\surroundwithmdframed[userdefinedwidth=.94\textwidth, align=center]{ipython}
+\surroundwithmdframed[userdefinedwidth=.94\textwidth, align=center]{alg}
+
+\renewcommand{\chaptername}{Lesson}
+
+\title{Notes for Math 3380\\\textbf{Algorithms for Applied Mathematics}}
+\author{Dr. Stephen Graves\\The University of Texas at Tyler}
+%\address{The University of Texas at Tyler}
+\date{Spring 2016}
+
+%\pagestyle{ruled}
+\chapterstyle{ger}
+\setlength{\beforechapskip}{0in}
+
+\begin{document}
+\frontmatter
+\pagestyle{empty}
+%\layout
+\maketitle
+\clearpage
+\section*{Introduction}
+When researching the topic for the last chapter of this book, I was struck by the following passage\footnote{Dinitz, Yefim. ``Dinitz' algorithm: The original version and Even's version.'' \emph{Theoretical Computer Science}. Springer Berlin Heidelberg, 2006. 218-240.} in Yefim Dinitz's discussion of the algorithm which bears his name:
+\begin{quotation}
+Shortly after the ``iron curtain" fell in 1990, an American and a Russian, who had both worked on the development of weapons, met. The American asked, ``When you developed the Bomb, how were you able to perform such an enormous amount of computing with your weak computers?". The Russian responded: ``We used better algorithms."
+\end{quotation}
+The message Dinitz expands upon in his paper is that a school of mathematics arose in the USSR favoring strong algorithms designed around carefully-planned data structures to solve computationally intensive problems; in the West, advances in computer speed allowed weaker algorithms to be at least as successful as Soviet algorithms, as the differences were made up in the hardware.
+
+Introductory students should understand this. If you can devise a careful algorithm on paper, you can build a data structure to model it. The process of solving mathematical problems computationally is then two-fold: first, work out an on-paper algorithm which solves the problem; second, determine the method of storing the relevant data for the problem in such a way that implementing the algorithm is efficient and understandable.
+
+This book is divided into four parts. The first is an extremely basic introduction to programming in Python 3.5. There are several reasons Python was chosen rather than another language, but the primary reasons are portability and cost. Python can be run under every operating system (to my knowledge) and is free and open source. The second part of the book applies the material from the first in the development of a robust data structure often used to solve mathematical problems: the matrix. We work from the basic definitions of a matrix through many of the operations of matrix theory, culminating with discussions of the $LU$ and $QR$ decompositions of a matrix. Each of these is used for solving a different class of practical problem. The third unit of the course is a very shallow introduction to cryptography, again with a focus on the data structures used to perform permutation arithmetic. Finally, the text concludes in the fourth part with an introduction to algorithmic graph theory. Various data structures for representing graphs computationally are discussed, and then ignored, as the three presented problems lend themselves very well to particular models rather than general ones.
+
+\clearpage
+\pagestyle{headings}
+\tableofcontents
+
+\mainmatter
+\pagestyle{ruled}
+\part{Crash course in programming with Python}
+
+%This is a test page $\xto{5}$
+
+
+\lecture{m3380-lec-01}
+\lecture{m3380-lec-02}
+\lecture{m3380-lec-03}
+\lecture{m3380-lec-04}
+
+\part{Matrix algorithms}
+\lecture{m3380-lec-05}
+\lecture{m3380-lec-06}
+\lecture{m3380-lec-07}
+\lecture{m3380-lec-08}
+
+\part{Introduction to cryptography}
+\lecture{m3380-lec-09}
+\lecture{m3380-lec-10}
+\lecture{m3380-lec-11}
+
+\part{Algorithmic graph theory}
+\lecture{m3380-lec-12}
+\lecture{m3380-lec-13}
+\lecture{m3380-lec-14}
+\lecture{m3380-lec-15}
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%sagemathcloud={"latex_command":"pdflatex -synctex=1 -interact=nonstopmode 'm3380-lec-main.tex'"}

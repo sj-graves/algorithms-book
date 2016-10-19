@@ -1,0 +1,187 @@
+\documentclass[m3380-lec-main.tex]{subfiles}
+\setcounter{chapter}{13}
+
+%\DeclareMathOperator{\R}{\mathbb{R}}
+
+\begin{document}
+
+
+\chapter{Minimum spanning trees}
+
+\section*{Goals}
+\begin{enumerate}[1.~]\setlength{\itemsep}{0pt}
+\item Explore the minimum spanning tree problem
+\item Explain Kruskal's algorithm
+\item Implement Kruskal's algorithm
+\end{enumerate}
+
+\section{Weighted graphs \& minimum spanning trees} A natural extension of graph theory is to consider a graph associated with a \emph{weight function}.
+
+\begin{defn} Suppose $\Gamma=(V,E)$ is a graph with vertex set $V$ and edge set $E$. A \emph{weight function} on $\Gamma$ is a function $w:E\to \mathbb{R}$. Such a weighted graph will be denoted $\Gamma=(V,E,w)$.
+\end{defn}
+
+Often the weight function somehow represents the ``cost" of traversing an edge -- in this context it becomes almost obvious why finding a spanning tree of minimum weight would be useful. Recall that a \emph{spanning forest} for a graph is an acyclic subgraph covering all vertices; a \emph{spanning tree} is a connected acyclic subgraph covering all vertices.
+
+A minimum spanning tree provides a way to connect all the vertices in a graph in a non-redundant way with the least associated cost.
+
+\section{Kruskal's algorithm} Joseph Kruskal first published his solution to the minimum spanning tree problem in 1956; again, this is a wonderful, almost intuitive algorithm, which hinges on an awesome use of mathematical induction. The caveat is that the weight function for Kruskal's algorithm must be a non-negative function, $w:E\to \set{x\geq 0:x\in \mathbb{R}}$.
+
+\begin{thm} If $\Gamma=(V,E)$ is a forest and $uv\in E$ is an edge where $u$ and $v$ are not in the same component of $\Gamma$, then $\Gamma'=(V,E\cup\set{uv})$ is a forest.
+\end{thm}
+\begin{proof}
+Suppose $\Gamma=(V,\set{~})$ is a totally disconnected graph, and let $u_0,u_1\in V$. Then $u_0$ and $u_1$ are (naturally) in separate components. The graph $\Gamma'=(V,\set{u_0,u_1})$ contains no cycles, since a graph with only one edge cannot contain a cycle.
+
+Suppose $\Gamma=(V,E)$ is a forest and $u_0,u_1\in V$ are vertices in different components of $\Gamma$. Assume, towards a contradiction, that $\Gamma=(V,E\cup\set{u_0u_1})$ contains a cycle. Then there is a cycle  $C=(v_0,e_1,v_1,e_2,v_2,\ldots,v_{n-1},e_n,v_n=v_0)$ where $v_i\in V$ and $v_i\neq v_j$ when $i\neq j$ and $\set{i,j}\neq\set{0,n}$. If $u_0u_1\neq e_j$ for any $j\in\set{1,2,\ldots,n}$, then we have contradicted the assumption that $\Gamma$ was a forest. On the other hand, if $u_0u_1\in \set{e_1,e_2,\ldots,e_n}$, then we may relabel the cycle $C=(v_0=u_0, e_1, v_1, e_2, v_2, \ldots, v_{n-1}=u_1, e_n=u_0u_1, v_n=u_0=v_0)$. But then $(v_0=u_0, e_1, v_1, e_2, v_2, \ldots, v_{n-1}=u_1)$ is a $u_0,u_1$-path, contradicting the assumption that $u_0$ and $u_1$ are in different components of $\Gamma$. In either case, we have a contradiction. 
+\end{proof}
+
+Hence we have an immediate method of producing a spanning forest -- include any edge which does not connect components. More importantly, we have all that is necessary for Kruskal's algorithm: if the graph is weighted, the edge of minimal weight which does not introduce a cycle is added in every iteration.
+
+\begin{alg}[Kruskal's Spanning Tree algorithm]
+Let ${\Gamma=(V,E,w)}$ be a weighted graph where $V=\set{v_1,v_2,\ldots,v_n}$ and $E=\set{e_1,e_2,\ldots, e_m}$ such that $w(e_i)\leq w(e_j)$ whenever $i<j$.
+\begin{enum}
+\item Suppose $C_1 = \set{v_1}$, $C_2=\set{v_2}$, \ldots, $C_n=\set{V_n}$, and $E_0= \set{~}$
+\item For each $j=1,2,\ldots,m$, let $uv=e_j$. Do the following:
+\begin{enuma}
+\item If $u\in C_k$ and $v\in C_\ell$ and $C_k\neq C_\ell$ where $k<\ell$, then let $C_k = C_k\cup C_\ell$ and let $E_{j} = E_{j-1}\cup\set{e_j}$. Otherwise, let $E_{j} = E_{j-1}$.
+\end{enuma}
+\item $\Gamma' = (V,E_m)$ is a minimum spanning tree for $\Gamma$.
+\end{enum}
+\end{alg}
+
+\begin{exmp} Consider the list of $(w, u, v)$ triples below, where $w$ is the weight assigned to the edge $uv$:
+
+\bc
+\begin{verbatim}
+  (4, 'a', 'b')    (14, 'a', 'f')   (18, 'a', 'h')   (7, 'a', 'i')
+  (5, 'a', 'j')    (1, 'a', 'l')    (4, 'a', 'o')    (5, 'b', 'i')
+  (8, 'b', 'k')    (10, 'b', 'l')   (11, 'b', 'm')   (9, 'c', 'e')
+  (5, 'c', 'f')    (16, 'c', 'g')   (6, 'c', 'j')    (4, 'c', 'm')
+  (2, 'c', 'o')    (11, 'd', 'e')   (18, 'd', 'h')   (10, 'd', 'j')
+  (2, 'e', 'h')    (9, 'e', 'k')    (3, 'e', 'o')    (19, 'f', 'k')
+  (12, 'h', 'i')   (2, 'h', 'j')    (15, 'i', 'k')   (3, 'i', 'l')
+  (4, 'j', 'l')    (16, 'n', 'o')
+\end{verbatim}
+\ec
+The graph $\Gamma$ with this edge set on $V=\set{a,b,c,\ldots,o}$ and weight function $w$ is depicted in \autoref{fig:kruskal_exmp}. To begin applying Kruskal's algorithm to find a spanning tree of $\Gamma$ with minimal weight, we assign each vertex to its own component; thus, the partition of the vertices is \[\scr{C} = \set{C_0=\set{a},C_1=\set{b},C_2=\set{c},\ldots,C_{14}=\set{o}}.\] We begin with the lightest edge, and check each edge to determine whether it connects components. If not, the edge is included in the spanning tree.
+
+\begin{figure}[hbt]{\tiny
+\begin{center}\begin{tikzpicture}[scale=2]
+\graph [edge quotes = {auto}, math nodes, no placement, nodes={draw, circle, inner sep = 1pt}]{
+\foreach \n/\x/\y in {a/2.0/0.4, c/1.62/-0.64, b/1.24/0.82, e/2.46/-0.16, d/3.22/0.22, g/0.66/-0.64, f/1.28/-0.14, i/2.06/1.08, h/2.78/0.66, k/1.56/0.44, j/2.4/0.32, m/0.66/-0.02, l/1.76/1.16, o/2.48/-0.8, n/3.22/-0.8} \n[x=\x,y=\y];
+a -- b; a -- f; a -- i; a -- h; a -- j; a -- l; a -- o;
+c -- e; c -- g; c -- f; c -- j; c -- m; c -- o;
+b -- i; b -- k; b -- m; b -- l;
+e -- h; e -- k; e -- o;
+d -- e; d -- h; d -- j;
+f -- k;
+i -- k; i -- l;
+h -- i; h -- j;
+j -- l;
+n -- o;
+};
+\end{tikzpicture}
+\end{center}}
+\caption{\label{fig:kruskal_exmp} A graph $\Gamma$ with 15 vertices. Edge weights are not shown.}
+\end{figure}
+
+Let $C(v)=k$ if and only if $v\in C_k$. The ``lightest" edge is an $al$-edge, with weight $1$. Since $C(a)=0$ and $C(l)=11$, we include the edge $al$. Hence we update our partition, with the new partition $C_0=\set{a,\ell}$ and $C_{11}=\set{}$. 
+The next lightest edge is $co$, with weight $2$. Since $C(c) = 2$ and $C(o) = 14$, we again include the edge $co$. Updating the partition, we now have $C_{2} = \set{c,o}$ and $C_{14}=\set{}$. 
+%Proceeding to the next edge, we see that $w(dj)=1$, $C(d)=3$, and $C(j)=2$ from the previous iteration. We will naively merge the cell containing $j$, $C_2$ with the cell containing $d$, $C_3$, because $d$ precedes $j$ in the ordering of vertices. Hence we update $C_3=\set{c,d,j}$ and $C_2=\set{}$. Below you will find nice, verbose output of running Kruskal's algorithm on this graph.
+The next two edges are similar: firstly $w(eh)=2$, $C(e)=4$, and $C(h)=7$, so we include $eh$ and put $C_{4}=\set{e,h}$ and $C_7=\set{}$; secondly $w(hj)=2$, $C(h) = 4$ from the previous update, and $C(j)=9$, so we include $hj$ and put $C_4 = \set{e,h,j}$ and $C_9 = \set{}$.
+The next iteration shows us $w(eo)=3$, but now we merge two cells of the partition of which neither is a single-element cell. As the algorithm is written naively\footnote{This is naive, because a better approach would involve merging the smaller cell into the larger one -- this would require fewer assignments. Kruskal's algorithm is a good place to start thinking about ``smart" data structures, which improve the computational complexity of the algorithm by reducing the number of loops.}, we simply merge the cells into that of the vertex which comes first in the vertex order. So since $C(e)=4$ and $C(o)=2$, we include $eo$ and obtain $C_4=\set{c,e,h,j,o}$ and $C_2=\set{}$.
+
+\bc
+\begin{verbatim}
+  Weight   u   C(u)   v   C(v)   Include?
++--------+---+------+---+------+----------+
+    1      a    0     l    11      True
+    2      c    2     o    14      True
+    2      e    4     h    7       True
+    2      h    4     j    9       True
+    3      e    4     o    2       True
+    3      i    8     l    0       True
+    4      a    8     b    1       True
+    4      a    8     o    4       True
+    4      c    8     m    12      True
+    4      j    8     l    8      False
+    5      a    8     j    8      False
+    5      b    8     i    8      False
+    5      c    8     f    5       True
+    6      c    8     j    8      False
+    7      a    8     i    8      False
+    8      b    8     k    10      True
+    9      c    8     e    8      False
+    9      e    8     k    8      False
+    10     b    8     l    8      False
+    10     d    3     j    8       True
+    11     b    3     m    3      False
+    11     d    3     e    3      False
+    12     h    3     i    3      False
+    14     a    3     f    3      False
+    15     i    3     k    3      False
+    16     c    3     g    6       True
+    16     n    13    o    3       True
+    18     a    13    h    13     False
+    18     d    13    h    13     False
+    19     f    13    k    13     False
+\end{verbatim}
+\ec
+The set of included edges is $E' = \set{ab, al, ao, bk, cf, cg, cm, co, dj, eh, eo, hj, il, no}$. The result of this process is depicted in \autoref{fig:kruskal_exmp_completed}.
+\end{exmp}
+
+\begin{figure}[hbt]{\tiny
+\begin{center}\begin{tikzpicture}[scale=2]
+\graph [edge quotes = {auto}, math nodes, no placement, nodes={draw, circle, inner sep = 1pt}]{
+\foreach \n/\x/\y in {a/2.0/0.4, c/1.62/-0.64, b/1.24/0.82, e/2.46/-0.16, d/3.22/0.22, g/0.66/-0.64, f/1.28/-0.14, i/2.06/1.08, h/2.78/0.66, k/1.56/0.44, j/2.4/0.32, m/0.66/-0.02, l/1.76/1.16, o/2.48/-0.8, n/3.22/-0.8} \n[x=\x,y=\y];
+a --[dashed, thick, red] b; a -- f; a -- h; a -- i; a -- j; a --[dashed, thick, red] l; a --[dashed, thick, red] o;
+b -- i; b --[dashed, thick, red] k; b -- l; b -- m;
+c -- e; c --[dashed, thick, red] f; c --[dashed, thick, red] g; c -- j; c --[dashed, thick, red] m; c --[dashed, thick, red] o;
+d -- e; d -- h; d --[dashed, thick, red] j;
+e --[dashed, thick, red] h; e -- k; e --[dashed, thick, red] o;
+f -- k;
+h -- i; h --[dashed, thick, red] j;
+i -- k; i --[dashed, thick, red] l;
+j -- l;
+n --[dashed, thick, red] o;
+};
+\end{tikzpicture}
+\end{center}}
+
+\caption{\label{fig:kruskal_exmp_completed} The same graph $\Gamma$ from \autoref{fig:kruskal_exmp} with the minimum spanning tree discovered via Kruskal's algorithm highlighted with red dashed edges.}
+\end{figure}
+
+\section[Implementing Kruskal's algorithm]{Implementing Kruskal's algorithm with ``smart data structures''}
+
+In a very naive approach to Kruskal's algorithm, the function $C(v)$ reporting the component of vertex $v$ is not implemented. This requires two searches through the components for each edge. Since we will implement the components as a list of lists of vertices, we may (at the cost of a small amount of memory) implement the function $C:V\to \mathbb{N}$ as a dictionary storing the index of the component containing each vertex $v\in V$. The variable \verb|comps| stores the actual list of components.
+
+\bc
+\begin{verbatim}
+def smart_kruskal(wedge_dict):
+    V = []
+    wedges = []
+    for u,nbrs in wedge_dict.items():
+        wedges += [(w,u,v) for v,w in sorted(nbrs.items())]
+        V += ([u]+[v for v in nbrs.keys() if v not in V])
+    V.sort()
+    wedges.sort()
+    C = {v:i for i,v in enumerate(V)}
+    comps = {i:[v] for i,v in enumerate(V)}
+    included = []
+    excluded = []
+    for w,u,v in wedges:
+        cu = C[u]
+        cv = C[v]
+        if cu == cv:
+            excluded += [(u,v,w)]
+        else:
+            included += [(u,v,w)]
+            C[v] = cu
+            for vert in comps[cv]:
+                comps[cu].append(vert)
+                C[vert]=cu
+    return [included,excluded]
+\end{verbatim}
+\ec
+
+
+\end{document}

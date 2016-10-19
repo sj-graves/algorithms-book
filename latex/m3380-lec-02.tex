@@ -1,0 +1,262 @@
+\documentclass[m3380-lec-main.tex]{subfiles}
+\setcounter{chapter}{1}
+\begin{document}
+
+\chapter{Lists and iteration}
+
+\section*{Goals}
+\begin{enumerate}[1.~]\setlength{\itemsep}{0pt}
+\item Define the \verb|list| data type.
+\item Discuss the use of modules rather than interactive Python.
+\item Define the \verb|for... in...:| iteration structure.
+\end{enumerate}
+
+\section*{Special Instructions}
+Please have IDLE open and running. In this lesson the \car~ symbol will no longer appear in example code.
+
+\section{Lists} In the previous lesson, we discussed \verb|string| objects at some length. One unsatisfactory truth of working with strings is that it is impossible to change a single character in the middle of a pre-existing string, without overwriting the value of the string. This behavior occurs because strings are an \emph{immutable} data type.
+
+Our first example of an \emph{mutable compound data type} is the \verb|list|. Lists may contain as elements any other data type, including others which are compound! Syntactically, they are very easy to implement: a list consists of a comma-separated list of objects enclosed in square brackets. The elements can be indexed individually, or sublists can be constructed by slicing, exactly as when using strings.
+
+\smallskip{\fn\begin{verbatim}
+>>> foo = 'this is a string'
+>>> bar = [1,2,3,foo,5]
+>>> bar
+[1, 2, 3, 'this is a string', 5]
+>>> bar[-2:]
+['this is a string', 5]
+\end{verbatim}
+}\noindent
+Also, lists can be added and multiplied by integers:
+
+\smallskip{\fn\begin{verbatim}
+>>> [1,2,3] + ['a','b','c']
+[1, 2, 3, 'a', 'b', 'c']
+>>> 5 * [1,2,3]
+[1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]
+\end{verbatim}
+}\noindent
+
+\subsection{Methods} A wonderful feature of Python can be found in its implementation of \emph{methods}\footnote{We'll extensively discuss methods and classes after we've talked about functions, when we briefly discuss object-oriented programming. This will happen just before we start diving into ``real math."}, predefined functions available within each class of objects. For instance, \verb|bar.reverse()| will reverse the order of the elements of \verb|bar|:
+
+\smallskip{\fn\begin{verbatim}
+>>> bar.reverse()
+>>> bar
+[5, 'this is a string', 3, 2, 1]
+\end{verbatim}
+}\noindent
+Another useful list method is \verb|sort|, which reorders the elements of a list into sorted order, but \emph{only if all the elements can be compared!} For instance, if we sort our list \verb|bar| as it is, we will get an error. 
+
+\smallskip{\fn\begin{verbatim}
+>>> bar.sort()
+Traceback (most recent call last):
+  File "<pyshell#22>", line 1, in <module>
+    bar.sort()
+TypeError: unorderable types: str() < int()
+\end{verbatim}
+}\medskip\noindent
+
+Now, we have noted that lists are mutable, so we can change individually indexed pieces of \verb|bar|. If we replace \verb|bar[1]| with a number, for instance, we can sort \verb|bar| in place using the \verb|bar.sort()| method.
+
+\smallskip{\fn\begin{verbatim}
+>>> bar[1] = 9.4
+>>> bar
+[5, 9.4, 3, 2, 1]
+>>> bar.sort()
+>>> bar
+[1, 2, 3, 5, 9.4]
+\end{verbatim}
+}\noindent
+
+For more information on what methods are available to a given data type, you can define a variable of that type and then pass that variable name as an argument to the \verb|help| function. This will also give you an introduction to the style of Python's documentation. Try declaring \verb|temp| to be the empty list and then ask Python for \verb|help| about \verb|temp|:
+
+\smallskip{\fn\begin{verbatim}
+>>> temp = [ ]
+>>> help(temp)
+\end{verbatim}
+}\smallskip\noindent
+It is always the case that methods available to a variable \verb|my_var| will be accessed via \verb|my_var.method_name(...)|; we'll talk more about this when we get to functional and object-oriented programming in Lesson 4.
+
+\section{Modules} Everything up until now has focused on using Python as a very powerful calculator. To do anything more sophisticated, we must introduce \emph{modules}. In your IDLE window, select from the menu {File $\to$ New File}. An empty window will open without the familiar \verb|>>>| prompt! As an example of how modules work, let's play with a string method, \verb|swapcase()|.\medskip
+
+
+\smallskip{\fn\begin{verbatim}
+foo = 'Hello World!'
+for x in foo:
+    print(x.swapcase())
+\end{verbatim}
+}\smallskip\noindent
+Now, save this module as \verb|les2_ex1.py| in a convenient location. Then select ``Run~Module" from the Run menu. Something interesting will appear in the Python Shell window; for instance, what I see is this:\smallskip
+
+\smallskip{\fn
+\smallskip{\fn\begin{verbatim}
+========= RESTART: /Users/sgraves/Documents/Code/python/les2_ex1.py =========
+h
+E
+L
+L
+O
+ 
+w
+O
+R
+L
+D
+!
+>>>
+\end{verbatim}
+}\noindent
+}
+
+\noindent There are many, many benefits to writing code in modules rather than working extensively in interactive mode. Primary for students is the ability to edit code -- anyone who has made a mistake in these first two lessons knows fully well how irritating it is to retype incorrect code in interactive mode. The principle downside of using modules is that any output you wish to see must be \verb|print|ed. For instance, you can change the string \verb|foo| to any string you choose, and if you then save and run the module it will swap the upper and lower case characters in this new string.
+
+Since we are still learning basic concepts, we will continue to use interactive mode whenever it is instructive to do so.
+
+\section{\texttt{for} loops}
+This example also introduces a new coding structure, called a \emph{for loop}. Looping, or \emph{iteration} as it is properly called, is really the primary task of computers: repeatedly perform tedious tasks. In most programming languages, for loops are structured in such a way that some \emph{index variable} takes values from a starting point to an ending point with a specific step size. Python makes this even more clever by indexing over the elements of a compound data type!
+
+In our example, the data type of \verb|foo| is a string, so its elements are single-letter strings. The loop starts by setting \verb|x| to the value \verb|'H'|. Then it enters the indented \emph{block} of code below the \verb|for| statement. It will run everything in this indented block, and upon reaching the outdent will set \verb|x| to the next value in \verb|foo|.
+
+Here's another module to try: enter this and save it as \verb|les2_ex2.py| in the same directory or folder as your previous example, then run it.
+
+\smallskip{\fn\begin{verbatim}
+bar = "It's just a flesh wound."
+n=79 - len(bar)
+for i in range(n):
+    print(i * ' ' + bar)
+\end{verbatim}
+}\noindent
+
+This introduces the \verb|range| function, which is actually a very special data type. The command \verb|range(10)|, for instance, creates an object which will contain all integers $0\leq x<10$ -- but not until it is iterated over! You can sort of think of the range function as a promise to provide a list when needed, rather than the list itself. There are actually three ways \verb|range| can be called:
+\begin{center}
+\begin{tabular}{l|l}
+\textbf{Command} & \textbf{Produces} \\\hline
+\verb|range(i)| & The sequence of integers $0,1,2,\ldots,i-1$. \\
+\verb|range(i,j)| & The sequence of integers $i, i+1, i+2,\ldots, j-1$.\\
+\verb|range(i,j,k)| & The sequence of integers $i, i+k, i+2k,\ldots,i+mk$ \\
+	& where $m$ is the maximum integer such that $i+mk<j$.
+\end{tabular}
+\end{center}
+Importantly, \verb|range(10)| is precisely the list of valid indices for a \verb|list| containing ten elements.
+
+All loops can be nested within one another, but remember that this makes the number of executions \underline{multiply}, not just add.
+
+\subsection{Infinite loops} It is difficult, but not impossible, to get stuck in an ``infinite" for loop. To do this, you would have to \verb|append| data to the list over which the loop iterates at least as fast as the iteration progresses. This rapidly uses an incredibly large amount of memory and will bring your computer to a crippling halt.
+
+If you believe that a loop has gotten away from you, you have several remedies. First, try pressing Control-C. The sends a \verb|KeyboardInterrupt| to Python and should stop most runaway processes. If that fails, try restarting the Python Shell. On my various Mac computers, this is achieved by pressing Control-F6. If that fails, you can always quit IDLE. If that fails, you can always force IDLE to quit, using the Windows Task Manager or OS X Activity Monitor. If that fails, you can always restart your computer\footnote{None of these things will ``break your computer," \textbf{all else being equal.} Since Python is a high-level programming language, it is \textbf{possible} to ``break your computer" using Python code -- but you have to be trying to do this rather than it happening accidentally. Even then, in almost every case you only damage the software; a clean installation of your operating system, while time consuming, fixes software problems. This is still not something to worry about. In more than two decades of programming, I've never broken anything to the point where I needed to rebuild my OS.}.
+
+If you'd like to try an example of an infinite loop, enter the following code, and when you get bored of ``nothing happening" press Control-C, then evaluate \verb|len(x)|. Here's what you'll see, although the speed of your computer and how long you wait will determine the \verb|len|gth of \verb|x| when you stop. The purpose of running \verb|x.clear()| at the end is to relieve the ``memory pressure" of a large list of integers. I waited until the memory used by Python exceeded 1 GB as reported in the OS X Activity Monitor.\medskip
+
+
+\smallskip{\fn\begin{verbatim}
+>>> x = [0]
+>>> for i in x:
+        x.append(i)
+
+	
+Traceback (most recent call last):
+  File "<pyshell#43>", line 1, in <module>
+    for i in x:
+KeyboardInterrupt
+>>> len(x)
+144887010
+>>> x.clear()
+\end{verbatim}
+}\noindent
+
+\section{Power tool: list comprehension}
+Suppose you had a list \verb|foo| of numbers, and you wanted to set \verb|bar| equal to the list of their squares. We could easily perform this task with a for loop and the \verb|append| list method, which adds the argument to the end of the list.
+
+\smallskip{\fn\begin{verbatim}
+>>> foo = [1, 3, 5, 7, 9]
+>>> bar = []
+>>> for x in foo:
+        bar.append(x**2)
+
+	
+>>> bar
+[1, 9, 25, 49, 81]
+\end{verbatim}
+}\noindent
+However, Python provides a much more elegant way to do the same thing, called \emph{list comprehension}. Essentially this provides a way to create a list by successively performing the same operation (in this case squaring) on all the elements of another list.
+
+\smallskip{\fn\begin{verbatim}
+>>> foo = [1, 3, 5, 7, 9]
+>>> bar = [ x ** 2 for x in foo ]
+>>> bar
+[1, 9, 25, 49, 81]
+\end{verbatim}
+}\noindent
+This seems like a trivial example, but what about this: we want to approximate a parabola $y=x^2$ by using 101 points from $0$ to $1$. How do we calculate those points?
+
+\smallskip{\fn\begin{verbatim}
+>>> pts = [(x, x ** 2) for x in [i / 100 for i in range(101)]]
+\end{verbatim}
+}\noindent
+To be more sophisticated, what if we want to square $x_0=a$ and $x_n=b$, and all the $n$ equally-spaced values between?\medskip
+
+\smallskip{\fn
+
+\smallskip{\fn\begin{verbatim}
+>>> a, b, n = 5, 8, 10
+>>> pts = [(x, x ** 2) for x in [a + (b - a) * i / n for i in range(n + 1)]]
+>>> pts
+[(5.0, 25.0), (5.3, 28.09), (5.6, 31.359999999999996), (5.9, 34.81), (6.2, 38.44
+0000000000005), (6.5, 42.25), (6.8, 46.239999999999995), (7.1, 50.41), (7.4, 54.
+760000000000005), (7.7, 59.290000000000006), (8.0, 64.0)]
+\end{verbatim}
+}\noindent
+}
+\noindent There are two additional ideas demonstrated in this example code. The first occurs in the very first line of the code sample.
+\smallskip{\fn\begin{ipython}
+\verb|>>> a, b, n = 5, 8, 10|
+\end{ipython}
+}\smallskip\noindent
+This line is a \emph{multiple assignment}, where the \emph{tuple}\footnote{We will later learn about \texttt{tuple}, which is actually a Python data type related to lists. Here we use the mathematical definition of tuple: a finite ordered sequence.} of values $(5,8,10)$ is assigned to the tuple of variables $(a,b,n)$. Second, arithmetic with \emph{floating point} numbers is inexact arithmetic:
+we can see analytically that $6.2^2=38.44$ but 
+
+\smallskip{\fn\begin{verbatim}
+>>> (6.2)**2 - 38.44 == 0
+False
+\end{verbatim}
+}\noindent
+While this is not a course on error analysis and correcting for floating point arithmetic, we will try to avoid this type of error when possible. 
+
+\section{\texttt{tuple}s}
+A \verb|tuple| is another compound data type which looks almost exactly like a \verb|list|, but is immutable. Elements of tuples can be any data type, but once a \verb|tuple| is assigned its elements cannot be changed without overwriting the whole \verb|tuple|. 
+
+\smallskip{\fn\begin{verbatim}
+>>> spam = (1, 2, 3, 4)
+>>> type(spam)
+<class 'tuple'>
+>>> spam[3]=2
+Traceback (most recent call last):
+  File "<pyshell#2>", line 1, in <module>
+    spam[3]=2
+TypeError: 'tuple' object does not support item assignment
+>>> eggs=list(spam)
+>>> print(eggs, type(eggs))
+[1, 2, 3, 4] <class 'list'>
+>>> spam == tuple(eggs)
+True
+\end{verbatim}
+}\smallskip\noindent
+As you can see, you can directly convert between items of type \verb|list| and \verb|tuple|. Unfortunately, \verb|tuple| comprehension doesn't work like \verb|list| comprehension.
+
+\smallskip{\fn\begin{verbatim}
+>>> mylist = [ x**2 for x in range(10)]
+>>> mytuple = ( x**2 for x in range(10) )
+>>> mylist
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+>>> type(mylist)
+<class 'list'>
+>>> mytuple
+<generator object <genexpr> at 0x1046568e0>
+>>> type(mytuple)
+<class 'generator'>
+>>> tuple(mytuple)
+(0, 1, 4, 9, 16, 25, 36, 49, 64, 81)
+\end{verbatim}
+}\smallskip\noindent
+The \verb|generator| object created by this attempted \verb|tuple| comprehension is very similar to the \verb|range| objects. We won't stress out too much about the properties of \verb|range| and \verb|generator| objects, and will try to avoid them where possible.
+\end{document}

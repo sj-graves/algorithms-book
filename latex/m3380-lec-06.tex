@@ -1,0 +1,305 @@
+\documentclass[m3380-lec-main.tex]{subfiles}
+\setcounter{chapter}{5}
+
+%\DeclareMathOperator{\R}{\mathbb{R}}
+
+\begin{document}
+
+
+\chapter{Vectors and solving systems of equations}
+
+\section*{Goals}
+\begin{enumerate}[1.~]\setlength{\itemsep}{0pt}
+\item Define a vector, mathematically.
+\item Discuss the algebraic operations on vectors.
+\item Discuss algorithms for basic vector operations.
+\item Implement basic vector operations as a Python subclass.
+\item Discuss solutions to systems of linear equations.
+\item Introduce Gaussian elimination and Gauss-Jordan elimination.
+\item Discuss pivoting strategies and their necessity.
+\item Implement elementary row operations and discuss the algorithm for Gaussian elimination with partial pivoting.
+\end{enumerate}
+
+\section{Vectors in Euclidean space}
+The set of all real numbers, $\R$, can be considered (geometrically) as a Euclidean line -- a one-dimensional space. Likewise, we are familiar with the way in which the set of all ordered pairs of real numbers represents a Euclidean plane, which we write as $\R^2=\set{(x,y):x,y\in\R}$. Extending this idea we can think of Euclidean 3-space, as $\R^3=\set{(x,y,z):x,y,z\in \R}$. Under a right-hand rule, this is geometrically shown in \autoref{fig:vec-3d}.
+\begin{figure}[hbt]
+\[\begin{tikzpicture}
+\draw [->] (0,0) -- (2.5,0) node [right] {$y$};
+\draw [->] (0,0) -- (0,2.5) node [above] {$z$};
+\draw [->] (0,0) -- (-1,-4/3) node [below left] {$x$};
+\draw [thick, ->] (0,0) -- node [pos=.5, above] {$\vec{v}$} (1,.5) node [right] {$(a,b,c)$};
+\draw (1,.5) circle [radius=1pt];
+\end{tikzpicture}\]
+\caption{\label{fig:vec-3d}A drawing of a vector in 3-space.}
+\end{figure}
+We can extend this idea to that of \emph{Euclidean $n$-space}, given by 
+\[\R^n = \set{(x_1,x_2,\ldots,x_n):x_i\in \R\text{ for all }i=1,2,\ldots,n},\]
+although we (as limited humans in a 3-dimensional spatial universe) cannot picture higher dimensions. Points in $n$-dimensional Euclidean space are \emph{$n$-dimensional vectors over $\R$}.
+
+There is much disagreement among textbooks as to the correct notation for vectors, so in the interest of keeping everyone on the same page we will use the same notation used in Stewart's Calculus series: when written in \emph{coordinate notation}, we will write ${\vec{x} = \vc{x_1,x_2,\ldots,x_n}}$. As we will frequently combine matrix and vector calculations (for reasons which will become obvious), we will most often use \emph{column vector} notation:
+\[\vec{x} = \begin{bmr}x_1\\x_2\\ \vdots \\ x_n\end{bmr}. \]
+
+\section{Operations on vectors}
+Since one of the notations for a vector $\vec{x}$ is as a column matrix, the operations for vectors must agree with those for matrices. Hence addition and scalar multiplication are carried out coordinate-wise.
+
+\begin{defn} Let $\vec{x}=\vc{x_1,x_2,\ldots,x_n}$ and $\vec{y}=\vc{y_1,y_2,\ldots,y_n}$, and let $k\in \R$. Then the scalar multiple of $\vec{x}$ by $k$ is the vector 
+\[k\vec{x} = \vc{kx_1,kx_2,\ldots,kx_n}=\vec{x} k.\] 
+Likewise, the vector sum of $\vec{x}$ and $\vec{y}$ is the vector
+\[\vec{x}+\vec{y} = \vc{x_1+y_1,x_2+y_2,\ldots,x_n+y_n}=\vec{y}+\vec{x}.\]
+Combining these defines vector subtraction, 
+\[\vec{x}-\vec{y} = \vec{x}+(-1)\vec{y}.\]
+\end{defn}
+
+Rather than having exactly one way to multiply vectors, there could be many; we'll discuss the most generally useful, the \emph{dot product}.
+
+\begin{defn} The \emph{dot product} of vectors $\vec{x}=\vc{x_1,x_2,\ldots,x_n}$ and $\vec{y}=\vc{y_1,y_2,\ldots,y_n}$ is the scalar quantity
+\[\vec{x}\cdot\vec{y} = \sum_{i=1}^n x_iy_i = x_1y_1+x_2y_2+\cdots x_ny_n.\] The \emph{magnitude} of $\vec{x}$ is defined to be 
+\[\norm{\vec{x}} = \sqrt{\vec{x}\cdot\vec{x}} = \sqrt{x_1^2+x_2^2+\cdots+x_n^2}.\]
+\end{defn}
+
+A final concept which is very important is the idea of multiplying a vector by a matrix. In a very literal sense, multiplying a vector on the left by a matrix of the correct dimensions is a special type of function on the vetctor space: a \emph{linear transformation}.
+
+\begin{defn} Suppose $A=[a_{i,j}]$ is a real $m\times n$ matrix and $\vec{x}=\vc{x_1,x_2,\ldots,x_n}$ is an $n$-dimensional real vector. Then $A\vec{x}$ is the $m$-dimensional vector whose $i^\text{th}$ component is $\sum_{k=1}^n a_{i,k}x_k$.
+\[A\vec{x} = 
+\begin{bmatrix}
+a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\
+a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\
+\vdots & \vdots & \vdots & \vdots \\
+a_{m,1} & a_{m,2} & \cdots & a_{m,n}
+\end{bmatrix}
+\begin{bmr}x_1\\x_2\\\cdots\\x_n\end{bmr} = 
+\begin{bmatrix}
+a_{1,1}x_1+a_{1,2}x_2+\cdots+a_{1,n}x_n \\
+a_{2,1}x_1+a_{2,2}x_2+\cdots+a_{2,n}x_n \\ 
+\vdots \\
+a_{m,1}x_1+a_{m,2}x_2+\cdots+a_{m,n}x_n
+\end{bmatrix}.\] 
+In this case, left-multiplication by $A$ is a \emph{linear transformation} mapping $R^n$ to $R^m$. The study of vector spaces and linear transformations is called \emph{linear algebra.}
+\end{defn}
+
+
+For all of these operations, as well as instantiation and indexing, it is straightforward to develop Python code for a \verb|Vector| class from the definitions; it is normal to consider vectors as immutable and hence to store the coordinates in a \verb|tuple|. The important methods to define are \verb|__init__|,  \verb|__repr__|, \verb|dim| to return the dimension of the vector, \verb|__getitem__| for access to the vector components, \verb|__add__|, \verb|__mul__| for scalar multiplication only, \verb|dot| for dot products, and \verb|norm| for the magnitude. A good place to write your \verb|Vector| class is at the end of your \verb|Matrix.py| file. This is especially important as implementing matrix-vector multiplication requires some careful consideration.
+
+
+\section{Motivation for matrix arithmetic}
+Matrices have only been called such\footnote{Matrix is latin for ``womb," and here's the explanation for the term from the person who coined it, James Joseph Sylvester: \emph{I have in previous papers defined a ``Matrix" as a rectangular array of terms, out of which different systems of determinants may be engendered as from the womb of a common parent.}} since 1850, but some of the methods for which they have been used have been known in varying parts of the world since as early as the second century BC. Nearly all earliest uses of matrices are for the same purpose: solving systems of simultaneous linear equations.
+\begin{exmp}
+Consider the following system of simultaneous linear equations in three variables:
+%\begin{align*}
+%-4x_1 + 3x_2 -7x_3 &= 9 \\
+%2 x_1 + 5x_2 \phantom{- 7x_3} &= 3 \\
+%x_2 -12 x_3 &= 10
+%\end{align*}
+\begin{equation}\label{eq:sys}
+\systeme{x_1 + 3x_2 - 13x_3 = -18, x_1 + 2x_2 - 10x_3 = -15, -6x_1 - 7x_2 + 46x_3 = \phantom{-}77}\end{equation}
+We can solve this by the method of elimination, using repeated applications of the following three operations:
+\begin{enum}
+\item The order of equations may be rearranged. For example, the first and third equation could be swapped denoted $E_1:E_3$.
+\item An equation may be multiplied by a nonzero constant. For example, the second equation could be multiplied by $6$, denoted $6E_2$.
+\item A nonzero multiple of one equation may be added to another equation. For instance, 3 times the first equation could be added to the second, denoted $3E_1+E_2$
+\end{enum}
+As these operations preserve the arithmetic properties of the equations, the set of solutions before and after any sequence of these operations must be the same. The goal in the method of elimination is to ``diagonalize" the equation, so that the coefficient of $x_j$ in row $i$ is $0$ for all $j<i$. For instance, with our example, we could proceed in the following order:
+%
+%
+\begin{align}\label{eq:sys_elim}
+\systeme{x_1 + 3x_2 - 13x_3 = -18, x_1 + 2x_2 - 10x_3 = -15, -6x_1 - 7x_2 + 46x_3 = \phantom{-}77}
+	\xrightarrow[6E_1+E_3]{-E_1+E_2}
+	&\systeme{x_1 + 3x_2 - 13x_3 = -18, {-x_2}+3x_3=3, 11x_2-32x_3=-31} \\ \nonumber
+	\xto{11E_2+E_3}
+	&\systeme{x_1 + 3x_2 - 13x_3 = -18, {-x_2}+3x_3=3, x_3=2}
+\end{align}
+%
+%
+\noindent So eliminated, we can use back substitution to solve for $x_3$, $x_2$, and $x_1$ in that order:
+\begin{align*}
+x_3 &= 2 \\
+x_2 &= \frac1{3}\left(3+x_3\right) = 3 \\
+x_1 &= -18-3x_2+13x_3 = -1
+\end{align*}
+The importance of this method cannot be too highly stressed: solving systems of linear equations is a constant problem in applied mathematics, often because the underlying systems of nonlinear equations can be nicely linearized by making acceptable sacrifices. We notice that at no step were we required to interchange the order of equations, as we never encountered a situation where the $i^\text{th}$ variable had a coefficient of $0$ in the $i^\text{th}$ row.
+\end{exmp}
+
+The process used in the preceding example has nothing to do with the variables used -- in fact, they are used solely as placeholders in the computation. Understanding this, we can recast the problem into a vector algebra problem and dispense with the variables entirely.
+\begin{exmp}
+Consider the matrix $A$ and vectors $\vec{x}$ and $\vec{b}$ given by
+\begin{align*}
+A &= \begin{bmr}1 & 3 & -13 \\ 1 & 2 & -10 \\ -6 & -7 & 46\end{bmr} &
+\vec{x} &= \begin{bmr}x_1\\x_2\\x_3\end{bmr} &
+\vec{b} &= \begin{bmr}-18\\-15\\77\end{bmr}.
+\end{align*}
+Then the system in \autoref{eq:sys} is exactly equivalent to the vector equation $A\vec{x}=\vec{b}$. In order to keep track of the operations performed on both the left and right of the equal sign, it is sufficient to \emph{augment} the matrix $A$ by the vector $\vec{b}$, like so:
+\begin{align}\label{eq:aug}
+A\vert\vec{b} &= 
+	\begin{abmr}{3} 1 & 3 & -13 & -18 \\ 1 & 2 & -10 & -15\\ -6 & -7 & 46 & 77 \end{abmr}.
+\end{align}
+Now the three operations of the method of elimination correspond to the \emph{elementary row operations} on an augmented matrix, and the operations involved in \autoref{eq:sys_elim} correspond to the following sequence of row operations:
+\begin{align}\label{eq:aug_elim}
+\begin{abmr}{3} 1 & 3 & -13 & -18 \\ 1 & 2 & -10 & -15\\ -6 & -7 & 46 & 77 \end{abmr} 
+	\xrightarrow[6R_1+R_3]{-R_1+R_2}
+	&\begin{abmr}{3} 1 & 3 & -13 & -18 \\ 0 & -1 & 3 & 3 \\ 0 & 11 & -32 & -31 \end{abmr} \\ \nonumber
+\xto{11R_2+R_3}
+	&\begin{abmr}{3} 1 & 3 & -13 & -18 \\ 0 & -1 & 3 & 3 \\ 0 & 0 & 1 & 2 \end{abmr} 
+\end{align}
+\end{exmp}
+This is a \emph{row echelon form} for the matrix $A\vert\vec{b}$, and the process of obtaining it is called \emph{Gaussian elimination}, or informally \emph{row reduction}. If rows are interchanged or scaled, there can be many distinct row echelon forms of a matrix. However, we could continue to perform row operations until the left-most nonzero entry in each row is a $1$ and it is the only non-zero element in its column. This extended method is called \emph{Gauss-Jordan elimination}
+\begin{exmp}Continuing from \autoref{eq:aug_elim}, here are the final transformations from row echelon form to reduced row echelon form via Gauss-Jordan elimination.
+\begin{align*}
+\begin{abmr}{3} 1 & 3 & -13 & -18 \\ 0 & -1 & 3 & 3 \\ 0 & 0 & 1 & 2 \end{abmr}
+	\xto{-R_2}
+	&\begin{abmr}{3} 1 & 3 & -13 & -18 \\ 0 & 1 & -3 & -3 \\ 0 & 0 & 1 & 2 \end{abmr}
+	\xto{-3R_2+R_1}
+	\begin{abmr}{3} 1 & 0 & -4 & -9 \\ 0 & 1 & -3 & -3 \\ 0 & 0 & 1 & 2 \end{abmr} \\ 
+\xrightarrow[3R_3+R_2]{4R_3+R_1}
+	&\begin{abmr}{3} 1 & 0 & 0 & -1 \\ 0 & 1 & 0 & 3 \\ 0 & 0 & 1 & 2 \end{abmr}
+\end{align*}
+Analytically, there is no difference between Gauss-Jordan elimination and regular Gaussian elimination to row echelon form followed by back substitution. However, the computational complexity\footnote{Essentially, this is a measurement of the number of operations performed by an algorithm.} of Gauss-Jordan is higher than elimination and substitution. 
+
+Gauss-Jordan elimination becomes necessary when we desire to compute the \emph{inverse of a nonsingular square matrix}, later in the course.
+\end{exmp}
+
+\section{A floating-point problem}
+According to the specification for floating point arithmetic\footnote{IEEE 754}, ``double-precision" floating point numbers take up $64$ bits of memory and are stored in the following manner:
+\[ f = (-1)^s\cdot c\cdot b^{(-1)^{q_s}q},\]
+where
+\begin{enum}
+\item $s$ is either $0$ (for positive numbers) or $1$ (for negatives),
+\item $c$ is an integer taking up $52$ binary digits (bits),
+\item $q_s$ is the sign of the exponent, either $0$ or $1$, and
+\item $q$ is an integer taking up $10$ bits.
+\end{enum}
+The important part here is this: since $c$ takes up $52$ bits and is an integer, it can be any number from $0$ to $2^{52}-1={4,503,599,627,370,495}$. What this means is that double-precision arithmetic is only precise to 16 decimal places; beyond that, no differences are noticed by the representation. This causes a very specific kind of problem, which we'll call \emph{swamping}. This won't occur in our previous example, so we'll discuss a new one.
+
+\subsection{Swamping}
+Consider the following matrix equation:
+\[\begin{bmatrix} 10^{-20} & 1 \\ 1 & 2 \end{bmatrix} \begin{bmatrix}x_1\\x_2\end{bmatrix} = \begin{bmatrix}1 \\ 4\end{bmatrix}.\]
+If we solve via Gaussian elimination without interchanging rows we're going to have a problem almost immediately.
+\begin{align*}
+\begin{abmc}{2}10^{-20} & 1 & 1 \\ 1 & 2 & 4\end{abmc} \xto{-10^{20}R_1+R_2} 
+	&\begin{abmc}{2} 10^{-20} & 1 & 1 \\ 0 & 2-10^{20} & 4-10^{20} \end{abmc}\end{align*}
+No problem, right? Converting back to the original equation format, we see use back-substitution and find 
+\begin{align*}
+x_2 = \frac{4-10^{20}}{2-10^{20}} &\approx 1.0,\\
+x_1 = 10^{20}(1-x_2) = \frac{-2\cdot10^{20}}{2-10^{20}} &\approx 2.0.
+\end{align*}
+Except there's a problem: $10^{20}$ has so many digits that when represented as floating point numbers, 
+\[2.0 - 10.0^{20} = -10.0^{20} = 4.0 - 10.0^{20}.\] Hence in floating point arithmetic, what we obtain is different:
+\begin{align*}
+\begin{abmc}{2}10.0^{-20} & 1.0 & 1.0 \\ 1.0 & 2.0 & 4.0\end{abmc} \xto{-10.0^{20}R_1+R_2}
+	&\begin{abmc}{2} 10.0^{-20} & 1.0 & 1.0 \\ -0.0 & -10.0^{20} & -10.0^{20} \end{abmc}
+\end{align*}
+Back substituting, again in floating point arithmetic, we have
+\begin{align*}
+x_2 = \frac{-10.0^{20}}{-10.0^{20}} &= 1.0 \\
+x_1 = 10.0^{20}(1.0-x_2) &= 0.0
+\end{align*}
+This is far from correct. In fact,
+\[\begin{bmatrix} 10^{-20} & 1 \\ 1 & 2 \end{bmatrix} \begin{bmatrix}0\\1\end{bmatrix} = \begin{bmatrix}1 \\ 2\end{bmatrix}.\]
+Thankfully there are solutions to these sorts of problems, called \emph{pivoting strategies}.
+
+\section{Pivoting strategies}
+A \emph{pivoting strategy} is an algorithm which decides when to interchange rows (and/or columns) to avoid errors such as swamping. 
+
+\subsection{Partial pivoting}
+In partial pivoting, we consider the magnitude of elements in the column before selecting a pivot element. The unpivoted row containing an element of maximum magnitude in a column is first swapped with the pivot row, and then the elimination step for that row proceeds. Consider the augmented matrix in \autoref{eq:aug} once again. In each step, the column entry of maximum magnitude is underlined for easy location, and then (if necessary) swapped into the correct location. Once the ``largest'' element is in the pivot position, we'll use the elimination step of sending all column values beneath the pivot to 0.
+
+{\small\begin{align*}\label{eq:aug_elim-pp}
+\begin{abmr}{3} 1 & 3 & -13 & -18 \\ 1 & 2 & -10 & -15\\ \mathbf{\underline{-6}} & -7 & 46 & 77 \end{abmr}
+	\xto{R_1:R_3}
+	&\begin{abmr}{3} -6 & -7 & 46 & 77 \\ 1 & 2 & -10 & -15 \\ 1 & 3 & -13 & -18 \end{abmr}
+	\xrightarrow[\frac16 R_1+R_3]{\frac16R_1+R_2}
+	\begin{abmr}{3} 
+		-6 & -7 & 46 & 77 \\ 
+		0 & \frac56 & -\frac73 & -\frac{13}6 \\
+		0 & \mathbf{\underline{\frac{11}6}} & -\frac{16}3 & -\frac{31}6
+	\end{abmr} \\
+	\xto{R_2:R_3}
+	&\begin{abmr}{3}
+		-6 & -7 & 46 & 77 \\ 
+		0 & \frac{11}6 & -\frac{16}3 & -\frac{31}6\\
+		0 & \frac56 & -\frac73 & -\frac{13}6
+	\end{abmr}
+	\xto{-\frac5{11}R_2+R_3}
+	\begin{abmr}{3}
+		-6 & -7 & 46 & 77 \\ 
+		0 & \frac{11}6 & -\frac{16}3 & -\frac{31}6\\
+		0 & 0 & \frac1{11} & \frac2{11}
+	\end{abmr}
+\end{align*}}
+Following up with back substitution, 
+\begin{align*}
+x_3 = \frac{2/11}{1/11} &= 2, \\
+x_2 = \frac6{11}\left(-\frac{31}6+\frac{16}3x_3\right) &= 3, \\
+x_1 = -\frac16\left(77+7x_2-46x_3\right) &= -1
+\end{align*}
+In this example, we see no net gain; in the example with swamping, we will.
+\begin{exmp} Recall our swamping example. This time we'll use floating-point arithmetic but include partial pivoting.
+\begin{align*}
+\begin{abmc}{2}10.0^{-20} & 1.0 & 1.0 \\ 1.0 & 2.0 & 4.0\end{abmc} 
+	\xto{R_1:R_2}
+	&\begin{abmc}{2}
+		1.0 & 2.0 & 4.0 \\
+		10.0^{-20} & 1.0 & 1.0
+	\end{abmc}
+	\xto{-10.0^{-20}R_1+R_2}
+	\begin{abmr}{2}
+		1.0 & 2.0 & 4.0 \\
+		0.0 & 1.0 & 1.0
+	\end{abmr} 
+\end{align*}
+Back substitution is immediate:
+\begin{align*}
+x_2 &= 1.0, \\
+x_1 = 4.0 - 2.0x_2 &= 2.0.
+\end{align*}
+So we see that using partial pivoting totally avoided the error. The small difference which occurred and was ignored did so in the correct level of significance, and the actual difference between the correct answer and its floating point approximation is below the level of precision of floating point arithmetic!
+\end{exmp}
+
+\subsection{Complete Pivoting}
+Complete pivoting involves swapping the columns as well as the rows, which is slightly dangerous -- this changes the order of the solutions. An interesting way to track these changes is to use a \emph{permutation matrix}. Suppose that $A$ is a $m\times n$ matrix, and $I$ is the $n\times n$ identity matrix. Then if $A'$ and $I'$ are the results of swapping the $i^\text{th}$ and $j^\text{th}$ columns in both $A$ and $I$, it is the case that
+\[A = AI = A'I'.\] Hence a sequence of column swaps on $A$ can be tracked by making the same sequence of column swaps on an identity matrix $I$ of the correct dimensions.
+
+The pivot selection for complete pivoting is to swap the largest-magnitude entry in the submatrix below and to the right of the previous pivot point into the current pivot position via a row and column swap.
+
+\section{Algorithms for Gaussian elimination} Beginning with implementations of the elementary row operations, we can build the full algorithm for the method of Gaussian elimination with partial pivoting.
+\subsection{Elementary row operation: Elimination}
+The first elementary row operation is the elimination operation. We write this in our shorthand as $kR_i+R_j$ and mean ``multiply every element of row $i$ by scalar $k$ and then add that product to the corresponding element of row $j$.'' Rather than trying to perform the matrix operations as changes to a matrix itself, we'll assume that a new matrix is to be returned. 
+
+\begin{alg}
+Suppose $A=[a_{i,j}]$ is a \verb|Matrix|, \verb|k| is a scalar (\verb|float|), and \verb|i| and \verb|j| are row indices.
+\begin{enum}
+\item Let \verb|temp| be a \verb|list| of the \verb|tuple|s in $A$.
+\item Assign \verb|temp[j]| to be the \verb|list| containing $ka_{\verb|i|,\ell}+a_{\verb|j|,\ell}$ for each $\ell$.
+\item Return the \verb|Matrix| of \verb|temp|.
+\end{enum}
+\end{alg}
+
+\subsection{Elementary row operation: Swapping rows}
+The next elementary row operation is changing the row order\footnote{Even though we only swap two rows at a time, this is still a \emph{permutation of the rows}. We'll talk about permutations a lot when we get to Cryptography.} and is used in the partial pivoting algorithm.
+
+\begin{alg} Suppose $A=[a_{i,j}]$ is a \verb|Matrix| and both \verb|i| and \verb|j| are row indices.
+\begin{enum}
+\item Let \verb|temp| be a \verb|list| of the \verb|tuple|s of $A$.
+\item Set \verb|temp[i]| to the $\verb|j|^\text{th}$ \verb|tuple| of $A$.
+\item Set \verb|temp[j]| to the $\verb|i|^\text{th}$ \verb|tuple| of $A$.
+\item Return the \verb|Matrix| of \verb|temp|.
+\end{enum}
+\end{alg}
+
+\subsection{Gaussian elimination with partial pivoting}
+While we could first implement so-called naive Gaussian elimination, it makes more sense to immediately write the algorithm for partial pivoting as well.
+
+\begin{alg} Suppose $A$ is a $m\times n$ \verb|Matrix|. Set \verb|i = 0| and \verb|j = 0|.
+\begin{enum}
+\item (Pivot step) In the $\verb|j|^\text{th}$ column, identify a row containing an element of maximum absolute value. Let the index of this row be \verb|p|.
+\begin{enuma}
+\item If that value is 0, increment \verb|j|. If after incrementing, $\verb|j|>n$, return the matrix.
+\item Otherwise, swap row \verb|i| and row \verb|p|.
+\end{enuma}
+\item For every row index \verb|p| greater than \verb|i|, eliminate the coefficient in $A\verb|[p,j]|$ if it is not already 0.
+\item Increment \verb|i| and \verb|j|. If after incrementing either $\verb|i|>m$ or $\verb|j|>n$, return the matrix.
+\end{enum}
+\end{alg}
+
+\noindent At this point, you should be able to discover and implement the algorithm for back-substitution by yourself. What does it mean if there is a column of an augmented matrix which is never used for elimination?
+
+\end{document}

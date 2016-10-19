@@ -1,0 +1,172 @@
+\documentclass[m3380-lec-main.tex]{subfiles}
+\setcounter{chapter}{10}
+
+%\DeclareMathOperator{\R}{\mathbb{R}}
+
+\begin{document}
+
+
+\chapter{Public Key Encryption}
+
+\section*{Goals}
+\begin{enumerate}[1.~]\setlength{\itemsep}{0pt}
+\item Explain the difference between public key and ``shared secret" cryptography.
+\item Develop kid-RSA and demonstrate its strength and weakness.
+\item Develop RSA encryption.
+\end{enumerate}
+
+\section{Shared secret vs. public key encryption}
+Throughout Lesson 10, we talked about ``shared key" cryptography: if Alice is sending Bob an encrypted message, both Alice and Bob must have the whole key and understand the method. With the advent of digital computers it became necessary to build a stronger type of encryption, where the encryption and decryption keys are distinct. While first theoretically proposed by Diffie and Hellman in 1976, public key encryption saw its first practical application in the algorithm created\footnote{Clifford Cocks of the UK GCHQ described a system equivalent to RSA in 1973, but it was not know until 1997 due to its classification as top-secret.} by Ron Rivest, Adi Shamir, and Leonard Adelman, which now bears their initials: the RSA encryption algorithm.
+
+The difficulty inherent in creating the RSA algorithm involved finding a ``one-way function," a function $f$ which has an inverse $f^{-1}\neq f$ which is computationally difficult to find. The function used in RSA involves modular exponentiation.
+
+Conceptually, shared key cryptography is like the type of padlock which requires the key either to lock or unlock. Anyone with the key can encrypt, and they use the same key to decrypt. In RSA, the encryption key and the decryption key are mathematically related, but not equal. Hence the encryption key can be posted publically -- this is why some emails will contain a line in the signature which says ``PGP Key." Pretty Good Privacy, or PGP, is a cryptosystem that uses RSA as one of its steps. The decryption key in public key cryptography is called the \emph{private key} and is never shared. 
+
+We'll discuss an introductory version of RSA (sometimes called Kid RSA) before moving on to the full RSA algorithm. The difference between the two involves a different use of modular arithmetic in the key generation phase.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%% THIS IS HERE TO FIX SOME UNDERFULL VBOX BADNESS        %%%%%%%
+%\vfill                                                         %%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Kid RSA} As an introduction to the RSA algorithm, modular multiplication can be used to greatly simplify the calculation process; the trade-off is that the algorithm becomes susceptible to a very well-known mathematical attack. The only \emph{shared secret} in using Kid RSA is the method of converting strings into integers. 
+
+\subsection{Key Generation} The first step of a public key cryptography algorithm is the generation of the public and private keys.
+
+\begin{alg}[Kid RSA Key Generation]
+Let $a,b,a',b'\in \mathbb{Z}$ be arbitrary positive integers.
+Define
+\begin{align*}
+M &= ab-1 \\
+e &= a'M+a \\
+d &= b'M+b \\
+n &= (ed-1)/M = a'b'M+ab'+a'b+1
+\end{align*}
+ The public key is the ordered pair $(n,e)$; the private key is the ordered pair $(n,d)$.
+\end{alg}
+Having a public key generated and shared, a user can now wait for an encrypted message to arrive.
+\begin{exmp}
+Suppose we choose
+\begin{align*}
+a &= 5 & b &= 25 & a' &= 7 & b' &= -49.
+\end{align*}
+Following Algorithm 11.1, we obtain
+\begin{align*} 
+M &= 5(25)-1 = 124 \\
+e &= 7(124)+5 = 873 \\
+d &= 49(124)+25 = 6101 \\
+n &= (873(6101)-1)/124 = 42953
+\end{align*}
+Hence our public key is $(42953, 873)$, and our private key is $(42953, 6101)$.
+\end{exmp}
+
+Keys in hand, we now need to actually encrypt a message -- the power and allure of RSA and this easier variant is that the encryption function is mathematically simple. 
+
+\begin{alg}[Kid RSA Encryption]
+Suppose $(n,e)$ and $(n,d)$ are respectively public and private Kid RSA keys. If $m$ is an integer representing a single character of a plaintext message, then the associated encrypted integer is 
+\[ c = (me)\mod n. \]
+Likewise, if $c$ is an encrypted integer, then the associated decrypted integer is 
+\[ d= (cd)\mod n.\]
+\end{alg}
+It should be clear that since $(0x)\mod n=0$ for every pair of $n,x$, we should avoid coding any letter as the integer 0.
+
+\begin{exmp} Continuing our previous example, we have public key $(42953, 873)$. Suppose we remove punctuation and spaces from the message:
+\begin{quote}
+If I have seen further it is by standing on the shoulders of giants\footnote{Issac Newton in a letter to Robert Hooke, 1676}.
+\end{quote}
+We will convert to a list of integers by simply using the Python \verb|ord| command.
+{\fn\[\begin{array}{rrrrrrrrrrrrrrrrrrrr}
+73 & 70 & 73 & 72 & 65 & 86 & 69 & 83 & 69 & 69 & 78 & 70 & 85 & 82 & 84 & 72 & 69 & 82 & 73 & 84 \\
+73 & 83 & 66 & 89 & 83 & 84 & 65 & 78 & 68 & 73 & 78 & 71 & 79 & 78 & 84 & 72 & 69 & 83 & 72 & 79 \\
+85 & 76 & 68 & 69 & 82 & 83 & 79 & 70 & 71 & 73 & 65 & 78 & 84 & 83 
+\end{array}\]}
+Applying the Kid RSA algorithm, we obtain 
+{\fn\[\begin{array}{rrrrrrrrrr}
+20776 & 18157 & 20776 & 19903 & 13792 & 32125 & 17284 & 29506 & 17284 & 17284 \\
+25141 & 18157 & 31252 & 28633 & 30379 & 19903 & 17284 & 28633 & 20776 & 30379 \\
+20776 & 29506 & 14665 & 34744 & 29506 & 30379 & 13792 & 25141 & 16411 & 20776 \\
+25141 & 19030 & 26014 & 25141 & 30379 & 19903 & 17284 & 29506 & 19903 & 26014 \\
+31252 & 23395 & 16411 & 17284 & 28633 & 29506 & 26014 & 18157 & 19030 & 20776 \\
+13792 & 25141 & 30379 & 29506 
+\end{array}\]}
+\end{exmp}
+\subsection{Breaking Kid RSA}
+Unfortunately, it is number-theoretically trivial to break Kid RSA. Consider the values $n$, $d$, and $e$ used by the encryption. It must be the case that \[((me)\mod n)d\mod n = m,\]
+but then $e$ and $d$ must be multiplicative inverses modulo $n$. A number $e\in \mathbb{Z}_n$ only has a mutliplicative inverse when $\gcd(e,n)=1$. This leads, however, to an efficient expansion of Euclid's algorithm for the Greatest Common Divisor to recover the value of $d$.
+\begin{thm} Suppose $a,b$ are positive integers, such that $a=bq+r$ with $0\leq r<b$. Then $\gcd(a,b) = \gcd(b,r)$.
+\end{thm}
+The application of this theorem repeatedly is called Euclid's algorithm: given positive integers $a$ and $b$, there are unique $q,r$ with $0\leq r<b$ such that $a=bq+r$. If $r=0$, then $\gcd(a,b)=b$. If $r\neq 0$, then $\gcd(a,b) = \gcd(b,r)$.
+
+\begin{alg}[Extended Euclidean Algorithm]
+Let $s>t$ be positive integers.
+\begin{enum}
+\item Set \verb|a = [s]|, \verb|b = [t]|, \verb|q = [a//b]|, \verb|r = [a%b]|, and \verb|p = [0,1]|.
+\item While the last element of \verb|r| is nonzero:
+\begin{enuma}
+\item Append the last element of \verb|b| to \verb|a|.
+\item Append the last element of \verb|r| to \verb|b|.
+\item Append the quotient of those values to \verb|q|.
+\item Append the remainder of those values to \verb|r|.
+\item Append to \verb|p| the value \verb|(p[-2]+p[-1]*q[-2]) % s|.
+\end{enuma}
+\item When the loop terminates, \verb|p[-1]| is $t^{-1}$ in $\mathbb{Z}_s$.
+\end{enum}
+\end{alg}
+
+\begin{exmp}
+Applying the algorithm for our public key $(42953,873)$, we have:
+\begin{align*}
+&&  p_{-1} &= 0 \\
+42953 &= 49(873)+176 & p_0 &= 1 \\
+873 &= 4(176)+169    & p_1 &= (0-1(49))\mod 42953 = 42904 \\
+176 &= 1(169)+7      & p_2 &= (1-42904(4))\mod 42953 = 197 \\
+169 &= 24(7)+1       & p_3 &= (42904-197(1))\mod 42953 = 42707 \\
+7 &= 7(1)+0          & p_4 &= (197-42707(24))\mod 42953 = 6101
+\end{align*}
+But we had $d=6101$, so our decryption is broken. Applying \[f(c) = (6101\cdot c)\mod 42953\] to each integer $c$ in the list of encrypted integers, we recover the original list.
+\end{exmp}
+
+\section{Plain RSA}
+Plain RSA follows the same pattern: key generation and distribution, encryption, and decryption. Once again, the public key pair is to be distributed openly, and the private key is never to be distributed.
+
+
+\begin{alg}[RSA Key Generation]~
+\begin{enum}
+\item Choose two primes $p$ and $q$, which for purpose of security should be
+\begin{enuma}
+\item chosen randomly
+\item similar in magnitude,
+\item but different in length.
+\end{enuma}
+\item Let $n=pq$, the modulus.
+\item Compute $\phi(n) = (p-1)(q-1) = n-(p+q-1)$. This is \emph{Euler's totient function}.
+\item Choose an integer $e$ such that $1<e<\phi(n)$ and $\gcd(e,\phi(n))=1$.
+\item Let $d = e^{-1}\mod \phi(n)$.
+\end{enum}
+The public key is $(n,e)$ and the private key is $(n,d)$.
+\end{alg}
+
+
+\begin{alg}[RSA Encryption]
+Suppose $(n,e)$ is an RSA public key and $(n,d)$ is the associated private key.
+For each integer $m$ in an encoded message, the encrypted integer is 
+\[c(m) = m^e\mod n\] and the decrypted message of a given $c$ is \[m(c) = c^d\mod n.\]
+\end{alg}
+
+Reasonably secure RSA encryption requires the use of large primes -- requiring that the minimum bit-length be 1024 is not too small for security's sake. This in turn leads to very large $n$. For example, using SageMathCloud for its mathematical strengths over plain Python, I can generate a public key like so in a matter of moments. Note that the first nine lines are all part of the modulus of the key; $n$ in this example is a 2048-bit integer.
+
+
+\bc
+\begin{verbatim}
+(20402086648568173481955585730646286137315210218839346974138749941
+645259140495567770834936874243791372473116188864372884738105135450
+914873426313184766644920305916448220578083159085234843109165718821
+649816351354956181220389757990790051050071041390123552155032886914
+153510815090479150188398896673272304920300347717062622306615186215
+221390731247779732442600196675172980756129027793257452061157450306
+999338021825818915796490401265682040597421747260118459364506747473
+696770232104151315624298201601728269794649660724878710164849383257
+954760868276197510430226341671964363302816497178476763126391107078
+274240530722153356995721, 735866671)
+\end{verbatim}
+\ec
+\end{document}

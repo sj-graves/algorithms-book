@@ -1,0 +1,177 @@
+\documentclass[m3380-lec-main.tex]{subfiles}
+\setcounter{chapter}{12}
+
+%\DeclareMathOperator{\R}{\mathbb{R}}
+
+\begin{document}
+
+
+\chapter{Shortest Paths}
+
+\section*{Goals}
+\begin{enumerate}[1.~]\setlength{\itemsep}{0pt}
+\item Discuss the shortest path problem.
+\item Explain Dijkstra's shortest path algorithm.
+\item Implement Dijkstra's algorithm.
+\end{enumerate}
+
+\newcommand{\Erd}{\textrm{Erd\H{o}s}}
+
+\section{\Erd{} Number} The mathematician Paul \Erd{} is renowned for having been one of the most prolific mathematicians of the 20th century, as well as one of the most social: he wrote papers with more than 500 collaborators over his career. Due to his frequent collaborations, one of his coauthors assigned to Paul an ``\Erd{} number" of 0, for being Paul \Erd. Each of \Erd's coauthors were assigned an \Erd{} number of 1. Their coauthors who did not coauthor with \Erd{} were assigned an \Erd{} number of 2, and so on.
+
+Essentially, this builds a \emph{rooted collaboration graph}: a graph whose vertices are mathematicians and edges are coauthorship on a paper, with a special \emph{root vertex} designated as Paul \Erd. The distance in this graph is the length of a shortest path between vertices. The question then is how to determine a shortest path.
+
+While this problem is described in terms of something trivial, shortest paths are important in other mediums as well. If a transmission of a message in a network is more likely to have errors introduced with each subsequent connection traversed, it is important to minimize the number of transmissions. With a little creativity, the shortest path problem can be applied to hyperspace routing for a particular type of fictional faster-than-light travel.
+
+\section{Dijkstra's Algorithm}
+In 1956, Dutch computer scientist {Edsger Dijkstra} developed an algorithm for solving this problem. His solution, now known as Dijkstra's algorithm, is both elegant and simple.
+
+\begin{alg}[Dijkstra's Shortest Path Algorithm]
+Let $G=(V,E)$ be a graph, and let $x$ be a particular vertex in $V$. We will define $d(v)$ to be the currently known distance from $x$ to $v$, and $V'=\set{}$ to be an initially empty set. For each $v\in V\setminus\set{x}$, we define $p(v)$ to be the \emph{predecessor} of $v$ in a shortest path from $x$.
+\begin{enum}
+\item Mark $d(x)=0$ and $d(v)=\infty$ for every $v\in V\setminus\set{x}$.
+\item While $V\neq V'$, do the following:
+\begin{enuma}
+\item Let $u$ be any vertex in $\set{u\in V\setminus V': d(u)=\min\set{d(v):v\in V\setminus V'}}$.
+\item Add $u$ to $V'$.
+\item For each neighbor $v$ of $u$, if $d(v)>d(u)+1$, set $d(v)=d(u)+1$, and set $p(v)=u$.
+\end{enuma}
+\item Return the triple $(v,d(v), p(v))$ for each $v\in V$.
+\end{enum}
+\end{alg}
+
+In fact, Dijkstra's algorithm produces what is called a \emph{breadth-first traversal} of $\Gamma$ from the root vertex $x$. For each vertex $v$ in the same component of $\Gamma$ as $v_0$, there is a finite sequence of predecessors which can be followed backwards from $v$ to $x$; for vertices in other components, no such predecessor exists and the distance $d(x,v)$ is infinite. We'll illustrate the algorithm with the example of a graph with two components, one of which is a single isolated vertex.
+
+\begin{figure}[hbt]
+\begin{center}{\footnotesize\begin{tikzpicture}[scale=3]
+\foreach \n/\x/\y in {1/0.43/0.69, 2/1.14/0.66, 3/2.08/-0.14, 4/1.59/-0.23, 5/1.5/0.88, 6/1.6/-0.52, 7/1.82/0.45, 8/0.99/-0.54, 9/1.18/-0.74, 10/0.92/-0.3, 11/1.41/0.15, 12/0.49/-0.45, 13/0.78/0.17, 14/0.43/0.0, 15/0.96/-0.07, 16/2.08/0.45}{
+    \node [draw=black, circle, fill=white, inner sep=1pt] (\n) at (\x,\y) {};
+}
+\graph{
+(1) -- {(2), (14)}, (2) -- {(5), (7), (15)}, (3) -- {(4), (6), (7)}, (4) -- {(8), (11), (15)}, (5) -- {(11)}, (6) -- {(8), (9), (11)}, (7) -- {(11)}, (8) -- {(9), (12), (14)}, (9) -- {(10), (15)}, (10) -- {(11), (12), (13)}, (11) -- {(13)}, (12) -- {(14), (15)}, (13) -- {(14), (15)}, (14) -- {(15)}
+};
+\foreach \n in {2,5,7,13}{\node [above] at (\n) {\n};}
+\foreach \n in {4,6,8,9}{\node [below] at (\n) {\n};}
+\node [right] at (3) {3};
+\node [left] at (14) {14};
+\foreach \n in {1, 10, 11}{\node [above left] at (\n) {\n};}
+\node [below left] at (12) {12};
+\node [above right] at (15) {15};
+\node [above right] at (16) {16};
+\end{tikzpicture}
+}\end{center}
+\caption{\label{fig:dijkstra_exmp}A graph $\Gamma$ with two components: the vertex $v_{16}$ is isolated from all other vertices.}
+\end{figure}
+
+\begin{exmp} Consider the graph $\Gamma=(V,E)$ with vertex set $V=\set{1,2,\ldots,16}$ and edge set 
+\begin{align*} 
+E &= \left\{(1, 2), (1, 14), (2, 5), (2, 7), (2, 15), (3, 4), (3, 6), (3, 7), (4, 8), (4, 11), (4, 15), \right. \\
+ &\phantom{=}~\left.(5, 11), (6, 8), (6, 9), (6, 11), (7, 11), (8, 9), (8, 12), (8, 14), (9, 10), (9, 15),\right. \\
+ &\phantom{=}~\left.(10, 11), (10, 12), (10, 13), (11, 13), (12, 14), (12, 15), (13, 14), (13, 15), (14, 15)\right\}.
+\end{align*}
+This graph is depicted in \autoref{fig:dijkstra_exmp}. If we designate the root vertex to be $x=v_1$, we can begin the process.
+The iterations are explained briefly, and all steps are tabulated below in \autoref{tab:dijkstra_exmp}. Since $x=v_1$, we set 
+\[d(v) = \begin{cases}\infty & v\neq v_1 \\0 & v=v_1
+\end{cases}\]
+and $p(v)$ takes no values. As the only unvisited vertex at finite distance from $x$, we mark $v_1$ as visited by putting $V'=\set{v_1}$. Looking at the neighbors of $v_1$, we see that $N(v_1) = \set{v_2, v_{14}}$; since the distance to both is currently infinite, we redefine $d$ and $p$ as follows:
+\begin{align*}
+d(v) &= \begin{cases} 
+    0 & v=v_1 \\ 
+    1 & v\in \set{v_2,v_{14}} \\ 
+    \infty & \text{otherwise} 
+\end{cases} &
+p(v) &= 1\text{ for } v\in\set{v_2, v_{14}}.
+\end{align*}
+Since $2<14$, we choose next to visit $v_2$; hence $V'=\set{v_1,v_2}$ and we observe that the as-yet-unvisited neighbors of $v_2$ are $v_5$, $v_7$, and $v_{15}$. We again update $d$ and $p$:
+\begin{align*}
+d(v) &= \begin{cases} 
+    0 & v=v_1 \\ 
+    1 & v\in \set{v_2,v_{14}} \\ 
+    2 & v\in \set{v_5, v_7, v_{15}} \\
+    \infty & \text{otherwise} 
+\end{cases} &
+p(v) &= \begin{cases} 
+    1 & v\in\set{v_2, v_{14}} \\ 
+    2 & v\in\set{v_5, v_7, v_{15}}
+\end{cases}
+\end{align*}
+Proceeding in this manner, we will visit vertices $v_{14}$, $v_5$, $v_7$, $v_{15}$, $v_8$, and $v_{12}$ before something strange happens: every vertex will have been visited or ``seen" on its shortest path, except for $v_{16}$. While $v_{16}$ will eventually be added to $V'$, it will never be seen as a neighbor of another vertex, and will never be assigned a predecessor.
+\end{exmp}
+
+\begin{table}[hbt]{\fn
+\[\begin{array}{c|c|c|c|l@{~:~}l}
+& \textbf{Current} &&& \multicolumn{2}{l}{\textbf{Updating vertices}} \\
+\textbf{Step} & \textbf{Vertex} & \textbf{Distance} &\textbf{Predecessor} & \set{v_j:j\in J} & (d(v), p(v)) \\ \hline
+1 & 1 & 0 & \text{--} & \set{2, 14} & (1,1) \\
+2 & 2 & 1 & 1 & \set{5, 7, 14} & (2,2) \\
+3 & 14 & 1 & 1 & \set{8, 12, 13} & (2,14) \\
+4 & 5 & 2 & 2 & \set{11} & (3,5) \\
+5 & 7 & 2 & 2 & \set{3} & (3,7) \\
+6 & 15 & 2 & 2 & \set{2, 9} & (3, 15) \\
+7 & 8 & 2 & 14 & \set{6} & (3,8) \\
+8 & 12 & 2 & 14 & \set{10} & (3,12) \\
+9 & 13 & 2 & 14 \\
+10 & 11 & 3 & 5 \\
+11 & 3 & 3 & 7 \\
+12 & 6 & 3 & 8 \\
+13 & 10 & 3 & 12 \\
+14 & 4 & 3 & 15 \\
+15 & 9 & 3 & 15 \\
+16 & 16 & \infty & \text{--}
+\end{array}\]}
+\caption{\label{tab:dijkstra_exmp} Iterations of Dijkstra's algorithm on the graph $\Gamma$ from \autoref{fig:dijkstra_exmp}.}
+\end{table}
+
+Are there other ways to find shortest paths? Of course. The beauty of using Dijkstra's algorithm is that when you first encounter a vertex, you're already recording its shortest path. It will never be the case that this algorithm encounters a vertex at some large distance and then updates it to a smaller distance.
+
+
+\section{Implementing Dijkstra's algorithm}
+The only really sophisticated use of data structures in the implementation we will use of Dijkstra's algorithm is that we will use a double-ended dictionary of edges: that is, rather than only recording that $v_i$ is adjacent to $v_j$ when $j>i$, we will record both ends of every edge. As the edge dictionary which is provided is not necessarily double-ended, the first step of our implementation will be to create it.
+
+\bc
+\begin{verbatim}
+def double_dict(edge_dict):
+    """ edge_dict should be a dictionary with integer keys and list of 
+    integer values. double_dict will return dictionary and vertex set of
+    the graph."""
+    m = min(edge_dict.keys())               # These set up to return the 
+    M = max(edge_dict.keys())               # vertex set of the graph.
+    out_dict = {}
+    for u,nbrs in edge_dict.items():
+        for v in nbrs:
+            m = min(v, m)                   # Finding the min
+            M = max(v, M)                   # Finding the max
+            try:
+                out_dict[u] += [v]          # Updating double-endedness
+            except KeyError:
+                out_dict[u] = [v]
+            try:
+                out_dict[v] += [u]          # Updating double-endedness
+            except KeyError:
+                out_dict[v] = [u]
+    return out_dict, [m+i for i in range(M-m+1)] # return dict and vertices
+\end{verbatim}
+\ec
+Using these functions makes the implementation of Dijkstra's algorithm almost natural.
+
+\bc
+\begin{verbatim}
+def dijkstra(edge_dict, root, **kwargs):
+    dbl_dic, V = double_dict(edge_dict)
+    order = len(V)
+    d = {v:(order+1 if v!=root else 0) for v in V} # Setup distance mapping
+    p = {v:None for v in V}                        # Setup predecessors
+    vis = []
+    while len(vis)<len(V):
+        dpu = sorted((dist,p[v],v) for v,dist in d.items() if v not in vis)
+        cd, cp, cu = dpu[0]                        # Find nearest unvisited
+        vis += [cu]
+        if cu in dbl_dic.keys():
+            for v in dbl_dic[cu]:
+                if v not in vis and d[v]>cd+1:
+                    d[v] = cd+1                    # Update anything nearer
+                    p[v] = cu                      # than previously seen.
+    return d,p
+\end{verbatim}
+\ec
+\end{document}
