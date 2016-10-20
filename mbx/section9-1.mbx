@@ -1,0 +1,111 @@
+<section>
+<title>What is a permutation?</title>
+
+
+<introduction>
+<definition>
+<statement>
+<p>
+Suppose <m>A</m> is a set. Then a function <m>\sigma</m> with domain <m>A</m> and codomain <m>A</m> is a <term>permutation of <m>A</m></term> if and only if <m>\sigma</m> satisfies the following two criteria:
+
+<ol type="bfseriesi">
+<li><p>(Surjective/Onto) For each element <m>a\in A</m>, there is an element <m>a'\in A</m> such that <m>{\sigma(a') = a}</m>.</p></li>
+<li><p>(Injective/One-to-one) For any elements <m>a,b\in A</m>, if <m>f(a)=f(b)</m> then <m>a=b</m>.</p></li>
+</ol>
+
+</p>
+</statement>
+</definition>
+<p>
+Functions which are both one-to-one and onto are also called <em>bijections</em>, so an easier definition of a permutation <m>\sigma</m> of <m>A</m> is that <m>\sigma</m> is a bijection from <m>A</m> to itself. It is important to note that the definition of a permutation of <m>A</m> does not require that the set <m>A</m> be finite. The study of permutations of infinite sets is beyond the purpose to which we will put our permutations, so we will henceforth make the following assumption: <em>all sets which we permute will be finite sets.</em>
+</p>
+<definition>
+<statement>
+<p>
+We make the following notational definitions for the sake of convenience.
+<ul>
+<li><p><m>\scr{E}</m> is the set of letters in the English alphabet.</p></li>
+<li><p><m>[n] = \set{1,2,3,\ldots,n}</m> whenever <m>n\in \mathbb{N}</m>.</p></li>
+</ul>
+</p>
+
+<p>
+For a finite set <m>A</m> which is not a subset of <m>[n]</m> for any <m>n</m>, we denote the set of all permutations of <m>A</m> by <m>S_A</m>. The set of all permutations of <m>[n]</m> is denoted <m>S_n</m>.
+</p>
+</statement>
+</definition>
+</introduction>
+
+
+<subsection>
+<title>Representing a permutation</title>
+<p>
+There are several distinct ways of representing permutations which are useful in different situations. For non-numeric sets, one of the best is called <em>two-line notation</em>.
+</p>
+
+<example xml:id="exmp_perm1">
+<statement>
+<p>
+Suppose <m>\sigma_1:[15]\to[15]</m> is defined by <m>\sigma_1(i) = 16-i</m>. Then the <em>two line notation</em> for <m>\sigma_1</m> is
+</p>
+<image>
+<latex-image-code><![CDATA[\begin{tikzpicture}[scale=12/26]\node [left] at (0,0) {\( \sigma_1 = \)};{\draw[anchor=mid] (0,-1) grid (15,1) \foreach \x/\y/\z in {0/1/15, 1/2/14, 2/3/13, 3/4/12, 4/5/11, 5/6/10, 6/7/9, 7/8/8, 8/9/7, 9/10/6, 10/11/5, 11/12/4, 12/13/3, 13/14/2, 14/15/1}{(\x+1/2,1/2) node {\y} (\x+1/2,-1/2) node {\z}};}\end{tikzpicture}]]></latex-image-code>
+</image>
+<p>
+This permutation is one which the ``best" representation is its functional one, <m>\sigma_1(i)=16-i</m>. However, this is not always the case. Consider the following permutation <m>\sigma_2</m> of <m>[15]</m> given by
+</p>
+<image>
+<latex-image-code><![CDATA[\begin{tikzpicture}[scale=12/26]\node [left] at (0,0) {\( \sigma_2 = \)};{\draw[anchor=mid] (0,-1) grid (15,1) \foreach \x/\y/\z in {0/1/4, 1/2/3, 2/3/2, 3/4/7, 4/5/6, 5/6/5, 6/7/10, 7/8/9, 8/9/8, 9/10/13, 10/11/12, 11/12/11, 12/13/1, 13/14/15, 14/15/14}{(\x+1/2,1/2) node {\y} (\x+1/2,-1/2) node {\z}};}\end{tikzpicture}]]></latex-image-code>
+</image>
+<p>
+Worse still is this permutation <m>\sigma_3</m> of <m>\E</m>:
+</p>
+<image>
+<latex-image-code><![CDATA[\begin{tikzpicture}[scale=12/26]\node [left] at (0,0) {\( \sigma_3 = \)};{\draw[anchor=mid] (0,-1) grid (26,1) \foreach \x/\y/\z in {0/a/d, 1/b/k, 2/c/b, 3/d/c, 4/e/j, 5/f/s, 6/g/m, 7/h/n, 8/i/f, 9/j/o, 10/k/a, 11/l/t, 12/m/w, 13/n/v, 14/o/z, 15/p/p, 16/q/i, 17/r/x, 18/s/u, 19/t/r, 20/u/h, 21/v/q, 22/w/y, 23/x/l, 24/y/g, 25/z/e}{(\x+1/2,1/2) node {\y} (\x+1/2,-1/2) node {\z}};}\end{tikzpicture}]]></latex-image-code>
+</image>
+<p>
+Two line notation is especially good when there is no natural order for the symbols in the set being permuted. For example, if <m>A=\set{\clubsuit, \diamondsuit, \heartsuit, \spadesuit, \nabla, \surd, \infty}</m>, then the following is a valid permutation of <m>A</m>:
+</p>
+<image>
+<latex-image-code><![CDATA[\begin{tikzpicture}[scale=12/26]\node [left] at (0,0) {\( \sigma_4 = \)};{\draw[anchor=mid] (0,-1) grid (7,1) \foreach \x/\y/\z in {0/\(\clubsuit\)/\(\diamondsuit\), 1/\(\diamondsuit\)/\(\heartsuit\), 2/\(\heartsuit\)/\(\spadesuit\), 3/\(\spadesuit\)/\(\clubsuit\), 4/\(\nabla\)/\(\surd\), 5/\(\surd\)/\(\infty\), 6/\(\infty\)/\(\nabla\)}{(\x+1/2,1/2) node {\y} (\x+1/2,-1/2) node {\z}};}\end{tikzpicture}]]></latex-image-code>
+</image>
+</statement>
+</example>
+
+<p>
+For some sets, using both lines of the two-line notation is unnecessary. For instance, every permutation in <m>S_n</m> has the same first row in two-line notation! For sets such as these, where there is a commonly understood order and first element, we can suppress the first line of two-line notation, and obtain <em>one-line notation</em>.
+</p>
+
+<example>
+<statement>
+<p>
+We can write the permutations <m>\sigma_1</m> and <m>\sigma_2</m> above easily in one-line notation<fn>There is considerable disagreement in the literature about whether the symbols in one-line notation should be separated by spaces, commas, or not at all. Anecdotally, Dr.<nbsp />Kassie Archer of UT Tyler, who does research in combinatorial permutation theory, expressed that her personal preference is to use no separation if there are enough distinct elements in the set, and spaces otherwise. Our notation will follow her example.</fn>:
+<md>
+  <mrow>  \sigma_1 \amp = 15~14~13~12~11~10~9~8~7~6~5~4~3~2~1,</mrow>
+  <mrow>  \sigma_2 \amp = 4~3~2~7~6~5~10~9~8~13~12~11~1~15~14.</mrow>
+</md>
+</p>
+
+<p>
+Since <m>\sigma_3</m> is a permutation of <m>\E</m>, its one-line notation is a collection of English letters <mdash /> an unpronounceable word:
+<me>
+  \sigma_3 = \text{ dkbcjsmnfoatwvzpixurhqylge } .
+</me>
+</p>
+
+<p>
+Since the set <m>A</m> defined in <xref ref="exmp_perm1">Example</xref> has no clear order, we cannot use one-line notation to represent <m>\sigma_4</m>.
+</p>
+</statement>
+</example>
+
+<definition>
+<statement>
+<p>
+Suppose <m>A</m> is a set, and let <m>e_A:A\to A</m> be the function such that <m>e_A(a)=a</m> for each <m>a\in A</m>. Then <m>e_A</m> is the <term>identity permutation on <m>A</m></term>. When the set <m>A</m> being permuted is clear by context, the identity permutation will simply be denoted <m>e</m>.
+</p>
+</statement>
+</definition>
+</subsection>
+
+</section>

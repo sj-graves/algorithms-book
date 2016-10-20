@@ -1,0 +1,14 @@
+<section>
+<title>Capacitated networks</title>
+<p>
+All information flows over some sort of network, whether it be electronic or otherwise; you can think of communicating person-to-person as a pair of nodes and a regular graph edge connecting them, while a person lecturing to a group might be modeled more accurately by a hypergraph<fn>Remember that a <em>hypergraph</em> permits edges to contain more than two vertices.</fn>. Similarly, the logistic problem of transporting goods and services across the country can be modeled using a transportation network.
+</p>
+
+<p>
+In both of these cases, there is a sort of maximum capacity for the transfer, and this gives us the concept of a <em>capacitated network.</em> This is much like a weighted graph, but we tend to think of networks as directed. Additionally we must consider that not ever connection in a network can be utilized to its full capacity at all times; hence we have two numbers associated with each edge, the <em>flow</em> and the <em>capacity</em>.
+</p>
+
+<p>
+A capacitated network also has two special vertices: the <em>source</em>, <m>s</m>, and <em>target</em> (or sink), <m>t</m>. The flow begins form the source and terminates at the sink <mdash /> a flow is valid if and only if the flow into each vertex is equal to the flow out of the vertex, with exceptions at <m>s</m> and <m>t</m>, and the flow across each directed edge is less than or equal to the capacity of that edge.
+</p>
+</section>

@@ -1,0 +1,38 @@
+<section>
+<title>Errors, error handling, and the <c>try</c> statement</title>
+<p>
+There are several ways that executing a program can go wrong. The best type of error is a <em>syntax error</em>, usually caused by a typo in your code. These won't even run, and IDLE is very good at detecting them. The second best type of error is an <em>exception</em>. Exceptions are errors which are <c>raise</c>d by doing something which is syntactically correct in code but violates something about the way Python works. Here's a simple demonstration <mdash /> you can't add a string and an integer.
+</p>
+<pre>
+>>> s='123'
+>>> t=4
+>>> s+t
+Traceback (most recent call last):
+  File "&lt;pyshell#23>", line 1, in &lt;module>
+    s+t
+TypeError: Can't convert 'int' object to str implicitly
+>>> t+s
+Traceback (most recent call last):
+  File "&lt;pyshell#24>", line 1, in &lt;module>
+    t+s
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+</pre>
+<p>
+How these errors occurs is actually built in to the definitions of type <c>int</c> and type <c>str</c>. Somewhere in the <c>builtin</c> code for these types, a command reading <c>raise(TypeError('...'))</c> occurs. The <em>exception</em> is a <em>type error</em>, where you are trying to combine data types which are incompatible. There are lots of predefined exceptions: <c>TypeError</c>, <c>ValueError</c>, and <c>NameError</c> are the three you will most commonly see, followed by <c>ZeroDivisionError</c> when you aren't careful in your programming.
+</p>
+
+<p>
+In <c>les3_ex3.py</c>, I used the <c>ValueError</c> which is raised by trying to force the conversion of a non-integer string to an integer. Python is able to correctly handle the conversion of a string like <c>'12345'</c> to an integer, but to ask <q>what is the integer form of <c>'abc'</c>?</q> is a meaningless question. The <c>try: ... except: ...</c> block is a very specialized type of <c>if...then</c> structure. Python will run the code inside a <c>try:</c> block, and if an error is <c>raise</c>d will jump to the first <c>except... :</c> statement. If the type of the exception matches, that block will execute. The final block of <c>les3_ex3.py</c> is
+</p>
+<pre>
+except:
+        raise
+</pre>
+<p>
+which terminates the <c>try:... except:...</c> structure by <em>re-raising any unhandled exception</em>. This allows you to press Ctrl-C to exit the <c>while True:</c> loop, for instance. This is also the behavior of the <c>break</c> command: it makes the program immediately exit the innermost enclosing loop.
+</p>
+
+<p>
+The raising and handling of exceptions is often treated as an advanced programming topic, but is a useful tool even at the introductory level to help understand how programming errors are made, and how to avoid or mitigate them.
+</p>
+</section>

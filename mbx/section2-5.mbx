@@ -1,0 +1,41 @@
+<section>
+<title><c>tuple</c>s</title>
+<p>
+A <c>tuple</c> is another compound data type which looks almost exactly like a <c>list</c>, but is immutable. Elements of tuples can be any data type, but once a <c>tuple</c> is assigned its elements cannot be changed without overwriting the whole <c>tuple</c>.
+</p>
+<pre>
+>>> spam = (1, 2, 3, 4)
+>>> type(spam)
+&lt;class 'tuple'>
+>>> spam[3]=2
+Traceback (most recent call last):
+  File "&lt;pyshell#2>", line 1, in &lt;module>
+    spam[3]=2
+TypeError: 'tuple' object does not support item assignment
+>>> eggs=list(spam)
+>>> print(eggs, type(eggs))
+[1, 2, 3, 4] &lt;class 'list'>
+>>> spam == tuple(eggs)
+True
+</pre>
+<p>
+As you can see, you can directly convert between items of type <c>list</c> and <c>tuple</c>. Unfortunately, <c>tuple</c> comprehension doesn't work like <c>list</c> comprehension.
+</p>
+<pre>
+>>> mylist = [ x**2 for x in range(10)]
+>>> mytuple = ( x**2 for x in range(10) )
+>>> mylist
+[0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+>>> type(mylist)
+&lt;class 'list'>
+>>> mytuple
+&lt;generator object &lt;genexpr> at 0x1046568e0>
+>>> type(mytuple)
+&lt;class 'generator'>
+>>> tuple(mytuple)
+(0, 1, 4, 9, 16, 25, 36, 49, 64, 81)
+</pre>
+<p>
+The <c>generator</c> object created by this attempted <c>tuple</c> comprehension is very similar to the <c>range</c> objects. We won't stress out too much about the properties of <c>range</c> and <c>generator</c> objects, and will try to avoid them where possible.
+</p>
+</section>

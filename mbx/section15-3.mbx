@@ -1,0 +1,305 @@
+<section>
+<title>Dinitz' Algorithm</title>
+<p>
+The original solution to the problem of calculating a maximum flow was published in 1956 by {L. R. Ford, Jr. and D. R. Fulkerson}. The modified version presented here was produced by Yefim Dinitz as a ``response to a pre-class exercise in Adel'son Vel'sky's Algorithm class." According to Dinitz, he was at the time unaware of the basic details of the Ford-Fulkerson algorithm upon which his algorithm improves.
+</p>
+
+<p>
+Both algorithms proceed in this general fashion: given a flow, determine which edges have ``residual capacity." In the residual graph, try to find a flow which can augment the current flow. When no such flow can be found, a maximum flow has been found.
+</p>
+
+<p>
+The foremost reason an improvement was needed to the Ford-Fulkerson algorithm is its failure to terminate in certain cases of networks with irrational capacities. As the algorithm is successful in constructing a maximum flow whenever it terminates, an improvement to the algorithm was more likely than a replacement. Dinitz' improvement utilized shortest paths to overcome the conceptual flaw in Ford-Fulkerson during the step of finding an augmenting path. Hence we will first discuss the modification to Dikstra's algorithm which produces the necessary ``shortest path graph."
+</p>
+
+<p>
+The modification to Dijkstra's algorithm to construct a subgraph consisting of all shortest paths from <m>s</m> to <m>t</m> is conceptually deep but easy to implement. Suppose <m>v\in V</m> with <m>d(s,v)=k</m>, where <m>s</m> is the source vertex. Rather than recording a single <m>s,v</m>-path, we records every vertex <m>u\in V</m> such that <m>d(s,u)=k-1</m> and there is an arc<fn>Recall that we are working over directed graphs now.</fn> from <m>u</m> to <m>v</m>.
+</p>
+<algorithm xml:id="alg_mod_dijkstra">
+<title>All Shortest Paths from $s$ (Modified Dijkstra)</title>
+<p>
+Suppose that <m>\Delta_f=(V,E_f,c_f,s,t)</m> is a capacitated network with source vertex <m>s</m> and target vertex <m>t</m>.
+</p>
+
+<ol>
+<li><p>Initialize the distance and predecessor functions,
+<md>
+  <mrow>  d(s,v) \amp = \begin{cases}0, \amp  v=s \\ \infty, \amp v\neq s
+\end{cases}  
+\amp 
+p(v) \amp = \set{}</mrow>
+</md>
+for each <m>v\in V</m>. Also, define a set <m>V'=\set{}</m> of visited vertices.</p></li>
+<li><p>While <m>\abs{V'}\lt \abs{V}</m>, repeat the following steps:
+</p>
+
+<ol>
+<li><p>Let <m>u\in V\setminus V'</m> be an unvisited vertex nearest to <m>s</m>; that is,
+<me>
+  d(s,u)=\min\set{d(s,v):v\in V\setminus V'}.
+</me></p></li>
+<li><p>For each <m>v\in V\setminus V'</m> such that <m>uv\in E_f</m>, <m>d(s,u)+1\leq d(s,v)</m>, and <m>c_f(u,v)>0</m>:
+</p>
+
+<ol type="i">
+<li><p>update the distance to <m>v</m> by setting <m>d(s,v)=d(s,u)+1</m>, and</p></li>
+<li><p>update the set of predecessors of <m>v</m>, <m>p(v)</m>, to include <m>u</m>.</p></li>
+</ol>
+</li>
+<li><p>Add <m>u</m> to <m>V'</m>.</p></li>
+</ol>
+</li>
+<li><p>Return the values of <m>d(s,v)</m> and <m>p(v)</m> for each <m>v\in V</m>.</p></li>
+</ol>
+</algorithm>
+<p>
+The true ``secret" to Dinitz' algorithm is not in its use of this shortest path algorithm once, but twice: if the output <m>p(v)</m> is used to define a new set of arrows <m>E_b=\set{uv:v\in p(u)}</m> we can use the modified shortest path algorithm now on the graph with edge set <m>E_b</m> and source <m>t</m> to ensure that the only shortest paths we retain are paths from <m>s</m> to <m>t</m>.
+</p>
+<figure xml:id="fig_capnet_1" >
+<caption>(A) A capacitated network, <m>\Delta=(V,E,c,v_1,v_5)</m>; (B) the result <m>\Delta'</m> of applying <xref ref="alg_mod_dijkstra">Algorithm</xref> on <m>\Delta</m>; (C) the ``layered graph" <m>\Lambda=(V,E_\ell,c_\ell,v_1,v_5)</m> resulting from the application of <xref ref="alg_mod_dijkstra">Algorithm</xref> on <m>\Delta'</m>.</caption>
+<image>
+<latex-image-code><![CDATA[\begin{tikzpicture}[scale=2, node font=]
+\foreach \n/\x/\y in {1/0.0/0.0, 2/1.0/0.0, 3/0.0/1.0, 4/1.0/1.0, 5/1.0/2.0, 6/0.0/2.0} ,
+	\node (\n) at (\x,\y) ;
+
+\draw[-{Latex[]}, ec0]
+    (1) edge node [red, fill=white] {50} node [black, below=10pt] { (A)} (2) 
+    (1) edge node [red, fill=white] {10} (3)
+    (2) edge [bend left=15] node [red, fill=white] {10} (3)
+    (2) edge node [red, fill=white] {5} (4)
+    (2) edge [bend right=30] node [red, fill=white] {8} (5)
+    (3) edge [bend left=15] node [red, fill=white] {20} (2)
+    (3) edge node [red, fill=white] {10} (4)
+    (3) edge node [red, fill=white] {20} (5)
+    (3) edge node [red, fill=white] {20} (6)
+    (4) edge node [red, fill=white] {13} (5)
+    (6) edge node [red, fill=white] {20} (5);
+
+\path \foreach \n in {1, 2, 3, 4, 5, 6} { (\n) node [fill=vc0, draw=black, circle, inner sep=1pt, outer sep=0pt] {<c>\n</c>}};
+\node [left=5pt] at (1) {Source};
+\node [right=5pt] at (5) {Target};
+\foreach \n/\x/\y in {1/2.0/0.0, 2/3.0/0.0, 3/2.0/1.0, 4/3.0/1.0, 5/3.0/2.0, 6/2.0/2.0} ,
+	\node (u\n) at (\x,\y) ;
+
+\draw[{Latex[]}-, ec0]
+    (u1) edge node [red, fill=white] {50} node [black, below=10pt] { (B)} (u2) 
+    (u1) edge node [red, fill=white] {10} (u3)
+    (u2) edge node [red, fill=white] {5} (u4)
+    (u2) edge [bend right=30] node [red, fill=white] {8} (u5)
+    (u3) edge node [red, fill=white] {10} (u4)
+    (u3) edge node [red, fill=white] {20} (u5)
+    (u3) edge node [red, fill=white] {20} (u6)
+;
+
+\path \foreach \n in {1, 2, 3, 4, 5, 6} { (u\n) node [fill=vc0, draw=black, circle, inner sep=1pt, outer sep=0pt] {<c>\n</c>}};
+\node [left=5pt] at (u1) {Source};
+\node [right=5pt] at (u5) {Target};
+\foreach \n/\x/\y in {1/4.0/0.0, 2/5.0/0.0, 3/4.0/1.0, 4/5.0/1.0, 5/5.0/2.0, 6/4.0/2.0} ,
+	\node (v\n) at (\x,\y) ;
+
+\draw[-{Latex[]}, ec0]
+    (v1) edge node [red, fill=white] {50} node [black, below=10pt] { (C)} (v2) 
+    (v1) edge node [red, fill=white] {10} (v3)
+    (v2) edge [bend right=30] node [red, fill=white] {8} (v5)
+    (v3) edge node [red, fill=white] {20} (v5)
+;
+
+\path \foreach \n in {1, 2, 3, 4, 5, 6} { (v\n) node [fill=vc0, draw=black, circle, inner sep=1pt, outer sep=0pt] {<c>\n</c>}};
+\node [left=5pt] at (v1) {Source};
+\node [right=5pt] at (v5) {Target};\end{tikzpicture}]]></latex-image-code>
+</image>
+
+</figure>
+
+<example xml:id="exmp_capnet_1">
+<statement>
+<p>
+The graph in <xref ref="fig_capnet_1" autoname="yes" />(A) is a capacitated network <m>\Delta=(V,E,c,s,t)</m> with <m>V=\set{v_1,v_2,\ldots,v_6}</m>; only the indices of vertices are shown in the figure. Suppose we wish to apply Dijkstra's algorithm to this graph rooted at <m>v_1</m>. The neighbors of <m>v_1</m> are <m>N(v_1)=\set{v_2,v_3}</m>; visiting each of these in turn we see that the neighbors of <m>v_2</m> are <m>N(v_2)=\set{v_3,v_4,v_5}</m>; however, <m>d(v_1,v_3)=1\lt 2=d(v_1,v_2)+1</m>, so we do not update the predecessors of <m>v_3</m>. Likewise, <m>N(v_3) = \set{v_4,v_5,v_6}</m>. As this provides new paths of the same length to both <m>v_4</m> and <m>v_5</m>, we add <m>v_3</m> as a predecessor of each of those vertices. Recalling that the modified Dijkstra's algorithm provides a sort of ``predecessor graph," we have obtained the capacitated network shown in <xref ref="fig_capnet_1" autoname="yes" />(B). The second step of producing the layered data structure is to apply Dijkstra's algorithm on this intermediate graph, rooted now at the target vertex <m>v_5</m>. As the graph is directed, we see that vertices <m>v_4</m> and <m>v_6</m> are unreachable in the intermediate graph when rooted at <m>v_5</m>; hence the resulting layered graph of <xref ref="fig_capnet_1" autoname="yes" />(C) with vertex <m>v_1</m> at distance <m>0</m>, vertices <m>v_2</m> and <m>v_3</m> at distance <m>1</m>, and vertex <m>v_5</m> at distance <m>2</m>.
+</p>
+</statement>
+</example>
+
+<p>
+It is important to make a note about the structure of <m>\Lambda = (V,E_\ell,c_\ell,s,t)</m> produced from two successive applications of <xref ref="alg_mod_dijkstra">Algorithm</xref>. We first produced <m>\Delta'</m> from <m>\Delta</m> by including the reverse edges of exactly those edges lying on shortest paths emanating from <m>s</m>; we then construct <m>\Lambda</m> from <m>\Delta'</m> by including only those edges on shortest paths terminating at <m>t</m>. Hence <em>every path in <m>\Lambda</m> beginning at <m>s</m> will terminate at <m>t</m> and will be a shortest such path</em>. This structure must be maintained as we augment the flow across the network, for two reasons: as edges become saturated<fn>An edge <m>uv</m> is <em>saturated</em> when <m>f(u,v)=c(u,v)</m>, where <m>f</m> is the flow and <m>c</m> is the capacity.</fn> they must be removed from the residual capacity graph, just as residual capacities of unsaturated edges must be decreased. When saturated edges are removed, this can result in a vertex with no successors or with no predecessors, and both of these types of vertex lie on no <m>s,t</m>-path in <m>\Lambda</m>.
+</p>
+
+<p>
+The graph <m>\Lambda</m> is referred to as a layered structure since we can think of the vertices as lying in distance layers away from <m>s</m> such that any edge <m>uv\in E_\ell</m> has the property <m>d(s,v)=d(s(u)+1</m>. Thus maintaining those layers means we need no special algorithm to find augmenting paths: any path emanating from <m>s</m> in a well-maintained layered graph will eventually terminate at <m>t</m>. The order in which paths are followed can change the final assignment of flow to edges, but interestingly cannot change the total final value of the flow. The flow assigned along the path is the minimum residual capacity along any edge of the path.
+</p>
+<algorithm xml:id="alg_pathfind">
+<title>Pathfinding</title>
+<p>
+Suppose <m>\Lambda = (V,E_\ell,c_\ell,s,t)</m> is the result of two applications of <xref ref="alg_mod_dijkstra">Algorithm</xref> on a capacitated network <m>\Delta=(V,E,c,s,t)</m>.
+<ol>
+<li><p>Let <m>u_0=s</m>.</p></li>
+<li><p>Inductively choose <m>u_{i+1}</m> for <m>i\geq 0</m> such that <m>u_iu_{i+1}\in E_\ell</m>, until <m>u_n=t</m>.</p></li>
+<li><p>Let <m>f^* = \min\set{c_\ell(u_i,u_{i+1}):i=1,2,\ldots,n-1}</m>.</p></li>
+<li><p>The augmenting path to be returned is the path <m>(u_0,u_1,u_2,\ldots,u_n)</m> and the augmenting flow is <m>f^*</m> on each of those edges.</p></li>
+</ol>
+
+</p>
+</algorithm>
+<figure>
+<caption>(A) An augmenting path with flow value <m>f^*=8</m> in <m>\Lambda</m> from <xref ref="exmp_capnet_1">Example</xref>. (B) After updating the residual capacities of edges in <m>E_\ell</m>, the edge <m>v_2v_5</m> was saturated and therefore removed. This leaves <m>v_2</m> with no successor vertices, so the edge <m>v_1v_2</m> (shown with reduced capacity) must also be removed as no additional flow can move from <m>v_1</m> to <m>v_5</m> along <m>v_1v_2</m>. (C) The graph <m>\Lambda</m> after maintenance.</caption>
+<image>
+<latex-image-code><![CDATA[\begin{tikzpicture}[scale=2, node font=]
+\foreach \n/\x/\y in {1/0.0/0.0, 2/1.0/0.0, 3/0.0/1.0, 4/1.0/1.0, 5/1.0/2.0, 6/0.0/2.0} ,
+	\node (\n) at (\x,\y) ;
+
+\draw[-{Latex[]}, ec0]
+    (1) edge [blue, thick] node [red, fill=white] {50} node [black, below=10pt] {(A)} (2) 
+    (1) edge node [red, fill=white] {10} (3)
+    (2) edge [bend right=30, blue, thick] node [red, fill=white] {8} (5)
+    (3) edge node [red, fill=white] {20} (5);
+
+\path \foreach \n in {1, 2, 3, 4, 5, 6} { (\n) node [fill=vc0, draw=black, circle, inner sep=1pt, outer sep=0pt] {<c>\n</c>}};
+\node [left=5pt] at (1) {Source};
+\node [right=5pt] at (5) {Target};
+\foreach \n/\x/\y in {1/2.0/0.0, 2/3.0/0.0, 3/2.0/1.0, 4/3.0/1.0, 5/3.0/2.0, 6/2.0/2.0} ,
+	\node (u\n) at (\x,\y) ;
+
+\draw[-{Latex[]}, ec0]
+    (u1) edge[red, thick] node [red, fill=white] {42} node [black, below=10pt] {(B)} (u2) 
+    (u1) edge node [red, fill=white] {10} (u3)
+    (u3) edge node [red, fill=white] {20} (u5)
+;
+
+\path \foreach \n in {1, 2, 3, 4, 5, 6} { (u\n) node [fill=vc0, draw=black, circle, inner sep=1pt, outer sep=0pt] {<c>\n</c>}};
+\node [left=5pt] at (u1) {Source};
+\node [right=5pt] at (u5) {Target};
+\foreach \n/\x/\y in {1/4.0/0.0, 2/5.0/0.0, 3/4.0/1.0, 4/5.0/1.0, 5/5.0/2.0, 6/4.0/2.0} ,
+	\node (v\n) at (\x,\y) ;
+
+\draw[-{Latex[]}, ec0]
+    (v1) edge[white] node [black, below=10pt] {(C)} (v2) 
+    (v1) edge node [red, fill=white] {10} (v3)
+    (v3) edge node [red, fill=white] {20} (v5)
+;
+
+\path \foreach \n in {1, 2, 3, 4, 5, 6} { (v\n) node [fill=vc0, draw=black, circle, inner sep=1pt, outer sep=0pt] {<c>\n</c>}};
+\node [left=5pt] at (v1) {Source};
+\node [right=5pt] at (v5) {Target};\end{tikzpicture}]]></latex-image-code>
+</image>
+
+</figure>
+
+<example>
+<title>Continued from previous example.</title>
+<statement>
+<p>
+In our graph <m>\Lambda</m>, <m>u_0=s=v_1</m> has only two successors: <m>v_2</m> and <m>v_3</m>. Choosing <m>u_1=v_2</m>, we see that the only successor of <m>u_1</m> in <m>\Lambda</m> is <m>v_5=t</m>, so <m>u_2=v_5</m>. Our augmenting path is then <m>(v_1,v_2,v_5)</m>; as this flow only consists of two edges of capacities <m>50</m> and <m>8</m> respectively, it is clear that <m>f^*=\min\set{50,8}=8</m>.
+</p>
+
+<p>
+The current flow in our graph is <m>f(u,v)=0</m> for all <m>uv\in E</m>, and we now have an augmenting path and flow. So we update the flow value to accommodate the augmentation:
+<me>
+  f(u,v) = \begin{cases}8, \amp  uv\in\set{v_1v_2,v_2v_5} \\ 0, \amp uv\in E\setminus\set{v_1v_2,v_2v_5}.
+\end{cases}
+</me>
+</p>
+
+<p>
+We update our residual capacities and see that edge <m>v_2v_5</m> is now saturated; removing this edge from <m>E_\ell</m> we find that now <m>v_2</m> has no successors and so all edges terminating at <m>v_2</m> must also be removed in graph maintenance.
+</p>
+
+<p>
+Having maintained the graph, we see that the path <m>(v_1,v_3,v_5)</m> remains and permits another augmenting flow of <m>f^*=10</m>. Again updating, we have
+<me>
+  f(u,v) = \begin{cases}8, \amp  uv\in\set{v_1v_2,v_2v_5} \\
+    10, \amp  uv\in\set{v_1v_3,v_3v_5} \\
+    0, \amp uv\in E\setminus\set{v_1v_2,v_1v_3,v_2v_5,v_3v_5}.
+\end{cases}
+</me>
+</p>
+
+<p>
+Now no augmenting flows remain in <m>\Lambda</m> after maintenance, as <m>v_1v_3</m> is saturated and hence <m>v_3</m> has no predecessors in <m>\Lambda</m>.
+</p>
+
+<p>
+In order to continue to augment the flow, we must again determine the residual capacities and build a new residual graph <m>\Delta_f</m> taking into account the current flow <m>f</m>.
+</p>
+</statement>
+</example>
+
+<remark>
+<p>
+About graph maintenance: there are several different ways that this can be handled, all with the same result but different in individual process. Dinitz originally kept track of the endpoints of edges which became saturated as the algorithm updated the residual capacities along an augmenting path. After these capacities were updated, the algorithm processed through lists of vertices which might have been left with either no successors or no predecessors. In our implementation, we opt for a recursive solution: when an edge <m>uv\in E_\ell</m> becomes saturated, we call a process <c>clean_to_source</c> on its head vertex <m>u</m> and then a process <c>clean_to_target</c> on its tail vertex <m>v</m>. These two processes behave similarly, but in opposite directions. The first, <c>clean_to_source</c>, determines whether <m>u</m> has any successors; if not, <c>clean_to_source</c> is run on each predecessor <m>w</m> of <m>u</m>. Likewise <c>clean_to_target</c> checks whether <m>v</m> has any predecessors, and if not, <c>clean_to_target</c> is run on each successor <m>w</m> of <m>v</m>.
+</p>
+</remark>
+  
+<algorithm xml:id="alg_maint">
+<title>Maintenance of layered graph</title>
+<p>
+Suppose <m>\Lambda = (V,E_\ell,c_\ell,s,t)</m> is the layered graph structure output from two successive applications of <xref ref="alg_mod_dijkstra">Algorithm</xref>, that <m>P=\set{s=u_0,u_1,\ldots,u_{n-1},u_n=t}</m> is an augmenting path with augmenting flow value <m>f^*</m>.
+</p>
+
+<ol>
+<li><p>For each <m>i\in\set{0,1,2,\ldots,n-1}</m>, update <m>c_\ell(u_i,u_{i+1})</m> by subtracting from it the value <m>f^*</m>.</p></li>
+<li><p>For an edge <m>uv\in E_\ell</m> where after updating, <m>c_\ell(u,v)=0</m>, do the following:
+
+<em>Clean to source from a vertex <m>u</m>:</em>
+</p>
+
+<ol>
+<li><p>The vertex <m>u</m> has no successors in <m>\Lambda</m> precisely when
+<me>
+  \set{w\in V: c_\ell(u,w)>0}=\set{}.
+</me></p></li>
+<li><p>If <m>u</m> has no successors and is not the source vertex <m>s</m>, consider the set <m>{P=\set{w\in V:c_\ell(w,u)>0}}</m> of predecessors of <m>u</m>.</p></li>
+<li><p>For each <m>w\in P</m>, set <m>c_\ell(w,u)=0</m>. For each <m>w\in P</m> with no successors other than <m>u</m>, <em>clean to source from the vertex <m>w</m></em>.</p></li>
+</ol>
+<em>Clean to target from a vertex <m>v</m>:</em>
+<ol>
+<li><p>The vertex <m>v</m> has no predecessors in <m>\Lambda</m> precisely when
+<me>
+  \set{w\in V:c_\ell(w,v)>0}=\set{}.
+</me></p></li>
+<li><p>If <m>v</m> has no sucessors and is not the target vertex <m>t</m>, consider the set <m>S=\set{w\in V:c_\ell(v,w)>0}</m> of successors of <m>v</m>.</p></li>
+<li><p>For each <m>w\in S</m>, set <m>c_\ell(v,w)=0</m>. For each <m>w\in S</m> with no predecessors other than <m>v</m>, <em>clean to target from the vertex <m>w</m></em>.</p></li>
+</ol>
+</li>
+<li><p>After both cleaning processes have finished for all saturated edges, remove from <m>E_\ell</m> any edge <m>uv</m> with <m>c_\ell(u,v)=0</m>.</p></li>
+</ol>
+</algorithm>
+<p>
+We now have all the pieces in place to actually state Dinitz' algorithm.
+</p>
+<algorithm>
+<title>Dinitz' Max Flow Algorithm</title>
+<p>
+Suppose we are given a capacitated network <m>\Delta = (V,E,c,s,t)</m> with capacity function <m>c:E\to\R^+</m>, source <m>s</m>, and target <m>t</m>.
+</p>
+
+<ol>
+<li><p>Define the initial flow <m>f(u,v)=0</m> for <m>uv\in E</m> or <m>vu\in E</m>.</p></li>
+<li><p>Repeat the following:
+</p>
+
+<ol>
+<li><p>Calculate the <em>residual capacity function</em> <m>c_f:V\times V\to \R^+</m>, given by:
+<me>
+  c_f(u,v) = \begin{cases}c(u,v) - f(u,v), \amp  uv\in E \\
+    f(u,v), \amp  vu\in E
+\end{cases} .
+</me>
+We remark that a positive flow of <m>f(u,v)</m> provides exactly that much capacity to the reverse edge <m>vu</m>.</p></li>
+<li><p>Let <m>\Delta_f=(V,E_f,c_f,s,t)</m> be the <em>residual graph</em> with
+<me>
+  E_f=\set{uv\in E:c_f(u,v)>0}.
+</me></p></li>
+<li><p>Apply <xref ref="alg_mod_dijkstra">Algorithm</xref> to <m>\Delta</m> to produce <m>\Delta'</m>; apply <xref ref="alg_mod_dijkstra">Algorithm</xref> again to <m>\Delta'</m> to obtain the layered graph <m>\Lambda = (V,E_\ell,c_\ell,s,t)</m>. <em>When no shortest paths from <m>s</m> to <m>t</m> are found in constructing <m>\Delta'</m>, the flow is optimal.</em></p></li>
+<li><p>Repeat the following:
+</p>
+
+<ol type="i">
+<li><p>Use <xref ref="alg_pathfind">Algorithm</xref> to find an augmenting path <m>P</m> with flow value <m>f^*</m> in <m>\Lambda</m>. If no augmenting path exists, return to step a.</p></li>
+<li><p>Update <m>f</m> by adding <m>f^*</m> to the flow for each edge <m>u_iu_{i+1}</m> where <m>u_i,u_{i+1}</m> are adjacent vertices in <m>P</m>.</p></li>
+<li><p>Perform <xref ref="alg_maint">Algorithm</xref> upon <m>\Lambda</m>.</p></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</algorithm>
+</section>

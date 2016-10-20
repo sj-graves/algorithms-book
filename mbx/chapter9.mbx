@@ -1,0 +1,18 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" >
+<title>Permutations</title>
+
+
+<section>
+<title>Goals</title>
+<ol type="1">
+<li><p>Define permutations</p></li>
+<li><p>Permutation operations</p></li>
+<li><p>Implementation of a permutation class</p></li>
+</ol>
+</section>
+<xi:include  href="section9-1.mbx" />
+<xi:include  href="section9-2.mbx" />
+<xi:include  href="section9-3.mbx" />
+<xi:include  href="section9-4.mbx" />
+<xi:include  href="section9-5.mbx" />
+</chapter>

@@ -1,0 +1,118 @@
+<section>
+<title><m>PA=LU</m> factorization</title>
+<p>
+All of the above work is for naught if there is a zero pivot, of course, or computationally if due to swamping we encounter insurmountable errors. The solution, of course, is to use partial pivoting <mdash /> but permuting the rows of the matrix introduces a complication into the process. The solution is to find the appropriate <em>permutation matrix <m>P</m></em> so that <m>PA=LU</m>.
+</p>
+<definition>
+<statement>
+<p>
+A matrix <m>P</m> is a <term>permutation matrix</term> if it is a product of elementary matrices of type <m>S_{k,\ell}</m> only.
+</p>
+</statement>
+</definition>
+<p>
+In the <m>LU</m> factorization, the matrix <m>L</m> is used as a place to ``store" the row multipliers which are used in elimination; a more clever implementation of the algorithm allows those values to be stored in the matrix <m>U</m> below the main diagonal! This is useful as it allows the rows to be pivoted and the scalar multipliers to stay with their correct row if rows need to be swapped for partial pivoting. The row interchanges will be tracked in a permutation matrix <m>P</m>.
+</p>
+
+<example>
+<statement>
+<p>
+We will decompose a different example than previously to demonstrate how the multipliers stored within the matrix move with their rows. Boxed entries are ``zeroes," which for sake of convenience will have the multipliers stored in them.
+<md>
+  <mrow>  A = \begin{bmatrix} 
+		4 \amp  9 \amp  -11</mrow>
+  <mrow>  -2 \amp  3 \amp  5</mrow>
+  <mrow>  7 \amp  1 \amp  1
+	\end{bmatrix}
+	\xrightarrow[R_1:R_3]{P=\left[\begin{matrix}0\amp 0\amp 1</mrow>
+  <mrow>  0\amp 1\amp 0</mrow>
+  <mrow>  1\amp 0\amp 0\end{matrix}\right]}
+	\amp \begin{bmatrix} 
+		7 \amp  1 \amp  1</mrow>
+  <mrow>  -2 \amp  3 \amp  5</mrow>
+  <mrow>  4 \amp  9 \amp  -11 
+	\end{bmatrix} 
+	\xrightarrow[R_3-\frac47R_1]{R_2-(-\frac27 R_1)}
+	\begin{bmatrix}
+		7 \amp  1 \amp  1</mrow>
+  <mrow>  \fbox{$-\frac27$} \amp  \frac{23}7 \amp  \frac{37}7</mrow>
+  <mrow>  \fbox{$\frac47$} \amp  \frac{59}7 \amp  -\frac{81}7
+	\end{bmatrix}</mrow>
+  <mrow>  \xrightarrow[R_2:R_3]{P=\left[\begin{matrix}0\amp 0\amp 1</mrow>
+  <mrow>  1\amp 0\amp 0</mrow>
+  <mrow>  0\amp 1\amp 0\end{matrix}\right]}
+	\amp \begin{bmatrix}
+		7 \amp  1 \amp  1</mrow>
+  <mrow>  \fbox{$\frac47$} \amp  \frac{59}7 \amp  -\frac{81}7</mrow>
+  <mrow>  \fbox{$-\frac27$} \amp  \frac{23}7 \amp  \frac{37}7 
+	\end{bmatrix}
+	\xto{R_3 - \frac{23}{59}R_2}
+	\begin{bmatrix}
+		7 \amp  1 \amp  1</mrow>
+  <mrow>  \fbox{$\frac47$} \amp  \frac{59}7 \amp  -\frac{81}7</mrow>
+  <mrow>  \fbox{$-\frac27$} \amp  \fbox{$\frac{23}{59}$} \amp  \frac{578}{59} 
+	\end{bmatrix}</mrow>
+</md>
+</p>
+
+<p>
+Pulling apart this very compact notation, we have
+<md>
+  <mrow>  P \amp = \begin{bmatrix}0\amp 0\amp 1</mrow>
+  <mrow>  1\amp 0\amp 0</mrow>
+  <mrow>  0\amp 1\amp 0\end{bmatrix} \amp 
+A \amp = \begin{bmatrix} 4 \amp  9 \amp  -11</mrow>
+  <mrow>  -2 \amp  3 \amp  5</mrow>
+  <mrow>  7 \amp  1 \amp  1 \end{bmatrix} \amp 
+L \amp = \begin{bmatrix}1 \amp  0 \amp  0</mrow>
+  <mrow>  \frac47 \amp  1 \amp  0</mrow>
+  <mrow>  -\frac27 \amp  \frac{23}{59} \amp  1\end{bmatrix} \amp 
+U \amp = \begin{bmatrix}7 \amp  1 \amp  1</mrow>
+  <mrow>  0 \amp  \frac{23}7 \amp  -\frac{81}7</mrow>
+  <mrow>  0 \amp  0 \amp  \frac{578}{59}\end{bmatrix}</mrow>
+</md>
+and can very easily check
+<me>
+  PA = \begin{bmatrix}7 \amp  1 \amp  1 \\ 4 \amp  9 \amp  -11 \\ -2 \amp  3 \amp  5
+\end{bmatrix}  = LU.
+</me>
+</p>
+</statement>
+</example>
+
+<p>
+Here's code that can be embedded into <c>Matrix.py</c> to implement the <m>PA=LU</m> factorization of a matrix <m>A</m>. This does not use any of the elementary row operation methods previously developed
+</p>
+<pre>
+def palu(self):
+        m,n = self.dims()
+        if m!=n:
+            raise ValueError('Nonsquare matrix.')
+        elif self.det() == 0:
+            raise ValueError('Singular matrix.')
+        else:
+            P = [[1 if i==j else 0 for j in range(n)] for i in range(m)]
+            mat = [[self[i,j] for j in range(n)] for i in range(m)]
+            for j in range(m):
+                maxv = abs(mat[j][j])
+                piv = j
+                for i in range(j+1,m):
+                    if abs(mat[i][j]) > maxv:
+                        maxv = mat[i][j]
+                        piv = i
+                if piv != j:
+                    mat = mat[:j] + [mat[piv]] + mat[j+1:piv] + [mat[j]] \
+                          + mat[piv+1:]
+                    P = P[:j] + [P[piv]] + P[j+1:piv] + [P[j]] + P[piv+1:]
+                for i in range(j+1,m):
+                    mult = Fraction(mat[i][j],mat[j][j])
+                    mat[i][j] = mult
+                    for c in range(j+1,n):
+                        mat[i][c] += -mult*mat[j][c]
+            L = Matrix([[1 if i==j else (0 if j>i else mat[i][j])
+                         for j in range(n)] for i in range(m)])
+            U = Matrix([[mat[i][j] if j>=i else 0 for j in range(n)]
+                        for i in range(m)])
+            return (Matrix(P),L,U)
+</pre>
+</section>

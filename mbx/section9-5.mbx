@@ -1,0 +1,185 @@
+<section>
+<title>A basic permutation class</title>
+<p>
+As with all classes, we first have to define the <c>__init__</c> and <c>__repr__</c> methods, so that we can instantiate <c>Perm</c> objects and represent them in the Python interpreter.
+</p>
+<algorithm>
+<title>Input a permutation in one-line notation</title>
+<p>
+We assume that the input is a string of integers. If any of the integers consist of more than one digit, the integers must be separated by spaces.
+</p>
+
+<ol>
+<li><p>If the input string contains any spaces, let <c>oneline</c> be the list of substrings separated by spaces.</p></li>
+<li><p>Otherwise, let <c>oneline</c> be the list of single-character substrings.</p></li>
+<li><p>In either case, reset <c>oneline</c> to be the list of integer versions of the substrings.</p></li>
+<li><p>Check that the length of <c>oneline</c> is equal to <c>n</c>, the greatest integer contained in <c>oneline</c>; otherwise, the input is not a well defined one-line permutation and a <c>ValueError</c> should be raised.</p></li>
+<li><p>Create an empty dictionary <c>d</c></p></li>
+<li><p>For each pair <c>i,x</c> in <c>enumerate(oneline)</c>, assign the correct key of <c>d</c> to the correct value.</p></li>
+<li><p>Assign the attributes of <c>self</c>:
+</p>
+
+<ol>
+<li><p><c>self._data</c> should be set to <c>d</c></p></li>
+<li><p><c>self._is_int</c> should be <c>True</c>; later we will probably want to permute non-integers and it will be important to check this.</p></li>
+<li><p><c>self._domain</c> should be the list <c>[1, 2, ..., max(d.keys())]</c>. We'll need this for composition, later.</p></li>
+</ol>
+</li>
+</ol>
+</algorithm>
+<p>
+A good exercise at this point is to think about how you would implement one-line permutations if the input is an alphanumeric string.
+</p>
+<exercise>
+<statement>
+<p>
+Extend the algorithm above so that the input can be any alphanumeric string, as long as each character in the string only occurs once. The output permutation should take the input string and sort it, use that for the sorted list of keys, and assign to each character in the sorted list the corresponding position in the input list. Further, any alphanumeric characters not included in the list should be included in the permutation as fixed points.
+</p>
+
+<p>
+For instance, <c>Perm('thequ1i2ck3br4o56w7nfx8j9mpsv0lazydg')</c> should contain a dictionary as follows:
+</p>
+
+<p>
+\begingroup
+</p>
+<pre>
+{'0': 't', '1': 'h', '2': 'e', '3': 'q', '4': 'u', '5': '1', '6': 'i', '7': '2', 
+ '8': 'c', '9': 'k', 'a': '3', 'b': 'b', 'c': 'r', 'd': '4', 'e': 'o', 'f': '5', 
+ 'g': '6', 'h': 'w', 'i': '7', 'j': 'n', 'k': 'f', 'l': 'x', 'm': '8', 'n': 'j', 
+ 'o': '9', 'p': 'm', 'q': 'p', 'r': 's', 's': 'v', 't': '0', 'u': 'l', 'v': 'a', 
+ 'w': 'z', 'x': 'y', 'y': 'd', 'z': 'g'}
+</pre>
+<p>
+\endgroup
+</p>
+</statement>
+</exercise>
+<p>
+As for <c>__repr__</c>, since we are working (at this point) with permutations of integers, we should represent a permutation by its cycle decomposition.
+</p>
+<algorithm>
+<title>Disjoint cycle decomposition</title>
+<p>
+Begin with a permutation <m>\sigma</m> saved as a dictionary <c>d</c>.
+</p>
+
+<ol>
+<li><p>Let <c>keys</c> be a sorted copy of the list of keys of <c>d</c></p></li>
+<li><p>Create an empty list <c>decomp</c></p></li>
+<li><p>While <c>keys</c> is not empty:
+</p>
+
+<ol>
+<li><p>Start a new list <c>c</c> containing the least element of <c>keys</c></p></li>
+<li><p>Add elements to <c>c</c> in the order <m>c_1=\sigma(c_0)</m>, <m>c_2=\sigma(c_1)</m>, until you find an element <m>c_r</m> such that <m>\sigma(c_r)=c_0</m>. In each addition, remove <m>c_i</m> from <c>keys</c>.</p></li>
+<li><p>If <m>r>0</m>, add a tuple of <m>(c_0,c_1,\ldots,c_r)</m> to <c>decomp</c>.</p></li>
+</ol>
+</li>
+<li><p>Return <c>decomp</c> nicely as a string of the cycle decomposition of <m>\sigma</m>. If <c>decomp</c> is empty, the return should be the string <c>"(1)"</c>.</p></li>
+</ol>
+</algorithm>
+<p>
+In fact, it might be better to implement this algorithm as a <c>Perm.cycles()</c> method rather than in <c>Perm.__repr__</c>, so that non-integer strings can be automatically printed in either one-line or two-line notation.
+</p>
+
+<p>
+The next complicated step in defining permutations is deciding how to implement permutation composition as left-multiplication. To make this less complicated, we'll define overload the builtin <c>__call__</c> operator (which lets us use the notation <m>\sigma(x)</m>) and define a <c>domain</c> method to return the value of <c>self._domain</c>.
+</p>
+
+<p>
+\begingroup
+</p>
+<pre>
+def __call__(self, value):
+        try:
+            return self._data[value]
+        except KeyError:
+            return value
+
+    def domain(self):
+        return self._domain
+</pre>
+<p>
+\endgroup
+This sets us up for the composition algorithm.
+</p>
+<algorithm>
+<title>Permutation composition</title>
+<p>
+Suppose we have two permutations, <m>\sigma</m> and <m>\tau</m>, represented as <c>Perm</c> objects by <c>s</c> and <c>t</c> respectively.
+<ol>
+<li><p>Let <c>dom = list(set(s.domain()).union(t.domain()))</c>. This takes the domain to be the union of domains of <m>\sigma</m> and <m>\tau</m>, as a list.</p></li>
+<li><p>Sort the domain <c>dom</c>.</p></li>
+<li><p>Let <c>oneline</c> be a string of values <c>s(t(x))</c> for each <c>x</c> in <c>dom</c>, each separated by a space. This is why we wanted permutations to be callable.</p></li>
+<li><p>Return <c>Perm(oneline)</c>.</p></li>
+</ol>
+
+</p>
+</algorithm>
+<p>
+This should be implemented as <c>Perm.__mul__</c>, and since permutations can only be multiplied by other permutations, we need not worry about implementing <c>Perm.__rmul__</c>. To have full functionality for our permutations, the last two steps are related: defining the inverse of a permutation and powers of permutations. Our implementation of permutations as dictionaries makes inverses a snap.
+</p>
+
+<p>
+\begingroup
+</p>
+<pre>
+def inverse(self):
+        value = [(y,x) for x,y in self._data.items()]
+        value.sort()
+        return Perm(' '.join([str(y) for x,y in value]))
+</pre>
+<p>
+\endgroup
+</p>
+
+<p>
+As a means to implementing powers, we'll also implement the order function for a permutation. Recall that the order of a permutation is the least common multiple of the lengths of the cycles in its disjoint cycle decomposition.
+</p>
+
+<p>
+\begingroup
+</p>
+<pre>
+def order(self):
+        gcd = lambda a,b: b if a%b==0 else gcd(b,a%b)
+        def lcm(a_list):
+            l = a_list[0]
+            for x in a_list[1:]:
+                l = (l*x)//gcd(l,x)
+            return l
+        c = [len(x) for x in [y.split() for y in self.cycles()[1:-1].split(')(')]]
+        return lcm(c)
+</pre>
+<p>
+\endgroup
+We'll use this because we have a nice fact.
+</p>
+
+<lemma>
+<statement>
+<p>
+Suppose <m>\sigma\in S_n</m> with <m>\abs{\sigma}=k</m>, and suppose <m>p\in\mathbb{Z}</m>. Then <m>{\sigma^p = \sigma^{p\mod k}}</m>.
+</p>
+</statement>
+</lemma>
+
+<p>
+\begingroup
+</p>
+<pre>
+def __pow__(self,value):
+        if type(value)!=int:
+            raise TypeError('Only integer powers of permutations are permitted.')
+        p = value % self.order()
+        outperm = Perm('1')
+        for i in range(p):
+            outperm = outperm * self
+        return outperm
+</pre>
+<p>
+\endgroup
+Now we can use <c>g**5</c> to represent a permutation <m>g^5</m>, and while this is not a full-featured class of permutations, it is fully usable for our purposes.
+</p>
+</section>

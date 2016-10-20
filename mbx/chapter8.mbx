@@ -1,0 +1,18 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" >
+<title>Matrix decomposition: <m>QR</m> decomposition</title>
+
+
+<section>
+<title>Goals</title>
+<ol type="1">
+<li><p>Discuss least squares regression</p></li>
+<li><p>Discuss the Gram-Schmidt orthonormalization algorithm</p></li>
+<li><p>Discuss <m>QR</m> decomposition using Householder reflectors</p></li>
+</ol>
+</section>
+<xi:include  href="section8-1.mbx" />
+<xi:include  href="section8-2.mbx" />
+<xi:include  href="section8-3.mbx" />
+<xi:include  href="section8-4.mbx" />
+<xi:include  href="section8-5.mbx" />
+</chapter>

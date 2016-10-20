@@ -1,0 +1,8 @@
+<section>
+<title>Goals</title>
+<ol type="1">
+<li><p>Define the <c>list</c> data type.</p></li>
+<li><p>Discuss the use of modules rather than interactive Python.</p></li>
+<li><p>Define the <c>for... in...:</c> iteration structure.</p></li>
+</ol>
+</section>

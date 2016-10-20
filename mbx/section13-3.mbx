@@ -1,0 +1,61 @@
+<section>
+<title>Implementing Dijkstra's algorithm</title>
+<p>
+The only really sophisticated use of data structures in the implementation we will use of Dijkstra's algorithm is that we will use a double-ended dictionary of edges: that is, rather than only recording that <m>v_i</m> is adjacent to <m>v_j</m> when <m>j>i</m>, we will record both ends of every edge. As the edge dictionary which is provided is not necessarily double-ended, the first step of our implementation will be to create it.
+</p>
+
+<p>
+\begingroup
+</p>
+<pre>
+def double_dict(edge_dict):
+    """ edge_dict should be a dictionary with integer keys and list of 
+    integer values. double_dict will return dictionary and vertex set of
+    the graph."""
+    m = min(edge_dict.keys())               # These set up to return the 
+    M = max(edge_dict.keys())               # vertex set of the graph.
+    out_dict = {}
+    for u,nbrs in edge_dict.items():
+        for v in nbrs:
+            m = min(v, m)                   # Finding the min
+            M = max(v, M)                   # Finding the max
+            try:
+                out_dict[u] += [v]          # Updating double-endedness
+            except KeyError:
+                out_dict[u] = [v]
+            try:
+                out_dict[v] += [u]          # Updating double-endedness
+            except KeyError:
+                out_dict[v] = [u]
+    return out_dict, [m+i for i in range(M-m+1)] # return dict and vertices
+</pre>
+<p>
+\endgroup
+Using these functions makes the implementation of Dijkstra's algorithm almost natural.
+</p>
+
+<p>
+\begingroup
+</p>
+<pre>
+def dijkstra(edge_dict, root, **kwargs):
+    dbl_dic, V = double_dict(edge_dict)
+    order = len(V)
+    d = {v:(order+1 if v!=root else 0) for v in V} # Setup distance mapping
+    p = {v:None for v in V}                        # Setup predecessors
+    vis = []
+    while len(vis)&lt;len(V):
+        dpu = sorted((dist,p[v],v) for v,dist in d.items() if v not in vis)
+        cd, cp, cu = dpu[0]                        # Find nearest unvisited
+        vis += [cu]
+        if cu in dbl_dic.keys():
+            for v in dbl_dic[cu]:
+                if v not in vis and d[v]>cd+1:
+                    d[v] = cd+1                    # Update anything nearer
+                    p[v] = cu                      # than previously seen.
+    return d,p
+</pre>
+<p>
+\endgroup
+</p>
+</section>

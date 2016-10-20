@@ -1,0 +1,192 @@
+<section>
+<title><m>QR</m> factorization by Householder reflectors</title>
+<p>
+Another algorithm for determining the <m>QR</m> factorization of a matrix which requires fewer operations and is less susceptible to rounding error is the method of Householder reflectors. The method depends upon the following theorem.
+</p>
+<remark>
+<p>
+Throughout this section, it will be important to remember that if <m>\vec{x}_1,\vec{x}_2\in\R^n</m>, then <m>\vec{x}_1^T\vec{x}_2 = \vec{x}_1\cdot\vec{x}_2</m>. The transpose notation makes certain calculations and formulas nicer, or easier to prove.
+</p>
+</remark>
+
+<theorem>
+<statement>
+<p>
+Suppose <m>\vec{x},\vec{w}\in\R^n</m> have <m>\abs{\vec{x}}=\abs{\vec{w}}</m>. Then <m>\vec{w}-\vec{x}</m> and <m>\vec{w}+\vec{x}</m> are orthogonal.
+</p>
+</statement>
+</theorem>
+
+<proof>
+<p>
+The proof is made visually in <xref ref="fig_refl_thm1" autoname="yes" />, but is nonetheless simple to show algebraically:
+<me>
+  (\vec{w}-\vec{x})^T(\vec{w}+\vec{x}) = \vec{w}^T\vec{w}-\vec{x}^T\vec{w}+\vec{w}^T\vec{x}-\vec{x}^T\vec{x} = \abs{\vec{w}}^2-\abs{\vec{x}}^2 = 0.
+</me>
+</p>
+
+<p>
+Geometrically, the result follows as the vectors <m>\vec{x}</m> and <m>\vec{w}</m> form two legs of an isosceles triangle, <m>\vec{w}-\vec{x}</m> the base, and <m>\vec{w}+\vec{x}</m> the angle bisector of the angle subtended by the legs.
+</p>
+</proof>
+
+<figure xml:id="fig_refl_thm1" >
+<caption>Orthogonality of <m>\vec{w}-\vec{x}</m> and <m>\vec{w}+\vec{x}</m> in <m>\R^n</m>.</caption>
+<image>
+<latex-image-code><![CDATA[\begin{tikzpicture}[scale=1/2]
+\draw [->] (0,0) -- node [left] {\(\vec{w}\)} (3,4);
+\draw [->] (0,0) -- node [below] {\(\vec{x}\)} (5,0);
+\draw [dashed] (5,0) -- (8,4) -- (3,4);
+\draw [->, draw = blue]  (0,0) -- (8,4) node [right] {\color{blue}\(\vec{w}+\vec{x}\)} ;
+\draw [->, draw = red] (5,0) -- (3,4) node [above] {\color{red}\(\vec{w}-\vec{x}\)} ;\end{tikzpicture}]]></latex-image-code>
+</image>
+
+</figure>
+<p>
+Give two such vectors <m>\vec{x},\vec{w}\in\R^n</m>, define <m>\vec{v}=\vec{w}-\vec{x}</m>, and consider the matrix
+<me>
+  P = \frac{\vec{v}\vec{v}^T}{\vec{v}^T\vec{v}}.
+</me>
+</p>
+
+<p>
+While it may be confusing to think that this is a matrix, recall: since <m>\vec{v}</m> is an <m>n\times 1</m> column matrix, <m>\vec{v}\vec{v}^T</m> is an <m>n\times n</m> symmetric matrix. In fact,
+<md>
+  <mrow>  P^2 \amp = \frac{\vec{v}\vec{v}^T}{\vec{v}^T\vec{v}}\frac{\vec{v}\vec{v}^T}{\vec{v}^T\vec{v}} = \frac{\vec{v}(\vec{v}^T\vec{v})\vec{v}^T}{(\vec{v}^T\vec{v})^2} = \frac{\vec{v}\vec{v}^T}{\vec{v}^T\vec{v}} = P,
+\text{ and }  
+\amp 
+P\vec{v} \amp = \frac{\vec{v}\vec{v}^T}{\vec{v}^T\vec{v}}\vec{v} = \frac{\vec{v}(\vec{v}^T\vec{v})}{\vec{v}^T\vec{v}} = \vec{v}.</mrow>
+</md>
+</p>
+
+<p>
+A matrix satisfying <m>P^2=P</m> is called a <em>projection matrix.</em> The purpose of using <m>P</m> is that <m>\vec{x}-P\vec{x}</m> is the projection of <m>\vec{x}</m> onto <m>\vec{y+x}</m>, and therefore <m>\vec{x}-2P\vec{x} = \vec{w}</m>!
+</p>
+
+<theorem>
+<statement>
+<p>
+Let <m>\vec{x},\vec{w}\in\R^n</m> with <m>\abs{\vec{x}}=\abs{\vec{w}}</m>, and suppose <m>\vec{v} = \vec{w}-\vec{x}</m>. Then the matrix
+<me>
+  H = I-2\frac{\vec{v}\vec{v}^T}{\vec{v}^T\vec{v}}
+</me>
+is a <em>Householder reflector</em>, and is a symmetric orthogonal matrix with <m>H\vec{x}=\vec{w}</m>.
+</p>
+</statement>
+</theorem>
+
+<p>
+For brevity, I'll refer to the <m>QR</m> factorization by Householder reflectors as HHQR. The process of HHQR for a matrix <m>A</m> iterates through the columns of <m>A</m> just like Gram-Schmidt, but with far less numerical instability. We'll explain the process without use of an example, as the process becomes extremely unwieldy in exact arithmetic.
+</p>
+
+<p>
+Suppose we begin with a <m>m\times n</m> matrix<fn>The discussion of the method contained here originally appears in Timothy Sauer's excellent <em>Numerical Analysis, 2nd edition</em>.</fn> <m>A = [a_{i,j}]</m>, where <m>m>n</m>. We will choose as our first vector <m>\vec{x}_1 = \vc{a_{1,1},a_{2,1},\ldots, a_{m,1}}</m>, the first column of <m>A</m>. Since we desire to reflect it onto a coordinate axis vector of the same magnitude, we can choose <m>\vec{w_1}=\vc{\pm\abs{\vec{x}_1},0,0,\ldots,0}</m>. Since subtracting nearly identical floating point numbers is problematic and leads to rounding error, we will choose the sign of the first coordinate of <m>\vec{w}_1</m> to be the opposite of the sign of the first coordinate of <m>\vec{x}_1</m>. This allows us to determine the first Householder reflector <m>H_1</m> such that <m>H_1\vec{x}_1 = \vec{w}_1</m>. Now, putting <m>R_1 = H_1A</m> gives us a matrix whose first column is <m>\vec{w}_1</m>, by construction; notably, this is the first iteration and in the first column <m>R_1</m> is the start of an upper triangular matrix. Specifically, if we write <m>R_1=[r_{i,j}]</m>, we have <m>r_{i,1} = 0</m> whenever <m>i>1</m>.
+</p>
+
+<p>
+In order to continue this process, we will produce from <m>R_1</m> a new matrix <m>R_2=[r_{i,j}]</m> which has <m>r_{i,j}=0</m> whenever <m>i>j</m> and <m>j\leq 2</m>. We do so by ignoring the first row and column of <m>R_1</m>; doing so gives us <m>R'_1</m>, an <m>(m-1)\times(n-1)</m> matrix. If we let <m>\vec{x}_2</m> be the first column of <m>R'_1</m> and <m>\vec{w}_2=\vc{\pm\abs{\vec{x}_2},0,0,\ldots,0}</m>, we can find the Householder reflector <m>\hat{H}_2</m> such that <m>\hat{H}_2\vec{x}_2=\vec{w}_2</m>. Say then that <m>\hat{H}_2 = [\hat{h}_{i,j}]</m>. We will create our ``real" reflection matrix by inserting <m>\hat{H}_2</m> into the bottom right corner of an identity matrix. Here is the formula for <m>h_{i,j}</m> along with the more intuitive picture diagram:
+<md>
+  h_{i,j} = \begin{cases}1, \amp  i\lt 2\text{ or } j\lt 2,\text{ and } i=j \\
+0, \amp  i\lt 2\text{ or } j\lt 2,\text{ and } i\neq j \\
+\hat{h}_{i,j}, \amp  i,j\geq 2
+\end{cases} ,\qquad\text{ or } \qquad
+H_2 = \begin{augbmc}{1}{3}
+1 \amp  0 \amp  \cdots \amp  0 \\ \hline
+0 \amp    \amp    \amp    \\
+\vdots \amp    \amp  \hat{H}_2 \amp    \\
+0 \amp    \amp    \amp    
+\end{augbmc}.
+</md>
+</p>
+
+<p>
+Then <m>R_2=H_2R_1=H_2H_1A</m>.
+</p>
+
+<p>
+We continue this process in the way established: at each step, we reflect the first column of a submatrix onto a coordinate-axis vector of the same length, flipping signs of the first coordinate, and after processing <m>n</m> columns in this way we have <m>R=H_nH_{n-1}\cdots H_2H_1A</m>, which is an upper triangular matrix. Moreover, the matrices <m>H_j</m> are all orthogonal matrices, so <m>H_j^{-1}=H_j</m>. Hence we obtain
+<me>
+  QR = (H_1H_2\cdots H_{n-1}H_n) R = A.
+</me>
+</p>
+<algorithm>
+<title>HHQR</title>
+<p>
+Suppose <m>A</m> is a <m>m\times n</m> matrix.
+</p>
+
+<ol>
+<li><p>Let <m>Q</m> be the <m>m\times m</m> identity matrix.</p></li>
+<li><p>Let <m>R</m> be a floating point copy of <m>A</m>.</p></li>
+<li><p>In the <m>j^\text{ th }</m> column, for <m>j=1,2,\ldots,n</m>:
+</p>
+
+<ol>
+<li><p>Let <m>\vec{x}=\vc{r_{j,j},r_{j+1,j},\ldots,r_{m,j}}</m></p></li>
+<li><p>Let <m>\vec{w}=\vc{\pm\abs{\vec{x}},0,0,\ldots,0}</m> with the first coordinate having the opposite sign as in <m>\vec{x}</m>.</p></li>
+<li><p>Let <m>\vec{v}=\vec{w}-\vec{x}</m> and <m>\hat{H}=I-2\frac{\vec{v}\vec{v}^T}{\vec{v}^T\vec{v}}</m>.</p></li>
+<li><p>Let <m>H</m> be the <m>m\times m</m> identity matrix with <m>\hat{H}</m> replacing its bottom right corner.</p></li>
+<li><p>Set <m>Q=QH</m></p></li>
+<li><p>Set <m>R=HR</m></p></li>
+</ol>
+</li>
+</ol>
+
+<p>
+When the algorithm terminates, <m>QR=A</m>.
+</p>
+</algorithm>
+<p>
+Here's Python code which implements HHQR when <m>A</m> is specified as a list of lists rather than a matrix. Notice how local functions <c>sign</c>, <c>householder</c>, and <c>times</c> are defined within the <c>hhqr</c> function.
+</p>
+<pre>
+from math import sqrt
+
+def hhqr(A):
+    sign = lambda x: 1 if x>0 else (-1 if x&lt;0 else 0)
+    
+    def householder(xvec,wvec):
+        vvec = [wvec[i]-x for i,x in enumerate(xvec)]
+        d = sum([v**2 for v in vvec])
+        H = [[(1 if i==j else 0) - 2*vvec[i]*vvec[j]/d for
+              j in range(len(vvec))] for i in range(len(vvec))]
+        return H
+    
+    def times(A,B):
+        return [[sum([A[i][k]*B[k][j] for k in range(len(A[0]))]) for
+                 j in range(len(B[0]))] for i in range(len(A))]
+    
+    m = len(A)
+    n = len(A[0])
+    Q = [[(1 if i==j else 0) for j in range(m)] for i in range(m)]
+    R = [[float(x) for x in row] for row in A]
+    for j in range(n):
+        x = [R[i][j] for i in range(j,m)]
+        w = [-sign(x[0])*sqrt(sum([xi**2 for xi in x]))]+(m-j-1)*[0]
+        hh = householder(x,w)
+        H = [[(1 if k==l else 0) if (k&lt;j or l&lt;j) else hh[k-j][l-j] for
+              l in range(m)] for k in range(m)]
+        Q = times(Q,H)
+        R = times(H,R)
+    ##########################################################################
+    ## Everything after this is just to print the verification output nicely.
+    print('Verification: Q*R-A\n')
+    mat = times(Q,R)
+    mat = [[mat[i][j] - A[i][j] for j in range(n)] for i in range(m)]
+    clens = [max([len(str(mat[i][j])) for i in range(m)]) for j in range(n)]
+    out = ''
+    for i in range(m):
+        out += '[ '
+        for j in range(n):
+            l = len(str(mat[i][j]))
+            out += (clens[j]-l)*' '+str(mat[i][j])+', '
+        out = out[:-2] + ' ]\n'
+    print(out)
+    ##########################################################################
+    ## Except this, of course.
+    return Q,R
+</pre>
+<p>
+\part{Introduction to cryptography}
+</p>
+</section>

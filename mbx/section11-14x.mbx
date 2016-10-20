@@ -1,0 +1,8 @@
+<section>
+<title>Goals</title>
+<ol type="1">
+<li><p>Explain the difference between public key and ``shared secret" cryptography.</p></li>
+<li><p>Develop kid-RSA and demonstrate its strength and weakness.</p></li>
+<li><p>Develop RSA encryption.</p></li>
+</ol>
+</section>

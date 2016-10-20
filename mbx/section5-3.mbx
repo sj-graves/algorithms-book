@@ -1,0 +1,154 @@
+<section>
+<title>Beginning matrix operations</title>
+<p>
+The first matrix operations we will define are more about getting information from a matrix that we have represented than about combining matrices or changing their contents. First, we discussed above the notation of <m>m\times n</m> to denote that a matrix has <m>m</m> rows and <m>n</m> columns. It will be necessary for many of our other methods that we be able to determine the <em>dimensions</em> of a matrix, and we don't want to access the ``hidden" variables directly.
+</p>
+<exercise>
+<statement>
+<p>
+Write a method <c>dims</c> in the <c>Matrix</c> class which returns the dimensions of the matrix as a <c>tuple</c>, and add the function to <c>Matrix.py</c>.
+</p>
+</statement>
+</exercise>
+<p>
+A slight problem between the notation for matrices in mathematics and the implementation of matrices in Python has to do with indexing of the dimensions. Specifically, the <m>a_{i,j}</m> element of a matrix <m>A</m> would be stored as <c>A._data[i-1][j-1]</c>. The builtin method which allows us to use the ``bracket notation" for indexing of lists, strings, etc., is <c>__getitem__</c>. Likewise, those compound data types which are <em>mutable</em> have another method defined, <c>__setitem__</c>. We want to define only the first of these, and we will use Python indexing <mdash /> in fact, the element <m>a_{i,j}</m> will be indexed as <c>A[i-1,j-1]</c>. Add the following to <c>Matrix.py</c>.
+</p>
+<pre>
+def __getitem__(self, coords):
+        if type(coords)!=type( (1,1) ):
+            raise TypeError('Matrices require a tuple for indexing.')
+        i,j = coords
+        return self._data[i][j]
+</pre>
+<p>
+Now that we can both determine the dimensions of a matrix and read off its elements directly, we are ready to start building new matrices from old. The first way we will do this is via <em>scalar multiplication</em>. A <em>scalar</em> is a member of the set of numbers with which the matrix is filled <mdash /> for our purposes, these are <em>real numbers</em>, implemented as <c>int</c>s and <c>float</c>s. As a matter of notation, we will refer to a matrix <m>A</m> whose element in the <m>i^\text{ th }</m> row and <m>j^\text{ th }</m> column is <m>a_{i,j}</m> by writing <m>A=[a_{i,j}]</m>.
+</p>
+<definition>
+<statement>
+<p>
+Let <m>k</m> be a real number and <m>A=[a_{i,j}]</m> a real matrix. Then the <term>scalar product of <m>A</m> by <m>k</m></term> is the real matrix <m>kA = [k\cdot a_{i,j}]</m>. That is, the elements of <m>kA</m> are the elements of <m>A</m>, each multiplied by <m>k</m>.
+</p>
+</statement>
+</definition>
+
+<example>
+<statement>
+<p>
+As an example, consider
+<me>
+  A = \begin{bmatrix}3 \amp  4 \amp  6 \\ 5 \amp  9 \amp  12
+\end{bmatrix} \text{ and }  k =\frac12.
+</me>
+</p>
+
+<p>
+Then
+<me>
+  A\cdot k = \begin{bmatrix}\frac32 \amp  2 \amp  3 \\ \frac52 \amp  \frac92 \amp  6
+\end{bmatrix} = k\cdot A .
+</me>
+</p>
+</statement>
+</example>
+
+<p>
+Unfortunately, we're going to want to use the same operator (<c>*</c>, defined in <c>__mul__</c> and <c>__rmul__</c>) for scalar multiplication, which we've just defined, and <em>matrix multiplication</em>, which is much more complicated. We'll handle this inside the <c>__mul__</c> method by an <c>if</c> statement, and we'll let the case where both <c>Self</c> and <c>other</c> have type <c>Matrix</c> just <c>pass</c> for now.
+</p>
+<exercise>
+<statement>
+<p>
+Here's the code for scalar multiplication, with an important piece missing. Notice the <c>pass</c> statement inside the first <c>if</c> block <mdash /> this will be replaced later when we define an algorithm for matric multiplication.
+</p>
+<pre>
+def __mul__(self, other):
+        mult_err = 'Matrices may only be multiplied by scalars, or '+\
+                            'by matrices of appropriate dimensions.'
+        if type(self) == type(other):
+            pass
+        elif type(other) in [type(1), type(0.1)]:
+            new_grid = """AN IMPORTANT PIECE IS MISSING RIGHT HERE!!""" # &lt;======
+            return Matrix(new_grid)
+        else:
+            raise TypeError(mult_err)
+</pre>
+<p>
+Correct the missing piece with a nested list comprehension. Put your corrected version into <c>Matrix.py</c>.
+</p>
+</statement>
+</exercise>
+<p>
+Now we'll move to the first way to combine two matrices: matrix addition. A critical piece which cannot be overlooked is that only matrices of the same dimensions can be added <mdash /> addition of matrices with different dimensions is ``nonsense," since it is not defined.
+</p>
+<definition>
+<statement>
+<p>
+Suppose <m>A=[a_{i,j}]</m> and <m>B=[b_{i,j}]</m> are both <m>m\times n</m> matrices. Then their <term>sum</term> is the <m>m\times n</m> matrix <m>A+B = [a_{i,j}+b_{i,j}]</m>. That is, addition is carried out element-wise.
+</p>
+</statement>
+</definition>
+
+<example>
+<statement>
+<p>
+Suppose we have the following three matrices:
+<md>
+  <mrow>  A \amp = \begin{bmatrix} 3 \amp  4 \amp  6</mrow>
+  <mrow>  5 \amp  9 \amp  12 \end{bmatrix} \amp 
+B \amp = \begin{bmatrix} \pi \amp  -4 \amp  -5</mrow>
+  <mrow>  2 \amp  2 \amp  -2 \end{bmatrix} \amp 
+C \amp = \begin{bmatrix} 1 \amp  0 \amp  0</mrow>
+  <mrow>  0 \amp  1 \amp  0</mrow>
+  <mrow>  0 \amp  0 \amp  1 \end{bmatrix}</mrow>
+</md>
+</p>
+
+<p>
+Then <m>A+B</m> exists but neither <m>A+C</m> nor <m>B+C</m> is defined. The sum of <m>A</m> and <m>B</m> is
+<md>
+  <mrow>  A+B \amp = 
+\begin{bmatrix} 3 \amp  4 \amp  6</mrow>
+  <mrow>  5 \amp  9 \amp  12 \end{bmatrix} + 
+\begin{bmatrix} \pi \amp  -4 \amp  -5</mrow>
+  <mrow>  2 \amp  2 \amp  -2 \end{bmatrix}</mrow>
+  <mrow>  \amp = \begin{bmatrix} 3+\pi \amp  4-4 \amp  6-5</mrow>
+  <mrow>  5+2 \amp  9+2 \amp  12-2\end{bmatrix}</mrow>
+  <mrow>  \amp = \begin{bmatrix}3+\pi \amp  0 \amp  1</mrow>
+  <mrow>  7 \amp  11 \amp  10\end{bmatrix}.</mrow>
+</md>
+</p>
+</statement>
+</example>
+
+<p>
+Since we have the ability to index <c>other</c> when it is a <c>Matrix</c>, this should be straightforward to implement as a method. Moreover, matrix addition is <em>commutative</em>: if <m>A</m> and <m>B</m> are matrices such that <m>A+B</m> exists, then <m>A+B=B+A</m>. This allows us to define <c>Matrix.__radd__</c> as a call to <c>Matrix.__add__</c> like we did in class with <c>ComplexNumber</c> in Lesson 4.
+</p>
+<exercise>
+<statement>
+<p>
+Here's the code for matrix addition, with an important piece missing.
+</p>
+<pre>
+def __add__(self, other):
+        if type(self) == type(other):
+            if self.dims() != other.dims():
+                raise ValueError('Cannot add matrices of different dimensions.')
+            new_grid = """AN IMPORTANT PIECE IS MISSING RIGHT HERE!!""" # &lt;======
+            return Matrix(new_grid)
+
+    def __radd__(self, other):
+        return self.__add__(other)
+</pre>
+<p>
+Correct the missing piece with a nested list comprehension. Put your corrected version into <c>Matrix.py</c>.
+</p>
+</statement>
+</exercise>
+
+<exercise>
+<statement>
+<p>
+Subtraction of matrices is a combination of addition and scalar multiplication: <m>A-B=A+(-1)B</m>. The builtin for subtraction using the ``minus sign" is <c>__sub__</c>. Define <c>Matrix.sub</c> and add it to <c>Matrix.py</c>.
+</p>
+</statement>
+</exercise>
+</section>

@@ -1,0 +1,24 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" >
+<title>Vectors and solving systems of equations</title>
+
+
+<section>
+<title>Goals</title>
+<ol type="1">
+<li><p>Define a vector, mathematically.</p></li>
+<li><p>Discuss the algebraic operations on vectors.</p></li>
+<li><p>Discuss algorithms for basic vector operations.</p></li>
+<li><p>Implement basic vector operations as a Python subclass.</p></li>
+<li><p>Discuss solutions to systems of linear equations.</p></li>
+<li><p>Introduce Gaussian elimination and Gauss-Jordan elimination.</p></li>
+<li><p>Discuss pivoting strategies and their necessity.</p></li>
+<li><p>Implement elementary row operations and discuss the algorithm for Gaussian elimination with partial pivoting.</p></li>
+</ol>
+</section>
+<xi:include  href="section6-1.mbx" />
+<xi:include  href="section6-2.mbx" />
+<xi:include  href="section6-3.mbx" />
+<xi:include  href="section6-4.mbx" />
+<xi:include  href="section6-5.mbx" />
+<xi:include  href="section6-6.mbx" />
+</chapter>

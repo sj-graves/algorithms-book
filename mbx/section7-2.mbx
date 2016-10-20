@@ -1,0 +1,123 @@
+<section>
+<title>Matrix inverses</title>
+
+
+<introduction>
+<definition>
+<statement>
+<p>
+Let <m>A</m> be an <m>n\times n</m> matrix. Suppose there is a matrix <m>B</m> such that <m>AB=I</m>. Then <m>B</m> is the <term>inverse</term> of <m>A</m>, and we write <m>A^{-1}</m> instead of <m>B</m>. Moreover, <m>A^{-1}</m> is the unique such matrix and <m>A^{-1}A = I = AA^{-1}</m>.
+</p>
+</statement>
+</definition>
+
+<theorem>
+<statement>
+<p>
+Suppose <m>A</m> is a <m>n\times n</m> matrix and there is a sequence <m>(E_1,E_2,\ldots,E_k)</m> of elementary matrices such that
+<me>
+  E_kE_{k-1}\cdots E_2E_1A=I.
+</me>
+</p>
+
+<p>
+Then <m>A^{-1}=E_kE_{k-1}\cdots E_2E_1</m>.
+</p>
+</statement>
+</theorem>
+
+<proof>
+<p>
+From the definition and Theorem 7.1.
+</p>
+</proof>
+</introduction>
+
+
+<subsection>
+<title>Application of Gauss-Jordan elimination</title>
+<p>
+We find the inverse of a matrix by the same process of Gauss-Jordan elimination as used when solving systems of equations, but now we augment our square matrix <m>A</m> by an appropriately sized identity matrix rather than by a single vector.
+</p>
+
+<example>
+<statement>
+<p>
+Suppose we begin with a <m>3\times 3</m> matrix augmented by <m>I</m>
+<md>
+  A = \begin{augbmr}{3}{3}
+	1 \amp  3 \amp  5 \amp  1 \amp  0 \amp  0 \\
+	7 \amp  9 \amp  11 \amp  0 \amp  1 \amp  0 \\
+	2 \amp  -4 \amp  -6 \amp  0 \amp  0 \amp  1
+	\end{augbmr}.
+</md>
+</p>
+
+<p>
+Just to demonstrate that the choice of elementary row operations does not matter, we'll use Gauss-Jordan elimination with partial pivoting. Row operations marked on arrows are performed in order from the top to the bottom.
+<md>
+  <mrow>  \begin{augbmr}{3}{3}
+	1 \amp  3 \amp  5 \amp  1 \amp  0 \amp  0</mrow>
+  <mrow>  7 \amp  9 \amp  11 \amp  0 \amp  1 \amp  0</mrow>
+  <mrow>  2 \amp  -4 \amp  -6 \amp  0 \amp  0 \amp  1
+	\end{augbmr} \xrightarrow[\begin{matrix}-R_1+R_2</mrow>
+  <mrow>  -2R_1+R_3\end{matrix}]{\begin{matrix}R_1:R_2</mrow>
+  <mrow>  \frac17 R_1\end{matrix}}
+	\amp \begin{augbmr}{3}{3}
+	1 \amp  \frac97 \amp  \frac{11}7 \amp  0 \amp  \frac17 \amp  0</mrow>
+  <mrow>  0 \amp  \frac{12}7 \amp  \frac{24}7 \amp  1 \amp  -\frac17 \amp  0</mrow>
+  <mrow>  0 \amp  -\frac{46}7 \amp  -\frac{64}7 \amp  0 \amp  -\frac27 \amp  1
+	\end{augbmr}</mrow>
+  <mrow>  \xrightarrow[\begin{matrix}-\frac97R_2+R_1</mrow>
+  <mrow>  -\frac{12}7R_2+R_3\end{matrix}]{\begin{matrix}R_2:R_3</mrow>
+  <mrow>  -\frac{7}{46}R_2\end{matrix}}
+	\amp \begin{augbmr}{3}{3}
+	1 \amp  0 \amp  -\frac5{23} \amp  0 \amp  \frac2{23} \amp  \frac9{46}</mrow>
+  <mrow>  0 \amp  1 \amp  \frac{32}{23} \amp  0 \amp   \frac1{23} \amp -\frac7{46}</mrow>
+  <mrow>  0 \amp  0 \amp  \frac{24}{23} \amp  1 \amp  -\frac5{23} \amp  \frac6{23}
+	\end{augbmr}</mrow>
+  <mrow>  \xrightarrow[\begin{matrix}\frac5{23}R_3+R_1</mrow>
+  <mrow>  -\frac{32}{23}R_3+R_2\end{matrix}]{\frac{23}{24}R_3}
+	\amp \begin{augbmr}{3}{3}
+	1 \amp  0 \amp  0 \amp  \frac5{24} \amp  \frac1{24} \amp  \frac14</mrow>
+  <mrow>  0 \amp  1 \amp  0 \amp  -\frac43 \amp  \frac13 \amp  -\frac12</mrow>
+  <mrow>  0 \amp  0 \amp  1 \amp  \frac{23}{24} \amp  -\frac5{24} \amp  \frac14
+	\end{augbmr}</mrow>
+</md>
+</p>
+
+<p>
+Now, observe:
+<md>
+  <mrow>  \left[\begin{matrix} 
+		1 \amp  3 \amp  5</mrow>
+  <mrow>  7 \amp  9 \amp  11</mrow>
+  <mrow>  2 \amp  -4 \amp  6
+	\end{matrix}\right]
+	\left[\begin{matrix} 
+		\frac5{24} \amp  \frac1{24} \amp  \frac14</mrow>
+  <mrow>  -\frac43 \amp  \frac13 \amp  -\frac12</mrow>
+  <mrow>  \frac{23}{24} \amp  -\frac5{24} \amp  \frac14
+	\end{matrix}\right] \amp =
+	\left[\begin{matrix}
+	1\left(\frac5{24}\right)+3\left(-\frac43\right)+5\left(\frac{23}{24}\right) \amp  
+	1\left(\frac1{24}\right)+3\left(\frac13\right)+5\left(-\frac5{24}\right) \amp 
+	1\left(\frac14\right)+3\left(-\frac12\right)+5\left(\frac14\right)</mrow>
+  <mrow>  7\left(\frac5{24}\right)+9\left(-\frac43\right)+11\left(\frac{23}{24}\right) \amp  
+	7\left(\frac1{24}\right)+9\left(\frac13\right)+11\left(-\frac5{24}\right) \amp 
+	7\left(\frac14\right)+9\left(-\frac12\right)+11\left(\frac14\right)</mrow>
+  <mrow>  2\left(\frac5{24}\right)-4\left(-\frac43\right)-6\left(\frac{23}{24}\right) \amp  
+	2\left(\frac1{24}\right)-4\left(\frac13\right)-6\left(-\frac5{24}\right) \amp 
+	2\left(\frac14\right)-4\left(-\frac12\right)-6\left(\frac14\right) 
+	\end{matrix}\right]</mrow>
+  <mrow>  \amp =
+	\begin{bmatrix}1 \amp  0 \amp  0</mrow>
+  <mrow>  0 \amp  1 \amp  0</mrow>
+  <mrow>  0 \amp  0 \amp  1 \end{bmatrix}</mrow>
+</md>
+</p>
+</statement>
+</example>
+</subsection>
+
+</section>
