@@ -3,11 +3,13 @@
 
 
 <section>
-<title>Goals</title>
-<ol type="1">
-<li><p>Gain familiarity with the IDLE environment.</p></li>
-<li><p>Learn some elementary Python syntax and commands.</p></li>
-</ol>
+    <objectives>
+        <title>Goals</title>
+        <ol type="1">
+        <li><p>Gain familiarity with the IDLE environment.</p></li>
+        <li><p>Learn some elementary Python syntax and commands.</p></li>
+        </ol>
+    </objectives>
 </section>
 <xi:include  href="section1-2x.mbx" />
 <xi:include  href="section1-1.mbx" />

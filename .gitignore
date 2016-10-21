@@ -44,3 +44,7 @@ Thumbs.db
 *.toc
 *.bbl
 *.out
+
+mathbook
+knowl
+*.html

@@ -11,10 +11,10 @@ Please have IDLE open and running when you're reading notes so that you can actu
 <p>
 We're going to extensively discuss actual Python code in these notes, so let me determine some conventions. If I write something like <c>print</c>, you should understand that it is a Python command. Anything that looks like this:
 </p>
-<pre>
+<program>
 x=13
 print(x**2)
-</pre>
+</program>
 <p>
 is a piece of Python code.
 </p>
