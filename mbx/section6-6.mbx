@@ -1,0 +1,79 @@
+<section>
+<title>Algorithms for Gaussian elimination</title>
+
+
+<introduction>
+<p>
+Beginning with implementations of the elementary row operations, we can build the full algorithm for the method of Gaussian elimination with partial pivoting.
+</p>
+</introduction>
+
+
+<subsection>
+<title>Elementary row operation: Elimination</title>
+<p>
+The first elementary row operation is the elimination operation. We write this in our shorthand as <m>kR_i+R_j</m> and mean <q>multiply every element of row <m>i</m> by scalar <m>k</m> and then add that product to the corresponding element of row <m>j</m>.</q> Rather than trying to perform the matrix operations as changes to a matrix itself, we'll assume that a new matrix is to be returned.
+</p>
+<algorithm>
+<p>
+Suppose <m>A=[a_{i,j}]</m> is a <c>Matrix</c>, <c>k</c> is a scalar (<c>float</c>), and <c>i</c> and <c>j</c> are row indices.
+<ol>
+<li><p>Let <c>temp</c> be a <c>list</c> of the <c>tuple</c>s in <m>A</m>.</p></li>
+<li><p>Assign <c>temp[j]</c> to be the <c>list</c> containing <m>ka_{<c>i</c>,\ell}+a_{<c>j</c>,\ell}</m> for each <m>\ell</m>.</p></li>
+<li><p>Return the <c>Matrix</c> of <c>temp</c>.</p></li>
+</ol>
+
+</p>
+</algorithm>
+</subsection>
+
+
+<subsection>
+<title>Elementary row operation: Swapping rows</title>
+<p>
+The next elementary row operation is changing the row order<fn>Even though we only swap two rows at a time, this is still a <em>permutation of the rows</em>. We'll talk about permutations a lot when we get to Cryptography.</fn> and is used in the partial pivoting algorithm.
+</p>
+<algorithm>
+<p>
+Suppose <m>A=[a_{i,j}]</m> is a <c>Matrix</c> and both <c>i</c> and <c>j</c> are row indices.
+<ol>
+<li><p>Let <c>temp</c> be a <c>list</c> of the <c>tuple</c>s of <m>A</m>.</p></li>
+<li><p>Set <c>temp[i]</c> to the <m><c>j</c>^\text{ th }</m> <c>tuple</c> of <m>A</m>.</p></li>
+<li><p>Set <c>temp[j]</c> to the <m><c>i</c>^\text{ th }</m> <c>tuple</c> of <m>A</m>.</p></li>
+<li><p>Return the <c>Matrix</c> of <c>temp</c>.</p></li>
+</ol>
+
+</p>
+</algorithm>
+</subsection>
+
+
+<subsection>
+<title>Gaussian elimination with partial pivoting</title>
+<p>
+While we could first implement so-called naive Gaussian elimination, it makes more sense to immediately write the algorithm for partial pivoting as well.
+</p>
+<algorithm>
+<p>
+Suppose <m>A</m> is a <m>m\times n</m> <c>Matrix</c>. Set <c>i = 0</c> and <c>j = 0</c>.
+</p>
+
+<ol>
+<li><p>(Pivot step) In the <m><c>j</c>^\text{ th }</m> column, identify a row containing an element of maximum absolute value. Let the index of this row be <c>p</c>.
+</p>
+
+<ol>
+<li><p>If that value is 0, increment <c>j</c>. If after incrementing, <m><c>j</c>>n</m>, return the matrix.</p></li>
+<li><p>Otherwise, swap row <c>i</c> and row <c>p</c>.</p></li>
+</ol>
+</li>
+<li><p>For every row index <c>p</c> greater than <c>i</c>, eliminate the coefficient in <m>A<c>[p,j]</c></m> if it is not already 0.</p></li>
+<li><p>Increment <c>i</c> and <c>j</c>. If after incrementing either <m><c>i</c>>m</m> or <m><c>j</c>>n</m>, return the matrix.</p></li>
+</ol>
+</algorithm>
+<p>
+At this point, you should be able to discover and implement the algorithm for back-substitution by yourself. What does it mean if there is a column of an augmented matrix which is never used for elimination?
+</p>
+</subsection>
+
+</section>

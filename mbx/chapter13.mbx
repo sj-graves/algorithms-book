@@ -1,0 +1,16 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" >
+<title>Shortest Paths</title>
+
+
+<section>
+<title>Goals</title>
+<ol type="1">
+<li><p>Discuss the shortest path problem.</p></li>
+<li><p>Explain Dijkstra's shortest path algorithm.</p></li>
+<li><p>Implement Dijkstra's algorithm.</p></li>
+</ol>
+</section>
+<xi:include  href="section13-1.mbx" />
+<xi:include  href="section13-2.mbx" />
+<xi:include  href="section13-3.mbx" />
+</chapter>

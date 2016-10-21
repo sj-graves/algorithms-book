@@ -1,0 +1,16 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" >
+<title>Public Key Encryption</title>
+
+
+<section>
+<title>Goals</title>
+<ol type="1">
+<li><p>Explain the difference between public key and ``shared secret" cryptography.</p></li>
+<li><p>Develop kid-RSA and demonstrate its strength and weakness.</p></li>
+<li><p>Develop RSA encryption.</p></li>
+</ol>
+</section>
+<xi:include  href="section11-1.mbx" />
+<xi:include  href="section11-2.mbx" />
+<xi:include  href="section11-3.mbx" />
+</chapter>

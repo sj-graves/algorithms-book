@@ -1,0 +1,23 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" >
+<title>Matrix decomposition: <m>LU</m> decomposition</title>
+
+
+<section>
+<title>Goals</title>
+<ol type="1">
+<li><p>Discuss elementary matrices and their relationship to Gaussian elimination</p></li>
+<li><p>Discuss matrix inverses</p></li>
+<li><p>Discuss the <m>LU</m> decomposition of an invertible matrix <m>A</m></p></li>
+<li><p>Discuss the <m>PA=LU</m> factorization of an invertible matrix <m>A</m></p></li>
+</ol>
+<remark>
+<p>
+We often talk about square matrices in the context of systems of linear equations because a system of fewer than <m>n</m> equations in <m>n</m> unknowns is <em>underqualified</em>; that is, there are too few equations to give a unique solution in all variables. On the other hand, systems of more than <m>n</m> equations in <m>n</m> variables either have redundant equations (at least one equations is a linear combination of the others) or the system is <em>overqualified</em> and an inconsistent system. Thus <m>n</m> equations in <m>n</m> unknowns is the sort of ``happy medium" of having enough equations for unique solutions without having too many for a solution to exist.
+</p>
+</remark>
+</section>
+<xi:include  href="section7-1.mbx" />
+<xi:include  href="section7-2.mbx" />
+<xi:include  href="section7-3.mbx" />
+<xi:include  href="section7-4.mbx" />
+</chapter>

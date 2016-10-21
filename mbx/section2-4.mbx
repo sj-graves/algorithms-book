@@ -1,0 +1,62 @@
+<section>
+<title>Power tool: list comprehension</title>
+<p>
+Suppose you had a list <c>foo</c> of numbers, and you wanted to set <c>bar</c> equal to the list of their squares. We could easily perform this task with a for loop and the <c>append</c> list method, which adds the argument to the end of the list.
+</p>
+<pre>
+>>> foo = [1, 3, 5, 7, 9]
+>>> bar = []
+>>> for x in foo:
+        bar.append(x**2)
+
+	
+>>> bar
+[1, 9, 25, 49, 81]
+</pre>
+<p>
+However, Python provides a much more elegant way to do the same thing, called <em>list comprehension</em>. Essentially this provides a way to create a list by successively performing the same operation (in this case squaring) on all the elements of another list.
+</p>
+<pre>
+>>> foo = [1, 3, 5, 7, 9]
+>>> bar = [ x ** 2 for x in foo ]
+>>> bar
+[1, 9, 25, 49, 81]
+</pre>
+<p>
+This seems like a trivial example, but what about this: we want to approximate a parabola <m>y=x^2</m> by using 101 points from <m>0</m> to <m>1</m>. How do we calculate those points?
+</p>
+<pre>
+>>> pts = [(x, x ** 2) for x in [i / 100 for i in range(101)]]
+</pre>
+<p>
+To be more sophisticated, what if we want to square <m>x_0=a</m> and <m>x_n=b</m>, and all the <m>n</m> equally-spaced values between?
+</p>
+<pre>
+>>> a, b, n = 5, 8, 10
+>>> pts = [(x, x ** 2) for x in [a + (b - a) * i / n for i in range(n + 1)]]
+>>> pts
+[(5.0, 25.0), (5.3, 28.09), (5.6, 31.359999999999996), (5.9, 34.81), (6.2, 38.44
+0000000000005), (6.5, 42.25), (6.8, 46.239999999999995), (7.1, 50.41), (7.4, 54.
+760000000000005), (7.7, 59.290000000000006), (8.0, 64.0)]
+</pre>
+<p>
+}
+There are two additional ideas demonstrated in this example code. The first occurs in the very first line of the code sample.
+</p>
+
+<p>
+<c>>>> a, b, n = 5, 8, 10</c>
+</p>
+
+<p>
+This line is a <em>multiple assignment</em>, where the <em>tuple</em><fn>We will later learn about <c>tuple</c>, which is actually a Python data type related to lists. Here we use the mathematical definition of tuple: a finite ordered sequence.</fn> of values <m>(5,8,10)</m> is assigned to the tuple of variables <m>(a,b,n)</m>. Second, arithmetic with <em>floating point</em> numbers is inexact arithmetic:
+we can see analytically that <m>6.2^2=38.44</m> but
+</p>
+<pre>
+>>> (6.2)**2 - 38.44 == 0
+False
+</pre>
+<p>
+While this is not a course on error analysis and correcting for floating point arithmetic, we will try to avoid this type of error when possible.
+</p>
+</section>

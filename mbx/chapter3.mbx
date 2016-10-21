@@ -1,0 +1,17 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" >
+<title>Conditioning and error handling</title>
+
+
+<section>
+<title>Goals</title>
+<ol type="1">
+<li><p>Define the <c>bool</c> data type.</p></li>
+<li><p>Discuss conditional statements.</p></li>
+<li><p>Discuss error handling via <c>try:... except:...</c> blocks.</p></li>
+</ol>
+</section>
+<xi:include  href="section3-1.mbx" />
+<xi:include  href="section3-2.mbx" />
+<xi:include  href="section3-3.mbx" />
+<xi:include  href="section3-4.mbx" />
+</chapter>

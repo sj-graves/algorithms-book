@@ -1,0 +1,32 @@
+<section>
+<title>Vectors in Euclidean space</title>
+<p>
+The set of all real numbers, <m>\R</m>, can be considered (geometrically) as a Euclidean line <mdash /> a one-dimensional space. Likewise, we are familiar with the way in which the set of all ordered pairs of real numbers represents a Euclidean plane, which we write as <m>\R^2=\set{(x,y):x,y\in\R}</m>. Extending this idea we can think of Euclidean 3-space, as <m>\R^3=\set{(x,y,z):x,y,z\in \R}</m>. Under a right-hand rule, this is geometrically shown in <xref ref="fig_vec-3d" autoname="yes" />.
+</p>
+<figure xml:id="fig_vec-3d" >
+<caption>A drawing of a vector in 3-space.</caption>
+<image>
+<latex-image-code><![CDATA[\begin{tikzpicture}\draw [->] (0,0) -- (2.5,0) node [right] {\(y\)};
+\draw [->] (0,0) -- (0,2.5) node [above] {\(z\)};
+\draw [->] (0,0) -- (-1,-4/3) node [below left] {\(x\)};
+\draw [thick, ->] (0,0) -- node [pos=.5, above] {\(\vec{v}\)} (1,.5) node [right] {\((a,b,c)\)};
+\draw (1,.5) circle [radius=1pt];\end{tikzpicture}]]></latex-image-code>
+</image>
+
+</figure>
+<p>
+We can extend this idea to that of <em>Euclidean <m>n</m>-space</em>, given by
+<me>
+  \R^n = \set{(x_1,x_2,\ldots,x_n):x_i\in \R\text{ for all } i=1,2,\ldots,n},
+</me>
+although we (as limited humans in a 3-dimensional spatial universe) cannot picture higher dimensions. Points in <m>n</m>-dimensional Euclidean space are <em><m>n</m>-dimensional vectors over <m>\R</m></em>.
+</p>
+
+<p>
+There is much disagreement among textbooks as to the correct notation for vectors, so in the interest of keeping everyone on the same page we will use the same notation used in Stewart's Calculus series: when written in <em>coordinate notation</em>, we will write <m>{\vec{x} = \vc{x_1,x_2,\ldots,x_n}}</m>. As we will frequently combine matrix and vector calculations (for reasons which will become obvious), we will most often use <em>column vector</em> notation:
+<me>
+  \vec{x} = \begin{bmatrix}x_1\\x_2\\ \vdots \\ x_n
+\end{bmatrix} .
+</me>
+</p>
+</section>

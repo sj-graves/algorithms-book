@@ -1,0 +1,13 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" >
+<title>Substitution Ciphers</title>
+
+
+<section>
+<title>Introduction</title>
+<p>
+A <em>substitution cipher</em> in its simplest form is simply a permutation of the letters in an alphabet; more complicated substitution ciphers might map single characters to fixed-size blocks of characters.
+</p>
+</section>
+<xi:include  href="section10-1.mbx" />
+<xi:include  href="section10-2.mbx" />
+</chapter>

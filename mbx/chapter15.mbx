@@ -1,0 +1,17 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" >
+<title>Maximum flow in a capacitated network</title>
+
+
+<section>
+<title>Goals</title>
+<ol type="1">
+<li><p>Define a <em>capacitated network</em>.</p></li>
+<li><p>Introduce the maximum flow and minimum cut problems and the max-flow, min-cut theorem.</p></li>
+<li><p>Introduce Dinitz' Algorithm to solve the max-flow/min-cut problem.</p></li>
+</ol>
+</section>
+<xi:include  href="section15-1.mbx" />
+<xi:include  href="section15-2.mbx" />
+<xi:include  href="section15-3.mbx" />
+<xi:include  href="section15-4.mbx" />
+</chapter>

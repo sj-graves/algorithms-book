@@ -1,0 +1,16 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" >
+<title>Functions and object-oriented programming</title>
+
+
+<section>
+<title>Goals</title>
+<ol type="1">
+<li><p>Discuss functions defined both by <c>def ...:</c> and as <c>lambda</c> functions.</p></li>
+<li><p>Introduce classes.</p></li>
+<li><p>Discuss operator overloading.</p></li>
+</ol>
+</section>
+<xi:include  href="section4-1.mbx" />
+<xi:include  href="section4-2.mbx" />
+<xi:include  href="section4-3.mbx" />
+</chapter>

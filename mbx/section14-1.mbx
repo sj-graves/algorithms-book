@@ -1,0 +1,20 @@
+<section>
+<title>Weighted graphs <ampersand /> minimum spanning trees</title>
+<p>
+A natural extension of graph theory is to consider a graph associated with a <em>weight function</em>.
+</p>
+<definition>
+<statement>
+<p>
+Suppose <m>\Gamma=(V,E)</m> is a graph with vertex set <m>V</m> and edge set <m>E</m>. A <term>weight function</term> on <m>\Gamma</m> is a function <m>w:E\to \mathbb{R}</m>. Such a weighted graph will be denoted <m>\Gamma=(V,E,w)</m>.
+</p>
+</statement>
+</definition>
+<p>
+Often the weight function somehow represents the ``cost" of traversing an edge <mdash /> in this context it becomes almost obvious why finding a spanning tree of minimum weight would be useful. Recall that a <em>spanning forest</em> for a graph is an acyclic subgraph covering all vertices; a <em>spanning tree</em> is a connected acyclic subgraph covering all vertices.
+</p>
+
+<p>
+A minimum spanning tree provides a way to connect all the vertices in a graph in a non-redundant way with the least associated cost.
+</p>
+</section>

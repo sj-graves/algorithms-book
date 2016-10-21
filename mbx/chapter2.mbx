@@ -1,0 +1,19 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" >
+<title>Lists and iteration</title>
+
+
+<section>
+<title>Goals</title>
+<ol type="1">
+<li><p>Define the <c>list</c> data type.</p></li>
+<li><p>Discuss the use of modules rather than interactive Python.</p></li>
+<li><p>Define the <c>for... in...:</c> iteration structure.</p></li>
+</ol>
+</section>
+<xi:include  href="section2-4x.mbx" />
+<xi:include  href="section2-1.mbx" />
+<xi:include  href="section2-2.mbx" />
+<xi:include  href="section2-3.mbx" />
+<xi:include  href="section2-4.mbx" />
+<xi:include  href="section2-5.mbx" />
+</chapter>

@@ -1,0 +1,15 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" >
+<title>Introduction to Graph Theory</title>
+
+
+<section>
+<title>Goals</title>
+<ol type="1">
+<li><p>Define a <em>graph</em>.</p></li>
+<li><p>Discuss elementary properties of and definitions pertaining to graphs.</p></li>
+<li><p>Discuss several different methods for representing graphs computationally.</p></li>
+</ol>
+</section>
+<xi:include  href="section12-1.mbx" />
+<xi:include  href="section12-2.mbx" />
+</chapter>

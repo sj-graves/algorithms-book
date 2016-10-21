@@ -1,0 +1,8 @@
+<section>
+<title>Goals</title>
+<ol type="1">
+<li><p>Discuss least squares regression</p></li>
+<li><p>Discuss the Gram-Schmidt orthonormalization algorithm</p></li>
+<li><p>Discuss <m>QR</m> decomposition using Householder reflectors</p></li>
+</ol>
+</section>

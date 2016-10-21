@@ -1,0 +1,37 @@
+<section>
+<title>Boolean values</title>
+<p>
+In the language of mathematics, a <em>statement</em> is any expression which may be either true or false. These two values, <c>True</c> and <c>False</c> are the fundamental values of data type <c>bool</c>, and are likewise the fundamental values of <em>Boolean algebra</em><fn>Name after George Boole, author of <em>The Laws of Thought</em> (1854).</fn>. Boolean algebra is an algebraic system formalizing the same concepts as propositional calculus, which is in turn the formal language of logic and proof taught in Foundations (Math 3425). Here we use a very simple subset of Boolean algebra: expressions in Python which evalute to <c>True</c> or <c>False</c> are the basis of all <em>branching processes</em>, by which computers are instructed on how to make decisions.
+</p>
+
+<p>
+There are many, many Python commans which return <c>bool</c> values. The comparison operators are first among them.
+</p>
+<tabular>
+<row><cell><em>Operator</em></cell><cell><em>Meaning</em></cell></row>
+<row bottom="minor"><cell></cell><cell></cell></row>
+<row><cell><c>x == y</c></cell><cell>Is <m>x</m> formally equivalent to <m>y</m>?</cell></row>
+<row><cell><c>x != y</c></cell><cell>is <m>x</m> formally different from <m>y</m>?</cell></row>
+<row><cell><c>x &lt; y</c></cell><cell>Less than</cell></row>
+<row><cell><c>x &lt;= y</c></cell><cell>Less than or equal to</cell></row>
+<row><cell><c>x > y</c></cell><cell>Greater than</cell></row>
+<row><cell><c>x >= y</c></cell><cell>greater than or equal to</cell></row>
+</tabular>
+<p>
+For the ordered comparison operators to work, the objects to be compared must have an order. It may be surprising what data types are ordered in Python and thus can be compared using <c>&lt;</c> and <c>></c>.
+</p>
+
+<p>
+Additionally, Boolean statements may be combined and modified using the logical operations. Assume in the following table that <c>x</c> and <c>y</c> are of type <c>bool</c>.
+</p>
+<tabular>
+<row><cell><em>Name</em></cell><cell><em>Usage</em></cell></row>
+<row bottom="minor"><cell></cell><cell></cell></row>
+<row><cell>Negation</cell><cell><c>not x</c></cell></row>
+<row><cell>Conjuction</cell><cell><c>x and y</c></cell></row>
+<row><cell>Disjunction</cell><cell><c>x or y</c></cell></row>
+</tabular>
+<p>
+These may be combined using parentheses to follow all the rules of logic.
+</p>
+</section>

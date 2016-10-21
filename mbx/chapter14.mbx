@@ -1,0 +1,15 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" >
+<title>Minimum spanning trees</title>
+
+
+<section>
+<title>Goals</title>
+<ol type="1">
+<li><p>Explore the minimum spanning tree problem</p></li>
+<li><p>Explain Kruskal's algorithm</p></li>
+<li><p>Implement Kruskal's algorithm</p></li>
+</ol>
+</section>
+<xi:include  href="section14-1.mbx" />
+<xi:include  href="section14-2.mbx" />
+</chapter>

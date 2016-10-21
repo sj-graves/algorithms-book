@@ -1,0 +1,76 @@
+<section>
+<title>Lists</title>
+
+
+<introduction>
+<p>
+In the previous lesson, we discussed <c>string</c> objects at some length. One unsatisfactory truth of working with strings is that it is impossible to change a single character in the middle of a pre-existing string, without overwriting the value of the string. This behavior occurs because strings are an <em>immutable</em> data type.
+</p>
+
+<p>
+Our first example of an <em>mutable compound data type</em> is the <c>list</c>. Lists may contain as elements any other data type, including others which are compound! Syntactically, they are very easy to implement: a list consists of a comma-separated list of objects enclosed in square brackets. The elements can be indexed individually, or sublists can be constructed by slicing, exactly as when using strings.
+</p>
+<pre>
+>>> foo = 'this is a string'
+>>> bar = [1,2,3,foo,5]
+>>> bar
+[1, 2, 3, 'this is a string', 5]
+>>> bar[-2:]
+['this is a string', 5]
+</pre>
+<p>
+Also, lists can be added and multiplied by integers:
+</p>
+<pre>
+>>> [1,2,3] + ['a','b','c']
+[1, 2, 3, 'a', 'b', 'c']
+>>> 5 * [1,2,3]
+[1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]
+</pre>
+</introduction>
+
+
+<subsection>
+<title>Methods</title>
+<p>
+A wonderful feature of Python can be found in its implementation of <em>methods</em><fn>We'll extensively discuss methods and classes after we've talked about functions, when we briefly discuss object-oriented programming. This will happen just before we start diving into ``real math."</fn>, predefined functions available within each class of objects. For instance, <c>bar.reverse()</c> will reverse the order of the elements of <c>bar</c>:
+</p>
+<pre>
+>>> bar.reverse()
+>>> bar
+[5, 'this is a string', 3, 2, 1]
+</pre>
+<p>
+Another useful list method is <c>sort</c>, which reorders the elements of a list into sorted order, but <em>only if all the elements can be compared!</em> For instance, if we sort our list <c>bar</c> as it is, we will get an error.
+</p>
+<pre>
+>>> bar.sort()
+Traceback (most recent call last):
+  File "&lt;pyshell#22>", line 1, in &lt;module>
+    bar.sort()
+TypeError: unorderable types: str() &lt; int()
+</pre>
+<p>
+Now, we have noted that lists are mutable, so we can change individually indexed pieces of <c>bar</c>. If we replace <c>bar[1]</c> with a number, for instance, we can sort <c>bar</c> in place using the <c>bar.sort()</c> method.
+</p>
+<pre>
+>>> bar[1] = 9.4
+>>> bar
+[5, 9.4, 3, 2, 1]
+>>> bar.sort()
+>>> bar
+[1, 2, 3, 5, 9.4]
+</pre>
+<p>
+For more information on what methods are available to a given data type, you can define a variable of that type and then pass that variable name as an argument to the <c>help</c> function. This will also give you an introduction to the style of Python's documentation. Try declaring <c>temp</c> to be the empty list and then ask Python for <c>help</c> about <c>temp</c>:
+</p>
+<pre>
+>>> temp = [ ]
+>>> help(temp)
+</pre>
+<p>
+It is always the case that methods available to a variable <c>my_var</c> will be accessed via <c>my_var.method_name(...)</c>; we'll talk more about this when we get to functional and object-oriented programming in Lesson 4.
+</p>
+</subsection>
+
+</section>

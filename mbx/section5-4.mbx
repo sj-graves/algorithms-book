@@ -1,0 +1,128 @@
+<section>
+<title>Matrix Multiplication</title>
+<p>
+While multiplying two matrices together is not too much more complicated than either addition or scalar multiplication, we need to be very careful. We also will get to introduce another builtin command, <c>sum</c>.
+</p>
+<definition>
+<statement>
+<p>
+Suppose <m>A</m> is a <m>m\times n</m> matrix and <m>B</m> is a <m>p\times q</m> matrix. Then the <term>matrix product <m>AB</m></term> is defined if and only if <m>n=p</m>. In this case, <m>AB</m> is a <m>m\times q</m> matrix given by
+<me>
+  AB = \left[\sum_{k=0}^n a_{i,k}b_{k,j}\right].
+</me>
+</p>
+
+<p>
+That is, the element in the <m>i^\text{ th }</m> row and <m>j^\text{ th }</m> column of the product matrix <m>AB</m> is the sum of the element-wise product of the <m>i^\text{ th }</m> row of <m>A</m> and the <m>j^\text{ th }</m> column of <m>B</m>.
+</p>
+</statement>
+</definition>
+
+<example>
+<statement>
+<p>
+Suppose we have the following matrices:
+<md>
+  <mrow>  A \amp = \begin{bmatrix}2 \amp  3 \amp  \frac12</mrow>
+  <mrow>  1 \amp  -1 \amp  0 \end{bmatrix}, \amp 
+B \amp = \begin{bmatrix}3 \amp  0 \amp  1</mrow>
+  <mrow>  -1 \amp  -1 \amp  0</mrow>
+  <mrow>  2 \amp  4 \amp  6 \end{bmatrix}, \amp 
+C \amp = \begin{bmatrix}1 \amp  4</mrow>
+  <mrow>  \pi \amp  6</mrow>
+  <mrow>  2 \amp  1\end{bmatrix}.</mrow>
+</md>
+</p>
+
+<p>
+Then <m>A</m> is a <m>2\times 3</m> matrix, <m>B</m> is a <m>3\times 3</m> matrix, and <m>C</m> is a <m>3\times 2</m> matrix. Here are the possible products, and if they exist, the dimensions of the product matrix:
+<me>
+  \begin{array}{ccr@{~\to~}l}
+\textbf{Product} \amp  \textbf{Exists?} \amp  \multicolumn{2}{c}{\textbf{Dimensions}} \\ \toprule
+AB \amp  \text{ Yes }  \amp  (2\times 3)\cdot(3\times 3)\amp  2\times 3 \\ 
+BA \amp  \text{ No }   \amp  (3\times 3)\cdot(2\times 3) \amp  \emptyset\\
+AC \amp  \text{ Yes }  \amp  (2\times 3)\cdot(3\times 2) \amp  2\times 2\\
+CA \amp  \text{ Yes }  \amp  (3\times 2)\cdot(2\times 3) \amp  3\times 3\\
+BC \amp  \text{ Yes }  \amp  (3\times 3)\cdot(3\times 2) \amp  3\times 2\\
+CB \amp  \text{ No }   \amp  (3\times 2)\cdot(3\times 3) \amp  \emptyset
+\end{array}
+</me>
+</p>
+
+<p>
+Since the dimensions of <m>AC</m> and <m>CA</m> are different, we see that even if both <m>AC</m> and <m>CA</m> exist, they need not be equal! This is a simple demonstration of the fact that matrix multiplication is <em>not commutative.</em> So we can see the process of multiplying in action,
+<md>
+  <mrow>  AC \amp = 
+	\begin{bmatrix}2 \amp  3 \amp  \frac12</mrow>
+  <mrow>  1 \amp  -1 \amp  0 \end{bmatrix}
+	\begin{bmatrix}1 \amp  4</mrow>
+  <mrow>  \pi \amp  6</mrow>
+  <mrow>  2 \amp  1\end{bmatrix}</mrow>
+  <mrow>  \amp =	\begin{bmatrix} 
+		2(1)+3(\pi)+\frac12(2) \amp  2(4)+3(6)+\frac12(1)</mrow>
+  <mrow>  1(1)-1(\pi)+0(2) \amp  1(4)-1(6)+0(1)
+	\end{bmatrix}</mrow>
+  <mrow>  \amp =	\begin{bmatrix}
+		3+3\pi \amp  \frac{53}2</mrow>
+  <mrow>  1-\pi \amp  -2
+	\end{bmatrix},</mrow>
+</md>
+but in the other order
+<md>
+  <mrow>  CA \amp =
+	\begin{bmatrix}1 \amp  4</mrow>
+  <mrow>  \pi \amp  6</mrow>
+  <mrow>  2 \amp  1\end{bmatrix}
+	\begin{bmatrix}2 \amp  3 \amp  \frac12</mrow>
+  <mrow>  1 \amp  -1 \amp  0 \end{bmatrix}</mrow>
+  <mrow>  \amp =	\begin{bmatrix}
+		1(2)+4(1) \amp  1(3)+4(-1) \amp  1\left(\frac12\right)+4(0)</mrow>
+  <mrow>  \pi(2)+6(1) \amp  \pi(3)+6(-1) \amp  \pi\left(\frac12\right)+6(0)</mrow>
+  <mrow>  2(2)+1(1) \amp  2(3)+1(-1) \amp  2\left(\frac12\right)+1(0)
+	\end{bmatrix}</mrow>
+  <mrow>  \amp =	\begin{bmatrix}
+		6 \amp  -1 \amp  \frac92</mrow>
+  <mrow>  6+2\pi \amp  -6+3\pi \amp  \frac{\pi}2</mrow>
+  <mrow>  5 \amp  5 \amp  1
+	\end{bmatrix}.</mrow>
+</md>
+</p>
+</statement>
+</example>
+
+<p>
+To think about this algorithmically, let's say <m>A</m> is a <m>m\times n</m> matrix and <m>B</m> is a <m>n\times q</m> matrix. Then <m>C = AB</m> is a <m>m\times q</m> matrix; if <m>C = [c_{i,j}]</m>, then
+<me>
+  c_{i,j} = \sum_{k=0}^n a_{i,k}b_{k,j}.
+</me>
+</p>
+
+<p>
+So for each pair <c>i,j</c> where <c>i in range(m)</c> and <c>j in range(q)</c> we will need to take the sum over a list <c>[A[i,k] * B[k,j] for k in range(n)]</c>. This is precisely the result of the <c>sum</c> command: it computes the sum of numbers in a list. The most efficient way to implement this is as a list comprehension of a list comprehension of a sum of a list comprehension!
+Here's an updated form of <c>Matrix.__mul__</c>, again with the list comprehension for <c>new_grid</c> missing.
+</p>
+<pre>
+def __mul__(self, other):
+        mult_err = 'Matrices may only be multiplied by scalars, or '+\
+                            'by matrices of appropriate dimensions.'
+        if type(self) == type(other): # matrix multiplication
+            m,n = self.dims()
+            p,q = other.dims()
+            if n != p:
+                raise ValueError(mult_err)
+            new_grid = """AN IMPORTANT PIECE IS MISSING RIGHT HERE!!""" # &lt;======
+            return Matrix(new_grid)
+        elif type(other) in [type(1), type(0.1)]: # scalar multiplication
+            new_grid = """AN IMPORTANT PIECE IS MISSING RIGHT HERE!!""" # &lt;======
+            return Matrix(new_grid)
+        else:
+            raise TypeError(mult_err)
+</pre>
+<exercise>
+<statement>
+<p>
+Finish the implementation of <c>Matrix.__mul__</c> to enable matrix multiplication. Save it in <c>Matrix.py</c>.
+</p>
+</statement>
+</exercise>
+</section>

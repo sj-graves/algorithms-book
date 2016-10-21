@@ -1,0 +1,81 @@
+<section>
+<title>Conditional statements</title>
+
+
+<subsection>
+<title><c>while</c> loops</title>
+<p>
+The first type of conditional statement we will consider is the ``other" kind of iteration: the <c>while</c> loop. It is much, much easier to enter an infinite while loop, but they generally create less memory pressure than infinite for loops. Here's the easiest do-nothing infinite while loop:
+</p>
+<pre>
+>>> while True:
+        None
+</pre>
+<p>
+The structure of a <c>while</c> loop is uncomplicated, and its meaning follows immediately from its structure: while some statement evaluates to <c>True</c>, execute an indented block of code. Upon reaching the end of the indented block, check if the statement is still true; if so, repeat the block, and if not, move on beyond the loop. We can use a while loop to compose an annoying SMS by counting until we run out of room. Since text messages (prior to smart phones) were limited to 160 characters, we save the following as <c>les3_ex1.py</c> and execute it.
+</p>
+<pre>
+s = ''
+i = 1
+limit = 160
+while len(str(i))+len(s)+1 &lt; limit:
+    s = s + str(i) + ' '
+    i = i + 1
+print(s)
+</pre>
+<p>
+A common error when using while loops in this way is failure to <em>increment your counter</em>. This is the <c>i = i + 1</c> line. What would happen if we left it off? Would this loop run forever? There is a shorthand for incrementing a variable: for every data type where addition makes sense, you can use <c>oldvar += newvar</c> instead of <c>oldvar = oldvar + newvar</c> as long as the data types of <c>oldvar</c> and <c>newvar</c> match. This means I could have written the above example as follows.
+</p>
+<pre>
+s = ''
+i = 1
+limit = 160
+while len(str(i))+len(s)+1 &lt; limit:
+    s += str(i) + ' '
+    i += 1
+print(s)
+</pre>
+</subsection>
+
+
+<subsection>
+<title><c>if</c> statements</title>
+<p>
+Often we only wish to execute a block of code if some condition is met. The natural language way that this would be expressed is something like ``If the condition is met, then do task A. Otherwise, do task B." This is available in Python using <c>if:... else:...</c> blocks. Here's an example which you should save as <c>les3_ex2.py</c>.
+</p>
+<pre>
+s = input('Please type something here and then press return: ')
+if len(s)%2==0:
+    t='even'
+else:
+    t='odd'
+print('You typed an '+t+' number of characters.')
+</pre>
+<p>
+Just like loops, <c>if...:</c> statements are block structures; the block is complete when the level of indentation returns to the same level as the original if statement.
+</p>
+
+<p>
+It is frequently the case that <c>if</c> blocks need to be nested, and just as often the case where if the test fails, we want to test something else. This is called an <em>else if</em>, implemented in Python by the <c>elif</c> command. We'll use the following code, <c>les3_ex3.py</c>, to demonstrate this and to introduce another type of conditional statement.
+</p>
+<pre>
+while True:
+    try:
+        s = input('Please type an integer: ')
+        n = int(s)
+        if n%3==1:
+            t='one greater than '
+        elif n%3==2:
+            t='one less than '
+        else:
+            t=''
+        print('Your number is '+t+'a multiple of 3.')
+        break
+    except ValueError as err:
+        print('!!! That is not an integer!!!!',err)
+    except:
+        raise
+</pre>
+</subsection>
+
+</section>
