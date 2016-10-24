@@ -11,8 +11,8 @@
         </ol>
     </objectives>
 </section>
-<xi:include  href="section1-2x.mbx" />
-<xi:include  href="section1-1.mbx" />
-<xi:include  href="section1-2.mbx" />
-<xi:include  href="section1-3.mbx" />
+<xi:include  href="section1_2x.xml" />
+<xi:include  href="section1_1.xml" />
+<xi:include  href="section1_2.xml" />
+<xi:include  href="section1_3.xml" />
 </chapter>

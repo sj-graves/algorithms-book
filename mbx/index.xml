@@ -48,37 +48,37 @@
     <book>
             <title>Algorithms for Applied Mathematics
             </title>
-        <xi:include href="./frontmatter.mbx" />
+        <xi:include href="./frontmatter.xml" />
 
-        <xi:include href="./chapter1.mbx" />
+        <xi:include href="./chapter1.xml" />
 
-        <xi:include href="./chapter2.mbx" />
+        <xi:include href="./chapter2.xml" />
 
-        <xi:include href="./chapter3.mbx" />
+        <xi:include href="./chapter3.xml" />
 
-        <xi:include href="./chapter4.mbx" />
+        <xi:include href="./chapter4.xml" />
 
-        <xi:include href="./chapter5.mbx" />
+        <xi:include href="./chapter5.xml" />
 
-        <xi:include href="./chapter6.mbx" />
+        <xi:include href="./chapter6.xml" />
 
-        <xi:include href="./chapter7.mbx" />
+        <xi:include href="./chapter7.xml" />
 
-        <xi:include href="./chapter8.mbx" />
+        <xi:include href="./chapter8.xml" />
 
-        <xi:include href="./chapter9.mbx" />
+        <xi:include href="./chapter9.xml" />
 
-        <xi:include href="./chapter10.mbx" />
+        <xi:include href="./chapter10.xml" />
 
-        <xi:include href="./chapter11.mbx" />
+        <xi:include href="./chapter11.xml" />
 
-        <xi:include href="./chapter12.mbx" />
+        <xi:include href="./chapter12.xml" />
 
-        <xi:include href="./chapter13.mbx" />
+        <xi:include href="./chapter13.xml" />
 
-        <xi:include href="./chapter14.mbx" />
+        <xi:include href="./chapter14.xml" />
 
-        <xi:include href="./chapter15.mbx" />
+        <xi:include href="./chapter15.xml" />
         
         <backmatter>
             <colophon> <p>

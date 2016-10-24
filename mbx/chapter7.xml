@@ -16,8 +16,8 @@ We often talk about square matrices in the context of systems of linear equation
 </p>
 </remark>
 </section>
-<xi:include  href="section7-1.mbx" />
-<xi:include  href="section7-2.mbx" />
-<xi:include  href="section7-3.mbx" />
-<xi:include  href="section7-4.mbx" />
+<xi:include  href="section7_1.xml" />
+<xi:include  href="section7_2.xml" />
+<xi:include  href="section7_3.xml" />
+<xi:include  href="section7_4.xml" />
 </chapter>

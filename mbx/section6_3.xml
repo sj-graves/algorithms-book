@@ -27,7 +27,7 @@ As these operations preserve the arithmetic properties of the equations, the set
 <md>
   <mrow>  \systeme{x_1 + 3x_2 - 13x_3 = -18, x_1 + 2x_2 - 10x_3 = -15, -6x_1 - 7x_2 + 46x_3 = 77}
 	\xrightarrow[6E_1+E_3]{-E_1+E_2}
-	\amp \systeme{x_1 + 3x_2 - 13x_3 = -18, {-x_2}+3x_3=3, 11x_2-32x_3=-31}</mrow>
+	\amp \systeme{x_1 + 3x_2 - 13x_3 = -18, {-x_2}+3x_3=3, 11x_2_32x_3=-31}</mrow>
   <mrow>  \nonumber
 	\xto{11E_2+E_3}
 	\amp \systeme{x_1 + 3x_2 - 13x_3 = -18, {-x_2}+3x_3=3, x_3=2}</mrow>
@@ -39,7 +39,7 @@ So eliminated, we can use back substitution to solve for <m>x_3</m>, <m>x_2</m>,
 <md>
   <mrow>  x_3 \amp = 2</mrow>
   <mrow>  x_2 \amp = \frac1{3}\left(3+x_3\right) = 3</mrow>
-  <mrow>  x_1 \amp = -18-3x_2+13x_3 = -1</mrow>
+  <mrow>  x_1 \amp = -18_3x_2+13x_3 = -1</mrow>
 </md>
 </p>
 

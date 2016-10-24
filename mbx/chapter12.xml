@@ -10,6 +10,6 @@
 <li><p>Discuss several different methods for representing graphs computationally.</p></li>
 </ol>
 </section>
-<xi:include  href="section12-1.mbx" />
-<xi:include  href="section12-2.mbx" />
+<xi:include  href="section12_1.xml" />
+<xi:include  href="section12_2.xml" />
 </chapter>

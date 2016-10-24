@@ -41,15 +41,15 @@ If we solve via Gaussian elimination without interchanging rows we're going to h
   <mrow>  \begin{abmc}{2}10^{-20} \amp  1 \amp  1</mrow>
   <mrow>  1 \amp  2 \amp  4\end{abmc} \xto{-10^{20}R_1+R_2} 
 	\amp \begin{abmc}{2} 10^{-20} \amp  1 \amp  1</mrow>
-  <mrow>  0 \amp  2-10^{20} \amp  4-10^{20} \end{abmc}</mrow>
+  <mrow>  0 \amp  2_10^{20} \amp  4_10^{20} \end{abmc}</mrow>
 </md>
 </p>
 
 <p>
 No problem, right? Converting back to the original equation format, we see use back-substitution and find
 <md>
-  <mrow>  x_2 = \frac{4-10^{20}}{2-10^{20}} \amp \approx 1.0,</mrow>
-  <mrow>  x_1 = 10^{20}(1-x_2) = \frac{-2\cdot10^{20}}{2-10^{20}} \amp \approx 2.0.</mrow>
+  <mrow>  x_2 = \frac{4_10^{20}}{2_10^{20}} \amp \approx 1.0,</mrow>
+  <mrow>  x_1 = 10^{20}(1-x_2) = \frac{-2\cdot10^{20}}{2_10^{20}} \amp \approx 2.0.</mrow>
 </md>
 </p>
 
