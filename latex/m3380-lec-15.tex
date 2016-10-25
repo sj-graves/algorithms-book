@@ -48,11 +48,11 @@ Just as it is interesting to determine a maximum flow over a network, there are 
 \end{thm}
 
 \section{Dinitz' Algorithm}
-The original solution to the problem of calculating a maximum flow was published in 1956 by {L. R. Ford, Jr. and D. R. Fulkerson}. The modified version presented here was produced by Yefim Dinitz as a ``response to a pre-class exercise in Adel'son Vel'sky's Algorithm class." According to Dinitz, he was at the time unaware of the basic details of the Ford-Fulkerson algorithm upon which his algorithm improves.
+The original solution to the problem of calculating a maximum flow was published in 1956 by {L. R. Ford, Jr. and D. R. Fulkerson}. The modified version presented here was produced by Yefim Dinitz as a ``response to a pre-class exercise in Adel'son Vel'sky's Algorithm class.'' According to Dinitz, he was at the time unaware of the basic details of the Ford-Fulkerson algorithm upon which his algorithm improves.
 
-Both algorithms proceed in this general fashion: given a flow, determine which edges have ``residual capacity." In the residual graph, try to find a flow which can augment the current flow. When no such flow can be found, a maximum flow has been found.
+Both algorithms proceed in this general fashion: given a flow, determine which edges have ``residual capacity.'' In the residual graph, try to find a flow which can augment the current flow. When no such flow can be found, a maximum flow has been found.
 
-The foremost reason an improvement was needed to the Ford-Fulkerson algorithm is its failure to terminate in certain cases of networks with irrational capacities. As the algorithm is successful in constructing a maximum flow whenever it terminates, an improvement to the algorithm was more likely than a replacement. Dinitz' improvement utilized shortest paths to overcome the conceptual flaw in Ford-Fulkerson during the step of finding an augmenting path. Hence we will first discuss the modification to Dikstra's algorithm which produces the necessary ``shortest path graph." 
+The foremost reason an improvement was needed to the Ford-Fulkerson algorithm is its failure to terminate in certain cases of networks with irrational capacities. As the algorithm is successful in constructing a maximum flow whenever it terminates, an improvement to the algorithm was more likely than a replacement. Dinitz' improvement utilized shortest paths to overcome the conceptual flaw in Ford-Fulkerson during the step of finding an augmenting path. Hence we will first discuss the modification to Dikstra's algorithm which produces the necessary ``shortest path graph.''
 
 The modification to Dijkstra's algorithm to construct a subgraph consisting of all shortest paths from $s$ to $t$ is conceptually deep but easy to implement. Suppose $v\in V$ with $d(s,v)=k$, where $s$ is the source vertex. Rather than recording a single $s,v$-path, we records every vertex $u\in V$ such that $d(s,u)=k-1$ and there is an arc\footnote{Recall that we are working over directed graphs now.} from $u$ to $v$.
 
@@ -79,7 +79,7 @@ for each $v\in V$. Also, define a set $V'=\set{}$ of visited vertices.
 \end{enum}
 \end{alg}
 
-The true ``secret" to Dinitz' algorithm is not in its use of this shortest path algorithm once, but twice: if the output $p(v)$ is used to define a new set of arrows $E_b=\set{uv:v\in p(u)}$ we can use the modified shortest path algorithm now on the graph with edge set $E_b$ and source $t$ to ensure that the only shortest paths we retain are paths from $s$ to $t$.
+The true secret to Dinitz' algorithm is not in its use of this shortest path algorithm once, but twice: if the output $p(v)$ is used to define a new set of arrows $E_b=\set{uv:v\in p(u)}$ we can use the modified shortest path algorithm now on the graph with edge set $E_b$ and source $t$ to ensure that the only shortest paths we retain are paths from $s$ to $t$.
 
 
 \begin{figure}[hbt]

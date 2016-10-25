@@ -38,7 +38,7 @@ These may be combined using parentheses to follow all the rules of logic.
  
 \section{Conditional statements}
 \subsection{\texttt{while} loops}
-The first type of conditional statement we will consider is the ``other" kind of iteration: the \verb|while| loop. It is much, much easier to enter an infinite while loop, but they generally create less memory pressure than infinite for loops. Here's the easiest do-nothing infinite while loop:
+The first type of conditional statement we will consider is the ``other'' kind of iteration: the \verb|while| loop. It is much, much easier to enter an infinite while loop, but they generally create less memory pressure than infinite for loops. Here's the easiest do-nothing infinite while loop:
 
 \smallskip{\fn\begin{verbatim}
 >>> while True:
@@ -70,7 +70,7 @@ print(s)
 \end{verbatim}
 }\smallskip\noindent
 
-\subsection{\texttt{if} statements} Often we only wish to execute a block of code if some condition is met. The natural language way that this would be expressed is something like ``If the condition is met, then do task A. Otherwise, do task B." This is available in Python using \verb|if:... else:...| blocks. Here's an example which you should save as \verb|les3_ex2.py|.
+\subsection{\texttt{if} statements} Often we only wish to execute a block of code if some condition is met. The natural language way that this would be expressed is something like ``If the condition is met, then do task A. Otherwise, do task B.'' This is available in Python using \verb|if:... else:...| blocks. Here's an example which you should save as \verb|les3_ex2.py|.
 
 \smallskip{\fn\begin{verbatim}
 s = input('Please type something here and then press return: ')
@@ -154,7 +154,7 @@ We often use this to prematurely exit \verb|for| or \verb|while| loops. Sometime
 \end{verbatim}
 }\smallskip\noindent
 
-On the other hand, sometimes while writing code you need some ``placeholder" code -- for instance, you're trying to write a complicated if-else block, and you want to work on the \verb|else:| part first. The \verb|pass| command is a do-nothing command. In fact, it does so little that you can't even get \verb|help| on it:
+On the other hand, sometimes while writing code you need some ``placeholder'' code -- for instance, you're trying to write a complicated if-else block, and you want to work on the \verb|else:| part first. The \verb|pass| command is a do-nothing command. In fact, it does so little that you can't even get \verb|help| on it:
 
 \smallskip{\fn\begin{verbatim}
 >>> help(pass)
