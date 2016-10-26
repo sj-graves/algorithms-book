@@ -10,6 +10,6 @@
 <li><p>Implement Kruskal's algorithm</p></li>
 </ol>
 </section>
-<xi:include  href="section14_1.xml" />
-<xi:include  href="section14_2.xml" />
+<xi:include  href="section14-1.mbx" />
+<xi:include  href="section14-2.mbx" />
 </chapter>

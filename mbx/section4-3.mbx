@@ -176,7 +176,7 @@ There are many, many operators and methods which you will want to overload to ma
 <subsection>
 <title>``It's a trap!"</title>
 <p>
-In fact, we didn't need to do any of this work to implement complex numbers. Try <c>help(complex)</c>. Following a convention from engineering and the sciences, <m>j=\sqrt{-1}</m>, and entering <c>z = 5_3j</c> produces a complex number with full functionality. We won't be saving our <c>ComplexNumber</c> class for further use.
+In fact, we didn't need to do any of this work to implement complex numbers. Try <c>help(complex)</c>. Following a convention from engineering and the sciences, <m>j=\sqrt{-1}</m>, and entering <c>z = 5-3j</c> produces a complex number with full functionality. We won't be saving our <c>ComplexNumber</c> class for further use.
 </p>
 
 <p>

@@ -10,9 +10,9 @@
 <li><p>Implementation of a permutation class</p></li>
 </ol>
 </section>
-<xi:include  href="section9_1.xml" />
-<xi:include  href="section9_2.xml" />
-<xi:include  href="section9_3.xml" />
-<xi:include  href="section9_4.xml" />
-<xi:include  href="section9_5.xml" />
+<xi:include  href="section9-1.mbx" />
+<xi:include  href="section9-2.mbx" />
+<xi:include  href="section9-3.mbx" />
+<xi:include  href="section9-4.mbx" />
+<xi:include  href="section9-5.mbx" />
 </chapter>

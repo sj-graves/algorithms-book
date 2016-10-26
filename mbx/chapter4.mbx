@@ -10,7 +10,7 @@
 <li><p>Discuss operator overloading.</p></li>
 </ol>
 </section>
-<xi:include  href="section4_1.xml" />
-<xi:include  href="section4_2.xml" />
-<xi:include  href="section4_3.xml" />
+<xi:include  href="section4-1.mbx" />
+<xi:include  href="section4-2.mbx" />
+<xi:include  href="section4-3.mbx" />
 </chapter>

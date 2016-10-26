@@ -46,7 +46,7 @@ Following up with back substitution,
 <md>
   <mrow>  x_3 = \frac{2/11}{1/11} \amp = 2,</mrow>
   <mrow>  x_2 = \frac6{11}\left(-\frac{31}6+\frac{16}3x_3\right) \amp = 3,</mrow>
-  <mrow>  x_1 = -\frac16\left(77+7x_2_46x_3\right) \amp = -1</mrow>
+  <mrow>  x_1 = -\frac16\left(77+7x_2-46x_3\right) \amp = -1</mrow>
 </md>
 </p>
 

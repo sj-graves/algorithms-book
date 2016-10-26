@@ -42,7 +42,7 @@ This and related questions are most often answered by the process of <em>least s
 <p>
 Consider the system
 <md>
-  <mrow>  \systeme{3x_1_2x_2=4, 2x_1+x_2=9, -3x_1+2x_2=6.}</mrow>
+  <mrow>  \systeme{3x_1-2x_2=4, 2x_1+x_2=9, -3x_1+2x_2=6.}</mrow>
 </md>
 </p>
 

@@ -174,10 +174,10 @@ Applying the algorithm for our public key <m>(42953,873)</m>, we have:
 <md>
   <mrow>  \amp \amp   p_{-1} \amp = 0</mrow>
   <mrow>  42953 \amp = 49(873)+176 \amp  p_0 \amp = 1</mrow>
-  <mrow>  873 \amp = 4(176)+169    \amp  p_1 \amp = (0_1(49))\mod 42953 = 42904</mrow>
-  <mrow>  176 \amp = 1(169)+7      \amp  p_2 \amp = (1_42904(4))\mod 42953 = 197</mrow>
-  <mrow>  169 \amp = 24(7)+1       \amp  p_3 \amp = (42904_197(1))\mod 42953 = 42707</mrow>
-  <mrow>  7 \amp = 7(1)+0          \amp  p_4 \amp = (197_42707(24))\mod 42953 = 6101</mrow>
+  <mrow>  873 \amp = 4(176)+169    \amp  p_1 \amp = (0-1(49))\mod 42953 = 42904</mrow>
+  <mrow>  176 \amp = 1(169)+7      \amp  p_2 \amp = (1-42904(4))\mod 42953 = 197</mrow>
+  <mrow>  169 \amp = 24(7)+1       \amp  p_3 \amp = (42904-197(1))\mod 42953 = 42707</mrow>
+  <mrow>  7 \amp = 7(1)+0          \amp  p_4 \amp = (197-42707(24))\mod 42953 = 6101</mrow>
 </md>
 </p>
 
