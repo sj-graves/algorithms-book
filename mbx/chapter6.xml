@@ -15,10 +15,10 @@
 <li><p>Implement elementary row operations and discuss the algorithm for Gaussian elimination with partial pivoting.</p></li>
 </ol>
 </section>
-<xi:include  href="section6-1.mbx" />
-<xi:include  href="section6-2.mbx" />
-<xi:include  href="section6-3.mbx" />
-<xi:include  href="section6-4.mbx" />
-<xi:include  href="section6-5.mbx" />
-<xi:include  href="section6-6.mbx" />
+<xi:include  href="section6_1.xml" />
+<xi:include  href="section6_2.xml" />
+<xi:include  href="section6_3.xml" />
+<xi:include  href="section6_4.xml" />
+<xi:include  href="section6_5.xml" />
+<xi:include  href="section6_6.xml" />
 </chapter>

@@ -10,9 +10,9 @@
 <li><p>Discuss <m>QR</m> decomposition using Householder reflectors</p></li>
 </ol>
 </section>
-<xi:include  href="section8-1.mbx" />
-<xi:include  href="section8-2.mbx" />
-<xi:include  href="section8-3.mbx" />
-<xi:include  href="section8-4.mbx" />
-<xi:include  href="section8-5.mbx" />
+<xi:include  href="section8_1.xml" />
+<xi:include  href="section8_2.xml" />
+<xi:include  href="section8_3.xml" />
+<xi:include  href="section8_4.xml" />
+<xi:include  href="section8_5.xml" />
 </chapter>

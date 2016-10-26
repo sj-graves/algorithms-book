@@ -110,8 +110,8 @@ Then <m>A+B</m> exists but neither <m>A+C</m> nor <m>B+C</m> is defined. The sum
   <mrow>  5 \amp  9 \amp  12 \end{bmatrix} + 
 \begin{bmatrix} \pi \amp  -4 \amp  -5</mrow>
   <mrow>  2 \amp  2 \amp  -2 \end{bmatrix}</mrow>
-  <mrow>  \amp = \begin{bmatrix} 3+\pi \amp  4-4 \amp  6-5</mrow>
-  <mrow>  5+2 \amp  9+2 \amp  12-2\end{bmatrix}</mrow>
+  <mrow>  \amp = \begin{bmatrix} 3+\pi \amp  4_4 \amp  6_5</mrow>
+  <mrow>  5+2 \amp  9+2 \amp  12_2\end{bmatrix}</mrow>
   <mrow>  \amp = \begin{bmatrix}3+\pi \amp  0 \amp  1</mrow>
   <mrow>  7 \amp  11 \amp  10\end{bmatrix}.</mrow>
 </md>

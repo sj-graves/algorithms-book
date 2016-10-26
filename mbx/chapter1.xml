@@ -1,0 +1,55 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" >
+<title>Welcome to Algorithms and Sage!</title>
+
+
+
+<objectives><!--<title>Goals</title>-->
+<ol type="1">
+<li><p>Gain familiarity with the SageMathCloud environment.</p></li>
+<li><p>Learn some elementary Sage/Python syntax and commands.</p></li>
+</ol>
+</objectives>
+
+<introduction>
+    <title>Special Instructions</title>
+    <p>
+        We will be making extensive use of <url href="http://cloud.sagemath.com">SageMathCloud</url> throughout the semester, so your very first task is to set up an account.
+    </p>
+    <ol><title>Configuring SageMathCloud</title>
+    <li /> 
+    </ol>
+    <p>
+        While most examples of Sage or Python code will be emdedded in Sage cells within the text, it is important that you are logged into SageMathCloud and actively typing code examples and working along with exercises as we progress - <em> especially if you are using an offline copy of the book!</em>
+    </p>
+
+    <p>
+        We're going to extensively discuss actual code in these notes, so let's determine some conventions. When you read something like <c>print</c>, you should understand that it is a Sage or Python command. 
+    </p>
+
+    <section>
+        <title> Running Sage Code</title>
+            <example>
+            <p>
+                Anything that looks like this is an executable piece of Sage code.
+            </p>
+            <sage>
+                <input>
+                    x = 13
+                    print (x**2 == x^2)
+                </input>
+                <output>
+                    True
+                </output>
+            </sage>
+
+        </example>
+    </section>
+</introduction>
+
+
+
+<!-- <xi:include  href="section1_2x.xml" /> -->
+<xi:include  href="section1_1.xml" />
+<xi:include  href="section1_2.xml" />
+<xi:include  href="section1_3.xml" />
+</chapter>

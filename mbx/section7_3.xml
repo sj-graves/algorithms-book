@@ -122,8 +122,8 @@ U \amp = \begin{bmatrix} 1 \amp  3 \amp  -13</mrow>
 Recall that we must solve <m>L\vec{y}=\vec{b}</m> before we can solve <m>U\vec{x}=\vec{y}</m>, and so doing we obtain
 <md>
   <mrow>  y_1 \amp = b_1 				\amp  x_3 \amp = y_3</mrow>
-  <mrow>  y_2 \amp = b_2-y_1 			\amp  x_2 \amp = -(y_2-3x_3)</mrow>
-  <mrow>  y_3 \amp = b_3+6y_1+11y_2	\amp  x_1 \amp = y_1-3x_2+13x_3</mrow>
+  <mrow>  y_2 \amp = b_2-y_1 			\amp  x_2 \amp = -(y_2_3x_3)</mrow>
+  <mrow>  y_3 \amp = b_3+6y_1+11y_2	\amp  x_1 \amp = y_1_3x_2+13x_3</mrow>
 </md>
 </p>
 
@@ -131,8 +131,8 @@ Recall that we must solve <m>L\vec{y}=\vec{b}</m> before we can solve <m>U\vec{x
 As you can see, we can now solve the matrix equation <m>A\vec{x}=\vec{b}</m> very quickly for any <m>{\vec{b}=\vc{b_1,b_2,b_3}}</m>. In our example, we had <m>\vec{b}=\vc{-18,-15,77}</m>, so we get
 <md>
   <mrow>  y_1 = b_1 \amp = -18				\amp  x_3 = y_3 \amp = 2</mrow>
-  <mrow>  y_2 = b_2-y_1 \amp = 3				\amp  x_2 = -(y_2-3x_3) \amp = 3</mrow>
-  <mrow>  y_3 = b_3+6y_1+11y_2 \amp = 2		\amp  x_1 = y_1-3x_2+13x_3 \amp = -1</mrow>
+  <mrow>  y_2 = b_2-y_1 \amp = 3				\amp  x_2 = -(y_2_3x_3) \amp = 3</mrow>
+  <mrow>  y_3 = b_3+6y_1+11y_2 \amp = 2		\amp  x_1 = y_1_3x_2+13x_3 \amp = -1</mrow>
 </md>
 and our solution vector is <m>\vec{x} = \vc{2,3,-1}</m>.
 </p>

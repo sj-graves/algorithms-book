@@ -37,6 +37,9 @@
     
     
     <sage>
-        x = var('x')
+        <input>
+            x = 13
+            print (x**2==x^2)
+        </input>
     </sage>
 </section>

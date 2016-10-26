@@ -10,8 +10,8 @@
 <li><p>Discuss error handling via <c>try:... except:...</c> blocks.</p></li>
 </ol>
 </section>
-<xi:include  href="section3-1.mbx" />
-<xi:include  href="section3-2.mbx" />
-<xi:include  href="section3-3.mbx" />
-<xi:include  href="section3-4.mbx" />
+<xi:include  href="section3_1.xml" />
+<xi:include  href="section3_2.xml" />
+<xi:include  href="section3_3.xml" />
+<xi:include  href="section3_4.xml" />
 </chapter>

@@ -10,10 +10,10 @@
 <li><p>Define the <c>for... in...:</c> iteration structure.</p></li>
 </ol>
 </section>
-<xi:include  href="section2-4x.mbx" />
-<xi:include  href="section2-1.mbx" />
-<xi:include  href="section2-2.mbx" />
-<xi:include  href="section2-3.mbx" />
-<xi:include  href="section2-4.mbx" />
-<xi:include  href="section2-5.mbx" />
+<xi:include  href="section2_4x.xml" />
+<xi:include  href="section2_1.xml" />
+<xi:include  href="section2_2.xml" />
+<xi:include  href="section2_3.xml" />
+<xi:include  href="section2_4.xml" />
+<xi:include  href="section2_5.xml" />
 </chapter>
