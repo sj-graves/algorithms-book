@@ -87,6 +87,16 @@
                 This book was originally authored in <url href="http://www.latex-project.org/"><m>\LaTeX</m></url> and rewritten in 
                 <url href="http://mathbook.pugetsound.edu">MathBook XML</url>.
             </p></colophon>
+            
+            <references>
+                <biblio xml:id="bib_Din2006" type="raw">
+                    <author>Dinitz, Y.</author>
+                    <title>Dinitz’ algorithm: The original version and Even’s version.</title> 
+                    <journal>Theoretical Computer Science</journal>, 
+                    <year>2006</year>, 218-240. 
+                    DOI: <url href="http://doi.org/10.1007/11685654_10">10.1007/11685654_10</url>
+                </biblio>
+            </references>
         </backmatter>
     </book>
 </mathbook>

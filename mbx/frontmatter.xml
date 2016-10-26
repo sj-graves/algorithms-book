@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
- 
+
 <frontmatter xmlns:xi="http://www.w3.org/2001/XInclude" >
- 
+
     <titlepage>
         <author>
             <personname>Stephen J. Graves</personname>
@@ -9,10 +9,10 @@
             <institution>The University of Texas at Tyler</institution>
             <email>sgraves@uttyler.edu</email>
         </author>
- 
+
         <date>DRAFT <today /> DRAFT</date>
     </titlepage>
- 
+
     <colophon>
         <copyright>
             <year>2016</year>
@@ -21,5 +21,54 @@
             </shortlicense>
         </copyright>
     </colophon>
- 
+
+    <acknowledgement>
+        <p>
+            Thank you to the University of Texas at Tyler students of Math 3380: Algorithms for Applied Mathematics. You were my guinea pigs as I initially drafted this manuscript as lecture notes.
+        </p>
+        <p>Moreover, thank you to Rob Beezer, who made possible the conversion of this book to Mathbook XML, and to David Farmer, who used his excellent S2LX script to bulk-convert the original <latex /> source to Mathbook XML.
+        </p>
+    </acknowledgement>
+
+    <foreword>
+        <p>
+            When researching the topic for the last chapter of this book, I was struck by the following passage in Yefim Dinitz’s discussion<xref ref="bib_Din2006"></xref> of the algorithm which bears his name: 
+            <blockquote>
+                Shortly after the <q>iron curtain</q> fell in 1990, an American and a Russian,
+                who had both worked on the development of weapons, met. The American
+                asked, “When you developed the Bomb, how were you able to perform such
+                an enormous amount of computing with your weak computers?” The Russian
+                responded: “We used better algorithms.”
+            </blockquote>
+        </p>
+        <p>
+            The message Dinitz expands upon in his paper is that a school of mathematics arose in
+            the USSR favoring strong algorithms designed around carefully-planned data structures to
+            solve computationally intensive problems; in the West, advances in computer speed allowed
+            weaker algorithms to be at least as successful as Soviet algorithms, as the differences were
+            made up in the hardware.
+        </p>
+        <p>
+            Introductory students should understand this. If you can devise a careful algorithm on
+            paper, you can build a data structure to model it. The process of solving mathematical
+            problems computationally is then two-fold: first, work out an on-paper algorithm which
+            solves the problem; second, determine the method of storing the relevant data for the
+            problem in such a way that implementing the algorithm is efficient and understandable.
+            This book is divided into four parts. The first is an extremely basic introduction to
+            programming in Python 3.5. There are several reasons Python was chosen rather than
+            another language, but the primary reasons are portability and cost. Python can be run
+            under every operating system (to my knowledge) and is free and open source. The second
+            part of the book applies the material from the first in the development of a robust data
+            structure often used to solve mathematical problems: the matrix. We work from the basic
+            definitions of a matrix through many of the operations of matrix theory, culminating
+            with discussions of the LU and QR decompositions of a matrix. Each of these is used for
+            solving a different class of practical problem. The third unit of the course is a very shallow
+            introduction to cryptography, again with a focus on the data structures used to perform
+            permutation arithmetic. Finally, the text concludes in the fourth part with an introduction
+            to algorithmic graph theory. Various data structures for representing graphs computationally
+            are discussed, and then ignored, as the three presented problems lend themselves very
+            well to particular models rather than general ones.
+        </p>
+    </foreword>
+
 </frontmatter>

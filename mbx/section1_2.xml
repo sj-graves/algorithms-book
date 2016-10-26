@@ -1,70 +1,70 @@
 <section>
-<title>Python and numbers</title>
-<p>
-Python works really well with integers (called <c>int</c>s) and floating point numbers (called <c>float</c>s), and carefully respects order of operations.
-</p>
+    <title>Python and numbers</title>
+    <p>
+        Python works really well with integers (called <c>int</c>s) and floating point numbers (called <c>float</c>s), and carefully respects order of operations.
+    </p>
 
-<p>
-<c>>>> 4 * (0 + 4 ** 2 - 1) / 3</c><nbsp />\fbox{$\dlsh$}
-</p>
+    <p>
+        <c>>>> 4 * (0 + 4 ** 2 - 1) / 3</c><nbsp />\fbox{$\dlsh$}
+    </p>
 
-<p>
-<c>20.0</c>
-</p>
+    <p>
+        <c>20.0</c>
+    </p>
 
-<p>
-In the above example, we note two things: first, the <c>**</c> operator is our power operator; second, we fed in all <c>int</c>egers and the returned value was a <c>float</c>. This is the behavior of <c>/</c>, which is the division operator. Integer division (via the Division Algorithm) uses <c>//</c> and <c>%</c> for quotient and remainder respectively:
-</p>
+    <p>
+        In the above example, we note two things: first, the <c>**</c> operator is our power operator; second, we fed in all <c>int</c>egers and the returned value was a <c>float</c>. This is the behavior of <c>/</c>, which is the division operator. Integer division (via the Division Algorithm) uses <c>//</c> and <c>%</c> for quotient and remainder respectively:
+    </p>
 
-<p>
-<c>>>> 16 // 3</c><nbsp />\fbox{$\dlsh$}
-</p>
+    <p>
+        <c>>>> 16 // 3</c><nbsp />\fbox{$\dlsh$}
+    </p>
 
-<p>
-<c>5</c>
-</p>
+    <p>
+        <c>5</c>
+    </p>
 
-<p>
-<c>>>> 16 % 3</c><nbsp />\fbox{$\dlsh$}
-</p>
+    <p>
+        <c>>>> 16 % 3</c><nbsp />\fbox{$\dlsh$}
+    </p>
 
-<p>
-<c>1</c>
-</p>
+    <p>
+        <c>1</c>
+    </p>
 
-<p>
-To assign a value to a variable name, we use <c>=</c>:
-</p>
+    <p>
+        To assign a value to a variable name, we use <c>=</c>:
+    </p>
 
-<p>
-<c>>>> spam = 5</c><nbsp />\fbox{$\dlsh$}
-</p>
+    <p>
+        <c>>>> spam = 5</c><nbsp />\fbox{$\dlsh$}
+    </p>
 
-<p>
-<c>>>> eggs = spam</c><nbsp />\fbox{$\dlsh$}
-</p>
+    <p>
+        <c>>>> eggs = spam</c><nbsp />\fbox{$\dlsh$}
+    </p>
 
-<p>
-<c>>>> spam = 90.5</c><nbsp />\fbox{$\dlsh$}
-</p>
+    <p>
+        <c>>>> spam = 90.5</c><nbsp />\fbox{$\dlsh$}
+    </p>
 
-<p>
-<c>>>> eggs</c><nbsp />\fbox{$\dlsh$}
-</p>
+    <p>
+        <c>>>> eggs</c><nbsp />\fbox{$\dlsh$}
+    </p>
 
-<p>
-<c>5</c>
-</p>
+    <p>
+        <c>5</c>
+    </p>
 
-<p>
-<c>>>> spam</c><nbsp />\fbox{$\dlsh$}
-</p>
+    <p>
+        <c>>>> spam</c><nbsp />\fbox{$\dlsh$}
+    </p>
 
-<p>
-<c>90.5</c>
-</p>
+    <p>
+        <c>90.5</c>
+    </p>
 
-<p>
-We see now that first setting <c>eggs</c> equal to the value of <c>spam</c> and then changing <c>spam</c> does not also change <c>eggs</c>.
-</p>
+    <p>
+        We see now that first setting <c>eggs</c> equal to the value of <c>spam</c> and then changing <c>spam</c> does not also change <c>eggs</c>.
+    </p>
 </section>
