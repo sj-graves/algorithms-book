@@ -1,0 +1,84 @@
+<section xml:id="section_LI_LISTS">
+    <title>Lists</title>
+
+
+    <introduction>
+        <p>
+            In the previous lesson, we discussed <c>string</c> objects at some length. One unsatisfactory truth of working with strings is that it is impossible to change a single character in the middle of a pre-existing string, without overwriting the value of the string. This behavior occurs because strings are an <em>immutable</em> data type.
+        </p>
+    </introduction>
+    <subsection>
+        <title>Basic <c>list</c> operations</title>
+        <p>
+            Our first example of a <em>mutable compound data type</em> is the <c>list</c>. Lists may contain as elements any other data type, including others which are compound! Syntactically, they are very easy to implement: a list consists of a comma-separated list of objects enclosed in square brackets. The elements can be indexed individually, or sublists can be constructed by slicing, exactly as when using strings.
+        </p>
+        <sage>
+            <input>
+                foo = 'this is a string'
+                bar = [1,2,3,foo,5]
+                print bar
+                print bar[-2:]
+            </input>
+            <output>
+                [1, 2, 3, 'this is a string', 5]
+                ['this is a string', 5]
+            </output>
+        </sage>
+        <p>
+            Also, lists can be added and multiplied by integers:
+        </p>
+        <sage>
+            <input>
+                print [1,2,3] + ['a','b','c']
+                print 5 * [1,2,3]
+            </input>
+            <output>
+                [1, 2, 3, 'a', 'b', 'c']
+                [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]
+            </output>
+        </sage>
+    </subsection>
+
+
+    <subsection>
+        <title>Methods</title>
+        <p>
+            A wonderful feature of Python can be found in its implementation of <em>methods</em><fn>We'll extensively discuss methods and classes after we've talked about functions, when we briefly discuss object-oriented programming. This will happen just before we start diving into <q>real math.</q></fn>, predefined functions available within each class of objects. For instance, <c>bar.reverse()</c> will reverse the order of the elements of <c>bar</c>:
+        </p>
+        <sage>
+            <input>
+                bar.reverse()
+                print bar
+            </input>
+            <output>
+                [5, 'this is a string', 3, 2, 1]
+            </output>
+        </sage>
+        <p>
+            Another useful list method is <c>sort</c>, which reorders the elements of a list into sorted order. Sage does this more intelligently than Python, ordering numbers befre strings. However, not all data types can be compared, so it is possible that for some <c>list</c> you would try to <c>.sort()</c> and Sage would <c>raise</c> a <c>TypeError</c>.
+        </p>
+        <sage>
+            <input>
+                bar.sort()
+                print bar
+            </input>
+            <output>
+                [1, 2, 3, 5, 'this is a string']
+            </output>
+        </sage>
+        <p>
+            For more information on what methods are available to a given data type, you can define a variable of that type and then pass that variable name as an argument to the <c>help</c> function. This will also give you an introduction to the style of Python's documentation. Try declaring <c>temp</c> to be the empty list and then ask Python for <c>help</c> about <c>temp</c>:
+        </p>
+        <sage type="display">
+            <input>
+                temp = [ ]
+                help(temp)
+            </input>
+        </sage>
+        
+        <p>
+            It is always the case that methods available to a variable <c>my_var</c> will be accessed via <c>my_var.method_name(...)</c>; we'll talk more about this when we get to <xref provisional="Chapter 4" />.
+        </p>
+    </subsection>
+
+</section>

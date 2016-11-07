@@ -1,102 +1,87 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <mathbook xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en-US">
     <docinfo>
-    <macros>
-    \renewcommand{\cftdot}{\cdot}
-    \newcommand{\E}{\scr{E}}
-    \newcommand{\vig}{Vigen\`{e}re~}
-    \newcommand{\Erd}{Erd\H{o}s}
-    \newcommand{\bc}{ \begingroup \fn}
-    \newcommand{\ec}{\endgroup}
-    \newcommand{\scr}[1]{\mathscr{#1}}
-    \newcommand{\ds}[1]{\displaystyle{#1}}
-    \newcommand{\abs}[1]{\left|#1\right|}
-    \newcommand{\set}[1]{\ds{\left\{#1\right\}}}
-    \newcommand{\less}{\setminus}
-    \newcommand{\lecture}[1]{\subfile{#1}}
-    \DeclareMathOperator{\lspan}{span}
-    \DeclareMathOperator{\Mod}{mod}
-    \DeclareMathOperator{\proj}{proj}
-    \DeclareMathOperator{\fix}{fix}
-    \DeclareMathOperator{\lcm}{lcm}
-    \DeclareMathOperator{\Aut}{Aut}
-    \newcommand{\car}{~\fbox{$\dlsh$}}
-    \newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
-    \renewcommand{\vec}[1]{\mathbf{#1}}
-    \newcommand{\vc}[1]{\left\langle#1\right\rangle}
-    \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-    \newcommand{\R}{\mathbb{R}}
-    \newcommand{\xto}[1]{\xrightarrow{#1}}
-    \renewcommand{\set}[1]{\left\{#1\right\}}
-    \newcommand{\fn}{}
-    \renewcommand{\chaptername}{Lesson}
-        
-    \newcommand{\drawcr}{\tikz[scale=1/4]{\draw [->] (.75,.75) -- (.75,.4) -- (.25,.4); \draw (0,0) rectangle (1,1);}}
-    </macros>
+        <macros>
+            \renewcommand{\cftdot}{\cdot}
+            \newcommand{\E}{\scr{E}}
+            \newcommand{\vig}{Vigen\`{e}re~}
+            \newcommand{\Erd}{Erd\H{o}s}
+            \newcommand{\bc}{ \begingroup \fn}
+            \newcommand{\ec}{\endgroup}
+            \newcommand{\scr}[1]{\mathscr{#1}}
+            \newcommand{\ds}[1]{\displaystyle{#1}}
+            \newcommand{\abs}[1]{\left|#1\right|}
+            \newcommand{\set}[1]{\ds{\left\{#1\right\}}}
+            \newcommand{\less}{\setminus}
+            \newcommand{\lecture}[1]{\subfile{#1}}
+            \DeclareMathOperator{\lspan}{span}
+            \DeclareMathOperator{\Mod}{mod}
+            \DeclareMathOperator{\proj}{proj}
+            \DeclareMathOperator{\fix}{fix}
+            \DeclareMathOperator{\lcm}{lcm}
+            \DeclareMathOperator{\Aut}{Aut}
+            \newcommand{\car}{~\fbox{$\dlsh$}}
+            \newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+            \renewcommand{\vec}[1]{\mathbf{#1}}
+            \newcommand{\vc}[1]{\left\langle#1\right\rangle}
+            \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+            \newcommand{\R}{\mathbb{R}}
+            \newcommand{\xto}[1]{\xrightarrow{#1}}
+            \renewcommand{\set}[1]{\left\{#1\right\}}
+            \newcommand{\fn}{}
+            \renewcommand{\chaptername}{Lesson}
 
-    <latex-image-preamble>
+            \newcommand{\drawcr}{\tikz[scale=1/4]{\draw [->] (.75,.75) -- (.75,.4) -- (.25,.4); \draw (0,0) rectangle (1,1);}}
+        </macros>
 
-    \usepackage{tikz}
-    \usetikzlibrary{positioning,matrix,arrows}
-    \usetikzlibrary{shapes,decorations,shadows,fadings}
+        <latex-image-preamble>
 
-    \usepackage{pgfplots}
+            \usepackage{tikz}
+            \usetikzlibrary{positioning,matrix,arrows}
+            \usetikzlibrary{shapes,decorations,shadows,fadings}
 
-    </latex-image-preamble>
+            \usepackage{pgfplots}
+
+        </latex-image-preamble>
 
     </docinfo>
 
 
-    <book>
-            <title>Algorithms for Applied Mathematics
-            </title>
-        <xi:include href="./frontmatter.xml" />
+    <book xml:id="AAM">
+        <title>Algorithms for Applied Mathematics
+        </title>
 
-        <xi:include href="./chapter1.xml" />
-
-        <xi:include href="./chapter2.xml" />
-
+        <xi:include href="./aam-fm.xml" />
+        
+        <!-- Part I: Programming in Sage -->
+        <xi:include href="./ch-sagebasics.xml" />
+        <xi:include href="./ch-li.xml" />
         <xi:include href="./chapter3.xml" />
-
         <xi:include href="./chapter4.xml" />
 
+        <!-- Part II: Matrices and Vectors -->
         <xi:include href="./chapter5.xml" />
-
         <xi:include href="./chapter6.xml" />
-
         <xi:include href="./chapter7.xml" />
-
         <xi:include href="./chapter8.xml" />
-
-        <xi:include href="./chapter9.xml" />
-
-        <xi:include href="./chapter10.xml" />
-
-        <xi:include href="./chapter11.xml" />
-
-        <xi:include href="./chapter12.xml" />
-
-        <xi:include href="./chapter13.xml" />
-
-        <xi:include href="./chapter14.xml" />
-
-        <xi:include href="./chapter15.xml" />
         
-        <backmatter>
-            <colophon> <p>
+        <!-- Part III: Basic Cryptography -->
+        <xi:include href="./chapter9.xml" />
+        <xi:include href="./chapter10.xml" />
+        <xi:include href="./chapter11.xml" />
+        
+        <!-- Part IV: Algorithms in Graph Theory -->
+        <xi:include href="./chapter12.xml" />
+        <xi:include href="./chapter13.xml" />
+        <xi:include href="./chapter14.xml" />
+        <xi:include href="./chapter15.xml" />
+        <backmatter xml:id="AAS-bm">
+            <colophon xml:id="AAS-bm-col"> <p>
                 This book was originally authored in <url href="http://www.latex-project.org/"><m>\LaTeX</m></url> and rewritten in 
                 <url href="http://mathbook.pugetsound.edu">MathBook XML</url>.
-            </p></colophon>
-            
-            <references>
-                <biblio xml:id="bib_Din2006" type="raw">
-                    <author>Dinitz, Y.</author>
-                    <title>Dinitz’ algorithm: The original version and Even’s version.</title> 
-                    <journal>Theoretical Computer Science</journal>, 
-                    <year>2006</year>, 218-240. 
-                    DOI: <url href="http://doi.org/10.1007/11685654_10">10.1007/11685654_10</url>
-                </biblio>
-            </references>
+                </p></colophon>
+
+            <xi:include href="./bibliography.xml" />
         </backmatter>
     </book>
 </mathbook>

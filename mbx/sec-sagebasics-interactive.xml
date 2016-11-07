@@ -1,0 +1,97 @@
+<section xml:id="section-SageBasics-Interactive">
+    <title>Interactive modes</title>
+    <introduction>
+        <p>
+            There are two ways we discuss in this text to use Sage interactively. The primary method you should use is <url href="http:cloud.sagemath.com">SageMathCloud</url>, within <c>.sagews</c> files. This allows you to save your work. I will refer constantly to SageMathCloud, and will generally abbreviate it to SMC.</p>
+        <p>
+            The secondary method, the embedded Sage cell, is mainly for readers who are accessing this book in its online format. In a print format these will occur as code snippets with or without output; in most cases online these will be executable code.
+        </p>
+        <p> Let's briefly discuss these in reverse order.
+        </p>
+    </introduction>
+
+    <subsection>
+        <title>Sage cells</title>
+        <p> Below is a small example of an interactive sage cell. To evaluate the code, you can either click the <q>Evaluate Sage Code</q> button, or click inside the cell (to get a cursor inside it) and then press Shift+Enter.</p>
+        <sage>
+            <input>
+                x = 13
+                print (x**2==x^2)
+            </input>
+            <output>
+                True
+            </output>
+        </sage>
+        <p>
+            We'll use these frequently, especially when I want you to repair some broken code. Did you notice the <c>print</c> command in this cell? Using the <c>print</c> command is the only way to see anything other than the last line out output in a Sage cell. This is not the case for SageMathCloud: in SMC, every<fn>Not really every line shows up, but for now this is true.</fn> line of output will show up, even if you don't use <c>print</c>. 
+        </p>
+        <p>
+            When I want you to see some code but it doesn't generate any output to run (like function definitions or assignment to variables), it will lack the <q>Evaluate</q> button. You can still evaluate the code by clicking inside the cell and pressing Shift+Enter.
+        </p>
+        <sage type="display">
+            <input>
+                x = var('x')
+                y = function('y')(x)
+                dy = diff(y,x)
+            </input>
+        </sage>
+
+    </subsection>
+
+    <subsection>
+        <title>SageMathCloud</title>
+        <p>
+            There's not really enough good to say about using SMC for your examples instead of the embedded Sage cells, but let me summarize.
+        </p>
+        <ol>
+            <li> All your work is saved in the cloud.</li>
+            <li> SMC is cheap, even for long-term ongoing use. It can be free if you're not concerned about server reliability.</li>
+            <li> Since SMC runs on Linux, you can run all of the built-in software packages (Python, R, Octave, Maxima, etc.) from the command line <em>inside</em> your SMC account.</li>
+            <li> SMC has built-in course management which is pretty great for collecting (unsurprisingly) Sage-based work. </li>
+            <li> SMC can be collaborative, with many people working on projects (and contributing upgrades to those projects). </li>
+            <li> All your work is <em>saved in the cloud!!!</em> If you're at home and want to access SMC from your iPad, you can!
+                <fn>I actually don't recommend this, because I do it a lot. Even with a wireless keyboard, trying to program on a tablet with touch controls is very, very non-intuitive.
+                </fn>
+                Any computer with web access becomes a legitimate place to work on Sage code - the computer lab, Starbucks, anywhere.
+            </li> 
+        </ol>
+    </subsection>
+
+</section>
+<!--    <p>
+        When you first open IDLE, you should get a report like so:
+    </p>
+    <example>
+        <program>
+            <input>
+                Python 3.5.0 (v3.5.0:374f501f4567, Sep 12 2015, 11:00:19) 
+                [GCC 4.2.1 (Apple Inc. build 5666) (dot 3)] on darwin
+                Type "copyright", "credits" or "license()" for more information.
+                >>>
+            </input>
+        </program>
+
+    </example>
+    <p>
+        From this you can deduce two things: Python is running, and I use a Mac. The <c>>>></c> which appears at the bottom is the <em>prompt</em>; it's waiting for you to give Python a command. At the end of every line with a prompt, you can assume that the <q>return</q> key was pressed. Here's what use of interactive mode will look like:
+    </p>
+
+    <console language='Python'>
+        <prompt>>>> </prompt>
+        <input>3+7</input>
+        <output>10</output>
+    </console>
+
+    <p>
+        Congratulations, you've just used Python as a calculator!
+    </p>
+
+
+    <sage>
+        <input>
+            x = 13
+            print (x**2==x^2)
+        </input>
+    </sage>
+</section>
+-->

@@ -1,0 +1,187 @@
+<section xml:id="section-SageBasics-Strings">
+    <title>Working with strings</title>
+
+
+    <introduction>
+        <p>
+            Mathematically, a <em>string</em> is a finite sequence of symbols from an <em>alphabet</em>, which is really just the set of allowable symbols. Python behaves similarly: if you can type something, it's an allowable symbol. Sage generally inherits everything about strings directly from Python. Strings in Python are differentiated from variable names and commands by being enclosed in single or double quotes. The only difference between single and double quotes for Python has to do with quotes within strings. 
+        </p>
+    </introduction>
+    <subsection>
+        <title>Basic use of strings</title>
+        <p>
+            The operation of attaching one string to the end of another string is called <em>concatenation</em>, and is carried out in Python using the <c>+</c> operator. Integer multiplication of strings using <c>*</c> produces multiple copies of the string.
+        </p>
+
+        <sage>
+            <input>
+                spam = 'There, he moved!'
+                eggs = "No he didn't, that was you hitting the cage!"
+                print 3*spam
+                print spam+eggs
+            </input>
+        </sage>
+
+        <p>
+            Syntax errors will result if you have improperly nested your quotes. In the code above, I defined <c>eggs</c> using double quotes due to the use of the contraction <q>didn't.</q> Try using single quotes instead:
+        </p>
+
+        <sage>
+            <input>
+                eggs = 'No he didn't, that was you hitting the cage!'
+            </input>
+        </sage>
+
+        <p>
+            Another way to avoid this is to <em>escape</em> the special character. The <em>escape character</em> in Sage is <c>\</c>.
+        </p>
+
+        <sage>
+            <input>
+                eggs = 'No he didn\'t, that was you hitting the cage!'
+                print eggs
+            </input>
+        </sage>
+
+        <p>
+            There are other special escaped characters, including <c>\n</c> which inserts a new line, and <c>\t</c> which inserts a tab. Neither will display if the string is returned as the last evaluated input to a cell, but only when they are displayed using <c>print</c>.
+        </p>
+
+        <sage>
+            <input>
+                eggs = 'No he didn\'t, that was you hitting the cage!\n\tI never!'
+                print eggs
+                eggs
+            </input>
+        </sage>
+    </subsection>
+    <subsection>
+        <title>The <c>print</c> command</title>
+        <p>
+            The <c>print</c> command prints a formatted string version of whatever comma-separated <em>argument(s)</em> it is given; if it is given more than one argument, it separates them with a space:
+        </p>
+
+        <sage>
+            <input>
+                print 3,5,spam
+            </input>
+        </sage>
+
+        <p>
+            If you just evaluated that cell out of order, you would have seen an error arise: a <c>NameError</c> would have been generated because <c>spam</c> would not have been defined. This behavior is not particular to the Sage cell. In SMC, if you have restarted a worksheet you must be careful to run all of the cells in order or risk incorrect behavior. To see this in action, reload the current page of the online book (or restart your worksheet) and run the last cell first.
+        </p>
+
+    </subsection>
+    <subsection><title>Indexing strings</title>
+        <p>
+            Since strings are actually sequences of printable characters, we should be able to access elements of the sequence individually; in other languages, these pieces are called <em>characters</em>, but Python has no separate character class. They are simply strings of size 1. An extremely important thing to remember about Python is that all sequence-type objects have first index <m>0</m>. If you wanted to represent the sequence of positive integers less than or equal to 100, <m>a=(1,2,3,4,\ldots, 100)</m>, the elements of the tuple would be <m>a_0=1</m>, <m>a_1=2</m>, <m>a_2=3</m>, and so on, up to <m>a_{99}=100</m>.
+        </p>
+
+        <p>
+            Rather than subscripts, indices in Python are given in square brackets. Trying to index a position outside a string will result in an error.
+        </p>
+        <sage>
+            <input>
+                spam = 'this is a string'
+                print 'Index 0: '+spam[0]
+                print 'Index 5: '+spam[5]
+                print 'Index -1: '+spam[-1]
+                print 'Index 42: '+spam[42]
+            </input>
+            <output>
+                Index 0: t
+                Index 5: i
+                Index -1: g
+                ---------------------------------------------------------------------------
+                IndexError                                Traceback (most recent call last)
+                &lt;ipython-input-1-1f9f3cd0c992&gt; in &lt;module&gt;()
+                3 print 'Index 5: '+spam[Integer(5)]
+                4 print 'Index -1: '+spam[-Integer(1)]
+                ----&gt; 5 print 'Index 42: '+spam[Integer(42)]
+
+                IndexError: string index out of range
+            </output>
+        </sage>
+    </subsection>
+
+    <subsection>
+        <title>Slicing strings</title>
+        <p>
+            You can access a substring by <em>slicing</em> the string, but you have to be careful how slicing works. The best way to imagine it (as explained in the Python tutorial) is to think of the indices actually marking the dividers between letters in a string:
+        </p>
+        <image xml:id="img_string-indices" source="./images/string_indices.svg" />
+        <p>
+            So if this is the string <c>spam</c>, then we can see that <c>spam[0]</c> gave us the single-letter string starting at index 0, and <c>spam[-1]</c> gave us the single-letter string starting at index <m>-1</m> from the end of the string. If we want to isolate the word <c>this</c> we can do it two ways. Since the word <c>string</c> appears at the end of <c>spam</c>, there are several ways to easily access it:
+        </p>
+
+        <sage>
+            <input>
+                print spam[0:4]
+                print spam[:4]
+                print spam[10:16]
+                print spam[10:]
+                print spam[-6:]
+            </input>
+            <output>
+                this
+                this
+                string
+                string
+                string
+            </output>
+        </sage>
+
+        <p>
+            Negative and positive indices can be mixed and matched, and mixing is handled smartly. Also, Python will accept a slice beyond the length of a string.
+        </p>
+
+        <sage>
+            <input>
+                print spam[-11:9]
+                print spam[8:-11]
+                print spam[8:42]
+            </input>
+            <output>
+                is a
+
+                a string
+            </output>
+        </sage>
+        <p>
+            You can always find the length of your string using the <c>len(...)</c> function:
+        </p>
+        <sage>
+            <input>
+                len(spam)
+            </input>
+            <output>
+                16
+            </output>
+        </sage>
+    </subsection>
+
+
+    <subsection>
+        <title>Strings are <em>immutable</em></title>
+        <p>
+            An important thing to note about strings is that you may read individual positions but you may not overwrite individual positions. The data types which allow writing to indices or slices are called <em>mutable</em> types; strings are an example of an <em>immutable</em> data type.
+        </p>
+        <sage>
+            <input>
+                spam[5]='1'
+            </input>
+            <output>
+                ---------------------------------------------------------------------------
+                TypeError                                 Traceback (most recent call last)
+                &lt;ipython-input-1-10831c6d9efa&gt; in &lt;module&gt;()
+                ----&gt; 1 spam[Integer(5)] = '1'
+
+                TypeError: 'str' object does not support item assignment
+            </output>
+        </sage>
+        <p>
+            In the next lesson we will talk about other compound<fn>A data type is <em>compound</em> if it contains other data. Strings contain single-character strings, for instance.</fn> objects which are <em>mutable</em>, namely <em>lists</em>.
+        </p>
+    </subsection>
+
+</section>
