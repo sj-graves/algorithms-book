@@ -1,8 +1,12 @@
 <section xml:id='sec-SageBasics-Advanced'>
-    <title>Advanced Sage</title>
+    <title>More Advanced Sage</title>
 
     <p>
-        It should be abundantly obvious that Sage is much, much more powerful than we've currently expressed. Here's a very quick demonstration of some of the more powerful things which you can do in Sage.
+        It should be abundantly obvious that Sage is much, much more powerful than we've currently expressed. Here's a very quick demonstration of some of the more powerful things which you can do in Sage. For a nice, long tour of the various applications of Sage to undergraduate mathematics, see Bard's excellent book <xref ref="bib_SageBook" />.
+    </p>
+    
+    <p> 
+        The focus of this text is on developing the algorithms which Sage already employs, so we will tend to avoid using any <q>sophisticated</q> functions, except possibly for the purpose of error-checking. Here are a few small examples of more powerful features SMC incorporates.
     </p>
 
     <activity xml:id="sec-SageBasics-Advanced-ODE">
@@ -65,7 +69,7 @@
                     ym,yM= min(dxR), max(dxR)
                     xx,yy=var('x,y')
                     vp = plot_vector_field((yy,(-b*yy-c*xx)/a),(xx,xm,xM),(yy,ym,yM))
-                    show(pp+vp)
+                    show(pp+vp+list_plot([(x0,dx0)],size=30,color="red"))
             </input>
         </sage>
     </activity>
@@ -76,14 +80,13 @@
             Sage comes preequipped with a sophisticated suite of tools for algorithmic graph theory, which we'll touch on late in the course. Here's a small sample.
             <sage>
                 <input>
-                    G = graphs.WagnerGraph()+graphs.CubeGraph(3)
-                    show(G.plot())
-                    print "\nThese graphs are " + ("" if graphs.WagnerGraph().is_isomorphic(graphs.CubeGraph(3)) else "not ")+"isomorphic."
+                    G = graphs.WagnerGraph()
+                    H = graphs.CubeGraph(3)
+                    show((G+H).plot())
+                    print "\nThese graphs are " + ("" if G.is_isomorphic(H) else "not ")+"isomorphic."
                 </input>
             </sage>
         </p>
     </subsection>
-    <p>
-        For a nice, long tour of the various applications of Sage to undergraduate mathematics, see Bard's excellent book <xref ref="bib_SageBook" />.
-    </p>
+    <p> There are many, many other examples we could show, but Bard's book provides a wonderful breadth of coverage of the features of Sage. This brief section should serve only to pique your interest.</p>
 </section>

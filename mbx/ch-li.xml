@@ -5,15 +5,16 @@
     <objectives>
         <ol type="1">
             <li><p>Define the <c>list</c> data type.</p></li>
-            <li><p>Discuss the use of modules rather than interactive Python.</p></li>
             <li><p>Define the <c>for... in...:</c> iteration structure.</p></li>
+            <li><p>Discuss list comprehension.</p></li>
+            <li><p>Define the <c>tuple</c> data type.</p></li>
         </ol>
     </objectives>
 
     <!--xi:include  href="section2_4x.xml" /-->
 <xi:include  href="sec-li-lists.xml" />
-<xi:include  href="sec-li-modules.xml" />
-<xi:include  href="sec-li-forloops.xml" />
+<!--xi:include  href="sec-li-modules.xml" /-->
+<xi:include  href="sec-li-iteration.xml" />
 <xi:include  href="sec-li-comprehension.xml" />
 <xi:include  href="sec-li-tuples.xml" />
 </chapter>

@@ -1,14 +1,14 @@
 <chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="ch-SageBasics">
     <title>Sage: Basics</title>
 
-    <objectives>
+    <objectives xml:id="obj-SageBasics">
         <ol>
             <li><p>Gain familiarity with Sage cells and the SageMathCloud environment.</p></li>
             <li><p>Learn some elementary Sage/Python syntax and commands.</p></li>
         </ol>
     </objectives>
 
-    <introduction>
+    <introduction xml:id="intro-SageBasics">>
         <title>Special Instructions</title>
         <p> This is not a manual for using Sage to solve mathematical problems. Consult the excellent <xref ref="bib_SageBook">Sage for Undergraduates</xref> by Gregory Bard.</p>
 

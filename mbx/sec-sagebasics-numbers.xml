@@ -1,4 +1,4 @@
-<section xml:id="section-SageBasics-Numbers">
+<section xml:id="sec-SageBasics-Numbers">
     <title>Working with numbers</title>
     <p>
         Python works really well with integers (which have type <c>int</c>) and floating point numbers (which have type <c>float</c>), and carefully respects order of operations, and of course Sage inherits this. But Sage is a <em>mathematical</em> programming language, so it automatically knows more than Python about numbers. For instance, in Python, the division operator <c>/</c> automatically returns a <c>float</c>.

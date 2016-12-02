@@ -1,0 +1,85 @@
+<section xml:id="sec-ListsIteration-Iteration">
+    <title>Iteration over a list</title>
+
+
+    <introduction>
+        <p>
+            The noun <em>computer</em> used to refer to a person whose job was often tedious computation; the difference now is that we have digital computers! This is the power of modern computers, which is often obscured by flashy graphics and entertainment value. Computers can make boring calculations quickly through <em>iteration</em>. Let's look at a new coding structure.</p>
+        <sage>
+            <input>
+                foo = "Hello world!"
+                for x in foo:
+                    print x.swapcase()
+            </input>
+        </sage>
+        <p>
+            The <c>for</c> loop is the most generally useful type of <em>iteration</em>, which is the primary purpose of a computer: repeated performace of a tedious task. In many programming languages, a <c>for</c> loop updates some <em>index variable</em> from a starting point to an ending point with a specific step size. This could be written something like <c>for i from 1 to 10 step 2</c>, for instance. Sage inherits a much more flexible structure from Python by skipping the index variable entirely and allowing the loop to iterate over the elements of an object with any <em>iterable</em> compound data type. As we saw in <xref ref="sec-SageBasics-Strings" autoname="title"/>, the elements of a string of length greater than 1 are strings of length 1.
+        </p>
+        <p>
+            Executing the example above shows us exactly how Sage treats a <c>for</c> loop. The variable <c>x</c> consecutively is assigned the value of each single-character string of <c>foo</c>, and then the case-swapped version of <c>x</c> is printed on its own line. In the event that the single character stored in <c>x</c> is not alphabetic, the <c>str.swapcase()</c> method simply returns the original character.
+        </p>
+
+        <p>
+            In our example, the data type of <c>foo</c> is a string, so its elements are single-letter strings. The loop starts by setting <c>x</c> to the value <c>'H'</c>. Then it enters the indented <em>block</em> of code below the <c>for</c> statement. It will run everything in this indented block, and upon reaching the outdent will set <c>x</c> to the next value in <c>foo</c>.
+        </p>
+
+        <p>
+            Here's another module to try: enter this and save it as <c>les2_ex2.py</c> in the same directory or folder as your previous example, then run it.
+        </p>
+        <pre>
+            bar = "It's just a flesh wound."
+            n=79 - len(bar)
+            for i in range(n):
+            print(i * ' ' + bar)
+        </pre>
+        <p>
+            This introduces the <c>range</c> function, which is actually a very special data type. The command <c>range(10)</c>, for instance, creates an object which will contain all integers <m>0\leq x\lt 10</m> <mdash /> but not until it is iterated over! You can sort of think of the range function as a promise to provide a list when needed, rather than the list itself. There are actually three ways <c>range</c> can be called:
+        </p>
+        <tabular>
+            <row><cell><em>Command</em></cell><cell><em>Produces</em></cell></row>
+            <row bottom="minor"><cell></cell><cell></cell></row>
+            <row><cell><c>range(i)</c></cell><cell>The sequence of integers <m>0,1,2,\ldots,i-1</m>.</cell></row>
+            <row><cell><c>range(i,j)</c></cell><cell>The sequence of integers <m>i, i+1, i+2,\ldots, j-1</m>.</cell></row>
+            <row><cell><c>range(i,j,k)</c></cell><cell>The sequence of integers <m>i, i+k, i+2k,\ldots,i+mk</m></cell></row>
+            <row><cell></cell><cell>where <m>m</m> is the maximum integer such that <m>i+mk\lt j</m>.</cell></row>
+        </tabular>
+        <p>
+            Importantly, <c>range(10)</c> is precisely the list of valid indices for a <c>list</c> containing ten elements.
+        </p>
+
+        <p>
+            All loops can be nested within one another, but remember that this makes the number of executions <em>multiply</em>, not just add.
+        </p>
+    </introduction>
+
+
+    <subsection>
+        <title>Infinite loops</title>
+        <p>
+            It is difficult, but not impossible, to get stuck in an ``infinite" for loop. To do this, you would have to <c>append</c> data to the list over which the loop iterates at least as fast as the iteration progresses. This rapidly uses an incredibly large amount of memory and will bring your computer to a crippling halt.
+        </p>
+
+        <p>
+            If you believe that a loop has gotten away from you, you have several remedies. First, try pressing Control-C. The sends a <c>KeyboardInterrupt</c> to Python and should stop most runaway processes. If that fails, try restarting the Python Shell. On my various Mac computers, this is achieved by pressing Control-F6. If that fails, you can always quit IDLE. If that fails, you can always force IDLE to quit, using the Windows Task Manager or OS X Activity Monitor. If that fails, you can always restart your computer<fn>None of these things will ``break your computer," <em>all else being equal.</em> Since Python is a high-level programming language, it is <em>possible</em> to ``break your computer" using Python code <mdash /> but you have to be trying to do this rather than it happening accidentally. Even then, in almost every case you only damage the software; a clean installation of your operating system, while time consuming, fixes software problems. This is still not something to worry about. In more than two decades of programming, I've never broken anything to the point where I needed to rebuild my OS.</fn>.
+        </p>
+
+        <p>
+            If you'd like to try an example of an infinite loop, enter the following code, and when you get bored of ``nothing happening" press Control-C, then evaluate <c>len(x)</c>. Here's what you'll see, although the speed of your computer and how long you wait will determine the <c>len</c>gth of <c>x</c> when you stop. The purpose of running <c>x.clear()</c> at the end is to relieve the ``memory pressure" of a large list of integers. I waited until the memory used by Python exceeded 1 GB as reported in the OS X Activity Monitor.
+        </p>
+        <pre>
+            >>> x = [0]
+            >>> for i in x:
+            x.append(i)
+
+
+            Traceback (most recent call last):
+            File "&lt;pyshell#43>", line 1, in &lt;module>
+            for i in x:
+            KeyboardInterrupt
+            >>> len(x)
+            144887010
+            >>> x.clear()
+        </pre>
+    </subsection>
+
+</section>
