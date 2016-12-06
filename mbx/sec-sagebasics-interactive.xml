@@ -26,15 +26,19 @@
             We'll use these frequently, especially when I want you to repair some broken code. Did you notice the <c>print</c> command in this cell? Using the <c>print</c> command is the only way to see anything other than the last line out output in a Sage cell. This is not the case for SageMathCloud: in SMC, every<fn>Not really every line shows up, but for now this is true.</fn> line of output will show up, even if you don't use <c>print</c>. 
         </p>
         <p>
-            When I want you to see some code but it doesn't generate any output to run (like function definitions or assignment to variables), it will lack the <q>Evaluate</q> button. You can still evaluate the code by clicking inside the cell and pressing Shift+Enter.
+            There will frequently be code which you are expected to try yourself, and occasionally the code will use a feature of SageMathCloud which is not implemented in regular Sage. Whenever there is code which is extremely important to try yourself, it will be provided as a code listing rather than an interactive Sage cell:
         </p>
-        <sage type="display">
-            <input>
-                x = var('x')
-                y = function('y')(x)
-                dy = diff(y,x)
-            </input>
-        </sage>
+        <listing>
+            <title>Example of a code listing</title>
+            <caption>An example of a code listing which cannot be evaluated in-place.</caption>
+            <program>
+                <input>
+                    x = var('x')
+                    y = function('y')(x)
+                    dy = diff(y,x)
+                </input>
+            </program>
+        </listing>
 
     </subsection>
 

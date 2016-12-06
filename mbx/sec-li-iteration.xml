@@ -1,8 +1,8 @@
 <section xml:id="sec-ListsIteration-Iteration">
     <title>Iteration over a list</title>
 
-
-    <introduction>
+    <subsection xml:id="sec-ListsIteration-Iteration-ForLoops">
+        <title>For loops</title>
         <p>
             The noun <em>computer</em> used to refer to a person whose job was often tedious computation; the difference now is that we have digital computers! This is the power of modern computers, which is often obscured by flashy graphics and entertainment value. Computers can make boring calculations quickly through <em>iteration</em>. Let's look at a new coding structure.</p>
         <sage>
@@ -22,35 +22,49 @@
         <p>
             In our example, the data type of <c>foo</c> is a string, so its elements are single-letter strings. The loop starts by setting <c>x</c> to the value <c>'H'</c>. Then it enters the indented <em>block</em> of code below the <c>for</c> statement. It will run everything in this indented block, and upon reaching the outdent will set <c>x</c> to the next value in <c>foo</c>.
         </p>
+    </subsection>
 
-        <p>
-            Here's another module to try: enter this and save it as <c>les2_ex2.py</c> in the same directory or folder as your previous example, then run it.
+    <subsection xml:id="sec-ListsIteration-Iteration-Range">
+        <title>The range function</title><p>
+        Here's another example to try: add it to a new cell in the same worksheet as the above.
         </p>
-        <pre>
-            bar = "It's just a flesh wound."
-            n=79 - len(bar)
-            for i in range(n):
-            print(i * ' ' + bar)
-        </pre>
+        <sage>
+            <input>
+                bar = "It's just a flesh wound."
+                n=79 - len(bar)
+                for i in range(n):
+                print i * ' ' + bar
+            </input>
+        </sage>
         <p>
-            This introduces the <c>range</c> function, which is actually a very special data type. The command <c>range(10)</c>, for instance, creates an object which will contain all integers <m>0\leq x\lt 10</m> <mdash /> but not until it is iterated over! You can sort of think of the range function as a promise to provide a list when needed, rather than the list itself. There are actually three ways <c>range</c> can be called:
+            This introduces function <c>range(n)</c>, which provides the list of integer indices of a list of length <c>n</c>. To be technically correct, a <c>range</c> object isn't a list, but in practicality you won't see any differences. There are several different sets of arguments which can be passed to <c>range</c>, summarized in <xref ref="table-range_options" autoname="yes"/> below.
         </p>
-        <tabular>
-            <row><cell><em>Command</em></cell><cell><em>Produces</em></cell></row>
-            <row bottom="minor"><cell></cell><cell></cell></row>
-            <row><cell><c>range(i)</c></cell><cell>The sequence of integers <m>0,1,2,\ldots,i-1</m>.</cell></row>
-            <row><cell><c>range(i,j)</c></cell><cell>The sequence of integers <m>i, i+1, i+2,\ldots, j-1</m>.</cell></row>
-            <row><cell><c>range(i,j,k)</c></cell><cell>The sequence of integers <m>i, i+k, i+2k,\ldots,i+mk</m></cell></row>
-            <row><cell></cell><cell>where <m>m</m> is the maximum integer such that <m>i+mk\lt j</m>.</cell></row>
-        </tabular>
-        <p>
-            Importantly, <c>range(10)</c> is precisely the list of valid indices for a <c>list</c> containing ten elements.
-        </p>
-
+        <table  xml:id="table-range_options">
+            <title>Arguments to the range command</title>
+            <caption>Arguments to the <c>range</c> command.</caption>
+            <tabular>
+                <row><cell><em>Command</em></cell><cell><em>Produces</em></cell></row>
+                <row bottom="minor"><cell></cell><cell></cell></row>
+                <row><cell><c>range(i)</c></cell><cell>The sequence of integers <m>0,1,2,\ldots,i-1</m>.</cell></row>
+                <row><cell><c>range(i,j)</c></cell><cell>The sequence of integers <m>i, i+1, i+2,\ldots, j-1</m>.</cell></row>
+                <row><cell><c>range(i,j,k)</c></cell><cell>The sequence of integers <m>i, i+k, i+2k,\ldots,i+mk</m></cell></row>
+                <row><cell></cell><cell>where <m>m</m> is the maximum integer such that <m>i+mk\lt j</m>.</cell></row>
+            </tabular>
+        </table>
         <p>
             All loops can be nested within one another, but remember that this makes the number of executions <em>multiply</em>, not just add.
         </p>
-    </introduction>
+        <sage>
+            <input>
+                foo = []
+                for i in range(10):
+                    for j in range(5):
+                        foo.append([i,j])
+                print len(foo)    
+                
+            </input>
+        </sage>
+    </subsection>
 
 
     <subsection>
@@ -60,26 +74,12 @@
         </p>
 
         <p>
-            If you believe that a loop has gotten away from you, you have several remedies. First, try pressing Control-C. The sends a <c>KeyboardInterrupt</c> to Python and should stop most runaway processes. If that fails, try restarting the Python Shell. On my various Mac computers, this is achieved by pressing Control-F6. If that fails, you can always quit IDLE. If that fails, you can always force IDLE to quit, using the Windows Task Manager or OS X Activity Monitor. If that fails, you can always restart your computer<fn>None of these things will ``break your computer," <em>all else being equal.</em> Since Python is a high-level programming language, it is <em>possible</em> to ``break your computer" using Python code <mdash /> but you have to be trying to do this rather than it happening accidentally. Even then, in almost every case you only damage the software; a clean installation of your operating system, while time consuming, fixes software problems. This is still not something to worry about. In more than two decades of programming, I've never broken anything to the point where I needed to rebuild my OS.</fn>.
+            If you believe that a loop has gotten away from you, you have several remedies in SMC and really only one in a Sage Cell. In SMC, at the top of every window showing a Sage Worksheet are two important butons: <em>Stop</em> and <em>Restart</em>. Stop sends a <c>KeyboardInterrupt</c> to the running process in an attempt to halt the running computation. This will often work, but if it appears not to do so, the Restart button will stop the current process and restart the instance of Sage. This will require you to reload any variables with approriate values after the restart. In embedded Sage cells in the book, your only real option is to refresh the page.
         </p>
 
         <p>
-            If you'd like to try an example of an infinite loop, enter the following code, and when you get bored of ``nothing happening" press Control-C, then evaluate <c>len(x)</c>. Here's what you'll see, although the speed of your computer and how long you wait will determine the <c>len</c>gth of <c>x</c> when you stop. The purpose of running <c>x.clear()</c> at the end is to relieve the ``memory pressure" of a large list of integers. I waited until the memory used by Python exceeded 1 GB as reported in the OS X Activity Monitor.
+            I recommend against trying to build an infinite loop in this way: the amount of memory used grows with the size of the list, and even in SMC there is a finite cap on the amount of memory which can be used by a project. Nearing that limit will make your browser react incredibly slowly.
         </p>
-        <pre>
-            >>> x = [0]
-            >>> for i in x:
-            x.append(i)
-
-
-            Traceback (most recent call last):
-            File "&lt;pyshell#43>", line 1, in &lt;module>
-            for i in x:
-            KeyboardInterrupt
-            >>> len(x)
-            144887010
-            >>> x.clear()
-        </pre>
     </subsection>
 
 </section>

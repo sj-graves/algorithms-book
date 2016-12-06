@@ -1,0 +1,17 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="ch-Conditionals">
+    <title>Sage: Conditioning and error handling</title>
+
+
+    <objectives>
+        <title>Goals</title>
+        <ol type="1">
+            <li><p>Define the <c>bool</c> data type.</p></li>
+            <li><p>Discuss conditional statements.</p></li>
+            <li><p>Discuss error handling via <c>try:... except:...</c> blocks.</p></li>
+        </ol>
+    </objectives>
+    <xi:include  href="sec-cond-booleans.xml" />
+    <xi:include  href="sec-cond-conditionals.xml" />
+    <xi:include  href="sec-cond-errors.xml" />
+    <xi:include  href="sec-cond-breakpass.xml" />
+</chapter>

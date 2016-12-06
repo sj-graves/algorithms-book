@@ -1,12 +1,6 @@
 <section xml:id="sec-ListsIteration-Lists">
     <title>Lists</title>
 
-
-    <introduction>
-        <p>
-            In the previous lesson, we discussed <c>string</c> objects at some length. One unsatisfactory truth of working with strings is that it is impossible to change a single character in the middle of a pre-existing string, without overwriting the value of the string. This behavior occurs because strings are an <em>immutable</em> data type.
-        </p>
-    </introduction>
     <subsection>
         <title>Basic <c>list</c> operations</title>
         <p>
@@ -36,6 +30,19 @@
                 [1, 2, 3, 'a', 'b', 'c']
                 [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]
             </output>
+        </sage>
+        <p>
+            There is an important distinction between lists and strings involving indexing. Specifically, you can change individual elements of a list without overwriting the entire list. This makes <c>list</c> a <em>mutable</em> data type, while <c>str</c> is <em>immutable</em>.
+        </p>
+        <sage>
+            <input>
+                foo = 'this is a string'
+                bar = [0,2,4,foo,8]
+                print bar
+                bar[3] = -6
+                print bar
+                foo[3]="p"
+            </input>
         </sage>
     </subsection>
 
@@ -75,7 +82,7 @@
                 help(temp)
             </input>
         </sage>
-        
+
         <p>
             It is always the case that methods available to a variable <c>my_var</c> will be accessed via <c>my_var.method_name(...)</c>; we'll talk more about this when we get to <xref provisional="Chapter 4" />.
         </p>

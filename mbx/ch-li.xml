@@ -1,5 +1,5 @@
 <chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="chapter-LI">
-    <title>Lists and iteration</title>
+    <title>Sage: Lists and iteration</title>
 
 
     <objectives>
@@ -10,11 +10,15 @@
             <li><p>Define the <c>tuple</c> data type.</p></li>
         </ol>
     </objectives>
-
+    <introduction>
+        <p>
+            In the previous chapter, we discussed <c>str</c> objects at some length. The methods of the <c>str</c> data type allow us a fairly sophisticated suite of tools for dealing with text, but what we really will want is to build lists of arbitrary data. The data type build-in to Sage for such purposes is called <c>list</c>, unsurprisingly.
+        </p>
+    </introduction>
     <!--xi:include  href="section2_4x.xml" /-->
-<xi:include  href="sec-li-lists.xml" />
-<!--xi:include  href="sec-li-modules.xml" /-->
-<xi:include  href="sec-li-iteration.xml" />
-<xi:include  href="sec-li-comprehension.xml" />
-<xi:include  href="sec-li-tuples.xml" />
+    <xi:include  href="sec-li-lists.xml" />
+    <!--xi:include  href="sec-li-modules.xml" /-->
+    <xi:include  href="sec-li-iteration.xml" />
+    <xi:include  href="sec-li-comprehension.xml" />
+    <xi:include  href="sec-li-tuples.xml" />
 </chapter>

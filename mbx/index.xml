@@ -56,7 +56,7 @@
         <!-- Part I: Programming in Sage -->
         <xi:include href="./ch-sagebasics.xml" />
         <xi:include href="./ch-li.xml" />
-        <xi:include href="./chapter3.xml" />
+        <xi:include href="./ch-cond.xml" />
         <xi:include href="./chapter4.xml" />
 
         <!-- Part II: Matrices and Vectors -->

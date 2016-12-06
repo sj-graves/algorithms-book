@@ -109,9 +109,9 @@
         <p>
             You can access a substring by <em>slicing</em> the string, but you have to be careful how slicing works. The best way to imagine it (as explained in the Python tutorial) is to think of the indices actually marking the dividers between letters in a string:
         </p>
-        <image xml:id="img_string-indices" source="./images/string_indices.svg" />
+        <image xml:id="img_string-indices" source="./images/sagebasics-string_indices.svg" />
         <p>
-            So if this is the string <c>spam</c>, then we can see that <c>spam[0]</c> gave us the single-letter string starting at index 0, and <c>spam[-1]</c> gave us the single-letter string starting at index <m>-1</m> from the end of the string. If we want to isolate the word <c>this</c> we can do it two ways. Since the word <c>string</c> appears at the end of <c>spam</c>, there are several ways to easily access it:
+            So if we have <c>spam = "this is a string"</c>, then we can see that <c>spam[0]</c> gave us the single-letter string starting at index 0, and <c>spam[-1]</c> gave us the single-letter string starting at index <m>-1</m> from the end of the string. If we want to isolate the word <c>this</c> we can do it two ways. Since the word <c>string</c> appears at the end of <c>spam</c>, there are several ways to easily access it:
         </p>
 
         <sage>
