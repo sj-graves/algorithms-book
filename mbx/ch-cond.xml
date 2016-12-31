@@ -20,7 +20,7 @@
                 print x,
             </input></sage>
         <p>
-        This is actually correct behavior inherited from Python: remember that <c>range(n)</c> lists the nonnegative integers <m>0, 1, 2, \ldots, n-1</m>. Since we specified <c>n</c> to be negative, the correct range of integers to return is empty. In order to change the behavior depending upon the type of input, we need to be able to evaluate whether a statement is True or False.<fn>Stephen Colbert refers to this as "truthiness."</fn> </p>
+        This is actually correct behavior inherited from Python: remember that <c>range(n)</c> lists the nonnegative integers <m>0, 1, 2, \ldots, n-1</m>. Since we specified <c>n</c> to be negative, the correct range of integers to return is empty. In order to change the behavior depending upon the type of input, we need to be able to evaluate whether a statement is True or False.<fn>Stephen Colbert refers to this as "truthiness."</fn> We will revisit this example later.</p>
     </introduction>
     
     <xi:include  href="sec-cond-booleans.xml" />

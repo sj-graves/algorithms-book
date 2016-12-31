@@ -1,4 +1,4 @@
-<section>
+<section xml:id="sec-Conditionals-Conditionals">
     <title>Conditional statements</title>
     <introduction>
         <p>A <em>conditional statement</em> is one which performs a different task depending upon a boolean value.</p>
@@ -24,28 +24,28 @@
             The structure of a <c>while</c> loop is uncomplicated, and its meaning follows immediately from its structure: while some statement evaluates to <c>True</c>, execute an indented block of code. Upon reaching the end of the indented block, check if the statement is still true; if so, repeat the block, and if not, move on beyond the loop. For instance, the following code produces a string of consecutive positive integers separated by spaces, up to a specific limit of length.
         </p>
         <sage>
-        <input>
-            s = ""
-            i = 1
-            limit = 160
-            while len(s)+len(str(i))+1 &lt;= limit:
-                s = s + str(i)+" "
-                i = i + 1
-            print s
+            <input>
+                s = ""
+                i = 1
+                limit = 160
+                while len(s)+len(str(i))+1 &lt;= limit:
+                    s = s + str(i)+" "
+                    i = i + 1
+                print s
             </input>
         </sage>
         <p>
             A common error when using while loops in this way is failure to <em>increment your counter</em>. This is the <c>i = i + 1</c> line. What would happen if we left it off? Would this loop run forever? There is a shorthand for incrementing a variable: for every data type where addition makes sense, you can use <c>oldvar += newvar</c> instead of <c>oldvar = oldvar + newvar</c> as long as the data types of <c>oldvar</c> and <c>newvar</c> match. This means I could have written the above example as follows.
         </p>
-<sage>
-        <input>
-            s = ""
-            i = 1
-            limit = 160
-            while len(s)+len(str(i))+1 &lt;= limit:
+        <sage>
+            <input>
+                s = ""
+                i = 1
+                limit = 160
+                while len(s)+len(str(i))+1 &lt;= limit:
                 s += str(i)+" "
                 i += 1
-            print s
+                print s
             </input>
         </sage>    </subsection>
 
@@ -57,12 +57,12 @@
         </p>
         <sage>
             <input>
-            s = "This is a string."
-            if len(s)%2==0:
-                t='even'
-            else:
-                t='odd'
-            print('The string "'+s+'" contains an '+t+' number of characters.')
+                s = "This is a string."
+                if len(s)%2==0:
+                    t='even'
+                else:
+                    t='odd'
+                print('The string "'+s+'" contains an '+t+' number of characters.')
             </input>
         </sage>
         <p>
@@ -73,25 +73,46 @@
         </p>
         <listing>
             <program>
-            <input>
-                i = 1
-                while i&lt;20:
-                    (q,r) = divmod(i,3)
-                    if r==1:
-                        rem = " + 1"
-                    elif r==2:
-                        rem = " - 1"
-                        q += 1
-                    else:
-                        rem = ""
-                    print i,'= 3*'+str(q)+rem
-                    i += 1
-                
-                            
-            </input>
+                <input>
+                    i = 1
+                    while i&lt;20:
+                        (q,r) = divmod(i,3)
+                        if r==1:
+                            rem = " + 1"
+                        elif r==2:
+                            rem = " - 1"
+                            q += 1
+                        else:
+                            rem = ""
+                        print i,'= 3*'+str(q)+rem
+                        i += 1
+
+
+                </input>
             </program>
             <caption>An example of nested conditional statements using the <c>elif</c> structure. What is the output?</caption>
         </listing>
+        <p> Let's revisit the example with which the chapter began.</p>
+        <sage>
+            <input>
+                n = -5
+                for x in range(n):
+                    print x,
+            </input>
+        </sage>
+        <p>Recall that what we wanted was for the loop to print the integers in the closed interval <m>[n,0]</m> when we specify <c>n</c> to be a negative integer and otherwise the <c>range(n)</c>. We can make short work of this with an <c>if</c> stastement. Checkl that the behavior is correct for yourself by changing the value of <c>n</c>.</p>
+        <sage>
+            <input>
+                n = -5
+                if n&lt;=0:
+                    for i in range(n,1):
+                        print i,
+                else:
+                    for i in range(n):
+                        print i,
+            </input>
+        </sage>
+
     </subsection>
 
 </section>
