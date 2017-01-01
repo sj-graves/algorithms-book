@@ -100,7 +100,7 @@
                     print x,
             </input>
         </sage>
-        <p>Recall that what we wanted was for the loop to print the integers in the closed interval <m>[n,0]</m> when we specify <c>n</c> to be a negative integer and otherwise the <c>range(n)</c>. We can make short work of this with an <c>if</c> stastement. Checkl that the behavior is correct for yourself by changing the value of <c>n</c>.</p>
+        <p>Recall that what we wanted was for the loop to print the integers in the closed interval <m>[n,0]</m> when we specify <c>n</c> to be a negative integer and otherwise the <c>range(n)</c>. We can make short work of this with an <c>if</c> stastement. Check that the behavior is correct for yourself by changing the value of <c>n</c>.</p>
         <sage>
             <input>
                 n = -5

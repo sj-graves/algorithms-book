@@ -1,22 +1,5 @@
 <section xml:id="sec-Conditionals-Errors">
-    <title>Errors, error handling, and the try statement</title>
-    <!--<p>
-        There are several ways that executing a program can go wrong. The best type of error is a <em>syntax error</em>, usually caused by a typo in your code. These won't even run, and IDLE is very good at detecting them. The second best type of error is an <em>exception</em>. Exceptions are errors which are <c>raise</c>d by doing something which is syntactically correct in code but violates something about the way Python works. Here's a simple demonstration <mdash /> you can't add a string and an integer.
-    </p>
-    <pre>
-        >>> s='123'
-        >>> t=4
-        >>> s+t
-        Traceback (most recent call last):
-        File "&lt;pyshell#23>", line 1, in &lt;module>
-        s+t
-        TypeError: Can't convert 'int' object to str implicitly
-        >>> t+s
-        Traceback (most recent call last):
-        File "&lt;pyshell#24>", line 1, in &lt;module>
-        t+s
-        TypeError: unsupported operand type(s) for +: 'int' and 'str'
-    </pre>-->
+    <title>Exceptions and exception handling</title>
     <subsection xml:id="sec-Conditionals-Errors-SyntaxErrors">
         <title>Syntax errors</title>
         <p>
@@ -161,41 +144,56 @@
         <p>
             Combining <c>continue</c> and <c>break</c> commands with good exception handling provides a very high degree of control over the flow of a program. Remember: intentionally raising an exception outside of a <c>try:... except:...</c> block is a sort of <q>nuclear option,</q> as it will immediately terminate the execution of the program <em>no matter what</em>.
         </p>
-    </subsection>
-    <example>
-        <title>Exception handling in vital systems engineering</title>
+
+        <example>
+            <title>Exception handling in vital systems engineering</title>
+            <p>
+                In various types of engineering, there are varying degrees of tolerance of faults. For instance, it is much less damaging if a outside house faucet is leaking than if the hydraulic line controlling an airplane's elevon or aileron fails. In <em>vital systems engineering</em> it is required that when any failure occurs, the system must fail into a controlled state. Exception handling in this case is critical -- an example with which most Americans are familiar is the software controlling a traffic light. For many failures of the control software, the <q>controlled failure state</q> is to revert to a flashing red light in all directions. Traffic law provides that this is to be treated as an all-direction stop sign. In fact, traffic law also provides the final failure state: if the power goes out altogether and the light is off, drivers are required to treat the light as a stop sign.
+            </p>
+        </example>
+        
         <p>
-            In various types of engineering, there are varying degrees of tolerance of faults. For instance, it is much less damaging if a outside house faucet is leaking than if the hydraulic line controlling an airplane's elevon or aileron fails. In <em>vital systems engineering</em> it is required that when any failure occurs, the system must fail into a controlled state. Exception handling in this case is critical -- an example with which most Americans are familiar is the software controlling a traffic light. For many failures of the control software, the <q>controlled failure state</q> is to revert to a flashing red light in all directions. Traffic law provides that this is to be treated as an all-direction stop sign. In fact, traffic law also provides the final failure state: if the power goes out altogether and the light is off, drivers are required to treat the light as a stop sign.
+            One last flow control command to acknowledge is the <c>pass</c> command. Everything after a <c>pass</c> statement in the current block is ignored; mostly these are used while in the early stages of writing code, to provide a place holder for a section which has not been written.
         </p>
-    </example>
-    <!--<p>
-        How these errors occurs is actually built in to the definitions of type <c>int</c> and type <c>str</c>. Somewhere in the <c>builtin</c> code for these types, a command reading <c>raise(TypeError('...'))</c> occurs. The <em>exception</em> is a <em>type error</em>, where you are trying to combine data types which are incompatible. There are lots of predefined exceptions: <c>TypeError</c>, <c>ValueError</c>, and <c>NameError</c> are the three you will most commonly see, followed by <c>ZeroDivisionError</c> when you aren't careful in your programming.
-    </p>
+        <sage>
+            <input>
+                n = 4
+                if n % 3 == 1:
+                    pass
+                else:
+                    print 'The value of n is not one more than a multiple of three.'
+            </input>
+        </sage>
+    </subsection>
 
-    <p>
-        In <c>les3_ex3.py</c>, I used the <c>ValueError</c> which is raised by trying to force the conversion of a non-integer string to an integer. Python is able to correctly handle the conversion of a string like <c>'12345'</c> to an integer, but to ask <q>what is the integer form of <c>'abc'</c>?</q> is a meaningless question. The <c>try: ... except: ...</c> block is a very specialized type of <c>if...then</c> structure. Python will run the code inside a <c>try:</c> block, and if an error is <c>raise</c>d will jump to the first <c>except... :</c> statement. If the type of the exception matches, that block will execute. The final block of <c>les3_ex3.py</c> is
-    </p>
-    <pre>
-        except:
-            raise
-    </pre>
-    <p>
-        which terminates the <c>try:... except:...</c> structure by <em>re-raising any unhandled exception</em>. This allows you to press Ctrl-C to exit the <c>while True:</c> loop, for instance. This is also the behavior of the <c>break</c> command: it makes the program immediately exit the innermost enclosing loop.
-    </p>
-
-    <p>
-        The raising and handling of exceptions is often treated as an advanced programming topic, but is a useful tool even at the introductory level to help understand how programming errors are made, and how to avoid or mitigate them.
-    </p>-->
-    <p>
-        One last flow control command to acknowledge is the <c>pass</c> command. Everything after a <c>pass</c> statement in the current block is ignored; mostly these are used while in the early stages of writing code, to provide a place holder for a section which has not been written.
-    </p>
-    <sage>
-        <input>
-            n = 4
-            if n % 3 == 1:
-                pass
-            else:
-                print 'The value of n is not one more than a multiple of three.'
-        </input>
-    </sage>
+    <subsection xml:id="sec-Conditionals-Errors-Bugs">
+        <title>Bugs</title>
+        <p>
+            The final and worst type of programming error is not automatically detectable: the <em>bug</em>. Bugs are errors in your algorithm which do not violate any rules for the language, but nonetheless lead to incorrect results or responses in executing the program. Bugs are nearly unavoidable and often are diabolically difficult to diagnose, isolate, and solve. The process of doing these three tasks is <em>debugging</em>, and often one of the hardest tasks for a programmer is to debug code written by someone else. For this reason, we come now to an important programming maxim.
+        </p>
+        <principle> 
+            <statement>
+                <p>
+                    Always <em>document your code</em>.
+                </p>
+            </statement>
+        </principle>
+        <p>
+            <em>Documenting your code</em> is the process of including instructive comments about the iuntended flow of the program in the code itself. Short comments in Sage are lines of code beginning with the <em>hash</em> symbol <c>#</c>. Longer comments are included as multiline strings, beginning and ending with tripled quotes, either <c>'''</c> or <c>&quot;&quot;&quot;</c>.
+        </p>
+        <sage>
+            <input>
+                print 'This code executes.'
+                # This is a short comment and nothing on this line executes
+                print 'This code also executes.'
+                &quot;&quot;&quot;This is 
+                a longer
+                comment.&quot;&quot;&quot;
+                print 'Here\'s a last line which executes.'
+            </input>
+        </sage>
+        <p>
+            It is a bad habit of programmers to not provide extensive documentation to their code. The assumption that another programmer will need to read code later is deeply flawed, but it is often the case that after a significant time interval the original programmer will have little or no understanding of how their code works. While writing extensive comments is fairly boring, it saves time in the long run when code must be reused.
+        </p>
+    </subsection>
 </section>
