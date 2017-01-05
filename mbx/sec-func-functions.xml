@@ -1,113 +1,135 @@
 <section xml:id="sec-Functions-Functions">
-<title>Functions in programming</title>
+    <title>Functions in programming</title>
 
 
-<introduction>
-<p>
-A mathematical function is a well-defined relation between two sets, if you've taken Foundations or other proof-based courses. A function in computer programming is as well, although it may not often seem like it.
-</p>
-
-<p>
-In programming, functions are necessary when you need to repeatedly perform the same algorithm, perhaps on a variety of inputs. Input values to a function are called its <em>arguments</em>, and we will use the terminology of <em>passing arguments to a function</em>. Every Python function also has an output value, although sometimes its output is <c>None</c>.
-</p>
-</introduction>
-
-
-<subsection>
-<title><c>lambda</c> expressions</title>
-<p>
-The simplest type of function in Python is called a <c>lambda</c> expression. Let's say we want to define a function <m>f</m> which takes two arguments, <m>n</m> and <m>x</m>, and returns <m>nx</m>. Mathematically, this is simple: let <m>f(n,x)=nx</m>. When we need to define such a simple function for our own use in a Python program, we can define <m>f</m> in almost the same way.
-</p>
-<pre>
->>> f = lambda n,x: n*x
->>> f(4,12)
-48
->>> f(4,'12')
-'12121212'
->>> f([4],'12')
-Traceback (most recent call last):
-  File "&lt;pyshell#92>", line 1, in &lt;module>
-    f([4],'12')
-  File "&lt;pyshell#89>", line 1, in &lt;lambda>
-    f = lambda n,x: n*x
-TypeError: can't multiply sequence by non-int of type 'str'
-</pre>
-<p>
-There is a limitation: <c>lambda</c> expressions are not block structures, and if there is more than one expression following the <c>lambda ... :</c> a syntax error will occur. In fact, trying to enter an indented block by pressing enter after the colon raises a syntax error!
-</p>
-<pre>
->>> g = lambda x:
-	
-SyntaxError: invalid syntax
-</pre>
-<p>
-The variable names which occur after the keyword <c>lambda</c> and before the colon are the tuple of arguments to the function; the expression after the colon is what is evaluated based upon those arguments, and whatever is evaluated is returned as the function's output.
-</p>
-</subsection>
+    <introduction>
+        <p>
+            To be precise, let's give a mathematical definition of a function.
+        </p>
+        <definition>
+            <statement>
+                A <em>function</em> <m>f</m> is a rule which assigns to each value in a set <m>A</m> exactly one value in a set <m>B</m>. This is denoted by <m>f:A\to B</m>. The set <m>A</m> is called the <em>domain of <m>f</m></em> and the set <m>B</m> is called the <em>codomain of <m>f</m></em>.
+            </statement>
+        </definition>
+        <p>
+            Examples of mathematical functions abound, and you have probably spent the last several years as a mathematics student learning about the behavior of all sorts of different functions: polynomials, rational functions, trigonometric functions, exponential functions, and logarithms, just to name a few. These functions all have some things in common. They all take as input a single number, usually a real number (although each of the listed functions has an extension into the complex numbers). Moreover, they all return as output exactly one real number for each real number input. Multivariate calculus introduces the idea of functions with more than one input, sometimes written as a vector of inputs, sometimes with vector or matrix<fn>Vectors and matrices will be discussed at length in chapters 5 through 8, so if the precise meaning of these words is unknown to you at this point, don't worry.</fn> output as well. For instance, we could define 
+            <me>\vec{f}(x,y) = \begin{bmatrix} x^2\\ -\frac{x}{y} \end{bmatrix}.</me>
+        </p>
+        <p>
+            Functions in Sage do this and more. A programming function is a well-defined set of instructions which is provided with a set of inputs and produces exactly one output for each input. The values input to a function in Sage are its <em>arguments</em>. Very technically, only the final output value is truly the output, and for a Sage function it is called the <em>return</em> value.
+        </p>
+        <p>
+            There are two easy ways in Sage to define a function. Simple, one-line functions can be defined as <em>anonymous functions</em> by using the <c>lambda</c> command. Aslo called <em>lambda functions</em>, these functions are frequently useful, but are limited in that they have no block structure and cannot contain more than one line of code. For more elaborate functions, the command used in Sage is <c>def</c>, short for <em>definition</em>.
+        </p>
+    </introduction>
 
 
-<subsection>
-<title><c>def</c>ining functions</title>
-<p>
-The long-form way to define a function, and the way that methods of classes will be defined later in the lesson, is using the <c>def</c> command. The syntax is no more complicated than anything else we've worked with so far. Save the following as <c>les4_ex1.py</c> and run it in IDLE.
-</p>
-<pre>
-def fib(n):
-    '''A mysterious function appears!
+    <subsection xml:id="sec-Functions-Functions-Lambda">
+        <title>Lambda functions</title>
+        <p>
+            Let's say we want to define a function <m>f</m> which takes two arguments, <m>n</m> and <m>x</m>, and returns <m>nx</m>. Mathematically, this is simple: let <m>f(n,x)=nx</m>. When we need to define such a simple function for our own use in a Sage program, we can define <m>f</m> in almost the same way.
+        </p>
+        <sage>
+            <input>
+                f = lambda n,x: n*x
+                print f(4,12)
+                print f(4,'foo')
+                print f([4],'foo')
+            </input>
+        </sage>
+        <p>
+            The limitation that a <c>lambda</c> expression cannot contain more than one line of code is clearly seen here to be a limitation. We cannot include a <c>try</c> block to handle the exception raised when we try to multiply objects of incompatible types! It is so definitely not a block structure that attempting to use indentation to create such structure while using <c>lambda</c> will generate a <c>SyntaxError</c>.
+        </p>
+        <sage>
+            <input>
+                f = lambda n,x:
+                    n*x
+            </input>
+        </sage>
+        <p>
+            The variable names which occur between <c>lambda</c> and <c>:</c> are the tuple of arguments to the lambda function, and since they are considered to be a tuple they are indexed by position. While the limitation that a lambda function must consist of a single line seems severe, there is enough flexibility in the underlying Python language to allow a significant amount of power.
+        </p>
+        <example>
+            <title>A recursive lambda function</title>
+            <p>
+                A function is <em>recursive</em> if it uses the principle of mathematical induction to be evaluated. Such a recursive function <c>rec</c> would call itself on a <q>smaller</q> input unless the input is already somehow <q>smallest.</q>
+            </p>
+            <listing xml:id="listing-Recursive-Euclid-GCD">
+                <program>
+                    <input>
+                        rec = lambda a,b: b if a%b==0 else rec(b,a%b)
+                    </input>
+                </program>
+                <caption>A recursive function</caption>
+            </listing>
+            <p>
+                Let's restrict the arguments to positive integers <m>a</m> and <m>b</m>. We must remember that the binary operator <c>%</c> in Sage returns the remainder of integer division. Hence <c>7 % 3</c> evaluates to <c>1</c>, since <m>7 = 3(2)+1</m>. With this in mind, what is the behavior of the code structure which follows?
+            </p>
+            <program>
+                <input>
+                    variable = first_value if second_value else third_value
+                </input>
+            </program>
+            <p>
+                This is a comlicated statement, but it is equivalent to writing the following code.
+            </p>
+            <program>
+                <input>
+                if second_value:
+                    variable = first_value
+                else:
+                    variable = third_value
+                </input>
+            </program>
+            <p>
+                Hopefully you can see the benefit in the more compact form of writing this. As they are equivalent, the shorter form is never necessary, but sometimes it is used in an effort to make code more <q>elegant</q>. With that in mind, can you determine what the final return value of <C>rec(51,1734)</C> would be? What about <c>rec(x,y)</c> if <c>x</c> and <c>y</c> are both defined to be positive integers?
+            </p>
+        </example>
+    </subsection>
 
-    The argument n must be a positive integer.
-'''
-    if (type(n)!=type(1)) or (type(n)==type(1) and n&lt;0):
-        raise TypeError('function fib expects positive integer')
-    seq = [1,1]
-    while len(seq)&lt;n:
-        seq.append(seq[-1]+seq[-2])
-    return seq[-1]
-</pre>
-<p>
-You'll notice that when you run this through IDLE, nothing appears to happen! However, something important has occurred: try typing <c>help(fib)</c> at the prompt.
-</p>
-<pre>
->>> help(fib)
-Help on function fib in module __main__:
 
-fib(n)
-    A mysterious function appears!
-    
-    The argument n must be a positive integer.
-</pre>
-<p>
-So we see that now there is a function called <c>fib</c>, and if we pass a positive integer to it, something should happen.
-</p>
+    <subsection xml:id='sec-Function-Functions-Defs'>
+        <title>Defining long-form functions</title>
+        <p>
+            More often than not, a single line of code doesn't suffice to solve a problem. The <c>def</c> structure provides the ability to write more complicated procedures in function form. Let's investigate a simple function <c>fib</c> to understand the structure of a function written using <c>def</c>.
+        </p>
+        <listing>
+            <program>
+                <input>
+                    def fib(n):
+                        '''A mysterious function appears!
 
-<p>
-Let's look at the code you've saved as <c>les4_ex1.py</c> once again. The first expression is <c>def fib(n):</c>, which tells Python to define a function named <c>fib</c> in the current context and let it have one argument, <c>n</c>, which can be used inside the function. Moving into the <c>def</c> block, the first expression we encounter is a multiline string! This is very good programming practice in Python, and it's called the <em>documentation string</em>, or <em>docstring</em> for short. It is good programming style<fn>Yes, there are such things as good programming style and bad programming style. You can consider it two ways. The first way is that writing code in a nice, consistent style makes it easier for you to later relearn what you've done. The second is that I will have to read code that you write, and if it is horribly difficult to decipher because you haven't been nice to me, I will have a harder time being nice to you! The ``manual" of good style for Python is generally accepted to be what is documented in Python Enhancement Proposal 8 (PEP 8). This can be found at <url href="https://www.python.org/dev/peps/pep-0008/"><c>https://www.python.org/dev/peps/pep-0008/</c></url>. A very brief overview of that style guide is found at <url href="https://docs.python.org/3/tutorial/controlflow.html#intermezzo-coding-style"><c>https://docs.python.org/3/tutorial/controlflow.html<hash />intermezzo-coding-style</c></url>.</fn> to include a docstring, since it enables the <c>help</c> function to tell something about the defined function. I won't go into the formatting of the docstring here: see the Python Tutorial.
-</p>
-
-<p>
-Moving into the actual code of our function, we see that the very first thing it does is checks the type and the value of the argument, and if the type is wrong or the integer is negative, a <c>TypeError</c> is raised. You can think of this as ``bulletproofing" our function: if you're writing code for other people to use, you must be very certain that they cannot through malice or ignorance pass an argument to your function which will fundamentally break stuff<fn>This is a technical term.</fn>. Type and value checking the input to a function is a good way to do this. If you are writing code just for yourself and know that nothing seriously bad will happen if you accidentally pass a float or a string instead of an integer, you will often skip this step.
-</p>
-
-<p>
-The next line instantiates a list, <c>seq</c>, and the following <c>while</c> loop makes use of the <c>append</c> method of the <c>list</c> class to lengthen the list to the length passed as argument <c>n</c>. Once <c>len(seq) >= n</c>, the loop exits and the last entry of <c>seq</c> is <c>return</c>ed.
-</p>
-
-<p>
-Generally speaking, this structure is what every function will follow! You'll pass in some arguments, maybe do some type checking, and then run an algorithm on the arguments. When you complete the algorithm, you return something. One special note is that even functions which contain no <c>return</c> statement return a value <mdash /> it is the special value <c>None</c> of data type <c>NoneType</c>. If you try to execute the expression <c>None</c>, nothing happens.
-</p>
-<pre>
->>> None
->>>
-</pre>
-<p>
-You've already used a function which returns <c>None</c>: the <c>print</c> function.
-</p>
-<pre>
->>> print(print(5))
-5
-None
->>>
-</pre>
-</subsection>
+                        The argument n must be a positive integer.
+                        '''
+                        if type(n) == type(1) and n &gt; 0:
+                            sequence = [0,1]
+                            while len(sequence) &lt; n:
+                                sequence += [sequence[-2]+sequence[-1]]
+                            return sequence[-1]
+                        else:
+                            raise TypeError('Function fib expects positive integer.')
+                </input>
+            </program>
+            <caption>
+                A function written using the <c>def</c> command.
+            </caption>
+        </listing>
+        <p>
+            The first line consists of <c>def fib(n):</c>, which uses the <c>def</c> command to define a function whose name is <c>fib</c> and which takes exactly one argument, <c>n</c>. The value of this argument must be given when the function is used, or a <c>TypeError</c> will be raised. This is followed by a multiline string enclosed in <c>'''</c>; when this string appears in a function definition it is called the <em>docstring</em>, or <em>documentation string</em>, and provides the text for the <c>help</c> function when used interactively. In this case, if we want to see the help for <c>fib</c> after the function has been defined, we would type <c>help(fib)</c>. 
+        </p>
+        <p>
+            After the docstring, our function contains an if statement which compares <c>type(n)</c> to <c>type(1)</c>. If they are of the same type, then the if statement proceeds to check also whether <c>n</c> is positive.
+            <fn>
+                If <c>p</c> and <c>q</c> are Boolean, <c>p and q</c> is true if and only if both <c>p</c> and <c>q</c> are true. Hence if the first argument <c>p</c> is false then there is no need to test the second argument. Similarly, <c>p or q</c> is true as long as at least one of <c>p</c> or <c>q</c> is true. Hence if the first argument is true, then the second argument is not tested.
+            </fn>
+            This if statement provides <em>input validation</em> to check whether the value passed into the argument is as expected when writing the function. Supposing the value of <c>n</c> is as expected, the first statement inside the if block sets the value of <c>sequence</c> to <c>[0,1]</c>. Then as long as the length of <c>sequence</c>, found by calling <c>len(sequence)</c>, is less than the input value <c>n</c>, the sum of the last two values of <c>sequence</c> is included at the end of <c>sequence</c>. After the while loop finishes executing, the last value of <c>sequence</c> is returned.
+        </p>
+        <p>
+            If the input validation failed because the input value of the argument to <c>fib</c> was either not an integer or was not positive, then the else block executes and a <c>TypeError</c> is raised; the argument to the <c>TypeError</c> is the displayed error message.
+        </p>
+        <p>
+            Generally speaking, this structure is what every function will follow! You'll pass in some arguments, maybe do some type checking, and then run an algorithm on the arguments. When you complete the algorithm, you return something. Functions which reach the end of their <c>def</c> block without executing an explicit <c>return</c> statement return the special value <c>None</c> of <c>NoneType</c>.
+        </p>
+    </subsection>
 
 </section>

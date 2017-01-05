@@ -1,4 +1,7 @@
-<section xml:id="sec-Functions-Loads">
+<section xml:id="sec-Functions-Reusability">
+    <title>
+        Writing reusable code
+    </title>
     <introduction>
         <p>
             In this section we will discuss <c>.sage</c> files and their use in writing reusable function code.
