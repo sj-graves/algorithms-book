@@ -20,6 +20,8 @@
             \DeclareMathOperator{\fix}{fix}
             \DeclareMathOperator{\lcm}{lcm}
             \DeclareMathOperator{\Aut}{Aut}
+            \DeclareMathOperator{\Real}{Re}
+            \DeclareMathOperator{\Imag}{Im}
             \newcommand{\car}{~\fbox{$\dlsh$}}
             \newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
             \renewcommand{\vec}[1]{\mathbf{#1}}

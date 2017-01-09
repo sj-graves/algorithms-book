@@ -71,7 +71,7 @@
                 </input>
             </program>
             <p>
-                This is a comlicated statement, but it is equivalent to writing the following code.
+                This is a complicated statement, but it is equivalent to writing the following code.
             </p>
             <program>
                 <input>
@@ -82,7 +82,7 @@
                 </input>
             </program>
             <p>
-                Hopefully you can see the benefit in the more compact form of writing this. As they are equivalent, the shorter form is never necessary, but sometimes it is used in an effort to make code more <q>elegant</q>. With that in mind, can you determine what the final return value of <C>rec(51,1734)</C> would be? What about <c>rec(x,y)</c> if <c>x</c> and <c>y</c> are both defined to be positive integers?
+                Hopefully you can see the benefit in the more compact form of writing this. As they are equivalent, the shorter form is never necessary, but sometimes it is used in an effort to make code more <q>elegant</q>. With that in mind, can you determine what the final return value of <C>rec(51,1734)</C> would be? What about the general behavior of <c>rec(x,y)</c> if <c>x</c> and <c>y</c> are both defined to be positive integers?
             </p>
         </example>
     </subsection>
@@ -131,5 +131,20 @@
             Generally speaking, this structure is what every function will follow! You'll pass in some arguments, maybe do some type checking, and then run an algorithm on the arguments. When you complete the algorithm, you return something. Functions which reach the end of their <c>def</c> block without executing an explicit <c>return</c> statement return the special value <c>None</c> of <c>NoneType</c>.
         </p>
     </subsection>
+    <subsection xml:id="sec-Functions-Functions-Reusability">
+        <title>Writing reusable code</title>
+        <p>
+            While it is not always the case that you need to reuse a program, it is definitely of worth to consider several questions. Will writing the program to solve exactly one problem be quicker than solving the single problem analytically, or is there no known analytic solution? Is the algorithm much more difficult to solve in the general case, or at least a more general case than the single problem, and is it instructive to consider the more general solution? If it is the case that the program you are considering will be useful more than once, you should strongly consider writing it in such a way that you can reuse the code. In Sage, this is most effectively done by writing your functions in a separate file with the extension <c>.sage</c>, for example <c>my_functions.sage</c>, and then when you need to use them in a different worksheet (in the same directory) you can access the functions by using the command <c>load('my_functions.sage')</c>.
+        </p>
+        <p>
+            The example function <c>rec</c> from the previous section is interesting, as it provides a very short implementation of Euclid's algorithm for calculating the greatest common divisor of two integers. If this function definition is written only in Sage worksheet (a <c>.sagews</c> file), then it is <q>inaccessible</q> for other worksheets and would need to be copied and pasted from worksheet to worksheet. While this works, it is an inelegant solution. It is better to open a new file with the extension <c>.sage</c> and then, when the functions defined in that file are needed, to use the <c>load</c> command to access those functions. For instance, if <c>rec_euclid.sage</c> is a file in your home directory (on Unix-based systems like Linux and Mac OS, this is accessed at <c>~</c>), you would load the definitions of <c>rec</c> from <c>rec_euclid.sage</c> by calling <c>load('~/rec_euclid.sage')</c>.
+        </p>
 
+        <historical xml:id="historical-Euclid">
+            <title>Euclid of Alexandria</title>
+            <p>
+                While we here refer to Euclid for his number theoretic algorithm to calculate the greatest common divisor of integers, his true fame lies in authoring the <em>Elements</em>. Until educational methods changed drastically in the twentieth century, Euclid's <em>Elements</em> was considered to be a standard part of the curriculum of every educated person. Originally written sometime circa 300 B.C., the geometry of Euclid was part of the <em>quadrivium</em>, the second stage of the liberal arts education, until modern educational methods supplanted the classical style at the turn of the twentieth century.
+            </p>
+        </historical>
+    </subsection>
 </section>
