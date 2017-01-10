@@ -50,4 +50,4 @@ mathbook
 knowl
 *.html
 latex/*.pdf
-mbx/temp.sagews
+xml/temp.sagews

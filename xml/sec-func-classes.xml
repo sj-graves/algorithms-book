@@ -18,64 +18,124 @@
                 An object declared to have a particular class is called an <em>instance</em> of that class. This is adequately explained by the use of the phrase <q>for instance</q> when introducing an example of a topic under discussion. Creation of an instance is called <em>instantiation.</em>
             </li>
         </ol>
-        <usage>
+        <convention>
+            <title>Class implementation</title>
             <p>
                 Supposing we have defined a class <c>MyClass</c>, we will instantiate an object of that class named <c>foo</c> by <c>foo = MyClass(...)</c>, where the initialization may take some arguments. If <c>MyClass</c> has a defined method called <c>first_method</c>, then we would call that method on the object <c>foo</c> by using <c>foo.first_method(...)</c>. Class methods always have at least one argument, canonically named <c>self</c>. This allows <c>self.second_method(...)</c> or <c>self.some_attrbute</c> to be used in the definition of <c>first_method</c> in a consistend manner to the definition of <c>MyClass</c>.
             </p>
-        </usage>
+        </convention>
         <p>
             For the purpose of learning how we set up classes and what considerations are made when deciding what attributes and methods to include in a class definition, we'll implement a class which Sage actually handles natively as symbolic expressions, namely the complex numbers. 
         </p>
     </introduction>
-    <subsection xml:id="sec-Functions-Classes-ComplexNumbers">
-        <title>Complex numbers</title>
+    
+    <subsection xml:id="sec-Functions-Classes-GaussianIntegers">
+        <title>Gaussian integers</title>
         <definition>
             <statement>
-                The <em>imaginary number <m>i</m></em> is defined to be the number which satisfies <m>i^2=-1</m>. A <em>complex number</em> is any number <m>z=a+ib</m> where <m>a</m> and <m>b</m> are real numbers. The real number <m>a</m> is the <em>real part of <m>z</m></em> and the real number <m>b</m> is the <em>imaginary part of <m>z</m></em>, and these are denoted by <m>\Real z=a</m> and <m>\Imag z=b.</m>
+                The <em>imaginary number <m>i</m></em> is defined to be the number which satisfies <m>i^2=-1</m>. A <em>complex number</em> is any number <m>z=a+ib</m> where <m>a</m> and <m>b</m> are real numbers. The real number <m>a</m> is the <em>real part of <m>z</m></em> and the real number <m>b</m> is the <em>imaginary part of <m>z</m></em>, and these are denoted by <m>\Real z=a</m> and <m>\Imag z=b.</m> A complex number <m>z</m> is a <em>Gaussian integer</em> if and only if <m>\Real z</m> and <m>\Imag z</m> are both integers.
             </statement>
         </definition>
         <p>
-            Note that this definition allows every real number to be considered as a complex number with the imaginary part equal to <m>0</m>; this in turn allows us to envision each imaginary number as a point on the <em>complex plane</em>, with horizontal axis the real part and vertical axis the imaginary part. All our basic operations on real numbers must naturally extend to operations on complex numbers, so however we define our class of complex numbers, we will need to define methods for addition, subtraction, multiplication, division, and exponentiation by integers; we will define these in the next section, <xref ref="sec-Functions-Overloading" autoname="title"/>. For each, we can double-check that our operation behaves correctly by testing against the built-in behavior of Sage on complex numbers. This code is not intended to be reused elsewhere (since Sage can already handle complex numbers) so it is safe to write it all in a worksheet.
+            Note that these definitions allow every real number to be considered as a complex number with the imaginary part equal to <m>0</m>; this in turn allows us to envision each imaginary number as a point on the <em>complex plane</em>, with horizontal axis the real part and vertical axis the imaginary part. All our basic operations on real numbers must naturally extend to operations on complex numbers, so however we define our class of complex numbers, we will need to define methods for addition, subtraction, multiplication, and exponentiation by integers; we will define these in the next section, <xref ref="sec-Functions-Overloading" autoname="title"/>. 
+            <fn>
+                We need not include a division operator, since a ratio of Gaussian integers certainly need not be a Gaussian integer.
+            </fn>
+            For each, we can double-check that our operation behaves correctly by testing against the built-in behavior of Sage on complex numbers. This code is not intended to be reused elsewhere (since Sage can already handle complex numbers) so it is safe to write it all in a worksheet.
         </p>
         <listing>
             <program>
                 <input>
-                    class MyComplex:
-                    '''My complex number class.
-                    '''
+                    class GaussianInteger:
+                        '''My Gaussian Integer class.
+                        '''
                 </input>
             </program>
-            <caption>Beginning the complex number class. Notice that we should provide at least a brief docstring for class definitions.</caption>
+            <caption>Beginning the Gaussian integer class. Notice that we should provide at least a brief docstring for class definitions.</caption>
         </listing>
         <p>
-            Since we haven't provided anything other than a docstring for our class, the type of a variable declared to be an object of that class is just <c>'instance'</c>. Since we know that a complex number is totally determined by its real and imaginary parts, it makes sense that what we want to use to instantiate an actual complex number is something like <c>MyComplexNumber(a,b)</c>. This is handled via the <em>initialization operator</em>, a special method defined within the class as the function <c>__init__</c>. We want to provide some input validation to our class, so we will define a method <c>__init__(self, a, b)</c> to verify that both <c>a</c> and <c>b</c> are real. We will take advantage of Sage's built-in <c>real</c> command for this purpose.
+            Since we haven't provided anything other than a docstring for our class, the type of a variable declared to be an object of that class is just <c>'instance'</c>. Since we know that a complex number is totally determined by its real and imaginary parts, it makes sense that what we want to use to instantiate an actual complex number is something like <c>GaussianInteger(a,b)</c>. This is handled via the <em>initialization operator</em>, a special method defined within the class as the function <c>__init__</c>. We want to provide some input validation to our class, so we will define a method <c>__init__(self, a, b)</c> to verify that both <c>a</c> and <c>b</c> are integers. 
         </p>
         <listing xml:id="listing-Complex-init">
             <program>
                 <input>
-                    class MyComplex:
-                        '''My complex number class.
+                    class GaussianInteger:
+                        '''My Gaussian integer class.
                         '''
                         def __init__(self, a, b):
-                            '''The two arguments to initialize the MyComplex class must be real.
+                            '''The two arguments to initialize the GaussianInteger class must be integers.
                             '''
-                            val_err = ValueError('Both arguments to MyComplex(a,b) must be real numbers.')
-                            try:
-                                if a==real(a) and b==real(b):
-                                    self.realpart = a
-                                    self.imagpart = b
-                                else:
-                                    raise val_err
-                            except:
-                                raise val_err
+                            if type(a)==type(1) and type(b)==type(1):
+                                self.realpart = a
+                                self.imagpart = b
+                            else:
+                                raise ValueError('Both arguments to GaussianInteger(a,b) must be integers.')
             
                 </input>
             </program>
-            <caption>The complex number class with an initialization method.</caption>
+            <caption>The Gaussian integer class with an initialization method.</caption>
         </listing>
         <p>
-            Our input validation consists of both a <c>try</c> block, to detect if the arguments passed to <c>MyComplex</c> do not have a real part (which is to say that Sage's <c>real</c> function raises an error), and an <c>if</c> statement to verify that we do not try to initialize a complex number <m>a+ib</m> where one of <m>a</m> or <m>b</m> is itself complex!
+            Out input validation consists of checking the type of the two arguments, <c>a</c> and <c>b</c>, against the type of the integer <m>1</m>. If either has a different type than that of <m>1</m>, a <c>ValueError</c> is raised. In the case where valid input is provided, we see that the <c>self</c> object is having two attributes assigned: <c>self.realpart</c> and <c>self.imagpart</c>.
         </p>
+        <convention>
+            <p>
+                The strange method name of <c>__init__</c> is actually very important to the underlying Python source of Sage. Methods which are named according to the scheme <c>__method_name__</c> are generally the way that Python handles built-in <em>operators</em>, such as addition or subtraction. After all, to be able to have Sage interpret <c>4 + 5</c> it must know how to add one integer to another. We will discuss these operators at length in the next section, <xref ref="sec-Functions-Overloading" autoname="title"/>.
+            </p>
+            <p>
+                The <c>__init__</c> method must assign a value to each attribute of an object, even if the value of the attribute is <c>None</c>.
+            </p>
+        </convention>
+        <p>
+            After the initialization method, we should provide some way for instances of <c>GaussianInteger</c> to be represented in a human-readable format. Otherwise, we'll see something like <c>&lt;__builtin__.GaussianInteger instance at 0x7f110b16cb90&gt;</c> as the value of an instance! Again, we use a built-in operator method for this, called <c>__repr__</c>. 
+        </p>
+        <listing>
+            <program>
+                <input>
+                    class GaussianInteger:
+                        
+                        ...
+                    
+                        def __repr__(self):
+                            plusminus = "+"
+                            if self.imagpart &lt; 0:
+                                plusminus = ""
+                            return str(self.realpart) + plusminus + str(self.imagpart) + "*I"
+                </input>
+            </program>
+            <caption>The <c>__repr__</c> method for <c>MyComplex</c>.</caption>
+        </listing>
+        
+        <p>
+            Generally, the <c>__repr__</c> method should return an unambiguous string representation of the object. Since the Gaussian integers are in bijective correspondence with the integer-coordinate points in the real plane, we could also have specified the return string to be <c>'('+str(self.realpart)+','+str(self.imagpart)+')'</c>, but what was given in the above listing is more elegant.
+        </p>
+        
+        <p>
+            Before we begin to discuss addition, subtraction, multiplication, and powers, we will define a method for which there is not a built-in operator: the <em>norm</em>.
+        </p>
+        <definition>
+            <statement>
+                If <m>z</m> is any complex number, the <em>norm of <m>z</m></em> is 
+                <me>\abs{z} = \sqrt{(\Real z)^2 + (\Imag z)^2}.</me>
+                This is a measure of the size of <m>z</m>.
+            </statement>
+        </definition>
+        <p>
+            Since there's not a built-in method for this, we will call the method <c>norm</c>.
+        </p>
+        <listing>
+            <program>
+                <input>
+                    class GaussianInteger:
+                    
+                        ...
+                    
+                        def norm(self):
+                            return sqrt(self.realpart^2 + self.imagpart^2)
+                </input>
+            </program>
+            <caption>Extending the Gaussian integer class to define the <em>norm</em>. Note that we can take advantage of Sage's built in mathematical capabilities and use the <c>sqrt</c> function without having to load any extra <q>libraries.</q></caption>
+        </listing>
     </subsection>
 </section>
 <!--
