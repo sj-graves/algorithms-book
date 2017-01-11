@@ -18,15 +18,19 @@
     </sage>
 
     <p>
-        We have some other important operators for integer arithmetic which are defined via <xref ref="thm_DivisionAlg" autoname="title" />, respectively <c>//</c> and <c>%</c>.
+        We have some other important operators for integer arithmetic which are defined via the Division Algorithm (given at the bottom of the page), respectively <c>//</c> and <c>%</c>, called the <em>quotient</em> and <em>remainder</em> operators.
     </p>
 
     <exercise>
         <statement>
-            Without executing any code, decide what <c>15//4</c> and <c>15%4</c> should be.
+            <p>
+                Without executing any code, decide what <c>15//4</c> and <c>15%4</c> should be.
+            </p>
         </statement>
         <answer>
-            Respectively, the answers should be <c>3</c> and <c>1</c>.
+            <p>
+                Respectively, the answers should be <c>3</c> and <c>1</c>.
+            </p>
         </answer>
     </exercise>
 
@@ -85,7 +89,9 @@
         <theorem xml:id="thm_DivisionAlg">
             <title>The Division Algorithm</title>
             <statement>
-                Let <m>a,b\in \mathbb{Z}</m> with <m>b\neq 0</m>. Then there are unique <m>q,r\in\mathbb{Z}</m> with <m>0&lt;r&lt;\abs{b}</m> such that <m>a=bq+r</m>.
+                <p>
+                    Let <m>a,b\in \mathbb{Z}</m> with <m>b\neq 0</m>. Then there are unique <m>q,r\in\mathbb{Z}</m> with <m>0&lt;r&lt;\abs{b}</m> such that <m>a=bq+r</m>.
+                </p>
             </statement>
         </theorem>
     </subsection>

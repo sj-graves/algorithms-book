@@ -136,171 +136,49 @@
             </program>
             <caption>Extending the Gaussian integer class to define the <em>norm</em>. Note that we can take advantage of Sage's built in mathematical capabilities and use the <c>sqrt</c> function without having to load any extra <q>libraries.</q></caption>
         </listing>
+        
+        <p>
+            A last pair of methods which we need to define for our Gaussian integer class allow us to avoid direct reference to the attributes of <c>GaussianInteger</c> objects. While Python allows us to reference attributes directly, it is generally considered to be bad practice, not least of all because other object-oriented programming languages forbid it. We will add a method <c>re</c> and a method <c>im</c> to access these attributes indirectly.
+        </p>
+        <listing>
+            <program>
+                <input>
+                    class GaussianInteger:
+                        '''My Gaussian integer class.
+                        '''
+                        def __init__(self, a, b):
+                            '''The two arguments to initialize the GaussianInteger class must be integers.
+                            '''
+                            if type(a)==type(1) and type(b)==type(1):
+                                self.realpart = a
+                                self.imagpart = b
+                            else:
+                                raise ValueError('Both arguments to GaussianInteger(a,b) must be integers.')
+                        
+                        def __repr__(self):
+                            plusminus = "+"
+                            if self.imagpart &lt; 0:
+                                plusminus = ""
+                            return str(self.realpart) + plusminus + str(self.imagpart) + "*I"
+                    
+                        def norm(self):
+                            return sqrt(self.realpart^2 + self.imagpart^2)
+                    
+                        def re(self):
+                            return self.realpart
+                    
+                        def im(self):
+                            return self.imagpart
+                </input>
+            </program>
+            <caption>A full listing of the <c>GaussianInteger</c> class to this point.</caption>
+        </listing>
+    </subsection>
+    
+    <subsection xml:id="sec-Functions-Classes-Afterword">
+        <title>Extending the class</title>
+        <p>
+            In order to fully flesh out the Gaussian integer class, we will need the ability to redefine the standard addition operator to handle adding together two objects of <c>GaussianInteger</c> type. This idea is called <em>operator overloading</em> and is the topic of the final section of this chapter.
+        </p>
     </subsection>
 </section>
-<!--
-    <introduction>
-        <p>
-            I'm not going to go into a deep philosophical discussion about the different ``programming paradigms," of which <em>object-oriented programming</em> is one. We'll treat this in a very introductory manner: complicated data types are best considered as a <em>class</em> of variables. All the <em>objects</em> of the same class should have the same operations which can be performed upon them; these are <em>methods</em> of the class. The parameters of objects in the class we will call <em>attributes</em>, in keeping with Python terminology.
-        </p>
-
-        <p>
-            So we could define a class of complex numbers of the form <m>a+i b</m> where <m>a,b\in \mathbb{R}</m>. Arithmetic of complex numbers is different from real numbers, because we have to remember to treat the special number <m>i=\sqrt{-1}</m> accordingly. Mathematically speaking, this means that a complex number <m>a+ib</m> is comprised of an ordered pair of real numbers <m>(a,b)</m>, and we must define carefully what are the algorithms for addition, multiplication, etc.
-        </p>
-
-        <p>
-            In Python, it makes sense to define a class of complex numbers. Let's start a new file, <c>les4_ex2.py</c>. Since we want to be very careful about what a complex number is, we'll start simply.
-        </p>
-        <pre>
-            class ComplexNumber:
-            """A complex number class.
-            """
-        </pre>
-        <p>
-            If this is all we put in our file, nothing interesting happens except that we can now create a variable of type <c>ComplexNumber</c> like so:
-        </p>
-        <pre>
-            >>> x = ComplexNumber()
-            >>> type(x)
-            &lt;class '__main__.ComplexNumber'>
-            >>> x
-            &lt;__main__.ComplexNumber object at 0x10367bbe0>
-        </pre>
-        <p>
-            This isn't very interesting: when we try to use our <c>ComplexNumber</c>, all that Python knows is its type and where in the system's memory it lives. This is because we haven't defined any way for a <c>ComplexNumber</c> to be <em>initialized</em>. There are two methods that you should always define for a new data class, and initialization is the first of these. In order to know that <m>x=a+ib</m> is a particular complex number, we must know specifically two attributes: its real part <m>a</m> and its imaginary part <m>b</m>. Here's how we will do this:
-        </p>
-        <pre>
-            class ComplexNumber:
-            """A complex number class.
-            """
-            def __init__(self,a,b):
-            if not (type(a) in [type(0), type(0.1)] and
-            type(b) in [type(0), type(0.1)]):
-            raise TypeError("ComplexNumber(a,b) expects a and b to both be of"\
-            + " type 'int' or type 'float'.")
-            else:
-            self.real_part = a
-            self.imag_part = b
-        </pre>
-        <p>
-            Here we have a very strange name for a function: <c>__init__</c> with three arguments, <c>self</c>, <c>a</c>, and <c>b</c>. The first of these, <c>self</c>, is special and should be the first argument of every method of a class. This makes much more sense later when we want to define other methods. We also see that, after the error-checking is done, we assign attributes <c>real_part</c> and <c>imag_part</c> to <c>self</c> by using <c>self.real_part</c> and <c>self.imag_part</c> as variables. After <c>__init__</c> executes, every attribute of the object being initialized must have a value, even if that value is <c>None</c>.
-        </p>
-
-        <p>
-            Now we need to get to the other mandatory<fn>Not Python-mandatory, because Python doesn't require this. Instead, it's just extremely bad programming etiquette.</fn> method. This is the <em>representation</em> of the object, implemented in Python as the <c>__repr__</c> method<fn>I'm going to pronounce this as ``repper," which rhymes with ``pepper."</fn>. This method must return an unambiguous string representation of the complex number.
-        </p>
-
-        <p>
-            For complex numbers, this is incredibly easy. Complex numbers are in bijective correspondence<fn>Take Foundations!</fn> with ordered pairs of real numbers, so the <em>canonical</em> representation of a complex number <m>x=a+iy</m> is as the ordered pair <m>(a,b)</m>. Let's extend <c>les4_ex2.py</c> to the following:
-        </p>
-        <pre>
-            class ComplexNumber:
-            ...
-
-            def __repr__(self):
-            return str( (self.real_part, self.imag_part) )
-        </pre>
-        <p>
-            Now if we save and rerun our module, we can actually assign values to a variable of type <c>ComplexNumber</c> and also see what is the value of the variable!
-        </p>
-        <pre>
-            >>> x = ComplexNumber(1,3.4)
-            >>> x
-            (1, 3.4)
-            >>> type(x)
-            &lt;class '__main__.ComplexNumber'>
-        </pre>
-        <p>
-            Optionally, you can define the <c>__str__</c> method for the class, which defines a ``human-readable" format for objects in the class. We might do so as follows.
-        </p>
-        <pre>
-            class ComplexNumber:
-            ...
-
-            def __str__(self):
-            (a, b) = (self.real_part, self.imag_part)
-            if a != 0:
-            s = str(a)
-            if b&lt;0:
-            s += ' - I*(' + str(-b) + ')'
-            elif b>0:
-            s += ' + I*(' + str(b) + ')'
-            else:
-            if b&lt;0:
-            s = '-I*(' + str(b) + ')'
-            else:
-            s = 'I*(' + str(b) + ')'
-            return s
-        </pre>
-        <p>
-            Now we can call this function
-        </p>
-    </introduction>
-
-
-    <subsection>
-        <title>Adding more methods</title>
-        <p>
-            It's very easy to add new methods to a class, since they're just functions defined inside the block structure of the class. Let's say we want to be able to determine the magnitude (called a <em>norm</em> in mathematics) of a complex number <c>x</c> by calling the method <c>x.norm()</c>. We'll need to add one line to the beginning of our module, and then we can add our function <c>norm</c>. Here's what your file <c>les4_ex2.py</c> should now look like:
-        </p>
-        <pre>
-            from math import sqrt
-
-            class ComplexNumber:
-            """A complex number class.
-            """
-            def __init__(self,a,b):
-            if not (type(a) in [type(0), type(0.1)] and
-            type(b) in [type(0), type(0.1)]):
-            raise TypeError("ComplexNumber(a,b) expects a and b to both be of"\
-            + " type 'int' or type 'float'.")
-            else:
-            self.real_part = a
-            self.imag_part = b
-
-            def __repr__(self):
-            return str( (self.real_part, self.imag_part) )
-
-            def __str__(self):
-            (a, b) = (self.real_part, self.imag_part)
-            if a != 0:
-            s = str(a)
-            if b&lt;0:
-            s += ' - I*(' + str(-b) + ')'
-            elif b>0:
-            s += ' + I*(' + str(b) + ')'
-            else:
-            if b&lt;0:
-            s = '-I*(' + str(b) + ')'
-            else:
-            s = 'I*(' + str(b) + ')'
-            return s
-
-            def norm(self):
-            return sqrt(self.real_part**2 + self.imag_part**2)
-        </pre>
-        <p>
-            The line at the beginning, <c>from math import sqrt</c>, tells Python to find a module named <c>math</c> in either the current directory or Python's module search, and allow us to access the function <c>sqrt</c>. Note that if we had already defined a function or variable as <c>sqrt</c>, this import command would have overwritten our function or variable! To work around this, we could instead have had our first line be simply <c>import math</c>, but then when we wanted to use the function <c>sqrt</c> from the <c>math</c> module, we would have needed to type <c>return math.sqrt(self.real_part**2 + self.imag_part**2)</c>.
-        </p>
-
-        <p>
-            What else should we define for complex numbers? It would be nice to be able to access the real and imaginary parts of a complex number, so we'll define <c>re</c> and <c>im</c> methods.
-        </p>
-        <pre>
-            from math import sqrt
-
-            class ComplexNumber:
-            ...
-            def re(self):
-            return self.real_part
-
-            def im(self):
-            return self.imag_part
-        </pre>
-        <p>
-            We should include our arithmetic operations as well. To keep things simple, we'll only define addition and multiplication here, and leave the others as an exercise. Python understands that <c>3 + 5</c> and <c>5 + 3</c> should both be 8, but maybe we want to be lazy with a variables <c>x</c> and <c>y</c> of type <c>ComplexNumber</c> and have all of <c>x + y</c>, <c>3 + x</c>, <c>x + 3</c>, <c>3.1 + x</c>, and <c>x + 3.1</c> execute correctly. Interestingly, <c>3 + x</c> and <c>3.1 + x</c> will be handled identically, but <c>x + y</c>, <c>3 + x</c>, and <c>x + 3</c> are all distinct!
-        </p>
-    </subsection>
-
-</section>
--->

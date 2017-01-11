@@ -43,8 +43,8 @@
                 i = 1
                 limit = 160
                 while len(s)+len(str(i))+1 &lt;= limit:
-                s += str(i)+" "
-                i += 1
+                    s += str(i)+" "
+                    i += 1
                 print s
             </input>
         </sage>    </subsection>

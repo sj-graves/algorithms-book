@@ -1,7 +1,88 @@
 <section xml:id="sec-Functions-Overloading">
-<title>Operator overloading</title>
+    <title>Operator overloading</title>
 
+    <introduction>
+        <p>
+            We learn in elementary school that the procedure necessary to calculate <m>3 + 5</m> and the procedure necessary to calculate <m>\frac13 + \frac15</m> are different, but we never have difficulty connecting that both procedures are addition. Computers, however, are much simpler and in order for a computer to <q>recognize</q> that the two operations are related it must be told explicitly. The method of instructing a computer than integer addition and fraction addition may use the same symbol is called <em>operator overloading</em>.
+        </p>
+        <p>
+            In fact, the function names for standard arithmetic operators are similar to the initialization method: they all look like <c>__method__</c>.  The difficulty shows up when we recognize that Sage's addition operator is not commutative
+            <fn>
+                Recall that an operation <m>\star</m>is <em>commutative</em> if and only if <m>a\star b=b\star a</m> for every pair <m>(a,b)</m> in the domain of the operator. The first time students usually encounter a non-commutative operation is in matrix theory, since matrix multiplication is the canonical example of a non-commutative operation.
+            </fn>
+            in every case. For instance, consider addition of strings.
+        </p>
+        <sage>
+            <input>
+                foo = 'This is a first string'
+                bar = 'And this is another'
+                print foo + bar
+                print bar + foo
+            </input>
+        </sage>
+        <p>
+            The two operators for which commutativity is an issue are addition and multiplication, and the <q>problem</q> of deciding whether or not they should be commutative is determined within the class definition. The following table summarizes the <q>handedness</q> of the listed operators, along with the method names for inclusion in class definitions.
+        </p>
+        <table>
+            <tabular>
+                <row bottom="major">
+                    <cell>Method</cell>
+                    <cell>Operation Defined</cell>
+                </row>
+                <row>
+                    <cell>
+                        <c>__add__(self, other)</c>
+                    </cell>
+                    <cell>
+                        <c>self + other</c>
+                    </cell>
+                </row>
+                <row>
+                    <cell>
+                        <c>__radd__(self, other)</c>
+                    </cell>
+                    <cell>
+                        <c>other + self</c>
+                    </cell>
+                </row>
+                <row>
+                    <cell>
+                        <c>__mul__(self, other)</c>
+                    </cell>
+                    <cell>
+                        <c>self * other</c>
+                    </cell>
+                </row>
+                <row>
+                    <cell>
+                        <c>__rmul__(self, other)</c>
+                    </cell>
+                    <cell>
+                        <c>other * self</c>
+                    </cell>
+                </row>
+            </tabular>
+        </table>
+        <p>
+            The first step in implementing the operations of addition and multiplication for Gaussian integers is to clearly articulate the algorithms. We should probably state a definition!
+        </p>
+        <definition>
+            <statement>
+                <p>
+                    An <em>algorithm</em> is a formal procedure which gives the necessary instructions to complete a task.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            This is a very loose definition, because a lot of procedures are algorithms, although we don't think of them in such terms: a recipe is an algorithm for producing food, after all. We will restrict our use of the terminology to procedures which enumerate the steps of some sort of computational task.
+        </p>
 
+    </introduction>
+    <subsection xml:id='sec-Functions-Overloading-ComplexOperations'>
+        <title>Operating on the Gaussian integers</title>
+    </subsection>
+</section>
+<!--
 <introduction>
 <p>
 Operator overloading is easy for a human and hard for a computer. A person can immediately see the symbol <c>+</c> and know from the context how to interpret it. For instance, we can immediately understand that there is a difference between ``<m>3+5</m>" and ``Alice + Bob." A computer has to be told how to handle each of them separately! This is handled by <em>overloading</em> the operator of <c>+</c>. Python does this behind the curtain. Every data type for which <c>+</c> makes sense must have in its class definition a method called <c>__add__</c>. In fact, usually it is implemented as <c>def __add__(self, other):</c>, and then the return value is <c>self + other</c>. It is generally also smart to define a <c>__radd__</c> method to return <c>other + self</c>, and for numerical quantities they should be equal<fn>Addition is almost universally a commutative operation.</fn>.
@@ -78,10 +159,10 @@ If it so happens that <m>d=0</m>, then <m>xy = ac+ibc</m>. Again, we can use thi
 <ol>
 <li><p>If <c>y</c> is a <c>ComplexNumber</c>, return 
 
-	<c>ComplexNumber(a * c - b * d, a * d + b * c)</c></p></li>
+ <c>ComplexNumber(a * c - b * d, a * d + b * c)</c></p></li>
 <li><p>If not, but <c>y</c> is either an <c>int</c> or a <c>float</c>, return
 
-	<c>ComplexNumber(a*y, b*y)</c></p></li>
+ <c>ComplexNumber(a*y, b*y)</c></p></li>
 <li><p>Otherwise, raise a <c>TypeError</c>.</p></li>
 </ol>
 
@@ -122,7 +203,7 @@ class ComplexNumber:
             else:
                 s = 'I*(' + str(b) + ')'
         return s
-                
+
     def norm(self):
         return sqrt(self.real_part**2 + self.imag_part**2)
 
@@ -183,5 +264,5 @@ In fact, we didn't need to do any of this work to implement complex numbers. Try
 \part{Matrix algorithms}
 </p>
 </subsection>
+</section>-->
 
-</section>
