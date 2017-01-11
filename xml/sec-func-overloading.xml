@@ -64,12 +64,12 @@
             </tabular>
         </table>
         <p>
-            The first step in implementing the operations of addition and multiplication for Gaussian integers is to clearly articulate the algorithms. We should probably state a definition!
+            The first step in implementing the operations of addition and multiplication for Gaussian integers is to clearly articulate the algorithms. We should probably state a definition.
         </p>
         <definition>
             <statement>
                 <p>
-                    An <em>algorithm</em> is a formal procedure which gives the necessary instructions to complete a task.
+                    An <em>algorithm</em> is a formal procedure which gives the necessary instructions to complete a task, often computational.
                 </p>
             </statement>
         </definition>
@@ -80,6 +80,15 @@
     </introduction>
     <subsection xml:id='sec-Functions-Overloading-ComplexOperations'>
         <title>Operating on the Gaussian integers</title>
+        <subsubsection>
+            <title>Complex addition</title>
+            <p>
+                Since we have decided that every real number can be written as a complex number with imaginary part <m>0</m>, it must be that whatever we define to be the addition operator in the complex numbers must respect real addition. In fact, if we treat <m>i</m> like a real variable rather than an imaginary constant, we get the desired definition from the distributive property. Suppose <m>z_1=x_1+iy_1</m> and <m>z_2=x_2+iy_2</m> are complex numbers. Then
+            </p>
+            <md>
+                <mrow> z_1 + z_2 = </mrow>
+            </md>
+        </subsubsection>
     </subsection>
 </section>
 <!--
