@@ -111,17 +111,20 @@
         </p>
         
         <p>
-            Before we begin to discuss addition, subtraction, multiplication, and powers, we will define a method for which there is not a built-in operator: the <em>norm</em>.
+            Before we begin to discuss addition, subtraction, multiplication, and powers, we will define two methods for which there is not a built-in operator: the <em>norm</em>, and the <em>complex conjugate</em>.
         </p>
         <definition>
             <statement>
-                If <m>z</m> is any complex number, the <em>norm of <m>z</m></em> is 
-                <me>\abs{z} = \sqrt{(\Real z)^2 + (\Imag z)^2}.</me>
-                This is a measure of the size of <m>z</m>.
+                <p>
+                    If <m>z=x+iy</m> is any complex number, the <em>norm of <m>z</m></em> is 
+                    <me>\abs{z} = \sqrt{(\Real z)^2 + (\Imag z)^2} = \sqrt{x^2+y^2}.</me>
+                    The <em>complex conjugate of <m>z</m></em> is
+                    <me>\bar{z} = \Real z - i(\Imag z) = x-iy.</me>
+                </p>
             </statement>
         </definition>
         <p>
-            Since there's not a built-in method for this, we will call the method <c>norm</c>.
+            Since there are not built-in methods for these, we will call the methods <c>norm</c> and <c>conj</c>.
         </p>
         <listing>
             <program>
@@ -132,6 +135,9 @@
                     
                         def norm(self):
                             return sqrt(self.realpart^2 + self.imagpart^2)
+                    
+                        def conj(self):
+                            return GaussianInteger(self.realpart, -self.imagpart)
                 </input>
             </program>
             <caption>Extending the Gaussian integer class to define the <em>norm</em>. Note that we can take advantage of Sage's built in mathematical capabilities and use the <c>sqrt</c> function without having to load any extra <q>libraries.</q></caption>
@@ -163,6 +169,9 @@
                     
                         def norm(self):
                             return sqrt(self.realpart^2 + self.imagpart^2)
+
+                        def conj(self):
+                            return GaussianInteger(self.realpart, -self.imagpart)
                     
                         def re(self):
                             return self.realpart

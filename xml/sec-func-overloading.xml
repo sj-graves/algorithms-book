@@ -85,193 +85,208 @@
             <p>
                 Since we have decided that every real number can be written as a complex number with imaginary part <m>0</m>, it must be that whatever we define to be the addition operator in the complex numbers must respect real addition. In fact, if we treat <m>i</m> like a real variable rather than an imaginary constant, we get the desired definition from the distributive property. Suppose <m>z_1=x_1+iy_1</m> and <m>z_2=x_2+iy_2</m> are complex numbers. Then
             </p>
-            <md>
-                <mrow> z_1 + z_2 = </mrow>
+            <md align='gather'>
+                <mrow> z_1 + z_2 &amp;= (x_1 + iy_1) + (x_2 + iy_2) </mrow>
+                <mrow> &amp;= (x_1+x_2) + i(y_1+y_2) </mrow>
             </md>
+            <p>
+                This turns into an algorithm very nicely, but what if one of <m>z_1</m> or <m>z_2</m> is of the wrong data type in Sage? Specifically, we want to be able to seamlessly add a Sage <c>Integer</c> to a <c>GaussianInteger</c> and have it return the correct <c>GaussianInteger</c>. This requires that we include a little type checking into our algorithm.
+            </p>
+            <algorithm>
+                <title>Addition for Gaussian integers</title>
+                <statement>
+                    <p>
+                        Suppose <c>self</c> is a <c>GaussianInteger</c> and <c>other</c> is some other input value.
+                    </p>
+                    <ol>
+                        <li> 
+                            If <c>other</c> and <c>self</c> have the same type, <c>GaussianInteger</c>, return a new <c>GaussianInteger</c> with real part <c>self.re()+other.re()</c> and imaginary part <c>self.im()+other.im()</c>.
+                        </li>
+                        <li>
+                            Otherwise, if <c>other</c> has type <c>Integer</c>, return a new <c>GaussianInteger</c> with real part <c>self.re()+other</c> and imaginary part <c>self.im()</c>.
+                        </li>
+                        <li>
+                            Otherwise raise an error.
+                        </li>
+                    </ol>
+                </statement>
+            </algorithm>
+            <p>
+                Now that we have an algorithm written down, writing the code is very direct. This is a virtue of using a Python-based language. In fact, we can do both left and right addition at the same time, since we know that addition of Gaussian integers is commutative.
+            </p>
+            <exercise>
+                <title>Implement addition for the Gaussian integer class</title>
+                <statement>
+                    Try implementing the algorithm above in the <c>__add__</c> and <c>__radd__</c> methods of <c>GaussianInteger</c>.
+                </statement>
+                <solution>
+                    <listing>
+                        <program>
+                            <input>
+                                class GaussianInteger:
+
+                                    ...
+
+                                    def __add__(self, other):
+                                        if type(other)==type(self):
+                                            return GaussianInteger(self.re()+other.re(),self.im()+other.im())
+                                        elif type(other)==type(1):
+                                            return GaussianInteger(self.re()+other, self.im())
+                                        else:
+                                            typeOther = str(type(other))
+                                            raise TypeError('Addition is not defined for ' + \
+                                                'GaussianInteger and ' + typeOther)
+
+                                    def __radd__(self, other):
+                                        return self+other
+                            </input>
+                        </program>
+                        <caption>The addition methods <c>__add__</c> and <c>__radd__</c> for class <c>GaussianInteger</c>.</caption>
+                    </listing>
+                    <p>
+                        Since <c>__radd__(self,other)</c> is the method called by <c>other + self</c> and addition of complex numbers is commutative, we have introduced fewer potential errors by allowing <c>__radd__</c> to simply return the value of <c>self + other</c>. It is often beneficial to think of ways that the same functions can be reused rather than rewriting the same algorithm multiple times.
+                    </p>
+                </solution>
+            </exercise>
+            
+        </subsubsection>
+        
+        <subsubsection>
+            <title>Complex multiplication</title>
+            <p>
+                Like with addition, we already know an algorithm (often called FOIL) for multiplying binomials; if we are treating <m>i</m> as a variable, we can use FOIL and then the distributive and associative properties to write the product of two Gaussian integers. Suppose <m>z_1=x_1+iy_1</m> and <m>z_2=x_2+iy_2</m> are complex numbers. Then
+            <md align='gather'>
+                <mrow> z_1z_2 &amp;= (x_1+i y_1)(x_2+i y_2) </mrow>
+                <mrow> &amp;= x_1x_2+ix_1y_2+ix_2y_1+i^2y_1y_2 </mrow>
+                <mrow> &amp;= (x_1x_2-y_1y_2)+i(x_1y_2+x_2y_1) </mrow>
+            </md>
+            </p>
+            <p>
+                Just like with addition, this is exactly what we want when both <c>self</c> and <c>other</c> are of type <c>GaussianInteger</c>, but what about when <c>other</c> is an <c>Integer</c>? Again, quickly adding some type verification makes for a complete and correct algorithm.
+            </p>
+            <algorithm>
+                <title>Multiplication for Gaussian integers</title>
+                <statement>
+                    <p>
+                        Suppose <c>self</c> is a <c>GaussianInteger</c> and <c>other</c> is some other input value.
+                    </p>
+                    <ol>
+                        <li> 
+                            If <c>other</c> and <c>self</c> have the same type, <c>GaussianInteger</c>, let <c>x = self.realpart</c>, <c>y = self.imagpart</c>, <c>a = other.re()</c>, and <c>b = other.im()</c>. Return a new <c>GaussianInteger</c> with real part <c>a*x-b*y</c> and imaginary part <c>a*y+b*x</c>.
+                        </li>
+                        <li>
+                            On the other hand, if <c>other</c> has type <c>Integer</c>, return a new <c>GaussianInteger</c> with real part <c>other*self.realpart</c> and imaginary part <c>other*self.imagpart</c>.
+                        </li>
+                        <li>
+                            Otherwise raise an error.
+                        </li>
+                    </ol>
+                </statement>                        
+            </algorithm>
+            <p>
+                We again are working with an operation which is commutative, so the implementation of <c>__rmul__</c> can be written as a direct call to <c>__mul__</c>.
+            </p>
+            <exercise>
+                <title>Implement multiplication for the Gaussian integer class</title>
+                <statement>
+                    Try implementing the above algorithm in the <c>__mul__</c> and <c>__rmul__</c> methods of the <c>GaussianInteger</c> class.
+                </statement>
+                <solution>
+                    <listing>
+                        <program>
+                            <input>
+                                class GaussianInteger:
+
+                                    ...
+
+                                    def __mul__(self, other):
+                                        if type(other)==type(self):
+                                            x, y = self.realpart, self.imagpart
+                                            a, b = other.re(), other.im()
+                                            return GaussianInteger(a*x-b*y, a*y+b*x)
+                                        elif type(other)==type(1):
+                                            return GaussianInteger(other*self.realpart, other*self.imagpart)
+                                        else:
+                                            typeOther = str(type(other))
+                                            raise TypeError('Multiplication is not defined for ' + \
+                                                'GaussianInteger and ' + typeOther)
+                                
+                                    def __rmul__(self,other):
+                                        return self*other
+                            </input>
+                        </program>
+                        <caption> The multiplication methods <c>__mul__</c> and <c>__rmul__</c> for the <c>GaussianInteger</c> class.</caption>
+                    </listing>
+                    <p>
+                        Like in the previous exercise, we can avoid implementing the same algorithm twice for multiplication by returning <c>self * other</c> in the body of <c>__rmul__</c>.
+                    </p>
+                </solution>
+            </exercise>
         </subsubsection>
     </subsection>
+    
+    <subsection>
+        <title>Other operators to overload</title>
+        <p>
+            There are many, many operators and methods which you will want to overload to make robust classes. In fact, nearly every routine mathematical function can be overloaded <emdash /> you just need to know the <q>hidden</q> Python name of the operator. A good place to see a list of built-in methods which correspond to operators is in the <c>help</c> files for the <c>complex</c> class! Sage can natively handle complex numbers both as expressions (specified in the form <c>3-4*I</c>) or as a special <c>ComplexNumber</c> class (specified in the form <c>3-4j</c> where <m>j=\sqrt{-1}</m> as is the rule in engineering and the sciences).
+        </p>
+        <sage>
+            <input>
+                z = 3-4j
+                print type(z)
+                help(complex)
+            </input>
+        </sage>
+        <exercise>
+            <title>Implement other operators</title>
+            <statement>
+                <p>Try to write algorithms and implement operators for some other common mathematical operations: negation, subtraction, and integer powers are a good place to start.</p>
+            </statement>
+            <solution>
+                <algorithm>
+                    <title>Negation</title>
+                    <statement>
+                        <p>
+                            If <c>self</c> is a <c>GaussianInteger</c>, return a new <c>GaussianInteger</c> with real part <c>-self.realpart</c> and imaginary part <c>-self.imagpart</c>.
+                        </p>
+                    </statement>
+                </algorithm>
+                <algorithm>
+                    <title>Subtraction</title>
+                    <statement>
+                        <p>
+                            Suppose <c>self</c> is a <c>GaussianInteger</c> and <c>other</c> is some other input value.
+                        </p>
+                        <ol>
+                            <li> 
+                                If <c>other</c> and <c>self</c> have the same type, <c>GaussianInteger</c>, or if <c>other</c> has type <c>Integer</c>, return <c>self + (-other)</c>.
+                            </li>
+                            <li>
+                                Otherwise raise an error.
+                            </li>
+                        </ol>
+                    </statement>
+                </algorithm>
+                <algorithm>
+                    <title>Integer powers</title>
+                    <statement>
+                        <p>
+                            Suppose <c>self</c> is a <c>GaussianInteger</c> and <c>other</c> is some other input value.
+                        </p>
+                        <ol>
+                            <li>
+                                If <c>other</c> has type <c>Integer</c>, let <c>value=GaussianInteger(1,0)</c>. Exactly <c>other</c> times, set <c>value = value*self</c>. Return <c>value</c>.
+                            </li>
+                            <li>
+                                Otherwise raise an error.
+                            </li>
+                        </ol>
+                    </statement>
+                </algorithm>
+            </solution>
+        </exercise>
+        <p>
+            Since there is a built-in <c>ComplexNumber</c> class implemented as a mathematical ring in Sage, we don't need to keep our <c>GaussianInteger</c> class for further use; however, you'll want to keep it to use for the end of chapter project.
+        </p>
+    </subsection>
 </section>
-<!--
-<introduction>
-<p>
-Operator overloading is easy for a human and hard for a computer. A person can immediately see the symbol <c>+</c> and know from the context how to interpret it. For instance, we can immediately understand that there is a difference between ``<m>3+5</m>" and ``Alice + Bob." A computer has to be told how to handle each of them separately! This is handled by <em>overloading</em> the operator of <c>+</c>. Python does this behind the curtain. Every data type for which <c>+</c> makes sense must have in its class definition a method called <c>__add__</c>. In fact, usually it is implemented as <c>def __add__(self, other):</c>, and then the return value is <c>self + other</c>. It is generally also smart to define a <c>__radd__</c> method to return <c>other + self</c>, and for numerical quantities they should be equal<fn>Addition is almost universally a commutative operation.</fn>.
-</p>
-</introduction>
-
-
-<subsection>
-<title>Complex addition</title>
-<p>
-What is the algorithm for complex addition? That is, if I defined <m>x=a+ib</m> and <m>y=c+id</m> for some <m>a,b,c,d\in\mathbb{R}</m>, what does it mean to write <m>x+y</m>? If we treat <m>x=a+ib</m> and <m>y=c+id</m> as polynomials in variable <m>i</m> with real coefficients, we can use the rules for polynomials and obtain
-<md>
-  <mrow>  x + y \amp  = (a+ib) + (c+id)</mrow>
-  <mrow>  \amp = a+c+ib+id</mrow>
-  <mrow>  \amp =(a+c) + i(b+d).</mrow>
-</md>
-</p>
-
-<p>
-Since it makes sense for complex numbers and real numbers to follow the same rules, this is a sensible definition for the algorithm of addition.
-</p>
-<algorithm>
-<p>
-(Complex Addition)
-Let <c>x</c> be a <c>ComplexNumber</c> with representation <c>(a,b)</c> and let <c>y</c> be some other variable.
-<ol>
-<li><p>If <c>y</c> is a <c>ComplexNumber</c> with representation <c>(c,d)</c>, return 
- <c>ComplexNumber(a + c, b + d)</c>.</p></li>
-<li><p>If not, but <c>y</c> is either an <c>int</c> or a <c>float</c>, return 
- <c>ComplexNumber(a + y, b)</c>.</p></li>
-<li><p>Otherwise, raise a <c>TypeError</c>.</p></li>
-</ol>
-
-</p>
-</algorithm>
-<p>
-For complex numbers, we update <c>les4_ex2.py</c> as follows to implement addition and right addition.
-</p>
-<pre>
-from math import sqrt
-
-class ComplexNumber:
-    ...
-    def __add__(self,other):
-        if type(other)==type(self):
-            return ComplexNumber(self.real_part + other.re(),
-                                 self.imag_part + other.im())
-        elif type(other) in [type(1), type(0.1)]:
-            return ComplexNumber(other + self.real_part, self.imag_part)
-
-    def __radd__(self, other):
-        return self.__add__(other)
-</pre>
-</subsection>
-
-
-<subsection>
-<title>Complex Multiplication</title>
-<p>
-Complex multiplication, like complex addition, follows naturally from the behavior of polynomials with real coefficients. Again letting <m>x=a+ib</m> and <m>y=c+id</m> be complex numbers, we see that
-<md>
-  <mrow>  xy \amp = (a+ib)(c+id)</mrow>
-  <mrow>  \amp = ac +ibc +iad + i^2bd</mrow>
-  <mrow>  \amp = (ac-bd)+i(bc+ad).</mrow>
-</md>
-</p>
-
-<p>
-If it so happens that <m>d=0</m>, then <m>xy = ac+ibc</m>. Again, we can use this to determine the algorithm for complex multiplication.
-</p>
-<algorithm>
-<p>
-(Complex Multiplication) Let <c>x</c> be a <c>ComplexNumber</c> with representation <c>(a,b)</c> and let <c>y</c> be some other variable.
-<ol>
-<li><p>If <c>y</c> is a <c>ComplexNumber</c>, return 
-
- <c>ComplexNumber(a * c - b * d, a * d + b * c)</c></p></li>
-<li><p>If not, but <c>y</c> is either an <c>int</c> or a <c>float</c>, return
-
- <c>ComplexNumber(a*y, b*y)</c></p></li>
-<li><p>Otherwise, raise a <c>TypeError</c>.</p></li>
-</ol>
-
-</p>
-</algorithm>
-<p>
-To implement this is similar to the implementation of addition: there are builtin operators for both left and right multiplication (which is important since multiplication is often not commutative) which can be overloaded, named <c>__mul__</c> and <c>__rmul__</c>. Including them, here is the final, full version of <c>les4_ex2.py</c>.
-</p>
-<pre>
-from math import sqrt
-
-class ComplexNumber:
-    """A complex number class.
-    """
-    def __init__(self,a,b):
-        if not (type(a) in [type(0), type(0.1)] and
-                type(b) in [type(0), type(0.1)]):
-            raise TypeError("ComplexNumber(a,b) expects a and b to both be of"\
-                            + " type 'int' or type 'float'.")
-        else:
-            self.real_part = a
-            self.imag_part = b
-
-    def __repr__(self):
-        return str( (self.real_part, self.imag_part) )
-
-    def __str__(self):
-        (a, b) = (self.real_part, self.imag_part)
-        if a != 0:
-            s = str(a)
-            if b&lt;0:
-                s += ' - I*(' + str(-b) + ')'
-            elif b>0:
-                s += ' + I*(' + str(b) + ')'
-        else:
-            if b&lt;0:
-                s = '-I*(' + str(b) + ')'
-            else:
-                s = 'I*(' + str(b) + ')'
-        return s
-
-    def norm(self):
-        return sqrt(self.real_part**2 + self.imag_part**2)
-
-    def re(self):
-        return self.real_part
-
-    def im(self):
-        return self.imag_part
-
-    def __add__(self,other):
-        (a, b) = (self.real_part, self.img_part)
-        if type(other)==type(self):
-            (c, d) = (other.re(), other.im())
-            return ComplexNumber(a + c, b + d)
-        elif type(other) in [type(1), type(0.1)]:
-            return ComplexNumber(other + a, b)
-        else:
-            raise TypeError("No method is defined for addition of "\
-                            + "ComplexNumber + '" \
-                            + other.__class__().__name__() + "'")
-
-    def __radd__(self, other):
-        return self.__add__(other)
-
-    def __mul__(self, other):
-        (a, b) = (self.real_part, self.imag_part)
-        if type(other)==type(self):
-            (c, d) = (other.re(), other.im())
-            return ComplexNumber(a * c - b * d, a * d + b * c)
-        elif type(other) in [type(0), type(0.1)]:
-            return ComplexNumber(a * other, b * other)
-        else:
-            raise TypeError("No method is defined for addition of "\
-                            + "ComplexNumber + '" \
-                            + other.__class__().__name__() + "'")
-
-    def __rmul__(self, other):
-        return self.__mul__(other)
-</pre>
-</subsection>
-
-
-<subsection>
-<title>Overloading other operators</title>
-<p>
-There are many, many operators and methods which you will want to overload to make robust classes. In fact, almost everything can be overloaded if you can determine how Python handles an operator behind the scenes. For numerical data types, there's an easy way to see what the ``normal" operators are: type <c>help(float)</c> and read the documentation for the <c>float</c> class! In fact, you can often inherit methods from ``parent" classes if the operations are already correct.
-</p>
-</subsection>
-
-
-<subsection>
-<title>``It's a trap!"</title>
-<p>
-In fact, we didn't need to do any of this work to implement complex numbers. Try <c>help(complex)</c>. Following a convention from engineering and the sciences, <m>j=\sqrt{-1}</m>, and entering <c>z = 5_3j</c> produces a complex number with full functionality. We won't be saving our <c>ComplexNumber</c> class for further use.
-</p>
-
-<p>
-\part{Matrix algorithms}
-</p>
-</subsection>
-</section>-->
-
