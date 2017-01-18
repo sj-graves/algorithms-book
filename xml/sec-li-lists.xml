@@ -84,7 +84,7 @@
         </sage>
 
         <p>
-            It is always the case that methods available to a variable <c>my_var</c> will be accessed via <c>my_var.method_name(...)</c>; we'll talk more about this when we get to <xref provisional="Chapter 4" />.
+            It is always the case that methods available to a variable <c>my_var</c> will be accessed via <c>my_var.method_name(...)</c>; we'll talk more about this when we get to <xref ref="ch-Functions" autoname='title'/>.
         </p>
     </subsection>
 
