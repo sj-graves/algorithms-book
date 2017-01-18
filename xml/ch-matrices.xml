@@ -1,0 +1,8 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="ch-Matrices">
+    <title>Matrices and their operations</title>
+    <!--<xi:include  href="section5_8x.xml" />-->
+    <xi:include  href="sec-matrices-defn.xml" />
+    <!--<xi:include  href="section5_2.xml" />-->
+    <xi:include  href="sec-matrices-ops.xml" />
+    <xi:include  href="sec-matrices-mult.xml" />
+</chapter>

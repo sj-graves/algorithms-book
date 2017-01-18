@@ -62,10 +62,10 @@
         <xi:include href="./ch-func.xml" />
 
         <!-- Part II: Matrices and Vectors -->
-        <xi:include href="./chapter5.xml" />
-        <xi:include href="./chapter6.xml" />
-        <xi:include href="./chapter7.xml" />
-        <xi:include href="./chapter8.xml" />
+        <xi:include href="./ch-matrices.xml" />
+        <xi:include href="./ch-vectors.xml" />
+        <xi:include href="./ch-LUdecomp.xml" />
+        <xi:include href="./ch-QRdecomp.xml" />
         
         <!-- Part III: Basic Cryptography -->
         <xi:include href="./chapter9.xml" />
