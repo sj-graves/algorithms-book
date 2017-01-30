@@ -24,12 +24,12 @@
     <exercise>
         <statement>
             <p>
-                Without executing any code, decide what <c>15//4</c> and <c>15%4</c> should be.
+                Without executing any code, decide what <c>17//4</c> and <c>17%4</c> should be.
             </p>
         </statement>
         <answer>
             <p>
-                Respectively, the answers should be <c>3</c> and <c>1</c>.
+                Respectively, the answers should be <c>4</c> and <c>1</c>.
             </p>
         </answer>
     </exercise>

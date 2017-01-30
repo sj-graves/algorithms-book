@@ -33,7 +33,7 @@
                 bar = "It's just a flesh wound."
                 n=79 - len(bar)
                 for i in range(n):
-                print i * ' ' + bar
+                    print i * ' ' + bar
             </input>
         </sage>
         <p>

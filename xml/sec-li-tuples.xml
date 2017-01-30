@@ -43,7 +43,7 @@
                 print eggs, "is a", type(eggs)
 
                 for yolk in eggs:
-                print yolk,
+                    print yolk,
 
                 eggs[3]=5
             </input>
