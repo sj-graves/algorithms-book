@@ -1,5 +1,6 @@
-<section>
-    <subsection>
+<section xml:id="sec-Matrices-Representation">
+    <title>Representing matrices</title>
+    <!--<subsection>
         <title>What is a matrix?</title>
         <p>
             A <em>matrix</em> is a rectangular grid of elements<fn>There's a much more technical definition, but for our purposes this is sufficient.</fn>; in our investigation, we will limit the elements to real numbers. For instance, and by way of demonstrating the form we will use to write a matrix,
@@ -28,68 +29,148 @@
         <p>
             Matrices have many, many interesting properties. These can be investigated at length in a course on Matrix Theory (like Math 3203: Matrix Methods) or better yet in a course on Linear Algebra (like Math 3315: Linear Algebra). We will take an approach much more like Matrix Theory than Linear Algebra so that we can avoid most or all of the ``proofiness."
         </p>
-    </subsection>
+    </subsection>-->
+    <p>
+        Since we have already experienced the use of the Sage <c>table</c> command to produce nice output for a list whose elements are equal-length lists, it seems sensible to make use of that model to represent matrices computationally.
+        <fn>
+            Sage comes equipped with a fully-featured implementation of matrix theory; given appropriate input, <c>matrix(input)</c> will produce robust matrices with all the bells and whistles. We are interested in replicating some of the features (not all!) of this matrix class in our own class for the experience of implementing the matrix algorithms.
+        </fn>
+    </p>
     <subsection>
-    <title>How would a computer best represent a matrix?</title>
-    <p>
-        There is a sort of natural way to represent a matrix algorithmically, which arises from the way we refer to elements of a matrix. For instance, if we are working with a matrix <m>A</m> and are interested in the element of <m>A</m> in the <m>i^\text{ th }</m> row and <m>j^\text{ th }</m> column<fn>By convention rows are horizontal and columns vertical.</fn>, we might logically refer to it mathematically as the element <m>a_{i,j}</m>. The number of rows of <m>A</m> is its <em>row dimension</em>, and the number of columns of <m>A</m> is its <em>column dimension</em>. Hence if we have
-        <me>
-            A=\begin{bmatrix}\pi\amp  e\amp  6.2 \\ \frac13 \amp  7 \amp  -42
-            \end{bmatrix}
-        </me>
-        we would say that <m>A</m> has row dimension <m>2</m> and column dimension <m>3</m>, or more concisely say that <m>A</m> is a <m>2\times 3</m> matrix. Row dimension is always listed first in this notation.
-    </p>
-
-    <p>
-        Since we index the element in the <m>i^\text{ th }</m> row and <m>j^\text{ th }</m> column as <m>a_{i,j}</m>, it seems natural that the <m>i^\text{ th }</m> row should be something like a list. In fact, since we won't want to overwrite individual elements of a matrix, we'll use a tuple of tuples to store the elements. Without any validation of input, this would be easy enough. However, if we want to be careful, there are many things which could go wrong in trying to input a matrix which we want to protect against <mdash /> after all, we might use this matrix class later for something more fun!
-    </p>
-
-    <p>
-        Here's a brief list of what could be incorrect input for a matrix:
+    <title>Initializing objects in the <c>aam_Matrix</c> class</title>
+        <p>
+            Mathematically, we denote a general matrix <m>A</m> with <m>m</m> rows and <m>n</m> columns as a <m>m\times n</m> matrix, and we write
+            <me>A = \begin{bmatrix}
+                <![CDATA[a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\]]>
+                <![CDATA[a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\]]>
+                <![CDATA[\vdots & \vdots & \vdots & \vdots \\]]>
+                <![CDATA[a_{m,1} & a_{m,2} & \cdots & a_{m,n} ]]>
+                \end{bmatrix} = 
+                \left[ a_{i,j}\right]_{m\times n}.
+            </me>
+            Since the <m>j^\text{th}</m> entry of the <m>i^\text{th}</m> row is <m>a_{i,j}</m>, however we represent the data of a matrix object <c>A</c> we will want to access the same element as <c>A[i][j]</c>; this implies that the data in the matrix is stored in something like a list of lists. In fact, to avoid overwriting individual elements of a matrix rather than the whole matrix, we will store the data as a tuple of tuples.
+        </p>
+        <p>
+            This would be easy enough, except we have already specified that a matrix must consist of a <em>rectangular</em> array of <em>numbers</em>; because of these requirements we have to specify an algorithm to correctly <em>validate the input</em> to our matrix initialization algorithm. Here's a brief list of what could be incorrect input for a matrix:
         <ol>
-            <li><p>The value input could not be have any elements (not a compound data type).</p></li>
-            <li><p>The elements of the input value could not be compound types.</p></li>
+            <li><p>The input could not have any elements (not a compound data type).</p></li>
+            <li><p>The elements of the input could not be of compound types.</p></li>
             <li><p>The first element of the input could be an empty container, like <c>[ ]</c>.</p></li>
             <li><p>The length of the elements of the inputs could be different.</p></li>
             <li><p>The innermost elements could be non-numeric.</p></li>
-        </ol>
-    </p>
-
-    <p>
-        All of these errors are addressed in the following code, which you should save as <c>Matrix.py</c>.
-    </p>
-    <pre>
-        class Matrix:
-            """A matrix class.
-            """
-            def __init__(self, grid):
-                input_err = '\n\nMatrix class requires rectangular grid of numbers '+\
-                    'as input.\n\n'
-                try:
-                    # will raise error if not compound
-                    self._coldim = len(grid[0])
-                    if self._coldim==0: # empty first row
-                        raise ValueError(input_err) 
-                    self._data = []
-                    for row in grid:
-                        # check row length and that all row elements are numbers
-                        if (len(row)!=self._coldim) or \
-                            not all([type(x) in [float,int] for x in row]):
-                            raise ValueError(input_err[2:-2]) 
-                        else:
-                            self._data.append(tuple(row))
-                except:
-                    print(input_err)
-                    raise
-                self._data = tuple(self._data)
-                self._rowdim = len(grid)
-
-            def __repr__(self):
-                return str(self._data)
-    </pre>
-    <p>
-        This code, like many, introduces a new command, <c>all</c>. This is a special boolean function which takes a compound object as its only argument. The effect of running <c>all</c> on a list <c>spam</c> would be to return <c>True</c> if and only if <c>bool(x)</c> returns <c>True</c> for every <c>x</c> in <c>spam</c>. We won't worry about producing a prettier output than provided by <c>Matrix.__repr__</c> at this point, so we'll leave <c>Matrix.__str__</c> undefined.
-    </p>
-</subsection>
-
+            </ol>
+            In all of these cases, we want the initialization routine to raise a <c>ValueError</c>.
+        </p>
+        <p>
+            An additional consideration to the design of a matrix class involves the choice of attributes. For an <m>m\times n</m> matrix, it will be very useful to store not just a <c>data</c> attribute but also attributes for each of the column dimension <m>n</m> and row dimension <m>n</m> of the matrix. 
+        </p>
+        <algorithm>
+            <title>Initialization of a matrix object</title>
+            <statement>
+                <p>
+                Consider that <c>grid</c> is the input.
+                </p>
+                <ol>
+                    <li> Check that the initial element of <c>grid</c> has an initial element; this will raise an error if <c>grid</c> is not a container of containers.</li>
+                    <li> Check that each of the elements of <c>grid</c> has the same length; this will raise an error if the array is not rectangular.</li>
+                    <li> Check that each element of each element of <c>grid</c> is numeric.</li>
+                </ol>
+            </statement>
+        </algorithm>
+        <p>
+            All of these errors are addressed in the following code, which you should save as <c>aam_Matrix.sage</c>.
+        </p>
+        <listing xml:id="matrix_init">
+            <program>
+                <input>
+                    class aam_Matrix:
+                        """A matrix class.
+                        """
+                        def __init__(self, grid):
+                            input_error = "aam_Matrix(grid) expects grid to be a rectangular array " +\
+                                          "(list of lists) of numbers."
+                            try:
+                                # If grid[0][0] cannot be accessed, grid is not a container of containers.
+                                grid[0][0]
+                            except:
+                                raise ValueError(input_error)
+                            self.col_dim = len(grid[0])
+                            for row in grid:
+                                # If some row has length different from the col_dim, the grid is not rectangular
+                                if len(row)!=self.col_dim:
+                                    raise ValueError(input_error)
+                                try:
+                                    # Adding an integer to a non-numeric quantity will raise an exception.
+                                    [x+1 for x in row]
+                                except:
+                                    raise ValueError(input_error)
+                            self.row_dim = len(grid)
+                            self.data = tuple(tuple(row) for row in grid)
+                </input>
+            </program>
+            <caption>Initialization of our matrix class</caption>
+        </listing>
+        
+        <exercise>
+            <title>Input validation using "any" and "all"</title>
+            
+            <statement>
+                <p>
+                    The <c>all(some_list)</c> function returns <c>True</c> if all of the elements of <c>some_list</c> 
+                    are <c>True</c>. Similarly, the <c>any(some_list)</c> function returns <c>True</c> if at least one 
+                    of the elements of <c>some_list</c> is <c>True</c>.
+                </p>
+                <p>
+                    Look at <xref ref="matrix_init" autoname="title" /> and rewrite the section which checks to see that 
+                    all elements of <c>grid</c> are numeric, using the <c>any</c> or <c>all</c> command.
+                </p>
+            </statement>
+        </exercise>
+    </subsection>
+    <subsection>
+        <title>Representing <c>aam_Matrix</c> as a string</title>
+        <p>
+            To reiterate a point from <xref ref="sec-Functions-Classes" autoname='title' />, it is important after defining the initialization method of a new class to define the representation method, <c>__repr__</c>. An easy way to represent an <c>aam_Matrix</c> object is simply by returning the string of its <c>data</c> attribute.
+        </p>
+        <listing>
+            <program>
+                <input>
+                    class aam_Matrix:
+                        ...
+                        def __repr__(self):
+                            return str(self.data)
+                </input>
+            </program>
+            <caption>A simple <c>__repr__</c> method for the <c>aam_Matrix</c> class</caption>
+        </listing>
+        <exercise>
+            <title>A more sophisticated <c>__repr__</c> for <c>aam_Matrix</c></title>
+            <statement>
+                <p>
+                    While the listing above meets the requirement of providing string output to represent an object in the <c>aam_Matrix</c> class, it doesn't quite look the way mathematicians prefer to represent matrices. Consider the following alternative code listing:
+                </p>
+                <listing>
+                    <program>
+                        <input>
+                            class aam_Matrix:
+                                ...
+                                def __repr__(self):
+                                    sl = lambda thing: len(str(thing))
+                                    cell_widths = [max([sl(row[j]) for row in self.data]) for j in range(self.col_dim)]
+                                    pad = lambda thing, j: (cell_widths[j]-sl(thing))*' '+str(thing)
+                                    out_str = ""
+                                    for row in self.data:
+                                        out_str += "[" + " ".join([pad(entry,col) for col,entry in enumerate(row)]) + "]\n"
+                                    out_str = out_str[:-1]
+                                    return out_str
+                        </input>
+                    </program>
+                    <caption>A sophisticated <c>__repr__</c> method for the <c>aam_Matrix</c> class.</caption>
+                </listing>
+                <p>
+                    Without simply implementing this in your code, explain line-by-line the execution of this code. What will the output for an arbitrary numerica matrix look like?
+                </p>
+            </statement>
+        </exercise>
+    </subsection>
 </section>

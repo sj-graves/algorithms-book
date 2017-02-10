@@ -1,8 +1,53 @@
 <chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="ch-Matrices">
     <title>Matrices and their operations</title>
+    <introduction>
+        <title>What is a matrix?</title>
+        <p>
+            A <em>matrix</em> is a rectangular grid numerical elements. For instance, and by way of demonstrating the form we will use to write a matrix,
+            <me>
+                A=\begin{bmatrix}
+                <![CDATA[ \pi & e & 6.2 \\]]>
+                <![CDATA[ \frac13 & 7 & -42]]>
+                \end{bmatrix}
+            </me>
+            and
+            <me>
+                B = \begin{bmatrix}
+                <![CDATA[1 & 0 & 0 & 0 \\]]>
+                <![CDATA[0 & 1 & 0 & 0 \\]]>
+                <![CDATA[0 & 0 & 1 & 0 \\]]>
+                <![CDATA[0 & 0 & 0 & 1]]>
+                \end{bmatrix}
+            </me>
+            are matrices. Neither
+            <me>
+                C = \begin{bmatrix}
+                <![CDATA[5 & 8 \\]]>
+                <![CDATA[2 & 3 & 0 ]]>
+                \end{bmatrix}
+            </me>
+            nor
+            <me>
+                D = \begin{bmatrix}
+                <![CDATA[\text{Eric} & \text{John}\\]]>
+                <![CDATA[\text{Graham} & \text{Terry}]]>
+                \end{bmatrix}
+            </me>
+            are matrices, the first because it is non-rectangular and the second because the names of members of Monty Python are not numbers.
+        </p>
+        
+        
+    </introduction>
     <!--<xi:include  href="section5_8x.xml" />-->
     <xi:include  href="sec-matrices-defn.xml" />
     <!--<xi:include  href="section5_2.xml" />-->
     <xi:include  href="sec-matrices-ops.xml" />
     <xi:include  href="sec-matrices-mult.xml" />
+    
+    <conclusion>
+        <title>A formal definition of a matrix</title>
+        <p>
+            To formally define a matrix requires a notion of a <em>field</em>, which is a particularly strong algebraic object. The model of a field is the set of rational numbers with the operations of addition, subtraction, multiplication, and division by nonzero numbers. Once the <em>field axioms</em> are satisfied for a particular set, there are a further set of axioms which define a <em>vector space</em> over the field. The behavior of matrices with elements from a given field is directly tied to the concept of a <em>linear transformation</em> of a vector space over that field. For an online introduction to matrix theory, vector space theory, and linear algebra, see the online beta version of Dr. Rob Beezer's <url href='http://linear.ups.edu/fcla/index.html' > First Course in Linear Algebra</url>.
+        </p>
+    </conclusion>
 </chapter>

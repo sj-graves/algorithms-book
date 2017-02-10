@@ -4,7 +4,7 @@
         Python works really well with integers (which have type <c>int</c>) and floating point numbers (which have type <c>float</c>), and carefully respects order of operations, and of course Sage inherits this. But Sage is a <em>mathematical</em> programming language, so it automatically knows more than Python about numbers. For instance, in Python, the division operator <c>/</c> automatically returns a <c>float</c>.
     </p>
     <p>
-        Sage generally doesn't mess around with <c>float</c>, but uses a built-in implementation of the <xref ref="def_ring" autoname="title" /> of real numbers. Similarly, calculations involving integers in Sage use a ring of integers, rather than simply using Python's <c>int</c>. For everyday calculations this makes Sage much, much more powerful, as calculations default to being <em>exact</em>. Numerical approximations of a number can be obtained using the <c>N</c> or <c>n</c> built-ins.
+        Sage generally doesn't mess around with <c>float</c>, but uses a built-in implementation of the <xref ref="def_ring" autoname="title" /> of real numbers. Similarly, calculations involving integers in Sage use a "ring" of integers, rather than simply using Python's <c>int</c>. For everyday calculations this makes Sage much, much more powerful, as calculations default to being <em>exact</em>. Numerical approximations of a number can be obtained using the <c>N</c> or <c>n</c> built-ins.
     </p>
     <sage>
         <input>
@@ -56,36 +56,40 @@
     </p>
 
     <subsection>
-        <title>Extra Definitions</title>
-        <p>If I use terms in the text to be precise but we don't really need a formal mathematical definition, I will try to include a small subsection like this defining them rigorously.
+        <title>Technical definitions</title>
+        <p>
+            In the above discussion, I refer to a "ring" of integers; for the purposes of our class, it is immaterial what constitutes a ring, but there is a formal mathematical definition. You should consider a ring to be a set of elements for which it makes sense to add, subtract, and multiply, but not necessarily to divide: just like the integers! The notation for the set of all integers is <m>\mathbb{Z}</m>.
         </p>
-        <definition xml:id="def_ring">
-            <title>Ring</title>
-            <statement>
-                <p>A <em>ring</em> is a set <m>R</m> along with two binary operations, generally called addition <m>+</m> and multiplication <m>\cdot</m>, which satisfy the following properties when <m>a,b,c\in R</m>:
-                </p>
-                <ol>
-                    <li><m>(a+b)+c=a+(b+c)</m>,</li>
-                    <li><m>a+b=b+a</m>,</li>
-                    <li>there is an element <m>0\in R</m> such that <m>a+0=a</m> for every <m>a\in R</m>,</li>
-                    <li>for each element <m>a\in R</m> there is a unique element <m>-a\in R</m> such that <m>(-a)+a=0</m></li>
-                    <li><m>(a\cdot b)\cdot c = a\cdot(b\cdot c)</m></li>
-                    <li> there is an element <m>1\in R</m> such that <m>1\cdot a=a</m> for every <m>a\in R</m>,</li>
-                    <li> <m>a\cdot(b+c)=a\cdot b+a\cdot c</m>, and</li>
-                    <li> <m>(a+b)\cdot c = a\cdot c+b\cdot c</m>.</li>
-                </ol>
-            </statement>
-        </definition>
-        <convention xml:id="convention_named-rings">
-            <title>These are a few of my favorite rings</title>
-            <p>There are several rings of numbers which are used so frequently that they need names.</p>
-            <ul>
-                <li><m>\mathbb{Z}</m> is the ring of integers, <m>\set{\ldots,-3,-2,-1,0,1,2,3,\ldots}</m>. I will denote by <m>\mathbb{Z}^+</m> the set of positive integers.</li>
-                <li><m>\mathbb{Q}</m> is the ring of rational numbers, <m>\set{p/q:p,q\in \mathbb{Z}, q\neq 0}</m>.</li>
-                <li><m>\mathbb{R}</m> is the ring of real numbers.</li>
-                <li><m>\mathbb{C}</m> is the ring of complex numbers.</li>
-            </ul>
-        </convention>
+        <example>
+            <title>A formal definition of rings, and some examples.</title>
+            <definition xml:id="def_ring">
+                <title>Ring</title>
+                <statement>
+                    <p>A <em>ring</em> is a set <m>R</m> along with two binary operations, generally called addition <m>+</m> and multiplication <m>\cdot</m>, which satisfy the following properties when <m>a,b,c\in R</m>:
+                    </p>
+                    <ol>
+                        <li><m>(a+b)+c=a+(b+c)</m>,</li>
+                        <li><m>a+b=b+a</m>,</li>
+                        <li>there is an element <m>0\in R</m> such that <m>a+0=a</m> for every <m>a\in R</m>,</li>
+                        <li>for each element <m>a\in R</m> there is a unique element <m>-a\in R</m> such that <m>(-a)+a=0</m></li>
+                        <li><m>(a\cdot b)\cdot c = a\cdot(b\cdot c)</m></li>
+                        <li> there is an element <m>1\in R</m> such that <m>1\cdot a=a</m> for every <m>a\in R</m>,</li>
+                        <li> <m>a\cdot(b+c)=a\cdot b+a\cdot c</m>, and</li>
+                        <li> <m>(a+b)\cdot c = a\cdot c+b\cdot c</m>.</li>
+                    </ol>
+                </statement>
+            </definition>
+            <convention xml:id="convention_named-rings">
+                <title>These are a few of my favorite rings</title>
+                <p>There are several rings of numbers which are used so frequently that they need names.</p>
+                <ul>
+                    <li><m>\mathbb{Z}</m> is the ring of integers, <m>\set{\ldots,-3,-2,-1,0,1,2,3,\ldots}</m>. I will denote by <m>\mathbb{Z}^+</m> the set of positive integers.</li>
+                    <li><m>\mathbb{Q}</m> is the ring of rational numbers, <m>\set{p/q:p,q\in \mathbb{Z}, q\neq 0}</m>.</li>
+                    <li><m>\mathbb{R}</m> is the ring of real numbers.</li>
+                    <li><m>\mathbb{C}</m> is the ring of complex numbers.</li>
+                </ul>
+            </convention>
+        </example>
         <theorem xml:id="thm_DivisionAlg">
             <title>The Division Algorithm</title>
             <statement>

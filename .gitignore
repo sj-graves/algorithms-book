@@ -51,4 +51,5 @@ knowl
 html
 *.html
 latex/*.pdf
-xml/temp.sagews
+xml/*.sage
+xml/*.sagews
