@@ -35,7 +35,9 @@
             </me>
             are matrices, the first because it is non-rectangular and the second because the names of members of Monty Python are not numbers.
         </p>
-        
+        <p>
+            We will use this chapter to build a Sage class <c>aam_Matrix</c> representing mathematical matrices, and refine it in further chapters.
+        </p>
         
     </introduction>
     <!--<xi:include  href="section5_8x.xml" />-->

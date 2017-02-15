@@ -1,181 +1,324 @@
 <section xml:id="sec-Matrices-Operations">
     <title>Beginning matrix operations</title>
-    <p>
-        The first matrix operations we will define are more about getting information from a matrix that we have represented than about combining matrices or changing their contents. First, we discussed above the notation of <m>m\times n</m> to denote that a matrix has <m>m</m> rows and <m>n</m> columns. It will be necessary for many of our other methods that we be able to determine the <em>dimensions</em> of a matrix, and we don't want to access the <q>hidden</q> variables directly.
-    </p>
-    <exercise>
-        <title>Dimensions method for the <c>aam_Matrix</c> class</title>
-        <statement>
-            <p>
-                Write a method <c>dims</c> in the <c>aam_Matrix</c> class which returns the dimensions of the matrix as a <c>tuple</c>, and add the function to <c>aam_Matrix.sage</c>.
-            </p>
-        </statement>
-    </exercise>
-    <p>
-        There is a incompatibility between the notation for entries in a matrix mathematically and the notation for indexing tuples-of-tuples in Python and Sage.  Recall that the entry in the <m>i^\text{th}</m> row and <m>j^\text{th}</m> column of a matrix <m>A</m> is denoted <m>a_{i,j</m>, but that if <c>A</c> is instead a tuple-of-tuples in Sage, the <m>j^\text{th}</m> element of the <m>i^\text{th}</m> tuple of <c>A</c> is indexed as <c>A[i-1][j-1]</c>. The built-in method for indexing for container classes is <c>__getitem__</c>. 
-    </p>
-    <convention>
-        <title>Indexing in the <c>aam_Matrix</c> class</title>
-        <statement>
-            We will implement <c>__getitem__</c> in such a way that the entry <m>a_{i,j}</m> of the mathematical matrix <m>A</m> will be accessed via <c>A[i,j]</c> when <c>A</c> is the corresponding <c>aam_Matrix</c>.
-        </statement>
-    </convention>
-    <p>
-        For mutable container data types, there is a corresponding method <c>__setitem__</c>, which we will note implement! We have to be careful that the second argument of <c>__getitem__</c> is a tuple, so that comma-separated values are passed correctly.
-    </p>
-    <!--<p>
-        A slight problem between the notation for matrices in mathematics and the implementation of matrices in Python has to do with indexing of the dimensions. Specifically, the <m>a_{i,j}</m> element of a matrix <m>A</m> would be stored as <c>A._data[i-1][j-1]</c>. The builtin method which allows us to use the ``bracket notation" for indexing of lists, strings, etc., is <c>__getitem__</c>. Likewise, those compound data types which are <em>mutable</em> have another method defined, <c>__setitem__</c>. We want to define only the first of these, and we will use Python indexing <mdash /> in fact, the element <m>a_{i,j}</m> will be indexed as <c>A[i-1,j-1]</c>. Add the following to <c>Matrix.py</c>.
-    </p>
-    <pre>
-        def __getitem__(self, coords):
-        if type(coords)!=type( (1,1) ):
-        raise TypeError('Matrices require a tuple for indexing.')
-        i,j = coords
-        return self._data[i][j]
-    </pre>-->
-    <listing>
-        <program>
-            <input>
-                class aam_Matrix:
-                    ...
-                    def __getitem__(self,(i,j)):
-                        if all([type(i)==type(1), type(j)==type(1), 1 &lt;= i &lt;= self.row_dim, 1 &lt;= j &lt;= self.col_dim]):
-                            return self.data[i-1][j-1]
-                        else:
-                            raise IndexError('index out of bounds or of non-integer type.')
-            </input>
-        </program>
-        <caption>A method to access indexed elements in the <c>aam_Matrix</c> class.</caption>
-    </listing>
-    <p>
-        Now that we can both determine the dimensions of a matrix and read off its elements directly, we are ready to start building new matrices from old. The first way we will do this is via <em>scalar multiplication</em>. A <em>scalar</em> is a member of the set of numbers with which the matrix is filled <mdash /> for our purposes, these are <em>real numbers</em>, implemented as <c>int</c>s and <c>float</c>s. As a matter of notation, we will refer to a matrix <m>A</m> whose element in the <m>i^\text{ th }</m> row and <m>j^\text{ th }</m> column is <m>a_{i,j}</m> by writing <m>A=[a_{i,j}]</m>.
-    </p>
-    <definition>
-        <statement>
-            <p>
-                Let <m>k</m> be a real number and <m>A=[a_{i,j}]</m> a real matrix. Then the <term>scalar product of <m>A</m> by <m>k</m></term> is the real matrix <m>kA = [k\cdot a_{i,j}]</m>. That is, the elements of <m>kA</m> are the elements of <m>A</m>, each multiplied by <m>k</m>.
-            </p>
-        </statement>
-    </definition>
+    <subsection>
+        <title>Dimensions and indexing</title>
+        <p>
+            The first matrix operations we will define are more about getting information from a matrix that we have represented than about combining matrices or changing their contents. First, we discussed above the notation of <m>m\times n</m> to denote that a matrix has <m>m</m> rows and <m>n</m> columns. It will be necessary for many of our other methods that we be able to determine the <em>dimensions</em> of a matrix, and we don't want to access the <q>hidden</q> variables directly.
+        </p>
+        <exercise>
+            <title>Dimensions method for the <c>aam_Matrix</c> class</title>
+            <statement>
+                <p>
+                    Write a method <c>dims</c> in the <c>aam_Matrix</c> class which returns the dimensions of the matrix as a <c>tuple</c>, and add the function to <c>aam_Matrix.sage</c>.
+                </p>
+            </statement>
+        </exercise>
+        <p>
+            There is a incompatibility between the notation for entries in a matrix mathematically and the notation for indexing tuples-of-tuples in Python and Sage.  
+            In mathematical notation, the entry in the <m>i^\text{th}</m> row and <m>j^\text{th}</m> column of a matrix <m>A</m> is generally denoted <m>a_{i,j}</m>. 
+            If the same matrix is represented as a tuple of tuples <c>A</c> in Sage, then the same position is found in index <c>A[i-1][j-1]</c>; to access <c>A[i-1][j-1]</c>
+            for an object of type <c>aam_Matrix</c> will require that we implement the <c>__getitem__</c> method in the class.
+        </p>
+        <convention>
+            <title>Indexing in the <c>aam_Matrix</c> class</title>
+            <statement>
+                We will implement <c>__getitem__</c> in such a way that the entry <m>a_{i,j}</m> of the mathematical matrix <m>A</m> will be accessed via <c>A[i,j]</c> when <c>A</c> is the corresponding <c>aam_Matrix</c>.
+            </statement>
+        </convention>
+        <p>
+            For mutable container data types, there is a corresponding method <c>__setitem__</c>, which we will note implement! We have to be careful that the second argument of <c>__getitem__</c> is a tuple, so that comma-separated values are passed correctly.
+        </p>
+        <listing>
+            <program>
+                <input>
+                    class aam_Matrix:
+                        ...
+                        def __getitem__(self,(i,j)):
+                            if all([type(i)==type(1), 
+                                    type(j)==type(1), 
+                                    1 &lt;= i &lt;= self.row_dim, 
+                                    1 &lt;= j &lt;= self.col_dim
+                                   ]):
+                                return self.data[i-1][j-1]
+                            else:
+                                raise IndexError('index out of bounds or of non-integer type.')
+                </input>
+            </program>
+            <caption>A method to access indexed elements in the <c>aam_Matrix</c> class.</caption>
+        </listing>
+    </subsection>
+    
+    <subsection>
+        <title>Mathematical operations on a matrix</title>
+        <p>
+            Now that we can both determine the dimensions of a matrix and read off its elements directly, we are ready to start building new matrices 
+            from old. The first way we will do this is via <em>scalar multiplication</em>. A <em>scalar</em> is a member of the set of numbers with 
+            which the matrix is filled <mdash /> for our purposes, these are <em>real numbers</em>. 
+        </p>
+        <subsubsection>
+            <title>Scalar multiplication</title>
+            <definition>
+                <title>Scalar product of a matrix</title>
+                <statement>
+                    <p>
+                        Let <m>k</m> be a real number and <m>A=[a_{i,j}]</m> a real matrix. Then the <term>scalar product of <m>A</m> by <m>k</m></term> 
+                        is the real matrix <m>kA = [k\cdot a_{i,j}]</m>. That is, the elements of <m>kA</m> are the elements of <m>A</m>, each multiplied 
+                        by <m>k</m>.
+                    </p>
+                </statement>
+            </definition>
 
-    <example>
-        <statement>
+            <example>
+                <title>Example of a scalar product of matrices</title>
+                <statement>
+                    <p>
+                        As an example, consider <m>k = \frac12</m> and
+                        <md alignment="gather">
+                            <mrow>
+                                A &amp;= \begin{bmatrix}
+                                <![CDATA[3 &  4 &  6 \\]]>
+                                <![CDATA[5 &  9 &  12  ]]>
+                                \end{bmatrix}.
+                            </mrow>
+                        </md>
+                    </p>
+                    <p>
+                        Then
+                        <me>
+                            A\cdot k = \begin{bmatrix}\frac32 \amp  2 \amp  3 \\ \frac52 \amp  \frac92 \amp  6
+                            \end{bmatrix} = k\cdot A .
+                        </me>
+                    </p>
+                </statement>
+            </example>
+
+            <!--p>
+                Unfortunately, we're going to want to use the same operator (<c>*</c>, defined in <c>__mul__</c> and <c>__rmul__</c>) for scalar multiplication, which we've just defined, and <em>matrix multiplication</em>, which is much more complicated. We'll handle this inside the <c>__mul__</c> method by an <c>if</c> statement, and we'll let the case where both <c>Self</c> and <c>other</c> have type <c>Matrix</c> just <c>pass</c> for now.
+            </p-->
             <p>
-                As an example, consider
-                <me>
-                    A = \begin{bmatrix}3 \amp  4 \amp  6 \\ 5 \amp  9 \amp  12
-                    \end{bmatrix} \text{ and }  k =\frac12.
-                </me>
+                In the <xref ref="sec-Matrices-Multiplication" autoname="no">next section of this chapter</xref>, we're going to define the mathematical operation
+                of <em>matrix multiplication</em>, and for both matrix multiplication and scalar multiplication we will want to use <c>*</c> (as defined by the 
+                <c>__mul__</c> and <c>__rmul__</c> methods) as the multiplication operator. This will be handled inside an <c>if</c> statement in the <c>__mul__</c>
+                method of <c>aam_Matrix</c>.
             </p>
+            <algorithm>
+                <title>Scalar multiplication of matrices</title>
+                <statement>
+                    <p>
+                        Let <c>self</c> be a matrix in the class <c>aam_Matrix</c>, and let <c>other</c> be the value by which <c>self</c> is to be multiplied.
+                    </p>
+                    <ol>
+                        <li>Test the type of <c>other</c> to ensure it is a numeric type. If not, raise a <c>TypeError</c>.</li>
+                        <li>Create a new list of lists whose elements are <c>other*self[i,j]</c> in the <m>j^\text{th}</m> element of the <m>i^\text{th}</m> list.</li>
+                        <li>Construct a new <c>aam_Matrix</c> from this new list of lists.</li>
+                    </ol>            
+                </statement>
+            </algorithm>
+            <exercise>
+                <title>Implementing scalar multiplication of matrices</title>
+                <statement>
+                    <p>Complete the following code for scalar multiplication.</p>
+                    <listing>
+                        <program>
+                            <input>
+                                class aam_Matrix:
+                                    ...
+                                    def __mul__(self, other):
+                                        """ Implement self * other in the aam_Matrix class."""
+                                        try:
+                                            N(other) #This will raise an error if other is of a non-numeric type.
+                                            <!--new_grid = [[other*self[i,j] for j in [1..self.col_dim]] for i in [1..self.row_dim]]-->
+                                            """
+                                            In this space, build an object new_grid containing the correct data 
+                                            and structure to make the next command returning aam_Matrix(new_grid)
+                                            succeed.
+                                            """
+                                            return aam_Matrix(new_grid)
+                                        except TypeError:
+                                            if type(other)==type(self):
+                                                <!--(m,n) = self.dims()
+                                                (p,q) = other.dims()
+                                                if n != p:
+                                                    raise ValueError('Dimension mismatch - left matrix dimensions '+str( (m,n) )+' but right matrix dimensions '+str( (p,q) )+'.')
+                                                else:
+                                                    """
+                                                    Replace this multiline comment with a careful definition of new_grid
+                                                    so that the following line, return aam_Matrix(new_grid), successfully
+                                                    builds the matrix product.
+                                                    """
+                                                    new_grid = [[sum([self[i,j]*other[j,k] for j in [1..n]]) for k in [1..q]] for i in [1..m]]
+                                                    return aam_Matrix(new_grid)-->
+                                                pass
+                                            else:
+                                                raise TypeError('Matrix multiplication by '+str(type(other)) + \
+                                                    ' objects is not defined.')
+                            </input>
+                        </program>
+                        <caption>
+                            A partial code for the <c>__mul__</c> method in class <c>aam_Matrix</c>. In the sixteenth line, the <c>pass</c> statement is a <em>stub</em> 
+                            where we will later insert the code for multiplication of two <c>aam_Matrix</c> objects.
+                        </caption>
+                    </listing>
+                </statement>
+            </exercise>
+            <p>
+                The previous operation is a binary operation between matrices and scalars; our first operation which will combine two distinct matrices is
+                addition. Addition of matrices is carries out component-wise, which necessitates that the two matrices have the same dimensions.
+            </p>
+        </subsubsection>
+        <subsubsection>
+            <title>Matrix addition and subtraction</title>
+            <definition>
+                <statement>
+                    <p>
+                        Suppose <m>A=[a_{i,j}]</m> and <m>B=[b_{i,j}]</m> are both <m>m\times n</m> matrices. Then their <term>sum</term> is the <m>m\times n</m> matrix <m>A+B = [a_{i,j}+b_{i,j}]</m>. That is, addition is carried out element-wise.
+                    </p>
+                </statement>
+            </definition>
+
+            <example>
+                <title>Example of addition between matrices</title>
+                <statement>
+                    <p>
+                        Suppose we have the following three matrices:
+                        <md alignment="gather">
+                            <mrow>
+                                <![CDATA[A = \begin{bmatrix} 3 & 4 & 6 \\ 5 & 9 & 12 \end{bmatrix}, & ]]>
+                                <![CDATA[B = \begin{bmatrix} \pi & -4 & -5 \\ 2 & 2 & -2 \end{bmatrix}, &]]>
+                                <![CDATA[C = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}.]]>
+                            </mrow>
+                            <!--<mrow>  A \amp= \begin{bmatrix} 3 \amp  4 \amp  6</mrow>
+                            <mrow>  5 \amp  9 \amp  12 \end{bmatrix} \amp 
+                                B \amp = \begin{bmatrix} \pi \amp  -4 \amp  -5</mrow>
+                            <mrow>  2 \amp  2 \amp  -2 \end{bmatrix} \amp 
+                                C \amp = \begin{bmatrix} 1 \amp  0 \amp  0</mrow>
+                            <mrow>  0 \amp  1 \amp  0</mrow>
+                            <mrow>  0 \amp  0 \amp  1 \end{bmatrix}</mrow>-->
+                        </md>
+                    </p>
+
+                    <p>
+                        Then <m>A+B</m> exists but neither <m>A+C</m> nor <m>B+C</m> is defined. The sum of <m>A</m> and <m>B</m> is
+                        <md>
+                            <mrow>
+                                A + B \amp = 
+                                <![CDATA[\begin{bmatrix} 3 & 4 & 6 \\ 5 & 9 & 12 \end{bmatrix} + ]]>
+                                <![CDATA[\begin{bmatrix} \pi & -4 & -5 \\ 2 & 2 & -2 \end{bmatrix}]]>
+                            </mrow>
+                            <mrow>
+                                \amp = 
+                                <![CDATA[ \begin{bmatrix}]]>
+                                <![CDATA[    3 + \pi & 4 - 4 & 6 - 5 \\]]>
+                                <![CDATA[    5 + 2 & 9 + 2 & 12 - 2 ]]>
+                                <![CDATA[ \end{bmatrix}]]>
+                            </mrow>
+                            <mrow>
+                                \amp = 
+                                <![CDATA[ \begin{bmatrix}]]>
+                                <![CDATA[ 3 + \pi & 0 & 1 \\ ]]>
+                                <![CDATA[ 7 & 11 & 10 ]]>
+                                <![CDATA[ \end{bmatrix}]]>
+                            </mrow>
+                        </md>
+                    </p>
+                </statement>
+            </example>
 
             <p>
-                Then
-                <me>
-                    A\cdot k = \begin{bmatrix}\frac32 \amp  2 \amp  3 \\ \frac52 \amp  \frac92 \amp  6
-                    \end{bmatrix} = k\cdot A .
-                </me>
+                Since we have the ability to index <c>other</c> when it is an <c>aam_Matrix</c>, this should be uncomplicated to 
+                implement as a method. Moreover, matrix addition is <em>commutative</em>: if <m>A</m> and <m>B</m> are matrices such 
+                that <m>A+B</m> exists, then <m>A+B=B+A</m>. 
             </p>
-        </statement>
-    </example>
+            <algorithm>
+                <title>Addition of matrices</title>
+                <statement>
+                    <p>
+                        Let <c>self</c> be a matrix in the class <c>aam_Matrix</c>, and let <c>other</c> be the value which is to be 
+                        added to <c>self</c>.
+                    </p>
+                    <ol>
+                        <li> 
+                            Test the type of <c>other</c> to ensure it is an <c>aam_Matrix</c>; if so, ensure that the dimensions of 
+                            <c>other</c> are the same as those of <c>self</c>. Raise an exception if either of these cases fail.
+                        </li>
+                        <li>
+                            Create a new list of lists whose elements are <c>other[i,j]+self[i,j]</c> in the <m>j^\text{th}</m> 
+                            element of the <m>i^\text{th}</m> list.
+                        </li>
+                        <li>
+                            Construct a new <c>aam_Matrix</c> from this new list of lists.
+                        </li>
+                    </ol>
+                </statement>
+            </algorithm>
+            <exercise>
+                <title>Implementing matrix (left) addition</title>
+                <statement>
+                    <p>Complete the following code for matrix addition.</p>
+                    <listing>
+                        <program>
+                            <input>
+                                class aam_Matrix:
+                                    ...
+                                    def __add__(self, other):
+                                        """ Implement self + other in the aam_Matrix xlass.
+                                        """
+                                        if type(self) != type(other):
+                                            raise TypeError('Matrix addition with '+str(type(other))+ \
+                                                ' objects is not defined.')
+                                            pass
+                                        elif self.dims() != other.dims():
+                                            raise ValueError('Dimension mismatch - '+str(self.dims())+\ 
+                                                ' cannot be added to '+str(other.dims()))
+                                            pass
+                                        else:
+                                            <!--new_grid = [[self[i,j]+other[i,j] for j in [1..self.col_dim]] for i in [1..self.row_dim]]-->
+                                            """
+                                            In this space, build an object new_grid containing the correct data 
+                                            and structure to make the next command returning aam_Matrix(new_grid)
+                                            succeed.
+                                            """
+                                            return aam_Matrix(new_grid)
+                                    <!--
+                                    def __radd__(self, other):
+                                        """ Implement other + self in the aam_Matrix class.
+                                        """
+                                        return self.__add__(other)
 
-    <p>
-        Unfortunately, we're going to want to use the same operator (<c>*</c>, defined in <c>__mul__</c> and <c>__rmul__</c>) for scalar multiplication, which we've just defined, and <em>matrix multiplication</em>, which is much more complicated. We'll handle this inside the <c>__mul__</c> method by an <c>if</c> statement, and we'll let the case where both <c>Self</c> and <c>other</c> have type <c>Matrix</c> just <c>pass</c> for now.
-    </p>
-    <exercise>
-        <statement>
-            <p>
-                Here's the code for scalar multiplication, with an important piece missing. Notice the <c>pass</c> statement inside the first <c>if</c> block <mdash /> this will be replaced later when we define an algorithm for matric multiplication.
-            </p>
-            <pre>
-                def __mul__(self, other):
-                mult_err = 'Matrices may only be multiplied by scalars, or '+\
-                'by matrices of appropriate dimensions.'
-                if type(self) == type(other):
-                pass
-                elif type(other) in [type(1), type(0.1)]:
-                new_grid = """AN IMPORTANT PIECE IS MISSING RIGHT HERE!!""" # &lt;======
-                return Matrix(new_grid)
-                else:
-                raise TypeError(mult_err)
-            </pre>
-            <p>
-                Correct the missing piece with a nested list comprehension. Put your corrected version into <c>Matrix.py</c>.
-            </p>
-        </statement>
-    </exercise>
-    <p>
-        Now we'll move to the first way to combine two matrices: matrix addition. A critical piece which cannot be overlooked is that only matrices of the same dimensions can be added <mdash /> addition of matrices with different dimensions is ``nonsense," since it is not defined.
-    </p>
-    <definition>
-        <statement>
-            <p>
-                Suppose <m>A=[a_{i,j}]</m> and <m>B=[b_{i,j}]</m> are both <m>m\times n</m> matrices. Then their <term>sum</term> is the <m>m\times n</m> matrix <m>A+B = [a_{i,j}+b_{i,j}]</m>. That is, addition is carried out element-wise.
-            </p>
-        </statement>
-    </definition>
+                                    def __sub__(self, other):
+                                        """ Implement self - other in the aam_Matrix class."""
+                                        return self + (-1)*other
 
-    <example>
-        <statement>
-            <p>
-                Suppose we have the following three matrices:
-                <md>
-                    <mrow>  A \amp = \begin{bmatrix} 3 \amp  4 \amp  6</mrow>
-                    <mrow>  5 \amp  9 \amp  12 \end{bmatrix} \amp 
-                        B \amp = \begin{bmatrix} \pi \amp  -4 \amp  -5</mrow>
-                    <mrow>  2 \amp  2 \amp  -2 \end{bmatrix} \amp 
-                        C \amp = \begin{bmatrix} 1 \amp  0 \amp  0</mrow>
-                    <mrow>  0 \amp  1 \amp  0</mrow>
-                    <mrow>  0 \amp  0 \amp  1 \end{bmatrix}</mrow>
-                </md>
-            </p>
+                                    def __rsub__(self, other):
+                                        return other + (-1)*self-->
+                            </input>
+                        </program>
+                        <caption>
+                            A partial code for the <c>__add__</c> method in class <c>aam_Matrix</c>.
+                        </caption>
+                    </listing>
+                </statement>
+            </exercise>
 
-            <p>
-                Then <m>A+B</m> exists but neither <m>A+C</m> nor <m>B+C</m> is defined. The sum of <m>A</m> and <m>B</m> is
-                <md>
-                    <mrow>  A+B \amp = 
-                        \begin{bmatrix} 3 \amp  4 \amp  6</mrow>
-                    <mrow>  5 \amp  9 \amp  12 \end{bmatrix} + 
-                        \begin{bmatrix} \pi \amp  -4 \amp  -5</mrow>
-                    <mrow>  2 \amp  2 \amp  -2 \end{bmatrix}</mrow>
-                    <mrow>  \amp = \begin{bmatrix} 3+\pi \amp  4_4 \amp  6_5</mrow>
-                    <mrow>  5+2 \amp  9+2 \amp  12_2\end{bmatrix}</mrow>
-                    <mrow>  \amp = \begin{bmatrix}3+\pi \amp  0 \amp  1</mrow>
-                    <mrow>  7 \amp  11 \amp  10\end{bmatrix}.</mrow>
-                </md>
-            </p>
-        </statement>
-    </example>
-
-    <p>
-        Since we have the ability to index <c>other</c> when it is a <c>Matrix</c>, this should be straightforward to implement as a method. Moreover, matrix addition is <em>commutative</em>: if <m>A</m> and <m>B</m> are matrices such that <m>A+B</m> exists, then <m>A+B=B+A</m>. This allows us to define <c>Matrix.__radd__</c> as a call to <c>Matrix.__add__</c> like we did in class with <c>ComplexNumber</c> in Lesson 4.
-    </p>
-    <exercise>
-        <statement>
-            <p>
-                Here's the code for matrix addition, with an important piece missing.
-            </p>
-            <pre>
-                def __add__(self, other):
-                if type(self) == type(other):
-                if self.dims() != other.dims():
-                raise ValueError('Cannot add matrices of different dimensions.')
-                new_grid = """AN IMPORTANT PIECE IS MISSING RIGHT HERE!!""" # &lt;======
-                return Matrix(new_grid)
-
-                def __radd__(self, other):
-                return self.__add__(other)
-            </pre>
-            <p>
-                Correct the missing piece with a nested list comprehension. Put your corrected version into <c>Matrix.py</c>.
-            </p>
-        </statement>
-    </exercise>
-
-    <exercise>
-        <statement>
-            <p>
-                Subtraction of matrices is a combination of addition and scalar multiplication: <m>A-B=A+(-1)B</m>. The builtin for subtraction using the ``minus sign" is <c>__sub__</c>. Define <c>Matrix.sub</c> and add it to <c>Matrix.py</c>.
-            </p>
-        </statement>
-    </exercise>
+            <exercise>
+                <title>Right addition of matrices</title>
+                <statement>
+                    <p>
+                        <em>Without writing a complicated new code</em>, make an appropriate rearrangement of the arguments <c>self</c> 
+                        and <c>other</c> to define the <c>__radd__</c> method for the class <c>aam_Matrix</c>.
+                    </p>
+                </statement>
+            </exercise>
+            
+            <exercise>
+                <title>Matrix subtraction</title>
+                <statement>
+                    <p>
+                        Combine the operators of addition and scalar multiplication (<c>+</c> and <c>*</c>) in <c>aam_Matrix</c> to define
+                        the <c>__sub__</c> method for the class <c>aam_Matrix</c>.
+                    </p>
+                </statement>
+            </exercise>
+            </subsubsection>
+    </subsection>
 </section>

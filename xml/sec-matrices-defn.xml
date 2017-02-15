@@ -1,43 +1,7 @@
 <section xml:id="sec-Matrices-Representation">
     <title>Representing matrices</title>
-    <!--<subsection>
-        <title>What is a matrix?</title>
-        <p>
-            A <em>matrix</em> is a rectangular grid of elements<fn>There's a much more technical definition, but for our purposes this is sufficient.</fn>; in our investigation, we will limit the elements to real numbers. For instance, and by way of demonstrating the form we will use to write a matrix,
-            <me>
-                A=\begin{bmatrix}\pi\amp  e\amp  6.2 \\ \frac13 \amp  7 \amp  -42
-                \end{bmatrix}
-            </me>
-            and
-            <me>
-                B = \begin{bmatrix}1 \amp  0 \amp  0 \amp  0 \\ 0 \amp  1 \amp  0 \amp  0 \\ 0 \amp  0 \amp  1 \amp  0 \\ 0 \amp  0 \amp  0 \amp  1
-                \end{bmatrix}
-            </me>
-            are matrices. Neither
-            <me>
-                C = \begin{bmatrix}5 \amp  8 \amp  \\ 2 \amp  3 \amp  0
-                \end{bmatrix}
-            </me>
-            nor
-            <me>
-                D = \begin{bmatrix}\text{ Eric }  \amp  \text{ John }  \\ \text{ Graham }  \amp  \text{ Terry } 
-                \end{bmatrix}
-            </me>
-            are matrices, the first because it is non-rectangular and the second because the names of members of Monty Python are not numbers.
-        </p>
-
-        <p>
-            Matrices have many, many interesting properties. These can be investigated at length in a course on Matrix Theory (like Math 3203: Matrix Methods) or better yet in a course on Linear Algebra (like Math 3315: Linear Algebra). We will take an approach much more like Matrix Theory than Linear Algebra so that we can avoid most or all of the ``proofiness."
-        </p>
-    </subsection>-->
-    <p>
-        Since we have already experienced the use of the Sage <c>table</c> command to produce nice output for a list whose elements are equal-length lists, it seems sensible to make use of that model to represent matrices computationally.
-        <fn>
-            Sage comes equipped with a fully-featured implementation of matrix theory; given appropriate input, <c>matrix(input)</c> will produce robust matrices with all the bells and whistles. We are interested in replicating some of the features (not all!) of this matrix class in our own class for the experience of implementing the matrix algorithms.
-        </fn>
-    </p>
     <subsection>
-    <title>Initializing objects in the <c>aam_Matrix</c> class</title>
+        <title>Initializing objects in the <c>aam_Matrix</c> class</title>
         <p>
             Mathematically, we denote a general matrix <m>A</m> with <m>m</m> rows and <m>n</m> columns as a <m>m\times n</m> matrix, and we write
             <me>A = \begin{bmatrix}
