@@ -126,7 +126,7 @@
                                     def __mul__(self, other):
                                         """ Implement self * other in the aam_Matrix class."""
                                         try:
-                                            N(other) #This will raise an error if other is of a non-numeric type.
+                                            other + 1 #This will raise an error if other is of a non-numeric type.
                                             <!--new_grid = [[other*self[i,j] for j in [1..self.col_dim]] for i in [1..self.row_dim]]-->
                                             """
                                             In this space, build an object new_grid containing the correct data 

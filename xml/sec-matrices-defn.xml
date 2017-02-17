@@ -26,7 +26,7 @@
             In all of these cases, we want the initialization routine to raise a <c>ValueError</c>.
         </p>
         <p>
-            An additional consideration to the design of a matrix class involves the choice of attributes. For an <m>m\times n</m> matrix, it will be very useful to store not just a <c>data</c> attribute but also attributes for each of the column dimension <m>n</m> and row dimension <m>n</m> of the matrix. 
+            An additional consideration to the design of a matrix class involves the choice of attributes. For an <m>m\times n</m> matrix, it will be very useful to store not just a <c>data</c> attribute but also attributes for each of the column dimension <m>n</m> and row dimension <m>m</m> of the matrix. 
         </p>
         <algorithm>
             <title>Initialization of a matrix object</title>

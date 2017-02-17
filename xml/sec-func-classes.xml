@@ -103,7 +103,9 @@
                             return str(self.realpart) + plusminus + str(self.imagpart) + "*I"
                 </input>
             </program>
-            <caption>The <c>__repr__</c> method for <c>MyComplex</c>.</caption>
+            <caption>
+                The <c>__repr__</c> method for <c>MyComplex</c>. The <c>...</c> which appears after the <c>class</c> line indicates that this is to be added to the previously-written class definition.
+            </caption>
         </listing>
         
         <p>
