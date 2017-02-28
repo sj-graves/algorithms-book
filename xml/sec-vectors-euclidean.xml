@@ -1,0 +1,86 @@
+<section xml:id="sec-Vectors-Euclidean">
+    <title>Vectors in Euclidean space</title>
+    <definition>
+            <statement>
+                The <em>length</em> of a vector <m>\vec{x}</m> is a unique scalar associated with <m>\vec{x}</m> denoted by <m>\abs{\vec{x}}</m>. 
+            </statement>
+        </definition>
+        <p>
+            In compass-and-straight-edge geometry, there is no way to calculate the length of a vector, but it is possible to determine whether two vectors have the same length. The existence of a coordinate system (<em>Cartesian coordinates</em>, for example) allows us to define a formula for the length of a Euclidean vector.
+        </p>
+        <definition>
+            <title>Euclidean length</title>
+            <statement>
+                The length of a vector <me>\vec{x}=\vc{x_1,x_2,\ldots,x_n}\in\R^n</me> is given by <me>\abs{\vec{x}} = \sqrt{x_1^2+x_2^2+\cdots+x_n^2}.</me>
+            </statement>
+        </definition>
+    <p>
+        Vectors in the Euclidean plane and in Euclidean 3-space are generally represented as arrows with a <em>tail</em> at one point and a <em>head</em> at another. Two arrows in the plane represent <em>equivalent vectors</em> if the arrows lie along parallel lines, have the same length, and point in the same respective direction along each of their respective lines. The <em>zero vector</em>, which is the unique vector of length 0, is represented as a point at the origin.
+        </p>
+    <listing>
+        <p>
+            We can use the Sage <c>arrow2d</c> and <c>arrow3d</c> commands to demonstrate vectors.
+        </p>
+        <sage>
+            <input>
+                show(arrow2d((0,0), (1,2)))
+                show(arrow3d((0,0,0), (1,2,3)))
+            </input>
+        </sage>
+        <caption>The vector <m>\vc{1,2}\in\R^2</m> and <m>\vc{1,2,3}\in\R^3</m>.</caption>
+    </listing>
+    <subsection>
+        <title>Geometric operations</title>
+        <p>
+            The two operations which are necessary to turn a set of <m>n</m>-tuples into a <m>n</m>-dimensional vector space are <em>addition</em> and <em>scalar multiplication</em>, which are both demonstrated easily using geometric vectors.
+        </p>
+        
+        <subsubsection>
+            <title>Geometric vector addition</title>
+            <p>
+                To add two vectors <m>\vec{x}</m> and <m>\vec{y}</m> geometrically, we begin by drawing both as arrows, with the tail of each at the origin. We then draw an equivalent vector to <m>\vec{x}</m> with its tail at the head of <m>\vec{y}</m> and an equivalent vector to <m>\vec{y}</m> with its tail at the head of <m>\vec{x}</m>. These four vectors will form the sides of a parallelogram; the diagonal arrow with its tail at the origin and its head at the opposite corner of the parallelogram is the vector sum <m>\vec{x}+\vec{y}</m>.
+            </p>
+            <sage>
+                <input>
+                    @interact
+                    def _(x=input_box(default=(1,2), type=tuple), y=input_box(default=(2,-3), type=tuple)):
+                        s = (x[0]+y[0],x[1]+y[1])
+                        xarr = arrow2d((0,0),x,color='blue')
+                        yarr = arrow2d((0,0),y, color='red')
+                        xparr = arrow2d(y,s, color='blue', linestyle='--')
+                        yparr = arrow2d(x,s, color='red', linestyle='--')
+                        sumarr = arrow2d((0,0),s,color=(0,.75,0),linestyle='--')
+                        show(xarr+yarr+sumarr+xparr+yparr)
+                </input>
+            </sage>
+        </subsubsection>
+        <subsubsection>
+            <title>Geometric scaling of vectors</title>
+            <p>
+                The geometric scaling of a vector is actually the source of the term <em>scalar</em>; given a vector <m>\vec{x}</m> and a constant <m>k</m>, the scalar multiple of <m>\vec{x}</m> by <m>k</m> is the vector <m>k\vec{x}</m> with <m>\abs{k\vec{x}}=k\abs{\vec{x}}</m>, whose direction is the same as <m>\vec{x}</m> if <m>k\gt 0</m> and whose direction is opposite <m>\vec{x}</m> when <m>k\lt 0</m>. 
+            </p>
+            <p>
+                It should be clear that <m>0\vec{x}=\vec{0}</m> is the zero vector for every <m>\vec{x}</m>.
+            </p>
+            <sage>
+                <input>
+                    @interact
+                    def _(x=input_box(default=(1,2), type=tuple), k=input_box(default=2, type=real)):
+                        try:
+                            kx = (k*x[0],k*x[1])
+                            xarr = arrow2d((0,0),x,color='blue')
+                            kxarr = arrow2d((0,0),kx,color=(0,.75,0),linestyle='--', thickness='3pt')
+                            show(xarr+kxarr)
+                        except:
+                            show('An error occurred.')
+                </input>
+            </sage>
+        </subsubsection>
+    </subsection>
+    <subsection>
+        <title>Linear transformations in Euclidean geometry</title>
+        <p>
+            You can think of a linear transformation geometrically by considering the <em>unit square</em>, or its higher dimensional equivalent; the images of each of the <em>standard basis vectors</em> <m>\vec{e}_1 = \vc{1,0,,0,\ldots,0}, \vec{e}_2 =\vc{0,1,0,\ldots,0},\ldots, \vec{e}_n=\vc{0,0,0,\ldots,1}</m> are (roughly) the columns of the matrix representing the transformation.
+        </p>
+    </subsection>
+</section>
