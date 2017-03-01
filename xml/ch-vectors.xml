@@ -58,7 +58,7 @@
         </theorem>
     </introduction>
     <xi:include  href="sec-vectors-euclidean.xml" />
-    <xi:include  href="section6_2.xml" />
+    <xi:include  href="sec-vectors-ops.xml" />
     <xi:include  href="section6_3.xml" />
     <xi:include  href="section6_4.xml" />
     <xi:include  href="section6_5.xml" />

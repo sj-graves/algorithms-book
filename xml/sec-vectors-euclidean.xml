@@ -11,7 +11,7 @@
         <definition>
             <title>Euclidean length</title>
             <statement>
-                The length of a vector <me>\vec{x}=\vc{x_1,x_2,\ldots,x_n}\in\R^n</me> is given by <me>\abs{\vec{x}} = \sqrt{x_1^2+x_2^2+\cdots+x_n^2}.</me>
+                The length of a vector <me>\vec{x}=\vc{x_1,x_2,\ldots,x_n}\in\R^n</me> is given by <me>\norm{\vec{x}} = \sqrt{x_1^2+x_2^2+\cdots+x_n^2}.</me>
             </statement>
         </definition>
     <p>
@@ -80,7 +80,22 @@
     <subsection>
         <title>Linear transformations in Euclidean geometry</title>
         <p>
-            You can think of a linear transformation geometrically by considering the <em>unit square</em>, or its higher dimensional equivalent; the images of each of the <em>standard basis vectors</em> <m>\vec{e}_1 = \vc{1,0,,0,\ldots,0}, \vec{e}_2 =\vc{0,1,0,\ldots,0},\ldots, \vec{e}_n=\vc{0,0,0,\ldots,1}</m> are (roughly) the columns of the matrix representing the transformation.
+            You can think of a linear transformation geometrically by considering the <em>unit square</em>, or its higher dimensional equivalent; the images of each of the <em>standard basis vectors</em> 
+            <md>
+                <mrow>
+                    \vec{e}_1 \amp = \vc{1,0,0,\ldots,0},
+                </mrow>
+                <mrow>
+                    \vec{e}_2 \amp = \vc{0,1,0,\ldots,0},
+                </mrow>
+                <mrow>
+                    \amp\vdots
+                </mrow>
+                <mrow>
+                    \vec{e}_n \amp = \vc{0,0,0,\ldots,1}
+                </mrow>
+            </md>
+            are (roughly) the columns of the matrix representing the transformation.
         </p>
     </subsection>
 </section>
