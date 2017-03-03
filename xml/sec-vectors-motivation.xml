@@ -1,0 +1,183 @@
+<section xml:id='sec-Vectors-Motivation'>
+    <title>Motivation for matrix arithmetic</title>
+    <p>
+        Matrices have only been called such since 1850, when the term was coined by James Joseph Sylvester. His explanation for the terminology is succinct:
+    </p>
+    <blockquote>
+        <p>
+            I have in previous papers defined a <em>Matrix</em> as a rectangular array of terms, out of which different systems of determinants may be engendered as from the womb of a common parent.
+        </p>
+    </blockquote>
+    <p>
+        Though the terminology is relatively recent, some of the uses of matrices have been known in varying parts of the world since as early as the second century BC. Nearly all earliest uses of matrices are for the same purpose: solving systems of simultaneous linear equations.
+    </p>
+
+    <example xml:id='linear_eq_sys'>
+        <title>Solving a system of linear equations by elimination</title>
+        <statement>
+            <p>
+                Consider the following system of simultaneous linear equations in three variables:
+                <md>
+                    <mrow>
+                        x_1 + 3x_2 - 13x_3 \amp = -18
+                    </mrow>
+                    <mrow>
+                        x_1 + 2x_2 - 10x_3 \amp = -15
+                    </mrow>
+                    <mrow>
+                        -6x_1 - 7x_2 + 46x_3 \amp = 77
+                    </mrow>
+                </md>
+            </p>
+            <p>
+                We can solve this by the method of elimination, using repeated applications of the following three operations:
+            </p>
+            <ol>
+                <li><p>The order of equations may be rearranged. If the <m>i^\text{th}</m> and <m>j^\text{th}</m> equations are interchanged, we denote the swap by <m>E_i:E_j</m>.</p></li>
+                <li><p>An equation may be multiplied by a nonzero constant. If the <m>i^\text{th}</m> equation is multiplied by the constant <m>k</m>, we denote the operation by <m>k\,E_i</m>.</p></li>
+                <li><p>A nonzero multiple of one equation may be added to another equation, and the sum stored in the position of the latter equation. For example if we wished to multiply the <m>i^\text{th}</m> equation by <m>k</m>, add it to the <m>j^\text{th}</m> equation, and leave that sume in the position of the <m>j^\text{th}</m> equation, we would denote the operation by <m>k\,E_i+E_j</m>.</p></li>
+            </ol>
+
+            <p>
+                As these operations preserve the arithmetic properties of the equations, the set of solutions before and after any sequence of these operations must be the same. The goal in the method of elimination is to <em>diagonalize</em> the equation, so that the coefficient of <m>x_j</m> in row <m>i</m> is <m>0</m> for all <m>j\lt i</m>. Starting from the example system above, we could begin by adding multiples of the first equation to the second and third equations: <m>-E_1+E_2</m> and <m>6E_1+E_3</m>.
+            </p>
+            <md>
+                <mrow> x_1 + 3x_2 - 13x_3 \amp = -18    </mrow>
+                <mrow> -x_2 + 3x_3 \amp = 3             </mrow>
+                <mrow> 11x_2 - 32x_3 \amp =- 31         </mrow>
+            </md>
+            <p>
+                Next we can use a multiple of the second equation to eliminate the leading coefficient of the third equation, using <m>11E_2+E_3</m>.
+            </p>
+            <md>
+                <mrow> x_1 + 3x_2 - 13x_3 \amp = -18    </mrow>
+                <mrow> -x_2 + 3x_3 \amp = 3             </mrow>
+                <mrow> x_3 \amp = 2                     </mrow>
+            </md>
+            <p>
+                So eliminated, we can use back substitution to solve for <m>x_3</m>, <m>x_2</m>, and <m>x_1</m> in that order:
+                <md>
+                    <mrow>  x_3 \amp = 2</mrow>
+                    <mrow>  x_2 \amp = \frac1{3}\left(3+x_3\right) = 3</mrow>
+                    <mrow>  x_1 \amp = -18_3x_2+13x_3 = -1</mrow>
+                </md>
+            </p>
+
+            <p>
+                The importance of this method cannot be too highly stressed: solving systems of linear equations is a perennial problem in applied mathematics, often because the underlying systems of nonlinear equations can be nicely linearized by making acceptable sacrifices. We notice that at no step were we required to interchange the order of equations, as we never encountered a situation where the <m>i^\text{th}</m> variable had a coefficient of <m>0</m> in the <m>i^\text{th}</m> row.
+            </p>
+        </statement>
+    </example>
+
+    <p>
+        The process used in the preceding example has nothing to do with the variables used <mdash /> in fact, they are used solely as placeholders in the computation. Understanding this, we can recast the problem into a vector algebra problem and dispense with the variables entirely.
+    </p>
+
+    <example>
+        <title>Solving a linear matrix equation</title>
+        <statement>
+            <p>
+                Consider the matrix <m>A</m> and vectors <m>\vec{x}</m> and <m>\vec{b}</m> given by
+                <md align='gather'>
+                    <mrow>  A  \amp = 
+                        <![CDATA[\left[\begin{array}{rrr}]]>
+                        <![CDATA[1 & 3 &  -13 \\]]>
+                        <![CDATA[1 & 2 & -10 \\]]>
+                        <![CDATA[-6 & -7 & 46]]>
+                        <![CDATA[\end{array}\right] &]]> 
+                        <![CDATA[\vec{x} & = \left[\begin{array}{r} x_1 \\ x_2 \\ x_3 \end{array}\right] & ]]> 
+                        <![CDATA[\vec{b} & = \left[\begin{array}{r} -18 \\ -15 \\ 77 \end{array}\right].]]>
+                    </mrow>
+                </md>
+            </p>
+
+            <p>
+                Then the system in the previous example is exactly equivalent to the vector equation <m>A\vec{x}=\vec{b}</m>. In order to keep track of the operations performed on both the left and right of the equal sign, it is sufficient to <em>augment</em> the matrix <m>A</m> by the vector <m>\vec{b}</m>, like so:
+                <md>
+                    <mrow>  
+                        A\vert\vec{b} \amp = 
+                        \left[\begin{array}{rrr|r}
+                        1 \amp  3 \amp  -13 \amp  -18 \\ 
+                        1 \amp  2 \amp  -10 \amp  -15 \\ 
+                        -6 \amp  -7 \amp  46 \amp  77
+                        \end{array}\right].</mrow>
+                </md>
+            </p>
+
+            <p>
+                Now the three operations of the method of elimination correspond to the <em>elementary row operations</em> on an augmented matrix, and the operations involved in the previous example correspond to the following sequence of row operations:
+                <md>
+                    <mrow>
+                        \left[\begin{array}{rrr|r} 
+                        1 \amp  3 \amp  -13 \amp  -18 \\ 
+                        1 \amp  2 \amp  -10 \amp  -15 \\ 
+                        -6 \amp  -7 \amp  46 \amp  77
+                        \end{array}\right] 
+                        \xrightarrow[6R_1+R_3]{-R_1+R_2} \amp
+                        \left[\begin{array}{rrr|r}
+                        1 \amp  3 \amp  -13 \amp  -18 \\ 
+                        0 \amp  -1 \amp  3 \amp  3 \\ 
+                        0 \amp  11 \amp  -32 \amp  -31
+                        \end{array}\right]
+                    </mrow>
+                    <mrow>
+                        \xto{11R_2+R_3} \amp
+                        \left[\begin{array}{rrr|r} 
+                        1 \amp  3 \amp  -13 \amp  -18 \\ 
+                        0 \amp  -1 \amp  3 \amp  3 \\
+                        0 \amp  0 \amp  1 \amp  2
+                        \end{array}\right]
+                    </mrow>
+                </md>
+            </p>
+        </statement>
+    </example>
+
+    <p>
+        This is a <em>row echelon form</em> for the matrix <m>A\vert\vec{b}</m>, and the process of obtaining it is called <em>Gaussian elimination</em>, or informally <em>row reduction</em>. If rows are interchanged or scaled, there can be many distinct row echelon forms of a matrix. However, we could continue to perform row operations until the left-most nonzero entry in each row is a <m>1</m> and it is the only non-zero element in its column. This extended method is called <em>Gauss-Jordan elimination</em>
+    </p>
+
+    <example>
+        <title>Gauss-Jordan elimination</title>
+        <statement>
+            <p>
+                Continuing from the end of the preceding example, here are the final transformations from row echelon form to reduced row echelon form via Gauss-Jordan elimination.
+                <md>
+                    <mrow>  
+                        \left[\begin{array}{rrr|r} 
+                        1 \amp  3 \amp  -13 \amp  -18 \\ 
+                        0 \amp  -1 \amp  3 \amp  3 \\ 
+                        0 \amp  0 \amp  1 \amp  2
+                        \end{array} \right]
+                        \xto{-R_2} \amp
+                        \left[\begin{array}{rrr|r} 
+                        1 \amp  3 \amp  -13 \amp  -18 \\ 
+                        0 \amp  1 \amp  -3 \amp  -3 \\ 
+                        0 \amp  0 \amp  1 \amp  2
+                        \end{array} \right]
+                    </mrow>
+                    <mrow>
+                        \xto{-3R_2+R_1} \amp
+                        \left[\begin{array}{rrr|r} 
+                        1 \amp  0 \amp  -4 \amp  -9 \\ 
+                        0 \amp  1 \amp  -3 \amp  -3 \\ 
+                        0 \amp  0 \amp  1 \amp  2
+                        \end{array} \right]
+                    </mrow>
+                    <mrow>  
+                        \xto{4R_3+R_1,~3R_3+R_2} \amp
+                        \left[\begin{array}{rrr|r} 
+                        1 \amp  0 \amp  0 \amp  -1 \\ 
+                        0 \amp  1 \amp  0 \amp  3 \\ 
+                        0 \amp  0 \amp  1 \amp  2
+                        \end{array} \right]
+                    </mrow>
+                </md>
+            </p>
+
+        </statement>
+    </example>
+    <p>
+        It should be apparent that there is no difference in result between Gauss-Jordan elimination and regular Gaussian elimination to row echelon form followed by back substitution. However, the computational complexity (which essentially is a measurement of the number of operations performed by an algorithm) of Gauss-Jordan is <em>higher</em> than elimination and substitution. That being said, Gauss-Jordan elimination is among the best ways to calculate the inverse of an arbitrary nonsingular matrix, a task we will encounter later in the text.
+    </p>
+</section>

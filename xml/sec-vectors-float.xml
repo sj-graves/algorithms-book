@@ -1,0 +1,99 @@
+<section>
+    <title>A floating-point problem</title>
+
+
+    <introduction>
+        <p>
+            We have not yet encountered any errors to do with representation of numbers, but we soon will in the case when we implement Gaussian elimination and the coefficient matrix of the system of equations contains approximations of real numbers. To avoid the problems which come along with these approximations, we first need to investigate how they are stored in a computer.
+        </p>
+        <p>
+            According to the specification for floating point arithmetic (IEEE 754), <em>double-precision floating point numbers</em> take up <m>64</m> bits of memory and are stored in the following manner:
+            <me>
+                f = (-1)^s\cdot c\cdot b^{(-1)^{q_s}q},
+            </me>
+            where
+            <ol>
+                <li><p><m>s</m> is either <m>0</m> (for positive numbers) or <m>1</m> (for negatives),</p></li>
+                <li><p><m>c</m> is an integer taking up <m>52</m> binary digits (bits),</p></li>
+                <li><p><m>q_s</m> is the sign of the exponent, either <m>0</m> or <m>1</m>, and</p></li>
+                <li><p><m>q</m> is an integer taking up <m>10</m> bits.</p></li>
+            </ol>
+        </p>
+
+        <p>
+            The important part here is this: since <m>c</m> takes up <m>52</m> bits and is an integer, it can be any number from <m>0</m> to <m>2^{52}-1={4,503,599,627,370,495}</m>. What this means is that double-precision arithmetic is only precise to 16 decimal places; beyond that, no differences are noticed by the representation. This causes a very specific kind of problem, which we'll call <em>swamping</em>. This won't occur in our previous example, so we'll discuss a new one.
+        </p>
+    </introduction>
+
+
+    <subsection>
+        <title>Swamping</title>
+        <p>
+            Consider the following matrix equation:
+            <me>
+                \begin{bmatrix}10^{-20} \amp  1 \\ 1 \amp  2
+                \end{bmatrix}  \begin{bmatrix}x_1\\x_2
+                \end{bmatrix}  = \begin{bmatrix}1 \\ 4
+                \end{bmatrix} .
+            </me>
+        </p>
+
+        <p>
+            If we solve via Gaussian elimination without interchanging rows we're going to have a problem almost immediately.
+            <md>
+                <mrow>  \begin{abmc}{2}10^{-20} \amp  1 \amp  1</mrow>
+                <mrow>  1 \amp  2 \amp  4\end{abmc} \xto{-10^{20}R_1+R_2} 
+                    \amp \begin{abmc}{2} 10^{-20} \amp  1 \amp  1</mrow>
+                <mrow>  0 \amp  2_10^{20} \amp  4_10^{20} \end{abmc}</mrow>
+            </md>
+        </p>
+
+        <p>
+            No problem, right? Converting back to the original equation format, we see use back-substitution and find
+            <md>
+                <mrow>  x_2 = \frac{4_10^{20}}{2_10^{20}} \amp \approx 1.0,</mrow>
+                <mrow>  x_1 = 10^{20}(1-x_2) = \frac{-2\cdot10^{20}}{2_10^{20}} \amp \approx 2.0.</mrow>
+            </md>
+        </p>
+
+        <p>
+            Except there's a problem: <m>10^{20}</m> has so many digits that when represented as floating point numbers,
+            <me>
+                2.0 - 10.0^{20} = -10.0^{20} = 4.0 - 10.0^{20}.
+            </me>
+        </p>
+
+        <p>
+            Hence in floating point arithmetic, what we obtain is different:
+            <md>
+                <mrow>  \begin{abmc}{2}10.0^{-20} \amp  1.0 \amp  1.0</mrow>
+                <mrow>  1.0 \amp  2.0 \amp  4.0\end{abmc} \xto{-10.0^{20}R_1+R_2}
+                    \amp \begin{abmc}{2} 10.0^{-20} \amp  1.0 \amp  1.0</mrow>
+                <mrow>  -0.0 \amp  -10.0^{20} \amp  -10.0^{20} \end{abmc}</mrow>
+            </md>
+        </p>
+
+        <p>
+            Back substituting, again in floating point arithmetic, we have
+            <md>
+                <mrow>  x_2 = \frac{-10.0^{20}}{-10.0^{20}} \amp = 1.0</mrow>
+                <mrow>  x_1 = 10.0^{20}(1.0-x_2) \amp = 0.0</mrow>
+            </md>
+        </p>
+
+        <p>
+            This is far from correct. In fact,
+            <me>
+                \begin{bmatrix}10^{-20} \amp  1 \\ 1 \amp  2
+                \end{bmatrix}  \begin{bmatrix}0\\1
+                \end{bmatrix}  = \begin{bmatrix}1 \\ 2
+                \end{bmatrix} .
+            </me>
+        </p>
+
+        <p>
+            Thankfully there are solutions to these sorts of problems, called <em>pivoting strategies</em>.
+        </p>
+    </subsection>
+
+</section>
