@@ -134,7 +134,7 @@
     </example>
 
     <p>
-        This is a <em>row echelon form</em> for the matrix <m>A\vert\vec{b}</m>, and the process of obtaining it is called <em>Gaussian elimination</em>, or informally <em>row reduction</em>. If rows are interchanged or scaled, there can be many distinct row echelon forms of a matrix. However, we could continue to perform row operations until the left-most nonzero entry in each row is a <m>1</m> and it is the only non-zero element in its column. This extended method is called <em>Gauss-Jordan elimination</em>
+        This is a <em>row echelon form</em> for the matrix <m>A\vert\vec{b}</m>, and the process of obtaining it is called <em>Gaussian elimination</em>, or informally <em>row reduction</em>. If rows are interchanged or scaled, there can be many distinct row echelon forms of a matrix. If we perform additional row operations until the left-most nonzero entry in each row is a <m>1</m> and it is the only nonzero entry in its column, then we have produced a unique representation of the matrix, called its <em>reduced row echelon form</em>. The process of moving from the original matrix to its reduced row echelon form via row operations is called <em>Gauss-Jordan elimination</em>.
     </p>
 
     <example>
@@ -165,7 +165,7 @@
                         \end{array} \right]
                     </mrow>
                     <mrow>  
-                        \xto{4R_3+R_1,~3R_3+R_2} \amp
+                        \xrightarrow[3 R_3 + R_2]{4 R_3 + R_1} \amp
                         \left[\begin{array}{rrr|r} 
                         1 \amp  0 \amp  0 \amp  -1 \\ 
                         0 \amp  1 \amp  0 \amp  3 \\ 

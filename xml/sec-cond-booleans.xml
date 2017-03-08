@@ -5,7 +5,7 @@
     </p>
 
     <p>
-        There are many, many Python commans which return <c>bool</c> values. The comparison operators are first among them; these are called <em>binary operators</em> because they are applied to two values, to distinguish them from other operators which only are applied to one (like the operator for differentiation with respect to <m>x</m>, written <m>\frac{d}{dx}</m>).
+        There are many, many Python commands which return <c>bool</c> values. The comparison operators are first among them; these are called <em>binary operators</em> because they are applied to two values, to distinguish them from other operators which only are applied to one (like the operator for differentiation with respect to <m>x</m>, written <m>\frac{d}{dx}</m>).
     </p>
     <table xml:id="table-BinaryComparison">
         <caption>The <em>binary comparison operators</em>.</caption>

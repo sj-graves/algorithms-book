@@ -60,8 +60,8 @@
     <xi:include  href="sec-vectors-euclidean.xml" />
     <xi:include  href="sec-vectors-ops.xml" />
     <xi:include  href="sec-vectors-motivation.xml" />
-    <xi:include  href="sec-vectors-float.xml" />
-    <xi:include  href="section6_5.xml" />
+    <xi:include  href="sec-vectors-swamping.xml" />
+    <xi:include  href="sec-vectors-pivoting.xml" />
     <xi:include  href="section6_6.xml" />
     <conclusion xml:id="formal-vectorspace">
         <title>Formal definition of a vector space</title>

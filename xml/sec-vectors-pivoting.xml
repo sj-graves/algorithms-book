@@ -1,0 +1,232 @@
+<section>
+    <title>Pivoting strategies</title>
+
+
+    <introduction>
+        <p>
+            A <em>pivoting strategy</em> is an algorithm which decides when to interchange rows (and/or columns) to avoid errors such as swamping, and to handle the case in naive Gaussian elimination when a <m>0</m> element appears on the main diagonal of the augmented matrix. The <em>pivot position</em> is the entry on the main diagonal which is being used to eliminate other entries in its column; hence a pivoting strategy seeks to optimize which rows should be swapped so that the optimal element is in the pivot position.
+        </p>
+    </introduction>
+    <subsection>
+        <title>Naive pivoting</title>
+        <p>
+            Naive pivoting uses row-swapping in a totally non-strategic way. If at some step of the Gaussian elimination we encounter <m>a_{i,i} = 0</m>, naive pivoting requires that we apply <m>R_i:R_j</m> where <m>j</m> is the least index greater than <m>i</m> such that <m>a_{j,i}\neq 0</m>.
+        </p>
+    </subsection>
+
+    <subsection>
+        <title>Partial pivoting</title>
+        <p>
+            In partial pivoting we consider the magnitude of elements in the column when selecting a pivot element. When considering the element <m>a_{i,i}</m> in the pivot position, we apply the operation <m>R_i:R_j</m> where <m>j>i</m> and <m>\abs{a_{j,i}} = \max\set{\abs{a_{k,i}}:k\geq i}.</m> That is to say, we swap rows whenever the pivot element is not the element of <em>maximum magnitude</em> in the column below our pivot position. We will use the word <em>largest</em> to refer to an element of maximum magnitude.
+        </p>
+        <example>
+            <title>Gaussian elimination with partial pivoting</title>
+            <statement>
+                <p>
+                    We consider again the augmented matrix from <xref ref="sec-Vectors-Motivation" autoname="title" />.
+                </p>
+                <md>
+                    <mrow>  
+                        A\vert\vec{b} \amp = 
+                        \left[\begin{array}{rrr|r}
+                        1 \amp  3 \amp  -13 \amp  -18 \\ 
+                        1 \amp  2 \amp  -10 \amp  -15 \\ 
+                        -6 \amp  -7 \amp  46 \amp  77
+                        \end{array}\right].</mrow>
+                </md>
+                <p>
+                    In each step, the column entry of maximum magnitude is marked for easy location, and then (if necessary) swapped into the correct location. Once the largest element is in the pivot position, we'll use the elimination step of sending all column values beneath the pivot to 0.
+                </p>
+                <md>
+                    <mrow>
+                        \left[\begin{array}{ccc|c}
+                        1 \amp  3 \amp  -13 \amp  -18 \\ 
+                        1 \amp  2 \amp  -10 \amp  -15 \\ 
+                        \fbox{-6} \amp  -7 \amp  46 \amp  77
+                        \end{array}\right]
+
+                        \xto{R_1:R_3} \amp
+
+                        \left[\begin{array}{ccc|c}
+                        \fbox{$-6$} \amp -7 \amp 46 \amp 77 \\
+                        1 \amp 2 \amp -10 \amp -15 \\
+                        1 \amp 3 \amp -13 \amp -18
+                        \end{array}\right]
+                    </mrow>
+                    <mrow>
+                        \xrightarrow[\frac16 R_1 + R_3]{\frac16 R_1 + R_2} \amp
+
+                        \left[\begin{array}{ccc|c}
+                        -6 \amp  -7 \amp  46 \amp  77 \\ 
+                        0 \amp  \frac56 \amp  -\frac73 \amp  -\frac{13}6 \\
+                        0 \amp  \fbox{$\frac{11}6$} \amp  -\frac{16}3 \amp  -\frac{31}6
+                        \end{array} \right]
+                    </mrow>
+                    <mrow>
+                        \xto{R_2:R_3} \amp
+
+                        \left[\begin{array}{ccc|c}
+                        -6 \amp  -7 \amp  46 \amp  77 \\ 
+                        0 \amp  \fbox{$\frac{11}6$} \amp  -\frac{16}3 \amp  -\frac{31}6 \\
+                        0 \amp  \frac56 \amp  -\frac73 \amp  -\frac{13}6 
+                        \end{array} \right]
+                    </mrow>
+                    <mrow>
+                        \xto{-\frac5{11} R_2 + R_3} \amp
+
+                        \left[\begin{array}{rrr|r}
+                        -6 \amp  -7 \amp  46 \amp  77 \\ 
+                        0 \amp  \frac{11}6 \amp  -\frac{16}3 \amp  -\frac{31}6\\
+                        0 \amp  0 \amp  \frac1{11} \amp  \frac2{11}
+                        \end{array} \right]
+                    </mrow>
+                </md>
+                <p>
+                    While it is not technically part of the Gaussian elimination, we will often find it convenient to scale rows once a row ecehlon form matrix is produced so that the leading nonzero entry in each row is a <m>1</m>. If you recall, this is half of the requirements for having the <em>reduced</em> row echelon form, but we will not finish that process and instead solve via back substitution.
+                </p>
+                <md>
+                    <mrow>
+                        \left[\begin{array}{rrr|r}
+                        -6 \amp  -7 \amp  46 \amp  77 \\ 
+                        0 \amp  \frac{11}6 \amp  -\frac{16}3 \amp  -\frac{31}6\\
+                        0 \amp  0 \amp  \frac1{11} \amp  \frac2{11}
+                        \end{array} \right]
+
+                        \xrightarrow[11 R_3]{\begin{matrix} -\frac16 R_1 \\ \frac6{11} R_2\end{matrix}} \amp
+
+                        \left[\begin{array}{rrr|r}
+                        1 \amp \frac76 \amp -\frac{46}6 \amp -\frac{77}6 \\
+                        0 \amp 1 \amp -\frac{32}{11} \amp -\frac{31}{11} \\
+                        0 \amp 0 \amp 1 \amp 2
+                        \end{array}\right]
+                    </mrow>
+                </md>
+                <p>
+                    Now back substitution is uncomplicated,
+                    <md>
+                        <mrow>  x_3 \amp = 2,</mrow>
+                        <mrow>  x_2 \amp = -\frac{31}{11}+2\cdot\frac{32}{11} = 3,</mrow>
+                        <mrow>  x_1 \amp = -\frac{77}6 + 2\cdot\frac{46}6 - 3\cdot\frac76 = -1. </mrow>
+                    </md>
+                </p>
+                <p>
+                    Since we obtained the same result as previously but took more row operations to do so, this seems like a step backward. The process was more <em>computationally expensive</em> but obtained the identical result. In the next example, however, we will see how partial pivoting readily overcomes the errors caused by swamping in floating point arithmetic.
+                </p>
+            </statement>
+        </example>
+        <example>
+            <title>Partial pivoting defeats swamping</title>
+            <statement>
+                <p>
+                    Recall our example from <xref ref="sec-Vectors-Swamping" autoname='title' />. This time we'll use floating-point arithmetic but include partial pivoting.
+                </p>
+                <md>
+                    <mrow>
+                        \left[\begin{array}{cc|c}
+                        10.0^{-20} \amp 1.0 \amp 1.0 \\
+                        \fbox{$1.0$} \amp 2.0 \amp 4.0
+                        \end{array}\right] 
+
+                        \xto{R_1:R_2} \amp
+
+                        \left[\begin{array}{cc|c}
+                        1.0 \amp 2.0 \amp 4.0 \\
+                        10.0^{-20} \amp 1.0 \amp 1.0
+                        \end{array}\right] 
+                    </mrow>
+                    <mrow>
+                        \xto{-10.0^{-20} R_1 + R_2} \amp
+
+                        \left[\begin{array}{cc|c}
+                        1.0 \amp  2.0 \amp  4.0 \\
+                        0.0 \amp  1.0 \amp  1.0
+                        \end{array} \right]
+                    </mrow>
+                </md>
+
+                <!--md>
+                        <mrow>  \begin{abmc}{2}10.0^{-20} \amp  1.0 \amp  1.0</mrow>
+                        <mrow>  1.0 \amp  2.0 \amp  4.0\end{abmc} 
+                            \xto{R_1:R_2}
+                            \amp \begin{abmc}{2}
+                            1.0 \amp  2.0 \amp  4.0</mrow>
+                        <mrow>  10.0^{-20} \amp  1.0 \amp  1.0
+                            \end{abmc}
+                            \xto{-10.0^{-20}R_1+R_2}
+                            \left[\begin{array}{2}
+                            1.0 \amp  2.0 \amp  4.0 \\
+                            0.0 \amp  1.0 \amp  1.0
+                            \end{array} \right]</mrow>
+                    </md-->
+
+
+                <p>
+                    Back substitution is immediate:
+                    <md>
+                        <mrow>  x_2 \amp = 1.0,</mrow>
+                        <mrow>  x_1 = 4.0 - 2.0x_2 \amp = 2.0.</mrow>
+                    </md>
+                    These are exactly the values we obtained by solving exactly and then approximating!
+                </p>
+
+                <p>
+                    So we see that using partial pivoting totally avoided the swamping error. This algorithm avoids swamping by allowing all subtractions to occur at the correct order of magnitude: we never see a relatively tiny difference where we should see a relatively large one.
+                </p>
+            </statement>
+        </example>
+    </subsection>
+
+
+    <subsection>
+        <title>Complete Pivoting</title>
+        <p>
+            Complete pivoting involves swapping the columns as well as the rows, which is more complicated. Interchanging columns of the matrix is equivalent to changing the order of the variables.
+        </p>
+        <example>
+            <title></title>
+        </example>so if a matrix <m>A'|\vec{b}</m> is the result of the <em>column operation</em> <m>C_1:C_3</m> on the matrix <m>A=[a_{i,j}]_{3\times 3}</m> augmented by the vector <m>\vec{b}=\vc{b_1,b_2,b_3}</m>, we can think of the associated matrix equations changing from 
+            <me>
+                \begin{bmatrix}
+                a_{1,1} \amp a_{1,2} \amp a_{1,3} \\
+                a_{2,1} \amp a_{2,2} \amp a_{2,3} \\
+                a_{3,1} \amp a_{3,2} \amp a_{3,3}
+                \end{bmatrix}
+                \begin{bmatrix}
+                x_1 \\ x_2 \\ x_3
+                \end{bmatrix} = 
+                \begin{bmatrix}
+                b_1 \\ b_2 \\ b_3
+                \end{bmatrix}
+            </me>
+            to the equation
+            <me>
+                \begin{bmatrix}
+                a_{1,3} \amp a_{1,2} \amp a_{1,1} \\
+                a_{2,3} \amp a_{2,2} \amp a_{2,1} \\
+                a_{3,3} \amp a_{3,2} \amp a_{3,1}
+                \end{bmatrix}
+                \begin{bmatrix}
+                x_3 \\ x_2 \\ x_1
+                \end{bmatrix} = 
+                \begin{bmatrix}
+                b_3 \\ b_2 \\ b_1
+                \end{bmatrix}
+            </me>
+        </p>
+        <p>
+            An interesting way to track these changes is to use a <em>permutation matrix</em>. Suppose that <m>A</m> is a <m>m\times n</m> matrix, and <m>I</m> is the <m>n\times n</m> identity matrix. Then if <m>A'</m> and <m>I'</m> are the results of swapping the <m>i^\text{ th }</m> and <m>j^\text{ th }</m> columns in both <m>A</m> and <m>I</m>, it is the case that
+            <me>
+                A = AI = A'I'.
+            </me>
+        </p>
+
+        <p>
+            Hence a sequence of column swaps on <m>A</m> can be tracked by making the same sequence of column swaps on an identity matrix <m>I</m> of the correct dimensions.
+        </p>
+
+        <p>
+            The pivot selection for complete pivoting is to swap the largest-magnitude entry in the submatrix below and to the right of the previous pivot point into the current pivot position via a row and column swap.
+        </p>
+    </subsection>
+
+</section>
