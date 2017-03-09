@@ -1,105 +1,147 @@
-<section>
-<title>Elementary matrices</title>
+<section xml:id="sec-LUdecomp-Elementary">
+    <title>Elementary matrices</title>
 
 
-<introduction>
-<p>
-Suppose there is a matrix <m>A</m>, and some sequence of row operations transforms it into <m>A'</m>, so that <m>A\to A'</m>. What happens if we assume that there is some matrix <m>E</m> such that <m>EA=A'</m>? Assuming that such an <m>E</m> exists, what can we say about it?
-</p>
-
-<p>
-It makes sense to think that nothing is special about the matrix <m>A</m> when performing a row operation; for instance, <m>-2R_1+R_3</m> always produces elements <m>a_{3,j}-2a_{1,j}</m> in the third row, no matter what the values of <m>a_{i,j}</m> are. So we should think that if <m>E</m> corresponds to a particular elementary row operation, then left-multiplying <em>any</em> matrix of the correct dimensions by <m>E</m> will have the proper result. Further, <m>EI = E</m>, so we know that whatever effect a row operation has on the identity matrix results in the elementary matrix itself!
-</p>
-</introduction>
-
-
-<subsection>
-<title>Row swaps</title>
-<p>
-Consider then the result on the <m>4\times 4</m> identity matrix of having rows <m>1</m> and <m>3</m> swapped.
-<me>
-  \begin{bmatrix}1 \amp  0 \amp  0 \amp  0 \\ 0 \amp  1 \amp  0 \amp  0 \\ 0 \amp  0 \amp  1 \amp  0 \\ 0 \amp  0 \amp  0 \amp  1
-\end{bmatrix}  \xto{R_1:R_3} 
-	\begin{bmatrix}0 \amp  0 \amp  1 \amp  0 \\ 0 \amp  1 \amp  0 \amp  0 \\ 1 \amp  0 \amp  0 \amp  0 \\ 0 \amp  0 \amp  0 \amp  1
-\end{bmatrix} .
-</me>
-</p>
-
-<p>
-Hence the matrix corresponding to interchanging rows <m>k</m> and <m>\ell</m> must be the matrix with 0s in all entries except for 1s when <m>i=j</m> and <m>i\neq k</m>, <m>i\neq \ell</m>, and <m>a_{k,\ell}=a_{\ell,k}=1</m>. That is, <m>E=[e_{i,j}]</m> with
-<me>
-  e_{i,j} = \begin{cases}1, \amp  i=j\text{ and } i,j\notin\set{k,\ell}\text{ , or } i\neq j\text{ and } i,j\in\set{k,\ell} \\
-	0, \amp  \text{ otherwise } .
-\end{cases}
-</me>
-</p>
-</subsection>
+    <introduction>
+        <p>
+            Suppose there is a matrix <m>A</m>, and some sequence of row operations transforms it into <m>A'</m>, so that <m>A\to A'</m>. What happens if we assume that there is some matrix <m>E</m> such that <m>EA=A'</m>? Assuming that such an <m>E</m> exists, what can we say about it?
+        </p>
+        <p>
+            Since we know that the effect of such a matrix <m>E</m> on a matrix <m>A</m> does not depend upon the elements of <m>A</m>, it is very instructive to apply the matrix <m>E</m> to an identity matrix <m>I</m> of the appropriate size. In fact, <m>EI = E</m>, so the matrix obtained by performing a row operation on the identity matrix is the desired <em>elementary matrix</em>.
+        </p>
+        <!--p>
+            It makes sense to think that nothing is special about the matrix <m>A</m> when performing a row operation; for instance, <m>-2R_1+R_3</m> always produces elements <m>a_{3,j}-2a_{1,j}</m> in the third row, no matter what the values of <m>a_{i,j}</m> are. So we should think that if <m>E</m> corresponds to a particular elementary row operation, then left-multiplying <em>any</em> matrix of the correct dimensions by <m>E</m> will have the proper result. Further, <m>EI = E</m>, so we know that whatever effect a row operation has on the identity matrix results in the elementary matrix itself!
+        </p-->
+    </introduction>
 
 
-<subsection>
-<title>Scalar multiplication of a row</title>
-<p>
-Again, operating on the <m>4\times 4</m> identity matrix gives insight to the structure of this elementary matrix:
-<me>
-  \begin{bmatrix}1 \amp  0 \amp  0 \amp  0 \\ 0 \amp  1 \amp  0 \amp  0 \\ 0 \amp  0 \amp  1 \amp  0 \\ 0 \amp  0 \amp  0 \amp  1
-\end{bmatrix}  \xto{2R_4} 
-	\begin{bmatrix}1 \amp  0 \amp  0 \amp  0 \\ 0 \amp  1 \amp  0 \amp  0 \\ 0 \amp  0 \amp  1 \amp  0 \\ 0 \amp  0 \amp  0 \amp  2
-\end{bmatrix} .
-</me>
-</p>
+    <subsection>
+        <title>Row swaps</title>
+        <p>
+            Consider then the result on the <m>4\times 4</m> identity matrix of having rows <m>1</m> and <m>3</m> swapped.
+            <me>
+                \begin{bmatrix}
+                1 \amp  0 \amp  0 \amp  0 \\ 
+                0 \amp  1 \amp  0 \amp  0 \\ 
+                0 \amp  0 \amp  1 \amp  0 \\ 
+                0 \amp  0 \amp  0 \amp  1
+                \end{bmatrix}  \xto{R_1:R_3} 
+                \begin{bmatrix}
+                0 \amp  0 \amp  1 \amp  0 \\ 
+                0 \amp  1 \amp  0 \amp  0 \\ 
+                1 \amp  0 \amp  0 \amp  0 \\ 
+                0 \amp  0 \amp  0 \amp  1
+                \end{bmatrix} .
+            </me>
+        </p>
 
-<p>
-Hence the <m>n\times n</m> matrix which corresponds to multiplying row <m>k</m> by a scalar <m>\lambda</m> is the matrix <m>E=[e_{i,j}]</m> where
-<me>
-  e_{i,j} = \begin{cases}1, \amp  i=j\text{ and }  i\neq k\\
-	\lambda, \amp  i=j=k \\
-	0, \amp \text{ otherwise. } 
-\end{cases}
-</me>
-</p>
-</subsection>
+        <!--p>
+            Hence the matrix corresponding to interchanging rows <m>k</m> and <m>\ell</m> must be the matrix with 0s in all entries except for 1s when <m>i=j</m> and <m>i\neq k</m>, <m>i\neq \ell</m>, and <m>a_{k,\ell}=a_{\ell,k}=1</m>. That is, <m>E=[e_{i,j}]</m> with
+            <me>
+                e_{i,j} = \begin{cases}1, \amp  i=j\text{ and } i,j\notin\set{k,\ell}\text{ , or } i\neq j\text{ and } i,j\in\set{k,\ell} \\
+                0, \amp  \text{ otherwise } .
+                \end{cases}
+            </me>
+        </p-->
+        <p>
+            This demonstrates the form of the elementary matrix which interchanges rows <m>k</m> and <m>\ell</m> in a matrix: <m>E=[e_{i,j}]_{m\times m}</m> where
+            <me>
+                e_{i,j} = \begin{cases}
+                1, \amp i=j\text{ but }i\notin\set{k,\ell}\text{ or }i\neq j\text{ and both }i,j\in\set{k,\ell} \\
+                0, \amp \text{otherwise.}
+                \end{cases}
+            </me>
+        </p>
+    </subsection>
 
 
-<subsection>
-<title>Adding a scalar multiple of one row to another row</title>
-<p>
-Once again, consider the <m>4\times 4</m> identity matrix:
-<me>
-  \begin{bmatrix}1 \amp  0 \amp  0 \amp  0 \\ 0 \amp  1 \amp  0 \amp  0 \\ 0 \amp  0 \amp  1 \amp  0 \\ 0 \amp  0 \amp  0 \amp  1
-\end{bmatrix}  \xto{9R_4+R_2} 
-	\begin{bmatrix}1 \amp  0 \amp  0 \amp  0 \\ 0 \amp  1 \amp  0 \amp  9 \\ 0 \amp  0 \amp  1 \amp  0 \\ 0 \amp  0 \amp  0 \amp  1
-\end{bmatrix} .
-</me>
-</p>
+    <subsection>
+        <title>Scalar multiplication of a row</title>
+        <p>
+            Again, operating on the <m>4\times 4</m> identity matrix gives insight to the structure of this elementary matrix:
+            <me>
+                \begin{bmatrix}
+                1 \amp  0 \amp  0 \amp  0 \\ 
+                0 \amp  1 \amp  0 \amp  0 \\ 
+                0 \amp  0 \amp  1 \amp  0 \\ 
+                0 \amp  0 \amp  0 \amp  1
+                \end{bmatrix}  \xto{2R_4} 
+                \begin{bmatrix}
+                1 \amp  0 \amp  0 \amp  0 \\ 
+                0 \amp  1 \amp  0 \amp  0 \\ 
+                0 \amp  0 \amp  1 \amp  0 \\ 
+                0 \amp  0 \amp  0 \amp  2
+                \end{bmatrix} .
+            </me>
+        </p>
 
-<p>
-Hence the <m>n\times n</m> matrix which corresponds to adding to each column of row <m>\ell</m> the scalar multiple <m>\lambda</m> times the corresponding column of row <m>k</m> (<m>\lambda R_k+R_{\ell}</m>) is the matrix <m>E=[e_{i,j}]</m> where
-<me>
-  e_{i,j} = \begin{cases}1, \amp  i=j \\
-	\lambda, \amp  i=\ell\text{ and } j=k\\
-	0, \amp \text{ otherwise } .
-\end{cases}
-</me>
-</p>
+        <p>
+            Hence the <m>m\times m</m> matrix which corresponds to multiplying row <m>k</m> by a scalar <m>\lambda</m> is the matrix <m>E=[e_{i,j}]_{m\times m}</m> where
+            <me>
+                e_{i,j} = \begin{cases}
+                1, \amp  i=j\text{ and }  i\neq k\\
+                \lambda, \amp  i=j=k \\
+                0, \amp \text{ otherwise. } 
+                \end{cases}
+            </me>
+        </p>
+    </subsection>
 
-<p>
-Note there that the value <m>\lambda</m> appears in the row {being added to} and in the column corresponding to the row which is {being multiplied}.
-</p>
 
-<theorem>
-<statement>
-<p>
-Suppose that <m>A</m> is a <m>n\times n</m> matrix and that there is some sequence of elementary row operations by which <m>A</m> can be transformed into <m>I</m>, the <m>n\times n</m> identity matrix. Then there is a sequence <m>(E_1,E_2,\ldots,E_k)</m> of elementary matrices such that
-<me>
-  E_kE_{k-1}\cdots E_2E_1A=I.
-</me>
-</p>
+    <subsection>
+        <title>Row elimination</title>
+        <p>
+            Recall that row elimination is performed by adding a scalar multiple of one row to another row. We again consider the <m>4\times 4</m> identity matrix:
+            <me>
+                \begin{bmatrix}
+                1 \amp  0 \amp  0 \amp  0 \\ 
+                0 \amp  1 \amp  0 \amp  0 \\ 
+                0 \amp  0 \amp  1 \amp  0 \\ 
+                0 \amp  0 \amp  0 \amp  1
+                \end{bmatrix}  \xto{9R_4+R_2} 
+                \begin{bmatrix}
+                1 \amp  0 \amp  0 \amp  0 \\ 
+                0 \amp  1 \amp  0 \amp  9 \\ 
+                0 \amp  0 \amp  1 \amp  0 \\ 
+                0 \amp  0 \amp  0 \amp  1
+                \end{bmatrix} .
+            </me>
+        </p>
 
-<p>
-<m>\qedsymbol</m>
-</p>
-</statement>
-</theorem>
-</subsection>
+        <p>
+            Hence the <m>n\times n</m> matrix which corresponds to adding to each column of row <m>\ell</m> the scalar multiple <m>\lambda</m> times the corresponding column of row <m>k</m> (<m>\lambda R_k+R_{\ell}</m>) is the matrix <m>E=[e_{i,j}]</m> where
+            <me>
+                e_{i,j} = \begin{cases}1, \amp  i=j \\
+                \lambda, \amp  i=\ell\text{ and } j=k\\
+                0, \amp \text{ otherwise } .
+                \end{cases}
+            </me>
+        </p>
+
+        <remark>
+            <p>
+                It is extremely important to notice where <m>\lambda</m> appears in this matrix: in the row <em>which is being changed</em> and in the column corresponding to the row <em>which is being scaled. That means if the row operation is <m>\lambda R_k+R_{\ell}</m> and the elementary matrix is <m>E=[e_{i,j}]</m>, then <m>e_{\ell,k}=\lambda</m>.</em>
+            </p>
+        </remark>
+        <!--p>
+            Note there that the value <m>\lambda</m> appears in the row {being added to} and in the column corresponding to the row which is {being multiplied}.
+        </p-->
+        
+    </subsection>
+        <p>
+            The result of this section is that every sequence of row operations on a matrix <m>A</m> can be reproduced by a sequence of corresponding left multiplications of <m>A</m> by elementary matrices. This is especially important if we can reduce <m>A</m> to an identity matrix.
+        </p>
+
+        <theorem xml:id="thm-ElementaryMatrices">
+            <title>Products of elementary matrices</title>
+            <statement>
+                <p>
+                    Suppose that <m>A</m> is a <m>n\times n</m> matrix and that there is some sequence of elementary row operations by which <m>A</m> can be transformed into <m>I</m>, the <m>n\times n</m> identity matrix. Then there is a sequence <m>(E_1,E_2,\ldots,E_k)</m> of elementary matrices such that
+                    <me>
+                        E_kE_{k-1}\cdots E_2E_1A=I.
+                    </me>
+                </p>
+            </statement>
+        </theorem>
 
 </section>

@@ -183,42 +183,55 @@
             Complete pivoting involves swapping the columns as well as the rows, which is more complicated. Interchanging columns of the matrix is equivalent to changing the order of the variables.
         </p>
         <example>
-            <title></title>
-        </example>so if a matrix <m>A'|\vec{b}</m> is the result of the <em>column operation</em> <m>C_1:C_3</m> on the matrix <m>A=[a_{i,j}]_{3\times 3}</m> augmented by the vector <m>\vec{b}=\vc{b_1,b_2,b_3}</m>, we can think of the associated matrix equations changing from 
-            <me>
-                \begin{bmatrix}
-                a_{1,1} \amp a_{1,2} \amp a_{1,3} \\
-                a_{2,1} \amp a_{2,2} \amp a_{2,3} \\
-                a_{3,1} \amp a_{3,2} \amp a_{3,3}
-                \end{bmatrix}
-                \begin{bmatrix}
-                x_1 \\ x_2 \\ x_3
-                \end{bmatrix} = 
-                \begin{bmatrix}
-                b_1 \\ b_2 \\ b_3
-                \end{bmatrix}
-            </me>
-            to the equation
-            <me>
-                \begin{bmatrix}
-                a_{1,3} \amp a_{1,2} \amp a_{1,1} \\
-                a_{2,3} \amp a_{2,2} \amp a_{2,1} \\
-                a_{3,3} \amp a_{3,2} \amp a_{3,1}
-                \end{bmatrix}
-                \begin{bmatrix}
-                x_3 \\ x_2 \\ x_1
-                \end{bmatrix} = 
-                \begin{bmatrix}
-                b_3 \\ b_2 \\ b_1
-                \end{bmatrix}
-            </me>
-        </p>
+            <title>Rearranging columns in a system of equations</title>
+            <statement>
+                <p>
+                    If a matrix <m>A'|\vec{b}</m> is the result of the <em>column operation</em> <m>C_1:C_3</m> on the matrix <m>A=[a_{i,j}]_{3\times 3}</m> augmented by the vector <m>\vec{b}=\vc{b_1,b_2,b_3}</m>, we can think of the associated matrix equations changing from 
+                    <me>
+                        \begin{bmatrix}
+                        a_{1,1} \amp a_{1,2} \amp a_{1,3} \\
+                        a_{2,1} \amp a_{2,2} \amp a_{2,3} \\
+                        a_{3,1} \amp a_{3,2} \amp a_{3,3}
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                        x_1 \\ x_2 \\ x_3
+                        \end{bmatrix} = 
+                        \begin{bmatrix}
+                        b_1 \\ b_2 \\ b_3
+                        \end{bmatrix}
+                    </me>
+                    to the equation
+                    <me>
+                        \begin{bmatrix}
+                        a_{1,3} \amp a_{1,2} \amp a_{1,1} \\
+                        a_{2,3} \amp a_{2,2} \amp a_{2,1} \\
+                        a_{3,3} \amp a_{3,2} \amp a_{3,1}
+                        \end{bmatrix}
+                        \begin{bmatrix}
+                        x_3 \\ x_2 \\ x_1
+                        \end{bmatrix} = 
+                        \begin{bmatrix}
+                        b_3 \\ b_2 \\ b_1
+                        \end{bmatrix}
+                    </me>
+                </p>
+            </statement>
+        </example>
+
         <p>
-            An interesting way to track these changes is to use a <em>permutation matrix</em>. Suppose that <m>A</m> is a <m>m\times n</m> matrix, and <m>I</m> is the <m>n\times n</m> identity matrix. Then if <m>A'</m> and <m>I'</m> are the results of swapping the <m>i^\text{ th }</m> and <m>j^\text{ th }</m> columns in both <m>A</m> and <m>I</m>, it is the case that
+            In order to track these changes, we use a <em>permutation matrix</em>. 
+        </p>
+        <definition>
+            <statement>
+                <p>
+                    Suppose that <m>A</m> is a <m>m\times n</m> matrix, and <m>I</m> is the <m>n\times n</m> identity matrix. Then if <m>A'</m> and <m>I'</m> are the results of swapping the <m>i^\text{ th }</m> and <m>j^\text{ th }</m> columns in both <m>A</m> and <m>I</m>, it is the case that
             <me>
                 A = AI = A'I'.
             </me>
-        </p>
+                </p>
+            </statement>
+        </definition>
+            
 
         <p>
             Hence a sequence of column swaps on <m>A</m> can be tracked by making the same sequence of column swaps on an identity matrix <m>I</m> of the correct dimensions.

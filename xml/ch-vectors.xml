@@ -62,7 +62,7 @@
     <xi:include  href="sec-vectors-motivation.xml" />
     <xi:include  href="sec-vectors-swamping.xml" />
     <xi:include  href="sec-vectors-pivoting.xml" />
-    <xi:include  href="section6_6.xml" />
+    <xi:include  href="sec-vectors-ge.xml" />
     <conclusion xml:id="formal-vectorspace">
         <title>Formal definition of a vector space</title>
         <p> To be very precise, here are the necessary definitions which define a <em>vector space</em>.</p>
