@@ -136,5 +136,13 @@
             </statement>
         </exercise>
     </subsection>
+    <subsection>
+        <title>Application to solving systems</title>
+        A wonderful algebraic use for a matrix inverse comes into play when solving systems of equations. For instance, if <m>A</m> is an invertible matrix, then
+        <me>
+            A\vec{x} = \vec{b} \Longleftrightarrow \vec{x} = A^{-1}\vec{b}.
+        </me>
+        This is useful especially when there are multiple <em>loading vectors</em>, <m>\vec{b}_1, \vec{b}_2, \ldots</m>, and it is necessary to solve <m>A\vec{x}=\vec{b}_i</m> for each of them. While this is a very beautiful application of the inverse, it can be shown that using matrix multiplication in this way over a large set of loading vectors becomes less efficient than other methods, notably the <m>LU</m> decomposition and the <m>PA=LU</m> factorizations.
+    </subsection>
 
 </section>

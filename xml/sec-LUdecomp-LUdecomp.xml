@@ -1,191 +1,219 @@
-<section>
-<title><m>LU</m> decomposition</title>
+<section xml:id="sec-LUdecomp-LUdecomposition">
+    <title>LU decomposition</title>
 
 
-<introduction>
-<definition>
-<statement>
-<p>
-A <m>m\times n</m> matrix <m>L</m> is <term>lower triangular</term> if its entries satisfy <m>\ell_{i,j}=0</m> for <m>j>i</m> (entries to the right of the ``main diagonal" are zero). A <m>m\times n</m> matrix <m>U</m> is <term>upper triangular</term> if its entries satisfy <m>u_{i,j} = 0</m> for <m>j\lt i</m> (entries to the left of the ``main diagonal" are zero). An <m>LU</m> decomposition of a matrix <m>A</m> is any factorization <m>A=LU</m> where <m>L</m> is lower triangular and <m>U</m> is an upper triangular row echelon form of <m>A</m>.
-</p>
-</statement>
-</definition>
-<p>
-We can apply our theory of elementary matrices to this problem, immediately!
-</p>
+    <introduction>
+        <p>
+            Consider again the problem discussed at the end of the previous section. Suppose we are given a matrix of coefficients <m>A</m>, called the <em>staging matrix</em>, for a collection of related linear systems 
+            <me>
+                A\vec{x} = \vec{b}_i, i\in\set{1,2,3,\ldots,k}
+            </me>
+            for some <m>k\in\mathbb{Z}^+</m>, where the vectors <m>\vec{b}_1, \vec{b}_2, \ldots, \vec{b}_k</m> are called the <em>loading vectors</em>. We already can solve these systems using the inverse matrix <m>A^{-1}</m>, but the <em>lower-upper decomposition</em>, also called the <em>LU decomposition</em>, provides a much more computationally efficient method of solving the systems.
+        </p>
+        <definition>
+            <statement>
+                <p>
+                    A <m>m\times n</m> matrix <m>L</m> is <term>lower triangular</term> if its entries satisfy <m>\ell_{i,j}=0</m> for <m>j>i</m> (entries to the right of the main diagonal are zero). A <m>m\times n</m> matrix <m>U</m> is <term>upper triangular</term> if its entries satisfy <m>u_{i,j} = 0</m> for <m>j\lt i</m> (entries to the left of the main diagonal are zero). An <m>LU</m> decomposition of a matrix <m>A</m> is any factorization <m>A=LU</m> where <m>L</m> is lower triangular and <m>U</m> is an upper triangular row echelon form of <m>A</m>.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            We have already developed all the tools necessary to determine an LU decomposition of a matrix, and we already know the matrix <m>U</m> of the decomposition. 
+        </p>
 
-<example>
-<statement>
-<p>
-Recall from Lesson 6 our example system of equations and its corresponding augmented matrix form:
-<md>
-  <mrow>  \amp \systeme{
-x_1 + 3x_2 - 13x_3 = -18, 
-x_1 + 2x_2 - 10x_3 = -15, 
--6x_1 - 7x_2 + 46x_3 = 77
-}  \amp 
-A\vert\vec{b} \amp = \left[\begin{array}{3} 1 \amp  3 \amp  -13 \amp  -18 \\ 1 \amp  2 \amp  -10 \amp  -15\\ -6 \amp  -7 \amp  46 \amp  77
-\end{array} \right].</mrow>
-</md>
-</p>
+        <example>
+            <title>Producing the LU decomposition (part 1)</title>
+            <statement>
+                <p>
+                    Recall from Lesson 6 our example system of equations 
+                    <md>
+                        <mrow>
+                            x_1 + 3x_2 - 13x_3 \amp = -18
+                        </mrow>
+                        <mrow>
+                            x_1 + 2x_2 - 10x_3 \amp = -15
+                        </mrow>
+                        <mrow>
+                            -6x_1 - 7x_2 + 46x_3 \amp = 77.
+                        </mrow>
+                    </md>
+                    The associated matrix equation is
+                    <md>
+                        <mrow>  
+                            A\vert\vec{b} \amp = 
+                            \left[\begin{array}{rrr|r}
+                            1 \amp  3 \amp  -13 \amp  -18 \\ 
+                            1 \amp  2 \amp  -10 \amp  -15 \\ 
+                            -6 \amp  -7 \amp  46 \amp  77
+                            \end{array}\right].</mrow>
+                    </md>
 
-<p>
-The three required steps were <m>\xto{-R_1+R_2}</m>, <m>\xto{6R_1+R_3}</m>, and <m>\xto{11R_2+R_3}</m>, resulting in
-<me>
-  U = \begin{bmatrix}1 \amp  3 \amp  -13\\ 0 \amp  -1 \amp  3\\ 0 \amp  0 \amp  1
-\end{bmatrix}
-</me>
-when applied to just <m>A</m>. So if we let those correspond to elementary matrices <m>E_1</m>, <m>E_2</m>, and <m>E_3</m> respectively, we get
-<me>
-  E_3E_2E_1A = \begin{bmatrix}1\amp 0\amp 0\\-1\amp 1\amp 0\\6\amp 11\amp 1
-\end{bmatrix} \begin{bmatrix}1\amp 3\amp -13\\1\amp 2\amp -10\\-6\amp -7\amp 46
-\end{bmatrix} 
-	= \begin{bmatrix}1 \amp  3 \amp  -13\\ 0 \amp  -1 \amp  3\\ 0 \amp  0 \amp  1
-\end{bmatrix}  = U.
-</me>
-</p>
+                </p>
 
-<p>
-If we left-multiply both sides of this equation with the correct inverse matrices and obtain a lower triangular matrix as their product, we'll be done!
-</p>
-</statement>
-</example>
+                <p>
+                    The three required steps of Gaussian elimination to produce an upper triangular matrix <m>U</m> were <m>\xto{-R_1+R_2}</m>, <m>\xto{6R_1+R_3}</m>, and <m>\xto{11R_2+R_3}</m>, resulting in
+                    <me>
+                        U = \begin{bmatrix}1 \amp  3 \amp  -13\\ 0 \amp  -1 \amp  3\\ 0 \amp  0 \amp  1
+                        \end{bmatrix}
+                    </me>
+                    when applied to just <m>A</m>. So if we let those correspond to elementary matrices <m>E_1</m>, <m>E_2</m>, and <m>E_3</m> respectively, we get
+                    <me>
+                        E_3E_2E_1A = \begin{bmatrix}1\amp 0\amp 0\\-1\amp 1\amp 0\\6\amp 11\amp 1
+                        \end{bmatrix} \begin{bmatrix}1\amp 3\amp -13\\1\amp 2\amp -10\\-6\amp -7\amp 46
+                        \end{bmatrix} 
+                        = \begin{bmatrix}1 \amp  3 \amp  -13\\ 0 \amp  -1 \amp  3\\ 0 \amp  0 \amp  1
+                        \end{bmatrix}  = U.
+                    </me>
+                </p>
 
-<p>
-At this point it becomes helpful to assign special letters to the elementary matrices; these are by no means standard throughout the linear algebra literature and serve mostly to make clear the following theorem. Generally, when you discuss elementary matrices, they will simply be <m>E_i</m>s.
-</p>
+                <p>
+                    If we left-multiply both sides of this equation with the correct inverse matrices and obtain a lower triangular matrix as their product, we'll be done!
+                </p>
+            </statement>
+        </example>
 
-<theorem>
-<statement>
-<p>
-All elementary matrices are invertible.
-<ol>
-<li><p>If <m>S_{k,\ell}</m> is an elementary matrix which swaps rows <m>k</m> and <m>\ell</m> (<m>R_k:R_\ell</m>), then <m>S_{k,\ell}^2=I</m>, and <m>S_{k,\ell}=S_{k,\ell}^{-1}</m>.</p></li>
-<li><p>If <m>M_{\lambda, k}</m> is an elementary matrix which multiplies row <m>k</m> by a scalar <m>\lambda</m> (<m>\lambda R_k</m>), then <m>M_{\lambda,k}^{-1} = M_{1/\lambda, k}</m>.</p></li>
-<li><p>If <m>E_{\lambda, k, j}</m> is an elementary matrix which multiplies row <m>k</m> by a scalar <m>\lambda</m> and then adds the result onto row <m>\ell</m> (<m>\lambda R_k+R_\ell</m>), then <m>E_{\lambda, k, j}^{-1} = E_{-\lambda, k, j}</m>.</p></li>
-</ol>
+        <p>
+            At this point it becomes helpful to assign special letters to the elementary matrices; these are <em>by no means standard</em> throughout the linear algebra literature and serve mostly to make clear the following theorem. Generally, when you discuss elementary matrices, they will simply be denoted  by <m>E_i</m>s.
+        </p>
 
-</p>
-</statement>
-</theorem>
+        <theorem>
+            <title>All elementary matrices are invertible</title>
+            <statement>
+                <p>
+                    
+                    <ol>
+                        <li><p>If <m>S_{k,\ell}</m> is an elementary matrix which swaps rows <m>k</m> and <m>\ell</m> (<m>R_k:R_\ell</m>), then <m>S_{k,\ell}^2=I</m>, and <m>S_{k,\ell}=S_{k,\ell}^{-1}</m>.</p></li>
+                        <li><p>If <m>M_{\lambda, k}</m> is an elementary matrix which multiplies row <m>k</m> by a scalar <m>\lambda</m> (<m>\lambda R_k</m>), then <m>M_{\lambda,k}^{-1} = M_{1/\lambda, k}</m>.</p></li>
+                        <li><p>If <m>E_{\lambda, k, j}</m> is an elementary matrix which multiplies row <m>k</m> by a scalar <m>\lambda</m> and then adds the result onto row <m>\ell</m> (<m>\lambda R_k+R_\ell</m>), then <m>E_{\lambda, k, j}^{-1} = E_{-\lambda, k, j}</m>.</p></li>
+                    </ol>
 
-<example>
-<statement>
-<p>
-Continuing from above, we have
-<me>
-  E_3E_2E_1 = \begin{bmatrix}1\amp 0\amp 0\\-1\amp 1\amp 0\\6\amp 11\amp 1
-\end{bmatrix} ,
-</me>
-and all of <m>E_1, E_2, and E_3</m> are matrices as in Theorem 7.7 part 3. Hence
-<me>
-  (E_3E_2E_1)^{-1}=E_1^{-1}E_2^{-1}E_3^{-1} = \begin{bmatrix}1\amp 0\amp 0\\1\amp 1\amp 0\\-6\amp -11\amp 1
-\end{bmatrix} .
-</me>
-</p>
+                </p>
+            </statement>
+        </theorem>
 
-<p>
-Since this is lower triangular, we say <m>L=E_1^{-1}E_2^{-1}E_3^{-1}</m> and have obtained <m>A=LU</m>, the <m>LU</m> factorization of our matrix <m>A</m>. Now we need to use the <m>LU</m> decomposition to solve the system of equations!
-</p>
-</statement>
-</example>
+        <example>
+            <title>Producing the LU decomposition (part 2)</title>
+            <statement>
+                <p>
+                    Continuing from above, we have
+                    <me>
+                        E_3E_2E_1 = \begin{bmatrix}
+                        1  \amp 0  \amp 0\\
+                        -1 \amp 1  \amp 0\\
+                        6  \amp 11 \amp 1
+                        \end{bmatrix},
+                    </me>
+                    and all of <m>E_1, E_2, and E_3</m> are matrices as in part 3 of the theorem just stated . Hence
+                    <me>
+                        (E_3E_2E_1)^{-1}=E_1^{-1}E_2^{-1}E_3^{-1} = \begin{bmatrix}1\amp 0\amp 0\\1\amp 1\amp 0\\-6\amp -11\amp 1
+                        \end{bmatrix} .
+                    </me>
+                </p>
 
-<p>
-Matrix algebra very quickly gives us a method of solving the matrix equation <m>A\vec{x}=\vec{b}</m> using the <m>LU</m> decomposition:
-<me>
-  \vec{b} = A\vec{x} = (LU)\vec{x} = L(U\vec{x}).
-</me>
-</p>
+                <p>
+                    Since this is lower triangular, we say <m>L=E_1^{-1}E_2^{-1}E_3^{-1}</m> and have obtained <m>A=LU</m>, the <m>LU</m> factorization of our matrix <m>A</m>. Now we need to use the <m>LU</m> decomposition to solve the system of equations!
+                </p>
+            </statement>
+        </example>
+        <theorem>
+            <statement>
+                If <m>E_1, E_2, \ldots, E_k</m> are a sequence of elementary matrices such that <me>E_kE_{k-1}\cdots E_2E_1A = U</me> is an upper triangular matrix. Then the matrix product <me>L = E_1^{-1}E_2^{-1}\cdots E_{k-1}^{-1}E_k^{-1}</me> is lower triangular.
+            </statement>
+        </theorem>
+        <p>
+            Matrix algebra very quickly gives us a method of solving the matrix equation <m>A\vec{x}=\vec{b}</m> using the <m>LU</m> decomposition:
+            <me>
+                \vec{b} = A\vec{x} = (LU)\vec{x} = L(U\vec{x}).
+            </me>
+            If we assign <m>U\vec{x} = \vec{y}</m> and <m>L\vec{y}=\vec{b}</m>, we can rapidly solve the latter for <m>\vec{y}</m> using forward substitution and then the former for <m>\vec{x}</m> using back substitution.
+        </p>
 
-<p>
-So we now can separate this into two problems, namely <m>L\vec{y} = \vec{b}</m> and <m>U\vec{x} = \vec{y}</m>, but these are both triangular matrices. The solution to a this type of problem with triangular matrices involves only substitutions (either forward or backward)!
-</p>
+        <example>
+            <title>Solving a system using the LU decomposition</title>
+            <statement>
+                <p>
+                    Let's take our example and finish it out with substitution.
+                    <md>
+                        <mrow>  A \amp = \begin{bmatrix} 1 \amp  3 \amp  -13</mrow>
+                        <mrow>  1 \amp  2 \amp  -10</mrow>
+                        <mrow>  -6 \amp  -7 \amp  46 \end{bmatrix} \amp 
+                            L \amp = \begin{bmatrix}1 \amp  0 \amp  0</mrow>
+                        <mrow>  1 \amp  1 \amp  0</mrow>
+                        <mrow>  -6 \amp  -11 \amp  1\end{bmatrix} \amp 
+                            U \amp = \begin{bmatrix} 1 \amp  3 \amp  -13</mrow>
+                        <mrow>  0 \amp  -1 \amp  3</mrow>
+                        <mrow>  0 \amp  0 \amp  1\end{bmatrix}</mrow>
+                    </md>
+                </p>
 
-<example>
-<statement>
-<p>
-Let's take our example and finish it out with substitution.
-<md>
-  <mrow>  A \amp = \begin{bmatrix} 1 \amp  3 \amp  -13</mrow>
-  <mrow>  1 \amp  2 \amp  -10</mrow>
-  <mrow>  -6 \amp  -7 \amp  46 \end{bmatrix} \amp 
-L \amp = \begin{bmatrix}1 \amp  0 \amp  0</mrow>
-  <mrow>  1 \amp  1 \amp  0</mrow>
-  <mrow>  -6 \amp  -11 \amp  1\end{bmatrix} \amp 
-U \amp = \begin{bmatrix} 1 \amp  3 \amp  -13</mrow>
-  <mrow>  0 \amp  -1 \amp  3</mrow>
-  <mrow>  0 \amp  0 \amp  1\end{bmatrix}</mrow>
-</md>
-</p>
+                <p>
+                    Recall that we must solve <m>L\vec{y}=\vec{b}</m> before we can solve <m>U\vec{x}=\vec{y}</m>, and so doing we obtain
+                    <md>
+                        <mrow>  y_1 \amp = b_1 				\amp  x_3 \amp = y_3</mrow>
+                        <mrow>  y_2 \amp = b_2-y_1 			\amp  x_2 \amp = -(y_2_3x_3)</mrow>
+                        <mrow>  y_3 \amp = b_3+6y_1+11y_2	\amp  x_1 \amp = y_1_3x_2+13x_3</mrow>
+                    </md>
+                </p>
 
-<p>
-Recall that we must solve <m>L\vec{y}=\vec{b}</m> before we can solve <m>U\vec{x}=\vec{y}</m>, and so doing we obtain
-<md>
-  <mrow>  y_1 \amp = b_1 				\amp  x_3 \amp = y_3</mrow>
-  <mrow>  y_2 \amp = b_2-y_1 			\amp  x_2 \amp = -(y_2_3x_3)</mrow>
-  <mrow>  y_3 \amp = b_3+6y_1+11y_2	\amp  x_1 \amp = y_1_3x_2+13x_3</mrow>
-</md>
-</p>
-
-<p>
-As you can see, we can now solve the matrix equation <m>A\vec{x}=\vec{b}</m> very quickly for any <m>{\vec{b}=\vc{b_1,b_2,b_3}}</m>. In our example, we had <m>\vec{b}=\vc{-18,-15,77}</m>, so we get
-<md>
-  <mrow>  y_1 = b_1 \amp = -18				\amp  x_3 = y_3 \amp = 2</mrow>
-  <mrow>  y_2 = b_2-y_1 \amp = 3				\amp  x_2 = -(y_2_3x_3) \amp = 3</mrow>
-  <mrow>  y_3 = b_3+6y_1+11y_2 \amp = 2		\amp  x_1 = y_1_3x_2+13x_3 \amp = -1</mrow>
-</md>
-and our solution vector is <m>\vec{x} = \vc{2,3,-1}</m>.
-</p>
-</statement>
-</example>
-</introduction>
+                <p>
+                    As you can see, we can now solve the matrix equation <m>A\vec{x}=\vec{b}</m> very quickly for any <m>{\vec{b}=\vc{b_1,b_2,b_3}}</m>. In our example, we had <m>\vec{b}=\vc{-18,-15,77}</m>, so we get
+                    <md>
+                        <mrow>  y_1 = b_1 \amp = -18				\amp  x_3 = y_3 \amp = 2</mrow>
+                        <mrow>  y_2 = b_2-y_1 \amp = 3				\amp  x_2 = -(y_2_3x_3) \amp = 3</mrow>
+                        <mrow>  y_3 = b_3+6y_1+11y_2 \amp = 2		\amp  x_1 = y_1_3x_2+13x_3 \amp = -1</mrow>
+                    </md>
+                    and our solution vector is <m>\vec{x} = \vc{2,3,-1}</m>.
+                </p>
+            </statement>
+        </example>
+    </introduction>
 
 
-<subsection>
-<title>Motivation for using <m>LU</m> decomposition: operational complexity</title>
-<p>
-We have so far avoided discussing algorithmic complexity, but it is no longer avoidable.
-</p>
-<definition>
-<statement>
-<p>
-Suppose that an algorithm requires <m>f(n)</m> operational steps to complete when the input has size <m>n</m><fn>Both of these are very vague, because individual operations differ between algorithms, as does the measurement of size of input.</fn>. Suppose also that there is some function <m>F(n)</m> such that
-<me>
-  \lim_{n\to\infty} \frac{F(n)}{f(n)} = c
-</me>
-is constant. Then we say the algorithm has a <term>big-O complexity</term> of <m>F(n)</m>, written <m>O(F(n))</m><fn>While any function <m>F</m> will do, we try to find as simple a function as possible while keeping the limit positive.</fn>.
-</p>
-</statement>
-</definition>
-<p>
-This applies to the problem of solving systems of equations like so: a very well implemented naive algorithm for producing the Gaussian elimination of a matrix requires <m>\frac23n^3+\frac12n^2-\frac76n</m> divisions, multiplications, and addition/subtractions to perform the elimination step, and then an additional <m>n^2</m> of these operations to perform the back substitution step. Hence the operational complexity of naive Gaussian elimination is <m>O(n^3)</m>, since
-<me>
-  \lim_{n\to\infty}\frac{\frac23n^3+\frac12n^2-\frac76n}{n^3} = \frac23.
-</me>
-</p>
+    <subsection>
+        <title>Motivation for using <m>LU</m> decomposition: operational complexity</title>
+        <p>
+            We have so far avoided discussing algorithmic complexity, but it is no longer avoidable.
+        </p>
+        <definition>
+            <statement>
+                <p>
+                    Suppose that an algorithm requires <m>f(n)</m> operational steps to complete when the input has size <m>n</m><fn>Both of these are very vague, because individual operations differ between algorithms, as does the measurement of size of input.</fn>. Suppose also that there is some function <m>F(n)</m> such that
+                    <me>
+                        \lim_{n\to\infty} \frac{F(n)}{f(n)} = c
+                    </me>
+                    is constant. Then we say the algorithm has a <term>big-O complexity</term> of <m>F(n)</m>, written <m>O(F(n))</m><fn>While any function <m>F</m> will do, we try to find as simple a function as possible while keeping the limit positive.</fn>.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            This applies to the problem of solving systems of equations like so: a very well implemented naive algorithm for producing the Gaussian elimination of a matrix requires <m>\frac23n^3+\frac12n^2-\frac76n</m> divisions, multiplications, and addition/subtractions to perform the elimination step, and then an additional <m>n^2</m> of these operations to perform the back substitution step. Hence the operational complexity of naive Gaussian elimination is <m>O(n^3)</m>, since
+            <me>
+                \lim_{n\to\infty}\frac{\frac23n^3+\frac12n^2-\frac76n}{n^3} = \frac23.
+            </me>
+        </p>
 
-<p>
-What if instead of solving an equation <m>A\vec{x}=\vec{b}</m>, we actually have to solve a system
-<md>
-  <mrow>  A\vec{x}\amp =\vec{b}_1, \amp 
-A\vec{x}\amp =\vec{b}_2, \amp 
-A\vec{x}\amp =\vec{b}_3, \amp 
-\amp \cdots \amp 
-A\vec{x}\amp =\vec{b}_n,</mrow>
-</md>
-where <m>A</m> is a <m>n\times n</m> matrix? In such a case, since our vectors <m>\vec{b}_i</m> are involved in every step of each Gaussian elimination, solving all <m>n</m> problems becomes a <m>O(n^4)</m> algorithm, which is much worse than <m>O(n^3)</m>.
-</p>
+        <p>
+            What if instead of solving an equation <m>A\vec{x}=\vec{b}</m>, we actually have to solve a system
+            <md>
+                <mrow>  A\vec{x}\amp =\vec{b}_1, \amp 
+                    A\vec{x}\amp =\vec{b}_2, \amp 
+                    A\vec{x}\amp =\vec{b}_3, \amp 
+                    \amp \cdots \amp 
+                    A\vec{x}\amp =\vec{b}_n,</mrow>
+            </md>
+            where <m>A</m> is a <m>n\times n</m> matrix? In such a case, since our vectors <m>\vec{b}_i</m> are involved in every step of each Gaussian elimination, solving all <m>n</m> problems becomes a <m>O(n^4)</m> algorithm, which is much worse than <m>O(n^3)</m>.
+        </p>
 
-<p>
-On the other hand, the operational complexity of finding the <m>LU</m> decomposition of <m>A</m> is still <m>O(n^3)</m>, since we do all the same steps but have some additional assignments into the matrix <m>L</m>. Using the <m>LU</m> decomposition to solve <m>(LU)\vec{x}=\vec{b}_i</m> requires <m>2n^2</m> operations for the forward substitution involved in solving <m>L\vec{y}=\vec{b}_i</m> and then the back substitution of solving <m>U\vec{x}=\vec{y}</m>. Using the <m>LU</m> decomposition to solve the system of matrix equations above then is still <m>O(n^3)</m>, since
-<me>
-  \lim_{n\to\infty}\frac{n^3+2n^2(n)}{n^3} = 3.
-</me>
-</p>
+        <p>
+            On the other hand, the operational complexity of finding the <m>LU</m> decomposition of <m>A</m> is still <m>O(n^3)</m>, since we do all the same steps but have some additional assignments into the matrix <m>L</m>. Using the <m>LU</m> decomposition to solve <m>(LU)\vec{x}=\vec{b}_i</m> requires <m>2n^2</m> operations for the forward substitution involved in solving <m>L\vec{y}=\vec{b}_i</m> and then the back substitution of solving <m>U\vec{x}=\vec{y}</m>. Using the <m>LU</m> decomposition to solve the system of matrix equations above then is still <m>O(n^3)</m>, since
+            <me>
+                \lim_{n\to\infty}\frac{n^3+2n^2(n)}{n^3} = 3.
+            </me>
+        </p>
 
-<p>
-To sum up, the <m>LU</m> decomposition provides no net gain when used to solve a single matrix equation, but when faced with a large system of matrix equations it provides an enormous benefit in terms of the complexity of the algorithm and the time it will require for a program to complete the process.
-</p>
-</subsection>
+        <p>
+            To sum up, the <m>LU</m> decomposition provides no net gain when used to solve a single matrix equation, but when faced with a large system of matrix equations it provides an enormous benefit in terms of the complexity of the algorithm and the time it will require for a program to complete the process.
+        </p>
+    </subsection>
 
 </section>
