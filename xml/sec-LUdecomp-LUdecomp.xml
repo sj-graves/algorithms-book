@@ -37,7 +37,7 @@
                             -6x_1 - 7x_2 + 46x_3 \amp = 77.
                         </mrow>
                     </md>
-                    The associated matrix equation is
+                    The associated matrix equation is written as
                     <md>
                         <mrow>  
                             A\vert\vec{b} \amp = 
@@ -45,24 +45,41 @@
                             1 \amp  3 \amp  -13 \amp  -18 \\ 
                             1 \amp  2 \amp  -10 \amp  -15 \\ 
                             -6 \amp  -7 \amp  46 \amp  77
-                            \end{array}\right].</mrow>
+                            \end{array}\right]
+                        </mrow>
                     </md>
-
+                    in augmented form.
                 </p>
 
                 <p>
-                    The three required steps of Gaussian elimination to produce an upper triangular matrix <m>U</m> were <m>\xto{-R_1+R_2}</m>, <m>\xto{6R_1+R_3}</m>, and <m>\xto{11R_2+R_3}</m>, resulting in
+                    The three required steps of Gaussian elimination to produce an upper triangular matrix <m>U</m> were <m>{-R_1+R_2}</m>, <m>{6R_1+R_3}</m>, and <m>{11R_2+R_3}</m>, resulting in
                     <me>
-                        U = \begin{bmatrix}1 \amp  3 \amp  -13\\ 0 \amp  -1 \amp  3\\ 0 \amp  0 \amp  1
-                        \end{bmatrix}
+                        U = 
+                        \left[\begin{array}{rrr}
+                        1 \amp   3 \amp  -13\\ 
+                        0 \amp  -1 \amp    3\\ 
+                        0 \amp   0 \amp    1
+                        \end{array}\right]
                     </me>
                     when applied to just <m>A</m>. So if we let those correspond to elementary matrices <m>E_1</m>, <m>E_2</m>, and <m>E_3</m> respectively, we get
                     <me>
-                        E_3E_2E_1A = \begin{bmatrix}1\amp 0\amp 0\\-1\amp 1\amp 0\\6\amp 11\amp 1
-                        \end{bmatrix} \begin{bmatrix}1\amp 3\amp -13\\1\amp 2\amp -10\\-6\amp -7\amp 46
-                        \end{bmatrix} 
-                        = \begin{bmatrix}1 \amp  3 \amp  -13\\ 0 \amp  -1 \amp  3\\ 0 \amp  0 \amp  1
-                        \end{bmatrix}  = U.
+                        E_3E_2E_1A = 
+                        \left[\begin{array}{rrr}
+                         1 \amp 0  \amp 0\\
+                        -1 \amp 1  \amp 0\\
+                         6 \amp 11 \amp 1
+                        \end{array}\right]
+                        \left[\begin{array}{rrr}
+                         1 \amp  3 \amp -13\\
+                         1 \amp  2 \amp -10\\
+                        -6 \amp -7 \amp  46
+                        \end{array}\right]
+                        =
+                        \left[\begin{array}{rrr}
+                        1 \amp   3 \amp  -13\\ 
+                        0 \amp  -1 \amp    3\\ 
+                        0 \amp   0 \amp    1
+                        \end{array}\right]  = U.
                     </me>
                 </p>
 
@@ -97,16 +114,17 @@
                 <p>
                     Continuing from above, we have
                     <me>
-                        E_3E_2E_1 = \begin{bmatrix}
+                        E_3E_2E_1 = 
+                        \left[\begin{array}{rrr}
                         1  \amp 0  \amp 0\\
                         -1 \amp 1  \amp 0\\
                         6  \amp 11 \amp 1
-                        \end{bmatrix},
+                        \end{array}\right],
                     </me>
                     and all of <m>E_1, E_2, and E_3</m> are matrices as in part 3 of the theorem just stated . Hence
                     <me>
-                        (E_3E_2E_1)^{-1}=E_1^{-1}E_2^{-1}E_3^{-1} = \begin{bmatrix}1\amp 0\amp 0\\1\amp 1\amp 0\\-6\amp -11\amp 1
-                        \end{bmatrix} .
+                        (E_3E_2E_1)^{-1}=E_1^{-1}E_2^{-1}E_3^{-1} = 
+                        \left[\begin{array}{rrr} 1\amp 0\amp 0\\1\amp 1\amp 0\\-6\amp -11\amp 1 \end{array}\right] .
                     </me>
                 </p>
 
@@ -132,17 +150,28 @@
             <title>Solving a system using the LU decomposition</title>
             <statement>
                 <p>
-                    Let's take our example and finish it out with substitution.
+                    Let's take our example and finish it out with substitution. The matrix 
+                    <me>
+                        A = \left[\begin{array}{rrr}
+                         1 \amp  3 \amp -13\\
+                         1 \amp  2 \amp -10\\
+                        -6 \amp -7 \amp  46
+                        \end{array}\right]
+                    </me>
+                    was decomposed into <m>A=LU</m> where
                     <md>
-                        <mrow>  A \amp = \begin{bmatrix} 1 \amp  3 \amp  -13</mrow>
-                        <mrow>  1 \amp  2 \amp  -10</mrow>
-                        <mrow>  -6 \amp  -7 \amp  46 \end{bmatrix} \amp 
-                            L \amp = \begin{bmatrix}1 \amp  0 \amp  0</mrow>
-                        <mrow>  1 \amp  1 \amp  0</mrow>
-                        <mrow>  -6 \amp  -11 \amp  1\end{bmatrix} \amp 
-                            U \amp = \begin{bmatrix} 1 \amp  3 \amp  -13</mrow>
-                        <mrow>  0 \amp  -1 \amp  3</mrow>
-                        <mrow>  0 \amp  0 \amp  1\end{bmatrix}</mrow>
+                        <mrow>
+                            L \amp = \left[\begin{array}{rrr}
+                             1  \amp   0  \amp 0\\
+                             1  \amp   1  \amp 0\\
+                            -6  \amp -11  \amp 1
+                            \end{array}\right] \amp
+                            U \amp = \left[\begin{array}{rrr}
+                            1 \amp   3 \amp  -13\\ 
+                            0 \amp  -1 \amp    3\\ 
+                            0 \amp   0 \amp    1
+                            \end{array}\right]
+                        </mrow>
                     </md>
                 </p>
 
@@ -150,17 +179,17 @@
                     Recall that we must solve <m>L\vec{y}=\vec{b}</m> before we can solve <m>U\vec{x}=\vec{y}</m>, and so doing we obtain
                     <md>
                         <mrow>  y_1 \amp = b_1 				\amp  x_3 \amp = y_3</mrow>
-                        <mrow>  y_2 \amp = b_2-y_1 			\amp  x_2 \amp = -(y_2_3x_3)</mrow>
-                        <mrow>  y_3 \amp = b_3+6y_1+11y_2	\amp  x_1 \amp = y_1_3x_2+13x_3</mrow>
+                        <mrow>  y_2 \amp = b_2-y_1 			\amp  x_2 \amp = -(y_2-3x_3)</mrow>
+                        <mrow>  y_3 \amp = b_3+6y_1+11y_2	\amp  x_1 \amp = y_1-3x_2+13x_3</mrow>
                     </md>
                 </p>
 
                 <p>
                     As you can see, we can now solve the matrix equation <m>A\vec{x}=\vec{b}</m> very quickly for any <m>{\vec{b}=\vc{b_1,b_2,b_3}}</m>. In our example, we had <m>\vec{b}=\vc{-18,-15,77}</m>, so we get
                     <md>
-                        <mrow>  y_1 = b_1 \amp = -18				\amp  x_3 = y_3 \amp = 2</mrow>
-                        <mrow>  y_2 = b_2-y_1 \amp = 3				\amp  x_2 = -(y_2_3x_3) \amp = 3</mrow>
-                        <mrow>  y_3 = b_3+6y_1+11y_2 \amp = 2		\amp  x_1 = y_1_3x_2+13x_3 \amp = -1</mrow>
+                        <mrow>  y_1 \amp = b_1  = -18				\amp  x_3 \amp = y_3  = 2</mrow>
+                        <mrow>  y_2 \amp = b_2-y_1  = 3				\amp  x_2 \amp = -(y_2-3x_3) = 3</mrow>
+                        <mrow>  y_3 \amp = b_3+6y_1+11y_2  = 2		\amp  x_1 \amp = y_1-3x_2+13x_3  = -1</mrow>
                     </md>
                     and our solution vector is <m>\vec{x} = \vc{2,3,-1}</m>.
                 </p>
@@ -175,16 +204,35 @@
             We have so far avoided discussing algorithmic complexity, but it is no longer avoidable.
         </p>
         <definition>
-            <statement>
+            <statement><!--
                 <p>
                     Suppose that an algorithm requires <m>f(n)</m> operational steps to complete when the input has size <m>n</m><fn>Both of these are very vague, because individual operations differ between algorithms, as does the measurement of size of input.</fn>. Suppose also that there is some function <m>F(n)</m> such that
                     <me>
                         \lim_{n\to\infty} \frac{F(n)}{f(n)} = c
                     </me>
                     is constant. Then we say the algorithm has a <term>big-O complexity</term> of <m>F(n)</m>, written <m>O(F(n))</m><fn>While any function <m>F</m> will do, we try to find as simple a function as possible while keeping the limit positive.</fn>.
+                </p>-->
+                <p>
+                    Suppose that an algorithm requires <m>f(n)</m> operational steps to complete when the input has size <m>n</m>. Suppose slso that there is some function <m>g(n)</m> such that
+                    <me>
+                        \limsup_{n\to \infty}\abs{\frac{f(n)}{g(n)}} \lt \infty.
+                    </me>
+                    Then we say that the algorithm is <term>big-O of <m>g(n)</m></term> and write <m>f(n)=O(g(n))</m> as <m>n\to\infty</m>.
                 </p>
             </statement>
         </definition>
+        <aside>
+            <p>
+                The notation <m>\limsup</m> used in the above definition is a special analytic concept called the limit superior; its definition relies upon another analytic concept, the supremum, defined like so: if <m>S</m> is a set of real numbers, then <me>\sup S</me> is the least upper bound of the set <m>S</m>. Hence if <m>M\geq s</m> for every <m>x\in S</m>, then <m>\sup S\leq M</m>.
+            </p>
+            <p>
+                If <m>S=(s_1,s_2,s_3,\ldots,s_n,\ldots)</m> is a sequence rather than a set, then we can define the limit superior of <m>S</m> to be
+                <me>
+                    \limsup S = \sup\set{\lim T:T\subseteq S},
+                </me>
+                that is, the supremum of all subsequential limits.
+            </p>
+        </aside>
         <p>
             This applies to the problem of solving systems of equations like so: a very well implemented naive algorithm for producing the Gaussian elimination of a matrix requires <m>\frac23n^3+\frac12n^2-\frac76n</m> divisions, multiplications, and addition/subtractions to perform the elimination step, and then an additional <m>n^2</m> of these operations to perform the back substitution step. Hence the operational complexity of naive Gaussian elimination is <m>O(n^3)</m>, since
             <me>

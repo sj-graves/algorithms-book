@@ -1,118 +1,174 @@
-<section>
-<title><m>PA=LU</m> factorization</title>
-<p>
-All of the above work is for naught if there is a zero pivot, of course, or computationally if due to swamping we encounter insurmountable errors. The solution, of course, is to use partial pivoting <mdash /> but permuting the rows of the matrix introduces a complication into the process. The solution is to find the appropriate <em>permutation matrix <m>P</m></em> so that <m>PA=LU</m>.
-</p>
-<definition>
-<statement>
-<p>
-A matrix <m>P</m> is a <term>permutation matrix</term> if it is a product of elementary matrices of type <m>S_{k,\ell}</m> only.
-</p>
-</statement>
-</definition>
-<p>
-In the <m>LU</m> factorization, the matrix <m>L</m> is used as a place to ``store" the row multipliers which are used in elimination; a more clever implementation of the algorithm allows those values to be stored in the matrix <m>U</m> below the main diagonal! This is useful as it allows the rows to be pivoted and the scalar multipliers to stay with their correct row if rows need to be swapped for partial pivoting. The row interchanges will be tracked in a permutation matrix <m>P</m>.
-</p>
+<section xml:id='sec-LUdecomp-PALUdecomp'>
+    <title>PA=LU factorization</title>
+    <p>
+        The work in the preceding section needs a minor modification if we are to apply partial pivoting. The solution is to find the appropriate <em>permutation matrix <m>P</m></em> so that <m>PA=LU</m>.
+    </p>
+    <definition>
+        <statement>
+            <p>
+                A matrix <m>P</m> is a <term>permutation matrix</term> if it is a product of elementary matrices of type <m>S_{k,\ell}</m> only.
+            </p>
+        </statement>
+    </definition>
+    <p>
+        In the <m>LU</m> factorization, the matrix <m>L</m> is used as a place to record the row multipliers which are used in elimination; a more clever implementation of the algorithm allows those values to be stored in the matrix <m>U</m> below the main diagonal! Since every matrix which results from Gaussian elimination to row echelon form is an upper-triangular matrix, we can automatically assume that all elements which fall below the main diagonal of the resulting matrix are necessarily zero. Instead of recording the possibly many values of zero which we know must occur, we use those positions to store the corresponding element of the decomposition factor <m>L</m>. This is useful as it allows the rows of <m>L</m> to be pivoted and the scalar multipliers to stay with their correct row if rows need to be swapped for partial pivoting. The row interchanges will be tracked in a permutation matrix <m>P</m>.
+    </p>
+    <!--p>
+        Since we will track our permutation matrix separately, we know that all entries in the resulting matrix which fall below the main diagional are zero; this being the case, we will in place of the zero write a <q>boxed</q> constant, the negative of the scaling factor. Hence at the end of the process we will have the correct matrix <m>U</m> stored on and above the main diagonal and the correct entries for the matrix <m>L</m> stored below the main diagonal. Since the main diagonal entries of <m>L</m> are each <m>1</m> this provides all necessary information to construct our matrices.
+    </p-->
+    <example>
+        <title><m>PA=LU</m> via partial pivoting</title>
+        <statement>
+            <p>
+                We will decompose a different example than previously to demonstrate how the multipliers stored within the matrix move with their rows.
+                <md>
+                    <mrow>  
+                        A = \begin{bmatrix}
+                            4 \amp  9 \amp  -11 \\
+                            -2 \amp  3 \amp  5\\
+                            7 \amp  1 \amp  1
+                        \end{bmatrix}
+                        \xto{R_1:R_3} \amp
+                        \begin{bmatrix}
+                        7 \amp 1 \amp 1 \\
+                        -2 \amp 3 \amp 5 \\
+                        4 \amp 9 \amp -11
+                        \end{bmatrix}
+                        \amp
+                        P \amp = \left[\begin{matrix}
+                            0\amp 0\amp 1 \\
+                            0\amp 1\amp 0 \\
+                            1\amp 0\amp 0
+                        \end{matrix}\right]
+                    </mrow>
+                    <mrow>
+                        \xrightarrow[-\frac47R_1+R_3]{\frac27R_1+R_2} \amp
+                        \begin{bmatrix}
+                        7 \amp 1 \amp 1 \\
+                        \fbox{$-\frac27$} \amp  \frac{23}7 \amp  \frac{37}7 \\
+                        \fbox{$\frac47$} \amp  \frac{59}7 \amp  -\frac{81}7
+                        \end{bmatrix}
+                    </mrow>
+                    <mrow>
+                        \xto{R_2:R_3} \amp 
+                        \begin{bmatrix}
+                        7 \amp 1 \amp 1 \\
+                        \fbox{$\frac47$} \amp  \frac{59}7 \amp  -\frac{81}7 \\
+                        \fbox{$-\frac27$} \amp  \frac{23}7 \amp  \frac{37}7 
+                        \end{bmatrix}
+                        \amp 
+                        P \amp = \begin{bmatrix}
+                        0 \amp 0 \amp 1 \\
+                        1 \amp 0 \amp 0 \\
+                        0 \amp 1 \amp 0
+                        \end{bmatrix}
+                    </mrow>
+                    <mrow>
+                    \xto{R_3 - \frac{23}{59}R_2} \amp
+                        \begin{bmatrix}
+                        7 \amp  1 \amp  1 \\
+                        \fbox{$\frac47$} \amp  \frac{59}7 \amp  -\frac{81}7 \\
+                        \fbox{$-\frac27$} \amp  \fbox{$\frac{23}{59}$} \amp  \frac{578}{59}
+                        \end{bmatrix}
+                    </mrow>
+                
+                </md>
+                    <!--
+                        
+                    <mrow>  </mrow>
+                    <mrow>   
+                        \end{bmatrix}</mrow>
+                </md>-->
+            </p>
 
-<example>
-<statement>
-<p>
-We will decompose a different example than previously to demonstrate how the multipliers stored within the matrix move with their rows. Boxed entries are ``zeroes," which for sake of convenience will have the multipliers stored in them.
-<md>
-  <mrow>  A = \begin{bmatrix} 
-		4 \amp  9 \amp  -11</mrow>
-  <mrow>  -2 \amp  3 \amp  5</mrow>
-  <mrow>  7 \amp  1 \amp  1
-	\end{bmatrix}
-	\xrightarrow[R_1:R_3]{P=\left[\begin{matrix}0\amp 0\amp 1</mrow>
-  <mrow>  0\amp 1\amp 0</mrow>
-  <mrow>  1\amp 0\amp 0\end{matrix}\right]}
-	\amp \begin{bmatrix} 
-		7 \amp  1 \amp  1</mrow>
-  <mrow>  -2 \amp  3 \amp  5</mrow>
-  <mrow>  4 \amp  9 \amp  -11 
-	\end{bmatrix} 
-	\xrightarrow[R_3-\frac47R_1]{R_2-(-\frac27 R_1)}
-	\begin{bmatrix}
-		7 \amp  1 \amp  1</mrow>
-  <mrow>  \fbox{$-\frac27$} \amp  \frac{23}7 \amp  \frac{37}7</mrow>
-  <mrow>  \fbox{$\frac47$} \amp  \frac{59}7 \amp  -\frac{81}7
-	\end{bmatrix}</mrow>
-  <mrow>  \xrightarrow[R_2:R_3]{P=\left[\begin{matrix}0\amp 0\amp 1</mrow>
-  <mrow>  1\amp 0\amp 0</mrow>
-  <mrow>  0\amp 1\amp 0\end{matrix}\right]}
-	\amp \begin{bmatrix}
-		7 \amp  1 \amp  1</mrow>
-  <mrow>  \fbox{$\frac47$} \amp  \frac{59}7 \amp  -\frac{81}7</mrow>
-  <mrow>  \fbox{$-\frac27$} \amp  \frac{23}7 \amp  \frac{37}7 
-	\end{bmatrix}
-	\xto{R_3 - \frac{23}{59}R_2}
-	\begin{bmatrix}
-		7 \amp  1 \amp  1</mrow>
-  <mrow>  \fbox{$\frac47$} \amp  \frac{59}7 \amp  -\frac{81}7</mrow>
-  <mrow>  \fbox{$-\frac27$} \amp  \fbox{$\frac{23}{59}$} \amp  \frac{578}{59} 
-	\end{bmatrix}</mrow>
-</md>
-</p>
+            <p>
+                Pulling apart this very compact notation, we have
+                <md>
+                    <mrow>  P \amp = \begin{bmatrix}
+                        0\amp 0\amp 1 \\
+                        1\amp 0\amp 0 \\
+                        0\amp 1\amp 0
+                        \end{bmatrix} \amp 
+                        A \amp = \begin{bmatrix} 
+                        4 \amp  9 \amp  -11 \\
+                        -2 \amp  3 \amp  5 \\
+                        7 \amp  1 \amp  1 
+                        \end{bmatrix}
+                    </mrow>
+                    <mrow>
+                        L \amp = \begin{bmatrix}
+                        1 \amp  0 \amp  0 \\
+                        \frac47 \amp  1 \amp  0 \\
+                        -\frac27 \amp  \frac{23}{59} \amp  1
+                        \end{bmatrix} \amp 
+                        U \amp = \begin{bmatrix}
+                        7 \amp  1 \amp  1 \\
+                        0 \amp  \frac{23}7 \amp  -\frac{81}7 \\
+                        0 \amp  0 \amp  \frac{578}{59}
+                        \end{bmatrix}
+                    </mrow>
+                </md>
+                and can very easily check
+                <me>
+                    PA = \begin{bmatrix}
+                    7 \amp  1 \amp  1 \\ 
+                    4 \amp  9 \amp  -11 \\ 
+                    -2 \amp  3 \amp  5
+                    \end{bmatrix}  = LU.
+                </me>
+            </p>
+        </statement>
+    </example>
 
-<p>
-Pulling apart this very compact notation, we have
-<md>
-  <mrow>  P \amp = \begin{bmatrix}0\amp 0\amp 1</mrow>
-  <mrow>  1\amp 0\amp 0</mrow>
-  <mrow>  0\amp 1\amp 0\end{bmatrix} \amp 
-A \amp = \begin{bmatrix} 4 \amp  9 \amp  -11</mrow>
-  <mrow>  -2 \amp  3 \amp  5</mrow>
-  <mrow>  7 \amp  1 \amp  1 \end{bmatrix} \amp 
-L \amp = \begin{bmatrix}1 \amp  0 \amp  0</mrow>
-  <mrow>  \frac47 \amp  1 \amp  0</mrow>
-  <mrow>  -\frac27 \amp  \frac{23}{59} \amp  1\end{bmatrix} \amp 
-U \amp = \begin{bmatrix}7 \amp  1 \amp  1</mrow>
-  <mrow>  0 \amp  \frac{23}7 \amp  -\frac{81}7</mrow>
-  <mrow>  0 \amp  0 \amp  \frac{578}{59}\end{bmatrix}</mrow>
-</md>
-and can very easily check
-<me>
-  PA = \begin{bmatrix}7 \amp  1 \amp  1 \\ 4 \amp  9 \amp  -11 \\ -2 \amp  3 \amp  5
-\end{bmatrix}  = LU.
-</me>
-</p>
-</statement>
-</example>
+    <p>
+        The algorithm for <m>PA=LU</m> decomposition is no different than any other Gaussian elimination algorithm, except for storing additional information for the permutation matrix and the lower triangular factor; if we assume that we should generally use partial pivoting, we can adapt that algorithm accordingly. Below is code that can be embedded into <c>aam_Matrix.sage</c> to implement the <m>PA=LU</m> factorization of a matrix <m>A</m>. This does not use any of the elementary row operation methods previously developed, and in fact does all the actual algebraic manipulation inside a simple list of lists rather than with elementary matrices or other objects of type <c>aam_Matrix</c>. 
+    </p>
+    <listing>
+        <program>
+            <input>
+                def palu(self,verbose=False):
+                    m,n = self.dims()
+                    if m!=n:
+                        raise ValueError('Non-square matrix ('+str(m)+' by '+str(n)+')')
+                    # Initialize permutation grid
+                    P = [[1 if i==j else 0 for j in range(n)] for i in range(n)]
+                    # Copy self into an editable grid for row reduction
+                    mat = [[self[i,j] for j in [1..n]] for i in [1..n]]
+                    out = str(aam_Matrix(mat))
+                    # index over all but the last row: there's never
+                    # a step for the last row; all indexing is now list indexing
+                    for j in range(n-1):
+                        # find the largest magnitude element, and its sign and position
+                        cur_col = [mat[r][j] for r in range(j,n)]
+                        maxv, sign, piv = abs(mat[j][j]),sgn(mat[j][j]),j
+                        for r in range(j+1,n):
+                            mrj = abs(mat[r][j])
+                            if mrj>maxv:
+                                maxv, sign = mrj, sgn(mat[r][j])
+                                piv = r
+                        if maxv==0:
+                            raise ValueError('Singular matrix.')
+                        #print maxv*sign, piv, j
+                        if piv!=j:
+                            out += '\nR'+str(j)+':R'+str(piv)+'\n'
+                            mat[j],mat[piv] = copy(mat[piv]),copy(mat[j])
+                            P[j],P[piv] = copy(P[piv]),copy(P[j])
+                            out += str(aam_Matrix(mat))
 
-<p>
-Here's code that can be embedded into <c>Matrix.py</c> to implement the <m>PA=LU</m> factorization of a matrix <m>A</m>. This does not use any of the elementary row operation methods previously developed
-</p>
-<pre>
-def palu(self):
-        m,n = self.dims()
-        if m!=n:
-            raise ValueError('Nonsquare matrix.')
-        elif self.det() == 0:
-            raise ValueError('Singular matrix.')
-        else:
-            P = [[1 if i==j else 0 for j in range(n)] for i in range(m)]
-            mat = [[self[i,j] for j in range(n)] for i in range(m)]
-            for j in range(m):
-                maxv = abs(mat[j][j])
-                piv = j
-                for i in range(j+1,m):
-                    if abs(mat[i][j]) > maxv:
-                        maxv = mat[i][j]
-                        piv = i
-                if piv != j:
-                    mat = mat[:j] + [mat[piv]] + mat[j+1:piv] + [mat[j]] \
-                          + mat[piv+1:]
-                    P = P[:j] + [P[piv]] + P[j+1:piv] + [P[j]] + P[piv+1:]
-                for i in range(j+1,m):
-                    mult = Fraction(mat[i][j],mat[j][j])
-                    mat[i][j] = mult
-                    for c in range(j+1,n):
-                        mat[i][c] += -mult*mat[j][c]
-            L = Matrix([[1 if i==j else (0 if j>i else mat[i][j])
-                         for j in range(n)] for i in range(m)])
-            U = Matrix([[mat[i][j] if j>=i else 0 for j in range(n)]
-                        for i in range(m)])
-            return (Matrix(P),L,U)
-</pre>
+                        for r in range(j+1,n):
+                            if mat[r][j] != 0:
+                                scalar = -mat[r][j]/mat[j][j]
+                                out += '\n('+str(scalar)+')R'+str(j)+'+R'+str(r)+'\n'
+                                mat[r] = [mat[r][c] for c in range(j)]+[-scalar]
+                                mat[r] += [mat[r][c]+scalar*mat[j][c] for c in range(j+1,n)]
+                                out += str(aam_Matrix(mat))
+
+                    L = [[mat[i][j] if j \lt i else (1 if i==j else 0) for j in range(n)] for i in range(n)]
+                    U = [[mat[i][j] if j >= i else 0 for j in range(n)] for i in range(n)]
+
+                    return map(aam_Matrix,[P,L,U])
+            </input>
+        </program>
+        <caption>An implementation of the <m>PA=LU</m> algorithm using partial pivoting.</caption>
+    </listing>
 </section>
