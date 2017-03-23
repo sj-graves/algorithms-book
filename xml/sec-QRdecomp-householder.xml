@@ -1,4 +1,4 @@
-<section>
+<section xml:id="sec-QRdecomp-Householder">
 <title><m>QR</m> factorization by Householder reflectors</title>
 <p>
 Another algorithm for determining the <m>QR</m> factorization of a matrix which requires fewer operations and is less susceptible to rounding error is the method of Householder reflectors. The method depends upon the following theorem.

@@ -31,6 +31,7 @@
             \newcommand{\xto}[1]{\xrightarrow{#1}}
             \renewcommand{\set}[1]{\left\{#1\right\}}
             \newcommand{\fn}{}
+            \newcommand{\barx}[1]{\overline{\vec{#1}}}
             \renewcommand{\chaptername}{Lesson}
 
             \newcommand{\drawcr}{\tikz[scale=1/4]{\draw [->] (.75,.75) -- (.75,.4) -- (.25,.4); \draw (0,0) rectangle (1,1);}}

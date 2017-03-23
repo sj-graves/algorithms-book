@@ -1,18 +1,22 @@
-<chapter xmlns:xi="http://www.w3.org/2001/XInclude" >
-<title>Matrix decomposition: <m>QR</m> decomposition</title>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="ch-QRdecomp" >
+    <title>Matrix decomposition: QR decomposition</title>
 
 
-<section>
-<title>Goals</title>
-<ol type="1">
-<li><p>Discuss least squares regression</p></li>
-<li><p>Discuss the Gram-Schmidt orthonormalization algorithm</p></li>
-<li><p>Discuss <m>QR</m> decomposition using Householder reflectors</p></li>
-</ol>
-</section>
-<xi:include  href="section8_1.xml" />
-<xi:include  href="section8_2.xml" />
-<xi:include  href="section8_3.xml" />
-<xi:include  href="section8_4.xml" />
-<xi:include  href="section8_5.xml" />
+    <objectives>
+        <ol type="1">
+            <li><p>Discuss least squares regression</p></li>
+            <li><p>Discuss the Gram-Schmidt orthonormalization algorithm</p></li>
+            <li><p>Discuss <m>QR</m> decomposition using Householder reflectors</p></li>
+        </ol>
+    </objectives>
+    <introduction>
+        <p>
+            In this chapter, we will unite two mathematical problems which seem, on the surface, to be totally unrelated: curve fitting via least squares regression and production of an orthogonal factorization of a matrix.
+        </p>
+    </introduction>
+    <xi:include  href="sec-QRdecomp-leastsquares.xml" />
+    <xi:include  href="sec-QRdecomp-bestfit.xml" />
+    <xi:include  href="sec-QRdecomp-gramschmidt.xml" />
+    <xi:include  href="sec-QRdecomp-QRdecomp.xml" />
+    <xi:include  href="sec-QRdecomp-householder.xml" />
 </chapter>

@@ -3,5 +3,5 @@
 rm ~/algorithms-book/html/*.html
 xsltproc --xinclude ~/mathbook/xsl/mathbook-html.xsl ./index.xml
 mv *.html ../html/
-cp -R knowl ../html/knowl
-cp -R images ../html/images 
+cp -R knowl ../html
+cp -R images ../html

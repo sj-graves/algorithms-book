@@ -1,4 +1,4 @@
-<section>
+<section xml:id="sec-QRdecomp-GramSchmidt">
 <title>Gram-Schmidt orthonormalization</title>
 <p>
 A first method for producing an orthogonal matrix from an arbitrary matrix is the Gram-Schmidt algorithm. In essence, the idea is to treat each column of the initial matrix as a vector, and proceed through in order orthogonalizing each vector to those which have previously been orthonormalized.
