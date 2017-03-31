@@ -13,6 +13,12 @@
         <p>
             In this chapter, we will unite two mathematical problems which seem, on the surface, to be totally unrelated: curve fitting via least squares regression and production of an orthogonal factorization of a matrix.
         </p>
+        <definition>
+            <title>Orthogonal matrices</title>
+            <statement>
+                A matrix <m>Q</m> is <term>orthogonal</term> if and only if <m>Q^T=Q^{-1}.</m> An <term>orthognal factorization</term> of a matrix <m>A</m> is a factorization <m>A=QR</m> where the matrix <m>Q</m> is orthogonal.
+            </statement>
+        </definition>
     </introduction>
     <xi:include  href="sec-QRdecomp-leastsquares.xml" />
     <xi:include  href="sec-QRdecomp-bestfit.xml" />
