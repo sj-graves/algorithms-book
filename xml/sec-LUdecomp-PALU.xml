@@ -163,7 +163,7 @@
                                 mat[r] += [mat[r][c]+scalar*mat[j][c] for c in range(j+1,n)]
                                 out += str(aam_Matrix(mat))
 
-                    L = [[mat[i][j] if j \lt i else (1 if i==j else 0) for j in range(n)] for i in range(n)]
+                    L = [[mat[i][j] if j &lt; i else (1 if i==j else 0) for j in range(n)] for i in range(n)]
                     U = [[mat[i][j] if j >= i else 0 for j in range(n)] for i in range(n)]
 
                     return map(aam_Matrix,[P,L,U])
