@@ -3,7 +3,6 @@
     <docinfo>
         <macros>
             \renewcommand{\cftdot}{\cdot}
-            \newcommand{\E}{\scr{E}}
             \newcommand{\vig}{Vigen\`{e}re~}
             \newcommand{\Erd}{Erd\H{o}s}
             \newcommand{\bc}{ \begingroup \fn}
@@ -27,12 +26,13 @@
             \renewcommand{\vec}[1]{\mathbf{#1}}
             \newcommand{\vc}[1]{\left\langle#1\right\rangle}
             \newcommand{\norm}[1]{\left\lVert#1\right\rVert}
-            \newcommand{\R}{\mathbb{R}}
             \newcommand{\xto}[1]{\xrightarrow{#1}}
             \renewcommand{\set}[1]{\left\{#1\right\}}
             \newcommand{\fn}{}
             \newcommand{\barx}[1]{\overline{\vec{#1}}}
             \renewcommand{\chaptername}{Lesson}
+            \newcommand{\R}{\mathbb{R}}
+            \newcommand{\E}{\mathcal{E}}
 
             \newcommand{\drawcr}{\tikz[scale=1/4]{\draw [->] (.75,.75) -- (.75,.4) -- (.25,.4); \draw (0,0) rectangle (1,1);}}
         </macros>
@@ -69,8 +69,8 @@
         <xi:include href="./ch-QRdecomp.xml" />
         
         <!-- Part III: Basic Cryptography -->
-        <xi:include href="./chapter9.xml" />
-        <xi:include href="./chapter10.xml" />
+        <xi:include href="./ch-permutations.xml" />
+        <xi:include href="./ch-substcipher.xml" />
         <xi:include href="./chapter11.xml" />
         
         <!-- Part IV: Algorithms in Graph Theory -->

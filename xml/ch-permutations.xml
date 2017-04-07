@@ -1,0 +1,18 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="ch-Permutations">
+    <title>Permutations</title>
+
+
+    <objectives>
+        <ol type="1">
+            <li><p>Define permutations</p></li>
+            <li><p>Permutation operations</p></li>
+            <!--li><p>Implementation of a permutation class</p></li-->
+        </ol>
+    </objectives>
+    
+    <xi:include  href="sec-perms-defn.xml" />
+    <xi:include  href="sec-perms-groups.xml" />
+    <xi:include  href="sec-perms-cycles.xml" />
+    <xi:include  href="sec-perms-sage.xml" />
+    <!--xi:include  href="section9_5.xml" /-->
+</chapter>

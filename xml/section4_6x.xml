@@ -1,8 +1,0 @@
-<section>
-<title>Goals</title>
-<ol type="1">
-<li><p>Discuss functions defined both by <c>def ...:</c> and as <c>lambda</c> functions.</p></li>
-<li><p>Introduce classes.</p></li>
-<li><p>Discuss operator overloading.</p></li>
-</ol>
-</section>
