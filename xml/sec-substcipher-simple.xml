@@ -1,78 +1,64 @@
 <section>
-<title>Simple substitution</title>
+    <title>Simple substitution</title>
 
 
-<introduction>
-<p>
-Also called <em>monoalphabetic substitution</em>, these are among the easiest encryptions to break. A simple substitution cipher employs a single permutation of the symbol set to encrypt the plaintext. The <em>Caesar cipher</em> is one of the earliest known uses: in an alphabet of size <m>n</m>, the permutation for Julius Caesar's cipher was <m>\sigma(x) = (x+3)\mod n</m>. For Caesar's military dispatches, the permutation would have been
-</p>
-<image>
-<latex-image-code><![CDATA[\begin{tikzpicture}[scale=12/26]
-\draw (0,0.5) node [left] {\(\sigma_1 =\)} (0,0) grid (26,1) (26,0.5) node [right] {.};
-\draw
-    \foreach \x/\y in {A/0, B/1, C/2, D/3, E/4, F/5, G/6, H/7, I/8, J/9, K/10, L/11, M/12, N/13, O/14, P/15, Q/16, R/17, S/18, T/19, U/20, V/21, W/22, X/23, Y/24, Z/25}{ (\y+.5, 1.5) node {\x}}
-    \foreach \x/\y in {D/0, E/1, F/2, G/3, H/4, I/5, J/6, K/7, L/8, M/9, N/10, O/11, P/12, Q/13, R/14, S/15, T/16, U/17, V/18, W/19, X/20, Y/21, Z/22, A/23, B/24, C/25}{ (\y+.5, 0.5) node {\x}};\end{tikzpicture}]]></latex-image-code>
-</image>
-<p>
-Since <m>26\equiv 1 \mod 3</m>, this permutation <m>\sigma_1</m> would be written as a single <m>26</m>-cycle in disjoint cycle notation.
-</p>
+    <introduction>
+        <p>
+            Also called <em>monoalphabetic substitution</em>, these are among the easiest encryptions to break. A simple substitution cipher employs a single permutation of the symbol set to encrypt the plaintext. The <em>Caesar cipher</em> is one of the earliest known uses: in an alphabet of size <m>n</m>, the permutation for Julius Caesar's cipher was <me>\sigma(x) = (x+3)\mod n</me>. For Caesar's military dispatches, the permutation would have been
+        </p>
+        <image source="./images/caesar_cipher.svg" width="100%" />
+        <p>
+            Since <m>26\equiv 1 \mod 3</m>, this permutation <m>\sigma_1</m> would be written as a single <m>26</m>-cycle in disjoint cycle notation.
+        </p>
 
-<p>
-Generally speaking, we'll call an encryption of this type either a <em>shift cipher</em> or a <em>rotation cipher</em>; another frequently used rotation cipher is called ``ROT13," and is given by
-</p>
-<image>
-<latex-image-code><![CDATA[\begin{tikzpicture}[scale=12/26]
-\draw (0,0.5) node [left] {\(\sigma_2 =\)} (0,0) grid (26,1) (26,0.5) node [right] {.};
-\draw
-    \foreach \x/\y in {A/0, B/1, C/2, D/3, E/4, F/5, G/6, H/7, I/8, J/9, K/10, L/11, M/12, N/13, O/14, P/15, Q/16, R/17, S/18, T/19, U/20, V/21, W/22, X/23, Y/24, Z/25}{ (\y+.5, 1.5) node {\x}}
-    \foreach \x/\y in {N/0, O/1, P/2, Q/3, R/4, S/5, T/6, U/7, V/8, W/9, X/10, Y/11, Z/12, A/13, B/14, C/15, D/16, E/17, F/18, G/19, H/20, I/21, J/22, K/23, L/24, M/25}{ (\y+.5, 0.5) node {\x}};\end{tikzpicture}]]></latex-image-code>
-</image>
-<p>
-Since ROT13 is an involution<fn>A permutation <m>\sigma</m> is an involution if and only if <m>\sigma^2=(1)</m>.</fn>, it is used as the canonical example of weak encryption; it was commonly used online in usenet newsgroups during the early 1980s to obscure text such as ``spoilers," punchlines to jokes, or obscene language.
-</p>
-</introduction>
+        <p>
+            Generally speaking, we'll call an encryption of this type either a <em>shift cipher</em> or a <em>rotation cipher</em>; another frequently used rotation cipher is called ROT13, and is given by
+        </p>
+        <image source="./images/ROT13_cipher.svg" width="100%" />
+        <p>
+            Since ROT13 is an involution<fn>A permutation <m>\sigma</m> is an involution if and only if <m>\sigma^2=(1)</m>.</fn>, it is used as the canonical example of weak encryption; it was commonly used online in usenet newsgroups during the early 1980s to obscure text such as <q>spoilers,</q> punchlines to jokes, or obscene language.
+        </p>
+    </introduction>
 
 
-<subsection>
-<title>Polygraphic substitution</title>
-<p>
-Another more secure technique is to permute groups of letters, effectively increasing the size of the alphabet. A digraph encryption would take pairs of adjacent letters (<em>digraphs</em>) and permute them with another digraph.
-</p>
+    <subsection>
+        <title>Polygraphic substitution</title>
+        <p>
+            Another more secure technique is to permute groups of letters, effectively increasing the size of the alphabet. A digraph encryption would take pairs of adjacent letters (<em>digraphs</em>) and permute them with another digraph.
+        </p>
 
-<p>
-In the Playfair cipher<fn>Developed in 1854 by Charles Wheatstone but advocated by Lord Playfair.</fn> a <m>5\times 5</m> grid of letters containing a keyword is memorized, along with four rules. The keyword is written into the grid, with duplicate letters removed, and the remaining letters follow. The letters <m>I</m> and <m>J</m> are written into the same position. For instance, if our key phrase is ``TALONS UP," the grid would be
-</p>
-<image>
-<latex-image-code><![CDATA[\begin{tikzpicture}[scale=1/3]
-\draw \foreach \y/\x/\z in {4/0/T,  4/1/A,  4/2/L,  4/3/O,  4/4/N,  3/0/S,  3/1/U,  3/2/P,  3/3/B,  3/4/C,  2/0/D,  2/1/E,  2/2/F,  2/3/G,  2/4/H,  1/0/IJ,  1/1/K,  1/2/M,  1/3/Q,  1/4/R,  0/0/V,  0/1/W,  0/2/X,  0/3/Y,  0/4/Z}{
-    (\x+.5,\y+.5) node {\z}
-};\end{tikzpicture}]]></latex-image-code>
-</image>
-<p>
-.
-The rules are
-<ol>
-<li><p>If the paired letters are the same, insert an <m>X</m> between them.</p></li>
-<li><p>If the letters occur in the same row of the table, use the letters to their immediate right, wrapping around to the left side of the table if necessary.</p></li>
-<li><p>If the letters occur in the same column of the table, use the letters immediately below them, wrapping around to the top of the table if necessary.</p></li>
-<li><p>Otherwise, draw a rectangle around the pair of letters, and replace each with the unused corner from the same row.</p></li>
-</ol>
-</p>
+        <p>
+            In the Playfair cipher<fn>Developed in 1854 by Charles Wheatstone but advocated by Lord Playfair.</fn> a <m>5\times 5</m> grid of letters containing a keyword is memorized, along with four rules. The keyword is written into the grid, with duplicate letters removed, and the remaining letters follow. The letters <m>I</m> and <m>J</m> are written into the same position. For instance, if our key phrase is <q>talons up,</q> the grid would be as shown below:
+        
+        <figure>
+            <image source="./images/playfair_grid.svg" width="50%" />
+        <caption>The Playfair encryption grid with a keyphrase of <q>Talons up</q>.</caption>
+        </figure>
+        </p>
+        <p>
+            The rules are
+            <ol>
+                <li><p>If the paired letters are the same, insert an <m>X</m> between them.</p></li>
+                <li><p>If the letters occur in the same row of the table, use the letters to their immediate right, wrapping around to the left side of the table if necessary.</p></li>
+                <li><p>If the letters occur in the same column of the table, use the letters immediately below them, wrapping around to the top of the table if necessary.</p></li>
+                <li><p>Otherwise, draw a rectangle around the pair of letters, and replace each with the unused corner from the same row.</p></li>
+            </ol>
+        </p>
 
-<p>
-These rules are only difficult to formulate in writing, but in practice are easy to implement; the inventor claimed he could teach it to 3 out of 4 school boys in 15 minutes. To demonstrate the use of the cipher, we'll use our Playfair grid to encrypt the message, <c>HIT THE BOOKKEEPER</c>. First, we break the plaintext into pairs, inserting <m>X</m>'s where necessary:
-<me>
-  \texttt{HITTHEBOOKKEEPER}\mapsto \texttt{HI~T\underline{X}~TH~EB~O\underline{X}~OK~KE~EP~ER}
-</me>
-</p>
+        <p>
+            These rules are only difficult to formulate in writing, but in practice are easy to implement; the inventor claimed he could teach it to 3 out of 4 school boys in 15 minutes. To demonstrate the use of the cipher, we'll use our Playfair grid to encrypt the message, <c>HIT THE BOOKKEEPER</c>. First, we break the plaintext into pairs, inserting <m>X</m>'s where necessary:
+            <me>
+                \texttt{HITTHEBOOKKEEPER}\mapsto \texttt{HI~T\underline{X}~TH~EB~O\underline{X}~OK~KE~EP~ER}
+            </me>
+        </p>
 
-<p>
-Next we draw the appropriate boxes, as demonstrated in <xref ref="fig_playfair_exmp" autoname="yes" />.
-</p>
-<figure xml:id="fig_playfair_exmp" >
-<caption>Encoding characters using Playfair's cipher.</caption>
-<image>
-<latex-image-code><![CDATA[\begin{tikzpicture}[scale=1/3]
+        <p>
+            Next we draw the appropriate boxes, as demonstrated in <xref ref="fig_playfair_exmp" autoname="yes" />.
+        </p>
+        <figure xml:id="fig_playfair_exmp" >
+            <caption>Encoding characters using Playfair's cipher.</caption>
+            <image>
+                <latex-image-code><![CDATA[\begin{tikzpicture}[scale=1/3]
 \draw \foreach \s in {0,6,12}{
     \foreach \t in {14, 7, 0}{
         \foreach \y/\x/\z in {4/0/T,  4/1/A,  4/2/L,  4/3/O,  4/4/N,  3/0/S,  3/1/U,  3/2/P,  3/3/B,  3/4/C,  2/0/D,  2/1/E,  2/2/F,  2/3/G,  2/4/H,  1/0/IJ,  1/1/K,  1/2/M,  1/3/Q,  1/4/R,  0/0/V,  0/1/W,  0/2/X,  0/3/Y,  0/4/Z}{
@@ -99,12 +85,12 @@ Next we draw the appropriate boxes, as demonstrated in <xref ref="fig_playfair_e
     (14.5,-0.5) node {<c>ER</c>\(\mapsto\)<c>HK</c>};
 
 \draw (8.5,-1.5) node {<c>HITXTHEBOXOKKEEPER\(\mapsto\)DRLVNDGULYAQWKFUHK</c>};\end{tikzpicture}]]></latex-image-code>
-</image>
+            </image>
 
-</figure>
-<p>
-The resulting plaintext is <c>DRLVN DGULY AQWKF UHK</c>, broken into 5-character blocks. To decrypt the message is to use the same Playfair grid and reverse rules 2, 3, and 4. Unfortunately, the use of this digraph substitution remains equivalent to a monoalphabetic substitution cipher, this time on an alphabet of <m>26\cdot 25 = 650</m> symbols, since no double-letter digraphs are permuted. Since <m>\log_{10}(650!)\approx 1547.91</m>, this is a considerably large space of permutations to attack naively.
-</p>
-</subsection>
+        </figure>
+        <p>
+            The resulting plaintext is <c>DRLVN DGULY AQWKF UHK</c>, broken into 5-character blocks. To decrypt the message is to use the same Playfair grid and reverse rules 2, 3, and 4. Unfortunately, the use of this digraph substitution remains equivalent to a monoalphabetic substitution cipher, this time on an alphabet of <m>26\cdot 25 = 650</m> symbols, since no double-letter digraphs are permuted. Since <m>\log_{10}(650!)\approx 1547.91</m>, this is a considerably large space of permutations to attack naively.
+        </p>
+    </subsection>
 
 </section>
