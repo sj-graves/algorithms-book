@@ -1,0 +1,73 @@
+<section xml:id="sec-PublicKey-RSA">
+    <title>Full RSA</title>
+    <p>
+        Full RSA follows the same pattern: key generation and distribution, encryption, and decryption. Once again, the public key pair is to be distributed openly, and the private key is never to be distributed.
+    </p>
+    <algorithm>
+        <title>RSA Key Generation</title>
+        <p>
+            <nbsp />
+        </p>
+
+        <ol>
+            <li><p>Choose two primes <m>p</m> and <m>q</m>, which for purpose of security should be
+                </p>
+
+                <ol>
+                    <li><p>chosen randomly</p></li>
+                    <li><p>similar in magnitude,</p></li>
+                    <li><p>but different in length.</p></li>
+                </ol>
+            </li>
+            <li><p>Let <m>n=pq</m>, the modulus.</p></li>
+            <li><p>Compute <m>\phi(n) = (p-1)(q-1) = n-(p+q-1)</m>. This is <em>Euler's totient function</em>.</p></li>
+            <li><p>Choose an integer <m>e</m> such that <m>1\lt e\lt \phi(n)</m> and <m>\gcd(e,\phi(n))=1</m>.</p></li>
+            <li><p>Let <m>d = e^{-1}\mod \phi(n)</m>.</p></li>
+        </ol>
+
+        <p>
+            The public key is <m>(n,e)</m> and the private key is <m>(n,d)</m>.
+        </p>
+    </algorithm>
+
+    <algorithm>
+        <title>RSA Encryption</title>
+        <p>
+            Suppose <m>(n,e)</m> is an RSA public key and <m>(n,d)</m> is the associated private key.
+            For each integer <m>m</m> in an encoded message, the encrypted integer is
+            <me>
+                c(m) = m^e\mod n
+            </me>
+            and the decrypted message of a given <m>c</m> is
+            <me>
+                m(c) = c^d\mod n.
+            </me>
+        </p>
+    </algorithm>
+    <p>
+        Reasonably secure RSA encryption requires the use of large primes <mdash /> requiring that the minimum bit-length be 1024 is not too small for security's sake. This in turn leads to very large <m>n</m>. For example, using SageMathCloud for its mathematical strengths over plain Python, I can generate a public key like so in a matter of moments. Note that the first nine lines are all part of the modulus of the key; <m>n</m> in this example is a 2048-bit integer.
+    </p>
+
+    <p>
+        \begingroup
+    </p>
+    <pre>
+        (20402086648568173481955585730646286137315210218839346974138749941
+        645259140495567770834936874243791372473116188864372884738105135450
+        914873426313184766644920305916448220578083159085234843109165718821
+        649816351354956181220389757990790051050071041390123552155032886914
+        153510815090479150188398896673272304920300347717062622306615186215
+        221390731247779732442600196675172980756129027793257452061157450306
+        999338021825818915796490401265682040597421747260118459364506747473
+        696770232104151315624298201601728269794649660724878710164849383257
+        954760868276197510430226341671964363302816497178476763126391107078
+        274240530722153356995721, 735866671)
+    </pre>
+    <p>
+        \endgroup
+    </p>
+
+    <p>
+        \part{Algorithmic graph theory}
+    </p>
+</section>

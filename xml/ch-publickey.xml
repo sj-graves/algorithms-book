@@ -1,0 +1,32 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="ch-PublicKey" >
+    <title>Public Key Encryption</title>
+
+
+    <objectives>
+        <ol type="1">
+            <li><p>Explain the difference between public key and ``shared secret" cryptography.</p></li>
+            <li><p>Develop kid-RSA and demonstrate its strength and weakness.</p></li>
+            <li><p>Develop RSA encryption.</p></li>
+        </ol>
+    </objectives>
+    <introduction>
+        <title>Shared secret vs. public key encryption</title>
+        <p>
+            Throughout Lesson 10, we talked about ``shared key" cryptography: if Alice is sending Bob an encrypted message, both Alice and Bob must have the whole key and understand the method. With the advent of digital computers it became necessary to build a stronger type of encryption, where the encryption and decryption keys are distinct. While first theoretically proposed by Diffie and Hellman in 1976, public key encryption saw its first practical application in the algorithm created<fn>Clifford Cocks of the UK GCHQ described a system equivalent to RSA in 1973, but it was not know until 1997 due to its classification as top-secret.</fn> by Ron Rivest, Adi Shamir, and Leonard Adelman, which now bears their initials: the RSA encryption algorithm.
+        </p>
+
+        <p>
+            The difficulty inherent in creating the RSA algorithm involved finding a ``one-way function," a function <m>f</m> which has an inverse <m>f^{-1}\neq f</m> which is computationally difficult to find. The function used in RSA involves modular exponentiation.
+        </p>
+
+        <p>
+            Conceptually, shared key cryptography is like the type of padlock which requires the key either to lock or unlock. Anyone with the key can encrypt, and they use the same key to decrypt. In RSA, the encryption key and the decryption key are mathematically related, but not equal. Hence the encryption key can be posted publically <mdash /> this is why some emails will contain a line in the signature which says ``PGP Key." Pretty Good Privacy, or PGP, is a cryptosystem that uses RSA as one of its steps. The decryption key in public key cryptography is called the <em>private key</em> and is never shared.
+        </p>
+
+        <p>
+            We'll discuss an introductory version of RSA (sometimes called Kid RSA) before moving on to the full RSA algorithm. The difference between the two involves a different use of modular arithmetic in the key generation phase.
+        </p>
+    </introduction>
+    <xi:include  href="sec-publickey-kidRSA.xml" />
+    <xi:include  href="sec-publickey-RSA.xml" />
+</chapter>

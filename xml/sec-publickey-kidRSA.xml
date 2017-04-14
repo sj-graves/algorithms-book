@@ -1,0 +1,223 @@
+<section xml:id="sec-PublicKey-KidRSA">
+    <title>Kid RSA</title>
+
+
+    <introduction>
+        <p>
+            As an introduction to the RSA algorithm, modular multiplication can be used to greatly simplify the calculation process; the trade-off is that the algorithm becomes susceptible to a very well-known mathematical attack. The only <em>shared secret</em> in using Kid RSA is the method of converting strings into integers.
+        </p>
+    </introduction>
+
+
+    <subsection>
+        <title>Key Generation</title>
+        <p>
+            The first step of a public key cryptography algorithm is the generation of the public and private keys.
+        </p>
+        <algorithm xml:id="alg_kidRSA_keygen">
+            <title>Kid RSA Key Generation</title>
+            <statement>
+                <p>
+                    Let <m>a,b,a',b'\in \mathbb{Z}</m> be arbitrary positive integers.
+                    Define
+                    <md>
+                        <mrow>  M \amp = ab-1</mrow>
+                        <mrow>  e \amp = a'M+a</mrow>
+                        <mrow>  d \amp = b'M+b</mrow>
+                        <mrow>  n \amp = (ed-1)/M = a'b'M+ab'+a'b+1</mrow>
+                    </md>
+                </p>
+
+                <p>
+                    The public key is the ordered pair <m>(n,e)</m>; the private key is the ordered pair <m>(n,d)</m>.
+                </p>
+            </statement>
+        </algorithm>
+        <p>
+            Having a public key generated and shared, a user can now wait for an encrypted message to arrive.
+        </p>
+
+        <example>
+            <title>Generating Kid-RSA keys</title>
+            <statement>
+                <p>
+                    Suppose we choose
+                    <md>
+                        <mrow>  a \amp = 5 \amp  b \amp = 25 \amp  a' \amp = 7 \amp  b' \amp = -49.</mrow>
+                    </md>
+                </p>
+
+                <p>
+                    Following <xref ref="alg_kidRSA_keygen" autoname="title" />, we obtain
+                    <md>
+                        <mrow>  M \amp = 5(25)-1 = 124</mrow>
+                        <mrow>  e \amp = 7(124)+5 = 873</mrow>
+                        <mrow>  d \amp = 49(124)+25 = 6101</mrow>
+                        <mrow>  n \amp = (873(6101)-1)/124 = 42953</mrow>
+                    </md>
+                </p>
+
+                <p>
+                    Hence our public key is <m>(42953, 873)</m>, and our private key is <m>(42953, 6101)</m>.
+                </p>
+            </statement>
+        </example>
+
+        <p>
+            Keys in hand, we now need to actually encrypt a message <mdash /> the power and allure of RSA and this easier variant is that the encryption function is mathematically simple.
+        </p>
+        <algorithm>
+            <title>Kid RSA Encryption</title>
+            <statement>
+                <p>
+                    Suppose <m>(n,e)</m> and <m>(n,d)</m> are respectively public and private Kid RSA keys. If <m>m</m> is an integer representing a single character of a plaintext message, then the associated encrypted integer is
+                    <me>
+                        c = (me)\text{ mod } n.
+                    </me>
+                </p>
+
+                <p>
+                    Likewise, if <m>c</m> is an encrypted integer, then the associated decrypted integer is
+                    <me>
+                        d= (cd)\text{ mod } n.
+                    </me>
+                </p>
+            </statement>
+        </algorithm>
+        <p>
+            It should be clear that since <m>(0x)\text{ mod } n=0</m> for every pair of <m>n,x</m>, we should avoid coding any letter as the integer 0.
+        </p>
+
+        <example>
+            <title>Using Kid-RSA</title>
+            <statement>
+                <p>
+                    Continuing our previous example, we have public key <m>(42953, 873)</m>. Suppose we remove punctuation and spaces from the message written in a 1676 letter from Isaac Newton to Robert Hooke:
+                </p>
+                <blockquote>
+                    If I have seen further it is by standing on the shoulders of giants.
+                </blockquote>
+                <p>
+                    We will convert to a list of integers by simply using the Python <c>ord</c> command.
+                </p>
+                <listing>
+                    <program>
+                        <input>
+                            newt = "If I have seen further it is by standing on the shoulders of giants."
+                            inewt = [ord(c) for c in newt]
+                            print inewt
+                        </input>
+                    </program>
+                </listing>
+                <p>
+                    We now apply the Kid-RSA algorithm.
+                </p>
+                <listing>
+                    <program>
+                        <input>
+                            newt = "If I have seen further it is by standing on the shoulders of giants."
+                            inewt = [ord(c) for c in newt]
+                            # Here's our public key from up above
+                            (n,e) = (42953, 873)
+                            enc_newt = [(m*e)%n for m in inewt]
+                            print enc_newt
+                        </input>
+                    </program>
+                </listing>
+                <p>
+                    As a simple demonstration that the method truly works, let's finish out by decrypting.
+                </p>
+                <listing>
+                    <program>
+                        <input>
+                            newt = "If I have seen further it is by standing on the shoulders of giants."
+                            inewt = [ord(c) for c in newt]
+                            # Here's our public key from up above
+                            (n,e) = (42953, 873)
+                            enc_newt = [(m*e)%n for m in inewt]
+
+                            # Here's our private key to check our decryption.
+                            d = 6101
+
+                            print "".join([chr((c*d)%n) for c in enc_newt])
+                        </input>
+                    </program>
+                </listing>
+            </statement>
+        </example>
+    </subsection>
+
+
+    <subsection>
+        <title>Breaking Kid RSA</title>
+        <p>
+            Unfortunately, it is number-theoretically trivial to break Kid RSA. Consider the values <m>n</m>, <m>d</m>, and <m>e</m> used by the encryption. It must be the case that
+            <me>
+                ((me)\text{ mod }n)d\text{ mod } n = m,
+            </me>
+            but then <m>e</m> and <m>d</m> must be multiplicative inverses modulo <m>n</m>. A number <m>e\in \mathbb{Z}_n</m> only has a mutliplicative inverse when <m>\gcd(e,n)=1</m>. This leads, however, to an efficient expansion of Euclid's algorithm for the Greatest Common Divisor to recover the value of <m>d</m>.
+        </p>
+
+        <theorem>
+            <statement>
+                <p>
+                    Suppose <m>a,b</m> are positive integers, such that <m>a=bq+r</m> with <m>0\leq r\lt b</m>. Then <m>\gcd(a,b) = \gcd(b,r)</m>.
+                </p>
+            </statement>
+        </theorem>
+
+        <p>
+            The application of this theorem repeatedly is called Euclid's algorithm: given positive integers <m>a</m> and <m>b</m>, there are unique <m>q,r</m> with <m>0\leq r\lt b</m> such that <m>a=bq+r</m>. If <m>r=0</m>, then <m>\gcd(a,b)=b</m>. If <m>r\neq 0</m>, then <m>\gcd(a,b) = \gcd(b,r)</m>.
+        </p>
+        <algorithm>
+            <statement>
+                <title>Extended Euclidean Algorithm</title>
+                <p>
+                    Let <m>s>t</m> be positive integers.
+                </p>
+
+                <ol>
+                    <li><p>Set <c>a = [s]</c>, <c>b = [t]</c>, <c>q = [a//b]</c>, <c>r = [a%b]</c>, and <c>p = [0,1]</c>.</p></li>
+                    <li><p>While the last element of <c>r</c> is nonzero:
+                        </p>
+
+                        <ol>
+                            <li><p>Append the last element of <c>b</c> to <c>a</c>.</p></li>
+                            <li><p>Append the last element of <c>r</c> to <c>b</c>.</p></li>
+                            <li><p>Append the quotient of those values to <c>q</c>.</p></li>
+                            <li><p>Append the remainder of those values to <c>r</c>.</p></li>
+                            <li><p>Append to <c>p</c> the value <c>(p[-2]+p[-1]*q[-2]) % s</c>.</p></li>
+                        </ol>
+                    </li>
+                    <li><p>When the loop terminates, <c>p[-1]</c> is <m>t^{-1}</m> in <m>\mathbb{Z}_s</m>, and <m>\gcd{(s,t)}</m> is <c>r[-2]</c>.</p></li>
+                </ol>
+            </statement>
+        </algorithm>
+
+        <example>
+            <title>Cracking Kid-RSA</title>
+            <statement>
+                <p>
+                    Applying the algorithm for our public key <m>(42953,873)</m>, we have:
+                    <md>
+                        <mrow>  \amp \amp   p_{-1} \amp = 0</mrow>
+                        <mrow>  42953 \amp = 49(873)+176 \amp  p_0 \amp = 1</mrow>
+                        <mrow>  873 \amp = 4(176)+169    \amp  p_1 = (0-1(49))\text{ mod } 42953 \amp = 42904</mrow>
+                        <mrow>  176 \amp = 1(169)+7      \amp  p_2 = (1-42904(4))\text{ mod } 42953 \amp = 197</mrow>
+                        <mrow>  169 \amp = 24(7)+1       \amp  p_3 = (42904-197(1))\text{ mod } 42953 \amp = 42707</mrow>
+                        <mrow>  7 \amp = 7(1)+0          \amp  p_4 = (197-42707(24))\text{ mod } 42953 \amp = 6101</mrow>
+                    </md>
+                </p>
+
+                <p>
+                    But we had <m>d=6101</m>, so our decryption is broken. Applying
+                    <me>
+                        f(c) = (6101\cdot c)\text{ mod } 42953
+                    </me>
+                    to each integer <m>c</m> in the list of encrypted integers, we recover the original list.
+                </p>
+            </statement>
+        </example>
+    </subsection>
+
+</section>

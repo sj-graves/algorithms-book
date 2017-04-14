@@ -71,7 +71,7 @@
         <!-- Part III: Basic Cryptography -->
         <xi:include href="./ch-permutations.xml" />
         <xi:include href="./ch-substcipher.xml" />
-        <xi:include href="./chapter11.xml" />
+        <xi:include href="./ch-publickey.xml" />
         
         <!-- Part IV: Algorithms in Graph Theory -->
         <xi:include href="./chapter12.xml" />
