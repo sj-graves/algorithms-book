@@ -1,8 +1,0 @@
-<section>
-<title>Goals</title>
-<ol type="1">
-<li><p>Discuss the shortest path problem.</p></li>
-<li><p>Explain Dijkstra's shortest path algorithm.</p></li>
-<li><p>Implement Dijkstra's algorithm.</p></li>
-</ol>
-</section>

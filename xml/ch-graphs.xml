@@ -1,0 +1,16 @@
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="ch-Graphs" >
+    <title>Introduction to Graph Theory</title>
+
+
+    <objectives>
+        <title>Goals</title>
+        <ol type="1">
+            <li><p>Define a <em>graph</em>.</p></li>
+            <li><p>Discuss elementary properties of and definitions pertaining to graphs.</p></li>
+            <li><p>Discuss several different methods for representing graphs computationally.</p></li>
+        </ol>
+    </objectives>
+    
+    <xi:include  href="sec-graphs-defn.xml" />
+    <xi:include  href="sec-graphs-sage.xml" />
+</chapter>

@@ -74,7 +74,7 @@
         <xi:include href="./ch-publickey.xml" />
         
         <!-- Part IV: Algorithms in Graph Theory -->
-        <xi:include href="./chapter12.xml" />
+        <xi:include href="./ch-graphs.xml" />
         <xi:include href="./chapter13.xml" />
         <xi:include href="./chapter14.xml" />
         <xi:include href="./chapter15.xml" />
