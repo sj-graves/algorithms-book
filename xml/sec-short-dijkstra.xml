@@ -1,130 +1,146 @@
-<section>
-<title>Dijkstra's Algorithm</title>
-<p>
-In 1956, Dutch computer scientist {Edsger Dijkstra} developed an algorithm for solving this problem. His solution, now known as Dijkstra's algorithm, is both elegant and simple.
-</p>
-<algorithm>
-<title>Dijkstra's Shortest Path Algorithm</title>
-<p>
-Let <m>G=(V,E)</m> be a graph, and let <m>x</m> be a particular vertex in <m>V</m>. We will define <m>d(v)</m> to be the currently known distance from <m>x</m> to <m>v</m>, and <m>V'=\set{}</m> to be an initially empty set. For each <m>v\in V\setminus\set{x}</m>, we define <m>p(v)</m> to be the <em>predecessor</em> of <m>v</m> in a shortest path from <m>x</m>.
-</p>
+<section xml:id="sec-Short-Dijkstra">
+    <title>Dijkstra's Algorithm</title>
+    <p>
+        In 1956, Dutch computer scientist Edsger Dijkstra developed an algorithm for solving this problem. His solution, now known as <em>Dijkstra's algorithm</em>, is both elegant and simple. A <em>root vertex</em> is specified as having distance 0; its neighbors have distance 1. The neighbors of those vertices with distance 1 are next specified to have distance 2, unless they previously had distance 0; and so on. Those vertices which cannot be reached by a path from the root have distance <m>\infty</m>.
+    </p>
+    <algorithm>
+        <title>Dijkstra's Shortest Path Algorithm</title>
+        <statement>
+            <p>
+                Let <m>G=(V,E)</m> be a graph, and let <m>x</m> be a particular vertex in <m>V</m>. We will define <m>\dist(v)</m> to be the currently known distance from <m>x</m> to <m>v</m>, and <m>V'=\set{}</m> to be an initially empty set. For each <m>v\in V\setminus\set{x}</m>, we define <m>p(v)</m> to be the <em>predecessor</em> of <m>v</m> in a shortest path from <m>x</m>.
+            </p>
 
-<ol>
-<li><p>Mark <m>d(x)=0</m> and <m>d(v)=\infty</m> for every <m>v\in V\setminus\set{x}</m>.</p></li>
-<li><p>While <m>V\neq V'</m>, do the following:
-</p>
+            <ol>
+                <li><p>Mark <m>\dist(x)=0</m> and <m>\dist(v)=\infty</m> for every <m>v\in V\setminus\set{x}</m>.</p></li>
+                <li><p>While <m>V\neq V'</m>, do the following:
+                    </p>
 
-<ol>
-<li><p>Let <m>u</m> be any vertex in <m>\set{u\in V\setminus V': d(u)=\min\set{d(v):v\in V\setminus V'}}</m>.</p></li>
-<li><p>Add <m>u</m> to <m>V'</m>.</p></li>
-<li><p>For each neighbor <m>v</m> of <m>u</m>, if <m>d(v)>d(u)+1</m>, set <m>d(v)=d(u)+1</m>, and set <m>p(v)=u</m>.</p></li>
-</ol>
-</li>
-<li><p>Return the triple <m>(v,d(v), p(v))</m> for each <m>v\in V</m>.</p></li>
-</ol>
-</algorithm>
-<p>
-In fact, Dijkstra's algorithm produces what is called a <em>breadth-first traversal</em> of <m>\Gamma</m> from the root vertex <m>x</m>. For each vertex <m>v</m> in the same component of <m>\Gamma</m> as <m>v_0</m>, there is a finite sequence of predecessors which can be followed backwards from <m>v</m> to <m>x</m>; for vertices in other components, no such predecessor exists and the distance <m>d(x,v)</m> is infinite. We'll illustrate the algorithm with the example of a graph with two components, one of which is a single isolated vertex.
-</p>
-<figure xml:id="fig_dijkstra_exmp" >
-<caption>A graph <m>\Gamma</m> with two components: the vertex <m>v_{16}</m> is isolated from all other vertices.</caption>
-{
-<image>
-<latex-image-code><![CDATA[\begin{tikzpicture}[scale=3]
-\foreach \n/\x/\y in {1/0.43/0.69, 2/1.14/0.66, 3/2.08/-0.14, 4/1.59/-0.23, 5/1.5/0.88, 6/1.6/-0.52, 7/1.82/0.45, 8/0.99/-0.54, 9/1.18/-0.74, 10/0.92/-0.3, 11/1.41/0.15, 12/0.49/-0.45, 13/0.78/0.17, 14/0.43/0.0, 15/0.96/-0.07, 16/2.08/0.45}{
-    \node [draw=black, circle, fill=white, inner sep=1pt] (\n) at (\x,\y) ;
-}
-\graph{
-(1) -- {(2), (14)}, (2) -- {(5), (7), (15)}, (3) -- {(4), (6), (7)}, (4) -- {(8), (11), (15)}, (5) -- {(11)}, (6) -- {(8), (9), (11)}, (7) -- {(11)}, (8) -- {(9), (12), (14)}, (9) -- {(10), (15)}, (10) -- {(11), (12), (13)}, (11) -- {(13)}, (12) -- {(14), (15)}, (13) -- {(14), (15)}, (14) -- {(15)}
-};
-\foreach \n in {2,5,7,13}{\node [above] at (\n) {\n};}
-\foreach \n in {4,6,8,9}{\node [below] at (\n) {\n};}
-\node [right] at (3) {3};
-\node [left] at (14) {14};
-\foreach \n in {1, 10, 11}{\node [above left] at (\n) {\n};}
-\node [below left] at (12) {12};
-\node [above right] at (15) {15};
-\node [above right] at (16) {16};\end{tikzpicture}]]></latex-image-code>
-</image>
-}
-</figure>
+                    <ol>
+                        <li><p>Let <m>u</m> be any vertex in <me>\set{u\in V\setminus V': \dist(u)=\min\set{\dist(v):v\in V\setminus V'}}</me>.</p></li>
+                        <li><p>Add <m>u</m> to <m>V'</m>.</p></li>
+                        <li><p>For each neighbor <m>v</m> of <m>u</m>, if <m>\dist(v)>\dist(u)+1</m>, set <m>\dist(v)=\dist(u)+1</m>, and set <m>p(v)=u</m>.</p></li>
+                    </ol>
+                </li>
+                <li><p>Return the triple <m>(v,\dist(v), p(v))</m> for each <m>v\in V</m>.</p></li>
+            </ol>
+        </statement>
+    </algorithm>
+    <p>
+        In fact, Dijkstra's algorithm produces what is called a <em>breadth-first traversal</em> of <m>\Gamma</m> from the root vertex <m>x</m>. For each vertex <m>v</m> in the same component of <m>\Gamma</m> as <m>v_0</m>, there is a finite sequence of predecessors which can be followed backwards from <m>v</m> to <m>x</m>; for vertices in other components, no such predecessor exists and the distance <m>\dist(x,v)</m> is infinite. We'll illustrate the algorithm with the example of a graph with two components, one of which is a single isolated vertex.
+    </p>
+    <figure xml:id="fig_dijkstra_exmp" >
+        <caption>A graph <m>\Gamma</m> with two components: the vertex <m>v_{16}</m> is isolated from all other vertices.</caption>
+        <sage>
+            <input>
+                D = {1:[2, 14], 2:[5, 7, 15], 3:[4, 6, 7], 4:[8, 11, 15], 5:[11], 
+                6:[8,9,11], 7:[11], 8:[9,12,14], 9:[10,15], 10:[11,12,13], 
+                11:[13], 12:[14,15], 13:[14,15],14:[15], 16:[]}
+                show(Graph(D))
+            </input>
+        </sage>
+    </figure>
 
-<example>
-<statement>
-<p>
-Consider the graph <m>\Gamma=(V,E)</m> with vertex set <m>V=\set{1,2,\ldots,16}</m> and edge set
-<md>
-  <mrow>  E \amp = \left\{(1, 2), (1, 14), (2, 5), (2, 7), (2, 15), (3, 4), (3, 6), (3, 7), (4, 8), (4, 11), (4, 15), \right.</mrow>
-  <mrow>  \amp ~\left.(5, 11), (6, 8), (6, 9), (6, 11), (7, 11), (8, 9), (8, 12), (8, 14), (9, 10), (9, 15),\right.</mrow>
-  <mrow>  \amp ~\left.(10, 11), (10, 12), (10, 13), (11, 13), (12, 14), (12, 15), (13, 14), (13, 15), (14, 15)\right\}.</mrow>
-</md>
-</p>
+    <subsection>
+        <title>A full example of Dijkstra's algorithm</title>
+        <p>
+            Consider the graph <m>\Gamma=(V,E)</m> with vertex set <m>V=\set{1,2,\ldots,16}</m> and edge set
+            <md>
+                <mrow>  E \amp = \left\{(1, 2), (1, 14), (2, 5), (2, 7), (2, 15), (3, 4), (3, 6), (3, 7), (4, 8), (4, 11), (4, 15), \right.</mrow>
+                <mrow>  \amp ~\left.(5, 11), (6, 8), (6, 9), (6, 11), (7, 11), (8, 9), (8, 12), (8, 14), (9, 10), (9, 15),\right.</mrow>
+                <mrow>  \amp ~\left.(10, 11), (10, 12), (10, 13), (11, 13), (12, 14), (12, 15), (13, 14), (13, 15), (14, 15)\right\}.</mrow>
+            </md>
+        </p>
 
-<p>
-This graph is depicted in <xref ref="fig_dijkstra_exmp" autoname="yes" />. If we designate the root vertex to be <m>x=v_1</m>, we can begin the process.
-The iterations are explained briefly, and all steps are tabulated below in <xref ref="tab_dijkstra_exmp" autoname="yes" />. Since <m>x=v_1</m>, we set
-<me>
-  d(v) = \begin{cases}\infty \amp  v\neq v_1 \\0 \amp  v=v_1
-\end{cases}
-</me>
-and <m>p(v)</m> takes no values. As the only unvisited vertex at finite distance from <m>x</m>, we mark <m>v_1</m> as visited by putting <m>V'=\set{v_1}</m>. Looking at the neighbors of <m>v_1</m>, we see that <m>N(v_1) = \set{v_2, v_{14}}</m>; since the distance to both is currently infinite, we redefine <m>d</m> and <m>p</m> as follows:
-<md>
-  <mrow>  d(v) \amp = \begin{cases}0 \amp  v=v_1 \\ 
-    1 \amp  v\in \set{v_2,v_{14}} \\ 
-    \infty \amp  \text{ otherwise } 
-\end{cases}  \amp 
-p(v) \amp = 1\text{ for }  v\in\set{v_2, v_{14}}.</mrow>
-</md>
-</p>
+        <p>
+            This graph is depicted in <xref ref="fig_dijkstra_exmp" autoname="yes" />. If we designate the root vertex to be <m>x=v_1</m>, we can begin the process.
+            The iterations are explained briefly, and all steps are tabulated below in <xref ref="tab_dijkstra_exmp" autoname="yes" />. Since <m>x=v_1</m>, we set
+            <me>
+                \dist(v) = \begin{cases}\infty \amp  v\neq v_1 \\0 \amp  v=v_1
+                \end{cases}
+            </me>
+            and <m>p(v)</m> takes no values. As the only unvisited vertex at finite distance from <m>x</m>, we mark <m>v_1</m> as visited by putting <m>V'=\set{v_1}</m>. Looking at the neighbors of <m>v_1</m>, we see that <m>N(v_1) = \set{v_2, v_{14}}</m>; since the distance to both is currently infinite, we redefine <m>d</m> and <m>p</m> as follows:
+            <md>
+                <mrow>  \dist(v) \amp = \begin{cases}0 \amp  v=v_1 \\ 
+                    1 \amp  v\in \set{v_2,v_{14}} \\ 
+                    \infty \amp  \text{ otherwise } 
+                    \end{cases}  \amp 
+                    p(v) \amp = 1\text{ for }  v\in\set{v_2, v_{14}}.</mrow>
+            </md>
+        </p>
 
-<p>
-Since <m>2\lt 14</m>, we choose next to visit <m>v_2</m>; hence <m>V'=\set{v_1,v_2}</m> and we observe that the as-yet-unvisited neighbors of <m>v_2</m> are <m>v_5</m>, <m>v_7</m>, and <m>v_{15}</m>. We again update <m>d</m> and <m>p</m>:
-<md>
-  <mrow>  d(v) \amp = \begin{cases}0 \amp  v=v_1 \\ 
-    1 \amp  v\in \set{v_2,v_{14}} \\ 
-    2 \amp  v\in \set{v_5, v_7, v_{15}} \\
-    \infty \amp  \text{ otherwise } 
-\end{cases}  \amp 
-p(v) \amp = \begin{cases}1 \amp  v\in\set{v_2, v_{14}} \\ 
-    2 \amp  v\in\set{v_5, v_7, v_{15}}
-\end{cases}</mrow>
-</md>
-</p>
+        <p>
+            Since <m>2\lt 14</m>, we choose next to visit <m>v_2</m>; hence <m>V'=\set{v_1,v_2}</m> and we observe that the as-yet-unvisited neighbors of <m>v_2</m> are <m>v_5</m>, <m>v_7</m>, and <m>v_{15}</m>. We again update <m>d</m> and <m>p</m>:
+            <md>
+                <mrow>  \dist(v) \amp = \begin{cases}0 \amp  v=v_1 \\ 
+                    1 \amp  v\in \set{v_2,v_{14}} \\ 
+                    2 \amp  v\in \set{v_5, v_7, v_{15}} \\
+                    \infty \amp  \text{ otherwise } 
+                    \end{cases}  \amp 
+                    p(v) \amp = \begin{cases}1 \amp  v\in\set{v_2, v_{14}} \\ 
+                    2 \amp  v\in\set{v_5, v_7, v_{15}}
+                    \end{cases}</mrow>
+            </md>
+        </p>
 
-<p>
-Proceeding in this manner, we will visit vertices <m>v_{14}</m>, <m>v_5</m>, <m>v_7</m>, <m>v_{15}</m>, <m>v_8</m>, and <m>v_{12}</m> before something strange happens: every vertex will have been visited or ``seen" on its shortest path, except for <m>v_{16}</m>. While <m>v_{16}</m> will eventually be added to <m>V'</m>, it will never be seen as a neighbor of another vertex, and will never be assigned a predecessor.
-</p>
-</statement>
-</example>
+        <p>
+            Proceeding in this manner, we will visit vertices <m>v_{14}</m>, <m>v_5</m>, <m>v_7</m>, <m>v_{15}</m>, <m>v_8</m>, and <m>v_{12}</m> before something strange happens: every vertex will have been visited or ``seen" on its shortest path, except for <m>v_{16}</m>. While <m>v_{16}</m> will eventually be added to <m>V'</m>, it will never be seen as a neighbor of another vertex, and will never be assigned a predecessor.
+        </p>
+    </subsection>
 
-<figure xml:id="tab_dijkstra_exmp" >
-<caption>Iterations of Dijkstra's algorithm on the graph <m>\Gamma</m> from \xautoref{fig_dijkstra_exmp}.</caption>
-{
-<me>
-  \begin{array}{c|c|c|c|l@{~:~}l}
-\amp  \textbf{Current} \amp \amp \amp  \multicolumn{2}{l}{\textbf{Updating vertices}} \\
-\textbf{Step} \amp  \textbf{Vertex} \amp  \textbf{Distance} \amp \textbf{Predecessor} \amp  \set{v_j:j\in J} \amp  (d(v), p(v)) \\ \hline
-1 \amp  1 \amp  0 \amp  \text{ -- }  \amp  \set{2, 14} \amp  (1,1) \\
-2 \amp  2 \amp  1 \amp  1 \amp  \set{5, 7, 14} \amp  (2,2) \\
-3 \amp  14 \amp  1 \amp  1 \amp  \set{8, 12, 13} \amp  (2,14) \\
-4 \amp  5 \amp  2 \amp  2 \amp  \set{11} \amp  (3,5) \\
-5 \amp  7 \amp  2 \amp  2 \amp  \set{3} \amp  (3,7) \\
-6 \amp  15 \amp  2 \amp  2 \amp  \set{2, 9} \amp  (3, 15) \\
-7 \amp  8 \amp  2 \amp  14 \amp  \set{6} \amp  (3,8) \\
-8 \amp  12 \amp  2 \amp  14 \amp  \set{10} \amp  (3,12) \\
-9 \amp  13 \amp  2 \amp  14 \\
-10 \amp  11 \amp  3 \amp  5 \\
-11 \amp  3 \amp  3 \amp  7 \\
-12 \amp  6 \amp  3 \amp  8 \\
-13 \amp  10 \amp  3 \amp  12 \\
-14 \amp  4 \amp  3 \amp  15 \\
-15 \amp  9 \amp  3 \amp  15 \\
-16 \amp  16 \amp  \infty \amp  \text{ -- } 
-\end{array}
-</me>
-}
-</figure>
-<p>
-Are there other ways to find shortest paths? Of course. The beauty of using Dijkstra's algorithm is that when you first encounter a vertex, you're already recording its shortest path. It will never be the case that this algorithm encounters a vertex at some large distance and then updates it to a smaller distance.
-</p>
+    <table xml:id="tab_dijkstra_exmp">
+        <tabular halign="center">
+            <row>
+                <cell right="minor"></cell>
+                <cell right="minor">Current</cell>
+                <cell right="minor"></cell>
+                <cell right="minor"></cell>
+                <cell colspan="2" right="minor">Updating Vertices</cell>
+            </row>
+            <row bottom="major">
+                <cell right="minor">Step</cell>
+                <cell right="minor">Vertex</cell>
+                <cell right="minor">Distance</cell>
+                <cell right="minor">Predecessor</cell>
+                <cell right="minor"><m>\set{v_j:j\in J}</m></cell>
+                <cell right="minor"><m>(\dist(v), p(v))</m></cell>
+            </row>
+            <row><cell right="minor">0</cell> <cell right="minor">1</cell> <cell right="minor">0</cell> <cell right="minor">None</cell> 
+                <cell right="minor">[2, 14]</cell> <cell right="minor">(1, 1)</cell></row>
+            <row><cell right="minor">1</cell> <cell right="minor">2</cell> <cell right="minor">1</cell> <cell right="minor">1</cell> 
+                <cell right="minor">[5, 7, 15]</cell> <cell right="minor">(2, 2)</cell></row>
+            <row><cell right="minor">2</cell> <cell right="minor">14</cell> <cell right="minor">1</cell> <cell right="minor">1</cell> 
+                <cell right="minor">[8, 12, 13]</cell> <cell right="minor">(2, 14)</cell></row>
+            <row><cell right="minor">3</cell> <cell right="minor">5</cell> <cell right="minor">2</cell> <cell right="minor">2</cell> 
+                <cell right="minor">[11]</cell> <cell right="minor">(3, 5)</cell></row>
+            <row><cell right="minor">4</cell> <cell right="minor">7</cell> <cell right="minor">2</cell> <cell right="minor">2</cell> 
+                <cell right="minor">[3]</cell> <cell right="minor">(3, 7)</cell></row>
+            <row><cell right="minor">5</cell> <cell right="minor">15</cell> <cell right="minor">2</cell> <cell right="minor">2</cell> 
+                <cell right="minor">[4, 9]</cell> <cell right="minor">(3, 15)</cell></row>
+            <row><cell right="minor">6</cell> <cell right="minor">8</cell> <cell right="minor">2</cell> <cell right="minor">14</cell> 
+                <cell right="minor">[6]</cell> <cell right="minor">(3, 8)</cell></row>
+            <row><cell right="minor">7</cell> <cell right="minor">12</cell> <cell right="minor">2</cell> <cell right="minor">14</cell> 
+                <cell right="minor">[10]</cell> <cell right="minor">(3, 12)</cell></row>
+            <row><cell right="minor">8</cell> <cell right="minor">13</cell> <cell right="minor">2</cell> <cell right="minor">14</cell> 
+                <cell right="minor">[ ]</cell> <cell right="minor">(3, 13)</cell></row>
+            <row><cell right="minor">9</cell> <cell right="minor">11</cell> <cell right="minor">3</cell> <cell right="minor">5</cell> 
+                <cell right="minor">[ ]</cell> <cell right="minor">(4, 11)</cell></row>
+            <row><cell right="minor">10</cell> <cell right="minor">3</cell> <cell right="minor">3</cell> <cell right="minor">7</cell> 
+                <cell right="minor">[ ]</cell> <cell right="minor">(4, 3)</cell></row>
+            <row><cell right="minor">11</cell> <cell right="minor">4</cell> <cell right="minor">3</cell> <cell right="minor">15</cell> 
+                <cell right="minor">[ ]</cell> <cell right="minor">(4, 4)</cell></row>
+            <row><cell right="minor">12</cell> <cell right="minor">9</cell> <cell right="minor">3</cell> <cell right="minor">15</cell> 
+                <cell right="minor">[ ]</cell> <cell right="minor">(4, 9)</cell></row>
+            <row><cell right="minor">13</cell> <cell right="minor">6</cell> <cell right="minor">3</cell> <cell right="minor">8</cell> 
+                <cell right="minor">[ ]</cell> <cell right="minor">(4, 6)</cell></row>
+            <row><cell right="minor">14</cell> <cell right="minor">10</cell> <cell right="minor">3</cell> <cell right="minor">12</cell> 
+                <cell right="minor">[ ]</cell> <cell right="minor">(4, 10)</cell></row>
+            <row><cell right="minor">15</cell> <cell right="minor">16</cell> <cell right="minor"><m>\infty</m></cell> <cell right="minor">None</cell> 
+                <cell right="minor">[ ]</cell> <cell right="minor">(<m>\infty</m>, 16)</cell></row>
+        </tabular>
+        <caption>Iterations of Dijkstra's algorithm on the graph <m>\Gamma</m> from <xref ref="fig_dijkstra_exmp" autoname="yes" />.</caption>
+    </table>
+
+    <p>
+        Are there other ways to find shortest paths? Of course. The beauty of using Dijkstra's algorithm is that when you first encounter a vertex, you're already recording its shortest path. It will never be the case that this algorithm encounters a vertex at some large distance and then updates it to a smaller distance.
+    </p>
 </section>

@@ -1,4 +1,4 @@
-<chapter xmlns:xi="http://www.w3.org/2001/XInclude" >
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="ch-Short">
     <title>Shortest Paths</title>
 
 
@@ -26,6 +26,6 @@
     </introduction>
 
     <!--xi:include  href="section13_1.xml" /-->
-    <xi:include  href="section13_2.xml" />
-    <xi:include  href="section13_3.xml" />
+    <xi:include  href="sec-short-dijkstra.xml" />
+    <xi:include  href="sec-short-implementdijkstra.xml" />
 </chapter>

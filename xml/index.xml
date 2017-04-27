@@ -21,6 +21,7 @@
             \DeclareMathOperator{\Aut}{Aut}
             \DeclareMathOperator{\Real}{Re}
             \DeclareMathOperator{\Imag}{Im}
+            \DeclareMathOperator{\dist}{dist}
             \newcommand{\car}{~\fbox{$\dlsh$}}
             \newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
             \renewcommand{\vec}[1]{\mathbf{#1}}
@@ -75,8 +76,8 @@
         
         <!-- Part IV: Algorithms in Graph Theory -->
         <xi:include href="./ch-graphs.xml" />
-        <xi:include href="./chapter13.xml" />
-        <xi:include href="./chapter14.xml" />
+        <xi:include href="./ch-short.xml" />
+        <xi:include href="./ch-MST.xml" />
         <xi:include href="./chapter15.xml" />
         <backmatter xml:id="AAS-bm">
             <colophon xml:id="AAS-bm-col"> <p>
