@@ -24,13 +24,13 @@
             </statement>
         </definition>
         <p>
-            Often the weight function somehow represents the ``cost" of traversing an edge <mdash /> in this context it becomes almost obvious why finding a spanning tree of minimum weight would be useful. Recall that a <em>spanning forest</em> for a graph is an acyclic subgraph covering all vertices; a <em>spanning tree</em> is a connected acyclic subgraph covering all vertices.
+            Often the weight function somehow represents the <em>cost</em> of traversing an edge <mdash /> in this context it becomes almost obvious why finding a spanning tree of minimum weight would be useful. Recall that a <em>spanning forest</em> for a graph is an acyclic subgraph covering all vertices; a <em>spanning tree</em> is a connected acyclic subgraph covering all vertices.
         </p>
 
         <p>
             A minimum spanning tree provides a way to connect all the vertices in a graph in a non-redundant way with the least associated cost.
         </p>
     </introduction>
-    <xi:include  href="section14_1.xml" />
-    <xi:include  href="section14_2.xml" />
+    <xi:include  href="sec-MST-kruskal.xml" />
+    <xi:include  href="sec-MST-jarnikprim.xml" />
 </chapter>

@@ -1,0 +1,20 @@
+<section xml:id="sec-MST-JarnikPrim">
+    <title>The Jarn&#237;k-Prim Algorithm</title>
+    <introduction>
+        <p>
+            The second algorithm we will explore to build a minimum spanning tree is a near analogue of Dijkstra's shortest path algorithm, developed by Czech mathematician Vojt&#277;ch Jarn&#237;k in 1930 and then independently rediscovered by Robert Prim in 1957 and Dijkstra in 1959. The weights of each edge are considered exactly to be costs of adding the edge to the graph.
+        </p>
+    </introduction>
+    <subsection>
+        <title>Min Heaps</title>
+        <definition>
+            <statement>
+                A <term>min heap</term> is a special data structure representing a rooted tree, with the condition that a <em>parent vertex</em> is always ordered <em>before</em> its children. 
+            </statement>
+        </definition>
+        
+        <p>
+        Heaps are extremely efficient algorithms when knowing where the minimal (or maximal, for a max heap) element of a substructure is necessary. Hence they are the optimal data structure for Dijkstra's algorithm, and they provide a very efficient data structure for storing the vertices of a graph when using the Jarn&#237;k-Prim Algorithm to produce a minimum spanning tree of a connected graph -- you can use the Jarn&#237;k-Prim Algorithm to produce a spanning forest by running it on each component of the graph.
+        </p>
+    </subsection>
+</section>
