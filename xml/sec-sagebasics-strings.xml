@@ -68,7 +68,7 @@
         </sage>
 
         <p>
-            If you just evaluated that cell out of order, you would have seen an error arise: a <c>NameError</c> would have been generated because <c>spam</c> would not have been defined. This behavior is not particular to the Sage cell. In SMC, if you have restarted a worksheet you must be careful to run all of the cells in order or risk incorrect behavior. To see this in action, reload the current page of the online book (or restart your worksheet) and run the last cell first.
+            If you just evaluated that cell out of order, you would have seen an error arise: a <c>NameError</c> would have been generated because <c>spam</c> would not have been defined. This behavior is not particular to the Sage cell. In CoCalc, if you have restarted a worksheet you must be careful to run all of the cells in order or risk incorrect behavior. To see this in action, reload the current page of the online book (or restart your worksheet) and run the last cell first.
         </p>
 
     </subsection>

@@ -3,7 +3,7 @@
 
     <objectives xml:id="obj-SageBasics">
         <ol>
-            <li><p>Gain familiarity with Sage cells and the SageMathCloud environment.</p></li>
+            <li><p>Gain familiarity with Sage cells and the CoCalc environment.</p></li>
             <li><p>Learn some elementary Sage/Python syntax and commands.</p></li>
         </ol>
     </objectives>
@@ -13,7 +13,7 @@
         <p> This is not a manual for using Sage to solve mathematical problems. Consult the excellent <xref ref="bib_SageBook">Sage for Undergraduates</xref> by Gregory Bard.</p>
 
         <p>
-            We will be making extensive use of <url href="http://cloud.sagemath.com">SageMathCloud</url> throughout the semester, so your very first task is to set up an account. This is discussed in the course syllabus for Math 3380 as well as on the first day of class. While most examples of Sage or Python code will be emdedded in Sage cells within the text, it is important that you are logged into SageMathCloud and actively typing code examples and working along with exercises as we progress - <em> especially if you are using an offline copy of the book!</em>
+            We will be making extensive use of <url href="http://cocalc.com">CoCalc</url> throughout the semester, so your very first task is to set up an account<fn>This is discussed in the course syllabus for Math 3380 as well as on the first day of class.</fn>. While most examples of Sage or Python code will be emdedded in Sage cells within the text, it is important that you are logged into CoCalc and actively typing code examples and working along with exercises as we progress - <em> especially if you are using an offline copy of the book!</em>
         </p>
 
         <p>
@@ -35,10 +35,10 @@
     <xi:include  href="./sec-sagebasics-strings.xml" />
     <xi:include  href="./sec-sagebasics-advanced.xml" />
 
-    <!--    <conclusion>
+    <conclusion>
         <title><em>Caveat emptor!</em></title>
         <p>
             This text was originally written with the intent that students would write code in Python 3.5 using the IDLE environment. This is a perfectly valid plan, but Sage and SageMathCloud use Python 2.7, which differs from Python 3.5 in ways more important than just syntax. Some references to code from Python 3.5 remain scattered throughout the text. When they all have absolutely been eradicated, this warning will be removed.
         </p>
-    </conclusion>-->
+    </conclusion>
 </chapter>

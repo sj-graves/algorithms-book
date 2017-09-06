@@ -46,9 +46,10 @@
         </statement>
     </algorithm>
 
-    
-    
+
+
     <example>
+        <title>Applying Kruskal's Algorithm</title>
         <statement>
             <p>
                 Consider the graph with the following weighted edges:
@@ -58,170 +59,142 @@
                  (5, 7, 9), (5, 8, 5), (5, 9, 7), (6, 8, 10)]
                 -->
             </p>
+
             <table>
-                <tabular halign="center">
-                    <row bottom="major">
-                        <cell>Edge</cell><cell right="minor">Weight</cell>
-                        <cell>Edge</cell><cell right="minor">Weight</cell>
-                        <cell>Edge</cell><cell right="minor">Weight</cell>
-                        <cell>Edge</cell><cell right="minor">Weight</cell>
+                <tabular halign='center'>
+                    <row bottom='major'>
+                        <cell> Weight </cell> <cell right='minor'> Edge </cell>
+                        <cell> Weight </cell> <cell right='minor'> Edge </cell>
+                        <cell> Weight </cell> <cell right='minor'> Edge </cell>
+                        <cell> Weight </cell> <cell> Edge </cell>
                     </row>
                     <row>
-                        <cell> (0, 3) </cell><cell right="minor"> 1 </cell>
-                        <cell> (0, 8) </cell><cell right="minor"> 1 </cell>
-                        <cell> (0, 4) </cell><cell right="minor"> 2 </cell>
-                        <cell> (0, 5) </cell><cell right="minor"> 4 </cell></row>
+                        <cell> 1 </cell> <cell right='minor'> <m>v_{0}v_{3}</m></cell>
+                        <cell> 4 </cell> <cell right='minor'> <m>v_{1}v_{8}</m></cell>
+                        <cell> 7 </cell> <cell right='minor'> <m>v_{2}v_{8}</m></cell>
+                        <cell> 9 </cell> <cell> <m>v_{0}v_{9}</m></cell>
+                    </row>
                     <row>
-                        <cell> (1, 8) </cell><cell right="minor"> 4 </cell>
-                        <cell> (1, 2) </cell><cell right="minor"> 5 </cell>
-                        <cell> (2, 7) </cell><cell right="minor"> 5 </cell>
-                        <cell> (3, 4) </cell><cell right="minor"> 5 </cell></row>
+                        <cell> 1 </cell> <cell right='minor'> <m>v_{4}v_{8}</m></cell>
+                        <cell> 5 </cell> <cell right='minor'> <m>v_{1}v_{2}</m></cell>
+                        <cell> 7 </cell> <cell right='minor'> <m>v_{3}v_{7}</m></cell>
+                        <cell> 9 </cell> <cell> <m>v_{3}v_{9}</m></cell>
+                    </row>
                     <row>
-                        <cell> (5, 8) </cell><cell right="minor"> 5 </cell>
-                        <cell> (2, 8) </cell><cell right="minor"> 7 </cell>
-                        <cell> (3, 7) </cell><cell right="minor"> 7 </cell>
-                        <cell> (4, 9) </cell><cell right="minor"> 7 </cell></row>
+                        <cell> 2 </cell> <cell right='minor'> <m>v_{0}v_{4}</m></cell>
+                        <cell> 5 </cell> <cell right='minor'> <m>v_{2}v_{7}</m></cell>
+                        <cell> 7 </cell> <cell right='minor'> <m>v_{4}v_{9}</m></cell>
+                        <cell> 9 </cell> <cell> <m>v_{5}v_{7}</m></cell>
+                    </row>
                     <row>
-                        <cell> (5, 9) </cell><cell right="minor"> 7 </cell>
-                        <cell> (2, 6) </cell><cell right="minor"> 8 </cell>
-                        <cell> (0, 9) </cell><cell right="minor"> 9 </cell>
-                        <cell> (3, 9) </cell><cell right="minor"> 9 </cell></row>
+                        <cell> 2 </cell> <cell right='minor'> <m>v_{0}v_{8}</m></cell>
+                        <cell> 5 </cell> <cell right='minor'> <m>v_{3}v_{4}</m></cell>
+                        <cell> 7 </cell> <cell right='minor'> <m>v_{5}v_{9}</m></cell>
+                        <cell> 10 </cell> <cell> <m>v_{1}v_{6}</m></cell>
+                    </row>
                     <row>
-                        <cell> (4, 8) </cell><cell right="minor"> 9 </cell>
-                        <cell> (5, 7) </cell><cell right="minor"> 9 </cell>
-                        <cell> (1, 6) </cell><cell right="minor"> 10 </cell>
-                        <cell> (6, 8) </cell><cell right="minor"> 10 </cell></row>
-                </tabular>
-            </table>
+                        <cell> 4 </cell> <cell right='minor'> <m>v_{0}v_{5}</m></cell>
+                        <cell> 5 </cell> <cell right='minor'> <m>v_{5}v_{8}</m></cell>
+                        <cell> 8 </cell> <cell right='minor'> <m>v_{2}v_{6}</m></cell>
+                        <cell> 10 </cell> <cell> <m>v_{6}v_{8}</m></cell>
+                    </row>
+                </tabular></table>
             <p>
-                The graph <m>\Gamma</m> with this edge set on <m>V=\set{a,b,c,\ldots,o}</m> and weight function <m>w</m> is depicted in <xref ref="fig_kruskal_exmp" autoname="yes" />. To begin applying Kruskal's algorithm to find a spanning tree of <m>\Gamma</m> with minimal weight, we assign each vertex to its own component; thus, the partition of the vertices is
+                The graph <m>\Gamma</m> with this edge set on <m>V=\set{v_0,v_1,\ldots,v_9}</m> and weight function <m>w</m> is depicted in <xref ref="fig_kruskal_exmp" autoname="yes" />. To begin applying Kruskal's algorithm to find a spanning tree of <m>\Gamma</m> with minimal weight, we assign each vertex to its own component; thus, the partition of the vertices is
                 <me>
-                    \scr{C} = \set{C_0=\set{a},C_1=\set{b},C_2=\set{c},\ldots,C_{14}=\set{o}}.
+                    \mathcal{C} = \set{C_0=\set{v_0}, C_1=\set{v_1}, C_2=\set{v_2},\ldots,C_{9}=\set{v_9}}.
                 </me>
             </p>
             <figure xml:id="fig_kruskal_exmp">
-            <image source="./images/kruskal_example.svg"/>
-                <caption></caption>
+                <image source="./images/kruskal_example.svg" width="100%"/>
+                <caption> A weighted graph <m>\Gamma</m>.</caption>
             </figure>
+            <notation>
+                We define the function <m>c:V\to V</m> such that <m>c(u)=v</m> if and only if <m>u\in C_v</m>.
+            </notation>
             <p>
-                We begin with the lightest edge, and check each edge to determine whether it connects components. If not, the edge is included in the spanning tree.
-            </p>
-            
-            <p>
-                Let <m>C(v)=k</m> if and only if <m>v\in C_k</m>. The ``lightest" edge is an <m>al</m>-edge, with weight <m>1</m>. Since <m>C(a)=0</m> and <m>C(l)=11</m>, we include the edge <m>al</m>. Hence we update our partition, with the new partition <m>C_0=\set{a,\ell}</m> and <m>C_{11}=\set{}</m>.
-                The next lightest edge is <m>co</m>, with weight <m>2</m>. Since <m>C(c) = 2</m> and <m>C(o) = 14</m>, we again include the edge <m>co</m>. Updating the partition, we now have <m>C_{2} = \set{c,o}</m> and <m>C_{14}=\set{}</m>.
-                The next two edges are similar: firstly <m>w(eh)=2</m>, <m>C(e)=4</m>, and <m>C(h)=7</m>, so we include <m>eh</m> and put <m>C_{4}=\set{e,h}</m> and <m>C_7=\set{}</m>; secondly <m>w(hj)=2</m>, <m>C(h) = 4</m> from the previous update, and <m>C(j)=9</m>, so we include <m>hj</m> and put <m>C_4 = \set{e,h,j}</m> and <m>C_9 = \set{}</m>.
-                The next iteration shows us <m>w(eo)=3</m>, but now we merge two cells of the partition of which neither is a single-element cell. As the algorithm is written naively<fn>This is naive, because a better approach would involve merging the smaller cell into the larger one <mdash /> this would require fewer assignments. Kruskal's algorithm is a good place to start thinking about ``smart" data structures, which improve the computational complexity of the algorithm by reducing the number of loops.</fn>, we simply merge the cells into that of the vertex which comes first in the vertex order. So since <m>C(e)=4</m> and <m>C(o)=2</m>, we include <m>eo</m> and obtain <m>C_4=\set{c,e,h,j,o}</m> and <m>C_2=\set{}</m>.
+                The algorithm proceeds as follows: the edge of least weight is <m>v_0v_3</m>, with <m>w(v_0v_3) = 1</m>. Since <m>c(v_0)=0\neq 3=c(v_3)</m>, the edge <m>v_0v_3</m> can be included in the tree. We will merge the component <m>C_0</m> into <m>C_3</m>, since the two components are of equal size and <m>0 &lt; 3</m>. Hence we make <m>C_0=\set{}</m> and <m>C_3=\set{v_0,v_3}</m>. The next edge of least weight is <m>v_4v_8</m>, also with <m>w(v_4v_8)=1</m>; since <m>c(v_4)=4</m> and <m>c(v_8)=8</m>, we must merge <m>C_4</m> and <m>C_8</m> just as we did <m>C_0</m> and <m>C_3</m>. The process is tabulated below.
             </p>
 
-            <p>
-                \begingroup
-            </p>
-            <pre>
-                Weight   u   C(u)   v   C(v)   Include?
-                +--------+---+------+---+------+----------+
-                1      a    0     l    11      True
-                2      c    2     o    14      True
-                2      e    4     h    7       True
-                2      h    4     j    9       True
-                3      e    4     o    2       True
-                3      i    8     l    0       True
-                4      a    8     b    1       True
-                4      a    8     o    4       True
-                4      c    8     m    12      True
-                4      j    8     l    8      False
-                5      a    8     j    8      False
-                5      b    8     i    8      False
-                5      c    8     f    5       True
-                6      c    8     j    8      False
-                7      a    8     i    8      False
-                8      b    8     k    10      True
-                9      c    8     e    8      False
-                9      e    8     k    8      False
-                10     b    8     l    8      False
-                10     d    3     j    8       True
-                11     b    3     m    3      False
-                11     d    3     e    3      False
-                12     h    3     i    3      False
-                14     a    3     f    3      False
-                15     i    3     k    3      False
-                16     c    3     g    6       True
-                16     n    13    o    3       True
-                18     a    13    h    13     False
-                18     d    13    h    13     False
-                19     f    13    k    13     False
-            </pre>
-            <p>
-                \endgroup
-                The set of included edges is <m>E' = \set{ab, al, ao, bk, cf, cg, cm, co, dj, eh, eo, hj, il, no}</m>. The result of this process is depicted in <xref ref="fig_kruskal_exmp_completed" autoname="yes" />.
-            </p>
+            <table>
+                <tabular halign='center'>
+                    <row bottom='major'>
+                        <cell> Step </cell> <cell> Weight </cell> <cell><m>u</m></cell> <cell><m>c(u)</m></cell> <cell><m>v</m></cell> <cell><m>c(v)</m></cell> <cell right='minor'>Include <m>uv</m>?</cell>
+                    </row>
+                    <row><cell right='minor'> 0</cell> <cell> 1 </cell><cell> <m>v_{0}</m> </cell><cell> 0 </cell><cell> <m>v_{3}</m> </cell><cell> 3 </cell><cell> True </cell></row>
+                    <row><cell right='minor'> 1</cell> <cell> 1 </cell><cell> <m>v_{4}</m> </cell><cell> 4 </cell><cell> <m>v_{8}</m> </cell><cell> 8 </cell><cell> True </cell></row>
+                    <row><cell right='minor'> 2</cell> <cell> 2 </cell><cell> <m>v_{0}</m> </cell><cell> 3 </cell><cell> <m>v_{4}</m> </cell><cell> 8 </cell><cell> True </cell></row>
+                    <row><cell right='minor'> 3</cell> <cell> 2 </cell><cell> <m>v_{0}</m> </cell><cell> 8 </cell><cell> <m>v_{8}</m> </cell><cell> 8 </cell><cell> False </cell></row>
+                    <row><cell right='minor'> 4</cell> <cell> 4 </cell><cell> <m>v_{0}</m> </cell><cell> 8 </cell><cell> <m>v_{5}</m> </cell><cell> 5 </cell><cell> True </cell></row>
+                    <row><cell right='minor'> 5</cell> <cell> 4 </cell><cell> <m>v_{1}</m> </cell><cell> 1 </cell><cell> <m>v_{8}</m> </cell><cell> 8 </cell><cell> True </cell></row>
+                    <row><cell right='minor'> 6</cell> <cell> 5 </cell><cell> <m>v_{1}</m> </cell><cell> 8 </cell><cell> <m>v_{2}</m> </cell><cell> 2 </cell><cell> True </cell></row>
+                    <row><cell right='minor'> 7</cell> <cell> 5 </cell><cell> <m>v_{2}</m> </cell><cell> 8 </cell><cell> <m>v_{7}</m> </cell><cell> 7 </cell><cell> True </cell></row>
+                    <row><cell right='minor'> 8</cell> <cell> 5 </cell><cell> <m>v_{3}</m> </cell><cell> 8 </cell><cell> <m>v_{4}</m> </cell><cell> 8 </cell><cell> False </cell></row>
+                    <row><cell right='minor'> 9</cell> <cell> 5 </cell><cell> <m>v_{5}</m> </cell><cell> 8 </cell><cell> <m>v_{8}</m> </cell><cell> 8 </cell><cell> False </cell></row>
+                    <row><cell right='minor'> 10</cell> <cell> 7 </cell><cell> <m>v_{2}</m> </cell><cell> 8 </cell><cell> <m>v_{8}</m> </cell><cell> 8 </cell><cell> False </cell></row>
+                    <row><cell right='minor'> 11</cell> <cell> 7 </cell><cell> <m>v_{3}</m> </cell><cell> 8 </cell><cell> <m>v_{7}</m> </cell><cell> 8 </cell><cell> False </cell></row>
+                    <row><cell right='minor'> 12</cell> <cell> 7 </cell><cell> <m>v_{4}</m> </cell><cell> 8 </cell><cell> <m>v_{9}</m> </cell><cell> 9 </cell><cell> True </cell></row>
+                    <row><cell right='minor'> 13</cell> <cell> 7 </cell><cell> <m>v_{5}</m> </cell><cell> 8 </cell><cell> <m>v_{9}</m> </cell><cell> 8 </cell><cell> False </cell></row>
+                    <row><cell right='minor'> 14</cell> <cell> 8 </cell><cell> <m>v_{2}</m> </cell><cell> 8 </cell><cell> <m>v_{6}</m> </cell><cell> 6 </cell><cell> True </cell></row>
+                    <row><cell right='minor'> 15</cell> <cell> 9 </cell><cell> <m>v_{0}</m> </cell><cell> 8 </cell><cell> <m>v_{9}</m> </cell><cell> 8 </cell><cell> False </cell></row>
+                    <row><cell right='minor'> 16</cell> <cell> 9 </cell><cell> <m>v_{3}</m> </cell><cell> 8 </cell><cell> <m>v_{9}</m> </cell><cell> 8 </cell><cell> False </cell></row>
+                    <row><cell right='minor'> 17</cell> <cell> 9 </cell><cell> <m>v_{5}</m> </cell><cell> 8 </cell><cell> <m>v_{7}</m> </cell><cell> 8 </cell><cell> False </cell></row>
+                    <row><cell right='minor'> 18</cell> <cell> 10 </cell><cell> <m>v_{1}</m> </cell><cell> 8 </cell><cell> <m>v_{6}</m> </cell><cell> 8 </cell><cell> False </cell></row>
+                    <row><cell right='minor'> 19</cell> <cell> 10 </cell><cell> <m>v_{6}</m> </cell><cell> 8 </cell><cell> <m>v_{8}</m> </cell><cell> 8 </cell><cell> False </cell></row>
+                </tabular>
+                <caption>
+                    The set of included edges is <m>E' = \set{v_0v_3, v_4v_8, v_0v_8, v_0v_5, v_1v_8, v_1v_2, v_2v_7, v_4v_9, v_2v_6}</m>.
+                </caption>
+            </table>
+            <figure xml:id="fig_kruskal_exmp_completed" >
+                <caption>The same graph <m>\Gamma</m> with the minimum spanning tree discovered via Kruskal's algorithm highlighted with red edges.</caption>
+                <image source="./images/kruskal_example_tree.svg" width="100%" />
+            </figure>
+
         </statement>
     </example>
 
-    <figure xml:id="fig_kruskal_exmp_completed" >
-        <caption>The same graph <m>\Gamma</m> from \xautoref{fig_kruskal_exmp} with the minimum spanning tree discovered via Kruskal's algorithm highlighted with red dashed edges.</caption>
-        {
-        <image>
-            <latex-image-code><![CDATA[\begin{tikzpicture}[scale=2]
-\graph [edge quotes = {auto}, math nodes, no placement, nodes={draw, circle, inner sep = 1pt}]{
-\foreach \n/\x/\y in {a/2.0/0.4, c/1.62/-0.64, b/1.24/0.82, e/2.46/-0.16, d/3.22/0.22, g/0.66/-0.64, f/1.28/-0.14, i/2.06/1.08, h/2.78/0.66, k/1.56/0.44, j/2.4/0.32, m/0.66/-0.02, l/1.76/1.16, o/2.48/-0.8, n/3.22/-0.8} \n[x=\x,y=\y];
-a --[dashed, thick, red] b; a -- f; a -- h; a -- i; a -- j; a --[dashed, thick, red] l; a --[dashed, thick, red] o;
-b -- i; b --[dashed, thick, red] k; b -- l; b -- m;
-c -- e; c --[dashed, thick, red] f; c --[dashed, thick, red] g; c -- j; c --[dashed, thick, red] m; c --[dashed, thick, red] o;
-d -- e; d -- h; d --[dashed, thick, red] j;
-e --[dashed, thick, red] h; e -- k; e --[dashed, thick, red] o;
-f -- k;
-h -- i; h --[dashed, thick, red] j;
-i -- k; i --[dashed, thick, red] l;
-j -- l;
-n --[dashed, thick, red] o;
-};\end{tikzpicture}]]></latex-image-code>
-        </image>
-        }
-    </figure>
-    <p>
-        \section[Implementing Kruskal's algorithm]{Implementing Kruskal's algorithm with <q>smart data structures</q>}
-    </p>
+    <subsection>
+        <title>Implementing Kruskal's algorithm</title>
 
-    <p>
-        In a very naive approach to Kruskal's algorithm, the function <m>C(v)</m> reporting the component of vertex <m>v</m> is not implemented. This requires two searches through the components for each edge. Since we will implement the components as a list of lists of vertices, we may (at the cost of a small amount of memory) implement the function <m>C:V\to \mathbb{N}</m> as a dictionary storing the index of the component containing each vertex <m>v\in V</m>. The variable <c>comps</c> stores the actual list of components.
-    </p>
 
-    <p>
-        \begingroup
-    </p>
-    <pre>
-        def smart_kruskal(wedge_dict):
-        V = []
-        wedges = []
-        for u,nbrs in wedge_dict.items():
-        wedges += [(w,u,v) for v,w in sorted(nbrs.items())]
-        V += ([u]+[v for v in nbrs.keys() if v not in V])
-        V.sort()
-        wedges.sort()
-        C = {v:i for i,v in enumerate(V)}
-        comps = {i:[v] for i,v in enumerate(V)}
-        included = []
-        excluded = []
-        for w,u,v in wedges:
-        cu = C[u]
-        cv = C[v]
-        if cu == cv:
-        excluded += [(u,v,w)]
-        else:
-        included += [(u,v,w)]
-        C[v] = cu
-        for vert in comps[cv]:
-        comps[cu].append(vert)
-        C[vert]=cu
-        return [included,excluded]
-    </pre>
-    <p>
-        \endgroup
-    </p>
+        <p>
+            In a very naive approach to Kruskal's algorithm, the function <m>c(v)</m> reporting the component of vertex <m>v</m> is not implemented. This requires two searches through the components for each edge. We avoid this at the cost of storing both the component of each vertex as well as the vertices in each component.
+        </p>
+        <listing>
+            <program>
+                <input>
+                    def kruskal(G, verbose=False):
+                        V = G.vertices()
+                        WE = sorted((l,u,v) for u,v,l in G.edges())
 
-    <p>
-        \definecolor{vc0}{rgb}{1,1,1}
-        \definecolor{ec0}{rgb}{0.500000000000000,0.500000000000000,0.500000000000000}
-    </p>
+                        comp_of = {v:v for v in V}
+                        vert_of = {v:[v] for v in V}
+
+                        keep = []
+                        dump = []
+                        out_grid = []
+                        for i,(w,u,v) in enumerate(WE):
+                            cu, cv = comp_of[u], comp_of[v]
+                            row = [w,u,cu,v,cv,cu!=cv]
+                            out_grid.append( row )
+                            if cu==cv:
+                                dump.append( (u,v,w) )
+                                continue
+                            keep.append( (u,v,w) )
+                            if len(vert_of[cu]) > len(vert_of[cv]):
+                                v,u = u,v
+                                cu,cv = cv,cu
+                            vert_of[cv] += vert_of[cu]
+                            while len(vert_of[cu])>0:
+                                comp_of[vert_of[cu].pop()] = cv
+                        if verbose:
+                            print table(out_grid, header_row = ["Weight", "u", "C(u)", "v", "C(v)", "Include?"], align="center")
+                            return out_grid, keep, dump
+                        return keep,dump
+                </input>
+            </program>
+            <caption>A Sage implementation of Kruskal's algorithm.</caption>
+        </listing>
+    </subsection>
 </section>

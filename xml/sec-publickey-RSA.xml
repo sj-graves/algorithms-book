@@ -44,7 +44,7 @@
         </statement>
     </algorithm>
     <p>
-        Reasonably secure RSA encryption requires the use of large primes <mdash /> requiring that the minimum bit-length be 1024 is not too small for security's sake. This in turn leads to very large <m>n</m>. For example, using SageMathCloud we can generate a public key like so in a matter of moments. Note that the first nine lines are all part of the modulus of the key; <m>n</m> in this example is a 2048-bit integer.
+        Reasonably secure RSA encryption requires the use of large primes <mdash /> requiring that the minimum bit-length be 1024 is not too small for security's sake. This in turn leads to very large <m>n</m>. For example, using CoCalc we can generate a public key like so in a matter of moments. Note that the first nine lines are all part of the modulus of the key; <m>n</m> in this example is a 2048-bit integer.
     </p>
 
     <pre>

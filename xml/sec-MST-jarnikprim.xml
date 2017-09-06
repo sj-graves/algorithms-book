@@ -9,12 +9,28 @@
         <title>Min Heaps</title>
         <definition>
             <statement>
-                A <term>min heap</term> is a special data structure representing a rooted tree, with the condition that a <em>parent vertex</em> is always ordered <em>before</em> its children. 
+                A <term>min heap</term> is a special data structure representing a rooted tree, with the condition that a <em>parent vertex</em> is always ordered <em>before</em> its <em>children</em>. 
             </statement>
         </definition>
         
         <p>
-        Heaps are extremely efficient algorithms when knowing where the minimal (or maximal, for a max heap) element of a substructure is necessary. Hence they are the optimal data structure for Dijkstra's algorithm, and they provide a very efficient data structure for storing the vertices of a graph when using the Jarn&#237;k-Prim Algorithm to produce a minimum spanning tree of a connected graph -- you can use the Jarn&#237;k-Prim Algorithm to produce a spanning forest by running it on each component of the graph.
+        Heaps provide extremely efficient algorithms when knowing the position of a minimal (or maximal, for a max heap) element of a data set is necessary. Hence they are the optimal data structure for Dijkstra's algorithm, and they provide a very efficient data structure for storing the vertices of a graph when using the Jarn&#237;k-Prim Algorithm to produce a minimum spanning tree of a connected graph.
+        </p>
+        <p>
+            There is a standard way to develop a heap class representing a binary min heap. The data is stored in a list such that the children of the element stored in index <m>i</m> are stored in indices <m>2i+1</m> and <m>2i+2</m>. 
         </p>
     </subsection>
+    <subsection>
+        
+    </subsection>
+    <example>
+        <title>Applying</title>
+        <statement>
+            <!-- Here's the edge list:
+                [(0, 3, 1), (0, 4, 2), (0, 5, 4), (0, 8, 1), (0, 9, 9), (1, 2, 5), (1, 6, 10), (1, 8, 4), 
+                 (2, 6, 8), (2, 7, 5), (2, 8, 7), (3, 4, 5), (3, 7, 7), (3, 9, 9), (4, 8, 9), (4, 9, 7), 
+                 (5, 7, 9), (5, 8, 5), (5, 9, 7), (6, 8, 10)]
+                -->
+        </statement>
+    </example>
 </section>

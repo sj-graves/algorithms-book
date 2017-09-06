@@ -6,7 +6,7 @@
     </p>
     
     <p> 
-        The focus of this text is on developing the algorithms which Sage already employs, so we will tend to avoid using any <q>sophisticated</q> functions, except possibly for the purpose of error-checking. Here are a few small examples of more powerful features SMC incorporates.
+        The focus of this text is on developing the algorithms which Sage already employs, so we will tend to avoid using any <q>sophisticated</q> functions, except possibly for the purpose of error-checking. Here are a few small examples of more powerful features CoCalc incorporates.
     </p>
 
     <activity xml:id="sec-SageBasics-Advanced-ODE">
@@ -42,7 +42,7 @@
         <p>
             While the built-in <url href="http://maxima.sourceforge.net/">Maxima</url> software is limited in what it can solve algorithmically, this shows some of its power. If numerical approximations are acceptable rather than exact solutions, the possibilities become much more complex. The <q>pretty printed</q> mathematics text at the top of the evaluation comes from the tight inclusion of <latex /> with Sage; <latex /> is the typesetting engine used by professional mathematicians to produce the majority of mathematical texts, from exams to articles to textbooks.
         </p>
-        <p> In fact, you can get much more sophisticated using Sage, as it can be used to produce interactive output! The following produces part of the phase portrait of a homogenous linear second-order ODE with constant coefficients. Try copy and pasting this into a SMC worksheet and see what happens when you run it.
+        <p> In fact, you can get much more sophisticated using Sage, as it can be used to produce interactive output! The following produces part of the phase portrait of a homogenous linear second-order ODE with constant coefficients. Try copy and pasting this into a CoCalc worksheet and see what happens when you run it.
         </p>
         <sage type="display">
             <input>

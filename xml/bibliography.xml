@@ -1,8 +1,8 @@
 <references xml:id="AAS-bm-ref">
-    <biblio xml:id="bib_SMC" type="raw">
+    <biblio xml:id="bib_cocalc" type="raw">
         <author>Stein, W., et al.</author>
-        <title>SageMathCloud</title>
-        <url>http://cloud.sagemath.com</url>
+        <title>CoCalc</title>
+        <url>http://cocalc.com</url>
     </biblio>
     
     <biblio xml:id="bib_Din2006" type="raw">

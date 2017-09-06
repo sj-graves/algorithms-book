@@ -74,11 +74,11 @@
         </p>
 
         <p>
-            If you believe that a loop has gotten away from you, you have several remedies in SMC and really only one in a Sage Cell. In SMC, at the top of every window showing a Sage Worksheet are two important butons: <em>Stop</em> and <em>Restart</em>. Stop sends a <c>KeyboardInterrupt</c> to the running process in an attempt to halt the running computation. This will often work, but if it appears not to do so, the Restart button will stop the current process and restart the instance of Sage. This will require you to reload any variables with approriate values after the restart. In embedded Sage cells in the book, your only real option is to refresh the page.
+            If you believe that a loop has gotten away from you, you have several remedies in CoCalc and really only one in a Sage Cell. In CoCalc, at the top of every window showing a Sage Worksheet are two important butons: <em>Stop</em> and <em>Restart</em>. Stop sends a <c>KeyboardInterrupt</c> to the running process in an attempt to halt the running computation. This will often work, but if it appears not to do so, the Restart button will stop the current process and restart the instance of Sage. This will require you to reload any variables with approriate values after the restart. In embedded Sage cells in the book, your only real option is to refresh the page.
         </p>
 
         <p>
-            I recommend against trying to build an infinite loop in this way: the amount of memory used grows with the size of the list, and even in SMC there is a finite cap on the amount of memory which can be used by a project. Nearing that limit will make your browser react incredibly slowly.
+            I recommend against trying to build an infinite loop in this way: the amount of memory used grows with the size of the list, and even in CoCalc there is a finite cap on the amount of memory which can be used by a project. Nearing that limit will make your browser react incredibly slowly.
         </p>
     </subsection>
 
