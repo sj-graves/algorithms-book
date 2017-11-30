@@ -9,7 +9,11 @@
             <!--li><p>Implementation of a permutation class</p></li-->
         </ol>
     </objectives>
-    
+    <introduction>
+        <p>
+            In general English-language usage, a <term>permutation</term> is simply a rearrangement of an ordering. While this is exactly what mathematicians mean by a permuatation, we choose to be more rigorous in the particulars of the definition than in the general usage.
+        </p>
+    </introduction>
     <xi:include  href="sec-perms-defn.xml" />
     <xi:include  href="sec-perms-groups.xml" />
     <xi:include  href="sec-perms-cycles.xml" />

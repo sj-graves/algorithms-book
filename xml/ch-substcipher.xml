@@ -1,7 +1,12 @@
 <chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="ch-SubstCipher" >
     <title>Substitution Ciphers</title>
 
-
+    <objectives>
+        <ol>
+            <li><p>Introduce simple substitution ciphers, and demonstrate how easy they are to decipher.</p></li>
+            <li><p>Look at the much more interesting and difficult <em>polyalphabetic substitution</em>.</p></li>
+        </ol>
+    </objectives>
     <introduction>
         <title>Introduction</title>
         <p>

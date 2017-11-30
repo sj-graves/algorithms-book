@@ -1,7 +1,7 @@
 <section xml:id='sec-Permutations-Cycles'>
     <title>Cycles and disjoint cycle decomposition</title>
     <p>
-        There is another method of writing permutations which is preferred for group theory as it makes prominent special features of permutations.
+        There is another method of writing permutations which is preferred for group theory as it makes several special characteristics of permutations very visible.
     </p>
     <definition>
         <statement>

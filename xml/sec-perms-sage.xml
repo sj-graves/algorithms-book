@@ -100,7 +100,7 @@
     <subsection>
         <title>Which is better?</title>
         <p>
-            Simply put: neither or both. They're both fully developed classes, and you can use them for many of the same functions. Since we are interested in using permutations for the purpose of encryption, and it's often important to see the cycle structure. We'll adopt from this point on the cycle notation.
+            Simply put: neither or both. They're both fully developed classes, and you can use them for many of the same functions. Since we are interested in using permutations for the purpose of encryption, and it's often important to see the cycle structure, we'll adopt from this point on the cycle notation. Hence we'll use <c>PermutationGroupElement</c> in subsequent sections.
         </p>
     </subsection>
 </section>

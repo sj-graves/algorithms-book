@@ -1,14 +1,14 @@
 <section xml:id='sec-SageBasics-Advanced'>
     <title>More Advanced Sage</title>
+    <introduction>
+        <p>
+            It should be abundantly obvious that Sage is much, much more powerful than we've currently expressed. Here's a very quick demonstration of some of the more powerful things which you can do in Sage. For a nice, long tour of the various applications of Sage to undergraduate mathematics, see Bard's excellent book <xref ref="bib_SageBook" />.
+        </p>
 
-    <p>
-        It should be abundantly obvious that Sage is much, much more powerful than we've currently expressed. Here's a very quick demonstration of some of the more powerful things which you can do in Sage. For a nice, long tour of the various applications of Sage to undergraduate mathematics, see Bard's excellent book <xref ref="bib_SageBook" />.
-    </p>
-    
-    <p> 
-        The focus of this text is on developing the algorithms which Sage already employs, so we will tend to avoid using any <q>sophisticated</q> functions, except possibly for the purpose of error-checking. Here are a few small examples of more powerful features CoCalc incorporates.
-    </p>
-
+        <p> 
+            The focus of this text is on developing the algorithms which Sage already employs, so we will tend to avoid using any <q>sophisticated</q> functions, except possibly for the purpose of error-checking. Here are a few small examples of more powerful features CoCalc incorporates.
+        </p>
+    </introduction>
     <activity xml:id="sec-SageBasics-Advanced-ODE">
         <title>Solving ODEs</title>
         <p>
@@ -16,7 +16,7 @@
             <me>x''+4x'+4x = 2te^{-2t}+4\cos(2t)</me>
             subject to the initial conditions that <m>x(0)=1</m> and <m>x'(0)=0</m>.
         </p>
-        <sage>
+        <sage type='full'>
             <input>
                 t = var('t')
                 x = function('x')(t)
@@ -74,7 +74,7 @@
         </sage>
     </activity>
 
-    <subsection>
+    <activity>
         <title>Graph Theory</title>
         <p>
             Sage comes preequipped with a sophisticated suite of tools for algorithmic graph theory, which we'll touch on late in the course. Here's a small sample.
@@ -87,6 +87,6 @@
                 </input>
             </sage>
         </p>
-    </subsection>
+    </activity>
     <p> There are many, many other examples we could show, but Bard's book provides a wonderful breadth of coverage of the features of Sage. This brief section should serve only to pique your interest.</p>
 </section>

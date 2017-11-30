@@ -30,15 +30,16 @@
         </p>
     </acknowledgement>
 
-    <foreword xml:id="AAM-fm-fore">
+    <preface xml:id="AAM-fm-fore">
         <p>
             When researching the topic for the last chapter of this book, I was struck by the following passage in Yefim Dinitz’s discussion<xref ref="bib_Din2006"></xref> of the algorithm which bears his name: 
             <blockquote>
-                Shortly after the <q>iron curtain</q> fell in 1990, an American and a Russian,
+                <p>Shortly after the <q>iron curtain</q> fell in 1990, an American and a Russian,
                 who had both worked on the development of weapons, met. The American
                 asked, “When you developed the Bomb, how were you able to perform such
                 an enormous amount of computing with your weak computers?” The Russian
                 responded: “We used better algorithms.”
+                </p>
             </blockquote>
         </p>
         <p>
@@ -63,6 +64,6 @@
         <p>
             It is important to note that Sage already includes nearly all these algorithms, or in fact better versions of them, in its preinstalled software. The availability of these algorithms is not the desired result of this course, but rather that students build an understanding of how mathematical algorithms can be devised and implemented. Why? Because there are still questions which can be answered algorithmically which have either never been answered or never been asked.
         </p>
-    </foreword>
+    </preface>
 
 </frontmatter>

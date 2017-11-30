@@ -1,44 +1,46 @@
 <section xml:id="sec-Short-Dijkstra">
     <title>Dijkstra's Algorithm</title>
-    <p>
-        In 1956, Dutch computer scientist Edsger Dijkstra developed an algorithm for solving this problem. His solution, now known as <em>Dijkstra's algorithm</em>, is both elegant and simple. A <em>root vertex</em> is specified as having distance 0; its neighbors have distance 1. The neighbors of those vertices with distance 1 are next specified to have distance 2, unless they previously had distance 0; and so on. Those vertices which cannot be reached by a path from the root have distance <m>\infty</m>.
-    </p>
-    <algorithm>
-        <title>Dijkstra's Shortest Path Algorithm</title>
-        <statement>
-            <p>
-                Let <m>G=(V,E)</m> be a graph, and let <m>x</m> be a particular vertex in <m>V</m>. We will define <m>\dist(v)</m> to be the currently known distance from <m>x</m> to <m>v</m>, and <m>V'=\set{}</m> to be an initially empty set. For each <m>v\in V\setminus\set{x}</m>, we define <m>p(v)</m> to be the <em>predecessor</em> of <m>v</m> in a shortest path from <m>x</m>.
-            </p>
+    <introduction>
+        <p>
+            In 1956, Dutch computer scientist Edsger Dijkstra developed an algorithm for solving this problem. His solution, now known as <em>Dijkstra's algorithm</em>, is both elegant and simple. A <em>root vertex</em> is specified as having distance 0; its neighbors have distance 1. The neighbors of those vertices with distance 1 are next specified to have distance 2, unless they previously had distance 0; and so on. Those vertices which cannot be reached by a path from the root have distance <m>\infty</m>.
+        </p>
+        <algorithm>
+            <title>Dijkstra's Shortest Path Algorithm</title>
+            <statement>
+                <p>
+                    Let <m>G=(V,E)</m> be a graph, and let <m>x</m> be a particular vertex in <m>V</m>. We will define <m>\dist(v)</m> to be the currently known distance from <m>x</m> to <m>v</m>, and <m>V'=\set{}</m> to be an initially empty set. For each <m>v\in V\setminus\set{x}</m>, we define <m>p(v)</m> to be the <em>predecessor</em> of <m>v</m> in a shortest path from <m>x</m>.
+                </p>
 
-            <ol>
-                <li><p>Mark <m>\dist(x)=0</m> and <m>\dist(v)=\infty</m> for every <m>v\in V\setminus\set{x}</m>.</p></li>
-                <li><p>While <m>V\neq V'</m>, do the following:
-                    </p>
+                <ol>
+                    <li><p>Mark <m>\dist(x)=0</m> and <m>\dist(v)=\infty</m> for every <m>v\in V\setminus\set{x}</m>.</p></li>
+                    <li><p>While <m>V\neq V'</m>, do the following:
+                        </p>
 
-                    <ol>
-                        <li><p>Let <m>u</m> be any vertex in <me>\set{u\in V\setminus V': \dist(u)=\min\set{\dist(v):v\in V\setminus V'}}</me>.</p></li>
-                        <li><p>Add <m>u</m> to <m>V'</m>.</p></li>
-                        <li><p>For each neighbor <m>v</m> of <m>u</m>, if <m>\dist(v)>\dist(u)+1</m>, set <m>\dist(v)=\dist(u)+1</m>, and set <m>p(v)=u</m>.</p></li>
-                    </ol>
-                </li>
-                <li><p>Return the triple <m>(v,\dist(v), p(v))</m> for each <m>v\in V</m>.</p></li>
-            </ol>
-        </statement>
-    </algorithm>
-    <p>
-        In fact, Dijkstra's algorithm produces what is called a <em>breadth-first traversal</em> of <m>\Gamma</m> from the root vertex <m>x</m>. For each vertex <m>v</m> in the same component of <m>\Gamma</m> as <m>v_0</m>, there is a finite sequence of predecessors which can be followed backwards from <m>v</m> to <m>x</m>; for vertices in other components, no such predecessor exists and the distance <m>\dist(x,v)</m> is infinite. We'll illustrate the algorithm with the example of a graph with two components, one of which is a single isolated vertex.
-    </p>
-    <figure xml:id="fig_dijkstra_exmp" >
-        <caption>A graph <m>\Gamma</m> with two components: the vertex <m>v_{16}</m> is isolated from all other vertices.</caption>
-        <sage>
-            <input>
-                D = {1:[2, 14], 2:[5, 7, 15], 3:[4, 6, 7], 4:[8, 11, 15], 5:[11], 
-                6:[8,9,11], 7:[11], 8:[9,12,14], 9:[10,15], 10:[11,12,13], 
-                11:[13], 12:[14,15], 13:[14,15],14:[15], 16:[]}
-                show(Graph(D))
-            </input>
-        </sage>
-    </figure>
+                        <ol>
+                            <li><p>Let <m>u</m> be any vertex in <me>\set{u\in V\setminus V': \dist(u)=\min\set{\dist(v):v\in V\setminus V'}}</me>.</p></li>
+                            <li><p>Add <m>u</m> to <m>V'</m>.</p></li>
+                            <li><p>For each neighbor <m>v</m> of <m>u</m>, if <m>\dist(v)>\dist(u)+1</m>, set <m>\dist(v)=\dist(u)+1</m>, and set <m>p(v)=u</m>.</p></li>
+                        </ol>
+                    </li>
+                    <li><p>Return the triple <m>(v,\dist(v), p(v))</m> for each <m>v\in V</m>.</p></li>
+                </ol>
+            </statement>
+        </algorithm>
+        <p>
+            In fact, Dijkstra's algorithm produces what is called a <em>breadth-first traversal</em> of <m>\Gamma</m> from the root vertex <m>x</m>. For each vertex <m>v</m> in the same component of <m>\Gamma</m> as <m>v_0</m>, there is a finite sequence of predecessors which can be followed backwards from <m>v</m> to <m>x</m>; for vertices in other components, no such predecessor exists and the distance <m>\dist(x,v)</m> is infinite. We'll illustrate the algorithm with the example of a graph with two components, one of which is a single isolated vertex.
+        </p>
+        <figure xml:id="fig_dijkstra_exmp" >
+            <caption>A graph <m>\Gamma</m> with two components: the vertex <m>v_{16}</m> is isolated from all other vertices.</caption>
+            <sage>
+                <input>
+                    D = {1:[2, 14], 2:[5, 7, 15], 3:[4, 6, 7], 4:[8, 11, 15], 5:[11], 
+                    6:[8,9,11], 7:[11], 8:[9,12,14], 9:[10,15], 10:[11,12,13], 
+                    11:[13], 12:[14,15], 13:[14,15],14:[15], 16:[]}
+                    show(Graph(D))
+                </input>
+            </sage>
+        </figure>
+    </introduction>
 
     <subsection>
         <title>A full example of Dijkstra's algorithm</title>
@@ -87,60 +89,62 @@
         </p>
     </subsection>
 
-    <table xml:id="tab_dijkstra_exmp">
-        <tabular halign="center">
-            <row>
-                <cell right="minor"></cell>
-                <cell right="minor">Current</cell>
-                <cell right="minor"></cell>
-                <cell right="minor"></cell>
-                <cell colspan="2" right="minor">Updating Vertices</cell>
-            </row>
-            <row bottom="major">
-                <cell right="minor">Step</cell>
-                <cell right="minor">Vertex</cell>
-                <cell right="minor">Distance</cell>
-                <cell right="minor">Predecessor</cell>
-                <cell right="minor"><m>\set{v_j:j\in J}</m></cell>
-                <cell right="minor"><m>(\dist(v), p(v))</m></cell>
-            </row>
-            <row><cell right="minor">0</cell> <cell right="minor">1</cell> <cell right="minor">0</cell> <cell right="minor">None</cell> 
-                <cell right="minor">[2, 14]</cell> <cell right="minor">(1, 1)</cell></row>
-            <row><cell right="minor">1</cell> <cell right="minor">2</cell> <cell right="minor">1</cell> <cell right="minor">1</cell> 
-                <cell right="minor">[5, 7, 15]</cell> <cell right="minor">(2, 2)</cell></row>
-            <row><cell right="minor">2</cell> <cell right="minor">14</cell> <cell right="minor">1</cell> <cell right="minor">1</cell> 
-                <cell right="minor">[8, 12, 13]</cell> <cell right="minor">(2, 14)</cell></row>
-            <row><cell right="minor">3</cell> <cell right="minor">5</cell> <cell right="minor">2</cell> <cell right="minor">2</cell> 
-                <cell right="minor">[11]</cell> <cell right="minor">(3, 5)</cell></row>
-            <row><cell right="minor">4</cell> <cell right="minor">7</cell> <cell right="minor">2</cell> <cell right="minor">2</cell> 
-                <cell right="minor">[3]</cell> <cell right="minor">(3, 7)</cell></row>
-            <row><cell right="minor">5</cell> <cell right="minor">15</cell> <cell right="minor">2</cell> <cell right="minor">2</cell> 
-                <cell right="minor">[4, 9]</cell> <cell right="minor">(3, 15)</cell></row>
-            <row><cell right="minor">6</cell> <cell right="minor">8</cell> <cell right="minor">2</cell> <cell right="minor">14</cell> 
-                <cell right="minor">[6]</cell> <cell right="minor">(3, 8)</cell></row>
-            <row><cell right="minor">7</cell> <cell right="minor">12</cell> <cell right="minor">2</cell> <cell right="minor">14</cell> 
-                <cell right="minor">[10]</cell> <cell right="minor">(3, 12)</cell></row>
-            <row><cell right="minor">8</cell> <cell right="minor">13</cell> <cell right="minor">2</cell> <cell right="minor">14</cell> 
-                <cell right="minor">[ ]</cell> <cell right="minor">(3, 13)</cell></row>
-            <row><cell right="minor">9</cell> <cell right="minor">11</cell> <cell right="minor">3</cell> <cell right="minor">5</cell> 
-                <cell right="minor">[ ]</cell> <cell right="minor">(4, 11)</cell></row>
-            <row><cell right="minor">10</cell> <cell right="minor">3</cell> <cell right="minor">3</cell> <cell right="minor">7</cell> 
-                <cell right="minor">[ ]</cell> <cell right="minor">(4, 3)</cell></row>
-            <row><cell right="minor">11</cell> <cell right="minor">4</cell> <cell right="minor">3</cell> <cell right="minor">15</cell> 
-                <cell right="minor">[ ]</cell> <cell right="minor">(4, 4)</cell></row>
-            <row><cell right="minor">12</cell> <cell right="minor">9</cell> <cell right="minor">3</cell> <cell right="minor">15</cell> 
-                <cell right="minor">[ ]</cell> <cell right="minor">(4, 9)</cell></row>
-            <row><cell right="minor">13</cell> <cell right="minor">6</cell> <cell right="minor">3</cell> <cell right="minor">8</cell> 
-                <cell right="minor">[ ]</cell> <cell right="minor">(4, 6)</cell></row>
-            <row><cell right="minor">14</cell> <cell right="minor">10</cell> <cell right="minor">3</cell> <cell right="minor">12</cell> 
-                <cell right="minor">[ ]</cell> <cell right="minor">(4, 10)</cell></row>
-            <row><cell right="minor">15</cell> <cell right="minor">16</cell> <cell right="minor"><m>\infty</m></cell> <cell right="minor">None</cell> 
-                <cell right="minor">[ ]</cell> <cell right="minor">(<m>\infty</m>, 16)</cell></row>
-        </tabular>
-        <caption>Iterations of Dijkstra's algorithm on the graph <m>\Gamma</m> from <xref ref="fig_dijkstra_exmp" autoname="yes" />.</caption>
-    </table>
+    <conclusion>
+        <table xml:id="tab_dijkstra_exmp">
+            <tabular halign="center">
+                <row>
+                    <cell right="minor"></cell>
+                    <cell right="minor">Current</cell>
+                    <cell right="minor"></cell>
+                    <cell right="minor"></cell>
+                    <cell colspan="2" right="minor">Updating Vertices</cell>
+                </row>
+                <row bottom="major">
+                    <cell right="minor">Step</cell>
+                    <cell right="minor">Vertex</cell>
+                    <cell right="minor">Distance</cell>
+                    <cell right="minor">Predecessor</cell>
+                    <cell right="minor"><m>\set{v_j:j\in J}</m></cell>
+                    <cell right="minor"><m>(\dist(v), p(v))</m></cell>
+                </row>
+                <row><cell right="minor">0</cell> <cell right="minor">1</cell> <cell right="minor">0</cell> <cell right="minor">None</cell> 
+                    <cell right="minor">[2, 14]</cell> <cell right="minor">(1, 1)</cell></row>
+                <row><cell right="minor">1</cell> <cell right="minor">2</cell> <cell right="minor">1</cell> <cell right="minor">1</cell> 
+                    <cell right="minor">[5, 7, 15]</cell> <cell right="minor">(2, 2)</cell></row>
+                <row><cell right="minor">2</cell> <cell right="minor">14</cell> <cell right="minor">1</cell> <cell right="minor">1</cell> 
+                    <cell right="minor">[8, 12, 13]</cell> <cell right="minor">(2, 14)</cell></row>
+                <row><cell right="minor">3</cell> <cell right="minor">5</cell> <cell right="minor">2</cell> <cell right="minor">2</cell> 
+                    <cell right="minor">[11]</cell> <cell right="minor">(3, 5)</cell></row>
+                <row><cell right="minor">4</cell> <cell right="minor">7</cell> <cell right="minor">2</cell> <cell right="minor">2</cell> 
+                    <cell right="minor">[3]</cell> <cell right="minor">(3, 7)</cell></row>
+                <row><cell right="minor">5</cell> <cell right="minor">15</cell> <cell right="minor">2</cell> <cell right="minor">2</cell> 
+                    <cell right="minor">[4, 9]</cell> <cell right="minor">(3, 15)</cell></row>
+                <row><cell right="minor">6</cell> <cell right="minor">8</cell> <cell right="minor">2</cell> <cell right="minor">14</cell> 
+                    <cell right="minor">[6]</cell> <cell right="minor">(3, 8)</cell></row>
+                <row><cell right="minor">7</cell> <cell right="minor">12</cell> <cell right="minor">2</cell> <cell right="minor">14</cell> 
+                    <cell right="minor">[10]</cell> <cell right="minor">(3, 12)</cell></row>
+                <row><cell right="minor">8</cell> <cell right="minor">13</cell> <cell right="minor">2</cell> <cell right="minor">14</cell> 
+                    <cell right="minor">[ ]</cell> <cell right="minor">(3, 13)</cell></row>
+                <row><cell right="minor">9</cell> <cell right="minor">11</cell> <cell right="minor">3</cell> <cell right="minor">5</cell> 
+                    <cell right="minor">[ ]</cell> <cell right="minor">(4, 11)</cell></row>
+                <row><cell right="minor">10</cell> <cell right="minor">3</cell> <cell right="minor">3</cell> <cell right="minor">7</cell> 
+                    <cell right="minor">[ ]</cell> <cell right="minor">(4, 3)</cell></row>
+                <row><cell right="minor">11</cell> <cell right="minor">4</cell> <cell right="minor">3</cell> <cell right="minor">15</cell> 
+                    <cell right="minor">[ ]</cell> <cell right="minor">(4, 4)</cell></row>
+                <row><cell right="minor">12</cell> <cell right="minor">9</cell> <cell right="minor">3</cell> <cell right="minor">15</cell> 
+                    <cell right="minor">[ ]</cell> <cell right="minor">(4, 9)</cell></row>
+                <row><cell right="minor">13</cell> <cell right="minor">6</cell> <cell right="minor">3</cell> <cell right="minor">8</cell> 
+                    <cell right="minor">[ ]</cell> <cell right="minor">(4, 6)</cell></row>
+                <row><cell right="minor">14</cell> <cell right="minor">10</cell> <cell right="minor">3</cell> <cell right="minor">12</cell> 
+                    <cell right="minor">[ ]</cell> <cell right="minor">(4, 10)</cell></row>
+                <row><cell right="minor">15</cell> <cell right="minor">16</cell> <cell right="minor"><m>\infty</m></cell> <cell right="minor">None</cell> 
+                    <cell right="minor">[ ]</cell> <cell right="minor">(<m>\infty</m>, 16)</cell></row>
+            </tabular>
+            <caption>Iterations of Dijkstra's algorithm on the graph <m>\Gamma</m> from <xref ref="fig_dijkstra_exmp" autoname="yes" />.</caption>
+        </table>
 
-    <p>
-        Are there other ways to find shortest paths? Of course. The beauty of using Dijkstra's algorithm is that when you first encounter a vertex, you're already recording its shortest path. It will never be the case that this algorithm encounters a vertex at some large distance and then updates it to a smaller distance.
-    </p>
+        <p>
+            Are there other ways to find shortest paths? Of course. The beauty of using Dijkstra's algorithm is that when you first encounter a vertex, you're already recording its shortest path. It will never be the case that this algorithm encounters a vertex at some large distance and then updates it to a smaller distance.
+        </p>
+    </conclusion>
 </section>

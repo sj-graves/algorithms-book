@@ -1,8 +1,10 @@
 <section xml:id="sec-QRdecomp-GramSchmidt">
     <title>Gram-Schmidt orthonormalization</title>
-    <p>
-        A first method for producing an orthogonal matrix from an arbitrary matrix is the Gram-Schmidt algorithm. In essence, the idea is to treat each column of the initial matrix as a vector, and proceed through in order orthogonalizing each vector to those which have previously been orthonormalized.
-    </p>
+    <introduction>
+        <p>
+            A first method for producing an orthogonal matrix from an arbitrary matrix is the Gram-Schmidt algorithm. In essence, the idea is to treat each column of the initial matrix as a vector, and proceed through in order orthogonalizing each vector to those which have previously been orthonormalized.
+        </p>
+    </introduction>
     <subsection>
         <title>An example with two vectors</title>
         <p>
@@ -117,35 +119,36 @@
             </md>
             in the <m>i^\text{th}</m> iteration grows wildly inaccurate in floating point arithmetic. A minor modification produces the <term>modified Gram-Schmidt orthonormalization</term>.
         </p>
+
+
+        <algorithm xml:id='alg-MGSO'>
+            <title>Modified Gram-Schmidt Orthonormalization</title>
+            <statement>
+                <p>
+                    Let
+                    <me>
+                        S=\set{\vec{x}_j:1\leq j\leq n}
+                    </me>
+                    be a set of vectors in <m>\R^m</m>.
+                </p>
+
+                <ol>
+                    <li><p>For each <m>j</m> in <m>\set{1,2,\ldots,n}</m>, set <m>\vec{w}_j = \vec{x}_j</m>.</p></li>
+                    <li><p>For <m>j</m> in <m>\set{1,2,\ldots,n}</m>, do the following.
+                        </p>
+
+                        <ol>
+                            <li><p>For each <m>i\lt j</m>, set <m>\vec{w}_j = \vec{w}_j - (\vec{q_i}\cdot \vec{w}_j)\vec{q}_i</m>.</p></li>
+                            <li><p>Let <m>\vec{q}_j = \frac1{\abs{\vec{w}_j}}\vec{w}_j</m>.</p></li>
+                        </ol>
+                    </li>
+                </ol>
+
+                <p>
+                    The set <m>Q=\set{\vec{q}_j:1\leq j\leq n}</m> is an orthonormal basis for <m>\lspan(S)</m>.
+                </p>
+            </statement>
+        </algorithm>
     </subsection>
 
-
-    <algorithm xml:id='alg-MGSO'>
-        <title>Modified Gram-Schmidt Orthonormalization</title>
-        <statement>
-            <p>
-                Let
-                <me>
-                    S=\set{\vec{x}_j:1\leq j\leq n}
-                </me>
-                be a set of vectors in <m>\R^m</m>.
-            </p>
-
-            <ol>
-                <li><p>For each <m>j</m> in <m>\set{1,2,\ldots,n}</m>, set <m>\vec{w}_j = \vec{x}_j</m>.</p></li>
-                <li><p>For <m>j</m> in <m>\set{1,2,\ldots,n}</m>, do the following.
-                    </p>
-
-                    <ol>
-                        <li><p>For each <m>i\lt j</m>, set <m>\vec{w}_j = \vec{w}_j - (\vec{q_i}\cdot \vec{w}_j)\vec{q}_i</m>.</p></li>
-                        <li><p>Let <m>\vec{q}_j = \frac1{\abs{\vec{w}_j}}\vec{w}_j</m>.</p></li>
-                    </ol>
-                </li>
-            </ol>
-
-            <p>
-                The set <m>Q=\set{\vec{q}_j:1\leq j\leq n}</m> is an orthonormal basis for <m>\lspan(S)</m>.
-            </p>
-        </statement>
-    </algorithm>
 </section>

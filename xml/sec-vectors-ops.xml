@@ -1,90 +1,92 @@
-<section>
+<section xml:id="sec-Vectors-Operations">
     <title>Operations on vectors</title>
-    <p>
-        Since one of the notations for a vector <m>\vec{x}</m> is as a column matrix, the operations for vectors must agree with those for matrices. Hence addition and scalar multiplication are carried out coordinate-wise.
-    </p>
-    <definition>
-        <statement>
-            <p>
-                Let <m>\vec{x}=\vc{x_1,x_2,\ldots,x_n}</m> and <m>\vec{y}=\vc{y_1,y_2,\ldots,y_n}</m>, and let <m>k\in \R</m>. Then the <term>scalar multiple of <m>\vec{x}</m> by <m>k</m></term> is the vector
-                <me>
-                    k\vec{x} = \vc{kx_1,kx_2,\ldots,kx_n}=\vec{x} k.
-                </me>
-            </p>
+    <introduction>
+        <p>
+            Since one of the notations for a vector <m>\vec{x}</m> is as a column matrix, the operations for vectors must agree with those for matrices. Hence addition and scalar multiplication are carried out coordinate-wise.
+        </p>
+        <definition>
+            <statement>
+                <p>
+                    Let <m>\vec{x}=\vc{x_1,x_2,\ldots,x_n}</m> and <m>\vec{y}=\vc{y_1,y_2,\ldots,y_n}</m>, and let <m>k\in \R</m>. Then the <term>scalar multiple of <m>\vec{x}</m> by <m>k</m></term> is the vector
+                    <me>
+                        k\vec{x} = \vc{kx_1,kx_2,\ldots,kx_n}=\vec{x} k.
+                    </me>
+                </p>
 
-            <p>
-                Likewise, the <term>vector sum of <m>\vec{x}</m> and <m>\vec{y}</m></term> is the vector
-                <me>
-                    \vec{x}+\vec{y} = \vc{x_1+y_1,x_2+y_2,\ldots,x_n+y_n}=\vec{y}+\vec{x}.
-                </me>
-            </p>
+                <p>
+                    Likewise, the <term>vector sum of <m>\vec{x}</m> and <m>\vec{y}</m></term> is the vector
+                    <me>
+                        \vec{x}+\vec{y} = \vc{x_1+y_1,x_2+y_2,\ldots,x_n+y_n}=\vec{y}+\vec{x}.
+                    </me>
+                </p>
 
-            <p>
-                Combining these defines vector subtraction,
-                <me>
-                    \vec{x}-\vec{y} = \vec{x}+(-1)\vec{y}.
-                </me>
-            </p>
-        </statement>
-    </definition>
-    <p>
-        Rather than having exactly one way to multiply vectors, there could be many; we'll discuss the most generally useful, the <em>dot product</em>.
-    </p>
-    <definition>
-        <statement>
-            <p>
-                The <term>dot product</term> of vectors <m>\vec{x}=\vc{x_1,x_2,\ldots,x_n}</m> and <m>\vec{y}=\vc{y_1,y_2,\ldots,y_n}</m> is the scalar quantity
-                <me>
-                    \vec{x}\cdot\vec{y} = \sum_{i=1}^n x_iy_i = x_1y_1+x_2y_2+\cdots x_ny_n.
-                </me>
-            </p>
+                <p>
+                    Combining these defines vector subtraction,
+                    <me>
+                        \vec{x}-\vec{y} = \vec{x}+(-1)\vec{y}.
+                    </me>
+                </p>
+            </statement>
+        </definition>
+        <p>
+            Rather than having exactly one way to multiply vectors, there could be many; we'll discuss the most generally useful, the <em>dot product</em>.
+        </p>
+        <definition>
+            <statement>
+                <p>
+                    The <term>dot product</term> of vectors <m>\vec{x}=\vc{x_1,x_2,\ldots,x_n}</m> and <m>\vec{y}=\vc{y_1,y_2,\ldots,y_n}</m> is the scalar quantity
+                    <me>
+                        \vec{x}\cdot\vec{y} = \sum_{i=1}^n x_iy_i = x_1y_1+x_2y_2+\cdots x_ny_n.
+                    </me>
+                </p>
 
-            <p>
-                The <term>magnitude</term> of <m>\vec{x}</m> is defined to be
-                <me>
-                    \norm{\vec{x}} = \sqrt{\vec{x}\cdot\vec{x}} = \sqrt{x_1^2+x_2^2+\cdots+x_n^2}.
-                </me> It is hopefully clear that the magnitude of a vector is another term for its length.
-            </p>
-        </statement>
-    </definition>
-    <p>
-        A final concept which is very important is the idea of multiplying a vector by a matrix. In a very literal sense, multiplying a vector on the left by a matrix of the correct dimensions is a special type of function on the vetctor space: a <em>linear transformation</em>.
-    </p>
-    <definition>
-        <statement>
-            <p>
-                Suppose <m>A=[a_{i,j}]</m> is a real <m>m\times n</m> matrix and <m>\vec{x}=\vc{x_1,x_2,\ldots,x_n}</m> is an <m>n</m>-dimensional real vector. Then <m>A\vec{x}</m> is the <m>m</m>-dimensional vector whose <m>i^\text{ th }</m> component is <m>\sum_{k=1}^n a_{i,k}x_k</m>. That is,
-                <md>
-                    <mrow>
-                        A\vec{x}
-                        <![CDATA[ & = \begin{bmatrix} ]]>
-                        <![CDATA[a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\]]>
-                        <![CDATA[a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\]]>
-                        <![CDATA[\vdots & \vdots & & \vdots \\]]>
-                        <![CDATA[a_{m,1} & a_{m,2} & \cdots & a_{m,n} \\]]>
-                        \end{bmatrix}
-                        \begin{bmatrix}
-                        <![CDATA[x_1 \\ x_2 \\ \vdots \\ x_n]]>
-                        \end{bmatrix} 
-                    </mrow>
-                    <mrow>
-                        <![CDATA[ & = \begin{bmatrix} ]]>
-                        a_{1,1}x_1 + a_{1,2}x_2 + \cdots + a_{1,n}x_n \\
-                        a_{2,1}x_1 + a_{2,2}x_2 + \cdots + a_{2,n}x_n \\
-                        \vdots \\
-                        a_{m,1}x_1 + a_{m,2}x_2 + \cdots + a_{m,n}x_n
-                        \end{bmatrix}
-                    </mrow>
-                </md>
-            </p>
-            <p>
-                In this case, left-multiplication by <m>A</m> is a <term>linear transformation</term> mapping <m>R^n</m> to <m>R^m</m>. The study of vector spaces and linear transformations is called <term>linear algebra.</term>
-            </p>
-        </statement>
-    </definition>
-    <p>
-        For all of these operations, as well as instantiation and indexing, it is straightforward to develop new code for a <c>Vector</c> class from the definitions. However, it is also totally unnecessary: much of what is required is simply to treat vectors as column matrices. To do so simply requires <em>class inheritance</em>, a natural feature of object-oriented programming.
-    </p>
+                <p>
+                    The <term>magnitude</term> of <m>\vec{x}</m> is defined to be
+                    <me>
+                        \norm{\vec{x}} = \sqrt{\vec{x}\cdot\vec{x}} = \sqrt{x_1^2+x_2^2+\cdots+x_n^2}.
+                    </me> It is hopefully clear that the magnitude of a vector is another term for its length.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            A final concept which is very important is the idea of multiplying a vector by a matrix. In a very literal sense, multiplying a vector on the left by a matrix of the correct dimensions is a special type of function on the vetctor space: a <em>linear transformation</em>.
+        </p>
+        <definition>
+            <statement>
+                <p>
+                    Suppose <m>A=[a_{i,j}]</m> is a real <m>m\times n</m> matrix and <m>\vec{x}=\vc{x_1,x_2,\ldots,x_n}</m> is an <m>n</m>-dimensional real vector. Then <m>A\vec{x}</m> is the <m>m</m>-dimensional vector whose <m>i^\text{ th }</m> component is <m>\sum_{k=1}^n a_{i,k}x_k</m>. That is,
+                    <md>
+                        <mrow>
+                            A\vec{x}
+                            <![CDATA[ & = \begin{bmatrix} ]]>
+                            <![CDATA[a_{1,1} & a_{1,2} & \cdots & a_{1,n} \\]]>
+                            <![CDATA[a_{2,1} & a_{2,2} & \cdots & a_{2,n} \\]]>
+                            <![CDATA[\vdots & \vdots & & \vdots \\]]>
+                            <![CDATA[a_{m,1} & a_{m,2} & \cdots & a_{m,n} \\]]>
+                            \end{bmatrix}
+                            \begin{bmatrix}
+                            <![CDATA[x_1 \\ x_2 \\ \vdots \\ x_n]]>
+                            \end{bmatrix} 
+                        </mrow>
+                        <mrow>
+                            <![CDATA[ & = \begin{bmatrix} ]]>
+                            a_{1,1}x_1 + a_{1,2}x_2 + \cdots + a_{1,n}x_n \\
+                            a_{2,1}x_1 + a_{2,2}x_2 + \cdots + a_{2,n}x_n \\
+                            \vdots \\
+                            a_{m,1}x_1 + a_{m,2}x_2 + \cdots + a_{m,n}x_n
+                            \end{bmatrix}
+                        </mrow>
+                    </md>
+                </p>
+                <p>
+                    In this case, left-multiplication by <m>A</m> is a <term>linear transformation</term> mapping <m>R^n</m> to <m>R^m</m>. The study of vector spaces and linear transformations is called <term>linear algebra.</term>
+                </p>
+            </statement>
+        </definition>
+        <p>
+            For all of these operations, as well as instantiation and indexing, it is straightforward to develop new code for a <c>Vector</c> class from the definitions. However, it is also totally unnecessary: much of what is required is simply to treat vectors as column matrices. To do so simply requires <em>class inheritance</em>, a natural feature of object-oriented programming.
+        </p>
+    </introduction>
     <subsection xml:id='VectorInheritance'>
         <title>Inheriting <c>aam_Vector</c> from <c>aam_Matrix</c></title>
         <p>
@@ -94,10 +96,10 @@
             <program>
                 <input>
                     class aam_Vector(aam_Matrix):
-                        """A vector subclass of the aam_Matrix class.
-                        """
-                        def __init__(self, input_list):
-                            ...
+                    """A vector subclass of the aam_Matrix class.
+                    """
+                    def __init__(self, input_list):
+                    ...
                 </input>
             </program>
             <caption>Defining a subclass.</caption>

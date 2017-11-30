@@ -126,8 +126,9 @@
         <!--p>
             Note there that the value <m>\lambda</m> appears in the row {being added to} and in the column corresponding to the row which is {being multiplied}.
         </p-->
-        
+
     </subsection>
+    <conclusion>
         <p>
             The result of this section is that every sequence of row operations on a matrix <m>A</m> can be reproduced by a sequence of corresponding left multiplications of <m>A</m> by elementary matrices. This is especially important if we can reduce <m>A</m> to an identity matrix.
         </p>
@@ -143,5 +144,6 @@
                 </p>
             </statement>
         </theorem>
+    </conclusion>
 
 </section>

@@ -1,6 +1,7 @@
 <section xml:id="sec-Vectors-Euclidean">
     <title>Vectors in Euclidean space</title>
-    <definition>
+    <introduction>
+        <definition>
             <statement>
                 The <em>length</em> of a vector <m>\vec{x}</m> is a unique scalar associated with <m>\vec{x}</m> denoted by <m>\abs{\vec{x}}</m>. 
             </statement>
@@ -29,12 +30,14 @@
         </sage>
         <caption>The vector <m>\vc{1,2}\in\R^2</m> and <m>\vc{1,2,3}\in\R^3</m>.</caption>
     </listing>
+    </introduction>
     <subsection>
         <title>Geometric operations</title>
-        <p>
-            The two operations which are necessary to turn a set of <m>n</m>-tuples into a <m>n</m>-dimensional vector space are <em>addition</em> and <em>scalar multiplication</em>, which are both demonstrated easily using geometric vectors.
-        </p>
-        
+        <introduction>
+            <p>
+                The two operations which are necessary to turn a set of <m>n</m>-tuples into a <m>n</m>-dimensional vector space are <em>addition</em> and <em>scalar multiplication</em>, which are both demonstrated easily using geometric vectors.
+            </p>
+        </introduction>
         <subsubsection>
             <title>Geometric vector addition</title>
             <p>

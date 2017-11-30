@@ -50,11 +50,13 @@
     
     <subsection>
         <title>Mathematical operations on a matrix</title>
-        <p>
-            Now that we can both determine the dimensions of a matrix and read off its elements directly, we are ready to start building new matrices 
-            from old. The first way we will do this is via <em>scalar multiplication</em>. A <em>scalar</em> is a member of the set of numbers with 
-            which the matrix is filled <mdash /> for our purposes, these are <em>real numbers</em>. 
-        </p>
+        <introduction>
+            <p>
+                Now that we can both determine the dimensions of a matrix and read off its elements directly, we are ready to start building new matrices 
+                from old. The first way we will do this is via <em>scalar multiplication</em>. A <em>scalar</em> is a member of the set of numbers with 
+                which the matrix is filled <mdash /> for our purposes, these are <em>real numbers</em>. 
+            </p>
+        </introduction>
         <subsubsection>
             <title>Scalar multiplication</title>
             <definition>

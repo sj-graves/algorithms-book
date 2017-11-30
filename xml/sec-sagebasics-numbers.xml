@@ -1,64 +1,66 @@
 <section xml:id="sec-SageBasics-Numbers">
     <title>Working with numbers</title>
-    <p>
-        Python works really well with integers (which have type <c>int</c>) and floating point numbers (which have type <c>float</c>), and carefully respects order of operations, and of course Sage inherits this. But Sage is a <em>mathematical</em> programming language, so it automatically knows more than Python about numbers. For instance, in Python, the division operator <c>/</c> automatically returns a <c>float</c>.
-    </p>
-    <p>
-        Sage generally doesn't mess around with <c>float</c>, but uses a built-in implementation of the <xref ref="def_ring" autoname="title" /> of real numbers. Similarly, calculations involving integers in Sage use a "ring" of integers, rather than simply using Python's <c>int</c>. For everyday calculations this makes Sage much, much more powerful, as calculations default to being <em>exact</em>. Numerical approximations of a number can be obtained using the <c>N</c> or <c>n</c> built-ins.
-    </p>
-    <sage>
-        <input>
-            print 4 * (0 + 4 ^ 2 - 1) / 3
-            print n(5)
-        </input>
-        <output>
-            20
-            5.00000000000000
-        </output>
-    </sage>
+    <introduction>
+        <p>
+            Python works really well with integers (which have type <c>int</c>) and floating point numbers (which have type <c>float</c>), and carefully respects order of operations, and of course Sage inherits this. But Sage is a <em>mathematical</em> programming language, so it automatically knows more than Python about numbers. For instance, in Python, the division operator <c>/</c> automatically returns a <c>float</c>.
+        </p>
+        <p>
+            Sage generally doesn't mess around with <c>float</c>, but uses a built-in implementation of the <xref ref="def_ring" autoname="title" /> of real numbers. Similarly, calculations involving integers in Sage use a ring of integers, rather than simply using Python's <c>int</c>. For everyday calculations this makes Sage much, much more powerful, as calculations default to being <em>exact</em>. Numerical approximations of a number can be obtained using the <c>N</c> or <c>n</c> built-ins.
+        </p>
+        <sage>
+            <input>
+                print 4 * (0 + 4 ^ 2 - 1) / 3
+                print n(5)
+            </input>
+            <output>
+                20
+                5.00000000000000
+            </output>
+        </sage>
 
-    <p>
-        We have some other important operators for integer arithmetic which are defined via the Division Algorithm (given at the bottom of the page), respectively <c>//</c> and <c>%</c>, called the <em>quotient</em> and <em>remainder</em> operators.
-    </p>
+        <p>
+            We have some other important operators for integer arithmetic which are defined via the Division Algorithm (given at the bottom of the page), respectively <c>//</c> and <c>%</c>, called the <em>quotient</em> and <em>remainder</em> operators.
+        </p>
 
-    <exercise>
-        <statement>
-            <p>
-                Without executing any code, decide what <c>17//4</c> and <c>17%4</c> should be.
-            </p>
-        </statement>
-        <answer>
-            <p>
-                Respectively, the answers should be <c>4</c> and <c>1</c>.
-            </p>
-        </answer>
-    </exercise>
+        <exercise>
+            <statement>
+                <p>
+                    Without executing any code, decide what <c>17//4</c> and <c>17%4</c> should be.
+                </p>
+            </statement>
+            <answer>
+                <p>
+                    Respectively, the answers should be <c>4</c> and <c>1</c>.
+                </p>
+            </answer>
+        </exercise>
 
-    <p>
-        In both Sage and Python, to assign a value to a variable name, we use <c>=</c>. If we want to specify a symbolic variable, useful for many mathematical problems in Sage, we must define it to be a <c>var</c>.
-    </p>
+        <p>
+            In both Sage and Python, to assign a value to a variable name, we use <c>=</c>. If we want to specify a symbolic variable, useful for many mathematical problems in Sage, we must define it to be a <c>var</c>.
+        </p>
 
-    <sage>
-        <input>
-            spam = 5
-            eggs = spam
-            spam = spam^2
-            print spam
-            print eggs
-        </input>
-        <output>
-            25
-            5
-        </output>
-    </sage>
-    <p>
-        We see now that first setting <c>eggs</c> equal to the value of <c>spam</c> and then changing <c>spam</c> does not also change <c>eggs</c>.
-    </p>
+        <sage>
+            <input>
+                spam = 5
+                eggs = spam
+                spam = spam^2
+                print spam
+                print eggs
+            </input>
+            <output>
+                25
+                5
+            </output>
+        </sage>
+        <p>
+            We see now that first setting <c>eggs</c> equal to the value of <c>spam</c> and then changing <c>spam</c> does not also change <c>eggs</c>.
+        </p>
+    </introduction>
 
     <subsection>
         <title>Technical definitions</title>
         <p>
-            In the above discussion, I refer to a "ring" of integers; for the purposes of our class, it is immaterial what constitutes a ring, but there is a formal mathematical definition. You should consider a ring to be a set of elements for which it makes sense to add, subtract, and multiply, but not necessarily to divide: just like the integers! The notation for the set of all integers is <m>\mathbb{Z}</m>.
+            In the above discussion, I refer to a ring of integers; for the purposes of our class, it is immaterial what constitutes a ring, but there is a formal mathematical definition. You should consider a ring to be a set of elements for which it makes sense to add, subtract, and multiply, but not necessarily to divide: just like the integers! The notation for the set of all integers is <m>\mathbb{Z}</m>.
         </p>
         <example>
             <title>A formal definition of rings, and some examples.</title>
@@ -90,6 +92,9 @@
                 </ul>
             </convention>
         </example>
+        <p>
+            An important consequence of working within the ring of integers is that while we don't have "fractions," we do have integer division. This is actually a theorem.
+        </p>
         <theorem xml:id="thm_DivisionAlg">
             <title>The Division Algorithm</title>
             <statement>
