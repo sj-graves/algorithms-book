@@ -1,10 +1,245 @@
-<section xml:id="sec-MST-JarnikPrim">
+<section xml:id="sec-MST-Jarn&#237;kPrim">
     <title>The Jarn&#237;k-Prim Algorithm</title>
     <introduction>
         <p>
             The second algorithm we will explore to build a minimum spanning tree is a near analogue of Dijkstra's shortest path algorithm, developed by Czech mathematician Vojt&#277;ch Jarn&#237;k in 1930 and then independently rediscovered by Robert Prim in 1957 and Dijkstra in 1959. The weights of each edge are considered exactly to be costs of adding the edge to the graph.
         </p>
     </introduction>
+
+    <subsection>
+        <title>Jarn&#237;k-Prim Algorithm</title>
+        <p>
+            The idea of the algorithm is very simple, and the implementation can be made simple at the cost of longer run times. Suppose there is a finite weighted graph <m>\Gamma=(V,E)</m> with weight function <m>w:E\to\mathbb{R}^+</m> and a cost function <m>C:V\to\mathbb{R}^+\cup\set{\infty}</m> such that initially <m>C(v)=\infty</m> for all <m>v\in V</m>. Choose a vertex <m>v_0\in V</m> and set <m>C(v_0) = 0</m>, and let <m>V(T) = \set{v_0}</m> be the ordered set of vertices of a tree.
+        </p>
+        <p>
+            The algorithm proceeds from here inductively: suppose <m>u</m> is the vertex most recently added to <m>V(T)</m> and let <m>N(u)</m> be the neighbors of <m>u</m> in <m>\Gamma</m> which are not already vertices of <m>T</m>. For each <m>v\in N(u)</m>, let <m>C(v) = \min(C(v),C(u)+w(uv))</m>. In the case where the cost of a vertex <m>v</m> is changed, denote <m>u</m> as the predecessor of <m>v</m>. After so considering each vertex, any vertex of <m>V\setminus V(T)</m> of least cost is the next vertex to add to <m>V(T)</m>. As long as the original graph is connected, every vertex will eventually be added to <m>V(T)</m>, and since no edge is added between a new vertex and an old vertex of <m>V(T)</m>, the result is necessarily a tree.
+        </p>
+
+        <example>
+            <title>An example applying the Jarn&#237;k-Prim algorithm</title>
+            <statement>
+                <p>
+                    Consider a graph with the following weighted edges:
+                    <md>
+                        <mrow>
+                            w(v_{0}v_{3}) \amp= 1, \amp 
+                            w(v_{0}v_{4}) \amp= 2, \amp 
+                            w(v_{0}v_{5}) \amp= 4, \amp 
+                            w(v_{0}v_{8}) \amp= 1, \amp 
+                        </mrow>
+                        <mrow>
+                            w(v_{0}v_{9}) \amp= 9, \amp 
+                            w(v_{1}v_{2}) \amp= 5, \amp 
+                            w(v_{1}v_{6}) \amp= 10, \amp 
+                            w(v_{1}v_{8}) \amp= 4, \amp 
+                        </mrow>
+                        <mrow>
+                            w(v_{2}v_{6}) \amp= 8, \amp 
+                            w(v_{2}v_{7}) \amp= 5, \amp 
+                            w(v_{2}v_{8}) \amp= 7, \amp 
+                            w(v_{3}v_{4}) \amp= 5, \amp 
+                        </mrow>
+                        <mrow>
+                            w(v_{3}v_{7}) \amp= 7, \amp 
+                            w(v_{3}v_{9}) \amp= 9, \amp 
+                            w(v_{4}v_{8}) \amp= 9, \amp 
+                            w(v_{4}v_{9}) \amp= 7, \amp 
+                        </mrow>
+                        <mrow>
+                            w(v_{5}v_{7}) \amp= 9, \amp 
+                            w(v_{5}v_{8}) \amp= 5, \amp 
+                            w(v_{5}v_{9}) \amp= 7, \amp 
+                            w(v_{6}v_{8}) \amp= 10. \amp
+                        </mrow>
+                    </md>
+                    We will asume that the first vertex to be added is <m>v_0</m>, so that <m>C(0)=0</m> and <m>C(i)=\infty</m>, for each <m>i=2, 3, \dotsc, 9</m>. Adding <m>v_0</m> to <m>V(t)</m> updates the cost and predecessor functions to
+                    <table>
+                        <p>
+                            <me>
+                                \begin{array}{l|ccccc|ccccc}
+                                <![CDATA[
+i & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ \hline
+C(i) & 0^* & \infty & \infty & 1 & 2 & 4 & \infty & \infty & 1 & 9 \\
+P(i) & * & ? & ? & 0 & 0 & 0 & ? & ? & 0 & 0
+]]>
+                                \end{array}
+                            </me>
+                        </p>
+                        <caption>First vertex <m>v_0</m> included in MST.</caption>
+                    </table>
+                    Consulting the table, we see that the least expensive and least indexed vertex to next add to the tree is <m>v_3</m>.
+                </p>
+                <p>
+                    The neighbors of <m>v_3</m> are <m>v_4</m>, <m>v_7</m>, and <m>v_9</m>, but the cost to add <m>v_4</m> with predecessor <m>v_3</m> is <m>1+4=5>2=C(4)</m> and <m>1+9 = 10>9 = C(9)</m>; hence the only change is to vertex <m>v_7</m>.
+                    <table>
+                        <p>
+                            <me>
+                                \begin{array}{l|ccccc|ccccc}
+                                <![CDATA[
+i & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ \hline
+C(i) & 0^* & \infty & \infty & 1^* & 2 & 4 & \infty & 8 & 1 & 9 \\
+P(i) & * & ? & ? & 0 & 0 & 0 & ? & 3 & 0 & 0
+]]>
+                                \end{array}
+                            </me>
+                        </p>
+                        <caption>Second vertex <m>v_3</m> included in MST.</caption>
+                    </table>
+                </p>
+                <p>
+                    Proceeding in this manner, we generate the cost table.
+                    <table>
+                        <tabular align="center">
+                            <row bottom="major">
+                                <cell>Step</cell>
+                                <cell><m>v_0</m></cell>
+                                <cell><m>v_1</m></cell>
+                                <cell><m>v_2</m></cell>
+                                <cell><m>v_3</m></cell>
+                                <cell><m>v_4</m></cell>
+                                <cell><m>v_5</m></cell>
+                                <cell><m>v_6</m></cell>
+                                <cell><m>v_7</m></cell>
+                                <cell><m>v_8</m></cell>
+                                <cell><m>v_9</m></cell>
+                            </row>
+                            <row>
+                                <cell> 0 </cell>
+                                <cell> 0* </cell>
+                                <cell> <m>\infty</m></cell>
+                                <cell> <m>\infty</m></cell>
+                                <cell> <m>\infty</m></cell>
+                                <cell> <m>\infty</m></cell>
+                                <cell> <m>\infty</m></cell>
+                                <cell> <m>\infty</m></cell>
+                                <cell> <m>\infty</m></cell>
+                                <cell> <m>\infty</m></cell>
+                                <cell> <m>\infty</m></cell>
+                            </row>
+                            <row>
+                                <cell>1</cell>
+                                <cell>0*</cell>
+                                <cell> <m>\infty</m></cell>
+                                <cell> <m>\infty</m></cell>
+                                <cell>1*</cell>
+                                <cell>2</cell>
+                                <cell>4</cell>
+                                <cell> <m>\infty</m></cell>
+                                <cell> <m>\infty</m></cell>
+                                <cell>1</cell>
+                                <cell>9</cell>
+                            </row>
+                            <row>
+                                <cell>2</cell>
+                                <cell>0*</cell>
+                                <cell> <m>\infty</m></cell>
+                                <cell> <m>\infty</m></cell>
+                                <cell> 1* </cell>
+                                <cell>2</cell>
+                                <cell>4</cell>
+                                <cell> <m>\infty</m></cell>
+                                <cell>8</cell>
+                                <cell>1*</cell>
+                                <cell>9</cell>
+                            </row>
+                            <row>
+                                <cell>3</cell>
+                                <cell>0*</cell>
+                                <cell>5</cell>
+                                <cell>8</cell>
+                                <cell>1*</cell>
+                                <cell>2*</cell>
+                                <cell>4</cell>
+                                <cell>10</cell>
+                                <cell>8</cell>
+                                <cell>1*</cell>
+                                <cell>7</cell>
+                            </row>
+                        </tabular>
+                        <caption>Table of iterations of the cost function.</caption>
+                    </table>
+                    After this point, no changes are made to the cost function, and vertices are added in order of least cost.                    
+                </p>
+                <p>
+                    Next we produce the table of predecessors.
+                    <table>
+                        <tabular align="center">
+                            <row bottom="major">
+                                <cell>Step</cell>
+                                <cell><m>v_0</m></cell>
+                                <cell><m>v_1</m></cell>
+                                <cell><m>v_2</m></cell>
+                                <cell><m>v_3</m></cell>
+                                <cell><m>v_4</m></cell>
+                                <cell><m>v_5</m></cell>
+                                <cell><m>v_6</m></cell>
+                                <cell><m>v_7</m></cell>
+                                <cell><m>v_8</m></cell>
+                                <cell><m>v_9</m></cell>
+                            </row>
+                            <row>
+                                <cell> 0 </cell>
+                                <cell> * </cell>
+                                <cell> </cell>
+                                <cell> </cell>
+                                <cell> </cell>
+                                <cell> </cell>
+                                <cell> </cell>
+                                <cell> </cell>
+                                <cell> </cell>
+                                <cell> </cell>
+                                <cell> </cell>
+                            </row>
+                            <row>
+                                <cell>1</cell>
+                                <cell>*</cell>
+                                <cell> </cell>
+                                <cell> </cell>
+                                <cell> 0</cell>
+                                <cell> 0</cell>
+                                <cell> 0</cell>
+                                <cell> </cell>
+                                <cell> </cell>
+                                <cell> 0</cell>
+                                <cell> 0</cell>
+                            </row>
+                            <row>
+                                <cell> 2</cell>
+                                <cell> *</cell>
+                                <cell> </cell>
+                                <cell> </cell>
+                                <cell> 0</cell>
+                                <cell> 0</cell>
+                                <cell> 0</cell>
+                                <cell> </cell>
+                                <cell> 3</cell>
+                                <cell> 0</cell>
+                                <cell> 0</cell>
+                            </row>
+                            <row>
+                                <cell> 3</cell>
+                                <cell> *</cell>
+                                <cell> 8</cell>
+                                <cell> 8</cell>
+                                <cell> 0</cell>
+                                <cell> 0</cell>
+                                <cell> 0</cell>
+                                <cell> 8</cell>
+                                <cell> 3</cell>
+                                <cell> 0</cell>
+                                <cell> 4</cell>
+                            </row>
+                        </tabular>
+                        <caption>Table of iterations of the predecessor function.</caption>
+                    </table>
+                </p>
+
+
+            </statement>
+        </example>
+
+    </subsection>
+
     <subsection>
         <title>Min Heaps</title>
         <definition>
@@ -12,25 +247,13 @@
                 A <term>min heap</term> is a special data structure representing a rooted tree, with the condition that a <em>parent vertex</em> is always ordered <em>before</em> its <em>children</em>. 
             </statement>
         </definition>
-        
+
         <p>
-        Heaps provide extremely efficient algorithms when knowing the position of a minimal (or maximal, for a max heap) element of a data set is necessary. Hence they are the optimal data structure for Dijkstra's algorithm, and they provide a very efficient data structure for storing the vertices of a graph when using the Jarn&#237;k-Prim Algorithm to produce a minimum spanning tree of a connected graph.
+            Heaps provide extremely efficient algorithms when knowing the position of a minimal (or maximal, for a max heap) element of a data set is necessary. Hence they are the optimal data structure for Dijkstra's algorithm, and they provide a very efficient data structure for storing the vertices of a graph when using the Jarn&#237;k-Prim Algorithm to produce a minimum spanning tree of a connected graph.
         </p>
         <p>
             There is a standard way to develop a heap class representing a binary min heap. The data is stored in a list such that the children of the element stored in index <m>i</m> are stored in indices <m>2i+1</m> and <m>2i+2</m>. 
         </p>
     </subsection>
-    <subsection>
-        
-    </subsection>
-    <example>
-        <title>Applying</title>
-        <statement>
-            <!-- Here's the edge list:
-                [(0, 3, 1), (0, 4, 2), (0, 5, 4), (0, 8, 1), (0, 9, 9), (1, 2, 5), (1, 6, 10), (1, 8, 4), 
-                 (2, 6, 8), (2, 7, 5), (2, 8, 7), (3, 4, 5), (3, 7, 7), (3, 9, 9), (4, 8, 9), (4, 9, 7), 
-                 (5, 7, 9), (5, 8, 5), (5, 9, 7), (6, 8, 10)]
-                -->
-        </statement>
-    </example>
 </section>
+

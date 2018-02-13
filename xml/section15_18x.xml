@@ -1,8 +1,0 @@
-<section>
-<title>Goals</title>
-<ol type="1">
-<li><p>Define a <em>capacitated network</em>.</p></li>
-<li><p>Introduce the maximum flow and minimum cut problems and the max-flow, min-cut theorem.</p></li>
-<li><p>Introduce Dinitz' Algorithm to solve the max-flow/min-cut problem.</p></li>
-</ol>
-</section>

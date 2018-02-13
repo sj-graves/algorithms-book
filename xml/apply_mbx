@@ -1,0 +1,4 @@
+#!/bin/bash
+
+~/mathbook/script/mbx -c latex-image -f svg -d images -vv ./index.xml
+cp -R images ../html

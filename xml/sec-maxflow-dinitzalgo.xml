@@ -1,22 +1,22 @@
-<section>
+<section xml:id="sec-MaxFlow-DinitzAlgo">
     <title>Dinitz' Algorithm</title>
     <p>
-        The original solution to the problem of calculating a maximum flow was published in 1956 by {L. R. Ford, Jr. and D. R. Fulkerson}. The modified version presented here was produced by Yefim Dinitz as a ``response to a pre-class exercise in Adel'son Vel'sky's Algorithm class." According to Dinitz, he was at the time unaware of the basic details of the Ford-Fulkerson algorithm upon which his algorithm improves.
+        The original solution to the problem of calculating a maximum flow was published in 1956 by L. R. Ford, Jr. and D. R. Fulkerson. The modified version presented here was produced by Yefim Dinitz as a <q>response to a pre-class exercise in Adel'son Vel'sky's Algorithm class.</q> According to Dinitz, he was at the time unaware of the basic details of the Ford-Fulkerson algorithm upon which his algorithm improves.
     </p>
 
     <p>
-        Both algorithms proceed in this general fashion: given a flow, determine which edges have ``residual capacity." In the residual graph, try to find a flow which can augment the current flow. When no such flow can be found, a maximum flow has been found.
+        Both algorithms proceed in this general fashion: given a flow, determine which edges have <term>residual capacity.</term> In the residual graph, try to find a flow which can augment the current flow. When no such flow can be found, a maximum flow has been found.
     </p>
 
     <p>
-        The foremost reason an improvement was needed to the Ford-Fulkerson algorithm is its failure to terminate in certain cases of networks with irrational capacities. As the algorithm is successful in constructing a maximum flow whenever it terminates, an improvement to the algorithm was more likely than a replacement. Dinitz' improvement utilized shortest paths to overcome the conceptual flaw in Ford-Fulkerson during the step of finding an augmenting path. Hence we will first discuss the modification to Dikstra's algorithm which produces the necessary ``shortest path graph."
+        The foremost reason an improvement was needed to the Ford-Fulkerson algorithm is its failure to terminate in certain cases of networks with irrational capacities. As the algorithm is successful in constructing a maximum flow whenever it terminates, an improvement to the algorithm was more likely than a replacement. Dinitz' improvement utilized shortest paths to overcome the conceptual flaw in Ford-Fulkerson during the step of finding an augmenting path. Hence we will first discuss the modification to Dikstra's algorithm which produces the necessary shortest path graph.
     </p>
 
     <p>
         The modification to Dijkstra's algorithm to construct a subgraph consisting of all shortest paths from <m>s</m> to <m>t</m> is conceptually deep but easy to implement. Suppose <m>v\in V</m> with <m>d(s,v)=k</m>, where <m>s</m> is the source vertex. Rather than recording a single <m>s,v</m>-path, we records every vertex <m>u\in V</m> such that <m>d(s,u)=k-1</m> and there is an arc<fn>Recall that we are working over directed graphs now.</fn> from <m>u</m> to <m>v</m>.
     </p>
     <algorithm xml:id="alg_mod_dijkstra">
-        <title>All Shortest Paths from $s$ (Modified Dijkstra)</title>
+        <title>All Shortest Paths from <m>s</m>(Modified Dijkstra)</title>
         <p>
             Suppose that <m>\Delta_f=(V,E_f,c_f,s,t)</m> is a capacitated network with source vertex <m>s</m> and target vertex <m>t</m>.
         </p>
@@ -53,12 +53,18 @@
         </ol>
     </algorithm>
     <p>
-        The true ``secret" to Dinitz' algorithm is not in its use of this shortest path algorithm once, but twice: if the output <m>p(v)</m> is used to define a new set of arrows <m>E_b=\set{uv:v\in p(u)}</m> we can use the modified shortest path algorithm now on the graph with edge set <m>E_b</m> and source <m>t</m> to ensure that the only shortest paths we retain are paths from <m>s</m> to <m>t</m>.
+        The true improvement of Dinitz' algorithm over the earlier Ford-Fulkerson algorithm is not in its use of this shortest path algorithm once, but twice: if the output <m>p(v)</m> is used to define a new set of arrows <m>E_b=\set{uv:v\in p(u)}</m> we can use the modified shortest path algorithm now on the graph with edge set <m>E_b</m> and source <m>t</m> to ensure that the only shortest paths we retain are paths from <m>s</m> to <m>t</m>.
     </p>
-    <figure xml:id="fig_capnet_1" >
-        <caption>(A) A capacitated network, <m>\Delta=(V,E,c,v_1,v_5)</m>; (B) the result <m>\Delta'</m> of applying <xref ref="alg_mod_dijkstra">Algorithm</xref> on <m>\Delta</m>; (C) the ``layered graph" <m>\Lambda=(V,E_\ell,c_\ell,v_1,v_5)</m> resulting from the application of <xref ref="alg_mod_dijkstra">Algorithm</xref> on <m>\Delta'</m>.</caption>
-        <image xml:id="forwardflow">
-            <latex-image-code><![CDATA[
+
+
+    <example xml:id="exmp_capnet_1">
+        <title>Applying Dinitz' algorithm</title>
+        <statement>
+
+            <figure xml:id="fig_capnet_1" >
+                <caption>(A) A capacitated network, <m>\Delta=(V,E,c,v_1,v_5)</m>; (B) the result <m>\Delta'</m> of applying <xref ref="alg_mod_dijkstra" text="type-global"/> on <m>\Delta</m>; (C) the <q>layered graph</q> <m>\Lambda=(V,E_\ell,c_\ell,v_1,v_5)</m> resulting from the application of <xref ref="alg_mod_dijkstra" text="type-global" /> on <m>\Delta'</m>.</caption>
+                <image xml:id="forwardflow">
+                    <latex-image-code><![CDATA[
                 \tiny
                 \begin{tikzpicture}[scale=2, nodes={circle, inner sep=1pt}]
                 \definecolor{ec0}{rgb}{0,0,0}
@@ -116,21 +122,21 @@
                 ;
                 \end{tikzpicture}
                 ]]>
-            </latex-image-code>
-        </image>
+                    </latex-image-code>
+                </image>
 
-    </figure>
-
-    <example xml:id="exmp_capnet_1">
-        <statement>
+            </figure>
             <p>
-                The graph in <xref ref="fig_capnet_1" autoname="yes" />(A) is a capacitated network <m>\Delta=(V,E,c,s,t)</m> with <m>V=\set{v_1,v_2,\ldots,v_6}</m>; only the indices of vertices are shown in the figure. Suppose we wish to apply Dijkstra's algorithm to this graph rooted at <m>v_1</m>. The neighbors of <m>v_1</m> are <m>N(v_1)=\set{v_2,v_3}</m>; visiting each of these in turn we see that the neighbors of <m>v_2</m> are <m>N(v_2)=\set{v_3,v_4,v_5}</m>; however, <m>d(v_1,v_3)=1\lt 2=d(v_1,v_2)+1</m>, so we do not update the predecessors of <m>v_3</m>. Likewise, <m>N(v_3) = \set{v_4,v_5,v_6}</m>. As this provides new paths of the same length to both <m>v_4</m> and <m>v_5</m>, we add <m>v_3</m> as a predecessor of each of those vertices. Recalling that the modified Dijkstra's algorithm provides a sort of ``predecessor graph," we have obtained the capacitated network shown in <xref ref="fig_capnet_1" autoname="yes" />(B). The second step of producing the layered data structure is to apply Dijkstra's algorithm on this intermediate graph, rooted now at the target vertex <m>v_5</m>. As the graph is directed, we see that vertices <m>v_4</m> and <m>v_6</m> are unreachable in the intermediate graph when rooted at <m>v_5</m>; hence the resulting layered graph of <xref ref="fig_capnet_1" autoname="yes" />(C) with vertex <m>v_1</m> at distance <m>0</m>, vertices <m>v_2</m> and <m>v_3</m> at distance <m>1</m>, and vertex <m>v_5</m> at distance <m>2</m>.
+                The graph in (A) is a capacitated network <m>\Delta=(V,E,c,s,t)</m> with <m>V=\set{v_1,v_2,\ldots,v_6}</m>; only the indices of vertices are shown in the figure. Suppose we wish to apply Dijkstra's algorithm to this graph rooted at <m>v_1</m>. The neighbors of <m>v_1</m> are <m>N(v_1)=\set{v_2,v_3}</m>; visiting each of these in turn we see that the neighbors of <m>v_2</m> are <m>N(v_2)=\set{v_3,v_4,v_5}</m>; however, <m>d(v_1,v_3)=1\lt 2=d(v_1,v_2)+1</m>, so we do not update the predecessors of <m>v_3</m>. Likewise, <m>N(v_3) = \set{v_4,v_5,v_6}</m>. As this provides new paths of the same length to both <m>v_4</m> and <m>v_5</m>, we add <m>v_3</m> as a predecessor of each of those vertices. 
+            </p>
+            <p>
+                Recalling that the modified Dijkstra's algorithm provides a sort of <q>predecessor graph</q>, we have obtained the capacitated network shown in the figure as (B). The second step of producing the layered data structure is to apply Dijkstra's algorithm on this intermediate graph, rooted now at the target vertex <m>v_5</m>. As the graph is directed, we see that vertices <m>v_4</m> and <m>v_6</m> are unreachable in the intermediate graph when rooted at <m>v_5</m>; hence the resulting layered graph of the figure labelled (C) has vertex <m>v_1</m> at distance <m>0</m>, vertices <m>v_2</m> and <m>v_3</m> at distance <m>1</m>, and vertex <m>v_5</m> at distance <m>2</m>.
             </p>
         </statement>
     </example>
 
     <p>
-        It is important to make a note about the structure of <m>\Lambda = (V,E_\ell,c_\ell,s,t)</m> produced from two successive applications of <xref ref="alg_mod_dijkstra">Algorithm</xref>. We first produced <m>\Delta'</m> from <m>\Delta</m> by including the reverse edges of exactly those edges lying on shortest paths emanating from <m>s</m>; we then construct <m>\Lambda</m> from <m>\Delta'</m> by including only those edges on shortest paths terminating at <m>t</m>. Hence <em>every path in <m>\Lambda</m> beginning at <m>s</m> will terminate at <m>t</m> and will be a shortest such path</em>. This structure must be maintained as we augment the flow across the network, for two reasons: as edges become saturated<fn>An edge <m>uv</m> is <em>saturated</em> when <m>f(u,v)=c(u,v)</m>, where <m>f</m> is the flow and <m>c</m> is the capacity.</fn> they must be removed from the residual capacity graph, just as residual capacities of unsaturated edges must be decreased. When saturated edges are removed, this can result in a vertex with no successors or with no predecessors, and both of these types of vertex lie on no <m>s,t</m>-path in <m>\Lambda</m>.
+        It is important to make a note about the structure of <m>\Lambda = (V,E_\ell,c_\ell,s,t)</m> produced from two successive applications of <xref ref="alg_mod_dijkstra" text="type-global" />. We first produced <m>\Delta'</m> from <m>\Delta</m> by including the reverse edges of exactly those edges lying on shortest paths emanating from <m>s</m>; we then construct <m>\Lambda</m> from <m>\Delta'</m> by including only those edges on shortest paths terminating at <m>t</m>. Hence <em>every path in <m>\Lambda</m> beginning at <m>s</m> will terminate at <m>t</m> and will be a shortest such path</em>. This structure must be maintained as we augment the flow across the network, for two reasons: as edges become saturated<fn>An edge <m>uv</m> is <em>saturated</em> when <m>f(u,v)=c(u,v)</m>, where <m>f</m> is the flow and <m>c</m> is the capacity.</fn> they must be removed from the residual capacity graph, just as residual capacities of unsaturated edges must be decreased. When saturated edges are removed, this can result in a vertex with no successors or with no predecessors, and both of these types of vertex lie on no <m>s,t</m>-path in <m>\Lambda</m>.
     </p>
 
     <p>
@@ -139,7 +145,7 @@
     <algorithm xml:id="alg_pathfind">
         <title>Pathfinding</title>
         <p>
-            Suppose <m>\Lambda = (V,E_\ell,c_\ell,s,t)</m> is the result of two applications of <xref ref="alg_mod_dijkstra">Algorithm</xref> on a capacitated network <m>\Delta=(V,E,c,s,t)</m>.
+            Suppose <m>\Lambda = (V,E_\ell,c_\ell,s,t)</m> is the result of two applications of <xref ref="alg_mod_dijkstra" text="type-global" /> on a capacitated network <m>\Delta=(V,E,c,s,t)</m>.
             <ol>
                 <li><p>Let <m>u_0=s</m>.</p></li>
                 <li><p>Inductively choose <m>u_{i+1}</m> for <m>i\geq 0</m> such that <m>u_iu_{i+1}\in E_\ell</m>, until <m>u_n=t</m>.</p></li>
@@ -149,10 +155,14 @@
 
         </p>
     </algorithm>
-    <figure>
-        <caption>(A) An augmenting path with flow value <m>f^*=8</m> in <m>\Lambda</m> from <xref ref="exmp_capnet_1">Example</xref>. (B) After updating the residual capacities of edges in <m>E_\ell</m>, the edge <m>v_2v_5</m> was saturated and therefore removed. This leaves <m>v_2</m> with no successor vertices, so the edge <m>v_1v_2</m> (shown with reduced capacity) must also be removed as no additional flow can move from <m>v_1</m> to <m>v_5</m> along <m>v_1v_2</m>. (C) The graph <m>\Lambda</m> after maintenance.</caption>
-        <image xml:id='backflow'>
-            <latex-image-code><![CDATA[
+
+    <example>
+        <title>Continued from previous example.</title>
+        <statement>
+            <figure>
+                <caption>(A) An augmenting path with flow value <m>f^*=8</m> in <m>\Lambda</m> from <xref ref="exmp_capnet_1" text="type-global"/>. (B) After updating the residual capacities of edges in <m>E_\ell</m>, the edge <m>v_2v_5</m> was saturated and therefore removed. This leaves <m>v_2</m> with no successor vertices, so the edge <m>v_1v_2</m> (shown with reduced capacity) must also be removed as no additional flow can move from <m>v_1</m> to <m>v_5</m> along <m>v_1v_2</m>. (C) The graph <m>\Lambda</m> after maintenance.</caption>
+                <image xml:id='backflow'>
+                    <latex-image-code><![CDATA[
 \tiny
 \begin{tikzpicture}[scale=2]
 \definecolor{ec0}{rgb}{0,0,0}
@@ -197,14 +207,11 @@
 
 \end{tikzpicture}
 ]]>
-            </latex-image-code>
-        </image>
+                    </latex-image-code>
+                </image>
 
-    </figure>
+            </figure>
 
-    <example>
-        <title>Continued from previous example.</title>
-        <statement>
             <p>
                 In our graph <m>\Lambda</m>, <m>u_0=s=v_1</m> has only two successors: <m>v_2</m> and <m>v_3</m>. Choosing <m>u_1=v_2</m>, we see that the only successor of <m>u_1</m> in <m>\Lambda</m> is <m>v_5=t</m>, so <m>u_2=v_5</m>. Our augmenting path is then <m>(v_1,v_2,v_5)</m>; as this flow only consists of two edges of capacities <m>50</m> and <m>8</m> respectively, it is clear that <m>f^*=\min\set{50,8}=8</m>.
             </p>
@@ -250,7 +257,7 @@
     <algorithm xml:id="alg_maint">
         <title>Maintenance of layered graph</title>
         <p>
-            Suppose <m>\Lambda = (V,E_\ell,c_\ell,s,t)</m> is the layered graph structure output from two successive applications of <xref ref="alg_mod_dijkstra">Algorithm</xref>, that <m>P=\set{s=u_0,u_1,\ldots,u_{n-1},u_n=t}</m> is an augmenting path with augmenting flow value <m>f^*</m>.
+            Suppose <m>\Lambda = (V,E_\ell,c_\ell,s,t)</m> is the layered graph structure output from two successive applications of <xref ref="alg_mod_dijkstra" text="type-global" />, that <m>P=\set{s=u_0,u_1,\ldots,u_{n-1},u_n=t}</m> is an augmenting path with augmenting flow value <m>f^*</m>.
         </p>
 
         <ol>
@@ -307,14 +314,14 @@
                         <me>
                             E_f=\set{uv\in E:c_f(u,v)>0}.
                         </me></p></li>
-                    <li><p>Apply <xref ref="alg_mod_dijkstra">Algorithm</xref> to <m>\Delta</m> to produce <m>\Delta'</m>; apply <xref ref="alg_mod_dijkstra">Algorithm</xref> again to <m>\Delta'</m> to obtain the layered graph <m>\Lambda = (V,E_\ell,c_\ell,s,t)</m>. <em>When no shortest paths from <m>s</m> to <m>t</m> are found in constructing <m>\Delta'</m>, the flow is optimal.</em></p></li>
+                    <li><p>Apply <xref ref="alg_mod_dijkstra" text="type-global" /> to <m>\Delta</m> to produce <m>\Delta'</m>; apply <xref ref="alg_mod_dijkstra" text="type-global" /> again to <m>\Delta'</m> to obtain the layered graph <m>\Lambda = (V,E_\ell,c_\ell,s,t)</m>. <em>When no shortest paths from <m>s</m> to <m>t</m> are found in constructing <m>\Delta'</m>, the flow is optimal.</em></p></li>
                     <li><p>Repeat the following:
                         </p>
 
                         <ol type="i">
-                            <li><p>Use <xref ref="alg_pathfind">Algorithm</xref> to find an augmenting path <m>P</m> with flow value <m>f^*</m> in <m>\Lambda</m>. If no augmenting path exists, return to step a.</p></li>
+                            <li><p>Use <xref ref="alg_pathfind" text="type-global"/> to find an augmenting path <m>P</m> with flow value <m>f^*</m> in <m>\Lambda</m>. If no augmenting path exists, return to step a.</p></li>
                             <li><p>Update <m>f</m> by adding <m>f^*</m> to the flow for each edge <m>u_iu_{i+1}</m> where <m>u_i,u_{i+1}</m> are adjacent vertices in <m>P</m>.</p></li>
-                            <li><p>Perform <xref ref="alg_maint">Algorithm</xref> upon <m>\Lambda</m>.</p></li>
+                            <li><p>Perform <xref ref="alg_maint" text="type-global"/> upon <m>\Lambda</m>.</p></li>
                         </ol>
                     </li>
                 </ol>

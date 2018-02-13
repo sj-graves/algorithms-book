@@ -1,8 +1,0 @@
-<section>
-<title>Goals</title>
-<ol type="1">
-<li><p>Explore the minimum spanning tree problem</p></li>
-<li><p>Explain Kruskal's algorithm</p></li>
-<li><p>Implement Kruskal's algorithm</p></li>
-</ol>
-</section>
