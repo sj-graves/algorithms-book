@@ -11,8 +11,11 @@
     </objectives>
     <introduction>
         <p>
-            In general English-language usage, a <term>permutation</term> is simply a rearrangement of an ordering. While this is exactly what mathematicians mean by a permuatation, we choose to be more rigorous in the particulars of the definition than in the general usage.
+            The word <term>permutation</term> is uncommon in general English-language usage, but when it is used often the context is that there are many distinct arrangements of otherwise acceptable choices. While this is the utility of a permutation, the mathematical definition is actually easier.
         </p>
+<!--         <p>
+            In general English-language usage, a <term>permutation</term> is simply a rearrangement of an ordering. While this is exactly what mathematicians mean by a permuatation, we choose to be more rigorous in the particulars of the definition than in the general usage.
+        </p> -->
     </introduction>
     <xi:include  href="sec-perms-defn.xml" />
     <xi:include  href="sec-perms-groups.xml" />

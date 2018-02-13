@@ -1,12 +1,9 @@
-<section xml:id="sec-Graphs-Sage">>
+<section xml:id="sec-Graphs-Sage">
     <title>Representing graphs in Sage</title>
-
-
     <introduction>
         <p>
             There are many problems in discrete modeling which are best solved using graph theory, so it is important to be able to represent graphs as some sort of data structure. In fact, there is an abstract computer science data structure called a graph! This data structure is often of limited use when trying to solve mathematical problems on graphs, so we will focus instead on other methods of implementing graphs.
         </p>
-
         <p>
             To our great benefit, Sage comes pre-equipped with an incredible library of graph tools. The determination of which tools to use for which algorithm depends heavily upon the algorithm under consideration.
         </p>
@@ -21,23 +18,23 @@
         <sage>
             <input>
                 V = range(10)
-                E = [(0, 1), (0, 4), (0, 5), (1, 2), (1, 6), 
-                     (2, 3), (2, 7), (3, 4), (3, 8), (4, 9), 
+                E = [(0, 1), (0, 4), (0, 5), (1, 2), (1, 6),
+                     (2, 3), (2, 7), (3, 4), (3, 8), (4, 9),
                      (5, 7), (5, 8), (6, 8), (6, 9), (7, 9)]
                 Pet = Graph([V,E])
                 show(Pet.plot())
                 print Pet.is_isomorphic(graphs.PetersenGraph(), certificate=True)
             </input>
         </sage>
-        
+
         <p>
             We notice that each edge is listed only once, in one direction; the built in algorithm for the <c>Graph</c> class takes this into account. In fact, we can use the methods of this class to produce a sort of two-ended dictionary telling the neighborhood of each vertex in the graph.
         </p>
         <sage>
             <input>
                 V = range(10)
-                E = [(0, 1), (0, 4), (0, 5), (1, 2), (1, 6), 
-                     (2, 3), (2, 7), (3, 4), (3, 8), (4, 9), 
+                E = [(0, 1), (0, 4), (0, 5), (1, 2), (1, 6),
+                     (2, 3), (2, 7), (3, 4), (3, 8), (4, 9),
                      (5, 7), (5, 8), (6, 8), (6, 9), (7, 9)]
                 Pet = Graph([V,E])
                 print Pet.to_dictionary()
@@ -48,11 +45,11 @@
         </p>
         <sage>
             <input>
-                D = {0:[1,4,5], 1:[2,6], 2:[3,7], 3:[4,8], 
+                D = {0:[1,4,5], 1:[2,6], 2:[3,7], 3:[4,8],
                      4:[9], 5:[7,8], 6:[8,9], 7:[9]}
                 V = range(10)
-                E = [(0, 1), (0, 4), (0, 5), (1, 2), (1, 6), 
-                     (2, 3), (2, 7), (3, 4), (3, 8), (4, 9), 
+                E = [(0, 1), (0, 4), (0, 5), (1, 2), (1, 6),
+                     (2, 3), (2, 7), (3, 4), (3, 8), (4, 9),
                      (5, 7), (5, 8), (6, 8), (6, 9), (7, 9)]
                 Graph([V,E]) == Graph(D)
             </input>

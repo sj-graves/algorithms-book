@@ -24,7 +24,7 @@
         <title>Two-line permutation product diagrams</title>
         <statement>
             <p>
-                Consider the permutations 
+                Consider the permutations
                 <md>
                     <mrow>
                         g \amp = \verb|10 9 5 7 8 6 2 3 4 1|
@@ -53,7 +53,7 @@
         </statement>
     </remark>
     <p>
-        Having defined multiplication of permutations, it is natural to consider whether there is a <em>multiplicative identity</em>. 
+        Having defined multiplication of permutations, it is natural to consider whether there is a <em>multiplicative identity</em>.
     </p>
     <theorem>
         <statement>
@@ -84,7 +84,7 @@
                 We need to note that composition is <em>not commutative</em>. Generally speaking, <m>\sigma\tau\neq\tau\sigma</m>. To demonstrate, observe
             </p>
             <image source="./images/perm_prod_ex2.svg" />
-            <p>                
+            <p>
                 Clearly <m>gh\neq hg</m>, since two permutations can only be equal if they agree on every point in the domain.
             </p>
         </statement>

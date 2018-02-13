@@ -24,7 +24,7 @@
             </p>
         </remark>
         <figure>
-            <image source = "./images/PetersenGraph.svg" width='50%' />
+            <image source = "./images/PetersenGraph.svg" width='50%' align='center'/>
             <caption>A famous example of a graph is the <em>Petersen graph</em>. Here it is drawn with its vertex set consisting of the collection of subsets of size 2 of the set <m>\set{1,2,3,4,5}</m>, with an edge between vertices if and only if they are disjoint as sets. This labeling of the Petersen graph is convenient for several application in <em>algebraic graph theory</em>.</caption>
         </figure>
     </introduction>
@@ -59,7 +59,7 @@
             </statement>
         </definition>
         <figure>
-            <caption>If we relabel the vertices of the Petersen graph as 
+            <caption>If we relabel the vertices of the Petersen graph as
                 <md>
                     <mrow>
                         v_1 \amp = \set{1,2}, \amp
@@ -75,10 +75,10 @@
                         v_9 \amp = \set{1,3}, \amp
                         v_{10} \amp = \set{1,4},
                     </mrow>
-                </md> 
+                </md>
                 then the subgraph <m>\vc{V_1}_\Pi</m> induced by <m>V_1=\set{v_3,v_4,v_6,v_8,v_9}</m> has edge set
                 <m>E_1 = \set{v_3v_4, v_3v_8, v_4v_8, v_6v_8, v_6v_9}</m>, highlighted in red.</caption>
-            <image source="./images/PetersenGraph_colored.svg" width="50%" />
+            <image source="./images/PetersenGraph_colored.svg" width="50%"  align='center'/>
         </figure>
         <definition xml:id="defn_isom">
             <statement>
@@ -108,7 +108,7 @@
         </definition>
         <figure>
             <caption>While <m>K_4\neq K'_4</m>, the two graphs are isomorphic. In fact, since these are <em>complete</em> graphs, every bijection between the sets <m>\set{a,b,c,d}</m> and <m>\set{v_1,v_2,v_3,v_4}</m> is an isomorphism.</caption>
-            <image source="./images/K4_graphs.svg" width="100%" />
+            <image source="./images/K4_graphs.svg" width="100%"  align='center' />
         </figure>
         <definition>
             <statement>
@@ -143,7 +143,7 @@
         </definition>
         <figure>
             <caption>The Petersen graph with two distinct (and openly disjoint) <m>v_1,v_3</m>-paths, one highlighted in red and the other in blue. The union of the red and blue paths is a 9-cycle in <m>\Pi</m>.</caption>
-            <image source="./images/PetersenGraph_cycle.svg" width="50%" />
+            <image source="./images/PetersenGraph_cycle.svg" width="50%"  align='center'/>
         </figure>
         <definition>
             <statement>
