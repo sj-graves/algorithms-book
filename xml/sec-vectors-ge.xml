@@ -71,7 +71,7 @@
                         </p>
 
                         <ol>
-                            <li><p>If <m>a_{p,j}=0</m>, increment <m>j</m> and return to the pivot step, unless <m>j>n</m>, in which case return <m>A</m>./</p></li>
+                            <li><p>If <m>a_{p,j}=0</m>, increment <m>j</m> and return to the pivot step, unless <m>j>n</m>, in which case return <m>A</m>.</p></li>
                             <li><p>Otherwise, swap row <c>i</c> and row <c>p</c> of <m>A</m>.</p></li>
                         </ol>
                     </li>
