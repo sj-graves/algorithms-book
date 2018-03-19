@@ -21,64 +21,62 @@
         <statement>
             <p>
                 We will decompose a different example than previously to demonstrate how the multipliers stored within the matrix move with their rows.
-                <md>
-                    <mrow>  
-                        A = \begin{bmatrix}
-                            4 \amp  9 \amp  -11 \\
-                            -2 \amp  3 \amp  5\\
-                            7 \amp  1 \amp  1
-                        \end{bmatrix}
-                        \xto{R_1:R_3} \amp
-                        \begin{bmatrix}
-                        7 \amp 1 \amp 1 \\
-                        -2 \amp 3 \amp 5 \\
-                        4 \amp 9 \amp -11
-                        \end{bmatrix}
-                        \amp
-                        P \amp = \left[\begin{matrix}
-                            0\amp 0\amp 1 \\
-                            0\amp 1\amp 0 \\
-                            1\amp 0\amp 0
-                        \end{matrix}\right]
+                
+                    <![CDATA[
+\begin{align*}
+    A = \begin{bmatrix}
+            4 &  9 &  -11 \\
+            -2 &  3 &  5\\
+            7 &  1 &  1
+        \end{bmatrix} \xrightarrow{R_1:R_3} 
+        &\begin{bmatrix}
+        7 & 1 & 1 \\
+        -2 & 3 & 5 \\
+        4 & 9 & -11
+        \end{bmatrix}
+        &
+        P &= \begin{bmatrix}
+            0& 0& 1 \\
+            0& 1& 0 \\
+            1& 0& 0
+        \end{bmatrix}           \\
+        ~ \xrightarrow[-\frac47R_1+R_3]{\frac27R_1+R_2} 
+        &\begin{bmatrix}
+            7 & 1 & 1 \\
+            \fbox{$-\frac27$} &  \frac{23}7 &  \frac{37}7 \\
+            \fbox{$\frac47$} &  \frac{59}7 &  -\frac{81}7
+        \end{bmatrix} & ~ &~    \\
+        ~ \xto{R_2:R_3} 
+         & \begin{bmatrix}
+            7 & 1 & 1 \\
+            \fbox{$\frac47$} &  \frac{59}7 &  -\frac{81}7 \\
+            \fbox{$-\frac27$} &  \frac{23}7 &  \frac{37}7 
+            \end{bmatrix}
+            & 
+            P & = \begin{bmatrix}
+            0 & 0 & 1 \\
+            1 & 0 & 0 \\
+            0 & 1 & 0
+            \end{bmatrix}         \\
+        ~ \xto{- \frac{23}{59}R_2+R_3}
+        & \begin{bmatrix}
+            7 &  1 &  1 \\
+            \fbox{$\frac47$} &  \frac{59}7 &  -\frac{81}7 \\
+            \fbox{$-\frac27$} &  \fbox{$\frac{23}{59}$} &  \frac{578}{59}
+        \end{bmatrix} & ~ &~
+    \end{align*}
+]]>
+                
+<!--                 <md>
+                    <mrow>
+                        
                     </mrow>
                     <mrow>
-                        \xrightarrow[-\frac47R_1+R_3]{\frac27R_1+R_2} \amp
-                        \begin{bmatrix}
-                        7 \amp 1 \amp 1 \\
-                        \fbox{$-\frac27$} \amp  \frac{23}7 \amp  \frac{37}7 \\
-                        \fbox{$\frac47$} \amp  \frac{59}7 \amp  -\frac{81}7
-                        \end{bmatrix}
                     </mrow>
                     <mrow>
-                        \xto{R_2:R_3} \amp 
-                        \begin{bmatrix}
-                        7 \amp 1 \amp 1 \\
-                        \fbox{$\frac47$} \amp  \frac{59}7 \amp  -\frac{81}7 \\
-                        \fbox{$-\frac27$} \amp  \frac{23}7 \amp  \frac{37}7 
-                        \end{bmatrix}
-                        \amp 
-                        P \amp = \begin{bmatrix}
-                        0 \amp 0 \amp 1 \\
-                        1 \amp 0 \amp 0 \\
-                        0 \amp 1 \amp 0
-                        \end{bmatrix}
-                    </mrow>
-                    <mrow>
-                    \xto{R_3 - \frac{23}{59}R_2} \amp
-                        \begin{bmatrix}
-                        7 \amp  1 \amp  1 \\
-                        \fbox{$\frac47$} \amp  \frac{59}7 \amp  -\frac{81}7 \\
-                        \fbox{$-\frac27$} \amp  \fbox{$\frac{23}{59}$} \amp  \frac{578}{59}
-                        \end{bmatrix}
                     </mrow>
                 
-                </md>
-                    <!--
-                        
-                    <mrow>  </mrow>
-                    <mrow>   
-                        \end{bmatrix}</mrow>
-                </md>-->
+                </md> -->
             </p>
 
             <p>
