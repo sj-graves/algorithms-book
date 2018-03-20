@@ -21,62 +21,40 @@
         <statement>
             <p>
                 We will decompose a different example than previously to demonstrate how the multipliers stored within the matrix move with their rows.
-                
-                    <![CDATA[
-\begin{align*}
-    A = \begin{bmatrix}
-            4 &  9 &  -11 \\
-            -2 &  3 &  5\\
-            7 &  1 &  1
-        \end{bmatrix} \xrightarrow{R_1:R_3} 
-        &\begin{bmatrix}
-        7 & 1 & 1 \\
-        -2 & 3 & 5 \\
-        4 & 9 & -11
-        \end{bmatrix}
-        &
-        P &= \begin{bmatrix}
-            0& 0& 1 \\
-            0& 1& 0 \\
-            1& 0& 0
-        \end{bmatrix}           \\
-        ~ \xrightarrow[-\frac47R_1+R_3]{\frac27R_1+R_2} 
-        &\begin{bmatrix}
-            7 & 1 & 1 \\
-            \fbox{$-\frac27$} &  \frac{23}7 &  \frac{37}7 \\
-            \fbox{$\frac47$} &  \frac{59}7 &  -\frac{81}7
-        \end{bmatrix} & ~ &~    \\
-        ~ \xto{R_2:R_3} 
-         & \begin{bmatrix}
-            7 & 1 & 1 \\
-            \fbox{$\frac47$} &  \frac{59}7 &  -\frac{81}7 \\
-            \fbox{$-\frac27$} &  \frac{23}7 &  \frac{37}7 
-            \end{bmatrix}
-            & 
-            P & = \begin{bmatrix}
-            0 & 0 & 1 \\
-            1 & 0 & 0 \\
-            0 & 1 & 0
-            \end{bmatrix}         \\
-        ~ \xto{- \frac{23}{59}R_2+R_3}
-        & \begin{bmatrix}
-            7 &  1 &  1 \\
-            \fbox{$\frac47$} &  \frac{59}7 &  -\frac{81}7 \\
-            \fbox{$-\frac27$} &  \fbox{$\frac{23}{59}$} &  \frac{578}{59}
-        \end{bmatrix} & ~ &~
-    \end{align*}
-]]>
-                
-<!--                 <md>
+                <md>
                     <mrow>
-                        
+                        A = \begin{bmatrix}
+                        <![CDATA[ 4 &  9 &  -11 \\ -2 &  3 &  5\\ 7 &  1 &  1 ]]>
+                        \end{bmatrix} \xrightarrow{R_1:R_3}
+                        \amp \begin{bmatrix}
+                        <![CDATA[ 7 & 1 & 1 \\ -2 & 3 & 5 \\ 4 & 9 & -11 ]]>
+                        \end{bmatrix},
+                        P = \begin{bmatrix}
+                        <![CDATA[ 0& 0& 1 \\ 0& 1& 0 \\ 1& 0& 0 ]]>
+                        \end{bmatrix}
                     </mrow>
                     <mrow>
+                        \cdots \xrightarrow[-\frac47R_1+R_3]{\frac27R_1+R_2} 
+                        \amp \begin{bmatrix}
+                        <![CDATA[ 7 & 1 & 1 \\ \fbox{$-\frac27$} &  \frac{23}7 &  \frac{37}7 \\ \fbox{$\frac47$} &  \frac{59}7 &  -\frac{81}7 ]]>
+                        \end{bmatrix}
                     </mrow>
                     <mrow>
+                        \cdots \xto{R_2:R_3} 
+                        \amp \begin{bmatrix}
+                        <![CDATA[ 7 & 1 & 1 \\ \fbox{$\frac47$} &  \frac{59}7 &  -\frac{81}7 \\ \fbox{$-\frac27$} &  \frac{23}7 &  \frac{37}7 ]]>
+                        \end{bmatrix},
+                        P  = \begin{bmatrix}
+                        <![CDATA[ 0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0 ]]>
+                        \end{bmatrix}
                     </mrow>
-                
-                </md> -->
+                    <mrow>
+                        \cdots \xto{- \frac{23}{59}R_2+R_3}
+                        \amp \begin{bmatrix}
+                        <![CDATA[ 7 &  1 &  1 \\ \fbox{$\frac47$} &  \frac{59}7 &  -\frac{81}7 \\ \fbox{$-\frac27$} &  \fbox{$\frac{23}{59}$} &  \frac{578}{59} ]]>
+                        \end{bmatrix}
+                    </mrow>
+                </md>
             </p>
 
             <p>

@@ -39,46 +39,38 @@
                 </p>
                 <md>
                     <mrow>
-                        \left[\begin{array}{ccc|c}
-                        1 \amp  3 \amp  -13 \amp  -18 \\ 
-                        1 \amp  2 \amp  -10 \amp  -15 \\ 
-                        \fbox{-6} \amp  -7 \amp  46 \amp  77
-                        \end{array}\right]
-
-                        \xto{R_1:R_3} \amp
-
-                        \left[\begin{array}{ccc|c}
-                        \fbox{$-6$} \amp -7 \amp 46 \amp 77 \\
-                        1 \amp 2 \amp -10 \amp -15 \\
-                        1 \amp 3 \amp -13 \amp -18
+                        A\vert\vec{b} = 
+                        \amp \left[\begin{array}{ccc|c}
+                        <![CDATA[ 1 &  3 &  -13 &  -18 \\ 1 &  2 &  -10 &  -15 \\ \fbox{-6} &  -7 &  46 &  77 ]]>
+                        \end{array}\right] 
+                    </mrow>
+                    <mrow>
+                        \cdots \xrightarrow{R_1:R_3}
+                        \amp \left[\begin{array}{ccc|c}
+                        <![CDATA[ \fbox{$-6$} & -7 & 46 & 77 \\ 1 & 2 & -10 & -15 \\ 1 & 3 & -13 & -18 ]]>
                         \end{array}\right]
                     </mrow>
                     <mrow>
-                        \xrightarrow[\frac16 R_1 + R_3]{\frac16 R_1 + R_2} \amp
-
-                        \left[\begin{array}{ccc|c}
-                        -6 \amp  -7 \amp  46 \amp  77 \\ 
-                        0 \amp  \frac56 \amp  -\frac73 \amp  -\frac{13}6 \\
-                        0 \amp  \fbox{$\frac{11}6$} \amp  -\frac{16}3 \amp  -\frac{31}6
+                        \cdots \xrightarrow[\frac16 R_1 + R_3]{\frac16 R_1 + R_2}
+                        \amp \left[\begin{array}{ccc|c}
+                        <![CDATA[ -6 &  -7 &  46 &  77 \\ 0 &  \frac56 &  -\frac73 &  -\frac{13}6 \\ 0 &  \fbox{$\frac{11}6$} &  -\frac{16}3 &  -\frac{31}6 ]]>
+                        \end{array}\right]
+                    </mrow>
+                    <mrow>
+                        \cdots \xto{R_2:R_3} 
+                        \amp \left[\begin{array}{ccc|c}
+                        <![CDATA[ -6 &  -7 &  46 &  77 \\ 0 &  \fbox{$\frac{11}6$} &  -\frac{16}3 &  -\frac{31}6 \\ 0 &  \frac56 &  -\frac73 &  -\frac{13}6  ]]>
                         \end{array} \right]
                     </mrow>
                     <mrow>
-                        \xto{R_2:R_3} \amp
-
-                        \left[\begin{array}{ccc|c}
-                        -6 \amp  -7 \amp  46 \amp  77 \\ 
-                        0 \amp  \fbox{$\frac{11}6$} \amp  -\frac{16}3 \amp  -\frac{31}6 \\
-                        0 \amp  \frac56 \amp  -\frac73 \amp  -\frac{13}6 
-                        \end{array} \right]
+                        \cdots \xto{-\frac5{11} R_2 + R_3} 
+                        \amp \left[\begin{array}{rrr|r}
+                        <![CDATA[ -6 &  -7 &  46 &  77 \\ 0 &  \frac{11}6 &  -\frac{16}3 &  -\frac{31}6 \\ 0 &  0 &  \frac1{11} &  \frac2{11} ]]>
+                        \end{array}\right]
                     </mrow>
                     <mrow>
-                        \xto{-\frac5{11} R_2 + R_3} \amp
-
-                        \left[\begin{array}{rrr|r}
-                        -6 \amp  -7 \amp  46 \amp  77 \\ 
-                        0 \amp  \frac{11}6 \amp  -\frac{16}3 \amp  -\frac{31}6\\
-                        0 \amp  0 \amp  \frac1{11} \amp  \frac2{11}
-                        \end{array} \right]
+                        \cdots =
+                        \amp\, U\vert\vec{b}'
                     </mrow>
                 </md>
                 <p>
@@ -86,15 +78,16 @@
                 </p>
                 <md>
                     <mrow>
-                        \left[\begin{array}{rrr|r}
+                        U\vert\vec{b}' =
+                        \amp \left[\begin{array}{rrr|r}
                         -6 \amp  -7 \amp  46 \amp  77 \\ 
                         0 \amp  \frac{11}6 \amp  -\frac{16}3 \amp  -\frac{31}6\\
                         0 \amp  0 \amp  \frac1{11} \amp  \frac2{11}
                         \end{array} \right]
-
-                        \xrightarrow[11 R_3]{\begin{matrix} -\frac16 R_1 \\ \frac6{11} R_2\end{matrix}} \amp
-
-                        \left[\begin{array}{rrr|r}
+                    </mrow>
+                    <mrow>
+                        \cdots \xrightarrow{-\frac16 R_1, \frac6{11} R_2, 11 R_3} 
+                        \amp \left[\begin{array}{rrr|r}
                         1 \amp \frac76 \amp -\frac{46}6 \amp -\frac{77}6 \\
                         0 \amp 1 \amp -\frac{32}{11} \amp -\frac{31}{11} \\
                         0 \amp 0 \amp 1 \amp 2
@@ -135,7 +128,7 @@
                         \end{array}\right] 
                     </mrow>
                     <mrow>
-                        \xto{-10.0^{-20} R_1 + R_2} \amp
+                        \cdots \xto{-10.0^{-20} R_1 + R_2} \amp
 
                         \left[\begin{array}{cc|c}
                         1.0 \amp  2.0 \amp  4.0 \\
@@ -143,23 +136,6 @@
                         \end{array} \right]
                     </mrow>
                 </md>
-
-                <!--md>
-                        <mrow>  \begin{abmc}{2}10.0^{-20} \amp  1.0 \amp  1.0</mrow>
-                        <mrow>  1.0 \amp  2.0 \amp  4.0\end{abmc} 
-                            \xto{R_1:R_2}
-                            \amp \begin{abmc}{2}
-                            1.0 \amp  2.0 \amp  4.0</mrow>
-                        <mrow>  10.0^{-20} \amp  1.0 \amp  1.0
-                            \end{abmc}
-                            \xto{-10.0^{-20}R_1+R_2}
-                            \left[\begin{array}{2}
-                            1.0 \amp  2.0 \amp  4.0 \\
-                            0.0 \amp  1.0 \amp  1.0
-                            \end{array} \right]</mrow>
-                    </md-->
-
-
                 <p>
                     Back substitution is immediate:
                     <md>
