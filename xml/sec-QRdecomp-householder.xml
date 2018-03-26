@@ -1,7 +1,7 @@
 <section xml:id="sec-QRdecomp-Householder">
-    <title>QR factorization by Householder reflectors</title>
+    <title>QR decomposition by Householder reflectors</title>
     <p>
-        Another algorithm for determining the <m>QR</m> factorization of a matrix which requires fewer operations and is less susceptible to rounding error is the method of Householder reflectors. The method depends upon the following theorem.
+        Another algorithm for determining the <m>QR</m> decomposition of a matrix which requires fewer operations and is less susceptible to rounding error is the method of Householder reflectors. The method depends upon the following theorem.
     </p>
     <remark>
         <p>
@@ -78,7 +78,7 @@
     </theorem>
 
     <p>
-        For brevity, I'll refer to the <m>QR</m> factorization by Householder reflectors as HHQR. The process of HHQR for a matrix <m>A</m> iterates through the columns of <m>A</m> just like Gram-Schmidt, but with far less numerical instability. We'll explain the process without use of an example, as the process becomes extremely unwieldy in exact arithmetic.
+        For brevity, I'll refer to the <m>QR</m> decomposition by Householder reflectors as HHQR. The process of HHQR for a matrix <m>A</m> iterates through the columns of <m>A</m> just like Gram-Schmidt, but with far less numerical instability. We'll explain the process without use of an example, as the process becomes extremely unwieldy in exact arithmetic.
     </p>
 
     <p>
@@ -143,6 +143,10 @@
             </p>
         </statement>
     </algorithm>
+</section>
+
+
+
     <!--p>
         Here's Python code which implements HHQR when <m>A</m> is specified as a list of lists rather than a matrix. Notice how local functions <c>sign</c>, <c>householder</c>, and <c>times</c> are defined within the <c>hhqr</c> function.
     </p>
@@ -200,4 +204,3 @@
     <p>
         \part{Introduction to cryptography}
     </p-->
-</section>

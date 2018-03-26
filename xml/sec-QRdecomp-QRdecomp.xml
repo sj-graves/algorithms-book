@@ -1,15 +1,15 @@
 <section xml:id="sec-QRdecomp-QRdecomp">
-    <title>QR factorization</title>
+    <title>QR decomposition</title>
 
     <introduction>
         <p>
-            With the tool of the Modified Gram-Schmidt algorithm in hand, we have everything necessary to produce a <m>QR</m> factorization. 
+            With the tool of the Modified Gram-Schmidt algorithm in hand, we have everything necessary to produce a <m>QR</m> decomposition. 
         </p>
     </introduction>
     <subsection>
-        <title>Reduced <m>QR</m> factorization</title>
+        <title>Reduced <m>QR</m> decomposition</title>
         <p>
-            We begin with an <m>m\times n</m> matrix <m>A</m>, where <m>m\geq n</m>, which we think of as a matrix of <m>n</m> column vectors <m>\vec{x}_1, \vec{x}_2, \dotsc, \vec{x}_n\in \R^m</m>. If these vectors are linearly independent<fn>This can be checked in a number of ways, not the least of which is to perform Gaussian elimination on <m>A</m>; if the resulting matrix is upper triangular, then the column vectors of <m>A</m> are linearly independent.</fn>, they can be orthonormalized into a set of vectors <m>\set{\vec{q}_1,\dotsc,\vec{q}_n}</m> via Gram-Schmidt. Collecting those vectors as the columns of a matrix <m>Q</m>, we have the first factor of the <m>QR</m> factorization.
+            We begin with an <m>m\times n</m> matrix <m>A</m>, where <m>m\geq n</m>, which we think of as a matrix of <m>n</m> column vectors <m>\vec{x}_1, \vec{x}_2, \dotsc, \vec{x}_n\in \R^m</m>. If these vectors are linearly independent<fn>This can be checked in a number of ways, not the least of which is to perform Gaussian elimination on <m>A</m>; if the resulting matrix is upper triangular, then the column vectors of <m>A</m> are linearly independent.</fn>, they can be orthonormalized into a set of vectors <m>\set{\vec{q}_1,\dotsc,\vec{q}_n}</m> via Gram-Schmidt. Collecting those vectors as the columns of a matrix <m>Q</m>, we have the first factor of the <m>QR</m> decomposition.
         </p>
         <p>
             The matrix <m>R</m> is an upper triangular matrix, whose entries depend upon calculations performed in <xref ref="alg-MGSO" autoname="title" />. Specifically, if we write <m>R=[r_{i,j}]_{n\times n}</m>, then 
@@ -31,9 +31,9 @@
         </p>
     </subsection>
     <subsection>
-        <title>Full <m>QR</m> factorization</title>
+        <title>Full <m>QR</m> decomposition</title>
         <p>
-            When <m>A=[a_{i,j}]_{m\times n}</m> and <m>n \lt m</m>, the matrix <m>Q</m> produced via the reduced <m>QR</m> factorization cannot possibly be orthogonal, as only square matrices are invertible. In order to create from <m>A</m> an orthogonal matrix, let <m>B=[b_{i,j}]_{m\times(m-n)}</m> be a matrix whose columns are linearly independent from each other and from the columns of <m>A</m>. The process of <m>QR</m> factorization described above, performed upon the augmented matrix <m>A|B</m>, produces factors <m>Q</m> and <m>R</m> such that
+            When <m>A=[a_{i,j}]_{m\times n}</m> and <m>n \lt m</m>, the matrix <m>Q</m> produced via the reduced <m>QR</m> decomposition cannot possibly be orthogonal, as only square matrices are invertible. In order to create from <m>A</m> an orthogonal matrix, let <m>B=[b_{i,j}]_{m\times(m-n)}</m> be a matrix whose columns are linearly independent from each other and from the columns of <m>A</m>. The process of <m>QR</m> decomposition described above, performed upon the augmented matrix <m>A|B</m>, produces factors <m>Q</m> and <m>R</m> such that
             <me>
                 A = I_{m\times n}(A|B) = QR,
             </me>
@@ -44,9 +44,9 @@
         </p>
     </subsection>
     <example>
-        <title>A complete <m>QR</m> factorization example</title>
+        <title>A complete <m>QR</m> decomposition example</title>
         <p>
-            This example is <em>extremely</em> long and detailed. Suppose we wish to compute a full <m>QR</m> factorization of the matrix 
+            This example is <em>extremely</em> long and detailed. Suppose we wish to compute a full <m>QR</m> decomposition of the matrix 
             <me>
                 A = <!--[[1,0,-1],[1,2,-2],[-2,1,1],[0,0,1]]-->
                 \left[\begin{array}{rrr}
@@ -272,15 +272,15 @@
     </example>
 
     <subsection>
-        <title>An application of <m>QR</m> factorization: Least Squares Regression</title>
+        <title>An application of <m>QR</m> decomposition: Least Squares Regression</title>
         <p>
-            While we can use the <m>QR</m> factorization to solve a system of equations, it is approximately <em>three times more complicated</em> than <m>LU</m> factorization. However, <m>QR</m> factorization can avoid a problem called <em>ill-conditioning</em> in solving the least squares problem. Ill-conditioning, very loosely speaking, measures how much a small change in input will be amplified in the output, and in the case of solving a matrix equation is dependent only upon the matrix, not the algorithm used to solve the equation.
+            While we can use the <m>QR</m> decomposition to solve a system of equations, it is approximately <em>three times more complicated</em> than <m>LU</m> decomposition. However, <m>QR</m> decomposition can avoid a problem called <em>ill-conditioning</em> in solving the least squares problem. Ill-conditioning, very loosely speaking, measures how much a small change in input will be amplified in the output, and in the case of solving a matrix equation is dependent only upon the matrix, not the algorithm used to solve the equation.
         </p>
         <algorithm>
-            <title>Least squares by <m>QR</m> factorization</title>
+            <title>Least squares by <m>QR</m> decomposition</title>
             <statement>
                 <p>
-                    Given the <m>m\times n</m> inconsistent system of equations represented by <m>A\vec{x}=\vec{b}</m>, let <m>QR=A</m> be the full <m>QR</m> factorization of <m>A</m> and let
+                    Given the <m>m\times n</m> inconsistent system of equations represented by <m>A\vec{x}=\vec{b}</m>, let <m>QR=A</m> be the full <m>QR</m> decomposition of <m>A</m> and let
                     <md>
                         <mrow>  \hat{R} \amp = \text{ upper \(n\times n\) submatrix of \(R\) }</mrow>
                         <mrow>  \hat{\vec{d}} \amp = \text{ upper \(n\) entries of } \vec{d}=Q^T\vec{b}</mrow>
@@ -293,5 +293,4 @@
             </statement>
         </algorithm>
     </subsection>
-    
 </section>
