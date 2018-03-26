@@ -7,9 +7,9 @@
         </p>
     </introduction>
     <subsection>
-        <title>Reduced QR decomposition</title>
+        <title>Reduced <m>QR</m> factorization</title>
         <p>
-            We begin with an <m>m\times n</m> matrix <m>A</m>, where <m>m\geq n</m>, which we think of as a matrix of <m>n</m> column vectors <m>\vec{x}_1, \vec{x}_2, \ldots, \vec{x}_n\in \R^m</m>. If these vectors are linearly independent<fn>This can be checked in a number of ways, not the least of which is to perform Gaussian elimination on <m>A</m>; if the resulting matrix is upper triangular, then the column vectors of <m>A</m> are linearly independent.</fn>, they can be orthonormalized into a set of vectors <m>\set{\vec{q}_1,\ldtos,\vec{q}_n}</m> via Gram-Schmidt. Collecting those vectors as the columns of a matrix <m>Q</m>, we have the first factor of the <m>QR</m> factorization.
+            We begin with an <m>m\times n</m> matrix <m>A</m>, where <m>m\geq n</m>, which we think of as a matrix of <m>n</m> column vectors <m>\vec{x}_1, \vec{x}_2, \dotsc, \vec{x}_n\in \R^m</m>. If these vectors are linearly independent<fn>This can be checked in a number of ways, not the least of which is to perform Gaussian elimination on <m>A</m>; if the resulting matrix is upper triangular, then the column vectors of <m>A</m> are linearly independent.</fn>, they can be orthonormalized into a set of vectors <m>\set{\vec{q}_1,\dotsc,\vec{q}_n}</m> via Gram-Schmidt. Collecting those vectors as the columns of a matrix <m>Q</m>, we have the first factor of the <m>QR</m> factorization.
         </p>
         <p>
             The matrix <m>R</m> is an upper triangular matrix, whose entries depend upon calculations performed in <xref ref="alg-MGSO" autoname="title" />. Specifically, if we write <m>R=[r_{i,j}]_{n\times n}</m>, then 
@@ -31,9 +31,9 @@
         </p>
     </subsection>
     <subsection>
-        <title>Full QR decomposition</title>
+        <title>Full <m>QR</m> factorization</title>
         <p>
-            When <m>A=[a_{i,j}]_{m\times n}</m> and <m>n \lt m</m>, the matrix <m>Q</m> produced via the reduced <m>QR</m> decomposition cannot possibly be orthogonal, as only square matrices are invertible. In order to create from <m>A</m> an orthogonal matrix, let <m>B=[b_{i,j}]_{m\times(m-n)}</m> be a matrix whose columns are linearly independent from each other and from the columns of <m>A</m>. The process of <m>QR</m> decomposition described above, performed upon the augmented matrix <m>A|B</m>, produces factors <m>Q</m> and <m>R</m> such that
+            When <m>A=[a_{i,j}]_{m\times n}</m> and <m>n \lt m</m>, the matrix <m>Q</m> produced via the reduced <m>QR</m> factorization cannot possibly be orthogonal, as only square matrices are invertible. In order to create from <m>A</m> an orthogonal matrix, let <m>B=[b_{i,j}]_{m\times(m-n)}</m> be a matrix whose columns are linearly independent from each other and from the columns of <m>A</m>. The process of <m>QR</m> factorization described above, performed upon the augmented matrix <m>A|B</m>, produces factors <m>Q</m> and <m>R</m> such that
             <me>
                 A = I_{m\times n}(A|B) = QR,
             </me>
@@ -44,7 +44,7 @@
         </p>
     </subsection>
     <example>
-        <title>A complete QR factorization example</title>
+        <title>A complete <m>QR</m> factorization example</title>
         <p>
             This example is <em>extremely</em> long and detailed. Suppose we wish to compute a full <m>QR</m> factorization of the matrix 
             <me>
@@ -270,65 +270,14 @@
             If the length of computation for this <q>simple</q> example with three vectors from <m>\R^4</m> is not sufficient to demonstrate the necessity for solving the problem with a computer, nothing is! Moreover, this example was specially chosen so that it was numerically well-behaved.
         </p>
     </example>
-    <!--example>
-        <title>Another QR factorization example</title>
-        <p>
-            Consider that we have a set <m>S=\set{\vec{x}_1,\vec{x}_2,\vec{x}_3,\vec{x}_4}</m> where
-            <md>
-                <mrow>
-                    \vec{x}_1 \amp = \vc{6, -8, 6, 2, 10, -4},
-                </mrow>
-                <mrow>
-                    \vec{x}_2 \amp = \vc{-1, -3, -5, -8, 0, -1},
-                </mrow>
-                <mrow>
-                    \vec{x}_3 \amp = \vc{-5, 7, 6, -4, 8, -9},
-                </mrow>
-                <mrow>
-                    \vec{x}_4 \amp = \vc{0, -10, 0, -1, -9, -3}}.
-                </mrow>
-            </md>
-            We wish to extend <m>S</m> to an orthonormal basis <m>B</m> for <m>\R^6</m>. Letting the vectors of <m>S</m> be the columns of a matrix <m>A</m> and augmenting by the first two columns of the identity matrix, we obtain 
-            <me>
-                A|B = \left[\begin{array}{rrrr|rr}
-                6 \amp -1 \amp -5 \amp 0 \amp 1 \amp 0 \\
-                -8 \amp -3 \amp 7 \amp -10 \amp 0 \amp 1 \\
-                6 \amp -5 \amp 6 \amp 0 \amp 0 \amp 0 \\
-                2 \amp -8 \amp -4 \amp -1 \amp 0 \amp 0 \\
-                10 \amp 0 \amp 8 \amp -9 \amp 0 \amp 0 \\
-                -4 \amp -1 \amp -9 \amp -3 \amp 0 \amp 0
-                \end{array}\right]\] = QR.
-            </me>
-            The matrices <m>Q</m> and <m>R</m> are sufficiently complicated that it is impossible to nicely display them in the space provided. The column vectors of <m>Q</m> are as follows:
-            <md>
-                <mrow>
-                    \vec{q}_1 \amp = \frac18\vc{3, -4, 3, 1, 5, -2},
-                </mrow>
-                <mrow>
-                    \vec{q}_2 \amp = \frac1{8\sqrt{391}}\vc{-7, -60, -71, -125, 15, -22}
-                </mrow>
-                <mrow>
-                    \vec{q}_3 \amp = \frac{\vc{-9943, 13809, 7289, -6910, 8962, -12649}}{2\sqrt{157685999}}
-                </mrow>
-                <mrow>
-                    \vec{q}_4 \amp = \frac{\vc{-4125970, -7452911, 6244158, 599809, -11167027, -9534559}}{2\sqrt{81882274530869}}
-                </mrow>
-                <mrow>
 
-                </mrow>
-                <mrow>
-
-                </mrow>
-            </md>
-        </p>
-    </example-->
     <subsection>
-        <title>An application of QR factorization: Least Squares Regression</title>
+        <title>An application of <m>QR</m> factorization: Least Squares Regression</title>
         <p>
-            While we can use the <m>QR</m> factorization to solve a system of equations, it is approximately <em>three times more complicated</em> than <m>LU</m> decomposition. However, <m>QR</m> decomposition can avoid a problem called <em>ill-conditioning</em> in solving the least squares problem. Ill-conditioning, very loosely speaking, measures how much a small change in input will be amplified in the output, and in the case of solving a matrix equation is dependent only upon the matrix, not the algorithm used to solve the equation.
+            While we can use the <m>QR</m> factorization to solve a system of equations, it is approximately <em>three times more complicated</em> than <m>LU</m> factorization. However, <m>QR</m> factorization can avoid a problem called <em>ill-conditioning</em> in solving the least squares problem. Ill-conditioning, very loosely speaking, measures how much a small change in input will be amplified in the output, and in the case of solving a matrix equation is dependent only upon the matrix, not the algorithm used to solve the equation.
         </p>
         <algorithm>
-            <title>Least squares by $QR$ factorization</title>
+            <title>Least squares by <m>QR</m> factorization</title>
             <statement>
                 <p>
                     Given the <m>m\times n</m> inconsistent system of equations represented by <m>A\vec{x}=\vec{b}</m>, let <m>QR=A</m> be the full <m>QR</m> factorization of <m>A</m> and let
@@ -344,72 +293,5 @@
             </statement>
         </algorithm>
     </subsection>
-    <!--<introduction>
-        <p>
-            Consider a <m>m\times n</m> matrix <m>A</m>; the columns of <m>A</m> can be considered as <m>n</m> vectors in <m>\R^m</m>. If those vectors are linearly independent, they span an <m>n</m>-dimensional subspace of <m>\R^m</m>. The process of Gram-Schmidt orthonormalization performed upon that set of vectors will result in an orthonormal basis for that subspace. Collecting these vectors as the column vectors of a matrix <m>Q</m> gives us the first half of the <m>QR</m> factorization of <m>A</m>. The matrix <m>R</m> is produced as an upper-triangular matrix recording the magnitudes of the projections removed in each iteration of step 2a above, along with the scaling factors of step 2b. That is, <m>R=[r_{i,j}]</m> is a <m>n\times n</m> matrix with
-            <md>
-                <mrow>  r_{i,j} \amp = \begin{cases}\vec{q}_i\cdot \vec{w}_j, \amp  i\lt j \\
-                    \abs{\vec{w}_j}, \amp  i=j \\
-                    0, \amp i>j.
-                    \end{cases}</mrow>
-            </md>
-        </p>
-
-        <p>
-            This means that the order in which elements of <m>R</m> are recorded during the algorithm will be sort of <q>transpose</q> to the normal order: <m>r_{1,1}</m>, <m>r_{1,2}</m>, <m>r_{2,2}</m>, <m>r_{1,3}</m>, <m>r_{2,3}</m>, <m>r_{3,3}</m>, and so on.
-        </p>
-
-        <p>
-            The matrices <m>Q</m> and <m>R</m> produced as just described are the <em>reduced <m>QR</m> factorization of <m>A</m></em>. If it exists, it is customary to add <m>m-n</m> extra columns to <m>A</m>; these can be any column vectors linearly independent from the original columns of <m>A</m>, so it is often the case that the columns added correspond to vectors <m>\vc{1,0,0,\ldots}</m>, <m>\vc{0,1,0,\ldots}</m>, <m>\vc{0,0,1,\ldots}</m>, and so on. The orthonormal basis will then be a full basis for <m>\R^m</m> containing <m>m</m> vectors; in order that <m>A=QR</m>, it must be that <m>R</m> is a <m>m\times n</m> matrix. In fact this is the case, with <m>R=[r_{i,j}]</m> the <m>m\times n</m> matrix with the same formula from <xref ref="eq_rmatrix" autoname="yes" /> determining its elements. This different factorization is called the <em>full <m>QR</m> factorization of <m>A</m></em>.
-        </p>
-        <definition>
-            <statement>
-                <p>
-                    A square matrix <m>Q</m> is <term>orthogonal</term> if and only if <m>Q^T=Q^{-1}</m>.
-                </p>
-            </statement>
-        </definition>
-
-        <theorem>
-            <statement>
-                <p>
-                    Suppose <m>QR=A</m> is the full <m>QR</m> factorization of <m>A</m>. Then <m>Q</m> is an orthogonal matrix.
-                </p>
-            </statement>
-        </theorem>
-
-        <proof>
-            <p>
-                Consider <m>Q^TQ = [m_{i,j}]</m>. Then
-                <me>
-                    m_{i,j} = \vec{q}_i\cdot\vec{q}_j = \begin{cases}0\amp i\neq j\\1\amp i=j,
-                    \end{cases}
-                </me>
-                and the desired result holds.
-            </p>
-        </proof>
-    </introduction>
-
-
-    <subsection>
-        <title>Utility of <m>QR</m> factorization</title>
-        <p>
-            While we can use the <m>QR</m> factorization to solve a system of equations, it is approximately three times more complicated than <m>LU</m> decomposition. However, <m>QR</m> decomposition can avoid a problem called <em>ill-conditioning</em> in solving the least squares problem.
-        </p>
-        <algorithm>
-            <title>Least squares by $QR$ factorization</title>
-            <p>
-                Given the <m>m\times n</m> inconsistent system of equations represented by <m>A\vec{x}=\vec{b}</m>, let <m>QR=A</m> be the full <m>QR</m> factorization of <m>A</m> and let
-                <md>
-                    <mrow>  \hat{R} \amp = \text{ upper \(n\times n\) submatrix of \(R\) }</mrow>
-                    <mrow>  \hat{\vec{d}} \amp = \text{ upper \(n\) entries of } \vec{d}=Q^T\vec{b}</mrow>
-                </md>
-            </p>
-
-            <p>
-                Then the solution to <m>\hat{R}\vec{\bar{x}}=\hat{\vec{d}}</m> is the least squares solution <m>\bar{\vec{x}}</m>.
-            </p>
-        </algorithm>
-    </subsection>
--->
+    
 </section>
