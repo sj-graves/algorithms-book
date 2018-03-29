@@ -32,7 +32,7 @@
 
     <figure xml:id="fig_refl_thm1" >
         <caption>Orthogonality of <m>\vec{w}-\vec{x}</m> and <m>\vec{w}+\vec{x}</m> in <m>\R^n</m>.</caption>
-        <image xml:id="householder_orthogonality">
+        <image xml:id="householder_orthogonality" width="50%">
             <latex-image-code><![CDATA[
 \begin{tikzpicture}[scale=1/2]
 \draw [->] (0,0) -- node [left] {\(\vec{w}\)} (3,4);
@@ -45,7 +45,7 @@
 
     </figure>
     <p>
-        Give two such vectors <m>\vec{x},\vec{w}\in\R^n</m>, define <m>\vec{v}=\vec{w}-\vec{x}</m>, and consider the matrix
+        Given two such vectors <m>\vec{x},\vec{w}\in\R^n</m>, define <m>\vec{v}=\vec{w}-\vec{x}</m>, and consider the matrix
         <me>
             P = \frac{\vec{v}\vec{v}^T}{\vec{v}^T\vec{v}}.
         </me>
@@ -55,14 +55,18 @@
         While it may be confusing to think that this is a matrix, recall: since <m>\vec{v}</m> is an <m>n\times 1</m> column matrix, <m>\vec{v}\vec{v}^T</m> is an <m>n\times n</m> symmetric matrix. In fact,
         <md>
             <mrow>  P^2 \amp = \frac{\vec{v}\vec{v}^T}{\vec{v}^T\vec{v}}\frac{\vec{v}\vec{v}^T}{\vec{v}^T\vec{v}} = \frac{\vec{v}(\vec{v}^T\vec{v})\vec{v}^T}{(\vec{v}^T\vec{v})^2} = \frac{\vec{v}\vec{v}^T}{\vec{v}^T\vec{v}} = P,
-                \text{ and }  
-                \amp 
-                P\vec{v} \amp = \frac{\vec{v}\vec{v}^T}{\vec{v}^T\vec{v}}\vec{v} = \frac{\vec{v}(\vec{v}^T\vec{v})}{\vec{v}^T\vec{v}} = \vec{v}.</mrow>
+            </mrow>
+        </md>
+        and
+        <md>
+            <mrow>
+                P\vec{v} \amp = \frac{\vec{v}\vec{v}^T}{\vec{v}^T\vec{v}}\vec{v} = \frac{\vec{v}(\vec{v}^T\vec{v})}{\vec{v}^T\vec{v}} = \vec{v}.
+            </mrow>
         </md>
     </p>
 
     <p>
-        A matrix satisfying <m>P^2=P</m> is called a <em>projection matrix.</em> The purpose of using <m>P</m> is that <m>\vec{x}-P\vec{x}</m> is the projection of <m>\vec{x}</m> onto <m>\vec{y+x}</m>, and therefore <m>\vec{x}-2P\vec{x} = \vec{w}</m>!
+        A matrix satisfying <m>P^2=P</m> is called a <term>projection matrix.</term> The purpose of using <m>P</m> is that <m>\vec{x}-P\vec{x}</m> is the projection of <m>\vec{x}</m> onto <m>\vec{w+x}</m>, and therefore <m>\vec{x}-2P\vec{x} = \vec{w}</m>!
     </p>
 
     <theorem>
@@ -86,7 +90,7 @@
     </p>
 
     <p>
-        In order to continue this process, we will produce from <m>R_1</m> a new matrix <m>R_2=[r_{i,j}]</m> which has <m>r_{i,j}=0</m> whenever <m>i>j</m> and <m>j\leq 2</m>. We do so by ignoring the first row and column of <m>R_1</m>; doing so gives us <m>R'_1</m>, an <m>(m-1)\times(n-1)</m> matrix. If we let <m>\vec{x}_2</m> be the first column of <m>R'_1</m> and <m>\vec{w}_2=\vc{\pm\abs{\vec{x}_2},0,0,\ldots,0}</m>, we can find the Householder reflector <m>\hat{H}_2</m> such that <m>\hat{H}_2\vec{x}_2=\vec{w}_2</m>. Say then that <m>\hat{H}_2 = [\hat{h}_{i,j}]</m>. We will create our ``real" reflection matrix by inserting <m>\hat{H}_2</m> into the bottom right corner of an identity matrix. Here is the formula for <m>h_{i,j}</m> along with the more intuitive picture diagram:
+        In order to continue this process, we will produce from <m>R_1</m> a new matrix <m>R_2=[r_{i,j}]</m> which has <m>r_{i,j}=0</m> whenever <m>i>j</m> and <m>j\leq 2</m>. We do so by ignoring the first row and column of <m>R_1</m>; doing so gives us <m>R'_1</m>, an <m>(m-1)\times(n-1)</m> matrix. If we let <m>\vec{x}_2</m> be the first column of <m>R'_1</m> and <m>\vec{w}_2=\vc{\pm\abs{\vec{x}_2},0,0,\ldots,0}</m>, we can find the Householder reflector <m>\hat{H}_2</m> such that <m>\hat{H}_2\vec{x}_2=\vec{w}_2</m>. Say then that <m>\hat{H}_2 = [\hat{h}_{i,j}]</m>. We will create our full reflection matrix by inserting <m>\hat{H}_2</m> into the bottom right corner of an identity matrix. Here is the formula for <m>h_{i,j}</m> along with the more intuitive picture diagram:
         <md>
             <mrow>
                 h_{i,j} \amp = \begin{cases}
