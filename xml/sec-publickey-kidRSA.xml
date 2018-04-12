@@ -155,7 +155,7 @@
             <me>
                 ((me)\text{ mod }n)d\text{ mod } n = m,
             </me>
-            but then <m>e</m> and <m>d</m> must be multiplicative inverses modulo <m>n</m>. A number <m>e\in \mathbb{Z}_n</m> only has a mutliplicative inverse when <m>\gcd(e,n)=1</m>. This leads, however, to an efficient expansion of Euclid's algorithm for the Greatest Common Divisor to recover the value of <m>d</m>.
+            but then <m>e</m> and <m>d</m> must be multiplicative inverses modulo <m>n</m>. A number <m>e\in \mathbb{Z}_n</m> only has a multiplicative inverse when <m>\gcd(e,n)=1</m>. This leads to an efficient expansion of Euclid's algorithm for the Greatest Common Divisor to recover the value of <m>d</m>.
         </p>
 
         <theorem>
@@ -166,10 +166,97 @@
             </statement>
         </theorem>
 
+        <theorem>
+            <statement> 
+                Let <m>a,b\in \mathbb{Z}</m>. Then there exist <m>s,t\in \mathbb{Z}</m> such that <m>as+bt = \gcd(a,b)</m>.
+            </statement>
+        </theorem>
+        <corollary>
+            <statement>
+                Let <m>a,b\in \mathbb{Z}</m> with <m>\gcd(a,b)=1</m>. Then if there is some <m>k\in \mathbb{Z}</m> such that <m>as+bt = ka+1</m>, then <m>t= b^{-1}\text{ mod }a</m>.
+            </statement>
+        </corollary>
         <p>
-            The application of this theorem repeatedly is called Euclid's algorithm: given positive integers <m>a</m> and <m>b</m>, there are unique <m>q,r</m> with <m>0\leq r\lt b</m> such that <m>a=bq+r</m>. If <m>r=0</m>, then <m>\gcd(a,b)=b</m>. If <m>r\neq 0</m>, then <m>\gcd(a,b) = \gcd(b,r)</m>.
+            The combination of these two theorems and the corollary provide our extended version of Euclid's algorithm.
         </p>
-        <algorithm>
+        <example>
+            <title>Extending Euclid's Algorithm to find Inverses</title>
+            <statement>
+                <p>
+                    This process is straightforward application of the theory. We first make some strange assumptions about parameters: <m>s_{-1}=0</m> and <m>t_{-1}=1</m>. For <m>i\geq 0</m>, we will insist that <m>r_i = s_ia+t_ib</m>.
+                    <md>
+                        <mrow> 
+                            i \amp =0 \amp 
+                            a \amp= q_0 b + r_0 \amp 
+                            r_0 \amp= 1\cdot a-q_0b \amp 
+                            s_0 \amp= 1 \amp 
+                            t_0 \amp= -q_0 
+                        </mrow>
+                        <mrow>
+                            i \amp= 1 \amp
+                            b \amp = q_1r_0 + r_1 \amp
+                            r_1 \amp = b-q_1r_0
+                        </mrow>
+                        <mrow>
+                            \amp<nbsp/> \amp
+                            \amp<nbsp/> \amp
+                            \amp= b-q_1(a-q_0)b
+                        </mrow>
+                        <mrow>
+                            \amp<nbsp/> \amp
+                            \amp<nbsp/> \amp
+                            \amp=-q_1a+(1+q_0q_1)b \amp
+                            s_1 \amp= -q_1 \amp
+                            t_1 \amp= 1+q_0q_1
+                        </mrow>
+                        <intertext>
+                            <p>
+                                While the pattern is not clearly established at this point, it is the case that <m>s_1 = s_{-1}-q_1s_0</m> and <m>t_1=t_{-1}-q_1t_0</m>; this pattern will be more clear as we proceed.
+                            </p>
+                        </intertext>
+                        <mrow>
+                            i \amp= 2 \amp
+                            r_0 \amp= q_2r_1 + r_2 \amp
+                            r_2 \amp= r_0 - q_2r_1
+                        </mrow>
+                        <mrow>
+                            \amp<nbsp/> \amp
+                            \amp<nbsp/> \amp
+                            \amp= (s_0a-t_0b)-q_2(s_1 a+t_1 b)
+                        </mrow>
+                        <mrow>
+                            \amp<nbsp/> \amp
+                            \amp<nbsp/> \amp
+                            \amp= (s_0-q_2s_1)a+(t_0-q_2 t_1)b \amp
+                            s_2 \amp= s_0-q_2s_1 \amp
+                            t_2 \amp= t_0-q_2t_1
+                        </mrow>
+                        <intertext>
+                            In general,
+                        </intertext>
+                        <mrow>
+                            i \amp<nbsp/> \amp
+                            r_{i-2} \amp= q_i r_{i-1}+r_i \amp
+                            r_i \amp= (s_{i-2}a+t_{i-2}b)-q_i(s_{i-1}a+t_{i-1}b)
+                        </mrow>
+                        <mrow>
+                            \amp<nbsp/> \amp
+                            \amp<nbsp/> \amp
+                            \amp = (s_{i-2}-q_is_{i-1})a+(t_{i-2}-q_it_{i-1})b \amp
+                            s_i \amp= s_{i-2}-q_is_{i-1} \amp
+                            t_i \amp= t_{i-2}-q_it_{i-1}
+                        </mrow>
+                    </md>
+                </p>
+                <p>
+                    As the process is to continue until <m>r_{n+1}=0</m>, at which point <m>r_n=\gcd(a,b)</m>, we recognize that there are necessarily recursively determined sequences <m>\set{s_i:i=-1,0,1,\dotsc,n+1}</m> and <m>\set{t_i:i=-1,0,1,\dotsc,n+1}</m> such that <m>r_n=s_na+t_n b</m>. However, we are interested in the case when <m>\gcd(a,b)=1</m>, which is to say that <m>1=s_na+t_nb</m>; but then <m>-s_na+1 = t_n b</m>, so in modular arithmetic we see that <m>t=b^{-1}\text{ mod }a</m> as desired.
+                </p>
+            </statement>
+        </example>
+        <p>
+            The practical effect of this is that a full calculation of Euclid's algorithm with one nontrivial addition also gives the ability to break the KidRSA encryption.
+        </p>
+<!--         <algorithm>
             <statement>
                 <title>Extended Euclidean Algorithm</title>
                 <p>
@@ -186,26 +273,26 @@
                             <li><p>Append the last element of <c>r</c> to <c>b</c>.</p></li>
                             <li><p>Append the quotient of those values to <c>q</c>.</p></li>
                             <li><p>Append the remainder of those values to <c>r</c>.</p></li>
-                            <li><p>Append to <c>p</c> the value <c>(p[-2]+p[-1]*q[-2]) % s</c>.</p></li>
+                            <li><p>Append to <c>p</c> the value <c>(p[-2]-q[-2]*p[-1]) % s</c>.</p></li>
                         </ol>
                     </li>
                     <li><p>When the loop terminates, <c>p[-1]</c> is <m>t^{-1}</m> in <m>\mathbb{Z}_s</m>, and <m>\gcd{(s,t)}</m> is <c>r[-2]</c>.</p></li>
                 </ol>
             </statement>
-        </algorithm>
+        </algorithm> -->
 
         <example>
             <title>Cracking Kid-RSA</title>
             <statement>
                 <p>
-                    Applying the algorithm for our public key <m>(42953,873)</m>, we have:
+                    PRactically, we need only track the sequence of successive products of <m>e</m> in the calculation of the extended algorithm for <m>\gcd(n,e)</m>. Applying the algorithm for our public key <m>(42953,873)</m>, we have:
                     <md>
-                        <mrow>  \amp \amp   p_{-1} \amp = 0</mrow>
-                        <mrow>  42953 \amp = 49(873)+176 \amp  p_0 \amp = 1</mrow>
-                        <mrow>  873 \amp = 4(176)+169    \amp  p_1 = (0-1(49))\text{ mod } 42953 \amp = 42904</mrow>
-                        <mrow>  176 \amp = 1(169)+7      \amp  p_2 = (1-42904(4))\text{ mod } 42953 \amp = 197</mrow>
-                        <mrow>  169 \amp = 24(7)+1       \amp  p_3 = (42904-197(1))\text{ mod } 42953 \amp = 42707</mrow>
-                        <mrow>  7 \amp = 7(1)+0          \amp  p_4 = (197-42707(24))\text{ mod } 42953 \amp = 6101</mrow>
+                        <mrow>  \amp \amp   t_{-1} \amp = 0</mrow>
+                        <mrow>  42953 \amp = 49(873)+176 \amp  t_0 \amp = 1</mrow>
+                        <mrow>  873 \amp = 4(176)+169    \amp  t_1 = (0-1(49))\text{ mod } 42953 \amp = 42904</mrow>
+                        <mrow>  176 \amp = 1(169)+7      \amp  t_2 = (1-42904(4))\text{ mod } 42953 \amp = 197</mrow>
+                        <mrow>  169 \amp = 24(7)+1       \amp  t_3 = (42904-197(1))\text{ mod } 42953 \amp = 42707</mrow>
+                        <mrow>  7 \amp = 7(1)+0          \amp  t_4 = (197-42707(24))\text{ mod } 42953 \amp = 6101</mrow>
                     </md>
                 </p>
 

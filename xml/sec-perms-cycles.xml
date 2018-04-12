@@ -110,13 +110,22 @@
                 We can also compute powers of a permutation from its cycle decomposition by <q>skipping</q> through the cycles. For instance, rather than discovering <m>g^3</m> by calculating <m>g\cdot g^2</m>, we can recognize that the image of 1 under <m>g^3</m> must be the third number after 1 in the cyclic notation for <m>g</m>. Hence
                 <md>
                     <mrow>
-                        g^3 \amp = (1,5,10,8,4,2,3,9), \amp g^4 \amp = (1,4)(2,5)(3,10)(8,9),
+                        g^3 \amp = (1,5,10,8,4,2,3,9), 
                     </mrow>
                     <mrow>
-                        g^5 \amp = (1,9,3,2,4,8,10,5), \amp g^6 \amp = (1,10,4,3)(2,9,5,8),
+                         g^4 \amp = (1,4)(2,5)(3,10)(8,9),
                     </mrow>
                     <mrow>
-                        g^7 \amp = (1,2,10,9,4,5,3,8), \text{\,and} \amp g^8 \amp = e.
+                        g^5 \amp = (1,9,3,2,4,8,10,5), 
+                    </mrow>
+                    <mrow>
+                         g^6 \amp = (1,10,4,3)(2,9,5,8),
+                    </mrow>
+                    <mrow>
+                        g^7 \amp = (1,2,10,9,4,5,3,8), \text{and}
+                    </mrow>
+                    <mrow>
+                         g^8 \amp = e.
                     </mrow>
                 </md>
             </p>
@@ -125,7 +134,7 @@
     <exercise>
         <title>Powers of permutations</title>
         <statement>
-            Use the preceding example an investigate higher powers of the permutation <m>g</m>.
+            Use the preceding example and investigate higher powers of the permutation <m>g</m>.
         </statement>
     </exercise>
 
