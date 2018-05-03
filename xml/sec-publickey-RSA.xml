@@ -44,10 +44,18 @@
         </statement>
     </algorithm>
     <p>
-        Reasonably secure RSA encryption requires the use of large primes <mdash /> requiring that the minimum bit-length be 1024 is not too small for security's sake. This in turn leads to very large <m>n</m>. For example, using CoCalc we can generate a public key like so in a matter of moments. Note that the first nine lines are all part of the modulus of the key; <m>n</m> in this example is a 2048-bit integer.
+        Reasonably secure RSA encryption requires the use of large primes <mdash /> requiring that the minimum bit-length be 1024 is not too small for security's sake. This in turn leads to very large <m>n</m>. For example, using Sage we can generate a public key like so in a matter of moments. Note that the first nine lines are all part of the modulus of the key; <m>n</m> in this example is a 2048-bit integer.
     </p>
-
-    <pre>
+    <sage>
+        <input>
+            p = 53315427930205027967
+            q = 723525011215111164863
+            n = p*q
+            phin = (p-1)*(q-1)
+            e = 65537
+        </input>
+    </sage>
+<!--     <pre>
         (20402086648568173481955585730646286137315210218839346974138749941
         645259140495567770834936874243791372473116188864372884738105135450
         914873426313184766644920305916448220578083159085234843109165718821
@@ -58,5 +66,5 @@
         696770232104151315624298201601728269794649660724878710164849383257
         954760868276197510430226341671964363302816497178476763126391107078
         274240530722153356995721, 735866671)
-    </pre>
+    </pre> -->
 </section>

@@ -285,7 +285,7 @@
             <title>Cracking Kid-RSA</title>
             <statement>
                 <p>
-                    PRactically, we need only track the sequence of successive products of <m>e</m> in the calculation of the extended algorithm for <m>\gcd(n,e)</m>. Applying the algorithm for our public key <m>(42953,873)</m>, we have:
+                    Practically, we need only track the sequence of successive products of <m>e</m> in the calculation of the extended algorithm for <m>\gcd(n,e)</m>. Applying the algorithm for our public key <m>(42953,873)</m>, we have:
                     <md>
                         <mrow>  \amp \amp   t_{-1} \amp = 0</mrow>
                         <mrow>  42953 \amp = 49(873)+176 \amp  t_0 \amp = 1</mrow>
