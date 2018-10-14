@@ -27,4 +27,14 @@
     <xi:include  href="sec-maxflow-maxflow.xml" />
     <xi:include  href="sec-maxflow-dinitzalgo.xml" />
     <xi:include  href="sec-maxflow-dinitzimpl.xml" />
+    <exercises>
+        <project>
+            <title> Implementing Dinitz' Algorithm</title>
+            <statement>
+                <p>
+                    Try this!
+                </p>
+            </statement>
+        </project>
+    </exercises>
 </chapter>

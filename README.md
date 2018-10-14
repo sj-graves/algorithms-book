@@ -8,14 +8,14 @@ This text was originally written in LaTeX, and the original LaTeX source is stil
 1. All references to the IDLE environment are being replaced by references to the Sage Math Cloud.
 2. I'm adding and modifying material on the fly as I teach the associated course.
 
-The pedagogical reasons for switching to Mathbook XML are many, but it is a time-consuming process, and with a houseful of children, other projects, research projects, and a full teaching load, I'm wearing many hats simultaneously.
+The pedagogical reasons for switching to PreTeXt are many, but it is a time-consuming process, and with a houseful of children, other projects, research projects, and a full teaching load, I'm wearing many hats simultaneously.
 
 ### Instructions to install and "compile"
 From the command line, with `git` and `xsltproc` installed.
 
 1. `git clone https://github.com/sj-graves/algorithms-book.git`
 2. `git checkout master`
-3. Download and install the Mathbook XML scripts into a sibling folder to this folder `algorithms-book`. You can find instructions for this at http://mathbook.pugetsound.edu/
+3. Download and install the PreTeXt scripts into a sibling folder to this folder `algorithms-book`. You can find instructions for this at http://mathbook.pugetsound.edu/
 4. In the `algorithms-book/xml` directory, execute the `engage` script. This will call `xsltproc` and build the XML into HTML in a directory `algorithms-book/html`. Good luck, and remember: this textbook is a pre-release alpha version still undergoing active development. 
 
 If you have comments or questions regarding the text, please feel free to contact the author, Dr. Stephen Graves of the University of Texas at Tyler.
