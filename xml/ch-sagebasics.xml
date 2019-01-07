@@ -1,4 +1,4 @@
-<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="ch-SageBasics">
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="ch-SB">
     <title>Sage: Basics</title>
 
     <objectives xml:id="obj-SageBasics">
@@ -10,35 +10,72 @@
 
     <introduction xml:id="intro-SageBasics">>
         <title>Special Instructions</title>
-        <p> This is not a manual for using Sage to solve mathematical problems. Consult the excellent <xref ref="bib_SageBook">Sage for Undergraduates</xref> by Gregory Bard.</p>
+<!--         <p> This is not a manual for using built-in SageMath commands to solve difficult mathematical problems. For that purpose, consult the excellent <xref ref="bib_SageBook" text="Sage for Undergraduates" /> by Gregory Bard.</p> -->
 
+<!--         <p>
+            We will be making extensive use of <url href="http://cocalc.com">CoCalc</url> throughout the semester, so your very first task is to set up an account. 
+            While many examples of Sage code will be embedded in executable Sage cells in the web version of the book, the later chapters will require you to be logged into CoCalc to work along with exercises as we progress. This is doubly important if you are reading from a static PDF copy of the book!
+        </p> -->
         <p>
-            We will be making extensive use of <url href="http://cocalc.com">CoCalc</url> throughout the semester, so your very first task is to set up an account. While most examples of Sage or Python code will be emdedded in Sage cells within the text, it is important that you are logged into CoCalc and actively typing code examples and working along with exercises as we progress - <em> especially if you are using an offline copy of the book!</em>
+            This book is not a manual for how to use built-in SageMath commands to solve difficult mathematical problems; it is a textbook for a course in algorithm design and implementation. For the former, consult Gregory Bard's book <xref ref="bib_SageBook" text="title">Sage for Undergraduates</xref>. What we attempt in this text is to provide a very basic introduction to programming in SageMath (which will effectively teach Python syntax) and then demonstrate how these very basic ideas of programming are sufficient to solve computationally intensive mathematical problems with ease.
         </p>
-
         <p>
             We're going to extensively discuss actual code in these notes, so let's determine some conventions. 
         </p>
         <convention xml:id="conv-inlinecode"> 
-            <p>Text which appears <c>like this</c> will hereafter always be one of several things:</p>
-            <ul>
-                <li> a Sage or Python command,</li>
-                <li> a filename, or</li>
-                <li> a URL or email address.</li>
-            </ul>
+            <p>Text which appears <c>like this</c> will hereafter always be one of two things: Sage (or Python) code, or a filename. On the other hand, <url><c>http://cocalc.com</c></url> is a web address.</p>
+        </convention>
+        
+        <subsection>
+            <title>CoCalc</title>
+            <p>
+                The best practical way to learn Sage is to get a CoCalc account <aside>This is required for my students in the course Algorithms for Applied Mathematics.</aside> and just dig into using Sage. A good practice for using this text as an online ebook is to have CoCalc open in a separate browser window and start a new worksheet for each major division of the book. All your <q>try it out</q> work will then be saved for you to go back and look at what you did, with all the versions of changes logged.
+            </p>
+        </subsection>
+        <convention xml:id="conv-blockcode">>
+            <p>
+                More serious code will occur offset in a block. There are two kinds: <em>program listings</em>, and <em>executable Sage cells</em>. Here's what a program listing will look like:
+            </p>
+            <listing>
+                <program>
+                    <input>
+                        example code
+                        more example code
+                        even more example code
+                    </input>
+                </program>
+                <caption>
+                    This is a <em>program listing</em>, which cannot be executed can be easily copied and pasted.
+                </caption>
+            </listing>
+            <p>
+                On the other hand, here's an executable SageCell.
+            </p>
+            <sage>
+                <input>
+                    print "This is an example of an executable SageCell."
+                </input>
+                <output>
+                    This is an example of an executable SageCell.
+                </output>
+            </sage>
+            <p>
+                The main reason for using each of these is that in the case of a program listing, you are encouraged to copy the listing into a different window (hopefully running CoCalc) and execute the code. This will allow you to modify and retain modifications to the code. A simple SageCell, on the other hand, is all that is necessary to demonstrate a practical programming feature.
+            </p>
         </convention>
     </introduction>
 
 
-    <xi:include  href="./sec-sagebasics-interactive.xml" />
-    <xi:include  href="./sec-sagebasics-numbers.xml" />
+<!--     <xi:include  href="./sec-sagebasics-interactive.xml" /> -->
+    <xi:include  href="./sec-sagebasics-variables.xml" />
     <xi:include  href="./sec-sagebasics-strings.xml" />
     <xi:include  href="./sec-sagebasics-advanced.xml" />
+    <xi:include  href="./sec-sagebasics-project.xml" />
 
-    <conclusion>
+<!--     <conclusion>
         <title><em>Caveat emptor!</em></title>
         <p>
             This text was originally written with the intent that students would write code in Python 3.5 using the IDLE environment. This is a perfectly valid plan, but Sage and CoCalc use Python 2.7, which differs from Python 3.5 in ways more important than just syntax. Some references to code from Python 3.5 remain scattered throughout the text. When they all have absolutely been eradicated, this warning will be removed.
         </p>
-    </conclusion>
+    </conclusion> -->
 </chapter>

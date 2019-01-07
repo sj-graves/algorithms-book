@@ -4,7 +4,9 @@
 
     <introduction>
         <p>
-            Mathematically, a <em>string</em> is a finite sequence of symbols from an <em>alphabet</em>, which is really just the set of allowable symbols. Python behaves similarly: if you can type something, it's an allowable symbol. Sage generally inherits everything about strings directly from Python. Strings in Python are differentiated from variable names and commands by being enclosed in single or double quotes. The only difference between single and double quotes for Python has to do with quotes within strings. 
+            Mathematically, a <term>word</term> is a finite sequence of symbols from an <term>alphabet</term>, which is really just the set of allowable symbols. There are special mathematical operations associated with words, most notably <term>concatenation</term>. Concatenation is a fancy word which means <q>sticking together</q>. The implementation of words in this way in a programming language is a <term>string</term>, to differentiate between a word which performs an action and a word which is the value of a variable. Strings are words enclosed in matching sets of single or double quotes.
+<!--             Python behaves similarly: if you can type something, it's an allowable symbol. Sage generally inherits everything about strings directly from Python. Strings in Python are differentiated from variable names and commands by being enclosed in single or double quotes. The only difference between single and double quotes for Python has to do with quotes within strings.  -->
+            
         </p>
     </introduction>
     <subsection>
@@ -74,7 +76,7 @@
     </subsection>
     <subsection><title>Indexing strings</title>
         <p>
-            Since strings are actually sequences of printable characters, we should be able to access elements of the sequence individually; in other languages, these pieces are called <em>characters</em>, but Python has no separate character class. They are simply strings of size 1. An extremely important thing to remember about Python is that all sequence-type objects have first index <m>0</m>. If you wanted to represent the sequence of positive integers less than or equal to 100, <m>a=(1,2,3,4,\ldots, 100)</m>, the elements of the tuple would be <m>a_0=1</m>, <m>a_1=2</m>, <m>a_2=3</m>, and so on, up to <m>a_{99}=100</m>.
+            Since strings are actually sequences of printable characters, we should be able to access elements of the sequence individually; in other languages, these pieces are called <em>characters</em>, but Sage has no separate character class. They are simply strings of size 1. An extremely important thing to remember about Sage is that all sequence-type objects have first index <m>0</m>. If you wanted to represent the sequence of positive integers less than or equal to 100, <m>a=(1,2,3,4,\ldots, 100)</m>, the elements of the tuple would be <m>a_0=1</m>, <m>a_1=2</m>, <m>a_2=3</m>, and so on, up to <m>a_{99}=100</m>.
         </p>
 
         <p>
@@ -109,7 +111,23 @@
         <p>
             You can access a substring by <em>slicing</em> the string, but you have to be careful how slicing works. The best way to imagine it (as explained in the Python tutorial) is to think of the indices actually marking the dividers between letters in a string:
         </p>
-        <image xml:id="img_string-indices" source="./images/sagebasics-string_indices.svg" />
+        <figure xml:id="fig_string_indices" >
+            <image xml:id="sagebasics-string_indices">
+                <latex-image-code><![CDATA[
+\begin{tikzpicture}
+    \draw \foreach \x in {0,1,...,16}{(\x,0) node [below] {\tiny$\x$}};
+    \draw \foreach \x in {1,2,...,16}{(16-\x,1) node [above] {\tiny$-\x$}};
+    \draw (0,0) -- (0,1) 
+        \foreach \x/\c in {0/t, 1/h, 2/i, 3/s, 4/ , 5/i, 6/s, 7/ , 8/a, 9/ , 10/s, 11/t, 12/r, 13/i, 14/n, 15/g}{
+            (\x,0) -- ++(1,0) -- ++(0,1) -- ++(-1,0)
+            (\x+.5,.5) node [anchor=mid, color=red] {\textbf{\c}} 
+        };
+\end{tikzpicture}
+]]>
+                </latex-image-code>
+            </image>
+            <caption>Location of indices for string slicing.</caption>
+        </figure>
         <p>
             So if we have <c>spam = "this is a string"</c>, then we can see that <c>spam[0]</c> gave us the single-letter string starting at index 0, and <c>spam[-1]</c> gave us the single-letter string starting at index <m>-1</m> from the end of the string. If we want to isolate the word <c>this</c> we can do it two ways. Since the word <c>string</c> appears at the end of <c>spam</c>, there are several ways to easily access it:
         </p>
@@ -180,7 +198,7 @@
             </output>
         </sage>
         <p>
-            In the next lesson we will talk about other compound<fn>A data type is <em>compound</em> if it contains other data. Strings contain single-character strings, for instance.</fn> objects which are <em>mutable</em>, namely <em>lists</em>.
+            In the next section we will talk about other <em>compound</em> (containing other data), namely <em>lists</em>.
         </p>
     </subsection>
 

@@ -27,6 +27,7 @@
             This is a trivial example; here's an example which is more interesting.
         </p>
         <example xml:id="exmp-ListComprehension">
+            <title>Approximating Integrals</title>
             <p> 
                 While we know from Calculus that the best way to calculate the area between a curve <m>\set{(x,f(x)):a\leq x\leq b, f(x)\geq 0}</m> is to use the definite integral <m>\int_a^b f(x)\,dx</m>, we also know that <me>\int_a^b f(x)\,dx = \lim_{n\to\infty} \sum_{i=1}^n f(x_i^*)\Delta x_i.</me>
                 We can quickly approximate the Riemann sum on the right using lists and list comprehensions; leveraging the power of Sage as a full symbolic mathematics system, we can even go so far as to easily draw the approximating rectangles where <m>x_i^* = x_i</m>.
@@ -40,7 +41,8 @@
                         # generate a list of points on the curve y=x^2
                         points = [(x,x^2) for x in [i/n for i in range(n+1)]]
 
-                        # generate a list of coordinates of the corners of the approximating rectangles
+                        # generate a list of coordinates of the corners of 
+                        # the approximating rectangles
                         recs = [[(x-1/n,0),(x-1/n,y),(x,y),(x,0)] for x,y in points[1:]]
 
                         # calculate a list of the areas of each rectangle
@@ -62,7 +64,28 @@
                 </program>
             </listing>
             <p> Try to modify the above code until you get a picture like this:</p>
-            <image source="images/li-riemann_sum.svg"/>
+<!--             <image source="images/li-riemann_sum.svg"/> -->
+            <figure xml:id="fig-riemann_sum">
+                <caption>Rectangles under a curve.</caption>
+                <image xml:id="li-riemann_sum">
+                    <latex-image>
+                        <![CDATA[
+\begin{tikzpicture}[scale=1/2]
+    \draw (-0.5,0) -- (10,0) (0,-0.5) -- (0,10);
+    \foreach \x/\y in {1/1, 2/4, 3/9, 4/16, 5/25, 6/36, 7/49, 8/64, 9/81}{
+        \draw (-0.25,\x) -- (0,\x) (\x,-0.25) -- (\x,0);
+        \draw [blue] (\x,0) -- (\x,\y/10) -- (1+\x,\y/10) -- (1+\x,0);
+    };
+    \draw[thick, red] (0,0) parabola (10,10);
+    \foreach \x in {0.2,0.4,0.6,0.8,1.0}{
+        \node [below] at (10*\x,0) {\tiny$\x$};
+        \node [left] at (0,10*\x) {\tiny$\x$};
+    };
+\end{tikzpicture}
+]]>
+                    </latex-image>
+                </image>
+            </figure>
 
 
 
