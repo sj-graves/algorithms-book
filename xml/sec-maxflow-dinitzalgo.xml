@@ -64,7 +64,7 @@
             <figure xml:id="fig_capnet_1" >
                 <caption>(A) A capacitated network, <m>\Delta=(V,E,c,v_1,v_5)</m>; (B) the result <m>\Delta'</m> of applying <xref ref="alg_mod_dijkstra" text="type-global"/> on <m>\Delta</m>; (C) the <q>layered graph</q> <m>\Lambda=(V,E_\ell,c_\ell,v_1,v_5)</m> resulting from the application of <xref ref="alg_mod_dijkstra" text="type-global" /> on <m>\Delta'</m>.</caption>
                 <image xml:id="forwardflow">
-                    <latex-image-code><![CDATA[
+                    <latex-image><![CDATA[
                 \tiny
                 \begin{tikzpicture}[scale=2, nodes={circle, inner sep=1pt}]
                 \definecolor{ec0}{rgb}{0,0,0}
@@ -122,7 +122,7 @@
                 ;
                 \end{tikzpicture}
                 ]]>
-                    </latex-image-code>
+                    </latex-image>
                 </image>
 
             </figure>
@@ -162,7 +162,7 @@
             <figure>
                 <caption>(A) An augmenting path with flow value <m>f^*=8</m> in <m>\Lambda</m> from <xref ref="exmp_capnet_1" text="type-global"/>. (B) After updating the residual capacities of edges in <m>E_\ell</m>, the edge <m>v_2v_5</m> was saturated and therefore removed. This leaves <m>v_2</m> with no successor vertices, so the edge <m>v_1v_2</m> (shown with reduced capacity) must also be removed as no additional flow can move from <m>v_1</m> to <m>v_5</m> along <m>v_1v_2</m>. (C) The graph <m>\Lambda</m> after maintenance.</caption>
                 <image xml:id='backflow'>
-                    <latex-image-code><![CDATA[
+                    <latex-image><![CDATA[
 \tiny
 \begin{tikzpicture}[scale=2]
 \definecolor{ec0}{rgb}{0,0,0}
@@ -207,7 +207,7 @@
 
 \end{tikzpicture}
 ]]>
-                    </latex-image-code>
+                    </latex-image>
                 </image>
 
             </figure>

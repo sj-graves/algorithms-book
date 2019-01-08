@@ -1,5 +1,5 @@
-<section xml:id="sec-ListsIteration-Lists">
-    <title>Lists</title>
+<section xml:id="s-LI-LTD">
+    <title>Lists, tuples, and dictionaries</title>
 
     <subsection>
         <title>Basic <c>list</c> operations</title>

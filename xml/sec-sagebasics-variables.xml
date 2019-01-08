@@ -2,10 +2,10 @@
     <title>Working with variables</title>
     <introduction>
         <p>
-            It's not necessary to declare variables to use Sage as a calculator, but if that's all the power needed for a calculation you might be better served to actually use a calculator. For even the least sophisticated of interesting mathematical problems, there is a need to refer back to a previously calculated value, so we typically represent these as algebraic variables. When working algebraically, we aren't usually worried about what <em>type</em> of value is stored in a given variable, so long as everything makes logical sense. Therefore if we write <m>x+5 = y</m> it is a safe assumption that, whatever the values of <m>x</m> and <m>y</m>, they are variables of a type to which the integer 5 can be added.
+            It's not necessary to declare variables to use Sage as a calculator, but if that's all the power needed for a calculation you might be better served to actually use a calculator. For even the least sophisticated of interesting mathematical problems, there is a need to refer back to a previously calculated value, so we typically represent these as algebraic variables. When working algebraically, we aren't usually worried about what <term>type</term> of value is stored in a given variable, so long as everything makes logical sense. Therefore if we write <m>x+5 = y</m> it is a safe assumption that, whatever the values of <m>x</m> and <m>y</m>, they are variables of a type to which the integer 5 can be added.
         </p>
         <p>
-            When programming in Sage, we only need to be slightly more careful, and we have greater flexibility with what we call our variables as programmers than we generally have as mathematicians. Generally, mathematicians prefer variables to consist of a single character: <m>x</m>, <m>y</m>, or <m>\theta</m>. Sometimes mathematicians will decorate that character with other marks to distinguish some other meaning: <m>\bar{x}</m>, <m>\hat{p}</m>, or <m>\theta_5'</m>. In programming it is much more useful to use an entire word to denote a variable and thereby to give more meaning to what value is represented by that variable. For instance, a statistician might use <m>\bar{x}</m> to denote the sample mean of a variable <m>x</m>, but a programmer might refer to it as <c>mean_x</c>. The convention to separate terms in variable names by underscores (<c>_</c>) is sometimes called <term>snake_case</term> or <term>pothole_case</term>. Regardless of what you call it, snake_case allows for more meaningful variable names.
+            When programming in Sage, we only need to be slightly more careful, and we have greater flexibility with what we call our variables as programmers than we generally have as mathematicians. Generally, mathematicians prefer variables to consist of a single character: <m>x</m>, <m>y</m>, or <m>\theta</m>. Sometimes mathematicians will decorate that character with other marks to distinguish some other meaning: <m>\bar{x}</m>, <m>\hat{p}</m>, or <m>\theta_5'</m>. In programming it is much more useful to use an entire word to denote a variable and thereby to give more meaning to what value is represented by that variable. For instance, a statistician might use <m>\bar{x}</m> to denote the sample mean of a variable <m>x</m>, but a programmer might refer to it as <c>mean_x</c>. The convention to separate terms in variable names by an underscore <c>_</c> is sometimes called <term>snake_case</term> or <term>pothole_case</term>. Regardless of what you call it, snake_case allows for more meaningful variable names.
         </p>
     </introduction>
     <subsection xml:id="ss-SB-V-A">
@@ -21,7 +21,7 @@
                 </input>
             </sage>
             <p>
-                We note immediately that <em>assignment produces no output</em>. If you want to see the value of a variable after it has been assigned, you should either execute a line consisting of only the variable name, or <c>print</c> it.
+                We note immediately that <em>assignment produces no output</em>. If you want to see the value of a variable after it has been assigned, you should either execute a line consisting of only the variable name, or better still <c>print</c> it. In a Sage cell, only the output of the last-executed line will be printed, so using <c>print</c> is a better way to alwaays ensure that what you want to see is displayed as output.
             </p>
             <sage>
                 <input>
@@ -55,7 +55,7 @@
                 </input>
             </sage>
         </introduction>
-        <subsubsection>
+        <subsubsection xml:id="ss-SB-V-BDT">
             <title>Basic data types</title>
             <p>
                 There is a fundamental computational difference between <term>exact precision</term> and <term>numerical precision</term>. An exact precision calculation treats all rational numbers as ratios of integers. A numerical precision calculation performs the calculations in terms of a <em>floating point representation</em>, which uses a finite-length binary (base 2 rather than base 10) representation of the number. For more information, read <url href="https://en.wikipedia.org/wiki/IEEE_754">the Wikipedia page for IEEE 754</url>, the floating point arithmetic specification adopted by the Institute of Electrical and Electronics Engineers (IEEE) in 1985.
@@ -67,7 +67,7 @@
                 The most important non-number data type to consider is the <term>string</term>. Strings will be treated in the next section because they have many interesting features for beginning programmers.
             </p>
         </subsubsection>
-        <subsubsection>
+        <subsubsection xml:id="ss-SB-V-S">
             <title>Symbolic capability of Sage</title>
             <p>
                 One of the superpowers of Sage that differentiates it from Python, the programming language in which Sage itself is written, is that Sage is capable of symbolic mathematics: a programming variable can be defined as an abstract mathematical variable!
@@ -79,7 +79,7 @@
                 </input>
             </sage>
             <p>
-                This very limited example also introduces the idea of a <term>function</term>, in the context of writing code. Functions will be treated in a later section.
+                This very limited example introduces the syntax used for functions in Sage. We will discuss functions later in <xref ref="ch-Functions" text="title" />.
             </p>
         </subsubsection>
     </subsection>

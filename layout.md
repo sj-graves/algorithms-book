@@ -1,0 +1,71 @@
+# AAM Layout
+
+### Checks indicate that the xml:id has been updated to the parenthetical ID
+
+
+- [x] Sage: Basics (c-SB)
+  - [x] CoCalc (s-SB-CC)
+  - [x] Variables and basic data types (s-SB-V)
+    - numbers
+    - booleans
+    - assignments and operations
+  - [x] strings (s-SB-S)
+  - [x] Advanced sage (s-SB-AS)
+- [x] Sage: Lists and iteration (c-LI)
+  - [x] lists, tuples, and dictionaries (s-LI-LTD)
+  - [x] iteration (s-LI-I)
+  - [x] list comprehension (s-LI-LC)
+- [ ] Sage: Conditioning and error handling (c-CE)
+  - [ ] simple conditionals
+  - [ ] the power of `elif`
+  - [ ] exceptions and the `try:... except:` constructor
+- [ ] Sage: Functions and methods
+  - [ ] Functions in programming
+  - [ ] Classes and object-oriented programming
+  - [ ] Operator overloading
+- [ ] Matrices and their operations
+  - [ ] Representing matrices
+  - [ ] Beginning matrix operations
+  - [ ] Matric multiplication
+- [ ] Vectors and solving systems of equations
+  - [ ] Vectors in Euclidean space
+  - [ ] operations on vectors
+  - [ ] motivation for matrix arithmetic
+  - [ ] a "floating point" problem
+  - [ ] Gaussian elimination algorithms
+- [ ] Matrix decomposition: $LU$ decomposition
+  - [ ] Elementrary matrices
+  - [ ] Matrix inverses
+  - [ ] LU decomposition
+  - [ ] PA=LU factorization
+- [ ] Matrix decomposition: $QR$ factorization
+  - [ ] Least squares regression
+  - [ ] Curves of best fit
+  - [ ] Gram-Schmidt
+  - [ ] QR decomposition
+  - [ ] QR decomposition by Householder
+- [ ] Permutations
+  - [ ] What is a permutation
+  - [ ] Permutation groups
+  - [ ] Cycles and disjoint cycle decompositions
+  - [ ] working with permutations in Sage
+- [ ] Substitution ciphers
+  - [ ] Simple substitution
+  - [ ] Polyalphabetic substitution
+- [ ] Public key encryption
+  - [ ] Kid RSA
+  - [ ] Full RSA
+  - [ ] Elliptic curve cryptography?
+- [ ] Intro to graph theory
+  - [ ] Graphs
+  - [ ] Graphs in Sage
+- [ ] Shortest paths
+  - [ ] Dijkstra's algorithm
+  - [ ] Implementing Dijkstra's Algorithm
+- [ ] Minimum spanning trees
+  - [ ] Kruskal's algorithm
+  - [ ] The Jarnik-Prim algorithm
+- [ ] Maximum flow 
+  - [ ] Max flow
+  - [ ] Dinitz' algorithm
+  - [ ] Implementing Dinitz' algorithm

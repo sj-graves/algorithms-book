@@ -1,5 +1,5 @@
-<section xml:id="sec-ListsIteration-Comprehension">
-    <title>Power tool: list comprehension</title>
+<section xml:id="s-LI-LC">
+    <title>List comprehension</title>
     <introduction>
         <p>
             Suppose you had a list <c>foo</c> of numbers, and you wanted to set <c>bar</c> equal to the list of their squares. We could easily perform this task with a for loop and the <c>append</c> list method, which adds the argument to the end of the list.
@@ -9,7 +9,7 @@
                 foo = [1, 3, 5, 7, 9]
                 bar = []
                 for x in foo:
-                bar.append(x^2)
+                    bar.append(x^2)
                 print bar
             </input>
         </sage>

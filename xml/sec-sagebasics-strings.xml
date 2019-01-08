@@ -1,10 +1,10 @@
-<section xml:id="sec-SageBasics-Strings">
+<section xml:id="s-SB-S">
     <title>Working with strings</title>
 
 
     <introduction>
         <p>
-            Mathematically, a <term>word</term> is a finite sequence of symbols from an <term>alphabet</term>, which is really just the set of allowable symbols. There are special mathematical operations associated with words, most notably <term>concatenation</term>. Concatenation is a fancy word which means <q>sticking together</q>. The implementation of words in this way in a programming language is a <term>string</term>, to differentiate between a word which performs an action and a word which is the value of a variable. Strings are words enclosed in matching sets of single or double quotes.
+            Mathematically, a <term>word</term> is a finite sequence of symbols from an <term>alphabet</term>, which is really just the set of allowable symbols. There are special mathematical operations associated with words, most notably <term>concatenation</term>. Concatenation is a fancy word which means <q>sticking together</q>. The implementation of words in this way in a programming language is a <term>string</term>, to differentiate between a word which performs an action (sometimes called a <em>token</em>) and a word which is the value of a variable. The Sage syntax for representing a string is to use matched pairs of quotation marks, either single quotes <c>'this is a string'</c> or double quotes <c>"this is also a string"</c>. 
 <!--             Python behaves similarly: if you can type something, it's an allowable symbol. Sage generally inherits everything about strings directly from Python. Strings in Python are differentiated from variable names and commands by being enclosed in single or double quotes. The only difference between single and double quotes for Python has to do with quotes within strings.  -->
             
         </p>
@@ -113,7 +113,7 @@
         </p>
         <figure xml:id="fig_string_indices" >
             <image xml:id="sagebasics-string_indices">
-                <latex-image-code><![CDATA[
+                <latex-image><![CDATA[
 \begin{tikzpicture}
     \draw \foreach \x in {0,1,...,16}{(\x,0) node [below] {\tiny$\x$}};
     \draw \foreach \x in {1,2,...,16}{(16-\x,1) node [above] {\tiny$-\x$}};
@@ -124,7 +124,7 @@
         };
 \end{tikzpicture}
 ]]>
-                </latex-image-code>
+                </latex-image>
             </image>
             <caption>Location of indices for string slicing.</caption>
         </figure>

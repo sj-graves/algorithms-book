@@ -1,5 +1,5 @@
-<section xml:id='sec-SageBasics-Advanced'>
-    <title>More Advanced Sage</title>
+<section xml:id='s-SB-AS'>
+    <title>Advanced Sage (Optional)</title>
     <introduction>
         <p>
             It should be abundantly obvious that Sage is much, much more powerful than we've currently expressed. Here's a very quick demonstration of some of the more powerful things which you can do in Sage. For a nice, long tour of the various applications of Sage to undergraduate mathematics, see Bard's excellent book <xref ref="bib_SageBook" />.

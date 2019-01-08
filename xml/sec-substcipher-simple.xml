@@ -63,7 +63,7 @@
 
         <figure>
             <image xml:id='playfair_grid' width="30%">
-                <latex-image-code>
+                <latex-image>
                     <![CDATA[
 {\tiny
 \begin{tikzpicture}[scale=1/3]
@@ -76,7 +76,7 @@
 \end{tikzpicture}
 }
 ]]>
-                </latex-image-code>
+                </latex-image>
             </image>
         <caption>The Playfair encryption grid with a keyphrase of <q>Talons up</q>.</caption>
         </figure>
@@ -106,7 +106,7 @@
         <figure xml:id="fig_playfair_exmp" >
             <caption>Encoding characters using Playfair's cipher.</caption>
             <image xml:id="playfair_example">
-                <latex-image-code><![CDATA[
+                <latex-image><![CDATA[
 {\tiny
 \begin{tikzpicture}[scale=1/3]
 \draw \foreach \s in {0,6,12}{
@@ -175,7 +175,7 @@
 
 \end{tikzpicture}
 }
-]]></latex-image-code>
+]]></latex-image>
             </image>
 
         </figure>

@@ -1,4 +1,4 @@
-<section xml:id="sec-ListsIteration-Iteration">
+<section xml:id="s-LI-I">
     <title>Iteration over a list</title>
 
     <subsection xml:id="sec-ListsIteration-Iteration-ForLoops">
@@ -13,7 +13,7 @@
             </input>
         </sage>
         <p>
-            The <c>for</c> loop is the most generally useful type of <em>iteration</em>, which is the primary purpose of a computer: repeated performace of a tedious task. In many programming languages, a <c>for</c> loop updates some <em>index variable</em> from a starting point to an ending point with a specific step size. This could be written something like <c>for i from 1 to 10 step 2</c>, for instance. Sage inherits a much more flexible structure from Python by skipping the index variable entirely and allowing the loop to iterate over the elements of an object with any <em>iterable</em> compound data type. As we saw in <xref ref="sec-SageBasics-Strings" autoname="title"/>, the elements of a string of length greater than 1 are strings of length 1.
+            The <c>for</c> loop is the most generally useful type of <em>iteration</em>, which is the primary purpose of a computer: repeated performace of a tedious task. In many programming languages, a <c>for</c> loop updates some <em>index variable</em> from a starting point to an ending point with a specific step size. This could be written something like <c>for i from 1 to 10 step 2</c>, for instance. Sage inherits a much more flexible structure from Python by skipping the index variable entirely and allowing the loop to iterate over the elements of an object with any <em>iterable</em> compound data type. As we saw in <xref ref="s-SB-S" autoname="title"/>, the elements of a string of length greater than 1 are strings of length 1.
         </p>
         <p>
             Executing the example above shows us exactly how Sage treats a <c>for</c> loop. The variable <c>x</c> consecutively is assigned the value of each single-character string of <c>foo</c>, and then the case-swapped version of <c>x</c> is printed on its own line. In the event that the single character stored in <c>x</c> is not alphabetic, the <c>str.swapcase()</c> method simply returns the original character.
