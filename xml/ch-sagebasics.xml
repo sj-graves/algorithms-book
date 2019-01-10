@@ -3,8 +3,9 @@
 
     <objectives xml:id="obj-SageBasics">
         <ol>
-            <li><p>Gain familiarity with Sage cells and the CoCalc environment.</p></li>
-            <li><p>Learn some elementary Sage/Python syntax and commands.</p></li>
+            <li>Gain familiarity with Sage cells and the CoCalc environment.</li>
+            <li>Learn some elementary Sage.</li>
+            <li>Learn about basic data types.</li>
         </ol>
     </objectives>
 
@@ -22,8 +23,9 @@
     <xi:include  href="./sec-sagebasics-cocalc.xml" />
     <xi:include  href="./sec-sagebasics-variables.xml" />
     <xi:include  href="./sec-sagebasics-strings.xml" />
-    <xi:include  href="./sec-sagebasics-advanced.xml" />
-    <xi:include  href="./sec-sagebasics-project.xml" />
+    <xi:include  href="./sec-sagebasics-ltd.xml" />
+<!--     <xi:include  href="./sec-sagebasics-advanced.xml" /> -->
+<!--     <xi:include  href="./sec-sagebasics-project.xml" /> -->
     
     <conclusion>
         <title>Help! I've never programmed before!</title>

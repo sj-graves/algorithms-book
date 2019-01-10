@@ -76,11 +76,14 @@
     </subsection>
     <subsection><title>Indexing strings</title>
         <p>
-            Since strings are actually sequences of printable characters, we should be able to access elements of the sequence individually; in other languages, these pieces are called <em>characters</em>, but Sage has no separate character class. They are simply strings of size 1. An extremely important thing to remember about Sage is that all sequence-type objects have first index <m>0</m>. If you wanted to represent the sequence of positive integers less than or equal to 100, <m>a=(1,2,3,4,\ldots, 100)</m>, the elements of the tuple would be <m>a_0=1</m>, <m>a_1=2</m>, <m>a_2=3</m>, and so on, up to <m>a_{99}=100</m>.
+            Another way to talk about the string data type is as a <term>compound</term> data type. This means that an object of type <c>str</c> actually consists of smaller pieces of data -- in the case of <c>str</c>, the smaller pieces of data are single-character strings!
+        </p>
+        <p>
+            Since strings are actually sequences of printable characters, we should be able to access elements of the sequence individually; in other languages, these pieces are called <em>characters</em>, but Sage has no separate character class. They are simply strings of length 1. An extremely important thing to remember about Sage is that all sequence-type objects have first index <m>0</m>. If you wanted to represent the sequence of positive integers less than or equal to 100, <m>a=(1,2,3,4,\ldots, 100)</m>, the elements of the tuple would be <m>a_0=1</m>, <m>a_1=2</m>, <m>a_2=3</m>, and so on, up to <m>a_{99}=100</m>.
         </p>
 
         <p>
-            Rather than subscripts, indices in Python are given in square brackets. Trying to index a position outside a string will result in an error.
+            Rather than subscripts, indices in Sage are accessed using square brackets. Trying to index a position outside a string will result in an error called an <c>IndexError</c>.
         </p>
         <sage>
             <input>
@@ -96,10 +99,10 @@
                 Index -1: g
                 ---------------------------------------------------------------------------
                 IndexError                                Traceback (most recent call last)
-                &lt;ipython-input-1-1f9f3cd0c992&gt; in &lt;module&gt;()
-                3 print 'Index 5: '+spam[Integer(5)]
-                4 print 'Index -1: '+spam[-Integer(1)]
-                ----&gt; 5 print 'Index 42: '+spam[Integer(42)]
+                &lt;ipython-input-1-ff6662abe76a&gt; in &lt;module&gt;()
+                      3 print 'Index 5: '+spam[Integer(5)]
+                      4 print 'Index -1: '+spam[-Integer(1)]
+                ----> 5 print 'Index 42: '+spam[Integer(42)]
 
                 IndexError: string index out of range
             </output>
@@ -109,7 +112,7 @@
     <subsection>
         <title>Slicing strings</title>
         <p>
-            You can access a substring by <em>slicing</em> the string, but you have to be careful how slicing works. The best way to imagine it (as explained in the Python tutorial) is to think of the indices actually marking the dividers between letters in a string:
+            You can access a substring by <term>slicing</term> the string, but you have to be careful how slicing works. The best way to imagine it (as explained in the Python tutorial) is to think of the indices actually marking the dividers between letters in a string:
         </p>
         <figure xml:id="fig_string_indices" >
             <image xml:id="sagebasics-string_indices">
@@ -150,7 +153,7 @@
         </sage>
 
         <p>
-            Negative and positive indices can be mixed and matched, and mixing is handled smartly. Also, Python will accept a slice beyond the length of a string.
+            Negative and positive indices can be mixed and matched, and mixing is handled smartly. Also, Sage will accept a slice beyond the length of a string, and you can specify a <term>step size</term> for slicing as well.
         </p>
 
         <sage>
@@ -158,11 +161,17 @@
                 print spam[-11:9]
                 print spam[8:-11]
                 print spam[8:42]
+                print spam[0:-1:2]
+                print spam[-1:0:-1]
+                print spam[-1::-1]
             </input>
             <output>
                 is a
 
                 a string
+                ti sasrn
+                gnirts a si sih
+                gnirts a si siht
             </output>
         </sage>
         <p>
@@ -182,7 +191,7 @@
     <subsection>
         <title>Strings are <em>immutable</em></title>
         <p>
-            An important thing to note about strings is that you may read individual positions but you may not overwrite individual positions. The data types which allow writing to indices or slices are called <em>mutable</em> types; strings are an example of an <em>immutable</em> data type.
+            An important thing to note about strings is that you may read individual positions but you may not overwrite individual positions. The data types which allow writing to indices or slices are called <term>mutable</term> types; strings are an example of an <term>immutable</term> data type.
         </p>
         <sage>
             <input>
@@ -197,9 +206,17 @@
                 TypeError: 'str' object does not support item assignment
             </output>
         </sage>
-        <p>
-            In the next section we will talk about other <em>compound</em> (containing other data), namely <em>lists</em>.
-        </p>
+        
     </subsection>
-
+    <subsection>
+        <title>String methods</title>
+        <p>
+            All built-in data types in Sage have certain native <term>methods</term>, which you can think of as functions which act specifically on the variable object itself. To access the methods of a string on a string variable <c>bob</c>, you would use the syntax <c>bob.method_name(...)</c>. One of the two ways to see the methods built into a data type (for example, <c>str</c>) is to type <c>help(str)</c> in an input cell and execute it. Try it!
+        </p>
+        <sage>
+            <input>
+                help(str)
+            </input>
+        </sage>
+    </subsection>
 </section>

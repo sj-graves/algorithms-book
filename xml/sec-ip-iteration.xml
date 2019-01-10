@@ -1,58 +1,116 @@
-<section xml:id="s-LI-I">
-    <title>Iteration over a list</title>
-
-    <subsection xml:id="sec-ListsIteration-Iteration-ForLoops">
-        <title>For loops</title>
+<section xml:id="s-IP-I">
+    <title>Iteration</title>
+    <introduction>
         <p>
-            The noun <em>computer</em> used to refer to a person whose job was often tedious computation; the difference now is that we have digital computers! This is the power of modern computers, which is often obscured by flashy graphics and entertainment value. Computers can make boring calculations quickly through <em>iteration</em>. Let's look at a new coding structure.</p>
+            <term>Iteration</term> is the process of repeatedly performing a task; the noun <em>iteration</em> is used both for the entire process as well as for an individual performance of the task. When the task to be repeated is mathematical, especially if it is simple and mathematical, the iteration of the task can often be automated. For instance, the calculation of what color to display on each pixel of a computer screen is an iterated process. We'll discuss this in terms of a stupid example.
+        </p>
+        <p>
+            Let's suppose that we have a string <c>foo = "Hello world!"</c> and we want to do something silly with it: maybe we want to produce a new string <c>bar</c> with the same symbols as <c>foo</c> but each symbol occurring three times in a row. Obviously we could do this by hand,  but that's inelegant. We want something that we could use for <em>any</em> string <c>foo</c>, not just the particular string with which we started. 
+        </p>
+        <listing>
+            <program>
+                <input>
+                    foo = "Hello world!"
+                    bar = "HHHeeellllllooo   wwwooorrrlllddd!!!"
+                </input>
+            </program>
+            <caption>
+                An inelegant tripling of the characters in a string.
+            </caption>
+        </listing>
+        <p>
+            We recall that if we have a string <c>my_string</c> we can concatenate multiple copies together using the regular multiplication operator, for instance <c>3*my_string</c>. So we need some way to combine this multiplication idea with the idea of repeatedly looking at each character in the string <c>foo</c>.
+        </p>
+        <convention>
+            <title>Silly variable names</title>
+            <statement>
+                <p>
+                    I will often use silly variable names like <c>foo</c>, <c>bar</c>, <c>bob</c>, and <c>larry</c>. This is for a reason: they are called <term>metasyntactic variables</term> and the point of using short nonsense words is that you don't get confused about what the variable name <em>means</em>. Specifically, <c>foo</c> and <c>bar</c> are old programmer stand-bys for when you need a variable that you don't really care about.
+                </p>
+            </statement>
+        </convention>
+    </introduction>
+    <subsection xml:id="ss-IP-I-FL">
+        <title><c>for</c> loops</title>
+        <p>
+            The <c>for</c> loop is one of two fundamental tools for iteration in the arsenal of the computer programmer. In Sage the implementation of a <c>for</c> loop is very special. As a very easy starting example, consider the following program.
+        </p>
+        <sage>
+            <input>
+                foo = [0,1,2,4,9,16,25]
+                for bar in foo:
+                    x = 3*foo+1
+                    print x
+            </input>
+            <output>
+                1
+                4
+                7
+                13
+                28
+                49
+                76
+            </output>
+        </sage>
+        <p>
+            Observing the input of the program, we see a list of perfect squares of integers, and then a <term>block structure</term> which begins with the line <c>for bar in foo:</c> followed by a block of indented lines. Looking at the output, we can see what the program actually performs. The first value printed is 1, which is exactly <m>3(0)+1</m>; this is the value of <c>x</c> if the value of <c>bar</c> is the initial value in <c>foo</c>. In the next iteration, the loop updates the value of <c>bar</c> to the next value in <c>foo</c>, then performs the tasks in the block structure using that value.
+        </p>
+        <p>
+            In fact, this is the general behavior of the <c>for object in container:</c> block structure in Python and Sage. Start by assigning the initial element of <c>container</c> to <c>object</c>, and then as the iteration proceeds change let <c>object</c> take the value of successive elements of <c>container</c>. This makes it very straightforward to solve our problem of tripling the characters in a string.
+        </p>
         <sage>
             <input>
                 foo = "Hello world!"
-                for x in foo:
-                    print x.swapcase()
+                bar = ""
+                # This is a "comment" line, which is skipped in execution.
+                #
+                # I'm going to use c as the name of my character variable, because 
+                # it's short to type.
+                for c in foo:
+                    bar = bar + 3*c
+                print bar
             </input>
         </sage>
         <p>
-            The <c>for</c> loop is the most generally useful type of <em>iteration</em>, which is the primary purpose of a computer: repeated performace of a tedious task. In many programming languages, a <c>for</c> loop updates some <em>index variable</em> from a starting point to an ending point with a specific step size. This could be written something like <c>for i from 1 to 10 step 2</c>, for instance. Sage inherits a much more flexible structure from Python by skipping the index variable entirely and allowing the loop to iterate over the elements of an object with any <em>iterable</em> compound data type. As we saw in <xref ref="s-SB-S" autoname="title"/>, the elements of a string of length greater than 1 are strings of length 1.
-        </p>
-        <p>
-            Executing the example above shows us exactly how Sage treats a <c>for</c> loop. The variable <c>x</c> consecutively is assigned the value of each single-character string of <c>foo</c>, and then the case-swapped version of <c>x</c> is printed on its own line. In the event that the single character stored in <c>x</c> is not alphabetic, the <c>str.swapcase()</c> method simply returns the original character.
-        </p>
-
-        <p>
-            In our example, the data type of <c>foo</c> is a string, so its elements are single-letter strings. The loop starts by setting <c>x</c> to the value <c>'H'</c>. Then it enters the indented <em>block</em> of code below the <c>for</c> statement. It will run everything in this indented block, and upon reaching the outdent will set <c>x</c> to the next value in <c>foo</c>.
+            This example also introduces the syntax for a <term>comment</term> in Sage. Comments are the equivalent of notes in the margin for a programmer, and allow you to explain to later readers what is happening in code. Good programming style requires extensive documentation of a program, often by means of extensive commenting.
         </p>
     </subsection>
 
-    <subsection xml:id="sec-ListsIteration-Iteration-Range">
-        <title>The range function</title><p>
-        Here's another example to try: add it to a new cell in the same worksheet as the above.
+    <subsection xml:id="ss-IP-I-RF">
+        <title>The range function</title>
+        <p>
+            Programming languages other than Sage and Pythong are sometimes inflexible in their use of <c>for</c> loops and require that the values taken by the iterating variable are integers, something like <c>for i from 1 to 10</c>. While this is for good reason, it requires several lines more code to iterate through the elements of a container if the <c>for</c> loop only produces integer values of the iterating value. If this is the <em>desired</em> behavior in a Sage program, we would need to build an appropriate container of integers, using one of a family of <c>range</c> commands. Let's see how it works.
         </p>
         <sage>
             <input>
-                bar = "It's just a flesh wound."
-                n=79 - len(bar)
-                for i in range(n):
-                    print i * ' ' + bar
+                for foo in range(10):
+                    # The comma at the end of the next line makes the print statement 
+                    # not contain a "newline" character.
+                    print foo,
             </input>
+            <output>
+                0 1 2 3 4 5 6 7 8 9
+            </output>
         </sage>
         <p>
-            This introduces function <c>range(n)</c>, which provides the list of integer indices of a list of length <c>n</c>. To be technically correct, a <c>range</c> object isn't a list, but in practicality you won't see any differences. There are several different sets of arguments which can be passed to <c>range</c>, summarized in <xref ref="table-range_options" autoname="yes"/> below.
+            There are several variations of this, given in the table below. There are several different sets of arguments which can be passed to <c>range</c>, summarized in <xref ref="table-range_options" /> below. An easy way to remember that <c>range(n)</c> will produce the list of numbers 0 through <m>n-1</m> is to remember that those are the indices of a container of length <m>n</m>.
         </p>
         <table  xml:id="table-range_options">
             <title>Arguments to the range command</title>
             <caption>Arguments to the <c>range</c> command.</caption>
             <tabular>
-                <row><cell><em>Command</em></cell><cell><em>Produces</em></cell></row>
-                <row bottom="minor"><cell></cell><cell></cell></row>
-                <row><cell><c>range(i)</c></cell><cell>The sequence of integers <m>0,1,2,\ldots,i-1</m>.</cell></row>
-                <row><cell><c>range(i,j)</c></cell><cell>The sequence of integers <m>i, i+1, i+2,\ldots, j-1</m>.</cell></row>
-                <row><cell><c>range(i,j,k)</c></cell><cell>The sequence of integers <m>i, i+k, i+2k,\ldots,i+mk</m></cell></row>
-                <row><cell></cell><cell>where <m>m</m> is the maximum integer such that <m>i+mk\lt j</m>.</cell></row>
+                <row bottom="minor"><cell><em>Command</em></cell><cell><em>Produces</em></cell></row>
+                <row><cell><c>range(i)</c></cell>    <cell>The sequence of integers <m>0,1,2,\ldots,i-1</m>.</cell></row>
+                <row><cell><c>range(i,j)</c></cell>  <cell>The sequence of integers <m>i, i+1, i+2,\ldots, j-1</m>.</cell></row>
+                <row><cell><c>range(i,j,k)</c></cell><cell>The sequence of integers <m>i, i+k, i+2k,\ldots,i+mk,</m> </cell></row>
+                <row><cell></cell>                   <cell>where <m>m</m> is the maximum integer such that <m>i+mk\lt j</m>.</cell></row>
             </tabular>
         </table>
+    </subsection>
+    <subsection xml:id="ss-IP-I-NL">
+        <title>Nested loops</title>
         <p>
-            All loops can be nested within one another, but remember that this makes the number of executions <em>multiply</em>, not just add.
+            All loops can be nested within one another, but remember that this makes the number of executions <em>multiply</em>, not just add. 
         </p>
         <sage>
             <input>
@@ -61,25 +119,26 @@
                     for j in range(5):
                         foo.append([i,j])
                 print len(foo)    
-                
             </input>
         </sage>
     </subsection>
 
 
-    <subsection>
+    <subsection xml:id="ss-IP-I-IL">
         <title>Infinite loops</title>
         <p>
-            It is difficult, but not impossible, to get stuck in an ``infinite" for loop. To do this, you would have to <c>append</c> data to the list over which the loop iterates at least as fast as the iteration progresses. This rapidly uses an incredibly large amount of memory and will bring your computer to a crippling halt.
+            A loop which never reaches its halting condition is called an <term>infinite loop</term>. These are hard to create in Sage using <c>for</c> loops, but possible: they just use a ton of memory. The list over which you are iterating has to get longer at least as fast as you are iterating. As I don't want you to actually to do this, the code is given below as a listing rather than an executable Sage Cell.
         </p>
-
-        <p>
-            If you believe that a loop has gotten away from you, you have several remedies in CoCalc and really only one in a Sage Cell. In CoCalc, at the top of every window showing a Sage Worksheet are two important butons: <em>Stop</em> and <em>Restart</em>. Stop sends a <c>KeyboardInterrupt</c> to the running process in an attempt to halt the running computation. This will often work, but if it appears not to do so, the Restart button will stop the current process and restart the instance of Sage. This will require you to reload any variables with approriate values after the restart. In embedded Sage cells in the book, your only real option is to refresh the page.
-        </p>
-
-        <p>
-            I recommend against trying to build an infinite loop in this way: the amount of memory used grows with the size of the list, and even in CoCalc there is a finite cap on the amount of memory which can be used by a project. Nearing that limit will make your browser react incredibly slowly.
-        </p>
+        <listing>
+            <caption>A <c>for</c> loop which never halts.</caption>
+            <program>
+                <input>
+                    the_list = [0]
+                    for x in the_list:
+                        the_list.append(x)
+                </input>
+            </program>
+        </listing>
     </subsection>
 
 </section>

@@ -1,4 +1,4 @@
-<section xml:id="s-LI-LC">
+<section xml:id="s-IP-LC">
     <title>List comprehension</title>
     <introduction>
         <p>
@@ -26,82 +26,89 @@
         <p>
             This is a trivial example; here's an example which is more interesting.
         </p>
-        <example xml:id="exmp-ListComprehension">
+        <example xml:id="ex-IP-LC-AI">
             <title>Approximating Integrals</title>
             <p> 
-                While we know from Calculus that the best way to calculate the area between a curve <m>\set{(x,f(x)):a\leq x\leq b, f(x)\geq 0}</m> is to use the definite integral <m>\int_a^b f(x)\,dx</m>, we also know that <me>\int_a^b f(x)\,dx = \lim_{n\to\infty} \sum_{i=1}^n f(x_i^*)\Delta x_i.</me>
-                We can quickly approximate the Riemann sum on the right using lists and list comprehensions; leveraging the power of Sage as a full symbolic mathematics system, we can even go so far as to easily draw the approximating rectangles where <m>x_i^* = x_i</m>.
+                While we know from Calculus that the best way to calculate the area between the <m>x</m>-axis and a curve <m>y=f(x)\geq 0</m> (where <m>a\leq x\leq b</m>) is to use the definite integral <m>\int_a^b f(x)\,dx</m>, we also know that the definition of the definite integral depends upon the limit of sum of areas of approximating rectangles, <me>\int_a^b f(x)\,dx = \lim_{n\to\infty} \sum_{i=1}^n f(x_i^*)\Delta x_i.</me>
+                For a fixed number <m>n</m>, we can quickly approximate the Riemann sum on the right using lists and list comprehensions; leveraging the power of Sage as a full symbolic mathematics system, we can even go so far as to easily draw the approximating rectangles where <m>x_i^* = x_i</m>.
+            </p>
+            <p> Here's what we need to do:
+                <ol>
+                    <li>Choose a number <m>n</m> of approximating rectangles.</li>
+                    <li>Calculate the <m>n</m> points where the rectangles intersect the curve. The area of each rectangle then is the width of the rectangle times the <m>y</m>-coordinate of the point.</li>
+                    <li>Calculate those areas.</li>
+                    <li>Calculate the sum of all the rectangle areas.</li>
+                </ol>
             </p>
             <listing>
-                <caption>Approximating a definite integral with Riemann sums
+                <caption>
+                    Approximating a definite integral with Riemann sums. Notice the use of a symbolic variable <c>x</c> and a function <c>f</c> of that symbolic variable.
                 </caption>
                 <program>
                     <input>
-                        n=10
-                        # generate a list of points on the curve y=x^2
-                        points = [(x,x^2) for x in [i/n for i in range(n+1)]]
+                        n=13
+                        a, b = 0, 1
+                        dx = (b-a)/n
+                        x = var('x')
+                        f(x) = x^2
+                        # generate a list of points on the curve y=x^2 equally spaced in the 
+                        # x-axis interval [a,b]
+                        points = [(xi,f(xi)) for xi in [a+dx*i for i in range(n+1)]]
 
-                        # generate a list of coordinates of the corners of 
-                        # the approximating rectangles
-                        recs = [[(x-1/n,0),(x-1/n,y),(x,y),(x,0)] for x,y in points[1:]]
+                        # now calculate a list of areas of each rectangle
+                        areas = [dx*yi for (xi,yi) in points[1:]]
 
-                        # calculate a list of the areas of each rectangle
-                        areas = [y/n for x,y in points[1:]]
-
-                        # create containing the Graphics objects for each rectangle
-                        plot_list = [polygon(coords, fill=False) for coords in recs]
-
-                        # use Sage to plot the function y=x^2 on the interval [0,1]
-                        out_plot = plot(var('x')^2,(var('x'),0,1),color='red')
-
-                        total_area = 0
-                        for i,p in enumerate(plot_list):
-                        total_area += areas[i]
-                        out_plot += p
-                        show(out_plot, aspect_ratio=1)
-                        show("Approximate area is " + str(round(total_area,2)))
+                        approx_area = 0
+                        for ai in areas:
+                            approx_area += ai
+                        out_str = "The approximate area is {0}, and the actual area is {1}."
+                        print out_str.format(approx_area, integrate(f,(x,a,b)))
                     </input>
                 </program>
             </listing>
-            <p> Try to modify the above code until you get a picture like this:</p>
-<!--             <image source="images/li-riemann_sum.svg"/> -->
-            <figure xml:id="fig-riemann_sum">
-                <caption>Rectangles under a curve.</caption>
-                <image xml:id="li-riemann_sum">
-                    <latex-image>
-                        <![CDATA[
-\begin{tikzpicture}[scale=1/2]
-    \draw (-0.5,0) -- (10,0) (0,-0.5) -- (0,10);
-    \foreach \x/\y in {1/1, 2/4, 3/9, 4/16, 5/25, 6/36, 7/49, 8/64, 9/81}{
-        \draw (-0.25,\x) -- (0,\x) (\x,-0.25) -- (\x,0);
-        \draw [blue] (\x,0) -- (\x,\y/10) -- (1+\x,\y/10) -- (1+\x,0);
-    };
-    \draw[thick, red] (0,0) parabola (10,10);
-    \foreach \x in {0.2,0.4,0.6,0.8,1.0}{
-        \node [below] at (10*\x,0) {\tiny$\x$};
-        \node [left] at (0,10*\x) {\tiny$\x$};
-    };
-\end{tikzpicture}
-]]>
-                    </latex-image>
-                </image>
-            </figure>
+            <p>
+                The use of the <c>.format</c> method of strings in the last line allows us to sort of treat a string as a customizable function. Including the <c>{0}</c> and <c>{1}</c> in <c>out_str</c> allows you to replace each with the respective argument of the <c>format</c> method, without worrying about the data type of those arguments!
+            </p>
+            <p>
+                If we'd like to actually draw the approximation, we can add some graphics steps. Sage is very good at this.
+            </p>
+            <listing>
+                <caption>
+                    Additional steps which produce graphical output of the approximation of the area.
+                </caption>
+                <program>
+                    <input>
+                        out_plot = plot(f(x),(x,a,b), color="red")
+                        # from the original points, find the coordinates of corners of
+                        # approximating rectangles
+                        rec_pts = [ [(xi-dx, 0), (xi-dx, yi), (xi,yi), (xi,0)] for xi,yi in points[1:]]
 
+                        plot_list = [polygon(pts, rgbcolor=(.8,.8,1), edgecolor="blue") for pts in rec_pts]
+                        for p in plot_list:
+                            out_plot += p
 
-
+                        show(out_plot, aspect_ratio=1)
+                    </input>
+                </program>
+            </listing>
+            <p>
+                As an exercise, try to change the above code until both the picture and the approximation use <q>left endpoint approximation</q> instead of <q>right endpoint approximation.</q>
+            </p>
         </example>
     </introduction>
-    <subsection xml:id="sec-ListsIteration-Comprehension-Nested">
-        <p> <em>Nested list comprehension</em> is a very important tool for producing "legible code" in Sage or Python, because it provides a way to remove nested for loops. Compare the following two programs which result in identical output.
+    <subsection xml:id="ss-IP-LC-NLC">
+        <title>Nesting list comprehensions</title>
+        <p> 
+            Just as nested iterations are important for solving problems, often the most concise way to build a nested list is to use a <term>nested list comprehension</term>. Compare the following two programs, which produce identical output.
         </p>
         <sage>
             <input>
                 foo = []
                 for i in range(10):
-                bar = []
-                for j in range(i):
-                bar.append(j^2)
-                foo.append(bar)
+                    bar = []
+                    for j in range(i):
+                        bar.append(j^2)
+                    foo.append(bar)
                 print foo
             </input>
         </sage>
@@ -111,6 +118,27 @@
                 print foobar
             </input>
         </sage>
-        <p>The second of these examples shows the nesting of list comprehesions.</p>
+        <p>
+            The second of these examples shows a nesting of list comprehesions where the object being created in the outermost list is an inner list. It is also possible to have the container of the iteration be a list comprehension, although this is less common.
+        </p>
+        <sage>
+            <input>
+                print [[bar^2 for bar in foo] for foo in [2*bob for bob in "larry"]]
+            </input>
+        </sage>
     </subsection>
+    <subsection xml:id="ss-IP-LC-EC">
+        <title>The <c>enumerate</c> command</title>
+        <p>
+            Another useful feature of Sage is its ability to <term>enumerate</term> the objects in a container. Generally to enumerate means to count, but in such a way that the objects being counted each have a number associated with them. Think of this as giving serial numbers to the things being counted. Here's an example of enumerate being used.
+        </p>
+        <sage>
+            <input>
+                foo = "Hello world!"
+                for i, bar in enumerate(foo):
+                    print (i,bar)
+            </input>
+        </sage>
+    </subsection>
+
 </section>

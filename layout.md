@@ -1,24 +1,21 @@
 # AAM Layout
 
-### Checks indicate that the xml:id has been updated to the parenthetical ID
+### Checks indicate that the xml:id has been updated to the parenthetical ID and revised/verified in the Spring 2019 semester.
 
 
 - [x] Sage: Basics (c-SB)
   - [x] CoCalc (s-SB-CC)
   - [x] Variables and basic data types (s-SB-V)
+    - assignments and operations
     - numbers
     - booleans
-    - assignments and operations
   - [x] strings (s-SB-S)
-  - [x] Advanced sage (s-SB-AS)
-- [x] Sage: Lists and iteration (c-LI)
-  - [x] lists, tuples, and dictionaries (s-LI-LTD)
-  - [x] iteration (s-LI-I)
-  - [x] list comprehension (s-LI-LC)
-- [ ] Sage: Conditioning and error handling (c-CE)
-  - [ ] simple conditionals
-  - [ ] the power of `elif`
-  - [ ] exceptions and the `try:... except:` constructor
+  - [x] lists, tuples, and dictionaries (s-SB-LTD)
+- [x] Sage: Introductory programming (c-IP)
+  - [x] iteration (s-IP-I)
+  - [x] list comprehension (s-IP-LC)
+  - [ ] Conditional expressions (S-IP-CE)
+  - [ ] Exceptions and the `try:... except:` constructor (S-IP-ETEC)
 - [ ] Sage: Functions and methods
   - [ ] Functions in programming
   - [ ] Classes and object-oriented programming

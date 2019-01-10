@@ -1,91 +1,95 @@
-<section xml:id="s-LI-LTD">
+<section xml:id="s-SB-LTD">
     <title>Lists, tuples, and dictionaries</title>
-
-    <subsection>
-        <title>Basic <c>list</c> operations</title>
+    <introduction>
         <p>
-            Our first example of a <em>mutable compound data type</em> is the <c>list</c>. Lists may contain as elements any other data type, including others which are compound! Syntactically, they are very easy to implement: a list consists of a comma-separated list of objects enclosed in square brackets. The elements can be indexed individually, or sublists can be constructed by slicing, exactly as when using strings.
+            Our next three compound data types are related to strings in that they are all <term>container</term> data types. First of these, <term>lists</term> are <em>mutable</em> containers of arbitrary data. These are represented by the <c>list</c> data type, conveniently. A mathematical object much like the list is the <term>tuple</term>, an ordered finite sequence. However the <c>tuple</c> data type is <em>immutable</em>. Finally we will discuss <term>dictionaries</term>, of the type <c>dict</c>, which is a mutable data type which can be indexed using many different data types, not just integers.
+        </p>
+    </introduction>
+    <subsection>
+        <title>Syntax of lists and tuples</title>
+        <p>
+            It is uncomplicated to put data into a list or tuple in Sage. A <c>list</c> variable consists simply of a comma-separated list of values enclosed in square brackets; the values which may be so enclosed may even include other lists! A <c>tuple</c> is similar, being a comma-separated list of values enclosed in parentheses. Elements of each can be read by slicing and indexing exactly as with strings.
         </p>
         <sage>
             <input>
                 foo = 'this is a string'
-                bar = [1,2,3,foo,5]
+                bar = [1, 2, foo, [5, 5, 5]]
+                larry = (5, 4, bar, foo, 1)
+                nancy = (1, )
+                esmerelda = [2] 
+                empty_list = []
+                empty_tuple = tuple([])
+                
                 print bar
                 print bar[-2:]
+                print larry, nancy, esmerelda
+                print empty_list, empty_tuple
             </input>
-            <output>
-                [1, 2, 3, 'this is a string', 5]
-                ['this is a string', 5]
-            </output>
         </sage>
         <p>
-            Also, lists can be added and multiplied by integers:
+            We have some more interesting points to note in the above example: first, we can treat a data type as a function, and doing so attempts to <term>coerce</term> the input argument into the specified data type. Hence <c>tuple([])</c> produces a tuple containing 0 elements. Likewise, we must be careful to include a comma if we wish to create a single-element <c>tuple</c>, since the default behavior of parentheses is <term>association</term>, much like in mathematical notation. That is, we don't generally consider <m>(x)</m> to be a 1-tuple whose first coordinate is <m>x</m>, but rather consider it to be the variable <m>x</m> associated with nothing else.
+        </p>
+        <p>
+            Finally, let's demonstrate that a <c>list</c> is mutable but a <c>tuple</c> is not.
         </p>
         <sage>
             <input>
-                print [1,2,3] + ['a','b','c']
-                print 5 * [1,2,3]
-            </input>
-            <output>
-                [1, 2, 3, 'a', 'b', 'c']
-                [1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]
-            </output>
-        </sage>
-        <p>
-            There is an important distinction between lists and strings involving indexing. Specifically, you can change individual elements of a list without overwriting the entire list. This makes <c>list</c> a <em>mutable</em> data type, while <c>str</c> is <em>immutable</em>.
-        </p>
-        <sage>
-            <input>
-                foo = 'this is a string'
-                bar = [0,2,4,foo,8]
-                print bar
-                bar[3] = -6
-                print bar
-                foo[3]="p"
+                bob = [1,2,3,5,5]
+                larry = (5,3,3,2,1)
+                
+                bob[3] = 4
+                print bob
+                
+                larry[1] = 4
+                print larry
             </input>
         </sage>
     </subsection>
 
 
     <subsection>
-        <title>Methods</title>
+        <title>Operations and methods</title>
         <p>
-            A wonderful feature of Python can be found in its implementation of <em>methods</em><fn>We'll extensively discuss methods and classes after we've talked about functions, when we briefly discuss object-oriented programming. This will happen just before we start diving into <q>real math.</q></fn>, predefined functions available within each class of objects. For instance, <c>bar.reverse()</c> will reverse the order of the elements of <c>bar</c>:
+            Since it makes as much sense to concatenate and repeat lists or tuples as it does strings, we first see that addition and integer multiplication behave sensibly for lists and tuples.
         </p>
         <sage>
             <input>
-                bar.reverse()
-                print bar
+                bob = [1, 3, 2, 5, 4]
+                larry = (1, 2, 'bob')
+                
+                print bob + list(larry)
+                print larry + tuple(bob)
             </input>
-            <output>
-                [5, 'this is a string', 3, 2, 1]
-            </output>
         </sage>
         <p>
-            Another useful list method is <c>sort</c>, which reorders the elements of a list into sorted order. Sage does this more intelligently than Python, ordering numbers befre strings. However, not all data types can be compared, so it is possible that for some <c>list</c> you would try to <c>.sort()</c> and Sage would <c>raise</c> a <c>TypeError</c>.
+            Let's see the list of methods available for <c>list</c>.
         </p>
         <sage>
             <input>
-                bar.sort()
-                print bar
+                bob = [1,6,2,6,1,8,9]
+                help(bob)
             </input>
-            <output>
-                [1, 2, 3, 5, 'this is a string']
-            </output>
         </sage>
         <p>
-            For more information on what methods are available to a given data type, you can define a variable of that type and then pass that variable name as an argument to the <c>help</c> function. This will also give you an introduction to the style of Python's documentation. Try declaring <c>temp</c> to be the empty list and then ask Python for <c>help</c> about <c>temp</c>:
+            We see here we can get help not just by typing <c>help(list)</c> but by typing <c>help(bob)</c> when <c>bob</c> is a list. Let's take a moment to discuss all those strange methods with underscores in their names. For instance, the first <c>list</c> method is <c>__add__(...)</c> which seems to somehow implement addition. These are <term>operator methods</term>, which are used not by typing <c>x.__add__(y)</c> but instead by <c>x + y</c>. These methods provide the definitions for operators which are actually used by the syntax of a special Sage <em>token</em> like <c>+</c> or <c>in</c>.
         </p>
-        <sage type="display">
-            <input>
-                temp = [ ]
-                help(temp)
-            </input>
-        </sage>
-
         <p>
-            It is always the case that methods available to a variable <c>my_var</c> will be accessed via <c>my_var.method_name(...)</c>; we'll talk more about this when we get to <xref ref="ch-Functions" autoname='title'/>.
+            We should notice two special methods, <c>reverse</c> and <c>sort</c>, both of which describe the behavior as an <c>*IN PLACE*</c> behavior. What this means is that <c>bob.reverse()</c> actually reverses the order of the items in the list <c>bob</c> and then <em>overwrites the value of <c>bob</c> with that reversed-order version</em>! Likewise <c>bob.sort()</c> actually changes the order of elements of the list <c>bob</c>.
         </p>
     </subsection>
-
+    <subsection>
+        <title>Dictionaries</title>
+        <p>
+            Sometimes it is justifiable that a compound data type be indexed non-numerically. For instance, you might want to store a variable <c>professor</c> which contains the name, office number, and emaril address of your Algorithms professor. Which of those three is naturally the <m>0^\text{th}</m> element of your professor? Since there's not necessarily one right answer to that question, we might instead want to have a variable <c>professor</c> indexed by the strings <c>"name"</c>, <c>"office"</c>, and <c>"email"</c>. The syntax for a dictionary, with type <c>dict</c>, is as follows:
+        </p>
+        <sage>
+            <input>
+                professor = {"name":"Stephen Graves", "office":"RBN 4011", "email":"sgraves@uttyler.edu"}
+                print professor['name']
+            </input>
+        </sage>
+        <p>
+            In this example, the variable is named <c>professor</c> and is a dictionary with <term>keys</term> (<c>"name"</c>, <c>"office"</c>, and <c>"email"</c>) and <term>values</term> (<c>"Stephen Graves"</c>, <c>"RBN 4011"</c>, and <c>"sgraves@uttyler.edu"</c>). In effect, a dictionary in Sage is very much like a function whose finite domain is its set of keys and whose image is its set of values. In order for a value to be a key for a <c>dict</c>, it must be a <term>hashable</term> value, which effectively means it is immutable and has a unique representation: for these reasons, keys are often strings, numbers, or tuples.
+        </p>
+    </subsection>
 </section>
