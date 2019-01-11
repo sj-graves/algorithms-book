@@ -1,104 +1,116 @@
-<section xml:id="sec-Conditionals-Errors">
-    <title>Exceptions and exception handling</title>
-    <subsection xml:id="sec-Conditionals-Errors-SyntaxErrors">
-        <title>Syntax errors</title>
-        <p>
-            There are many ways in which the execution of a program can go wrong, and we call these <em>errors.</em> The first type is the <em>syntax error</em>, which is the equivalent of using bad grammar in English. For instance, the words <q>Grandma what this food</q> do not form a meaningful sentence because there is no verb. A syntax error is code which as written is meaningless to the interpreter. As an example, try the following.
-        </p>
-        <sage>
-            <input>
-                foo = 2^
-            </input>
-        </sage>
-        <p>
-            In this case, a syntax error arises because the <c>^</c> operator is a binary operator but we have only supplied one operand, the integer 2. Syntax errors are easy for Sage to detect and generally easy to fix; once you've learned how to program, syntax errors tend to disappear except when learning a new programming language or due to typos in your code.
-        </p>
-    </subsection>
-    
-    <subsection xml:id="sec-Conditionals-Errors-Exceptions">
+<section xml:id="s-IP-EEH">
+    <title>Errors and exception handling</title>
+    <introduction>
+        There's only one way for a program to run correctly, but so many different ways errors can appear. Some errors are easy to diagnose and fix and others can ruin whole days trying to pin down. Errors in programming fall broadly into two classes: exceptions and bugs.
+    </introduction>
+    <subsection xml:id="ss-IP-EEH-E">
         <title>Exceptions</title>
-        <p>
-            The next class of errors is also easy to detect by Sage and are called <em>exceptions</em>. In both Sage and Python, <c>Exception</c> is a special data type used for all sorts of errors which arise during programming. The terminology used by programmers is that a syntactically correct operation which disagrees with the rules for a particular object will <em>raise</em> an exception, which either must be <em>handled</em> or interrupt the execution of the program. Since an unhandled exception will terminate execution and Sage provides some short <em>debugging information</em> when execution fails, you will quickly become proficient in writing exception handlers. Many of the errors you will see in your life as a programmer are exceptions: type errors, index errors, value errors, name errors, and zero-division errors are all common examples. Try the following sequence of code examples to see each of these in turn.
-        </p>
-        <sage>
-            <input>
-                foo = 5
-                bar = 'This is a string.'
-                print foo*bar
-                print foo+bar
-            </input>
-        </sage>
-        <sage>
-            <input>
-                foo = [2^i for i in range(10)]
-                foo[11]
-            </input>
-        </sage>
-        <sage>
-            <input>
-                bar = 'This is a string.'
-                print int(bar)
-            </input>
-        </sage>
-        <sage>
-            <input>
-                foobar = 'This is also a string.'
-                print frobozz
-            </input>
-        </sage>
-        <sage>
-            <input>
-                print 1/0
-            </input>
-        </sage>
-
-        <p>
-            As mentioned above, in order for an exception to occur and stop execution, it must be <em>raised</em>. As with many programming structures in Sage and Python, this is done intuitively, via a <c>raise</c> command.
-        </p>
-        <sage>
-            <input>
-                raise RuntimeError(&quot;This is where you put the error text.&quot;)
-            </input>
-        </sage>
+        <introduction>
+            <p>
+                Errors are those errors which (left untreated) stop the execution of code abruptly. On the scale of all possible errors, this is clearly worse than <em>executes flawlessly</em>, but not much. In Sage (and Python!), an <c>Exception</c> is a special data type which is used for all sorts of regularly-occurring programming errors. The following are some of the more common exceptions you'll see when working with Sage, in no particular order.
+            </p>
+        </introduction>
+        <subsubsection>
+            <title>Syntax errors</title>
+            <p>
+                The first and easiest type of exception is a <c>SyntaxError</c>. This is the programming equivalent of a grammatically incorrect sentence, where you've written something which violates the basic rules of the Sage language. Sage will show you in the <term>error message</term> exactly where your Syntax error occurs. Here's an example:
+            </p>
+            <sage>
+                <input>
+                    foo = "This is a test"
+                    bar = 
+                </input>
+            </sage>
+        </subsubsection>
+        <subsubsection>
+            <title>Index errors</title>
+            <p>
+                <c>IndexError</c> is raised when you try to access an index of a container with <q>regular</q> indexing (like lists, tuples, and strings, but not dictionaries) but outside the bounds of the valid indices.
+            </p>
+            <sage>
+                <input>
+                    foo = "this is a string"
+                    bar = len(foo) + 5
+                    foo[bar]
+                </input>
+            </sage>
+        </subsubsection>
+        <subsubsection>
+            <title>Key errors</title>
+            <p>
+                The <c>KeyError</c> is closely related to the <c>IndexError</c>, but for dictionaries! Let's look at the behavior here rather than trying to explain it.
+            </p>
+            <sage>
+                <input>
+                    foo = {'bob':[1, 'the shrimp'], (2,3): (1,2,3,'the pineapple')}
+                    print foo.keys()
+                </input>
+                <output>
+                    ['bob', (2, 3)]
+                </output>
+            </sage>
+            <p>
+                In this example, we see that for a dictionary <c>foo</c>, the method <c>foo.keys()</c> returns the list of valid keys of the dictionary. If we try to index into a dictionary with a key other than those that show up using the <c>.keys()</c> method, we'll raise a <c>KeyError</c>. The Sage terminology for the data pointed to by a key is the <term>value</term>. You can get a list of all the values using the <c>.values()</c> method, and if you need a list of the keys in ordered pairs with their associated values, we use <c>.items()</c>.
+            </p>
+            <sage>
+                <input>
+                    foo = {'bob':[1, 'the shrimp'], (2,3): (1,2,3,'the pineapple')}
+                    print "keys: {0}".format(foo.keys())
+                    print "values: {0}".format(foo.values())
+                    print "items: {0}".format(foo.items())
+                </input>
+            </sage>
+            <p>
+                In fact we can use this last method, the list of ordered pairs, as one of the constructions of a dictionary. Rather than specifying the entries in <c>{k1:v1, k2:v2}</c> format, we can write <c>dict([(k1,v1),(k2,v2)])</c> and so convert a list of tuples into a dictionary.
+            </p>
+        </subsubsection>
+        <subsubsection>
+            <title>Type errors</title>
+            <p>
+                Another very common error is the <c>TypeError</c>, which is raised whenever the data type of a variable used in a computation is unexpected by the function being called. For instance, it doesn't make sense to take the square root of a string, because the <c>sqrt</c> function expects numerical input, but the Sage interpreter won't know the error exists until it attempts to execute the expression.
+            </p>
+            <sage>
+                <input>
+                    foo = "bob's your uncle"
+                    sqrt(foo)
+                </input>
+            </sage>
+        </subsubsection>
+        <conclusion>
+            <p>
+                There are many other types of errors which will be encountered as you try to write codes, too many to describe. Other common exceptions you might see are <c>ValueError</c>, <c>AttributeError</c>, <c>DivideByZeroError</c>, and one which I use frequently as a control mechanism, <c>RuntimeError</c>. In every case, the well written code underlying whatever you are attempting involves a <c>raise</c> command, the method by which an exception is generally triggered. The sole exception to this is the <c>KeyboardInterrupt</c> exception, which is the result of pressing the <q>Stop</q> button at the top of a Sage worksheet in CoCalc, while it is the midst of an execution. This generally does what it says: stops the execution. Sometimes when matters get even more out of hand, the <q>Restart</q> button is more useful, but restarting a worksheet does clear all known variables and so the execution of cells must be repeated in order.
+            </p>
+        </conclusion>
     </subsection>
-    <subsection xml:id="sec-Conditionals-Errors-ExceptionHandling">
-        <title>Exception handling</title>
+    <subsection xml:id="ss-IP-EEH-HE">
+        <title>Handling exceptions</title>
         <p>
-            To correctly handle an exception, it must be raised within a special block structure called a <em>try-except</em> block. 
+            In the dark ages when I learned to program, I was taught that an <q>unhandled exception is an unacceptable error.</q> What this means is that all possible exceptions should be thought of and a means implemented so that if an exception is raised, the program either continues or exits <q>gracefully,</q> rather than aborting with an error message. The block structure used in Sage to catch these types of errors is a <c>try:... except:...</c> block. Here's a trivial example:
         </p>
         <sage>
             <input>
-                n = 8
+                n = 1
                 try:
-                    if n%3==0:
-                        raise RuntimeError('This is a runtime error.')
-
-                    elif n%3==1:
-                        raise ValueError('This is a value error')
-
-                    elif n%3==2:
-                        raise TypeError('This is a type error.')
-
-                    raise ZeroDivisionError('Not really zero division.')
-
-                except RuntimeError:
-                    print 'This string will print upon a raised RuntimeError.'
-
-                except ValueError:
-                    print 'This string will print upon a raised ValueError.'
-
+                    if n==1:
+                        raise RuntimeError('First error')
+                    elif n==2:
+                        raise ValueError('Second error')
+                    else:
+                        raise TypeError('Third error')
+                except RuntimeError as error_message:
+                    print "We have encountered a RuntimeError, specifically {0}".format(error_message)
+                    pass
                 except:
-                    print 'Any other type of exception will trigger this!'
-                    raise
-
-                print 'The exception is safely handled.'
+                    print "All errors but RuntimeErrors are caught here!"
+                    pass
+                print "The program now exits cleanly."
             </input>
         </sage>
         <p>
-            In the above Sage code, changing the initial value of <c>n</c> will cause varying types of exception to be raised. <c>RuntimeError</c> is a very convenient type of error to plan to raise as a <em>flow control technique</em>, which we will discuss at the end of this section. It is very important to note that Sage code which includes a <c>try:</c> statement must also contain a subsequent <c>except:</c> statement, or a <c>SyntaxError</c> will result. Any number of specific exception types can be handled prior to the final <q>catch all</q> <c>except:</c>. It is frequently useful to include a <c>raise</c> statement with no argument at the end of this final <c>except:</c> block in order to terminate execution by reraising whatever exception caused the fault in the first place.
+            In the above Sage code, changing the initial value of <c>n</c> will cause varying types of exception to be raised. <c>RuntimeError</c> is a very convenient type of error to plan to raise as a <em>flow control technique</em>, which we will discuss at the end of this section. It is very important to note that Sage code which includes a <c>try:</c> statement must also contain a subsequent <c>except:</c> statement, or a <c>SyntaxError</c> will result. Any number of specific exception types can be handled prior to the final <q>catch all</q> <c>except:</c>. It is frequently useful to include a <c>raise</c> statement with no argument at the end of this final <c>except:</c> block in order to terminate execution by reraising whatever exception caused the fault in the first place, though this causes an abrupt stop to execution with an error message rather than an elegant stop with some nice message printed out. However while working through the initial phases of programming to solve a problem, this is a perfectly acceptable step.
         </p>
     </subsection>
-    <subsection xml:id="sec-Conditionals-Errors-FlowControl">
+    <subsection xml:id="ss-IP-EEH-FC">
         <title>Flow control</title>
         <note>
             <p>
@@ -153,7 +165,7 @@
         </example>
         
         <p>
-            One last flow control command to acknowledge is the <c>pass</c> command. Everything after a <c>pass</c> statement in the current block is ignored; mostly these are used while in the early stages of writing code, to provide a place holder for a section which has not been written.
+            One last flow control command to acknowledge is the <c>pass</c> command. Everything after a <c>pass</c> statement in the current block is ignored; mostly these are used while in the early stages of writing code, to provide a place holder for a section which has not been written. This allows a block structure to contain an effectively-empty block yet still be syntactically correct, as an actual empty block will always raise a <c>SyntaxError</c>.
         </p>
         <sage>
             <input>
@@ -166,11 +178,19 @@
         </sage>
     </subsection>
 
-    <subsection xml:id="sec-Conditionals-Errors-Bugs">
+    <subsection xml:id="ss-IP-EEH-B">
         <title>Bugs</title>
         <p>
-            The final and worst type of programming error is not automatically detectable: the <em>bug</em>. Bugs are errors in your algorithm which do not violate any rules for the language, but nonetheless lead to incorrect results or responses in executing the program. Bugs are nearly unavoidable and often are diabolically difficult to diagnose, isolate, and solve. The process of doing these three tasks is <em>debugging</em>, and often one of the hardest tasks for a programmer is to debug code written by someone else. For this reason, we come now to an important programming maxim.
+            The final and worst type of programming error is not automatically detectable: the <em>bug</em>. Bugs are errors in your algorithm which do not violate any rules for the language, but nonetheless lead to incorrect results or responses in executing the program. The root cause of a bug is not incorrect programming, but a flaw in the design or implementation of your algorithm. This is best described as saying, <q>the program is executing exactly what it was told, and what it was told was wrong.</q>
         </p>
+        <definition xml:id="defn-A">
+            <title>Algorithm</title>
+            <statement>
+                <p>
+                    An <term>algorithm</term> is a formal process for solving a problem. For instance, a well-written recipe is an algorithm for producing a particular food.
+                </p>
+            </statement>
+        </definition>
         <principle> 
             <statement>
                 <p>
@@ -179,7 +199,7 @@
             </statement>
         </principle>
         <p>
-            <em>Documenting your code</em> is the process of including instructive comments about the iuntended flow of the program in the code itself. Short comments in Sage are lines of code beginning with the <em>hash</em> symbol <c>#</c>. Longer comments are included as multiline strings, beginning and ending with tripled quotes, either <c>'''</c> or <c>&quot;&quot;&quot;</c>.
+            <term>Documenting your code</term> is the process of including instructive comments about the iuntended flow of the program in the code itself. Short comments in Sage are lines of code beginning with the <em>hash</em> symbol <c>#</c>. Longer comments are included as multiline strings, beginning and ending with tripled quotes, either <c>'''</c> or <c>&quot;&quot;&quot;</c>. Note that in CoCalc, the latter type of comment actually produces output, and so is to be avoided in the main execution of a cell.
         </p>
         <sage>
             <input>
@@ -193,7 +213,10 @@
             </input>
         </sage>
         <p>
-            It is a bad habit of programmers to not provide extensive documentation to their code. The assumption that another programmer will need to read code later is deeply flawed, but it is often the case that after a significant time interval the original programmer will have little or no understanding of how their code works. While writing extensive comments is fairly boring, it saves time in the long run when code must be reused.
+            It is a bad habit of programmers to not provide extensive documentation to their code. This bad habit especially arises among self-taught programmers who only infrequently have to look back at their code. Remember that most of the programs we will write this semester will be relatively short, but realitically most software requires many thousands of lines of code in order to properly function. If that software ever needs to be patched, upgraded or rewritten, having documented code is essential.
+        </p>
+        <p>
+            More practically, documenting your code as a programming student makes it easier for your instructor to see whether what your program actually did is the same as what it was intended to do.
         </p>
     </subsection>
 </section>

@@ -37,6 +37,7 @@ ehthumbs.db
 Thumbs.db
 *.sage-chat
 .*.sage-chat
+.*.term
 
 # LATEX temp files #
 ####################

@@ -9,7 +9,7 @@
             
         </p>
     </introduction>
-    <subsection>
+    <subsection xml:id="ss-SB-S-BUS">
         <title>Basic use of strings</title>
         <p>
             The operation of attaching one string to the end of another string is called <em>concatenation</em>, and is carried out in Python using the <c>+</c> operator. Integer multiplication of strings using <c>*</c> produces multiple copies of the string.
@@ -57,7 +57,7 @@
             </input>
         </sage>
     </subsection>
-    <subsection>
+    <subsection xml:id="ss-SB-S-P">
         <title>The <c>print</c> command</title>
         <p>
             The <c>print</c> command prints a formatted string version of whatever comma-separated <em>argument(s)</em> it is given; if it is given more than one argument, it separates them with a space:
@@ -74,7 +74,8 @@
         </p>
 
     </subsection>
-    <subsection><title>Indexing strings</title>
+    <subsection xml:id="ss-SB-S-In">
+        <title>Indexing strings</title>
         <p>
             Another way to talk about the string data type is as a <term>compound</term> data type. This means that an object of type <c>str</c> actually consists of smaller pieces of data -- in the case of <c>str</c>, the smaller pieces of data are single-character strings!
         </p>
@@ -109,7 +110,7 @@
         </sage>
     </subsection>
 
-    <subsection>
+    <subsection xml:id="ss-SB-S-S">
         <title>Slicing strings</title>
         <p>
             You can access a substring by <term>slicing</term> the string, but you have to be careful how slicing works. The best way to imagine it (as explained in the Python tutorial) is to think of the indices actually marking the dividers between letters in a string:
@@ -188,7 +189,7 @@
     </subsection>
 
 
-    <subsection>
+    <subsection xml:id="ss-SB-S-Im">
         <title>Strings are <em>immutable</em></title>
         <p>
             An important thing to note about strings is that you may read individual positions but you may not overwrite individual positions. The data types which allow writing to indices or slices are called <term>mutable</term> types; strings are an example of an <term>immutable</term> data type.
@@ -208,7 +209,7 @@
         </sage>
         
     </subsection>
-    <subsection>
+    <subsection xml:id="ss-SB-S-M">
         <title>String methods</title>
         <p>
             All built-in data types in Sage have certain native <term>methods</term>, which you can think of as functions which act specifically on the variable object itself. To access the methods of a string on a string variable <c>bob</c>, you would use the syntax <c>bob.method_name(...)</c>. One of the two ways to see the methods built into a data type (for example, <c>str</c>) is to type <c>help(str)</c> in an input cell and execute it. Try it!

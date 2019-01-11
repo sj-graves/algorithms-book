@@ -5,7 +5,7 @@
             Our next three compound data types are related to strings in that they are all <term>container</term> data types. First of these, <term>lists</term> are <em>mutable</em> containers of arbitrary data. These are represented by the <c>list</c> data type, conveniently. A mathematical object much like the list is the <term>tuple</term>, an ordered finite sequence. However the <c>tuple</c> data type is <em>immutable</em>. Finally we will discuss <term>dictionaries</term>, of the type <c>dict</c>, which is a mutable data type which can be indexed using many different data types, not just integers.
         </p>
     </introduction>
-    <subsection>
+    <subsection xml:id="ss-SB-LTD-SLT">
         <title>Syntax of lists and tuples</title>
         <p>
             It is uncomplicated to put data into a list or tuple in Sage. A <c>list</c> variable consists simply of a comma-separated list of values enclosed in square brackets; the values which may be so enclosed may even include other lists! A <c>tuple</c> is similar, being a comma-separated list of values enclosed in parentheses. Elements of each can be read by slicing and indexing exactly as with strings.
@@ -47,7 +47,7 @@
     </subsection>
 
 
-    <subsection>
+    <subsection xml:id="ss-SB-LTD-OM">
         <title>Operations and methods</title>
         <p>
             Since it makes as much sense to concatenate and repeat lists or tuples as it does strings, we first see that addition and integer multiplication behave sensibly for lists and tuples.
@@ -77,7 +77,8 @@
             We should notice two special methods, <c>reverse</c> and <c>sort</c>, both of which describe the behavior as an <c>*IN PLACE*</c> behavior. What this means is that <c>bob.reverse()</c> actually reverses the order of the items in the list <c>bob</c> and then <em>overwrites the value of <c>bob</c> with that reversed-order version</em>! Likewise <c>bob.sort()</c> actually changes the order of elements of the list <c>bob</c>.
         </p>
     </subsection>
-    <subsection>
+    
+    <subsection xml:id="ss-SB-LTD-D">
         <title>Dictionaries</title>
         <p>
             Sometimes it is justifiable that a compound data type be indexed non-numerically. For instance, you might want to store a variable <c>professor</c> which contains the name, office number, and emaril address of your Algorithms professor. Which of those three is naturally the <m>0^\text{th}</m> element of your professor? Since there's not necessarily one right answer to that question, we might instead want to have a variable <c>professor</c> indexed by the strings <c>"name"</c>, <c>"office"</c>, and <c>"email"</c>. The syntax for a dictionary, with type <c>dict</c>, is as follows:

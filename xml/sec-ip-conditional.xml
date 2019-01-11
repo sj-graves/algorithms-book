@@ -1,13 +1,15 @@
-<section xml:id="sec-Conditionals-Conditionals">
-    <title>Conditional statements</title>
+<section xml:id="s-IP-CE">
+    <title>Conditional expressions</title>
     <introduction>
-        <p>A <em>conditional statement</em> is one which performs a different task depending upon a boolean value.</p>
+        <p>
+            Thinking back to the Boolean data type from <xref ref="ss-SB-V-BDT" text="title" /> we may wonder, <q>what was the point of having that data type at all!?</q> Generally speaking, there's not a lot of need to parse through complicated calculations of logical statements <em>unless</em> the truth or falsehood of the result determines which task is next undertaken. <term>Conditional statements</term> are all those statements for which the results of execution depend upon the value of a Boolean variable.
+        </p>
     </introduction>
 
-    <subsection>
+    <subsection xml:id="ss-IP-CE-WL">
         <title>While loops</title>
         <p>
-            The first type of conditional statement we will consider is the "other" kind of iteration: the <c>while</c> loop. It is much, much easier to enter an infinite while loop, but they generally create less memory pressure than infinite for loops. Here's the easiest do-nothing infinite while loop:
+            The first type of conditional statement we will consider is the <q>other</q> kind of iteration: the <c>while</c> loop. The basic structure of a <c>while</c> loop is as a block structure, this time begun by <c>while condition_variable:</c>. So long as <c>condition_variable</c> remains <c>True</c>, the loop will repeat. This makes it trivial to produce an infinite while loop which creates no <em>memory pressure</em> on the system, and just idles along consuming a tiny little fraction of CPU power.
         </p>
         <listing>
             <program>
@@ -17,57 +19,55 @@
                 </input>
             </program>
             <caption>
-                A totally useless <c>while</c> loop which will never terminate.
+                A totally useless <c>while</c> loop which will never terminate, will never do anything, and is utterly useless.
             </caption>
         </listing>
         <p>
-            The structure of a <c>while</c> loop is uncomplicated, and its meaning follows immediately from its structure: while some statement evaluates to <c>True</c>, execute an indented block of code. Upon reaching the end of the indented block, check if the statement is still true; if so, repeat the block, and if not, move on beyond the loop. For instance, the following code produces a string of consecutive positive integers separated by spaces, up to a specific limit of length.
+            It is <em>extremely easy</em> to <em>accidentally</em> enter an infinite while loop. For example, suppose we want to run a while loop until a certain <term>counter variable</term> reaches a value, increasing by 1 each iteration. This is a great use of the <c>counter += 1</c> operation, which is shorthand for <c>counter = counter + 1</c>.
         </p>
         <sage>
             <input>
                 s = ""
-                i = 1
-                limit = 160
-                while len(s)+len(str(i))+1 &lt;= limit:
-                    s = s + str(i)+" "
-                    i = i + 1
+                counter = 1
+                limit = 100
+                while len(s) &lt;= limit:
+                    s += str(counter)+" "
+                    counter += 1
                 print s
             </input>
         </sage>
         <p>
-            A common error when using while loops in this way is failure to <em>increment your counter</em>. This is the <c>i = i + 1</c> line. What would happen if we left it off? Would this loop run forever? There is a shorthand for incrementing a variable: for every data type where addition makes sense, you can use <c>oldvar += newvar</c> instead of <c>oldvar = oldvar + newvar</c> as long as the data types of <c>oldvar</c> and <c>newvar</c> match. This means I could have written the above example as follows.
+            A common error when using while loops in this way is <em>failure to increment a counter</em>. This is the <c>counter += 1</c> line. What would happen if we left it off? Would the loop run forever, or would something else stop it?
         </p>
         <sage>
             <input>
                 s = ""
-                i = 1
-                limit = 160
-                while len(s)+len(str(i))+1 &lt;= limit:
-                    s += str(i)+" "
-                    i += 1
+                counter = 1
+                limit = 100
+                while len(s) &lt;= limit:
+                    s += str(counter)+" "
                 print s
             </input>
-        </sage>    </subsection>
+        </sage>
+    </subsection>
 
-
-    <subsection>
+    <subsection xml:id="ss-IP-CE-IF">
         <title>If statements</title>
         <p>
-            Often we only wish to execute a block of code if some condition is met. The natural language way that this would be expressed is something like ``If the condition is met, then do task A. Otherwise, do task B." This is available in Sage using <c>if:... else:...</c> blocks. Here's an example.
+            Often we only wish to perform a task if some condition is met. The natural language way that this would be expressed is something like <q>if it is raining when I leave for work, then I wear a hat, otherwise I wear sunglasses.</q> The algorithmic equivalent is available in Sage using <c>if:... else:...</c> blocks. Just like loops, <c>if...:</c> statements are block structures; the block is complete when the level of indentation returns to the same level as the original if statement. For example:
         </p>
         <sage>
             <input>
                 s = "This is a string."
+                # s = "This really is a string"
                 if len(s)%2==0:
                     t='even'
                 else:
                     t='odd'
-                print('The string "'+s+'" contains an '+t+' number of characters.')
+                out = 'The string "{0}" contains an {1} number of characters.'
+                print out.format(s,t)
             </input>
         </sage>
-        <p>
-            Just like loops, <c>if...:</c> statements are block structures; the block is complete when the level of indentation returns to the same level as the original if statement.
-        </p>
         <p>
             It is frequently the case that <c>if</c> blocks need to be nested. Just as often it is the case that when the condition fails, some other condition must be tested. This is carried out using a structure called an <em>else if</em>, written <c>elif</c> in Sage.
         </p>
@@ -90,28 +90,31 @@
 
                 </input>
             </program>
-            <caption>An example of nested conditional statements using the <c>elif</c> structure. What is the output?</caption>
+            <caption>An example of nested conditional statements using the <c>elif</c> structure. What is the output? Try <c>help(divmod)</c>.</caption>
         </listing>
-        <p> Let's revisit the example with which the chapter began.</p>
-        <sage>
-            <input>
-                n = -5
-                for x in range(n):
-                    print x,
-            </input>
-        </sage>
-        <p>Recall that what we wanted was for the loop to print the integers in the closed interval <m>[n,0]</m> when we specify <c>n</c> to be a negative integer and otherwise the <c>range(n)</c>. We can make short work of this with an <c>if</c> stastement. Check that the behavior is correct for yourself by changing the value of <c>n</c>.</p>
-        <sage>
-            <input>
-                n = -5
-                if n&lt;=0:
-                    for i in range(n,1):
-                        print i,
-                else:
-                    for i in range(n):
-                        print i,
-            </input>
-        </sage>
+        <exercise>
+            <title>A conditional example</title>
+            <statement>
+                <p>
+                    Suppose that we want to set a variable <c>n</c> to some integer value, and depending upon the value of <c>n</c> either print the list of integers <c>[0, 1, 2, ..., n]</c> or the list of integers <c>[n, n+1, n+2, ..., 0]</c>. Copy and complete the code listing to CoCalc!
+                </p>
+                <listing>
+                    <caption>
+                        Fix the code!
+                    </caption>
+                    <program>
+                        <input>
+                            n = 5
+                            if n &gt;= 0:
+                                my_list = # Put something here!
+                            else:
+                                my_list = # Put something here!
+                            print my_list
+                        </input>
+                    </program>
+                </listing>
+            </statement>
+        </exercise>
 
     </subsection>
 
