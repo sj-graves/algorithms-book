@@ -1,9 +1,9 @@
-<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="ch-Functions">
-    <title>Sage: Functions and methods</title>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="c-FP">
+    <title>Sage: Functional programming</title>
 
 
     <objectives>
-        <ol type="1">
+        <ol>
             <li><p>Discuss functions defined both by <c>def ...:</c> and as <c>lambda</c> functions.</p></li>
             <li><p>Discuss the use of <c>.sage</c> files which can be loaded into other worksheets.</p></li>
             <li><p>Introduce classes.</p></li>
@@ -18,6 +18,14 @@
         <p>
             In this chapter we will investigate the two ways that functions are generally defined in Sage, how functions and data objects are often combined into modules called <em>classes</em>, and how we can use function and class definitions to redefine standard operators used in other contexts. Further, we will begin to discuss the utility of saving your Sage code in <c>.sage</c> files to be loaded in other programs, rather than only working in the interactive Sage notebook.
         </p>
+        <definition>
+            <title>Function</title>
+            <statement>
+                <p>
+                    A <term>function</term> from a set <m>A</m> to a set <m>B</m> is a rule which assigns to each value in the set <m>A</m> exactly one value in the set <m>B</m>, which we denote by <m>f:A\to B</m>. The set <m>A</m> is the <term>domain</term> of <m>f</m> and the set <m>B</m> is the <term>codomain</term> of <m>f</m>. To avoid confusion with <c>range</c>, we will refer to the set <m>f(A) = \set{f(a):a\in A}</m> as the <term>image</term> of <m>f</m>.
+                </p>
+            </statement>
+        </definition>
     </introduction>
 
     <xi:include  href="sec-func-functions.xml" />

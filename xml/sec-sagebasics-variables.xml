@@ -86,7 +86,7 @@
             </input>
         </sage>
         <p>
-            This very limited example also introduces the syntax used for functions in Sage. We will discuss functions later in <xref ref="ch-Functions" text="title" />. In the next section, we will treat another fundamental data type: the <term>string</term>.
+            This very limited example also introduces the syntax used for functions in Sage. We will discuss functions later in <xref ref="c-FP" text="title" />. In the next section, we will treat another fundamental data type: the <term>string</term>.
         </p>
     </subsection>
 </section>

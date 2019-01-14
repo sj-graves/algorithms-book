@@ -1,30 +1,75 @@
-<section xml:id="sec-Functions-Functions">
-    <title>Functions in programming</title>
+<section xml:id="s-FP-FDT">
+    <title>Functions do things</title>
 
 
     <introduction>
         <p>
-            To be precise, let's give a mathematical definition of a function.
-        </p>
-        <definition>
-            <statement>
-                A <em>function</em> <m>f</m> is a rule which assigns to each value in a set <m>A</m> exactly one value in a set <m>B</m>. This is denoted by <m>f:A\to B</m>. The set <m>A</m> is called the <em>domain of <m>f</m></em> and the set <m>B</m> is called the <em>codomain of <m>f</m></em>.
-            </statement>
-        </definition>
-        <p>
-            Examples of mathematical functions abound, and you have probably spent the last several years as a mathematics student learning about the behavior of all sorts of different functions: polynomials, rational functions, trigonometric functions, exponential functions, and logarithms, just to name a few. These functions all have some things in common. They all take as input a single number, usually a real number (although each of the listed functions has an extension into the complex numbers). Moreover, they all return as output exactly one real number for each real number input. Multivariate calculus introduces the idea of functions with more than one input, sometimes written as a vector of inputs, sometimes with vector or matrix<fn>Vectors and matrices will be discussed at length in chapters 5 through 8, so if the precise meaning of these words is unknown to you at this point, don't worry.</fn> output as well. For instance, we could define 
+            Examples of mathematical functions abound, and you have probably spent the last several years as a mathematics student learning about the behavior of all sorts of different functions: polynomials, rational functions, trigonometric functions, exponential functions, and logarithms, just to name a few. These functions all have some things in common. They all take as input a single number, usually a real number (although each of the listed functions has an extension into the complex numbers). Moreover, they all return as output exactly one real number for each real number input. Multivariate calculus introduces the idea of functions with more than one input variable (sometimes written using vector notation) and then later introduces the idea of vector-valued functions. For instance, a nice multivariate calculus function example is
             <me>\vec{f}(x,y) = \begin{bmatrix} x^2\\ -\frac{x}{y} \end{bmatrix}.</me>
         </p>
         <p>
-            Functions in Sage do this and more. A programming function is a well-defined set of instructions which is provided with a set of inputs and produces exactly one output for each input. The values input to a function in Sage are its <em>arguments</em>. Very technically, only the final output value is truly the output, and for a Sage function it is called the <em>return</em> value.
+            Since Sage does symbolic math, it can do all this, but since Sage is also a full programming language it also has a means to use the word <em>function</em> to mean something else, which is often called a <term>subroutine</term>. We'll generally continue to call these functions as the usage is essentially the same for a subroutine in Sage as a mathematical function: the function name first, followed by a comma-separated sequence of inputs, called <term>arguments</term>.
         </p>
         <p>
-            There are two easy ways in Sage to define a function. Simple, one-line functions can be defined as <em>anonymous functions</em> by using the <c>lambda</c> command. Aslo called <em>lambda functions</em>, these functions are frequently useful, but are limited in that they have no block structure and cannot contain more than one line of code. For more elaborate functions, the command used in Sage is <c>def</c>, short for <em>definition</em>.
+            Symbolic functions like those used in Calculus are very, very easy to define in Sage.
         </p>
+        <sage>
+            <input>
+                x = var('x')
+                f(x) = 1+x^2 + x^3
+                print f
+                print f(3)
+                print f(x^2)
+            </input>
+        </sage>
     </introduction>
 
+    <subsection xml:id='ss-FP-FDT-DS'>
+        <title>Defining subroutines</title>
+        <p>
+            More often than not, a single line of code doesn't suffice to solve a problem. The <c>def my_func(...):</c>  block structure provides the ability to write more complicated procedures as reusable subroutines. Let's investigate a simple function <c>fib</c> to understand the structure of a function written using <c>def</c>.
+        </p>
+        <listing>
+            <program>
+                <input>
+                    def fib(n):
+                        '''A mysterious function appears!
 
-    <subsection xml:id="sec-Functions-Functions-Lambda">
+                        The argument n must be a positive integer.
+                        '''
+                        if type(n) == type(1) and n &gt; 0:
+                            sequence = [0,1]
+                            while len(sequence) &lt; n:
+                                sequence += [sequence[-2]+sequence[-1]]
+                            return sequence[-1]
+                        else:
+                            raise TypeError('Function fib expects positive integer.')
+                </input>
+            </program>
+            <caption>
+                A function written using the <c>def</c> command.
+            </caption>
+        </listing>
+        <p>
+            The first line consists of <c>def fib(n):</c>, which uses the <c>def</c> command to define a function whose name is <c>fib</c> and which takes exactly one argument, <c>n</c>. The value of this argument must be given when the function is used, or a <c>TypeError</c> will be raised. This is followed by a multiline string enclosed in <c>'''</c>; when this string appears in a function definition it is called the <em>docstring</em>, or <em>documentation string</em>, and provides the text for the <c>help</c> function when used interactively. In this case, if we want to see the help for <c>fib</c> after the function has been defined, we would type <c>help(fib)</c>. 
+        </p>
+        <p>
+            After the docstring, our function contains an if statement which compares <c>type(n)</c> to <c>type(1)</c>. If they are of the same type, then the if statement proceeds to check also whether <c>n</c> is positive.
+            <fn>
+                If <c>p</c> and <c>q</c> are Boolean, <c>p and q</c> is true if and only if both <c>p</c> and <c>q</c> are true. Hence if the first argument <c>p</c> is false then there is no need to test the second argument. Similarly, <c>p or q</c> is true as long as at least one of <c>p</c> or <c>q</c> is true. Hence if the first argument is true, then the second argument is not tested.
+            </fn>
+            This if statement provides <em>input validation</em> to check whether the value passed into the argument is as expected when writing the function. Supposing the value of <c>n</c> is as expected, the first statement inside the if block sets the value of <c>sequence</c> to <c>[0,1]</c>. Then as long as the length of <c>sequence</c>, found by calling <c>len(sequence)</c>, is less than the input value <c>n</c>, the sum of the last two values of <c>sequence</c> is included at the end of <c>sequence</c>. After the while loop finishes executing, the last value of <c>sequence</c> is returned.
+        </p>
+        <p>
+            If the input validation failed because the input value of the argument to <c>fib</c> was either not an integer or was not positive, then the else block executes and a <c>TypeError</c> is raised; the argument to the <c>TypeError</c> is the displayed error message.
+        </p>
+        <p>
+            Generally speaking, this structure is what every function will follow! You'll pass in some arguments, maybe do some type checking, and then run an algorithm on the arguments. When you complete the algorithm, you return something. Functions which reach the end of their <c>def</c> block without executing an explicit <c>return</c> statement return the special value <c>None</c> of <c>NoneType</c>.
+        </p>
+    </subsection>
+    
+
+    <subsection xml:id="ss-FP-FDT-LF">
         <title>Lambda functions</title>
         <p>
             Let's say we want to define a function <m>f</m> which takes two arguments, <m>n</m> and <m>x</m>, and returns <m>nx</m>. Mathematically, this is simple: let <m>f(n,x)=nx</m>. When we need to define such a simple function for our own use in a Sage program, we can define <m>f</m> in almost the same way.
@@ -88,49 +133,6 @@
     </subsection>
 
 
-    <subsection xml:id='sec-Function-Functions-Defs'>
-        <title>Defining long-form functions</title>
-        <p>
-            More often than not, a single line of code doesn't suffice to solve a problem. The <c>def</c> structure provides the ability to write more complicated procedures in function form. Let's investigate a simple function <c>fib</c> to understand the structure of a function written using <c>def</c>.
-        </p>
-        <listing>
-            <program>
-                <input>
-                    def fib(n):
-                        '''A mysterious function appears!
-
-                        The argument n must be a positive integer.
-                        '''
-                        if type(n) == type(1) and n &gt; 0:
-                            sequence = [0,1]
-                            while len(sequence) &lt; n:
-                                sequence += [sequence[-2]+sequence[-1]]
-                            return sequence[-1]
-                        else:
-                            raise TypeError('Function fib expects positive integer.')
-                </input>
-            </program>
-            <caption>
-                A function written using the <c>def</c> command.
-            </caption>
-        </listing>
-        <p>
-            The first line consists of <c>def fib(n):</c>, which uses the <c>def</c> command to define a function whose name is <c>fib</c> and which takes exactly one argument, <c>n</c>. The value of this argument must be given when the function is used, or a <c>TypeError</c> will be raised. This is followed by a multiline string enclosed in <c>'''</c>; when this string appears in a function definition it is called the <em>docstring</em>, or <em>documentation string</em>, and provides the text for the <c>help</c> function when used interactively. In this case, if we want to see the help for <c>fib</c> after the function has been defined, we would type <c>help(fib)</c>. 
-        </p>
-        <p>
-            After the docstring, our function contains an if statement which compares <c>type(n)</c> to <c>type(1)</c>. If they are of the same type, then the if statement proceeds to check also whether <c>n</c> is positive.
-            <fn>
-                If <c>p</c> and <c>q</c> are Boolean, <c>p and q</c> is true if and only if both <c>p</c> and <c>q</c> are true. Hence if the first argument <c>p</c> is false then there is no need to test the second argument. Similarly, <c>p or q</c> is true as long as at least one of <c>p</c> or <c>q</c> is true. Hence if the first argument is true, then the second argument is not tested.
-            </fn>
-            This if statement provides <em>input validation</em> to check whether the value passed into the argument is as expected when writing the function. Supposing the value of <c>n</c> is as expected, the first statement inside the if block sets the value of <c>sequence</c> to <c>[0,1]</c>. Then as long as the length of <c>sequence</c>, found by calling <c>len(sequence)</c>, is less than the input value <c>n</c>, the sum of the last two values of <c>sequence</c> is included at the end of <c>sequence</c>. After the while loop finishes executing, the last value of <c>sequence</c> is returned.
-        </p>
-        <p>
-            If the input validation failed because the input value of the argument to <c>fib</c> was either not an integer or was not positive, then the else block executes and a <c>TypeError</c> is raised; the argument to the <c>TypeError</c> is the displayed error message.
-        </p>
-        <p>
-            Generally speaking, this structure is what every function will follow! You'll pass in some arguments, maybe do some type checking, and then run an algorithm on the arguments. When you complete the algorithm, you return something. Functions which reach the end of their <c>def</c> block without executing an explicit <c>return</c> statement return the special value <c>None</c> of <c>NoneType</c>.
-        </p>
-    </subsection>
     <subsection xml:id="sec-Functions-Functions-Reusability">
         <title>Writing reusable code</title>
         <p>

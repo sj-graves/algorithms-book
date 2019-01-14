@@ -31,19 +31,22 @@
   - [x] Conditional expressions (s-IP-CE)
     - while loops (ss-IP-CE-WL)
     - if statements (ss-IP-CE-IF)
-  - [ ] Exceptions and the `try:... except:` constructor (s-IP-EEH)
+  - [x] Exceptions and the `try:... except:` constructor (s-IP-EEH)
     - Errors (ss-IP-EEH-E)
     - Handling exceptions (ss-IP-EEH-HE)
     - Flow control (ss-IP-EEH-FC)
     - Bugs (ss-IP-EEH-B)
-- [ ] Sage: Functions and methods
-  - [ ] Functions in programming
-  - [ ] Classes and object-oriented programming
-  - [ ] Operator overloading
-- [ ] Matrices and their operations
+- [ ] Sage: Functional Programming (c-FP)
+  - [ ] Functions do things (s-FP-FDT)
+    - Defining subroutines (ss-FP-FDT-DS)
+    - Lambda functions (ss-FP-FDT-LF)
+    - Writing reusable code (ss-FP-FDT-WRC)
+  - [ ] Classes, attributes, and methods (s-FP-CAM)
+  - [ ] Operator overloading (s-FP-OO)
+- [ ] Matrices and their operations (c-MO)
   - [ ] Representing matrices
   - [ ] Beginning matrix operations
-  - [ ] Matric multiplication
+  - [ ] Matrix multiplication
 - [ ] Vectors and solving systems of equations
   - [ ] Vectors in Euclidean space
   - [ ] operations on vectors
