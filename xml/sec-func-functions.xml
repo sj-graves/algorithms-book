@@ -29,27 +29,45 @@
         <p>
             More often than not, a single line of code doesn't suffice to solve a problem. The <c>def my_func(...):</c>  block structure provides the ability to write more complicated procedures as reusable subroutines. Let's investigate a simple function <c>fib</c> to understand the structure of a function written using <c>def</c>.
         </p>
-        <listing>
-            <program>
-                <input>
-                    def fib(n):
-                        '''A mysterious function appears!
-
-                        The argument n must be a positive integer.
-                        '''
-                        if type(n) == type(1) and n &gt; 0:
-                            sequence = [0,1]
+<!--         <listing> -->
+<!--             <program> -->
+<!--                 <input> -->
+<!--                     def fib(n): -->
+<!--                         '''A mysterious function appears! -->
+<!--  -->
+<!--                         The argument n must be a positive integer. -->
+<!--                         ''' -->
+<!--                         if type(n) == type(1) and n &gt; 0: -->
+<!--                             sequence = [0,1] -->
+<!--                             while len(sequence) &lt; n: -->
+<!--                                 sequence += [sequence[-2]+sequence[-1]] -->
+<!--                             return sequence[-1] -->
+<!--                         else: -->
+<!--                             raise TypeError('Function fib expects positive integer.') -->
+<!--                 </input> -->
+<!--             </program> -->
+<!--             <caption> -->
+<!--                 A function written using the <c>def</c> command. -->
+<!--             </caption> -->
+<!--         </listing> -->
+        <sage>
+            <input>
+                def fibo(n):
+                    """Return the n-th element in the Fibonacci sequence with initial values 0 and 1.
+                
+                    The argument n should be a positive integer.
+                    """
+                    try:
+                        if n > 0:
+                            sequence = [0, 1]
                             while len(sequence) &lt; n:
-                                sequence += [sequence[-2]+sequence[-1]]
-                            return sequence[-1]
-                        else:
-                            raise TypeError('Function fib expects positive integer.')
-                </input>
-            </program>
-            <caption>
-                A function written using the <c>def</c> command.
-            </caption>
-        </listing>
+                                sequence.append( sequence[-1] + sequence[-2] )
+                            return sequence[n]
+                    except:
+                    
+            </input>
+        </sage>
+        <p></p>
         <p>
             The first line consists of <c>def fib(n):</c>, which uses the <c>def</c> command to define a function whose name is <c>fib</c> and which takes exactly one argument, <c>n</c>. The value of this argument must be given when the function is used, or a <c>TypeError</c> will be raised. This is followed by a multiline string enclosed in <c>'''</c>; when this string appears in a function definition it is called the <em>docstring</em>, or <em>documentation string</em>, and provides the text for the <c>help</c> function when used interactively. In this case, if we want to see the help for <c>fib</c> after the function has been defined, we would type <c>help(fib)</c>. 
         </p>

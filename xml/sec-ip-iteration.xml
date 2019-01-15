@@ -39,7 +39,7 @@
             <input>
                 foo = [0,1,2,4,9,16,25]
                 for bar in foo:
-                    x = 3*foo+1
+                    x = 3*bar+1
                     print x
             </input>
             <output>
