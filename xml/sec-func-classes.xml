@@ -1,37 +1,145 @@
-<section xml:id="sec-Functions-Classes">
-    <title>Classes and object-oriented programming</title>
+<section xml:id="s-FP-CAM">
+    <title>Classes, attributes, and methods</title>
     <introduction>
         <p>
-            There is quite a bit of philosophical discussion about different <q>paradigms</q> of programming, but our sole focus will be on <em>object-oriented programming</em>. The basic ideas are these:
+            We already know about all sorts of different types of data. Now we want to be able to extend our list by defining our own data types. The philosophy of programming we'll follow is called the <term>object-oriented programming paradigm</term>. In this way of thinking, we start with the <term>class</term>. A class consists of all of the things of a particular kind: for instance, we have talked about the class of strings, or of lists. If we define <c>foo="this is a string"</c>we are declaring <c>foo</c>to be a particular object which is an <term>instance</term>of the string class. There is a set of <term>attributes</term>which is common to all objects in a class, and there are certain functions (called         <term>methods</term>) which can be applied to any object in a class. For instance, each human has an attribute which is their blood type and another attribute which is their birth year. An example of a method on a human object is to determine its age.
         </p>
-        <ol type="numbered">
-            <li>
-                A <em>class</em> consists of a data type and all the functions which are intrinsically associated with that data type.
-            </li>
-            <li>
-                The built-in functions for a class are called its <em>methods</em>. If <c>my_var</c> is an object of class <c>my_class</c>, and <c>my_method</c> is a built-in method of <c>my_class</c>, then it is executed on <c>my_var</c> by the command <c>my_var.my_method(...)</c>.
-            </li>
-            <li>
-                Additionally, objects in a class may have <q>subdata</q> associated with them, called <em>attributes</em>. Generally we will avoid accessing attributes directly, although Python and Sage allow it. Instead we will write methods for accessing the attributes, allowing them to remain somehow <q>private</q> data of the object.
-            </li>
-            <li>
-                An object declared to have a particular class is called an <em>instance</em> of that class. This is adequately explained by the use of the phrase <q>for instance</q> when introducing an example of a topic under discussion. Creation of an instance is called <em>instantiation.</em>
-            </li>
-        </ol>
-        <convention>
-            <title>Class implementation</title>
-            <p>
-                Supposing we have defined a class <c>MyClass</c>, we will instantiate an object of that class named <c>foo</c> by <c>foo = MyClass(...)</c>, where the initialization may take some arguments. If <c>MyClass</c> has a defined method called <c>first_method</c>, then we would call that method on the object <c>foo</c> by using <c>foo.first_method(...)</c>. Class methods always have at least one argument, canonically named <c>self</c>. This allows <c>self.second_method(...)</c> or <c>self.some_attrbute</c> to be used in the definition of <c>first_method</c> in a consistend manner to the definition of <c>MyClass</c>.
-            </p>
-        </convention>
         <p>
-            For the purpose of learning how we set up classes and what considerations are made when deciding what attributes and methods to include in a class definition, we'll implement a class which Sage actually handles natively as symbolic expressions, namely the complex numbers. 
+            It should be obvious that using <q>human</q>as a class and a particular human as an instance of the class is a silly example. Strings are much more sensible as an example, but they are a particularly limited and basic class. Let's consider a more complicated example.
         </p>
     </introduction>
-    
-    <subsection xml:id="sec-Functions-Classes-GaussianIntegers">
+    <subsection xml:id="ss-FP-CAM-GI">
         <title>Gaussian integers</title>
         <definition>
+            <title>Gaussian integer</title>
+            <statement>
+                A <term>Gaussian integer</term>is a number of the form <m>a+i b</m>where both <m>a</m> and <m>b</m> are integers and <m>i</m> is the imaginary number such that <m>i^2 = -1</m>.
+            </statement>
+        </definition>
+        <p>
+            If we want to begin by building a class of Gaussian integers, we use the <c>class</c> block structure. As this is a named structure (like when we used <c>def</c> to define a function) we will want to provide a docstring so that we can get <c>help</c>on our class after we've defined it. Once a <c>class</c>is defined, an instance of the class is created by using the class name as a function.</p>
+        <sage>
+            <input>
+                class g_int(): 
+                    """A class of Gaussian integers. 
+                    """
+
+                g_int()
+            </input>
+            <output>
+                &lt;__main__.g_int instance at 0x7f57fbcfdb48&gt;
+            </output>
+        </sage>
+        <p>
+            We have now created an instance of <c>g_int</c>, but it's not yet actually a Gaussian integer. Instead it's an <c>instance</c> of a do-nothing class. So we look at our definition and realize that in order to define a Gaussian integer, we must specify two integers. For a Gaussian integer <m>z=a+ib</m>, the integer <m>a</m> is the <term>real part of <m>z</m></term>and the integer <m>b</m>is the <term>imaginary part of <m>z</m></term>, so we will require that these be defined. In order to pass in particular values when we create our instance, we need to use the <c>__init__</c>method; a method is simply a function defined locally within a class, and there are a large number of special methods which are given        names beginning and ending with two underscores, <c>__</c>. We'll learn more about these in the next section. The <c>__init__</c>method is shorthand for <em>initialization</em>.
+        </p>
+        <listing>
+            <program>
+                <input>
+                    class g_int():
+                        """A class of Gaussian integers.
+                        """
+
+                        def __init__(self, a, b):
+                            # g_int(a,b) will create a Gaussian integer a+i*b if a and b are integers
+                            if type(a) == type(1) and type(b) == type(1):
+                                self.realpart = a
+                                self.imagpart = b
+                            else:
+                                raise TypeError('Must have integer arguments.')
+                </input>
+            </program>
+        <caption>The beginning of a Gaussian integer class, with <c>__init__</c> method.</caption>
+        </listing>
+        <p>
+            There is a strange first argument to our <c>__init__</c> method, named <c>self</c>. Since we are declaring an object, there needs to be a way for that object to know itself. This is roughly the equivalent of a person having an identity. In order to know whether you have anything in your pocket, you have to know to whom <q>you</q> and <q>your</q> refer. In Sage, <c>self</c> is the internal name of the object. Inside the code, we then refer to <c>self.realpart</c> and <c>self.imagpart</c>. These are the <term>attributes</term> of the object <c>self</c>, since every validly defined <c>g_int</c> will have a <c>.realpart</c> and a <c>.imagpart</c>. All this gives us a much more useable Gaussian integer class, but we still are missing something: we don't have a nice way to see what a particular <c>g_int</c> is! We know that if <c>foo</c> is an instance of <c>g_int</c>, then <c>foo.realpart</c> and <c>foo.imagpart</c> exist, but we want to print <c>foo</c> and have something that looks like <m>a+ib</m>! We add another special method, <c>__repr__</c>.
+        </p>
+        <listing>
+            <program>
+                <input>
+                    class g_int():
+                        ...
+                        def __repr__(self):
+                            out = str(self.realpart)
+                            if self.imagpart &lt; 0:
+                                out = out + "-i*({0})".format(-self.imagpart)
+                            elif self.imagpart &gt; 0:
+                                out = out + "+i*({0})".format(self.imagpart)
+                            return out
+                </input>
+            </program>
+            <caption> Adding a <c>__repr__</c> method to <c>class g_int</c>. The convention of using <c>...</c> implies that this listing is to be appended to the end of whatever previous definition of <c>class g_int</c> was given.
+            </caption>
+        </listing>
+        
+        <p>
+            We have now added to special, predefined methods to our class of Gaussian integers, but how do we add other methods? Let's consider two functions of a Gaussian integer, the <term>norm</term> and the <term>conjugate</term>.
+        </p>
+        <definition>
+            <title>Norms and conjugates of Gaussian integers</title>
+            <statement>
+                The <term>norm</term> of a Gaussian integer <m>a+ib</m> is the real number <m>\sqrt{a^2+b^2}</m>, and the <term>conjugate</term> of <m>a+ib</m> is <m>a-ib</m>.
+            </statement>
+        </definition>
+        <p>
+            We very simply add methods for these to our class, respectively naming the methods <c>norm</c> and <c>conj</c>.
+        </p>
+        <listing>
+            <program>
+                <input>
+                    class g_int():
+                        ...
+                        def norm(self):
+                            return sqrt(self.realpart^2 + self.imagpart^2)
+                    
+                        def conj(self):
+                            return g_int(self.realpart, -self.imagpart)
+                </input>
+            </program>
+            <caption>Adding <c>norm</c> and <c>conj</c> to the <c>g_int</c> class.</caption>
+        </listing>
+        <p>
+            While this no means exhausts all the things we wish to be able to do with Gaussian integers, it's a beginning!
+        </p>
+    </subsection>
+    <conclusion>
+        <p>
+            As we end of this section, hopefully you have created in CoCalc a worksheet to test all these commands. Your class definition should now look something like this.
+        </p>
+        <listing>
+            <program>
+                <input>
+                    class g_int():
+                        """A class of Gaussian integers.
+                        """
+
+                        def __init__(self, a, b):
+                            # g_int(a,b) will create a Gaussian integer a+i*b if a and b are integers
+                            if type(a) == type(1) and type(b) == type(1):
+                                self.realpart = a
+                                self.imagpart = b
+                            else:
+                                raise TypeError('Must have integer arguments.')
+
+                        def __repr__(self):
+                            out = str(self.realpart)
+                            if self.imagpart &lt; 0:
+                                out = out + "-i*({0})".format(-self.imagpart)
+                            elif self.imagpart &gt; 0:
+                                out = out + "+i*({0})".format(self.imagpart)
+                            return out
+
+                        def norm(self):
+                            return sqrt(self.realpart^2 + self.imagpart^2)
+                    
+                        def conj(self):
+                            return g_int(self.realpart, -self.imagpart)                    
+                </input>
+            </program>
+            <caption> A currently-full listing of the class definition for the <c>g_int</c> Gaussian integer class.</caption>
+        </listing>
+    </conclusion>
+    <!--         <definition>
             <statement>
                 The <em>imaginary number <m>i</m></em> is defined to be the number which satisfies <m>i^2=-1</m>. A <em>complex number</em> is any number <m>z=a+ib</m> where <m>a</m> and <m>b</m> are real numbers. The real number <m>a</m> is the <em>real part of <m>z</m></em> and the real number <m>b</m> is the <em>imaginary part of <m>z</m></em>, and these are denoted by <m>\Real z=a</m> and <m>\Imag z=b.</m> A complex number <m>z</m> is a <em>Gaussian integer</em> if and only if <m>\Real z</m> and <m>\Imag z</m> are both integers.
             </statement>
@@ -190,6 +298,5 @@
         <title>Extending the class</title>
         <p>
             In order to fully flesh out the Gaussian integer class, we will need the ability to redefine the standard addition operator to handle adding together two objects of <c>GaussianInteger</c> type. This idea is called <em>operator overloading</em> and is the topic of the final section of this chapter.
-        </p>
-    </subsection>
+        </p> -->
 </section>

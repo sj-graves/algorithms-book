@@ -85,7 +85,7 @@
                     of the elements of <c>some_list</c> is <c>True</c>.
                 </p>
                 <p>
-                    Look at <xref ref="matrix_init" autoname="title" /> and rewrite the section which checks to see that 
+                    Look at <xref ref="matrix_init" text="title" /> and rewrite the section which checks to see that 
                     all elements of <c>grid</c> are numeric, using the <c>any</c> or <c>all</c> command.
                 </p>
             </statement>
@@ -94,7 +94,7 @@
     <subsection>
         <title>Representing <c>aam_Matrix</c> as a string</title>
         <p>
-            To reiterate a point from <xref ref="sec-Functions-Classes" autoname='title' />, it is important after defining the initialization method of a new class to define the representation method, <c>__repr__</c>. An easy way to represent an <c>aam_Matrix</c> object is simply by returning the string of its <c>data</c> attribute.
+            To reiterate a point from <xref ref="s-FP-CAM" text='title' />, it is important after defining the initialization method of a new class to define the representation method, <c>__repr__</c>. An easy way to represent an <c>aam_Matrix</c> object is simply by returning the string of its <c>data</c> attribute.
         </p>
         <listing>
             <program>

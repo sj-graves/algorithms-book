@@ -1,170 +1,189 @@
 <section xml:id="s-FP-FDT">
-    <title>Functions do things</title>
+  <title>Functions do things</title>
+  <introduction>
+    <p>
+      Examples of mathematical functions abound, and you have probably spent
+    the last several years as a mathematics student learning about the behavior
+    of all sorts of different functions: polynomials, rational functions,
+    trigonometric functions, exponential functions, and logarithms, just to
+    name a few. These functions all have some things in common. They all take
+    as input a single number, usually a real number (although each of the
+    listed functions has an extension into the complex numbers). Moreover, they
+    all return as output exactly one real number for each real number input.
+    Multivariate calculus introduces the idea of functions with more than one
+    input variable (sometimes written using vector notation) and then later
+    introduces the idea of vector-valued functions. For instance, a nice
+    multivariate calculus function example is 
+    <me>\vec{f}(x,y) = \begin{bmatrix} x^2\\ -\frac{x}{y} \end{bmatrix}.</me>
+    </p>
+    <p>Since Sage does symbolic math, it can do all this, but since Sage is
+    also a full programming language it also has a means to use the word 
+    <em>function</em>to mean something else, which is often called a 
+    <term>subroutine</term>. We'll generally continue to call these functions
+    as the usage is essentially the same for a subroutine in Sage as a
+    mathematical function: the function name first, followed by a
+    comma-separated sequence of inputs, called 
+    <term>arguments</term>.</p>
+    <p>Symbolic functions like those used in Calculus are very, very easy to
+    define in Sage.</p>
+    <sage>
+      <input>x = var('x') f(x) = 1+x^2 + x^3 print f print f(3) print
+      f(x^2)</input>
+    </sage>
+  </introduction>
+  <subsection xml:id='ss-FP-FDT-DS'>
+    <title>Defining subroutines</title>
+    <p>More often than not, a single line of code doesn't suffice to solve a
+    problem. The 
+    <c>def my_func(...):</c>block structure provides the ability to write more
+    complicated procedures as reusable subroutines. Let's investigate a simple
+    function 
+    <c>fib</c>to understand the structure of a function written using 
+    <c>def</c>.</p>
+    <!--         <listing> -->
+    <!--             <program> -->
+    <!--                 <input> -->
+    <!--                     def fib(n): -->
+    <!--                         '''A mysterious function appears! -->
+    <!--  -->
+    <!--                         The argument n must be a positive integer. -->
+    <!--                         ''' -->
+    <!--                         if type(n) == type(1) and n &gt; 0: -->
+    <!--                             sequence = [0,1] -->
+    <!--                             while len(sequence) &lt; n: -->
+    <!--                                 sequence += [sequence[-2]+sequence[-1]] -->
+    <!--                             return sequence[-1] -->
+    <!--                         else: -->
+    <!--                             raise TypeError('Function fib expects positive integer.') -->
+    <!--                 </input> -->
+    <!--             </program> -->
+    <!--             <caption> -->
+    <!--                 A function written using the <c>def</c> command. -->
+    <!--             </caption> -->
+    <!--         </listing> -->
+    <listing>
+      <program>
+        <input>        
+          def fibo(n):
+            """Return the n-th element in the Fibonacci sequence with initial 
+            values 0 and 1. The argument n should be a positive integer. 
+            """
+            # Check to see if n &gt;= 2 is an integer
+            if type(n) == type(1) and n &gt; 1:
+              # Initialize the list
+              sequence = [0,1]
+              # Loop until the sequence is long enough
+              while len(sequence) &lt; n:
+                # Append the sum of the last two curent entries to the list
+                sequence.append( sequence[-2] + sequence[-1] )
+              # Once the list is long enough, return its last element
+              return sequence[-1]
+            else:
+              # In the case where the input validation fails, raise an error.
+              raise ValueError('Argument not a positive integer.')
+        </input>
+      </program>
+      <caption>Using a <c>def</c> function to calculate Fibonacci numbers.</caption>
+    </listing>
+    <p>
+      We note that executing the <c>def</c>block doesn't produce any output. This occurs for precisely the same reason as the lack of output for assigning a value to a variable -- unless there's a syntax error in the function, all we've really done is attached the rule of <q>perform this process</q> to the name of the subroutine. 
+    </p>
+    <p>
+      Let's pick apart the code so that we can see how subroutines are structured. We'll ignore all the comment lines which begin with <c>#</c>.
+      <ol>
+        <li><c>def fibo(n):</c> begins our function, assigning the name <c>fibo</c> to the process and declaring that the argument passed to the function will be referred to as <c>n</c> inside the function code.</li>
+        <li>The next three lines begin and end with <c>"""</c>, which tell us that this is a long-form multiline string. This particular string is called the <term>docstring</term> of the function, and is what will be displayed when <c>help(fibo)</c> is used.</li>
+        <li><c>if type(n) == type(1) and n &gt; 1:</c> tests the argument to make sure that it is valid input to the function. Since we'll be using the input argument <c>n</c> as an index of a list, we have to ensure that <c>n</c> is first an integer and then that it is at least 2, since the list starts with two elements.</li>
+        <li><c>sequence = [0,1]</c> initialize the first two values in our Fibonacci sequence. <em>If you change these, you get a different Fibonacci sequence!</em></li>
+        <li><c>while len(sequence) &lt; n:</c> runs the loop until the list has enough elements</li>
+        <li><c>sequence.append( sequence[-2] + sequence[-1] )</c> adds the last two elements of <c>sequence</c> and appends that value to <c>sequence</c>. This is the last line of the <c>while</c> loop.</li>
+        <li><c>return sequence[-1]</c> returns the last element of the list.</li>
+        <li><c>else:</c> executes in case the input validation of step (3) failed.</li>
+        <li><c>raise ValueError('Argument not a positive integer.')</c> raises a <c>ValueError</c> exception to tell us that something bad happened when we tried to run the function.</li>
+      </ol>
+    </p>
+    <p>
+      Of all this code, there are only two things necessary for a valid function definition. The first line is mandatory: you must have the <c>def</c> instruction, a function name, a (possibly empty) list of argument names in parentheses, and finally a colon <c>:</c>. Then the next line must be indented some number of spaces, and all the indentation of the block below this point must match. Every function has a <c>return</c> value, but if one is not explicitly written, the function returns a special value called <c>None</c>, of <c>NoneType</c>. Here's a minimal working example.
+    </p>
+    <sage>
+      <input>
+        def my_func():
+          1
+        my_func()
+      </input>
+    </sage>
+  </subsection>
+  <subsection xml:id="ss-FP-FDT-VS">
+    <title>Variable Scope</title>
+    <p>
+      A technical consideration that must be mentioned is that variable names used as arguments to functions or declared inside the function body are <term>local variables</term>, which cannot be used outside the function. Mainly you should think of there being two different <term>scopes</term> of variables in Sage: local variables, which are accessible only inside the function with which you are currently working, or <term>global variables</term> which can be seen everywhere. You usually want to avoid the use of global variables, so we won't worry about them too much.
+    </p>
+  </subsection>
+  <subsection xml:id="ss-FP-FDT-NF">
+    <title>Nesting functions</title>
+    <p>
+      As with other block structures (<c>if</c>, <c>for</c>, or <c>while</c>, particularly) we can nest <c>def</c> blocks. The effect of this is to create a function which is known locally inside another function. This is often referred to as a <term>helper function</term>. Usually helper functions are used when your function has some often-used subroutine that you would prefer to only write once. The benefit of using a helper function in this case is that if after being initially written you find an error in the design of your helper function, there is only one place where you need to change code, rather than having to change code everywhere that the process appears.
+    </p>
+    <p>
+      As an example of this, consider that I have a frequent need in a function <c>my_func</c> to sort a list of numbers in <em>decreasing</em> order. This is the opposite order of the <c>list.sort()</c> method, so we could write a helper function.
+    </p>
+    <listing>
+      <program>
+        <input>
+          def my_func():
+            def dsort(a_list):
+              b_list = sorted(a_list)
+              b_list.reverse()
+              return b_list
+            ...
+            ...
+            my_list = dsort(my_list)
+            ...
+            ...
+        </input>
+      </program>
+      <caption>Using helper functions.</caption>
+    </listing>
+  </subsection>
+  
+  <subsection xml:id="ss-FP-FDT-LF">
+    <title>Lambda functions</title>
+    <p>
+      There is another way to define functions when the process they perform is simple, called the <term>lambda constructor</term>. The <c>lambda</c> command allows you to assign a function which performs exactly one line of code. This is a limitation, but lambda functions end up being very useful especially as helper functions. The structure of a lambda definition is show below, where the example is to make a function <m>f</m> with two inputs which simply attempts to multiply the arguments.
+    </p>
+    <sage>
+      <input>
+        f = lambda a, b: a*b
 
-
-    <introduction>
-        <p>
-            Examples of mathematical functions abound, and you have probably spent the last several years as a mathematics student learning about the behavior of all sorts of different functions: polynomials, rational functions, trigonometric functions, exponential functions, and logarithms, just to name a few. These functions all have some things in common. They all take as input a single number, usually a real number (although each of the listed functions has an extension into the complex numbers). Moreover, they all return as output exactly one real number for each real number input. Multivariate calculus introduces the idea of functions with more than one input variable (sometimes written using vector notation) and then later introduces the idea of vector-valued functions. For instance, a nice multivariate calculus function example is
-            <me>\vec{f}(x,y) = \begin{bmatrix} x^2\\ -\frac{x}{y} \end{bmatrix}.</me>
-        </p>
-        <p>
-            Since Sage does symbolic math, it can do all this, but since Sage is also a full programming language it also has a means to use the word <em>function</em> to mean something else, which is often called a <term>subroutine</term>. We'll generally continue to call these functions as the usage is essentially the same for a subroutine in Sage as a mathematical function: the function name first, followed by a comma-separated sequence of inputs, called <term>arguments</term>.
-        </p>
-        <p>
-            Symbolic functions like those used in Calculus are very, very easy to define in Sage.
-        </p>
-        <sage>
-            <input>
-                x = var('x')
-                f(x) = 1+x^2 + x^3
-                print f
-                print f(3)
-                print f(x^2)
-            </input>
-        </sage>
-    </introduction>
-
-    <subsection xml:id='ss-FP-FDT-DS'>
-        <title>Defining subroutines</title>
-        <p>
-            More often than not, a single line of code doesn't suffice to solve a problem. The <c>def my_func(...):</c>  block structure provides the ability to write more complicated procedures as reusable subroutines. Let's investigate a simple function <c>fib</c> to understand the structure of a function written using <c>def</c>.
-        </p>
-<!--         <listing> -->
-<!--             <program> -->
-<!--                 <input> -->
-<!--                     def fib(n): -->
-<!--                         '''A mysterious function appears! -->
-<!--  -->
-<!--                         The argument n must be a positive integer. -->
-<!--                         ''' -->
-<!--                         if type(n) == type(1) and n &gt; 0: -->
-<!--                             sequence = [0,1] -->
-<!--                             while len(sequence) &lt; n: -->
-<!--                                 sequence += [sequence[-2]+sequence[-1]] -->
-<!--                             return sequence[-1] -->
-<!--                         else: -->
-<!--                             raise TypeError('Function fib expects positive integer.') -->
-<!--                 </input> -->
-<!--             </program> -->
-<!--             <caption> -->
-<!--                 A function written using the <c>def</c> command. -->
-<!--             </caption> -->
-<!--         </listing> -->
-        <sage>
-            <input>
-                def fibo(n):
-                    """Return the n-th element in the Fibonacci sequence with initial values 0 and 1.
-                
-                    The argument n should be a positive integer.
-                    """
-                    try:
-                        if n > 0:
-                            sequence = [0, 1]
-                            while len(sequence) &lt; n:
-                                sequence.append( sequence[-1] + sequence[-2] )
-                            return sequence[n]
-                    except:
-                    
-            </input>
-        </sage>
-        <p></p>
-        <p>
-            The first line consists of <c>def fib(n):</c>, which uses the <c>def</c> command to define a function whose name is <c>fib</c> and which takes exactly one argument, <c>n</c>. The value of this argument must be given when the function is used, or a <c>TypeError</c> will be raised. This is followed by a multiline string enclosed in <c>'''</c>; when this string appears in a function definition it is called the <em>docstring</em>, or <em>documentation string</em>, and provides the text for the <c>help</c> function when used interactively. In this case, if we want to see the help for <c>fib</c> after the function has been defined, we would type <c>help(fib)</c>. 
-        </p>
-        <p>
-            After the docstring, our function contains an if statement which compares <c>type(n)</c> to <c>type(1)</c>. If they are of the same type, then the if statement proceeds to check also whether <c>n</c> is positive.
-            <fn>
-                If <c>p</c> and <c>q</c> are Boolean, <c>p and q</c> is true if and only if both <c>p</c> and <c>q</c> are true. Hence if the first argument <c>p</c> is false then there is no need to test the second argument. Similarly, <c>p or q</c> is true as long as at least one of <c>p</c> or <c>q</c> is true. Hence if the first argument is true, then the second argument is not tested.
-            </fn>
-            This if statement provides <em>input validation</em> to check whether the value passed into the argument is as expected when writing the function. Supposing the value of <c>n</c> is as expected, the first statement inside the if block sets the value of <c>sequence</c> to <c>[0,1]</c>. Then as long as the length of <c>sequence</c>, found by calling <c>len(sequence)</c>, is less than the input value <c>n</c>, the sum of the last two values of <c>sequence</c> is included at the end of <c>sequence</c>. After the while loop finishes executing, the last value of <c>sequence</c> is returned.
-        </p>
-        <p>
-            If the input validation failed because the input value of the argument to <c>fib</c> was either not an integer or was not positive, then the else block executes and a <c>TypeError</c> is raised; the argument to the <c>TypeError</c> is the displayed error message.
-        </p>
-        <p>
-            Generally speaking, this structure is what every function will follow! You'll pass in some arguments, maybe do some type checking, and then run an algorithm on the arguments. When you complete the algorithm, you return something. Functions which reach the end of their <c>def</c> block without executing an explicit <c>return</c> statement return the special value <c>None</c> of <c>NoneType</c>.
-        </p>
-    </subsection>
-    
-
-    <subsection xml:id="ss-FP-FDT-LF">
-        <title>Lambda functions</title>
-        <p>
-            Let's say we want to define a function <m>f</m> which takes two arguments, <m>n</m> and <m>x</m>, and returns <m>nx</m>. Mathematically, this is simple: let <m>f(n,x)=nx</m>. When we need to define such a simple function for our own use in a Sage program, we can define <m>f</m> in almost the same way.
-        </p>
-        <sage>
-            <input>
-                f = lambda n,x: n*x
-                print f(4,12)
-                print f(4,'foo')
-                print f([4],'foo')
-            </input>
-        </sage>
-        <p>
-            The limitation that a <c>lambda</c> expression cannot contain more than one line of code is clearly seen here to be a limitation. We cannot include a <c>try</c> block to handle the exception raised when we try to multiply objects of incompatible types! It is so definitely not a block structure that attempting to use indentation to create such structure while using <c>lambda</c> will generate a <c>SyntaxError</c>.
-        </p>
-        <sage>
-            <input>
-                f = lambda n,x:
-                    n*x
-            </input>
-        </sage>
-        <p>
-            The variable names which occur between <c>lambda</c> and <c>:</c> are the tuple of arguments to the lambda function, and since they are considered to be a tuple they are indexed by position. While the limitation that a lambda function must consist of a single line seems severe, there is enough flexibility in the underlying Python language to allow a significant amount of power.
-        </p>
-        <example>
-            <title>A recursive lambda function</title>
-            <p>
-                A function is <em>recursive</em> if it uses the principle of mathematical induction to be evaluated. Such a recursive function <c>rec</c> would call itself on a <q>smaller</q> input unless the input is already somehow <q>smallest.</q>
-            </p>
-            <listing xml:id="listing-Recursive-Euclid-GCD">
-                <program>
-                    <input>
-                        rec = lambda a,b: b if a%b==0 else rec(b,a%b)
-                    </input>
-                </program>
-                <caption>A recursive function</caption>
-            </listing>
-            <p>
-                Let's restrict the arguments to positive integers <m>a</m> and <m>b</m>. We must remember that the binary operator <c>%</c> in Sage returns the remainder of integer division. Hence <c>7 % 3</c> evaluates to <c>1</c>, since <m>7 = 3(2)+1</m>. With this in mind, what is the behavior of the code structure which follows?
-            </p>
-            <program>
-                <input>
-                    variable = first_value if second_value else third_value
-                </input>
-            </program>
-            <p>
-                This is a complicated statement, but it is equivalent to writing the following code.
-            </p>
-            <program>
-                <input>
-                if second_value:
-                    variable = first_value
-                else:
-                    variable = third_value
-                </input>
-            </program>
-            <p>
-                Hopefully you can see the benefit in the more compact form of writing this. As they are equivalent, the shorter form is never necessary, but sometimes it is used in an effort to make code more <q>elegant</q>. With that in mind, can you determine what the final return value of <C>rec(51,1734)</C> would be? What about the general behavior of <c>rec(x,y)</c> if <c>x</c> and <c>y</c> are both defined to be positive integers?
-            </p>
-        </example>
-    </subsection>
-
-
-    <subsection xml:id="sec-Functions-Functions-Reusability">
-        <title>Writing reusable code</title>
-        <p>
-            While it is not always the case that you need to reuse a program, it is definitely of worth to consider several questions. Will writing the program to solve exactly one problem be quicker than solving the single problem analytically, or is there no known analytic solution? Is the algorithm much more difficult to solve in the general case, or at least a more general case than the single problem, and is it instructive to consider the more general solution? If it is the case that the program you are considering will be useful more than once, you should strongly consider writing it in such a way that you can reuse the code. In Sage, this is most effectively done by writing your functions in a separate file with the extension <c>.sage</c>, for example <c>my_functions.sage</c>, and then when you need to use them in a different worksheet (in the same directory) you can access the functions by using the command <c>load('my_functions.sage')</c>.
-        </p>
-        <p>
-            The example function <c>rec</c> from the previous section is interesting, as it provides a very short implementation of Euclid's algorithm for calculating the greatest common divisor of two integers. If this function definition is written only in Sage worksheet (a <c>.sagews</c> file), then it is <q>inaccessible</q> for other worksheets and would need to be copied and pasted from worksheet to worksheet. While this works, it is an inelegant solution. It is better to open a new file with the extension <c>.sage</c> and then, when the functions defined in that file are needed, to use the <c>load</c> command to access those functions. For instance, if <c>rec_euclid.sage</c> is a file in your home directory (on Unix-based systems like Linux and Mac OS, this is accessed at <c>~</c>), you would load the definitions of <c>rec</c> from <c>rec_euclid.sage</c> by calling <c>load('~/rec_euclid.sage')</c>.
-        </p>
-
-        <historical xml:id="historical-Euclid">
-            <title>Euclid of Alexandria</title>
-            <p>
-                While we here refer to Euclid for his number theoretic algorithm to calculate the greatest common divisor of integers, his true fame lies in authoring the <em>Elements</em>. Until educational methods changed drastically in the twentieth century, Euclid's <em>Elements</em> was considered to be a standard part of the curriculum of every educated person. Originally written sometime circa 300 B.C., the geometry of Euclid was part of the <em>quadrivium</em>, the second stage of the liberal arts education, until modern educational methods supplanted the classical style at the turn of the twentieth century.
-            </p>
-        </historical>
-    </subsection>
+        print f(3, 'bob')
+        print f(4+2*I, 4-2*I)
+        print f('bob', 'larry')
+      </input>
+    </sage>
+    <p>
+      Looking at the definition, we see that the function name <c>f</c> is being used just like a regular variable, and the <c>lambda</c> structure is what is assigned to <c>f</c>. The structure requires the <c>lambda</c> token, then a comma-separated sequence of arguments, then a colon, and then the single line of code to be executed.
+    </p>
+    <p>
+      Here's a cool example of using a lambda function for a real purpose. First, we need to know that if <c>a</c> and <c>b</c> are both integers, then <c>a % b</c> returns the remainder of <c>a</c> when integer-divided by <c>b</c>, called the <term>mod</term> operator.
+    </p>
+    <sage>
+      <input>
+        foo = lambda x,y: y if x%y == 0 else foo(y, x%y)
+        
+        foo(1978, 2019)
+      </input>
+    </sage>
+    <p>
+      Can you determine what this function <c>foo</c> is doing?
+    </p>
+  </subsection>
+   
+  <subsection xml:id="ss-FP-FDT-WRC">
+    <title>Writing reusable code</title>
+    <p>
+      You may never in your life need to look back at an old code you have written and reuse it, depending upon your career and interests. This being said, you often want to write code in a way that it can be easily reused. This is a limitation of writing all of your code inside a page like a Sage worksheet. If you are writing a program, especially a long program, and you know that you will need it more than once, it is beneficial to have it saved in a separate file which can be loaded into worksheets when you need it.
+    </p>
+    <p>
+      In Sage if you want to write a reusable function for use in more than one worksheet, it is best to save it in a <c>.sage</c> file rather than a <c>.sagews</c> file, and then use the <c>load(...)</c> function to <em>import</em> it when you need to use it. For instance, in the next section when we begin talking about <xref ref="s-FP-CAM" text="title" /> we'll write our classes in separate files so they can be loaded into worksheets when you need them.
+    </p>  </subsection>
 </section>
