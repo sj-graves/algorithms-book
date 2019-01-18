@@ -53,8 +53,8 @@
 
 
     <book xml:id="AAM">
-        <title>Algorithms for Applied Mathematics
-        </title>
+        <title>Algorithms for Applied Mathematics</title>
+        <initialism>AAM</initialism>
 
         <xi:include href="./aam-fm.xml" />
         
@@ -81,12 +81,16 @@
         <xi:include href="./ch-MST.xml" />
         <xi:include href="./ch-maxflow.xml" />
         <backmatter xml:id="AAS-bm">
+
+            <xi:include href="./bibliography.xml" />
+            <index>
+                <title>Index</title>
+                <index-list />
+            </index>
             <colophon xml:id="AAS-bm-col"> <p>
                 This book was originally authored in <url href="http://www.latex-project.org/"><m>\LaTeX</m></url> and rewritten in 
                 <url href="http://mathbook.pugetsound.edu">PreTeXt</url>.
                 </p></colophon>
-
-            <xi:include href="./bibliography.xml" />
         </backmatter>
     </book>
 </mathbook>

@@ -46,6 +46,8 @@
   - [x] Classes, attributes, and methods (s-FP-CAM)
     - Gaussian integers (ss-FP-CAM-GI)
   - [ ] Operator overloading (s-FP-OO)
+    - Operating on the Gaussian integers (ss-FP-OO-OGI)
+    - Other operators to overload (ss-FP-OO-OOO)
 - [ ] Matrices and their operations (c-MO)
   - [ ] Representing matrices
   - [ ] Beginning matrix operations

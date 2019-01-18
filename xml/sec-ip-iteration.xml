@@ -79,7 +79,7 @@
     <subsection xml:id="ss-IP-I-RF">
         <title>The range function</title>
         <p>
-            Programming languages other than Sage and Pythong are sometimes inflexible in their use of <c>for</c> loops and require that the values taken by the iterating variable are integers, something like <c>for i from 1 to 10</c>. While this is for good reason, it requires several lines more code to iterate through the elements of a container if the <c>for</c> loop only produces integer values of the iterating value. If this is the <em>desired</em> behavior in a Sage program, we would need to build an appropriate container of integers, using one of a family of <c>range</c> commands. Let's see how it works.
+            Programming languages other than Sage and Python are sometimes inflexible in their use of <c>for</c> loops and require that the values taken by the iterating variable are integers, something like <c>for i from 1 to 10</c>. While this is for good reason it requires several lines more code to iterate through the elements of a container if the <c>for</c> loop only produces integer values of the iterating variable. If this is the <em>desired</em> behavior in a Sage program, we would need to build an appropriate container of integers, using one of a family of <c>range</c> commands. Let's see how it works.
         </p>
         <sage>
             <input>

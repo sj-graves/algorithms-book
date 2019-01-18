@@ -145,6 +145,12 @@
       <caption>Using helper functions.</caption>
     </listing>
   </subsection>
+    <subsection xml:id="ss-FP-FDT-IV">
+        <title>Input validation</title>
+        <p>
+            When we consider mathematical functions, we recognize that every well-defined function has a <term>domain</term>, but in programming any value can be passed as an argument to any function, even if in error. The process of <term>input validation</term> is used to restrict the domain and raise an exception (or exit in some other way) when improper arguments are provided. Adding input validation to your functions is a way of <q>idiot-proofing</q> your code, by making it so that strange function behaviors are limited. It is very hard to cover all cases of bad input to a function, and so sometimes (for instance when good faith can be assumed by the users of a function) no input validation is added to a function.
+        </p>
+    </subsection>
   
   <subsection xml:id="ss-FP-FDT-LF">
     <title>Lambda functions</title>

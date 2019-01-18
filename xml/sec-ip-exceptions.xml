@@ -183,14 +183,6 @@
         <p>
             The final and worst type of programming error is not automatically detectable: the <em>bug</em>. Bugs are errors in your algorithm which do not violate any rules for the language, but nonetheless lead to incorrect results or responses in executing the program. The root cause of a bug is not incorrect programming, but a flaw in the design or implementation of your algorithm. This is best described as saying, <q>the program is executing exactly what it was told, and what it was told was wrong.</q>
         </p>
-        <definition xml:id="defn-A">
-            <title>Algorithm</title>
-            <statement>
-                <p>
-                    An <term>algorithm</term> is a formal process for solving a problem. For instance, a well-written recipe is an algorithm for producing a particular food.
-                </p>
-            </statement>
-        </definition>
         <principle> 
             <statement>
                 <p>

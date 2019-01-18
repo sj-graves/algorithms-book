@@ -1,29 +1,25 @@
-<section xml:id="sec-Functions-Overloading">
+<section xml:id="s-FP-OO">
     <title>Operator overloading</title>
 
     <introduction>
         <p>
-            We learn in elementary school that the procedure necessary to calculate <m>3 + 5</m> and the procedure necessary to calculate <m>\frac13 + \frac15</m> are different, but we never have difficulty connecting that both procedures are addition. Computers, however, are much simpler and in order for a computer to <q>recognize</q> that the two operations are related it must be told explicitly. The method of instructing a computer than integer addition and fraction addition may use the same symbol is called <em>operator overloading</em>.
+            We learn in elementary school that the procedure necessary to calculate <m>3 + 5</m> and the procedure necessary to calculate <m>\frac13 + \frac15</m> are different, but we allow that the procedure is addition in both cases so the use of the <m>+</m> <term>operator</term> is natural. Computers have no ability to know a thing – they simply store and retrieve information and perform calculations – so we must explicitly define both procedures to be addition. This causes a problem: the single symbol <c>+</c> is then being used for more than one process, and both are necessary. The problem of having a single operator being used for multiple processes is called <term>operator overloading</term>. The Sage (and Python) implementation of operator overloading is through the use of special methods, all of which have names of the format <c>__operator_name__</c>. 
         </p>
         <p>
-            In fact, the function names for standard arithmetic operators are similar to the initialization method: they all look like <c>__method__</c>.  The difficulty shows up when we recognize that Sage's addition operator is not commutative
-            <fn>
-                Recall that an operation <m>\star</m>is <em>commutative</em> if and only if <m>a\star b=b\star a</m> for every pair <m>(a,b)</m> in the domain of the operator. The first time students usually encounter a non-commutative operation is in matrix theory, since matrix multiplication is the canonical example of a non-commutative operation.
-            </fn>
-            in every case. For instance, consider addition of strings.
+            Operators are often classified by the number of arguments to the operation: for this reason, many of our regular mathematical operations are called <term>binary operators</term>, since they take two arguments. All of the basic arithmetic operations of addition, subtraction, multiplication, and division are binary operators, denoted by <m>+</m>, <m>-</m>, <m>\times</m> or <m>\cdot</m>, and <m>\div</m> or <m>/</m>. Other operations are <term>unary operators</term>, as they take only a single argument: the <m>\sqrt{\mbox{}}</m> operator (called the <term>radical</term> symbol) is an example, as is the differential operator <m>\frac{d}{dx}</m> for a single-variable function <m>f(x)</m>. We've encountered already a special programming idea called the <term>ternary operator</term>, the single-line <c>value if condition else alt_value</c> expression. In all cases, the first argument of an operator is always the referent object, often called <c>self</c>. For the binary operators, the second argument can be best thought of as <c>other</c>, though sometimes we'll give it another name for the sake of clarity. Binary operators also present a problem when the operator is not commutative.
         </p>
-        <sage>
-            <input>
-                foo = 'This is a first string'
-                bar = 'And this is another'
-                print foo + bar
-                print bar + foo
-            </input>
-        </sage>
+        <definition>
+            <title>Commutative operator</title>
+            <statement>
+                A binary mathematical operation <m>@</m> is <term>commutative</term> if and only if <m>x @ y = y @ x</m> for every <m>x</m> and <m>y</m> in the domain of the operation. If there is at least one pair of <m>x</m> and <m>y</m> for which <m>x @ y \neq y @ x</m>, then <m>@</m> is <term>non-commutative</term>.
+            </statement>
+        </definition>
+
         <p>
-            The two operators for which commutativity is an issue are addition and multiplication, and the <q>problem</q> of deciding whether or not they should be commutative is determined within the class definition. The following table summarizes the <q>handedness</q> of the listed operators, along with the method names for inclusion in class definitions.
+            The first two operators for which commutativity is an issue are addition and multiplication, specifically when we are defining new classes which interact with other classes. Two basic cases involving non-commutativity are string addition and matrix multiplication. If you've never worked with matrices before, the canonical eaxmple of non-commutative multiplication is within the set of square matrices of size <m>n</m>, which we will discuss later in the course.
         </p>
-        <table>
+        <table> <!-- OH MY GOSH TABLES TAKE FOREVER -->
+            <caption>Overloaded operators which are frequently non-commutative.</caption>
             <tabular>
                 <row bottom="major">
                     <cell>Method</cell>
@@ -31,42 +27,44 @@
                 </row>
                 <row>
                     <cell>
-                        <c>__add__(self, other)</c>
+                        <c>__add__(self, right)</c>
                     </cell>
                     <cell>
-                        <c>self + other</c>
-                    </cell>
-                </row>
-                <row>
-                    <cell>
-                        <c>__radd__(self, other)</c>
-                    </cell>
-                    <cell>
-                        <c>other + self</c>
+                        <c>self + right</c>
                     </cell>
                 </row>
                 <row>
                     <cell>
-                        <c>__mul__(self, other)</c>
+                        <c>__radd__(self, left)</c>
                     </cell>
                     <cell>
-                        <c>self * other</c>
+                        <c>left + self</c>
                     </cell>
                 </row>
                 <row>
                     <cell>
-                        <c>__rmul__(self, other)</c>
+                        <c>__mul__(self, right)</c>
                     </cell>
                     <cell>
-                        <c>other * self</c>
+                        <c>self * right</c>
+                    </cell>
+                </row>
+                <row>
+                    <cell>
+                        <c>__rmul__(self, left)</c>
+                    </cell>
+                    <cell>
+                        <c>left * self</c>
                     </cell>
                 </row>
             </tabular>
         </table>
         <p>
-            The first step in implementing the operations of addition and multiplication for Gaussian integers is to clearly articulate the algorithms. We should probably state a definition.
+            The first step in implementing the operations of addition and multiplication for Gaussian integers is to clearly articulate each algorithm.
         </p>
-        <definition>
+        <definition xml:id="defn-A">
+            <title>Algorithm</title>
+            <idx>algorithm</idx>
             <statement>
                 <p>
                     An <em>algorithm</em> is a formal procedure which gives the necessary instructions to complete a task, often computational.
@@ -78,9 +76,9 @@
         </p>
 
     </introduction>
-    <subsection xml:id='sec-Functions-Overloading-ComplexOperations'>
+    <subsection xml:id='ss-FP-OO-OGI'>
         <title>Operating on the Gaussian integers</title>
-        <subsubsection>
+        <subsubsection xml:id='sss-FP-OO-OGI-CA'>
             <title>Complex addition</title>
             <p>
                 Since we have decided that every real number can be written as a complex number with imaginary part <m>0</m>, it must be that whatever we define to be the addition operator in the complex numbers must respect real addition. In fact, if we treat <m>i</m> like a real variable rather than an imaginary constant, we get the desired definition from the distributive property. Suppose <m>z_1=x_1+iy_1</m> and <m>z_2=x_2+iy_2</m> are complex numbers. Then
@@ -90,20 +88,20 @@
                 <mrow> &amp;= (x_1+x_2) + i(y_1+y_2) </mrow>
             </md>
             <p>
-                This turns into an algorithm very nicely, but what if one of <m>z_1</m> or <m>z_2</m> is of the wrong data type in Sage? Specifically, we want to be able to seamlessly add a Sage <c>Integer</c> to a <c>GaussianInteger</c> and have it return the correct <c>GaussianInteger</c>. This requires that we include a little type checking into our algorithm.
+                This turns into an algorithm very nicely, but what if one of <m>z_1</m> or <m>z_2</m> is of the wrong data type in Sage? Specifically, we want to be able to seamlessly add a Sage <c>Integer</c> to a <c>GaussianInteger</c> and have it return the correct <c>GaussianInteger</c>. This requires that we include input validation and type checking into our algorithm.
             </p>
             <algorithm>
                 <title>Addition for Gaussian integers</title>
                 <statement>
                     <p>
-                        Suppose <c>self</c> is a <c>GaussianInteger</c> and <c>other</c> is some other input value.
+                        Suppose <c>self</c> is a <c>GaussianInteger</c> and <c>right</c> is some other input value.
                     </p>
                     <ol>
                         <li> 
-                            If <c>other</c> and <c>self</c> have the same type, <c>GaussianInteger</c>, return a new <c>GaussianInteger</c> with real part <c>self.re()+other.re()</c> and imaginary part <c>self.im()+other.im()</c>.
+                            If <c>self</c> and <c>right</c> have the same type, <c>GaussianInteger</c>, return a new <c>GaussianInteger</c> with real part <c>self.re()+right.re()</c> and imaginary part <c>self.im()+right.im()</c>.
                         </li>
                         <li>
-                            Otherwise, if <c>other</c> has type <c>Integer</c>, return a new <c>GaussianInteger</c> with real part <c>self.re()+other</c> and imaginary part <c>self.im()</c>.
+                            Otherwise, if <c>right</c> has type <c>Integer</c>, return a new <c>GaussianInteger</c> with real part <c>self.re()+right</c> and imaginary part <c>self.im()</c>.
                         </li>
                         <li>
                             Otherwise raise an error.
@@ -112,12 +110,12 @@
                 </statement>
             </algorithm>
             <p>
-                Now that we have an algorithm written down, writing the code is very direct. This is a virtue of using a Python-based language. In fact, we can do both left and right addition at the same time, since we know that addition of Gaussian integers is commutative.
+                Now that we have an algorithm written down, writing the code is very direct. This is a virtue of using a Python-based language. In fact, we can do both left and right addition at the same time, since we know that addition of Gaussian integers is actually commutative.
             </p>
             <exercise>
                 <title>Implement addition for the Gaussian integer class</title>
                 <statement>
-                    Try implementing the algorithm above in the <c>__add__</c> and <c>__radd__</c> methods of <c>GaussianInteger</c>.
+                    Implement the algorithm above in the <c>__add__</c> and <c>__radd__</c> methods of <c>GaussianInteger</c>.
                 </statement>
                 <solution>
                     <listing>
@@ -127,31 +125,29 @@
 
                                     ...
 
-                                    def __add__(self, other):
-                                        if type(other)==type(self):
-                                            return GaussianInteger(self.re()+other.re(),self.im()+other.im())
-                                        elif type(other)==type(1):
-                                            return GaussianInteger(self.re()+other, self.im())
+                                    def __add__(self, right):
+                                        if type(self)==type(right):
+                                            return GaussianInteger(self.re()+right.re(),self.im()+right.im())
+                                        elif type(right)==type(1):
+                                            return GaussianInteger(self.re()+right, self.im())
                                         else:
-                                            typeOther = str(type(other))
-                                            raise TypeError('Addition is not defined for ' + \
-                                                'GaussianInteger and ' + typeOther)
+                                            raise TypeError('Addition is not defined for GaussianInteger and {}.'.format(type(right)))
 
-                                    def __radd__(self, other):
-                                        return self+other
+                                    def __radd__(self, left):
+                                        return self + left
                             </input>
                         </program>
                         <caption>The addition methods <c>__add__</c> and <c>__radd__</c> for class <c>GaussianInteger</c>.</caption>
                     </listing>
                     <p>
-                        Since <c>__radd__(self,other)</c> is the method called by <c>other + self</c> and addition of complex numbers is commutative, we have introduced fewer potential errors by allowing <c>__radd__</c> to simply return the value of <c>self + other</c>. It is often beneficial to think of ways that the same functions can be reused rather than rewriting the same algorithm multiple times.
+                        Since <c>__radd__(self,left)</c> is the method called by <c>left + self</c> and addition of complex numbers is commutative, we have introduced fewer potential errors by allowing <c>__radd__</c> to simply return the value of <c>self + left</c>. It is often beneficial to think of ways that the same functions can be reused rather than rewriting the same algorithm multiple times, for precisely this reason – once written, there are fewer places in the code to introduce an error.
                     </p>
                 </solution>
             </exercise>
             
         </subsubsection>
         
-        <subsubsection>
+        <subsubsection xml:id="sss-FP-OO-OGI-CM">
             <title>Complex multiplication</title>
             <p>
                 Like with addition, we already know an algorithm (often called FOIL) for multiplying binomials; if we are treating <m>i</m> as a variable, we can use FOIL and then the distributive and associative properties to write the product of two Gaussian integers. Suppose <m>z_1=x_1+iy_1</m> and <m>z_2=x_2+iy_2</m> are complex numbers. Then
@@ -225,7 +221,7 @@
         </subsubsection>
     </subsection>
     
-    <subsection>
+    <subsection xml:id="ss-FP-OO-OOO">
         <title>Other operators to overload</title>
         <p>
             There are many, many operators and methods which you will want to overload to make robust classes. In fact, nearly every routine mathematical function can be overloaded <emdash /> you just need to know the <q>hidden</q> Python name of the operator. A good place to see a list of built-in methods which correspond to operators is in the <c>help</c> files for the <c>complex</c> class! Sage can natively handle complex numbers both as expressions (specified in the form <c>3-4*I</c>) or as a special <c>ComplexNumber</c> class (specified in the form <c>3-4j</c> where <m>j=\sqrt{-1}</m> as is the rule in engineering and the sciences).
