@@ -36,7 +36,7 @@
     - Handling exceptions (ss-IP-EEH-HE)
     - Flow control (ss-IP-EEH-FC)
     - Bugs (ss-IP-EEH-B)
-- [ ] Sage: Functional Programming (c-FP)
+- [x] Sage: Functional Programming (c-FP)
   - [x] Functions do things (s-FP-FDT)
     - Defining subroutines (ss-FP-FDT-DS)
     - Variable scope (ss-FP-FDT-VS)
@@ -45,13 +45,16 @@
     - Writing reusable code (ss-FP-FDT-WRC)
   - [x] Classes, attributes, and methods (s-FP-CAM)
     - Gaussian integers (ss-FP-CAM-GI)
-  - [ ] Operator overloading (s-FP-OO)
+  - [x] Operator overloading (s-FP-OO)
     - Operating on the Gaussian integers (ss-FP-OO-OGI)
     - Other operators to overload (ss-FP-OO-OOO)
 - [ ] Matrices and their operations (c-MO)
-  - [ ] Representing matrices
-  - [ ] Beginning matrix operations
-  - [ ] Matrix multiplication
+  - [ ] Representing matrices (s-MO-RM)
+    - [ ]
+    - [ ]
+    - [ ]
+  - [ ] Beginning matrix operations (s-MO-BMO)
+  - [ ] Matrix multiplication (s-MO-MM)
 - [ ] Vectors and solving systems of equations
   - [ ] Vectors in Euclidean space
   - [ ] operations on vectors

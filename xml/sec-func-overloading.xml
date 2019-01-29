@@ -122,9 +122,7 @@
                         <program>
                             <input>
                                 class GaussianInteger:
-
                                     ...
-
                                     def __add__(self, right):
                                         if type(self)==type(right):
                                             return GaussianInteger(self.re()+right.re(),self.im()+right.im())
@@ -282,7 +280,7 @@
             </solution>
         </exercise>
         <p>
-            Since there is a built-in <c>ComplexNumber</c> class implemented as a mathematical ring in Sage, we don't need to keep our <c>GaussianInteger</c> class for further use; however, you'll want to keep it to use for the end of chapter project.
+            Since there is a built-in <c>ComplexNumber</c> class implemented as a mathematical ring in Sage, we don't need to keep our <c>GaussianInteger</c> class for further use. You may wish to keep it around as an example, since building classes is a useful technique for the solution of many algorithms.
         </p>
     </subsection>
 </section>

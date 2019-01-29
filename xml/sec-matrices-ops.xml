@@ -26,7 +26,7 @@
             </statement>
         </convention>
         <p>
-            For mutable container data types, there is a corresponding method <c>__setitem__</c>, which we will note implement! We have to be careful that the second argument of <c>__getitem__</c> is a tuple, so that comma-separated values are passed correctly.
+            For mutable container data types, there is a corresponding method <c>__setitem__</c>, which we will not implement! We have to be careful that the second argument of <c>__getitem__</c> is a tuple, so that comma-separated values are passed correctly.
         </p>
         <listing>
             <program>
@@ -98,7 +98,7 @@
                 Unfortunately, we're going to want to use the same operator (<c>*</c>, defined in <c>__mul__</c> and <c>__rmul__</c>) for scalar multiplication, which we've just defined, and <em>matrix multiplication</em>, which is much more complicated. We'll handle this inside the <c>__mul__</c> method by an <c>if</c> statement, and we'll let the case where both <c>Self</c> and <c>other</c> have type <c>Matrix</c> just <c>pass</c> for now.
             </p-->
             <p>
-                In the <xref ref="sec-Matrices-Multiplication" autoname="no">next section of this chapter</xref>, we're going to define the mathematical operation
+                In <xref ref="sec-Matrices-Multiplication" text="title" />, we're going to define the mathematical operation
                 of <em>matrix multiplication</em>, and for both matrix multiplication and scalar multiplication we will want to use <c>*</c> (as defined by the 
                 <c>__mul__</c> and <c>__rmul__</c> methods) as the multiplication operator. This will be handled inside an <c>if</c> statement in the <c>__mul__</c>
                 method of <c>aam_Matrix</c>.
