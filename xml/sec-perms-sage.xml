@@ -21,7 +21,7 @@
         <convention>
             <statement>
                 <p>
-                It is <em>critical</em> to notice that Sage, and SageMathCloud, treat multiplication of permutations as <em>right multiplication</em>. There are very good reasons for this, but it is not the convention we have established. Practically this means that if we define
+                It is <em>critical</em> to notice that Sage treats multiplication of permutations as <em>right multiplication</em>. There are very good reasons for this, but it is not the convention we have established. Practically this means that if we define
                 <md>
                     <mrow>
                         g \amp = \verb|𝟷𝟶 𝟿 𝟻 𝟽 𝟾 𝟼 𝟸 𝟹 𝟺 𝟷|, \amp h \amp = \verb|𝟾 𝟷 𝟻 𝟿 𝟺 𝟼 𝟽 𝟹 𝟷𝟶 𝟸|,
