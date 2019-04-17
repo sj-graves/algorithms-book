@@ -54,3 +54,4 @@ html
 latex/*.pdf
 xml/*.sage
 xml/*.sagews
+xml/old-*
