@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercises xml:id="p-W">
+    <title>Welcome: Project</title>
+    <introduction>
+        <p>
+            We're going to test your familiarity with CoCalc.
+        </p>
+    </introduction>
+    <exercise xml:id="p-W-1" text="auto">
+        <title>Starting everything up</title>
+        <p>
+            This is an exercise. There are many like it but this one is mine.
+        </p>
+        <sage>
+            <input>
+                text = "Bob is a hooker"
+                print text
+            </input>
+        </sage>
+    </exercise>
+</exercises>

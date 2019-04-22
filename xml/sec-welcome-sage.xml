@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="s-W-S">
+    <title>Getting started with Sage</title>
+    <introduction>
+        <p>
+            Programming in Sage has a low barrier to entry, because Sage code follows Python syntax. This is not perfect, but this is a better first programming language than many alternatives both because of the general utility of Python and its cross-platform availability. No matter what operating system you use, you can write and execute Python! Installing and running Sage on your own computer presents many technical hurdles, especially for a multi-user installation: this is why the lead developer of Sage introduced SageMathCloud, the project which turned into <url href="https://cocalc.com">CoCalc</url>. Using CoCalc means you don't have to install Sage on your own computer, and as long as you have internet access you have access to your projects.
+        </p>
+        <p>
+            For now we'll use embedded <term>Sage cells</term> to discuss the basics of interacting with Sage.
+        </p>
+        <example xml:id="xmp-W-S-sagecell">
+            <title>Sage cells</title>
+            <p>
+                It used to break <pretext /> to put a Sage cell in an Example, but that bug has been squashed!
+            </p>
+            <sage language="sage">
+                <input>
+                    print 5*"This is a Sage Cell.\n"
+                    print 5*"If you're online, press 'Evaluate' now!\n"
+                </input>
+                <output>
+                    This is a Sage Cell.
+                    This is a Sage Cell.
+                    This is a Sage Cell.
+                    This is a Sage Cell.
+                    This is a Sage Cell.
+
+                    If you're online, press 'Evaluate (Sage)' now!
+                    If you're online, press 'Evaluate (Sage)' now!
+                    If you're online, press 'Evaluate (Sage)' now!
+                    If you're online, press 'Evaluate (Sage)' now!
+                    If you're online, press 'Evaluate (Sage)' now!
+
+                </output>
+            </sage>
+        </example>
+    </introduction>
+    <subsection xml:id="ss-W-S-IO">
+        <title>Input and output</title>
+        <p>
+            Sage cells are plain text cells in whatever editor you use, be it an embedded Sage cell as above or a cell of a Sage worksheet in CoCalc. The input consists of whatever you type in the cell, whether it be meaningful to Sage or not! <term>Values</term> are assigned to <term>variables</term> by using a single <c>=</c>. Assigning a value to a variable produces no output, so the first built-in command function we will use is <c>print</c>. 
+        </p>
+        <sage>
+            <input>
+                a = 12
+                b = 12.3
+                c = 5/6
+                print(a*b)
+                print(a*c)
+                print c
+            </input>
+            <output>
+                147.600000000000
+                10
+                5/6
+            </output>
+        </sage>
+        <p>
+            Embedded Sage cells on a single page behave the same way multiple cells of a Sage worksheet behave in CoCalc: the value stored in a variable is kept in memory until the page is reloaded or the Worksheet restarted. This does require that evaluation of Sage cells happens in the same order every time. For instance, if the cell below is executed <em>before</em> the cell above, an error would result, because the variables <c>a</c> and <c>c</c> have no value in the cell below until the cell above is evaluated!
+        </p>
+        <sage>
+            <input>
+                print a > a*c
+            </input>
+            <output>
+                True
+            </output>
+        </sage>
+        <exercise>
+            <p>What is different about the use of <c>print</c> in the two Sage cells above?</p>
+        </exercise>
+    </subsection>
+    <subsection xml:id="ss-W-S-BO">
+        <title>Basic operations</title>
+        <p>
+            From the examples above we see that Sage accepts a variety of formats of numbers, notably integers, approximate real numbers (called <term>floating point numbers</term>), and exact rational numbers. Sage can also understand many other things, and since the arithmetic operations are constantly useful Sage allows all basic arithmetic operations between mathematical objects in exactly the sense that a mathematician would hope.
+        </p>
+        <sage>
+            <input>
+                z = a+b*I
+                w = c+a*I
+                print(z)
+                print w
+                print w^2 + 2*w + 5
+                print z/w
+                print exp(a), log(c)
+            </input>
+            <output>
+                12.0000000000000 + 12.3000000000000*I
+                12*I + 5/6
+                44*I - 4919/36
+                1.08919178345172 - 0.924361681704742*I
+                e^12 log(5/6)
+            </output>
+        </sage>
+        <exercise>
+            <p> What is the effect of having a comma between two objects in a <c>print</c> statement? </p>
+        </exercise>
+        <p>
+            For more complicated mathematical functions, especially those which have a symbolic representation which is difficult to type, Sage provides a different mechanism. As an example, consider the number <m>w = \frac56+12 i </m> given above; its 
+        </p>
+    </subsection>
+    <subsection xml:id="ss-W-S-YCBI">
+        <title>You can't break it</title>
+    </subsection>
+    <subsection xml:id="ss-W-S-HIYF">
+        <title><c>help(...)</c> is your friend</title>
+    </subsection>
+</section>

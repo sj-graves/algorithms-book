@@ -1,0 +1,7 @@
+#!/bin/bash
+
+xsltproc --xinclude ~/mathbook/xsl/mathbook-latex.xsl ./aam-index.xml
+mv AAM.tex ../latex/
+cd ../latex
+latexmk -pdf -f -g -bibtex -synctex=1 -interaction=nonstopmode AAM.tex
+cd ../xml

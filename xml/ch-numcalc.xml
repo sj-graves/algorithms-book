@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="ch-NC">
+    <title>Numerical calculus</title>
+    <objectives>
+        <ol>
+            <li><p>Introduce Sage concepts:</p>
+                <ul>
+                    <li>Variables</li>
+                    <li>Symbolic variables</li>
+                    <li>Functions</li>
+                    <li>Symbolic functions</li>
+                </ul></li>
+            <li><p>Objects, attributes, and methods</p></li>
+        </ol>
+    </objectives>
+    <introduction>
+        <title />
+        <p>
+            Here we go!
+        </p>
+    </introduction>
+    <section>
+        <title>Defining things</title>
+        <p>
+            Place holder.
+        </p>
+    </section>
+</chapter>

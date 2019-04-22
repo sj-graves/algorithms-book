@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude"  xml:id="ch-W">
+    <title>Welcome to Algorithms for Applied Mathematics</title>
+    <shorttitle>Welcome to AAM</shorttitle>
+    <objectives>
+    <ol>
+        <li>Introduce the textbook, its organization, and its formatting.</li>
+        <li>Introduce <url href="https://cocalc.com/">CoCalc</url>.</li>
+        <li>Introduce the Sage programming language.</li>
+    </ol>
+    </objectives>
+
+    <introduction xml:id="ch-W-intro">
+        <p>
+            There are many programming textbooks in the world, and any text teaching Python programming is just a step away from being a Sage textbook. There are many applied mathematics textbooks as well, covering continuous and discrete applied mathematics. Some of them contain instructions on how to implement their algorithms in one language or another. There are even books which attempt to teach the use of Sage to solve difficult mathematical problems.
+        </p>
+        <p>
+            The difficulty is that most are not written at the appropriate level for an audience of beginners: either beginning mathematicians or beginning programmers or both.
+        </p>
+        <p>
+            Introduction to programming books focus exclusively on <em>getting computers to work for you</em>, but not necessarily in a way aimed at solving mathematical problems. Most of the applied math books assume an intermediate familiarity with programming. And the books on Sage, while excellent, are more focused on showing off the bells and whistles of Sage than using the basics to solve interesting problems. This textbook tries to approach these problems by the <em>via media</em>, the middle way. We discuss an introduction to programming <em>through</em> learning to solve mathematical problems.
+        </p>
+    </introduction>
+    
+    <xi:include href="./sec-welcome-text.xml" />
+    <xi:include href="./sec-welcome-cocalc.xml" />
+    <xi:include href="./sec-welcome-sage.xml" />
+    <xi:include href="./proj-welcome.xml" />
+    <xi:include href="./ex-welcome.xml" />
+
+    <conclusion xml:id="c-W-conc">
+        <title>Help! I've never programmed before!</title>
+        <p>
+            For some of you, this course will provide your first experience of writing code. This is great! We'll try to ease you into programming through chapter-level projects at a rate of about one per week. There are some very important tips for new programmers:
+            <ol>
+                <li>
+                    You can't really break anything by working in CoCalc. Also, if you accidentally delete something important, you can always click on the bright blue <q>TimeTravel</q> button at the top of the page.
+                </li>
+                <li>
+                    If you can't figure out why your code isn't working, ask someone. Your professor wants to help and is pretty good at debugging code.
+                </li>
+                <li>
+                    Even if you just can't get some code working, make sure you understand the <em>mathematical</em> part of the algorithms. These are important on written exams.
+                </li>
+                <li>
+                    Trying things repeatedly in different ways, even things which seem stupid or useless, is a way to get better. You can always create a new <c>.sagews</c> file.
+                </li>
+            </ol>
+            Generally the class will contain a spectrum of both programming and mathematical ability, but <em>everyone can successfully complete this course</em> provided you are willing to put in time and effort.
+        </p>
+    </conclusion>
+    
+</chapter>

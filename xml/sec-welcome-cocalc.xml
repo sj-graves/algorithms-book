@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="s-W-CC">
+    <title>Getting started with CoCalc</title>
+    <subsection xml:id="ss-W-CC-A">
+        <title>Your CoCalc account</title>
+        <introduction>
+            <p>
+                Everyone working in mathematics should have a <url href="https://cocalc.com">CoCalc</url> account, if simply for the reason that <latex /> is the language of mathematical typesetting and CoCalc provides a robust <latex /> editor with collaboration features. For anyone who wants to work computationally and does not want to bear the cost of expensive commercial mathematics software, here's a partial list of what is installed in CoCalc:
+            </p>
+            <sidebyside>
+                <ul>
+                    <li>Sagemath</li>
+                    <li><latex/></li>
+                    <li>GNU/Linux</li>
+                    <li>GNU Octave</li>
+                    <li>Scientific Python</li>
+                    <li>Julia</li>
+                    <li>X11</li>
+                </ul>
+                <ul>
+                    <li>R project</li>
+                    <li>Tensorflow</li>
+                    <li>GAP</li>
+                    <li>MAGMA</li>
+                    <li>Maxima</li>
+                    <li>Many major programming languages via <c>gcc</c>.</li>
+                </ul>
+            </sidebyside>
+            <p>
+                If this sounds like an advertisement, it is! All drafts of this text after the first were authored in CoCalc, since the editor handles XML remarkably well.
+            </p>
+        </introduction>
+        <subsubsection>
+            <title>Paid CoCalc accounts</title>
+            <p>
+                Paying for CoCalc entitles you to a certain number of upgrades which can be allocated on a project-by-project basis. The most important of these is <term>member hosting</term>, which makes your project run on a more stable server in the Google cloud. It is highly recommended that any project that is important to you runs in a member-hosted project, which means that CoCalc ceases to be a free service. There is a short-term subscription option for students.
+            </p>
+                <exercise>
+                    <p>What is your CoCalc user name?</p>
+                </exercise>
+        </subsubsection>
+
+    </subsection>
+    <subsection xml:id="ss-W-CC-AH">
+        <title>Assignments and handouts</title>
+        <p>
+            If you are using this textbook for a course and if your instructor has adopted CoCalc's course functionality, you may receive assignments directly into the project associated with your course. All the work you do in the folder which corresponds to an assignment will be <em>collected</em> by the instructor; there is no way to <em>submit</em> work.
+        </p>
+        <p>
+            Handouts are distributed via a similar mechanism. They will appear in your project whenever your instructor <em>publishes</em> them to you.
+        </p>
+    </subsection>
+    <subsection xml:id="ss-W-CC-C">
+        <title>Collaboration</title>
+        <p>
+            The name of CoCalc is an abbreviation for <em>Co</em>llaborative <em>Calc</em>ulation. As such, project owners can add other CoCalc users as collaborators on any project. However, this is <em>project-level collaboration</em>. You cannot share a single file or collaborate on a single file. Also, collaborators have full read/write privilege in the project.
+        </p>
+        <warning xml:id="warn-CoCalc_trust">
+            Only add CoCalc collaborators you actually trust!
+        </warning>
+    </subsection>
+</section>

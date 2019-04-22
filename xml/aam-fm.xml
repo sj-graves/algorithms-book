@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<frontmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="AAM-FM">
+    <titlepage>
+        <author>
+            <personname>Stephen J. Graves</personname>
+            <department>Department of Mathematics</department>
+            <institution>The University of Texas at Tyler</institution>
+            <email>sgraves@uttyler.edu</email>
+        </author>
+
+        <date>Version 2: Summer 2019</date>
+    </titlepage>
+
+    <colophon xml:id='AAM-FM-col'>
+        <copyright>
+            <year>2016 - Present</year>
+            <holder>Stephen J. Graves</holder>
+            <shortlicense>
+                Permission is granted to copy, distribute and/or modify this document under the 
+                terms of the Creative Commons Attribution-Noncommercial-Share Alike 4.0 license. 
+                A human readable version of this license can be read at 
+                <url href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA-4.0</url> 
+                or at its <url href="http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode">full legal code</url>.
+            </shortlicense>
+        </copyright>
+    </colophon>
+
+    <acknowledgement xml:id="AAM-FM-ack">
+        <p>
+            Thank you to the University of Texas at Tyler students of Math 3380: Algorithms for Applied Mathematics. You were my guinea pigs as I initially drafted this manuscript as lecture notes.
+        </p>
+        <p>
+            Thank you also to Rob Beezer and David Farmer, the core of the team responsible for the PreTeXt XML processor which makes the authoring of this book independent of the precise means of publishing.
+        </p>
+    </acknowledgement>
+
+    <preface xml:id="AAM-FM-pref">
+        <p>
+            When researching the topic for the last chapter of this book, I was struck by the following passage in Yefim Dinitz’s discussion<xref ref="bib_Din2006"></xref> of the algorithm which bears his name: 
+            <blockquote>
+                <p>Shortly after the <q>iron curtain</q> fell in 1990, an American and a Russian,
+                who had both worked on the development of weapons, met. The American
+                asked, “When you developed the Bomb, how were you able to perform such
+                an enormous amount of computing with your weak computers?” The Russian
+                responded: “We used better algorithms.”
+                </p>
+            </blockquote>
+        </p>
+        <p>
+            The message Dinitz expands upon in his paper is that a school of mathematics arose in the USSR favoring strong algorithms designed around carefully-planned data structures to solve computationally intensive problems; in the West, advances in computer speed allowed weaker algorithms to be at least as successful as Soviet algorithms, as the differences were made up in the hardware.
+        </p>
+        <p>
+            Introductory students should understand this. If you can devise a careful algorithm on paper, you can build a data structure to model it. The process of solving mathematical problems computationally is then two-fold: first, work out an on-paper algorithm which solves the problem; second, determine the method of storing the relevant data for the problem in such a way that implementing the algorithm is efficient and understandable.
+        </p>
+        <p>
+            This book is divided into four parts. The first is an extremely basic introduction to programming in Sage. Originally written for Python 3.5, I chose to revise into Sage when I converted the book to PreTeXt format. Sage allows for students to become familiar with an extremely powerful mathematical computing engine, which has the benefit of being freely available and (through CoCalc) cloud-based. Students do not need to worry about installing or maintaining software, and do not need to worry about where they are working: any computer with a regular keyboard and an internet connection will suffice. Moreover, Sage is written in Python, albeit Python 2.7 due to requirements of the available Python libraries for mathematics and the sciences. Almost all Python syntax is preserved in Sage.
+        </p>
+
+        <p>
+            The second part of the book applies the material from the first in the development of a robust data structure often used to solve mathematical problems: the matrix. We work from the basic definitions of a matrix through many of the operations of matrix theory, culminating  with discussions of the LU and QR decompositions of a matrix. Each of these is used for solving a different class of practical problem. 
+        </p>
+        <p>
+            The third unit of the course is a very shallow introduction to cryptography, with a focus on (mono- and polyalphabetic) substitution ciphers for their rich mathematics. A brief chapter is included dealing with more modern public key encryption.
+        </p>
+        <p>
+            Finally, the text concludes in the fourth part with an introduction to algorithmic graph theory. Various data structures for representing graphs computationally are discussed, and then ignored, as the three presented problems lend themselves very well to particular models rather than general ones.
+        </p>
+        <p>
+            It is important to note that Sage already includes nearly all these algorithms, or in fact better versions of them, in its preinstalled software. The availability of these algorithms is not the desired result of this course, but rather that students build an understanding of how mathematical algorithms can be devised and implemented. Why? Because there are still questions which can be answered algorithmically which have either never been answered or never been asked.
+        </p>
+    </preface>
+
+</frontmatter>

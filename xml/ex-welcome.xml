@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercises xml:id="ex-W">
+    <title>Welcome: Exercises</title>
+    <exercisegroup>
+        <title>CoCalc exercises</title>
+        <introduction>
+            <p>
+                These exercises refer to <xref ref="s-W-CC" text="title"/>.
+            </p>
+        </introduction>
+        <exercise>
+            <statement>
+                Bork bork bork.
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                Bork bork bork bork.
+            </statement>
+        </exercise>
+    </exercisegroup>
+    <exercise>
+        <title>Python 2 vs. Python 3</title>
+        <statement>
+            <p>
+                Several things changed between the development of Python 2.7 and Python 3, and while many of them are minor changes some of those minor changes made parts of Sage not work correctly with Python 3; hence Sage uses Python 2. CoCalc can use both! You can use <term>mode commands</term> to change into a pure Python work space.
+            </p>
+            <p>
+                Investigate the difference between Python 2 and Python 3 by executing the command <c>print "hello world!"</c> in a worksheet cell formatted to <c>%python</c> and a cell formatted to <c>%python3</c>.
+            </p>
+        </statement>
+    </exercise>
+</exercises>

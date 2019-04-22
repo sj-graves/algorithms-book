@@ -38,10 +38,17 @@ Thumbs.db
 *.sage-chat
 .*.sage-chat
 .*.term
+.*.swp
 
 # LATEX temp files #
 ####################
 *.aux
+*.syncdb
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
 *.synctex*
 *.toc
 *.bbl
@@ -51,7 +58,8 @@ mathbook
 knowl
 html
 *.html
-latex/*.pdf
+latex
 xml/*.sage
 xml/*.sagews
 xml/old-*
+xml/old
