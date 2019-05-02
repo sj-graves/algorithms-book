@@ -3,14 +3,15 @@
     <title>Numerical calculus</title>
     <objectives>
         <ol>
-            <li><p>Introduce Sage concepts:</p>
+            <li>
+                <p>Discuss approximations to calculus problems</p>
                 <ul>
-                    <li>Variables</li>
-                    <li>Symbolic variables</li>
-                    <li>Functions</li>
-                    <li>Symbolic functions</li>
-                </ul></li>
-            <li><p>Objects, attributes, and methods</p></li>
+                    <li>Root finding</li>
+                    <li>Instantaneous rate of change</li>
+                    <li>Quadrature</li>
+                </ul>
+            </li>
+            <li>Computational approaches</li>
         </ol>
     </objectives>
     <introduction>
@@ -20,7 +21,7 @@
         </p>
     </introduction>
     <section>
-        <title>Defining things</title>
+        <title>Interval bisection</title>
         <p>
             Place holder.
         </p>

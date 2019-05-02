@@ -97,13 +97,97 @@
             <p> What is the effect of having a comma between two objects in a <c>print</c> statement? </p>
         </exercise>
         <p>
+            There are mathematical operations which are perhaps less well known but often important for computation which deserve special treament: integer division and remainder calculations. We recall some basic mathematical facts. As this text will not focus upon proof, the proofs of theorems whenever given are provided solely for the pleasure of the reader.
+        </p>
+        <axiom>
+            <title>Well-ordering principle</title>
+            <idx>well-ordering principle</idx>
+            <statement>
+                Every non-empty subset of the positive integers has a least element.
+            </statement>
+        </axiom>
+        <theorem>
+            <title>The division algorithm</title>
+            <idx>division algorithm</idx>
+            <statement>
+                Suppose <m>a\in\Z</m> and <m>b\in\Z^+</m>. Then there is a unique pair of integers <m>q</m> and <m>0\leq r\lt b</m> such that <me>a = bq+r</me>.
+            </statement>
+            <proof>
+                <p>
+                    Suppose <m>a,b\in\Z^+</m>, and consider the set <m>S = \set{a-bq\in\Z:a-bq\geq 0}</m>. We must first show that <m>S</m> is non-empty to use the well-ordering principle; 
+                    if <m>a\gt 0</m> then <m>a = a-0(b)\in S</m>. If <m>a=0</m> then <m>b = 0+b = a-(-1)b\in S</m>. Finally, if <m>a\lt 0</m>, since <m>b\gt 0</m> we have 
+                    <me>-a(b-1) = a-a(b) \in S</me>, and thus <m>S</m> is nonempty. By well-ordering, <m>S</m> has a least element <m>a-bq\geq 0</m> for some <m>q\in\Z</m>.
+                </p>
+                <p>
+                    If <m>a-bq\geq b</m>, then <me>a-b(q+1) = a-bq-b\geq 0</me>, but <me>a-b(q+1)\lt a-bq</me>, contradicting our choice of <m>a-bq</m> as the least element of <m>S</m>. Thus <m>0\leq a-bq \lt b</m>. Let <m>r=a-bq</m>; then we have shown that a pair of integers <m>q,r</m> exist as per the theorem.
+                </p>
+                <p>
+                    Suppose there are <m>\theta,\rho\in\Z</m> with <m>0\leq \rho\lt b</m> such that <m>a = b\theta + \rho</m>. Then 
+                    <me>bq+r = a = b\theta+\rho</me>
+                    and so
+                    <me>b(q-\theta) = \rho-r.</me>
+                    Thus <m>b</m> divides <m>\rho - r</m>. Since <m>-b\leq \rho-r\leq b</m>, it is only possible for <m>b</m> to divide <m>\rho-r</m> if <m>\rho-r = 0</m>, whereby <m>\rho=r</m>. But then we have <m>bq+r = b\theta+r</m>, so <m>b(q-\theta) = 0</m>; since <m>b\gt 0</m>, it must be that <m>q=\theta</m> and so our constructed <m>q</m> and <m>r</m> are unique.
+                </p>
+                
+            </proof>
+        </theorem>
+        <p>
+            With the mathematical ideas of integer division refreshed in our minds we turn towards the implementation: given integers <m>a</m> and <m>b</m>, how do we effectively compute <m>q</m> and <m>r</m> using Sage?
+        </p>
+        <sage>
+            <input>
+                a = 123456789
+                b = 951847
+                print a//b, a%b
+                q = a//b
+                r = a%b
+                print a-(b*q+r)
+                q1, r1 = divmod(a,b)
+                print a-(b*q1+r1)
+            </input>
+            <output>
+                129 668526
+                0
+                0
+            </output>
+        </sage>
+        <exercise>
+            <statement>
+                <ol>
+                    <li> What does <c>//</c> do? What does <c>%</c> do? </li>
+                    <li> What does <c>divmod</c> do? </li>
+                    <li> What happens when a comma-separated list of variables is assigned to like in line 7 of the Sage cell above? Does this always work?</li>
+                </ol>
+                <p>
+                    Another way to compute <c>q</c> is to use the <c>floor</c> function. Run <c>help(floor)</c> and then investigate the effect of the <c>floor</c> function.
+                </p>
+                <sage>
+                    <input>
+                        help(floor)
+                    </input>
+                </sage>
+                <p>
+                    This should serve as an introduction to the <c>help</c> command.
+                </p>
+            </statement>
+        </exercise>
+<!--         <p>
             For more complicated mathematical functions, especially those which have a symbolic representation which is difficult to type, Sage provides a different mechanism. As an example, consider the number <m>w = \frac56+12 i </m> given above; its 
+        </p> -->
+    </subsection>
+    <subsection>
+        <title>An in-depth introduction</title>
+        <p>
+            The best way to learn Sage is the same as the best way to learn any other programming language: open it up and play with it. The great joy of Sage is that there is essentially no barrier to entry, because you can immediately execute whatever you type. It may not work, but you'll just get an error message and be able to learn from it. With a more traditional language like C++, you have to go through the process of learning how to compile, link, load, and execute your program. With Sage, you either click <q>Evaluate</q> or press <em>Shift-Enter</em>!
+        </p>
+        <p>
+            For a longer treatment of the basic uses of Sage, <url href="http://www.gregory-bard.com/home.html">Sage for Undergraduates</url><xref ref="bib_SageBook"/> is a very strong introduction. For a course only in <em>using Sage</em>, Bard's book does not have any real competition; as a book in programming in Sage, it has shortfalls, because that was not its intent.
         </p>
     </subsection>
-    <subsection xml:id="ss-W-S-YCBI">
+<!--     <subsection xml:id="ss-W-S-YCBI">
         <title>You can't break it</title>
     </subsection>
     <subsection xml:id="ss-W-S-HIYF">
         <title><c>help(...)</c> is your friend</title>
-    </subsection>
+    </subsection> -->
 </section>

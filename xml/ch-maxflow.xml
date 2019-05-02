@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude"  xml:id="ch-MF">
+    <title>Network flows</title>
+    <introduction>
+        <p>
+            We can extend the idea of a weighted graph from the preceding chapter even further. Rather than simply considering a weight on an arrow of a directed graph to be a cost or distance, we can consider it as a <em>carrying capacity</em> of the edge; for example, think of the maximum bandwidth of a network connection. While a particular use of the network may not require the full bandwidth, it is certainly the case that the flow of traffic on that connection cannot exceed the bandwidth. 
+        </p>
+    </introduction>
+    <xi:include href="./sec-maxflow-defs.xml" />
+    <xi:include href="./sec-maxflow-augpath.xml" />
+    <xi:include href="./sec-maxflow-dinitz.xml" />
+    <xi:include href="./sec-maxflow-impdin.xml" />
+    <xi:include href="./ex-maxflow.xml" />
+</chapter>

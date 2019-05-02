@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table xml:id="tab-fordfulkfail">
+    <caption>Steps in a Ford-Fulkerson attempt on a pathological network.</caption>
+    <tabular width="100%" top="major">
+        <col halign="left" />
+        <col halign="center" />
+        <col halign="center" />
+        <col halign="center" />
+        <col halign="center" />
+        <col halign="center" />
+        <col halign="center" />
+        <row>
+            <cell />
+            <cell />
+            <cell />
+            <cell />
+            <cell>Found</cell>
+            <cell>Sending</cell>
+            <cell>Restricting</cell>
+        </row>
+        <row bottom="medium">
+            <cell>Step #</cell>
+            <cell><m>c_f(1,2)</m></cell>
+            <cell><m>c_f(3,2)</m></cell>
+            <cell><m>c_f(3,4)</m></cell>
+            <cell>Path</cell>
+            <cell>Flow</cell>
+            <cell>Arrow</cell>
+        </row>
+        <row>
+            <cell> 0 </cell>
+            <cell> r </cell>
+            <cell> 1 </cell>
+            <cell> 1 </cell>
+            <cell><m>P_0=(0,3,2,5)</m></cell>
+            <cell> 1 </cell>
+            <cell>(3,2)</cell>
+        </row>
+        <row>
+            <cell> 1 </cell>
+            <cell> r </cell>
+            <cell> 0 </cell>
+            <cell> 1 </cell>
+            <cell><m>P_1 = (0,1,2,3,4,5)</m></cell>
+            <cell> r </cell>
+            <cell> (1,2) </cell>
+        </row>
+        <row>
+            <cell> 2 </cell>
+            <cell> 0 </cell>
+            <cell> r </cell>
+            <cell> 1 - r </cell>
+            <cell><m>P_2 = (0,3,2,1,5)</m></cell>
+            <cell> r </cell>
+            <cell> (3,2) </cell>
+        </row>
+<!--         <row>
+            <cell>0</cell>
+            <cell />
+            <cell />
+            <cell />
+            <cell><m>r^0=1</m></cell>
+            <cell><m>1</m></cell>
+            <cell><m>0</m></cell>
+        </row>
+        <row>
+            <cell>1</cell>
+            <cell><m>P_0 = (0,3,2,5)</m></cell>
+            <cell><m>1</m></cell>
+            <cell><m>(1,2)</m></cell>
+            <cell><m>r^0</m></cell>
+            <cell><m>r</m></cell>
+            <cell><m>0</m></cell>
+        </row>
+        <row>
+            <cell>2</cell>
+            <cell><m>P_1 = (0,1,2,3,4,5)</m></cell>
+            <cell><m>r</m></cell>
+        </row>
+        <row>
+            <cell>3</cell>
+            <cell><m>P_2 = (0,3,2,1,5)</m></cell>
+            <cell><m>r</m></cell>
+        </row>
+        <row>
+            <cell>4</cell>
+            <cell><m>P_1</m></cell>
+            <cell><m>r^2</m></cell>
+        </row>
+        <row>
+            <cell>5</cell>
+            <cell><m>P_3 = (0,4,3,2,5)</m></cell>
+            <cell><m>r^w</m></cell>
+        </row> -->
+    </tabular>
+</table>

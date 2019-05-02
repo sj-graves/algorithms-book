@@ -6,10 +6,19 @@
      </abbr> 
     </xsl:template> -->
     <docinfo>
-        <macros></macros>
-        <latex-image-pramble>\uspackage{tikz} \usetikzlibrary{shapes, decorations,
-        shadows, fadings, positioning, matrix, arrows.meta} \usepackage{pgfplots,
-        mathtools}</latex-image-pramble>
+        <macros>
+            \newcommand{\set}[1]{\left\{#1\right\}}
+            \newcommand{\abs}[1]{\left|#1\right|}
+            
+            \newcommand{\Z}{\mathbb{Z}}
+            \newcommand{\R}{\mathbb{R}}
+            \newcommand{\C}{\mathbb{C}}
+        </macros>
+        <latex-image-preamble>
+            \usepackage{tikz} 
+            \usetikzlibrary{shapes, decorations, shadows, fadings, positioning, matrix, arrows.meta, graphs, quotes, backgrounds} 
+            \usepackage{pgfplots,mathtools}
+        </latex-image-preamble>
         <initialism>AAM</initialism>
         <document-id>graves-AAM</document-id>
     </docinfo>
@@ -17,10 +26,62 @@
         <title>Algorithms for Applied Mathematics</title>
         
         <xi:include href="./aam-fm.xml" />
-        
+<!-- MAIN MATTER          -->
         <xi:include href="./ch-welcome.xml" />
         <xi:include href="./ch-numcalc.xml" />
+        <chapter><title>Permutations</title>
+            <section>
+                <title>Mathematical basics</title>
+            </section>
+        </chapter>
+        <chapter>
+            <title>Substitution ciphers</title>
+            <section>
+                <title>Monoalphabetic substitution: single characters</title>
+                <shorttitle>Small alphabets</shorttitle>
+            </section>
+            <section>
+                <title>Monoalphabetic substitution: multiple characters</title>
+                <shorttitle>Big alphabets</shorttitle>
+            </section>
+            
+        </chapter>
+        <chapter>
+            <title>Public key cryptography</title>
+            <section><title><q>One-way</q> functions</title></section>
+            <section><title>Kid RSA</title></section>
+            <section><title>Full RSA</title></section>
+            <section><title>Advanced topics: Elliptic curve cryptography</title>
+                <shorttitle>Elliptic curve cryptography</shorttitle>
+            </section>
+            <section><title>Advanced topics: NTRUencrypt</title>
+                <shorttitle>NTRU</shorttitle>
+            </section>
+        </chapter>
+        <chapter>
+            <title>Graphs</title>
+            <section><title>Definitions</title></section>
+            <section><title>Invariants</title></section>
+            <section><title>Isomorphism</title></section>
+        </chapter>
+        <chapter>
+            <title>Shortest paths</title>
+            <section><title>Definitions</title></section>
+            <section><title>Dijkstra's algorithm</title></section>
+            <section><title>Implementing Dijkstra's algorithm</title></section>
+        </chapter>
+        <chapter><title>Minimum spanning trees</title>
+            <section><title>Definitions</title></section>
+            <section><title>Jarnik-Prim algorithm</title></section>
+            <section><title>Implementing the Jarnik-Prim algorithm</title></section>
+            <section><title>Kruskal's algortihm</title></section>
+            <section><title>Implementing Kruskal's algorithm</title></section>
+            <section><title>Advanced topic: Heaps</title></section>
+        </chapter>
+        <xi:include href="./ch-maxflow.xml" />
         
+
+<!-- BACK MATTER          -->
         <xi:include href="./aam-bm.xml" />
     </book>
 </pretext>

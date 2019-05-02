@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="s-MF-NFD">
+    <title>Network flow definitions</title>
+    <p>
+        Let's carefully define our terms.
+    </p>
+    <definition xml:id="def-cap_net">
+        <title>Capacitated network</title>
+        <idx>capacitated network</idx>
+        <idx>capacity function</idx>
+        <idx><h>flow</h><h>value of</h>
+        </idx>
+        <statement>
+            <p>
+                A <term>capacitated network</term> is a directed graph <m>\Delta = (V,A)</m> with vertex set <m>V</m> and arrow set <m>A</m> along with a positive function <m>c:A\to\R^+</m> called the <term>capacity function</term>; if given a <term>source</term> vertex and <term>target</term> vertex, the capacitated network is denoted 
+                <me>\Delta=(V,A,c,s,t).</me>
+                A <term>flow</term> on a capacitated network is another function <m>f:A\to\R^{\geq 0}</m> satisfying:
+            </p>
+            <ol>
+                <li><m>0\leq f(u,v)\leq c(u,v)</m> for each <m>(u,v)\in A</m> and </li>
+                <li><m>\sum_{(u,v)\in A} f(u,v) = \sum_{(v,w)\in A} f(v,w)</m>.</li>
+            </ol>
+            <p>
+                The <term>value</term> of a flow, denoted <m>\abs{f}</m>, is <me>\abs{f} = \sum_{(u,v)\in A}f(u,v)</me>.
+            </p>
+        </statement>
+    </definition>
+    <p>
+        The natural extension of this idea is to pose the following question.
+    </p>
+    <question xml:id="ques-maxflow">
+        <title>Maximum flow</title>
+        <idx><h>flow</h><h>maximum flow</h></idx>
+        <statement>
+            The minimum value of a valid flow on a capacitated network should clearly be zero; what is the maximum value of a valid flow on a capacitated network?
+        </statement>
+    </question>
+    <p>
+        The question itself was first formally posed to Lester Ford, Jr.,  and Delbert Fulkerson at RAND corporation in 1955, in the context of determining a maximal steady state flow in a simplified model of railway traffic, and the result was published by Ford and Fulkerson in 1962. Yefem Dinitz never knew of their solution, since we was working in the Soviet Union and thus did not have access to western mathematical results -- the <q>iron curtain</q> prevented information being sent in either direction. Both the <term>Ford-Fulkerson</term> algorithm and <term>Dinitz algorithm</term> (often called <q>Dinic's algorithm</q>) operate along a similar principle: given a valid flow, calculate an <term>augmenting flow</term> which improves the current flow. If this is impossible, the current flow must be maximum.
+    </p>
+    <p>
+        Ford and Fulkerson confessed immediately a flaw in their algorithm: for particular networks and particular capacity functions, the algorithm would not halt. Every iteration of augmentation would improve the flow, and the asymptotic limit of the improvements was maximum, but the process only converged in limit. Dinitz' algorithm sidestepped the problem in an ingenious way which we'll discuss in the next section.
+    </p>
+    <figure xml:id="fig-capnet">
+        <caption>A capacitated network with source vertex <m>v_1</m> and target vertex <m>v_7</m>. This network is sufficiently <q>nice</q> that both the Ford-Fulkerson and Dinitz algorithms will terminate in a maximum flow.</caption>
+        <image xml:id="img-capnet">
+            <description>
+                A capacitated network with capacitated edges 
+               (1, 2, 50), (1, 3, 10), (2, 3, 10), (2, 4, 5),  (2, 5, 8),  (3, 2, 20), (3, 4, 10),
+               (3, 5, 20), (3, 6, 20), (4, 5, 13), (5, 7, 30), (6, 5, 20), (6, 7, 10).
+            </description>
+            <latex-image>
+                \begin{tikzpicture}[scale=3]
+                \draw \foreach \n/\x/\y in {2/0/1, 3/1/0, 4/1/1, 5/2/1, 6/2/0}{
+                    (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                }
+                (0,0) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                (3,.5) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                \graph[nodes={}, edges={-Stealth}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                    (1)/"1" ->["\footnotesize\tt 50"] (2)/2,
+                    (1)/1 ->["\footnotesize\tt 10"] (3)/3,
+                    (2)/2 ->["\footnotesize\tt 10"] (3)/3,
+                    (2)/2 ->["\footnotesize\tt 5"] (4)/4,
+                    (2.north east)/2 ->["\footnotesize\tt 8", bend left] (5.north west)/5,
+                    (3)/3 ->["\footnotesize\tt 20", bend left] (2)/2,
+                    (3)/3 ->["\footnotesize\tt 10"] (4)/4,
+                    (3)/3 ->["\footnotesize\tt 20"] (5)/5,
+                    (3)/3 ->["\footnotesize\tt 20"] (6)/6,
+                    (4)/4 ->["\footnotesize\tt 13"] (5)/5,
+                    (5)/5 ->["\footnotesize\tt 30"] (7)/7,
+                    (6)/6 ->["\footnotesize\tt 20"] (5)/5,
+                    (6)/6 ->["\footnotesize\tt 10"] (7)/7
+                };
+                \end{tikzpicture}
+            </latex-image>
+        </image>
+    </figure>
+    <p>
+        An example of a capacitated network which reveals the flaw in the Ford-Fulkerson algorithm is given in the next section.
+    </p>
+</section>

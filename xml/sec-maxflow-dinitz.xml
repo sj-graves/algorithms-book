@@ -1,0 +1,1131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="s-MF-D">
+    <title>Dinitz' algorithm</title>
+    <introduction>
+        <p>
+            Dinitz' algorithm differs from the Edmonds-Karp solution to the Ford-Fulkerson problem in its method of selecting augmenting paths, along with its use of a <q>smart</q> data structure. Rather than repeatedly finding augmenting paths via breadth-first search, a subgraph called the <term>layered</term> subgraph is constructed in which every longest path is a <m>(s,t)</m>-path; flow is maximized along all of these paths before another layered substructure is computed.
+        </p>
+        <p>
+            It is interesting to note that the algorithmic complexity of the Edmonds-Karp solution is <m>O(m^2n)</m> where <m>m</m> is the number of arrows and <m>n</m> the number of vertices; Dinitz' algorithm, on the other hand, has a natural complexity of <m>O(mn^2)</m> which is an improvement since most graphs have many more vertices than edges. By utilizing a heap data structure, the complexity can be further improved to <m>O(mn\log{n})</m>.
+        </p>
+    </introduction>
+    <subsection xml:id="ss-MF-D-LG">
+        <title>The layered graph</title>
+        <introduction>
+            <p>
+                Like all maximum flow algorithms, Dinitz' algorithm begins with a capacitated network <m>\Delta=(V,A,c,s,t)</m> with source <m>s</m> and target <m>t</m>. Given a flow <m>f:A\to\R^{\geq 0}</m>he <term>residual capacity</term> of <m>f</m> is once again defined to be the function <m>c_f:(V\times V)\to\R^{\geq 0}</m> given by
+            <me>c_f(u,v) = \left\{\begin{array}{ll}
+                c(u,v)-f(u,v), \amp (u,v)\in A \\
+                f(v,u),        \amp (u,v)\in A^{-1}\\
+                0,             \amp (u,v)\notin (A\cup A^{-1}),
+                \end{array}
+                \right.</me>
+                where <m>A^{-1} = \set{(v,u):(u,v)\in A}.</m>
+            </p>
+            <p>
+                Where Dinitz departs from other Ford-Fulkerson-style algorithms is in its use of a layered graph structure to make finding an augmenting path trivial. Begin by performing an upgraded Dijkstra-style breadth first search from the source vertex <m>s</m>, but rather than simply recording a single shrtest path from <m>s</m> to each other vertex, record <em>all</em> shortest paths where the edges have positive residual capacity.
+            </p>
+            <algorithm xml:id="alg-upgrade_dijkstra">
+                <title>Breadth-first search with all predecessors</title>
+                <shorttitle>BFS with all predecessors</shorttitle>
+                <statement>
+                    <p>
+                        Let <m>\Delta_f = (V,A_f,c_f,s,t)</m> be a capacitated network with flow <m>f</m> such that <m>A_f\subset V\times V</m> is the set of all arrows with positive residual capacity; that is, <m>c_f(u,v)\gt 0</m> if and only if <m>(u,v)\in A_f</m>.
+                    </p>
+                    <ol>
+                        <li>
+                            <p>
+                                Initialize the distance and predecessor functions and the set of visited vertices:
+                            </p>
+                            <ol>
+                                <li> Set <me>d(v) = \left\{\begin{array}{ll}
+                                        0, \amp v=s \\
+                                        \infty, \amp v\neq s
+                                    \end{array}
+                                    \right. </me> for each <m>v\in V</m></li>
+                                <li> Set <m>p(v) = \emptyset</m> for each <m>v \in V</m>.</li>
+                                <li> Let <m>V' = \emptyset</m> be the set of visited vertices.</li>
+                            </ol>
+                        </li>
+                        <li>
+                            <p> While <m>\abs{V'}\neq \abs{V}</m>:</p>
+                            <ol>
+                                <li>
+                                    Let <m>u_{min}</m> be such that <m>d(u_{min}) = \min\set{d(v):v\in V\setminus V'}</m>. <em>If the unvisited vertices are stored in a distance-sorted min heap, this step has lower time complexity.</em>
+                                </li>
+                                <li>
+                                    Let <m>d' = d(u_{min})+1,</m> and set <m>V' = V'\cup\set{u_{min}}.</m>
+                                </li>
+                                <li>
+                                    <p>
+                                        For each <m>v\in V\setminus V'</m> such that <m>c_f(u,v)>0</m> and <m>d' \leq d(v)</m>:
+                                    </p>
+                                    <ol>
+                                        <li>
+                                            Set <m>d(v) = d'</m>.
+                                        </li>
+                                        <li>
+                                            Set <m>p(v) = p(v)\cup{u_{min}}.</m>
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+                        <li>
+                            Return the subgraph of <m>\Delta_f</m> all of whose vertices are reachable from <m>s</m>.
+                        </li>
+                    </ol>
+                </statement>
+            </algorithm>
+            <p>
+                Once again, the use of this algorithm is what sets Dinitz' algorithm apart from other max-flow algorithms. Applying <xref ref="alg-upgrade_dijkstra" /> to the network <m>\Delta_f</m> produces the first layer, <m>L(s)</m>. Let <m>L'(s)</m> be this graph <m>L(s)</m> but with all its arrows reversed; then the layered graph <m>\hat{L}(s,t)</m> is the result of applying <xref ref="alg-upgrade_dijkstra" /> again to <m>L'(s)</m> with <m>t</m> specified as the source vertex. The resulting graph, with its arrows again reversed, is the layered graph <m>\hat{L}(s,t)</m>.
+            </p>
+        </introduction>
+        <subsubsection xml:id="ss-MF-D-CLG">
+            <title>Constructing the layered graph</title>
+            <p>
+                Consider the capacitated network once again which was shown in <xref ref="fig-capnet" />.
+                <sidebyside>
+                    <image xml:id="img-capnet2" width="50%">
+                        <latex-image>
+                            \begin{tikzpicture}[scale=3]
+                            \draw \foreach \n/\x/\y in {2/0/1, 3/1/0, 4/1/1, 5/2/1, 6/2/0}{
+                                (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                            }
+                            (0,0) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                            (3,.5) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                            \graph[nodes={}, edges={-Stealth}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                                (1)/"1" ->["\tt 50"] (2)/2,
+                                (1)/1 ->["\tt 10"] (3)/3,
+                                (2)/2 ->["\tt 10"] (3)/3,
+                                (2)/2 ->["\tt 5"] (4)/4,
+                                (2.north east)/2 ->["\tt 8", bend left] (5.north west)/5,
+                                (3)/3 ->["\tt 20", bend left] (2)/2,
+                                (3)/3 ->["\tt 10"] (4)/4,
+                                (3)/3 ->["\tt 20"] (5)/5,
+                                (3)/3 ->["\tt 20"] (6)/6,
+                                (4)/4 ->["\tt 13"] (5)/5,
+                                (5)/5 ->["\tt 30"] (7)/7,
+                                (6)/6 ->["\tt 20"] (5)/5,
+                                (6)/6 ->["\tt 10"] (7)/7
+                            };
+                            \end{tikzpicture}
+                        </latex-image>
+                    </image>
+                </sidebyside>
+                If we begin the application of <xref ref="alg-upgrade_dijkstra" /> from source vertex <m>v_1</m>, we get the following tabulation of our information.
+            </p>
+            <table xml:id="tab-din_layered_graph_1">
+                <caption>First phase of steps in creation of the layered graph for Dinitz' algorithm.</caption>
+                <tabular top="major">
+                    <col halign="center" /><col halign="center" />
+                    <col halign="center" /><col halign="center" />
+                    <col halign="center" /><col halign="center" />
+                    <col halign="center" /><col halign="center" />
+                    <col halign="center" /><col halign="center" />
+                    <row bottom="medium">
+                        <cell>Step</cell>
+                        <cell>Nearest</cell>
+                        <cell />
+                        <cell><m>v_1</m></cell>
+                        <cell><m>v_2</m></cell>
+                        <cell><m>v_3</m></cell>
+                        <cell><m>v_4</m></cell>
+                        <cell><m>v_5</m></cell>
+                        <cell><m>v_6</m></cell>
+                        <cell><m>v_7</m></cell>
+                    </row>
+                    <!-- -->
+                    <row>
+                        <cell>0</cell>
+                        <cell>-</cell>
+                        <cell>d(v)</cell>
+                        <cell>0</cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                    </row>
+                    <row bottom="minor">
+                        <cell /><cell />
+                        <cell>p(v)</cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                    </row>
+                    <!-- -->
+                    <row>
+                        <cell>1</cell>
+                        <cell><m>v_1</m></cell>
+                        <cell>d(v)</cell>
+                        <cell>0</cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                    </row>
+                    <row bottom="minor">
+                        <cell /><cell />
+                        <cell>p(v)</cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\set{v_1}</m></cell>
+                        <cell><m>\set{v_1}</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                    </row>
+                    <!-- -->
+                    <row>
+                        <cell>2</cell>
+                        <cell><m>v_3</m></cell>
+                        <cell>d(v)</cell>
+                        <cell>0</cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>\infty</m></cell>
+                    </row>
+                    <row bottom="minor">
+                        <cell /><cell />
+                        <cell>p(v)</cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\set{v_1}</m></cell>
+                        <cell><m>\set{v_1}</m></cell>
+                        <cell><m>\set{v_3}</m></cell>
+                        <cell><m>\set{v_3}</m></cell>
+                        <cell><m>\set{v_3}</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                    </row>
+                    <!-- -->
+                    <row>
+                        <cell>3</cell>
+                        <cell><m>v_2</m></cell>
+                        <cell>d(v)</cell>
+                        <cell>0</cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>\infty</m></cell>
+                    </row>
+                    <row bottom="minor">
+                        <cell /><cell />
+                        <cell>p(v)</cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\set{v_1}</m></cell>
+                        <cell><m>\set{v_1}</m></cell>
+                        <cell><m>\set{v_2, v_3}</m></cell>
+                        <cell><m>\set{v_2, v_3}</m></cell>
+                        <cell><m>\set{v_3}</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                    </row>
+                    <!-- -->
+                    <row>
+                        <cell>4</cell>
+                        <cell><m>v_6</m></cell>
+                        <cell>d(v)</cell>
+                        <cell>0</cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>3</m></cell>
+                    </row>
+                    <row bottom="minor">
+                        <cell /><cell />
+                        <cell>p(v)</cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\set{v_1}</m></cell>
+                        <cell><m>\set{v_1}</m></cell>
+                        <cell><m>\set{v_2, v_3}</m></cell>
+                        <cell><m>\set{v_2, v_3}</m></cell>
+                        <cell><m>\set{v_3}</m></cell>
+                        <cell><m>\set{v_6}</m></cell>
+                    </row>
+                    <!-- -->
+                    <row>
+                        <cell>5</cell>
+                        <cell><m>v_5</m></cell>
+                        <cell>d(v)</cell>
+                        <cell>0</cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>3</m></cell>
+                    </row>
+                    <row bottom="minor">
+                        <cell /><cell />
+                        <cell>p(v)</cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\set{v_1}</m></cell>
+                        <cell><m>\set{v_1}</m></cell>
+                        <cell><m>\set{v_2, v_3}</m></cell>
+                        <cell><m>\set{v_2, v_3}</m></cell>
+                        <cell><m>\set{v_3}</m></cell>
+                        <cell><m>\set{v_5,v_6}</m></cell>
+                    </row>
+                    <!-- -->
+                    <row>
+                        <cell>6</cell>
+                        <cell><m>v_4</m></cell>
+                        <cell>d(v)</cell>
+                        <cell>0</cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>3</m></cell>
+                    </row>
+                    <row bottom="minor">
+                        <cell /><cell />
+                        <cell>p(v)</cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\set{v_1}</m></cell>
+                        <cell><m>\set{v_1}</m></cell>
+                        <cell><m>\set{v_2, v_3}</m></cell>
+                        <cell><m>\set{v_2, v_3}</m></cell>
+                        <cell><m>\set{v_3}</m></cell>
+                        <cell><m>\set{v_5,v_6}</m></cell>
+                    </row>
+                    <!-- -->
+                    <row>
+                        <cell>7</cell>
+                        <cell><m>v_7</m></cell>
+                        <cell>d(v)</cell>
+                        <cell>0</cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>3</m></cell>
+                    </row>
+                    <row bottom="major">
+                        <cell /><cell />
+                        <cell>p(v)</cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\set{v_1}</m></cell>
+                        <cell><m>\set{v_1}</m></cell>
+                        <cell><m>\set{v_2, v_3}</m></cell>
+                        <cell><m>\set{v_2, v_3}</m></cell>
+                        <cell><m>\set{v_3}</m></cell>
+                        <cell><m>\set{v_5,v_6}</m></cell>
+                    </row>
+                </tabular>
+            </table>
+            <p>
+                Following the steps enumerated in <xref ref="tab-din_layered_graph_1" /> produces the graph as shown in <xref ref="fig-din_layered_graph_1" />.
+            </p>
+            <figure xml:id="fig-din_layered_graph_1">
+                <caption>
+                    The graph <m>L(s)</m> produced from a single <q>forward</q> application of <xref ref="alg-upgrade_dijkstra" /> to the network <m>\Delta</m> shown in <xref ref="fig-capnet"/>.
+                </caption>
+                <image xml:id="img-din_layered_graph_1" width="50%">
+                    <latex-image>
+                        {\tiny\begin{tikzpicture}[scale=1]
+                        \draw \foreach \n/\x/\y in {2/0/.5, 3/1/-.5, 4/1/.5, 5/2/.5, 6/2/-.5}{
+                            (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                        }
+                        (0,-.5) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                        (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                        \graph[nodes={}, edges={-Stealth}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                            (1)/1 ->["\tt 50"] (2)/2,
+                            (1)/1 ->["\tt 10"] (3)/3,
+                            (2)/2 ->["\tt 5"] (4)/4,
+                            (2.north east)/2 ->["\tt 8", bend left] (5.north west)/5,
+                            (3)/3 ->["\tt 10"] (4)/4,
+                            (3)/3 ->["\tt 20"] (5)/5,
+                            (3)/3 ->["\tt 20"] (6)/6,
+                            (5)/5 ->["\tt 30"] (7)/7,
+                            (6)/6 ->["\tt 10"] (7)/7
+                        };
+                        \end{tikzpicture}}
+                    </latex-image>
+                </image>
+            </figure>
+            <p>
+                We next repeat the application of <xref ref="alg-upgrade_dijkstra" /> to this graph <m>L(s)</m> but with its arrows reversed and its source vertex reset to <m>v_7</m>.
+            </p>
+            <table xml:id="tab-din_layered_graph_2">
+                <caption>First phase of steps in creation of the layered graph for Dinitz' algorithm.</caption>
+                <tabular top="major">
+                    <col halign="center" /><col halign="center" />
+                    <col halign="center" /><col halign="center" />
+                    <col halign="center" /><col halign="center" />
+                    <col halign="center" /><col halign="center" />
+                    <col halign="center" /><col halign="center" />
+                    <row bottom="medium">
+                        <cell>Step</cell>
+                        <cell>Nearest</cell>
+                        <cell />
+                        <cell><m>v_1</m></cell>
+                        <cell><m>v_2</m></cell>
+                        <cell><m>v_3</m></cell>
+                        <cell><m>v_4</m></cell>
+                        <cell><m>v_5</m></cell>
+                        <cell><m>v_6</m></cell>
+                        <cell><m>v_7</m></cell>
+                    </row>
+                    <!-- -->
+                    <row>
+                        <cell>0</cell>
+                        <cell>-</cell>
+                        <cell>d(v)</cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>0</m></cell>
+                    </row>
+                    <row bottom="minor">
+                        <cell /><cell />
+                        <cell>p(v)</cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                    </row>
+                    <!-- -->
+                    <row>
+                        <cell>1</cell>
+                        <cell><m>v_7</m></cell>
+                        <cell>d(v)</cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>0</m></cell>
+                    </row>
+                    <row bottom="minor">
+                        <cell /><cell />
+                        <cell>p(v)</cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\set{v_7}</m></cell>
+                        <cell><m>\set{v_7}</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                    </row>
+                    <!-- -->
+                    <row>
+                        <cell>2</cell>
+                        <cell><m>v_5</m></cell>
+                        <cell>d(v)</cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>0</m></cell>
+                    </row>
+                    <row bottom="minor">
+                        <cell /><cell />
+                        <cell>p(v)</cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\set{v_5}</m></cell>
+                        <cell><m>\set{v_5}</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\set{v_7}</m></cell>
+                        <cell><m>\set{v_7}</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                    </row>
+                    <!-- -->
+                    <row>
+                        <cell>3</cell>
+                        <cell><m>v_6</m></cell>
+                        <cell>d(v)</cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>0</m></cell>
+                    </row>
+                    <row bottom="minor">
+                        <cell /><cell />
+                        <cell>p(v)</cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\set{v_5}</m></cell>
+                        <cell><m>\set{v_5, v_6}</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\set{v_7}</m></cell>
+                        <cell><m>\set{v_7}</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                    </row>
+                    <!-- -->
+                    <row>
+                        <cell>4</cell>
+                        <cell><m>v_2</m></cell>
+                        <cell>d(v)</cell>
+                        <cell><m>3</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>0</m></cell>
+                    </row>
+                    <row bottom="minor">
+                        <cell /><cell />
+                        <cell>p(v)</cell>
+                        <cell><m>\set{v_2}</m></cell>
+                        <cell><m>\set{v_5}</m></cell>
+                        <cell><m>\set{v_5, v_6}</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\set{v_7}</m></cell>
+                        <cell><m>\set{v_7}</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                    </row>
+                    <!-- -->
+                    <row>
+                        <cell>5</cell>
+                        <cell><m>v_3</m></cell>
+                        <cell>d(v)</cell>
+                        <cell><m>3</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>0</m></cell>
+                    </row>
+                    <row bottom="minor">
+                        <cell /><cell />
+                        <cell>p(v)</cell>
+                        <cell><m>\set{v_2,v_3}</m></cell>
+                        <cell><m>\set{v_5}</m></cell>
+                        <cell><m>\set{v_5, v_6}</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\set{v_7}</m></cell>
+                        <cell><m>\set{v_7}</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                    </row>
+                    <!-- -->
+                    <row>
+                        <cell>6</cell>
+                        <cell><m>v_1</m></cell>
+                        <cell>d(v)</cell>
+                        <cell><m>3</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>0</m></cell>
+                    </row>
+                    <row bottom="minor">
+                        <cell /><cell />
+                        <cell>p(v)</cell>
+                        <cell><m>\set{v_2,v_3}</m></cell>
+                        <cell><m>\set{v_5}</m></cell>
+                        <cell><m>\set{v_5, v_6}</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\set{v_7}</m></cell>
+                        <cell><m>\set{v_7}</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                    </row>
+                    <!-- -->
+                    <row>
+                        <cell>6</cell>
+                        <cell><m>v_4</m></cell>
+                        <cell>d(v)</cell>
+                        <cell><m>3</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>2</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>1</m></cell>
+                        <cell><m>0</m></cell>
+                    </row>
+                    <row bottom="minor">
+                        <cell /><cell />
+                        <cell>p(v)</cell>
+                        <cell><m>\set{v_2,v_3}</m></cell>
+                        <cell><m>\set{v_5}</m></cell>
+                        <cell><m>\set{v_5, v_6}</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                        <cell><m>\set{v_7}</m></cell>
+                        <cell><m>\set{v_7}</m></cell>
+                        <cell><m>\emptyset</m></cell>
+                    </row>
+                </tabular>
+            </table>
+            <p>
+                We notice in this traversal that the vertex <m>v_4</m> is the last to be <q>visited</q>; it's distance from <m>v_7</m> is <m>\infty</m>, and since it has no predecessors in this reverse-traversal, we have no path in <m>\hat{L}(s,t)</m> from <m>s=v_1</m> to <m>t=v_7</m> which contains the vertex <m>v_4</m>. This gives us our layered graph for the first pass through Dinitz' algorithm.
+            </p>
+            <figure xml:id="fig-din_layered_graph_2">
+                <caption>
+                    The graph <m>\hat{L}(s,t)</m> produced from two successive applications of <xref ref="alg-upgrade_dijkstra" /> to the network <m>\Delta</m> shown in <xref ref="fig-capnet"/>, first in the forward direction with a source <m>s=v_1</m> and second in the reverse direction from the target <m>t=v_7</m>.
+                </caption>
+                <image xml:id="img-din_layered_graph_2" width="50%">
+                    <latex-image>
+                        {\tiny\begin{tikzpicture}
+                        \draw \foreach \n/\x/\y in {2/1/.5, 3/1/-.5, 5/2/.5, 6/2/-.5}{
+                            (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                        }
+                        (0,0) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                        (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                        \graph[nodes={}, edges={-Stealth}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                            (1)/"1" ->["\tt 50"] (2)/2,
+                            (1)/1 ->["\tt 10"] (3)/3,
+                            (2)/2 ->["\tt  8"] (5)/5,
+                            (3)/3 ->["\tt 20"] (5)/5,
+                            (3)/3 ->["\tt 20"] (6)/6,
+                            (5)/5 ->["\tt 30"] (7)/7,
+                            (6)/6 ->["\tt 10"] (7)/7
+                        };
+                        \end{tikzpicture}}
+                    </latex-image>
+                </image>
+            </figure>
+        </subsubsection>
+    </subsection>
+    <subsection xml:id="ss-MF-D-PFC">
+        <title>Pathfinding and cleanup</title>
+        <introduction>
+            The purpose of building the layered graph is that every longest path in the graph <m>\hat{L}(s,t)</m> has the property of being an <m>(s,t)</m>-path. This is extremely useful, as now every depth-first search will lead with minimal number of steps from <m>s</m> to <m>t</m>. These are our augmenting paths. Once such a path is found and the flow is augmented along it, the residual capacities are updated and therefore some of the edges in the layered graph may become <term>saturated</term>, meaning that no additional flow can pass along them. If this occurs, the layered graph must be <term>maintained</term> or <term>cleaned</term>, to ensure there are no vertices in the layered graph which are either <q>dead ends</q> with no outgoing edges nor the revers, vertices with no incoming edges.
+        </introduction>
+        <subsubsection xml:id="sss-MF-D-PF">
+            <title>Pathfinding and flow augmentation</title>
+            <p>
+                As every longest path in <m>\hat{L}(s,t)</m> is an <m>(s,t)</m>-path, we are free to choose any such path. We use the method of selecting vertices with least index whenever a choice is possible; for instance, we choose to make our augmenting path begin with the <m>(v_1,v_2)</m>-arrow rather than the <m>(v_1,v_3)</m>-arrow. We choose our first path to be <m>P_1 = (v_1,v_2,v_5,v_7)</m>.
+            </p>
+                <figure xml:id="fig-din_pathfinding_1">
+                    <caption>A first augmenting path with capacity 8 in <m>\hat{L}(s,t)</m>.</caption>
+                    <image xml:id="img-din_pathfinding_1" width="50%">
+                        <latex-image>
+                            {\tiny \begin{tikzpicture}[scale=1]
+                            \draw \foreach \n/\x/\y in {2/1/.5, 3/1/-.5, 5/2/.5, 6/2/-.5}{
+                            (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                            }
+                            (0,0) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                            (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                            \graph[nodes={}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                                (1)/1 ->[-Stealth,thick, draw=red, "\tt 50"] (2)/2,
+                                (1)/1 ->[-Stealth, "\tt 10"] (3)/3,
+                                (2)/2 ->[-Stealth, thick, red, "\tt  8"] (5)/5,
+                                (3)/3 ->[-Stealth, "\tt 20"] (5)/5,
+                                (3)/3 ->[-Stealth, "\tt 20"] (6)/6,
+                                (5)/5 ->[-Stealth, thick, red, "\tt 30"] (7)/7,
+                                (6)/6 ->[-Stealth, "\tt 10"] (7)/7
+                            };
+                            \end{tikzpicture}}
+                        </latex-image>
+                    </image>
+                </figure>
+            <p>
+                After we augment the flow along this path by 8, we see that the <m>(v_2,v_5)</m>-arrow becomes saturated and so we will need to do some cleanup. Decreasing the residual capacity of each arrow in our level graph leaves the problem that the <m>(v_1,v_2)</m>-arrow is part of no <m>(v_1,v_7)</m>-path; this is a problem precisely because <m>v_2</m> has no outgoing arrows left in the level graph. If we remove <m>v_2</m> from the level graph along with all arrows incoming to <m>v_2</m>, this may leave other vertices without outgoing arrows. So we want to pass down through the graph pruning out any of these edges, beginning with the removal of all saturated edges.
+            </p>
+            <p>
+                What does not occur at this stage but must also be considered is the opposite problem: removal of a saturated edge make leave a vertex with no incoming arrows. We then ould want to remove that vertex from the level graph, along with all its outgoing arrows, pruning towards the target until all such vertices without incoming edges are removed. Applying both of these processes is the <term>maintenance of the layered graph</term>.
+            </p>
+            <figure xml:id="fig-dinitz_maintenance_1">
+                <caption>First maintenance of the layered graph</caption>
+                <image xml:id="img-dinitz_maintenance_1" width="100%">
+                    <latex-image>
+                        \[\begin{array}{cc}
+                        \begin{tikzpicture}[scale=2]
+                        \draw \foreach \n/\x/\y in {2/1/.5, 3/1/-.5, 5/2/.5, 6/2/-.5}{
+                            (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                        }
+                        (0,0) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                        (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                        \graph[nodes={}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                            (1)/1 ->[-Stealth, "\tt 42"] (2)/2,
+                            (1)/1 ->[-Stealth, "\tt 10"] (3)/3,
+                            (2)/2 ->[-Stealth, thick, dashed, red, "\tt  0"] (5)/5,
+                            (3)/3 ->[-Stealth, "\tt 20"] (5)/5,
+                            (3)/3 ->[-Stealth, "\tt 20"] (6)/6,
+                            (5)/5 ->[-Stealth, "\tt 22"] (7)/7,
+                            (6)/6 ->[-Stealth, "\tt 10"] (7)/7
+                        };
+                        \end{tikzpicture}
+                        \amp
+                        \begin{tikzpicture}[scale=2]
+                        \draw \foreach \n/\x/\y in {2/1/.5, 3/1/-.5, 5/2/.5, 6/2/-.5}{
+                            (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                        }
+                        (0,0) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                        (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                        \graph[nodes={}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                            (1)/1 ->[-Stealth,thick, dashed, draw=red, "\tt 42"] (2)/2,
+                            (1)/1 ->[-Stealth, "\tt 10"] (3)/3,
+                            (3)/3 ->[-Stealth, "\tt 20"] (5)/5,
+                            (3)/3 ->[-Stealth, "\tt 20"] (6)/6,
+                            (5)/5 ->[-Stealth, "\tt 22"] (7)/7,
+                            (6)/6 ->[-Stealth, "\tt 10"] (7)/7
+                        };
+                        \end{tikzpicture}\\
+                        \text{(a)} \amp \text{(b)} \\
+                        \multicolumn{2}{c}{
+                        \begin{tikzpicture}[scale=2]
+                        \draw \foreach \n/\x/\y in {3/1/-.5, 5/2/.5, 6/2/-.5}{
+                            (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                        }
+                        (0,0) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                        (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                        \graph[nodes={}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                            (1)/1 ->[-Stealth, "\tt 10"] (3)/3,
+                            (3)/3 ->[-Stealth, "\tt 20"] (5)/5,
+                            (3)/3 ->[-Stealth, "\tt 20"] (6)/6,
+                            (5)/5 ->[-Stealth, "\tt 22"] (7)/7,
+                            (6)/6 ->[-Stealth, "\tt 10"] (7)/7
+                        };
+                        \end{tikzpicture}} \\
+                        \multicolumn{2}{c}{\text{(c)}}
+                        \end{array}\]
+                    </latex-image>
+                </image>
+            </figure>
+            <p>
+                We next choose the path <m>P_2 = (v_1,v_3,v_5,v_7)</m>, along which we can augment the flow by 10. As this saturates the <m>(v_1,v_3)</m> arrow, we remove it; but then <m>v_1</m> has no outgoing arrows and is deleted; moreover <m>v_3</m> has no incoming arrows, so must be deleted along with its outgoing arrows. This in turn causes <m>v_5</m> and <m>v_6</m> to lose their incoming arrows, so we must remove them and their outgoing arrows, leaving <m>v_7</m> with no incoming arrows. We thus remove <m>v_7</m> from <m>\hat{L}(x,t)</m> and are left with an empty graph! We must be finished with our first pass through the algorithm.
+            </p>
+            <figure xml:id="fig-dinitz_maintenance_2">
+                <caption>The second augmenting path and maintenance resulting in the empty graph</caption>
+                <image xml:id="img-dinitz_maintenance_2" width="100%">
+                    <latex-image>
+                        \begin{center}\tiny
+                        \begin{tikzpicture}
+                        \draw \foreach \n/\x/\y in {3/1/-.5, 5/2/.5, 6/2/-.5}{
+                            (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                        }
+                        (0,0) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                        (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                        \graph[nodes={}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                            (1)/1 ->[thick, red, -Stealth, "\tt 10"] (3)/3,
+                            (3)/3 ->[thick, red, -Stealth, "\tt 20"] (5)/5,
+                            (3)/3 ->[-Stealth, "\tt 20"] (6)/6,
+                            (5)/5 ->[thick, red, -Stealth, "\tt 22"] (7)/7,
+                            (6)/6 ->[-Stealth, "\tt 10"] (7)/7
+                        };
+                        \end{tikzpicture}
+                        %%%%%%%%%%%%%%%%%%%
+                        \begin{tikzpicture}
+                        \draw \foreach \n/\x/\y in {3/1/-.5, 5/2/.5, 6/2/-.5}{
+                            (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                        }
+                        (0,0) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                        (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                        \graph[nodes={}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                            (1)/1 ->[thick, red, dashed, -Stealth, "\tt 0"] (3)/3,
+                            (3)/3 ->[-Stealth, "\tt 10"] (5)/5,
+                            (3)/3 ->[-Stealth, "\tt 20"] (6)/6,
+                            (5)/5 ->[-Stealth, "\tt 12"] (7)/7,
+                            (6)/6 ->[-Stealth, "\tt 10"] (7)/7
+                        };
+                        \end{tikzpicture} \\
+                        %%%%%%%%%%%%%%%%%%%
+                        \begin{tikzpicture}
+                        \draw \foreach \n/\x/\y in {3/1/-.5, 5/2/.5, 6/2/-.5}{
+                            (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                        }
+                        (0,0) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                        (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                        \graph[nodes={}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                            (3)/3 ->[thick, red, dashed,-Stealth, "\tt 20"] (5)/5,
+                            (3)/3 ->[thick, red, dashed,-Stealth, "\tt 20"] (6)/6,
+                            (5)/5 ->[-Stealth, "\tt 22"] (7)/7,
+                            (6)/6 ->[-Stealth, "\tt 10"] (7)/7
+                        };
+                        \end{tikzpicture}
+                        %%%%%%%%%%%%%%%%%%%
+                        \begin{tikzpicture}
+                        \draw \foreach \n/\x/\y in {5/2/.5, 6/2/-.5}{
+                            (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                        }
+                        (0,0) node [draw=white, fill=white, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                        (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                        \graph[nodes={}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                            (5)/5 ->[thick, red, dashed,-Stealth, -Stealth, "\tt 22"] (7)/7,
+                            (6)/6 ->[thick, red, dashed,-Stealth, -Stealth, "\tt 10"] (7)/7
+                        };
+                        \end{tikzpicture}\\
+                        \end{center}
+                    </latex-image>
+                </image>
+            </figure>
+            <table xml:id="tab-dinitz-flow_1">
+                <caption>Value of flow is <m>\abs{f}=18</m> after all possible augmentation in first layered graph.</caption>
+                <tabular top="major">
+                    <col halign="left" />
+                    <col halign="center" />
+                    <col halign="left" />
+                    <col halign="center" />
+                    <col halign="left" />
+                    <col halign="center" />
+                    <row bottom="medium">
+                        <cell>Arrow</cell>
+                        <cell>Flow</cell>
+                        <cell>Arrow</cell>
+                        <cell>Flow</cell>
+                        <cell>Arrow</cell>
+                        <cell>Flow</cell>
+                    </row>
+                    <row>
+                        <cell><m>v_1,v_2</m></cell>
+                        <cell> 8 </cell>
+                        <cell><m>v_3,v_2</m></cell>
+                        <cell> 0 </cell>
+                        <cell><m>v_5,v_7</m></cell>
+                        <cell> 18 </cell>
+                    </row>
+                    <row>
+                        <cell><m>v_1,v_3</m></cell>
+                        <cell> 10 </cell>
+                        <cell><m>v_3,v_4</m></cell>
+                        <cell> 0 </cell>
+                        <cell><m>v_6,v_5</m></cell>
+                        <cell> 0 </cell>
+                    </row>
+                    <row>
+                        <cell><m>v_2,v_3</m></cell>
+                        <cell> 0 </cell>
+                        <cell><m>v_3,v_5</m></cell>
+                        <cell> 10 </cell>
+                        <cell><m>v_6,v_7</m></cell>
+                        <cell> 0 </cell>
+                    </row>
+                    <row>
+                        <cell><m>v_2,v_4</m></cell>
+                        <cell> 0 </cell>
+                        <cell><m>v_3,v_6</m></cell>
+                        <cell> 0 </cell>
+                        <cell />
+                        <cell />
+                    </row>
+                    <row bottom="major">
+                        <cell><m>v_2,v_5</m></cell>
+                        <cell> 8 </cell>
+                        <cell><m>v_4,v_5</m></cell>
+                        <cell> 0 </cell>
+                        <cell />
+                        <cell />
+                    </row>
+                </tabular>
+            </table>
+        </subsubsection>
+        <subsubsection xml:id="sss-MF-D-CA">
+            <title>Completion of the algorithm</title>
+            In order to complete the algorithm it is necessary to now plot the network with its residual capacities updated. This will introduce new arrows in the graph, which are the result of positive flow along original arrows. If need be, this flow can be redirected at a later stage to a different path to increase the total flow. The sequence of figures from <xref ref="fig-din_residual_2" /> through <xref ref="fig-din_pathfinding_3" /> demonstrate the remainder of the algorithm, and the final flow assignment is shown in <xref provisional="fig-din_final_flow" />.
+            <figure xml:id="fig-din_residual_2">
+                <caption>Residual capacity in network after first round of augmentation</caption>
+                <image xml:id="img-din_residual_2" width="50%">
+                    <latex-image>
+                        \begin{center}
+                        \tiny\begin{tikzpicture}[scale=1.5]
+                        \draw \foreach \n/\x/\y in {2/0/.5, 3/1/-.5, 4/1/.5, 5/2/.5, 6/2/-.5}{
+                            (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                        }
+                        (0,-.5) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                        (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                        \graph[nodes={}, edges={-Stealth}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                            (1) ->["\tt 42", bend left=15pt] (2)
+                                (2) ->["\tt 8", bend left=15pt] (1)
+                            (2) ->["\tt 10", bend left=15pt] (3)
+                            (2) ->["\tt 5"] (4)
+                            (3) ->["\tt 10"] (1)
+                            (3) ->["\tt 20", bend left=15pt] (2)
+                            (3) ->["\tt 10"] (4)
+                            (3) ->["\tt 10", bend left=15pt] (5)
+                            (3) ->["\tt 10"] (6)
+                            (4) ->["\tt 13"] (5)
+                            (5) ->["\tt 8", bend right=20pt] (2)
+                            (5) ->["\tt 10", bend left=15pt] (3)
+                            (5) ->["\tt 12", bend left=15pt] (7)
+                            (6) ->["\tt 20"] (5)
+                            (6) ->["\tt 10"] (7)
+                            (7) ->["\tt 18", bend left=15pt] (5)
+                        };
+                        \end{tikzpicture}
+                        \end{center}
+                    </latex-image>
+                </image>
+            </figure>
+            <figure xml:id="fig-din_pathfinding_2">
+                <caption>
+                    Second round of layered graph, pathfinding, augmentation, and cleanup. Augmenting paths are <m>P_3 = (v_1,v_2,v_3,v_5,v_7)</m> adding 10 to the flow and <m>P_4 = (v_1,v_2,v_4,v_5,v_7)</m> adding 2 to the flow.
+                </caption>
+                <image xml:id="img-din_pathfinding_2" width="100%">
+                    <latex-image>
+                    \[\begin{array}{cc}
+                    \begin{tikzpicture}[scale=1.5]
+                    \draw \foreach \n/\x/\y in {2/0/.5, 3/1/-.5, 4/1/.5, 5/2/.5, 6/2/-.5}{
+                        (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                    }
+                    (0,-.5) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                    (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                    \graph[nodes={}, edges={-Stealth}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                        (1) ->["\tt 42"] (2)
+                        (2) ->["\tt 10"] (3)
+                        (2) ->["\tt 5"] (4)
+                        (3) ->["\tt 10"] (5)
+                        (3) ->["\tt 10"] (6)
+                        (4) ->["\tt 13"] (5)
+                        (5) ->["\tt 12"] (7)
+                        (6) ->["\tt 10"] (7)
+                    };
+                    \end{tikzpicture}
+                    \amp
+                    \begin{tikzpicture}[scale=1.5]
+                    \draw \foreach \n/\x/\y in {2/0/.5, 3/1/-.5, 4/1/.5, 5/2/.5, 6/2/-.5}{
+                        (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                    }
+                    (0,-.5) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                    (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                    \graph[nodes={}, edges={-Stealth}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                        (1) ->[thick, red, "\tt 42"] (2)
+                        (2) ->[thick, red, "\tt 10"] (3)
+                        (2) ->["\tt 5"] (4)
+                        (3) ->[thick, red, "\tt 10"] (5)
+                        (3) ->["\tt 10"] (6)
+                        (4) ->["\tt 13"] (5)
+                        (5) ->[thick, red, "\tt 12"] (7)
+                        (6) ->["\tt 10"] (7)
+                    };
+                    \end{tikzpicture}
+                    \\
+                    \begin{tikzpicture}[scale=1.5]
+                    \draw \foreach \n/\x/\y in {2/0/.5, 3/1/-.5, 4/1/.5, 5/2/.5, 6/2/-.5}{
+                        (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                    }
+                    (0,-.5) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                    (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                    \graph[nodes={}, edges={-Stealth}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                        (1) ->["\tt 32"] (2)
+                        (2) ->[thick, red, dashed, "\tt 0"] (3)
+                        (2) ->["\tt 5"] (4)
+                        (3) ->[thick, red, dashed, "\tt 0"] (5)
+                        (3) ->["\tt 10"] (6)
+                        (4) ->["\tt 13"] (5)
+                        (5) ->["\tt 2"] (7)
+                        (6) ->["\tt 10"] (7)
+                    };
+                    \end{tikzpicture}
+                    \amp
+                    \begin{tikzpicture}[scale=1.5]
+                    \draw \foreach \n/\x/\y in {2/0/.5, 3/1/-.5, 4/1/.5, 5/2/.5, 6/2/-.5}{
+                        (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                    }
+                    (0,-.5) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                    (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                    \graph[nodes={}, edges={-Stealth}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                        (1) ->["\tt 32"] (2)
+                        (2) ->["\tt 5"] (4)
+                        (3) ->[thick, red, dashed, "\tt 10"] (6)
+                        (4) ->["\tt 13"] (5)
+                        (5) ->["\tt 2"] (7)
+                        (6) ->[thick, red, dashed, "\tt 10"] (7)
+                    };
+                    \end{tikzpicture}
+                    \\
+                    \begin{tikzpicture}[scale=1.5]
+                    \draw \foreach \n/\x/\y in {2/0/.5, 4/1/.5, 5/2/.5}{
+                        (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                    }
+                    (0,-.5) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                    (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                    \graph[nodes={}, edges={-Stealth}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                        (1) ->[thick, red, "\tt 32"] (2)
+                        (2) ->[thick, red, "\tt 5"] (4)
+                        (4) ->[thick, red, "\tt 13"] (5)
+                        (5) ->[thick, red, "\tt 2"] (7)
+                    };
+                    \end{tikzpicture}
+                    \amp
+                    \begin{tikzpicture}[scale=1.5]
+                    \draw \foreach \n/\x/\y in {2/0/.5, 4/1/.5, 5/2/.5}{
+                        (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                    }
+                    (0,-.5) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                    (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                    \graph[nodes={}, edges={-Stealth}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                        (1) ->["\tt 30"] (2)
+                        (2) ->["\tt 3"] (4)
+                        (4) ->["\tt 11"] (5)
+                        (5) ->[thick, red, dashed, "\tt 0"] (7)
+                    };
+                    \end{tikzpicture} \\
+                    \multicolumn{2}{c}{
+                    \begin{tikzpicture}[scale=1.5]
+                    \draw \foreach \n/\x/\y in {2/0/.5, 4/1/.5, 5/2/.5}{
+                        (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                    }
+                    (0,-.5) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                    (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                    \graph[nodes={}, edges={-Stealth}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                        (1) ->[thick, red, dashed, "\tt 30"] (2)
+                        (2) ->[thick, red, dashed, "\tt 3"] (4)
+                        (4) ->[thick, red, dashed, "\tt 11"] (5)
+                    };
+                    \end{tikzpicture}
+                    }
+                    \end{array}\]
+                    </latex-image>
+                </image>
+            </figure>
+            <table xml:id="tab-dinitz-flow_2">
+                <caption>Value of flow is <m>\abs{f}=30</m> after all possible augmentation in second layered graph.</caption>
+                <tabular top="major">
+                    <col halign="left" />
+                    <col halign="center" />
+                    <col halign="left" />
+                    <col halign="center" />
+                    <col halign="left" />
+                    <col halign="center" />
+                    <row bottom="medium">
+                        <cell>Arrow</cell>
+                        <cell>Flow</cell>
+                        <cell>Arrow</cell>
+                        <cell>Flow</cell>
+                        <cell>Arrow</cell>
+                        <cell>Flow</cell>
+                    </row>
+                    <row>
+                        <cell><m>v_1,v_2</m></cell>
+                        <cell> 20 </cell>
+                        <cell><m>v_3,v_2</m></cell>
+                        <cell> 0 </cell>
+                        <cell><m>v_5,v_7</m></cell>
+                        <cell> 30 </cell>
+                    </row>
+                    <row>
+                        <cell><m>v_1,v_3</m></cell>
+                        <cell> 10 </cell>
+                        <cell><m>v_3,v_4</m></cell>
+                        <cell> 0 </cell>
+                        <cell><m>v_6,v_5</m></cell>
+                        <cell> 0 </cell>
+                    </row>
+                    <row>
+                        <cell><m>v_2,v_3</m></cell>
+                        <cell> 2 </cell>
+                        <cell><m>v_3,v_5</m></cell>
+                        <cell> 20 </cell>
+                        <cell><m>v_6,v_7</m></cell>
+                        <cell> 0 </cell>
+                    </row>
+                    <row>
+                        <cell><m>v_2,v_4</m></cell>
+                        <cell> 2 </cell>
+                        <cell><m>v_3,v_6</m></cell>
+                        <cell> 0 </cell>
+                        <cell />
+                        <cell />
+                    </row>
+                    <row bottom="major">
+                        <cell><m>v_2,v_5</m></cell>
+                        <cell> 8 </cell>
+                        <cell><m>v_4,v_5</m></cell>
+                        <cell> 0 </cell>
+                        <cell />
+                        <cell />
+                    </row>
+                </tabular>
+            </table>
+            <figure xml:id="fig-din_pathfinding_3">
+                <caption>The residual capacity after second round of pathfinding and augmentation, and the layered graph. As this layered graph consists of a single path, it is the only possible augmenting path, <m>P_5=(v_1,v_2,v_4,v_5,v_3,v_6,v_7)</m>, and provides an additional flow of 3. </caption>
+                <image xml:id="img-din_pathfinding_3" width="100%">
+                    <latex-image>
+                        \tiny\begin{tikzpicture}[scale=1.5]
+                        \draw \foreach \n/\x/\y in {2/0/.5, 3/1/-.5, 4/1/.5, 5/2/.5, 6/2/-.5}{
+                            (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                        }
+                        (0,-.5) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                        (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                        \graph[nodes={}, edges={-Stealth}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                            (1) ->["\tt 30", bend left=15pt] (2)
+                                (2) ->["\tt 20", bend left=15pt] (1)
+                            (2) ->["\tt 3", bend left=15pt] (4)
+                            (3) ->["\tt 10"] (1)
+                            (3) ->["\tt 30"] (2)
+                            (3) ->["\tt 10"] (4)
+                            (3) ->["\tt 10"] (6)
+                            (4) ->["\tt 2", bend left=15pt] (2)
+                            (4) ->["\tt 11", bend left=15pt] (5)
+                            (5) ->["\tt 8", bend right=30] (2)
+                            (5) ->["\tt 20"] (3)
+                            (5) ->["\tt 2", bend left=15pt] (4)
+                            (6) ->["\tt 20"] (5)
+                            (6) ->["\tt 10"] (7)
+                            (7) ->["\tt 30"] (5)
+                        };
+                        \end{tikzpicture}
+                        %
+                        \tiny\begin{tikzpicture}[scale=1.5]
+                        \draw \foreach \n/\x/\y in {2/0/.5, 3/1/-.5, 4/1/.5, 5/2/.5, 6/2/-.5}{
+                            (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                        }
+                        (0,-.5) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                        (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                        \graph[nodes={}, edges={-Stealth}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                            (1) ->["\tt 30"] (2)
+                            (2) ->["\tt 3"] (4)
+                            (3) ->["\tt 10"] (4)
+                            (3) ->["\tt 10"] (6)
+                            (4) ->["\tt 11"] (5)
+                            (5) ->["\tt 20"] (3)
+                            (6) ->["\tt 10"] (7)
+                        };
+                        \end{tikzpicture}
+                    </latex-image>
+                </image>
+            </figure>
+            <figure xml:id="fig-din_final_flow">
+                <caption>A maximum flow on this capacitated network. Numerators represent flow, denominators capacity. The minimum cut corresponding to the max flow is the cut set <m>\set{(v_2,v_3), (v_2,v_4), (v_2,v_5), (v_1,v_3)}</m>.</caption>
+                <image xml:id="img-din_final_flow" width="100%">
+                    <latex-image>
+                    \begin{tikzpicture}[scale=4]
+                    \draw \foreach \n/\x/\y in {2/0/1, 3/1/0, 4/1/1, 5/2/1, 6/2/0}{
+                        (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                    }
+                    (0,0) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                    (3,.5) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                    \graph[nodes={}, edges={-Stealth}, edge quotes={fill=white, inner sep=1pt}]{
+                        (1)/1 ->["\tt{\color{blue}23}/50", thick, blue] (2)/2,
+                        (1)/1 ->["\tt{\color{blue}10}/10", thick, blue] (3)/3,
+                        (2)/2 ->["\tt{\color{blue}10}/10", thick, blue, bend left=15pt] (3)/3,
+                        (2)/2 ->["\tt{\color{blue}5}/5", thick, blue] (4)/4,
+                        (2.north east)/2 
+                              ->["\tt {\color{blue}8}/8", thick, blue, bend left] (5.north west)/5,
+                        (3)/3 ->["\tt 0/20", bend left=15pt] (2)/2,
+                        (3)/3 ->["\tt 0/10"] (4)/4,
+                        (3)/3 ->["\tt {\color{blue}17}/20", thick, blue] (5)/5,
+                        (3)/3 ->["\tt {\color{blue}3}/20", thick, blue] (6)/6,
+                        (4)/4 ->["\tt {\color{blue}5}/13", thick, blue] (5)/5,
+                        (5)/5 ->["\tt {\color{blue}30}/30", thick, blue] (7)/7,
+                        (6)/6 ->["\tt 0/20"] (5)/5,
+                        (6)/6 ->["\tt {\color{blue}3}/10", thick, blue] (7)/7
+                    };
+                    \end{tikzpicture}
+                    </latex-image>
+                </image>
+            </figure>
+        </subsubsection>
+    </subsection>
+</section>

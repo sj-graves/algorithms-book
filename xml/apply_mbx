@@ -1,4 +1,4 @@
 #!/bin/bash
 
-~/mathbook/script/mbx -c latex-image -f svg -d images -vv ./index.xml
+~/mathbook/script/mbx -c latex-image -f svg -d images -vv ./aam-index.xml
 cp -R images ../html

@@ -1,5 +1,4 @@
 #!/bin/bash
-
 xsltproc --xinclude ~/mathbook/xsl/mathbook-latex.xsl ./aam-index.xml
 mv AAM.tex ../latex/
 cd ../latex
