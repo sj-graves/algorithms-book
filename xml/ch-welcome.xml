@@ -20,6 +20,18 @@
         <p>
             Introduction to programming books focus exclusively on <em>getting computers to work for you</em>, but not necessarily in a way aimed at solving mathematical problems. Most of the applied math books assume an intermediate familiarity with programming. And the books on Sage, while excellent, are more focused on showing off the bells and whistles of Sage than using the basics to solve interesting problems. This textbook tries to approach these problems by the <em>via media</em>, the middle way. We discuss an introduction to programming <em>through</em> learning to solve mathematical problems.
         </p>
+        <p>
+            How do we solve mathematical problems computationally? We apply some <term>algorithm</term>.
+        </p>
+        <definition xml:id="def-algorithm">
+            <title>Algorithm</title>
+            <idx><h>algorithm</h></idx>
+            <statement>
+                <p>
+                    An <term>algorithm</term> is a detailed procedure for the completion of a task, often computational.
+                </p>
+            </statement>
+        </definition>
     </introduction>
     
     <xi:include href="./sec-welcome-text.xml" />

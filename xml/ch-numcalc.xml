@@ -15,15 +15,13 @@
         </ol>
     </objectives>
     <introduction>
-        <title />
+        <title>Basic Calculus</title>
         <p>
-            Here we go!
+            In order to become familiar with algorithmic mathematics, we'll begin with some introductory topics from differential and integral calculus. Two of these problems (<xref ref="s-NC-IRC" text="title"/> and <xref ref="s-NC-Q" text="title"/>) are foundational problems under study by Leibniz and Newton when they independently developed the methods of differentiation and integration.
         </p>
     </introduction>
-    <section>
-        <title>Interval bisection</title>
-        <p>
-            Place holder.
-        </p>
-    </section>
+    
+    <xi:include href="sec-numcalc-roots.xml" />
+    <xi:include href="sec-numcalc-derivatives.xml" />
+    <xi:include href="sec-numcalc-quadrature.xml" />
 </chapter>

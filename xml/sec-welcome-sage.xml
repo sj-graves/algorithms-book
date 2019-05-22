@@ -153,10 +153,13 @@
         </sage>
         <exercise>
             <statement>
+                <p>
+                    Consider a few subquestions:
+                </p>
                 <ol>
                     <li> What does <c>//</c> do? What does <c>%</c> do? </li>
                     <li> What does <c>divmod</c> do? </li>
-                    <li> What happens when a comma-separated list of variables is assigned to like in line 7 of the Sage cell above? Does this always work?</li>
+                    <li> What happens when a comma-separated list of variables is on the left side of the equal sign in an assignment, like in line 7 of the Sage cell above? Does this always work?</li>
                 </ol>
                 <p>
                     Another way to compute <c>q</c> is to use the <c>floor</c> function. Run <c>help(floor)</c> and then investigate the effect of the <c>floor</c> function.

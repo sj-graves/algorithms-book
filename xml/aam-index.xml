@@ -9,7 +9,9 @@
         <macros>
             \newcommand{\set}[1]{\left\{#1\right\}}
             \newcommand{\abs}[1]{\left|#1\right|}
+            \newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
             
+            \newcommand{\N}{\mathbb{N}}
             \newcommand{\Z}{\mathbb{Z}}
             \newcommand{\R}{\mathbb{R}}
             \newcommand{\C}{\mathbb{C}}
@@ -29,54 +31,54 @@
 <!-- MAIN MATTER          -->
         <xi:include href="./ch-welcome.xml" />
         <xi:include href="./ch-numcalc.xml" />
-        <chapter><title>Permutations</title>
-            <section>
+        <chapter xml:id="ch-P"><title>Permutations</title>
+            <section xml:id="s-P-MB">
                 <title>Mathematical basics</title>
             </section>
         </chapter>
-        <chapter>
+        <chapter xml:id="ch-SC">
             <title>Substitution ciphers</title>
-            <section>
+            <section xml:id="s-SC-MSSC">
                 <title>Monoalphabetic substitution: single characters</title>
                 <shorttitle>Small alphabets</shorttitle>
             </section>
-            <section>
+            <section xml:id="s-SC-MSMC">
                 <title>Monoalphabetic substitution: multiple characters</title>
                 <shorttitle>Big alphabets</shorttitle>
             </section>
             
         </chapter>
-        <chapter>
+        <chapter xml:id="ch-PKC">
             <title>Public key cryptography</title>
-            <section><title><q>One-way</q> functions</title></section>
-            <section><title>Kid RSA</title></section>
-            <section><title>Full RSA</title></section>
-            <section><title>Advanced topics: Elliptic curve cryptography</title>
+            <section xml:id="s-PKC-OWF"><title><q>One-way</q> functions</title></section>
+            <section xml:id="s-PKC-KRSA"><title>Kid RSA</title></section>
+            <section xml:id="s-PKC-RSA"><title>Full RSA</title></section>
+            <section xml:id="s-PKC-ECC"><title>Advanced topics: Elliptic curve cryptography</title>
                 <shorttitle>Elliptic curve cryptography</shorttitle>
             </section>
-            <section><title>Advanced topics: NTRUencrypt</title>
+            <section xml:id="s-PKC-NTRU"><title>Advanced topics: NTRUencrypt</title>
                 <shorttitle>NTRU</shorttitle>
             </section>
         </chapter>
-        <chapter>
+        <chapter xml:id="ch-G">
             <title>Graphs</title>
-            <section><title>Definitions</title></section>
-            <section><title>Invariants</title></section>
-            <section><title>Isomorphism</title></section>
+            <section xml:id="s-G-D"><title>Definitions</title></section>
+            <section xml:id="s-G-INV"><title>Invariants</title></section>
+            <section xml:id="s-G-ISOM"><title>Isomorphism</title></section>
         </chapter>
-        <chapter>
+        <chapter xml:id="ch-SP">
             <title>Shortest paths</title>
-            <section><title>Definitions</title></section>
-            <section><title>Dijkstra's algorithm</title></section>
-            <section><title>Implementing Dijkstra's algorithm</title></section>
+            <section xml:id="s-SP-D"><title>Definitions</title></section>
+            <section xml:id="s-SP-DA"><title>Dijkstra's algorithm</title></section>
+            <section xml:id="s-SP-IDA"><title>Implementing Dijkstra's algorithm</title></section>
         </chapter>
-        <chapter><title>Minimum spanning trees</title>
-            <section><title>Definitions</title></section>
-            <section><title>Jarnik-Prim algorithm</title></section>
-            <section><title>Implementing the Jarnik-Prim algorithm</title></section>
-            <section><title>Kruskal's algortihm</title></section>
-            <section><title>Implementing Kruskal's algorithm</title></section>
-            <section><title>Advanced topic: Heaps</title></section>
+        <chapter xml:id="ch-MST"><title>Minimum spanning trees</title>
+            <section xml:id="s-MST-D"><title>Definitions</title></section>
+            <section xml:id="s-MST-JPA"><title>Jarnik-Prim algorithm</title></section>
+            <section xml:id="s-MST-IJPA"><title>Implementing the Jarnik-Prim algorithm</title></section>
+            <section xml:id="s-MST-KA"><title>Kruskal's algortihm</title></section>
+            <section xml:id="s-MST-IKA"><title>Implementing Kruskal's algorithm</title></section>
+            <section xml:id="s-MST-H"><title>Advanced topic: Heaps</title></section>
         </chapter>
         <xi:include href="./ch-maxflow.xml" />
         

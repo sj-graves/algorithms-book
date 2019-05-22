@@ -7,6 +7,7 @@
     <definition xml:id="def-cap_net">
         <title>Capacitated network</title>
         <idx>capacitated network</idx>
+        <idx>flow</idx>
         <idx>capacity function</idx>
         <idx><h>flow</h><h>value of</h>
         </idx>
