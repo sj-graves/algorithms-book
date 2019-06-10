@@ -3,11 +3,12 @@
     <title>Welcome to Algorithms for Applied Mathematics</title>
     <shorttitle>Welcome to AAM</shorttitle>
     <objectives>
-    <ol>
-        <li>Introduce the textbook, its organization, and its formatting.</li>
-        <li>Introduce <url href="https://cocalc.com/">CoCalc</url>.</li>
-        <li>Introduce the Sage programming language.</li>
-    </ol>
+        <ol>
+            <li>Introduce the textbook, its organization, and its formatting.</li>
+            <li>Introduce <url href="https://cocalc.com/">CoCalc</url>.</li>
+            <li>Introduce the Sage programming language.</li>
+            <li><xref ref="ex-W" text="title"/> and <xref ref="pr-W" text="title"/></li>
+        </ol>
     </objectives>
 
     <introduction xml:id="ch-W-intro">
@@ -37,9 +38,10 @@
     <xi:include href="./sec-welcome-text.xml" />
     <xi:include href="./sec-welcome-cocalc.xml" />
     <xi:include href="./sec-welcome-sage.xml" />
-    <xi:include href="./proj-welcome.xml" />
     <xi:include href="./ex-welcome.xml" />
+    <xi:include href="./proj-welcome.xml" />
 
+    
     <conclusion xml:id="c-W-conc">
         <title>Help! I've never programmed before!</title>
         <p>
@@ -60,6 +62,7 @@
             </ol>
             Generally the class will contain a spectrum of both programming and mathematical ability, but <em>everyone can successfully complete this course</em> provided you are willing to put in time and effort.
         </p>
+        
     </conclusion>
     
 </chapter>

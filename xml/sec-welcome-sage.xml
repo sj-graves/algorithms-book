@@ -8,10 +8,10 @@
         <p>
             For now we'll use embedded <term>Sage cells</term> to discuss the basics of interacting with Sage.
         </p>
-        <example xml:id="xmp-W-S-sagecell">
+        <technology xml:id="tech-W-S-sagecell">
             <title>Sage cells</title>
             <p>
-                It used to break <pretext /> to put a Sage cell in an Example, but that bug has been squashed!
+                Sage cells link to the <url href="https://sagecell.sagemath.org/">Sage Cell Server</url>, which is very, very convenient. Sage cells allow you to embed active calculations in almost any website. These will appear strangely in the printed version of the text.
             </p>
             <sage language="sage">
                 <input>
@@ -33,7 +33,7 @@
 
                 </output>
             </sage>
-        </example>
+        </technology>
     </introduction>
     <subsection xml:id="ss-W-S-IO">
         <title>Input and output</title>
@@ -56,7 +56,7 @@
             </output>
         </sage>
         <p>
-            Embedded Sage cells on a single page behave the same way multiple cells of a Sage worksheet behave in CoCalc: the value stored in a variable is kept in memory until the page is reloaded or the Worksheet restarted. This does require that evaluation of Sage cells happens in the same order every time. For instance, if the cell below is executed <em>before</em> the cell above, an error would result, because the variables <c>a</c> and <c>c</c> have no value in the cell below until the cell above is evaluated!
+            Embedded Sage cells on a single page behave the same way multiple cells of a Sage worksheet behave in CoCalc: the value stored in a variable is kept in memory until the page is reloaded or the worksheet restarted. This does require that evaluation of Sage cells happens in the same order every time. For instance, if the cell below is executed <em>before</em> the cell above, an error would result, because the variables <c>a</c> and <c>c</c> are undefined in the cell below, if the cell above is never evaluated!
         </p>
         <sage>
             <input>
@@ -132,7 +132,7 @@
             </proof>
         </theorem>
         <p>
-            With the mathematical ideas of integer division refreshed in our minds we turn towards the implementation: given integers <m>a</m> and <m>b</m>, how do we effectively compute <m>q</m> and <m>r</m> using Sage?
+            With the mathematical idea of integer division refreshed in our minds we turn towards the implementation: given integers <m>a</m> and <m>b</m>, how do we effectively compute <m>q</m> and <m>r</m> using Sage?
         </p>
         <sage>
             <input>
@@ -160,17 +160,21 @@
                     <li> What does <c>//</c> do? What does <c>%</c> do? </li>
                     <li> What does <c>divmod</c> do? </li>
                     <li> What happens when a comma-separated list of variables is on the left side of the equal sign in an assignment, like in line 7 of the Sage cell above? Does this always work?</li>
+                    <li>
+                        <idx>floor</idx><idx>ceiling</idx>
+                        <p>
+                            Another way to compute <c>q</c> is to use the <term>floor function</term>. The mathematical notation and definition of the floor function is <me>\floor{x} = \max\set{k\in\Z:k\leq x},</me> which is to say that <m>\floor{x}</m> is the greatest integer less than or equal to <m>x</m>. Related to the floor function is the <term>ceiling function</term>, <me>\ceil{x} = \min\set{k\in\Z : k\geq x},</me> which is the least integer greater than or equal to <m>x</m>. These two functions are implemented in Sage using the <c>floor</c> and <c>ceil</c> functions. Investigate how you can use the floor and ceiling functions to compute <c>q</c> and <c>r</c>.
+                        </p>
+                    </li>
                 </ol>
-                <p>
-                    Another way to compute <c>q</c> is to use the <c>floor</c> function. Run <c>help(floor)</c> and then investigate the effect of the <c>floor</c> function.
-                </p>
                 <sage>
                     <input>
-                        help(floor)
+                        help(math.floor)
+                        math.ceil?
                     </input>
                 </sage>
                 <p>
-                    This should serve as an introduction to the <c>help</c> command.
+                    We see in this Sage cell that there are two interfaces to find help about commands in Sage: <c>help(command_name)</c> and <c>command_name?</c>.
                 </p>
             </statement>
         </exercise>
@@ -184,13 +188,18 @@
             The best way to learn Sage is the same as the best way to learn any other programming language: open it up and play with it. The great joy of Sage is that there is essentially no barrier to entry, because you can immediately execute whatever you type. It may not work, but you'll just get an error message and be able to learn from it. With a more traditional language like C++, you have to go through the process of learning how to compile, link, load, and execute your program. With Sage, you either click <q>Evaluate</q> or press <em>Shift-Enter</em>!
         </p>
         <p>
-            For a longer treatment of the basic uses of Sage, <url href="http://www.gregory-bard.com/home.html">Sage for Undergraduates</url><xref ref="bib_SageBook"/> is a very strong introduction. For a course only in <em>using Sage</em>, Bard's book does not have any real competition; as a book in programming in Sage, it has shortfalls, because that was not its intent.
+            For a longer treatment of the basic uses of Sage, <url href="http://www.gregory-bard.com/home.html"><pubtitle>Sage for Undergraduates</pubtitle></url><xref ref="bib_SageBook"/> is a very strong introduction. For a course only in <em>using Sage</em>, Bard's book does not have any real competition; as a book in programming in Sage, it has shortfalls, because that was not its intent. <pubtitle>Sage for Undergraduates</pubtitle> remains a very good explanation of how to use routine commands in Sage, as the assistance provided by <c>help(command_name)</c> or <c>command_name?</c> is often extremely technical.
         </p>
     </subsection>
-<!--     <subsection xml:id="ss-W-S-YCBI">
-        <title>You can't break it</title>
-    </subsection>
-    <subsection xml:id="ss-W-S-HIYF">
-        <title><c>help(...)</c> is your friend</title>
-    </subsection> -->
+    <reading-questions>
+        <exercise>
+            <p>What does <c>print</c> do?</p>
+        </exercise>
+        <exercise>
+            <p>What do <c>//</c>, <c>%</c>, and <c>divmod</c> do?</p>
+        </exercise>
+        <exercise>
+            <p>What do <c>floor</c> and <c>ceil</c> do?</p>
+        </exercise>
+    </reading-questions>
 </section>

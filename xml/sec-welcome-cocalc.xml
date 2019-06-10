@@ -7,25 +7,22 @@
             <p>
                 Everyone working in mathematics should have a <url href="https://cocalc.com">CoCalc</url> account, if simply for the reason that <latex /> is the language of mathematical typesetting and CoCalc provides a robust <latex /> editor with collaboration features. For anyone who wants to work computationally and does not want to bear the cost of expensive commercial mathematics software, here's a partial list of what is installed in CoCalc:
             </p>
-            <sidebyside>
-                <ul>
-                    <li>Sagemath</li>
-                    <li><latex/></li>
-                    <li>GNU/Linux</li>
-                    <li>GNU Octave</li>
-                    <li>Scientific Python</li>
-                    <li>Julia</li>
-                    <li>X11</li>
-                </ul>
-                <ul>
-                    <li>R project</li>
-                    <li>Tensorflow</li>
-                    <li>GAP</li>
-                    <li>MAGMA</li>
-                    <li>Maxima</li>
-                    <li>Many major programming languages via <c>gcc</c>.</li>
-                </ul>
-            </sidebyside>
+            <ul cols="2">
+                <li>Sagemath</li>
+                <li><latex/></li>
+                <li>GNU/Linux</li>
+                <li>GNU Octave</li>
+                <li>Scientific Python</li>
+                <li>Julia</li>
+                <li>X11</li>
+                <li>R project</li>
+                <li>Tensorflow</li>
+                <li>GAP</li>
+                <li>MAGMA</li>
+                <li>Maxima</li>
+                <li>CodeMirror editor</li>
+                <li>Many major programming languages via <c>gcc</c>.</li>
+            </ul>
             <p>
                 If this sounds like an advertisement, it is! All drafts of this text after the first were authored in CoCalc, since the editor handles XML remarkably well.
             </p>
@@ -58,5 +55,26 @@
         <warning xml:id="warn-CoCalc_trust">
             Only add CoCalc collaborators you actually trust!
         </warning>
+        <exercise>
+            <p>
+                Who are the collaborators on your CoCalc projects?
+            </p>
+        </exercise>
     </subsection>
+    <reading-questions>
+        <exercise>
+            <p>
+                What is the principal benefit of paying for CoCalc upgrades?
+            </p>
+            <answer>Project hosting on a members-only server.</answer>
+        </exercise>
+        <exercise>
+            <p>
+                 If you were using CoCalc for a course, who would be logical collaborators, remembering that collaborators have full read/write access to your whole project?
+            </p>
+            <answer>
+                Your instructor!
+            </answer>
+        </exercise>
+    </reading-questions>
 </section>

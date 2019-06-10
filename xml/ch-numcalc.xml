@@ -7,8 +7,9 @@
                 <p>Discuss approximations to calculus problems</p>
                 <ul>
                     <li>Root finding</li>
-                    <li>Instantaneous rate of change</li>
+<!--                     <li>Instantaneous rate of change</li> -->
                     <li>Quadrature</li>
+                    <li>Advanced root-finding</li>
                 </ul>
             </li>
             <li>Computational approaches</li>
@@ -17,11 +18,13 @@
     <introduction>
         <title>Basic Calculus</title>
         <p>
-            In order to become familiar with algorithmic mathematics, we'll begin with some introductory topics from differential and integral calculus. Two of these problems (<xref ref="s-NC-IRC" text="title"/> and <xref ref="s-NC-Q" text="title"/>) are foundational problems under study by Leibniz and Newton when they independently developed the methods of differentiation and integration.
+            In order to become familiar with algorithmic mathematics, we'll begin with two introductory topics from differential and integral calculus. The latter is a foundational problem under study by Leibniz and Newton when they independently developed the methods of differentiation and integration.
         </p>
     </introduction>
     
     <xi:include href="sec-numcalc-roots.xml" />
-    <xi:include href="sec-numcalc-derivatives.xml" />
+<!--     <xi:include href="sec-numcalc-derivatives.xml" /> -->
     <xi:include href="sec-numcalc-quadrature.xml" />
+    <xi:include href="sec-numcalc-newtraph.xml" />
+    <xi:include href="proj-numcalc.xml" />
 </chapter>

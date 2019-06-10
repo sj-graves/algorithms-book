@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercises xml:id="pr-NC">
+    <title>Project</title>
+    <project xml:id="pr-NC-ICA">
+        <title>Implementing calculus approximations</title>
+        <introduction>
+            <p>
+                This project will serve to introduce you to several important coding structures in the Sage language.
+            </p>
+        </introduction>
+        <task xml:id="p-W-1" text="auto">
+            <sage>
+                <input>
+                    def bisection(f,a,b,delta=10^-6):
+                        w = b-a
+                        r = ceil(log(w/delta, 2))
+                        m = [(a+b)/2]
+                        a, b = [a],[b]
+                        for i in range(r):
+                            if f(m[-1]) == 0:
+                                break
+                            elif f(m[-1]) &gt; 0:
+                                a.append(a[-1])
+                                b.append(m[-1])
+                            elif f(m[-1]) &lt; 0:
+                                a.append(m[-1])
+                                b.append(b[-1])
+                            m.append( (a[-1]+b[-1])/2 )
+                        return a,b,m
+                    
+                    x = var('x')
+                    f(x) = 3-x^2
+                    a,b,m = bisection(f,0,4)
+                    print m[-1]
+                </input>
+            </sage>
+        </task>
+    </project>
+</exercises>

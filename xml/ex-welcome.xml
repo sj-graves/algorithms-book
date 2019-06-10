@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<exercises xml:id="ex-W">
-    <title>Welcome: Exercises</title>
+<exercises xmlns:xi="http://www.w3.org/2001/XInclude"  xml:id="ex-W">
     <exercisegroup>
         <title>CoCalc exercises</title>
         <introduction>
             <p>
-                These exercises refer to <xref ref="s-W-CC" text="title"/>.
+                These exercises specifically refer to features of CoCalc possibly not present in other Sage installations.
             </p>
         </introduction>
         <exercise>
+            <title>Cell formatting</title>
             <statement>
-                Bork bork bork.
+                There are many different types of <term>cell formatting mode commands</term> which make the current cell of a Sage worksheet behave in a non-Sage way: primarily useful are the mode commands <c>%md</c> which creates a Markdown cell for unsophisticated text, <c>%html</c> which creates a HTML cell for web-formatted text (which generally you'll use Markdown to replicate!), and perhaps most importantly for a working mathematician, <c>%latex</c> which activates the full <latex /> installation of CoCalc.
+                <task>
+                    <p>
+                        Use a Markdown cell and the Github guide <url href="https://guides.github.com/features/mastering-markdown/">Mastering Markdown</url> to format a cell of output, consisting of:
+                        <ol label="i.">
+                            <li></li>
+                        </ol>
+                    </p>
+                </task>
             </statement>
         </exercise>
         <exercise>
@@ -18,16 +26,17 @@
                 Bork bork bork bork.
             </statement>
         </exercise>
-    </exercisegroup>
-    <exercise>
-        <title>Python 2 vs. Python 3</title>
+        <exercise>
+        <title>Python 2 vs. Python 3 in CoCalc</title>
         <statement>
             <p>
-                Several things changed between the development of Python 2.7 and Python 3, and while many of them are minor changes some of those minor changes made parts of Sage not work correctly with Python 3; hence Sage uses Python 2. CoCalc can use both! You can use <term>mode commands</term> to change into a pure Python work space.
+                Several things changed between the development of Python 2.7 and Python 3, and while many of them are minor changes some of those minor changes made parts of Sage not work correctly with Python 3; hence Sage uses Python 2. CoCalc can use both! You can use mode commands to change into a pure Python work space.
             </p>
             <p>
                 Investigate the difference between Python 2 and Python 3 by executing the command <c>print "hello world!"</c> in a worksheet cell formatted to <c>%python</c> and a cell formatted to <c>%python3</c>.
             </p>
         </statement>
     </exercise>
+    </exercisegroup>
+<!--     <xi:include href="./proj-welcome.xml" /> -->
 </exercises>

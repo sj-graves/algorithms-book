@@ -2,6 +2,99 @@
 <section xml:id="s-NC-Q">
     <title>Quadrature</title>
     <introduction>
-        Quadrature is the problem of <q>squaring</q> a figure; that is, finding the area enclosed within an arbitrary geometric figure.
+        <p>
+            Geometry has been well-understood for thousands of years, but there are certain intractable problems in regular Euclidean geometry. One intractable problem was the problem of quadrature.
+        </p>
+        <conjecture><title>The quadrature problem</title>
+            <statement>
+                Given a geometric figure, it is possible to construct a square with equal area.
+            </statement>
+        </conjecture>
+        <p>
+            Quadrature seems perfectly reasonable, but is provably the case that with a straight-edge and compass (the two tools of the classical geometer) it is impossible to construct a square with area equal to a given circle; and yet, we all know that the area of the circle of radius <m>r</m> is <m>A=\pi r^2.</m> How is it that we can arrive at this, even in approximation?
+        </p>
     </introduction>
+    <subsection xml:id="ss-NC-Q-RS">
+        <title>Riemann approximation</title>
+        <p>
+            For the sake of simplicity, we'll consider that the basic problem is to compute the area of the quarter of the unit disk in the first quadrant; that is, the region <m>R</m> bounded by the lines <m>x=0</m> and <m>y=0</m> along with the curve <m>y=\sqrt{1-x^2}</m> on the interval <m>0\leq x\leq 1</m>. This will give us the answer to the classical problem of squaring the circle.
+        </p>
+        <figure xml:id="fig-quarter_disk_1">
+            <caption>The region <m>R</m> bounded by the lines <m>x=0</m> and <m>y=0</m> along with the curve <m>y=\sqrt{1-x^2}</m> on the interval <m>0\leq x\leq 1</m></caption>
+            <image xml:id="img-quarter_disk_1" width="50%">
+                <latex-image>
+                    \begin{tikzpicture}[scale=3]
+                        \draw (-.2,0) -- (1.2,0) (0,-.2) -- (0,1.2);
+                        \filldraw [draw=blue, fill=blue!10!white, line width = 1.5] (1,0) arc [radius = 1, start angle=0, delta angle = 90]
+                        node [pos=1/2, above right] {\tiny $y=\sqrt{1-x^2}$}
+                            -- (0,0) -- (1,0);
+                        \draw \foreach \x in {0.2,0.4,0.6,0.8,1.0}{
+                            (0,\x) node [left]  {\tiny \x}
+                            (\x,0) node [rotate=90,left] {\tiny \x}
+                        };
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+        <p>
+            Rectangles are <em>not</em> the only plane figures of which we can determine the area: in fact, since we know the area of a triangle and all rectilinear plane figures can be triangulated, we can find the area of every polygon as a sum of triangular areas. In fact, we'll use trapezoidal regions to approximate the area under the curve. This is a well-balanced balanced approximation, since the trapezoid has as its area <m>A=\frac12(b_1+b_2) h</m>, which is <m>A = \frac12(b_1h+b_2h)</m> the average of two rectangular areas.
+        </p>
+        <figure xml:id="fig-quarter_disk_2">
+            <caption>
+                An approximation of the quarter-disk by five equal-width trapezoids. Observe how little additional area is outside the approximating region.
+            </caption>
+            <image xml:id="img-quarter_disk_2" width="50%">
+                <latex-image>
+                    \begin{tikzpicture}[scale=3]
+                    \draw (-.2,0) -- (1.2,0) (0,-.2) -- (0,1.2);
+                    \filldraw [fill=red!10!white, draw=red, line width=0.5] \foreach \a/\b/\c/\d in {0.0/1.0/0.2/0.9798, 0.2/0.9798/0.4/0.91652, 0.4/0.91652/0.6/0.8, 0.6/0.8/0.8/0.6, 0.8/0.6/1.0/0.0}{
+                        (\a,0) -- (\a,\b) -- (\c,\d) -- (\c,0)
+                    };
+                    \draw [draw=blue, line width = 1] (1,0) arc [radius = 1, start angle=0, delta angle = 90]
+                    node [pos=1/2, above right] {\tiny $y=\sqrt{1-x^2}$}
+                        -- (0,0) -- (1,0);
+                    \draw \foreach \x in {0.2,0.4,0.6,0.8,1.0}{
+                        (0,\x) node [left]  {\tiny \x}
+                        (\x,0) node [rotate=90,left] {\tiny \x}
+                    };
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+        <algorithm xml:id="alg-trap_qaudrature">
+            <title>Quadrature by trapezoidal approximation</title>
+            <statement>
+                <p>
+                    Let <m>R</m> be a plane region bounded above by the function <m>f(x)</m> and below by the interval <m>a\leq x\leq b</m> on the <m>x</m>-axis.
+                </p>
+                <ol label="1.">
+                    <li>
+                        Let <m>n\in\Z^+</m> be greater than 1. Let <m>a=x_0\lt x_1\lt x_2 \lt \cdots \lt x_{n-1} \lt x_n = b</m> be a regular partition of <m>[a,b]</m>, with <m>x_i-x_{i-1} = (b-a)/n</m> for each <m>i\in\set{1,2,\dotsc,n}</m>.
+                    </li>
+                    <li>
+                        Let <m>y_i = f(x_i)</m> for each <m>i\in\set{0,1,2,\dotsc,n}</m>.
+                    </li>
+                    <li>
+                        Since the area of the <m>i^\text{th}</m> approximating trapezoid is <m>A_i = \frac12(y_{i-1}+y_i)(x_i-x_{i-1})</m>, the approximate are of <m>R</m> is <m>A(R)\approx \sum_{i=1}^n A_i.</m>
+                    </li>
+                </ol>
+            </statement>
+        </algorithm>
+        <exercise>
+            <p>
+                Approximate the value of <m>\pi</m> by approximating the area under the example curve <m>y=\sqrt{1-x^2}</m> using 5 approximating trapezoids, and then 10 approximating trapezoids, and then multiplying by the appropriate factor.
+            </p>
+        </exercise>
+        <exercise>
+            <p>
+                Simplify the expression for <m>A(R)</m> the approximate area using <m>n</m> trapezoids.
+            </p>
+        </exercise>
+    </subsection>
+<!--     <subsection xml:id="ss-NC-Q-SR">
+        <title>Simpson's Rule</title>
+        <p>
+            Another even more accurate form of numerical integration is to use approximating parabolas
+        </p>
+    </subsection> -->
 </section>

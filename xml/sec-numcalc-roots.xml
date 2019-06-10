@@ -48,7 +48,7 @@
             <xref ref="def-function_limit"/> is arguably the only <q>real</q> definition in all of Calculus, as the idea of the limit (and the handling of infinitesimal quantities in general) is precisely the idea that was needed for the discovery of the discipline at the end of the 17th century.
         </p>
     </introduction>
-    <subsection>
+    <subsection xml:id="ss-NC-RF-IB">
         <title>Interval bisection</title>
         <p>
             For continuous functions there are cases when we can ensure that at least one root exists in a given interval, via the <xref ref="thm-intermediate_value_theorem"  text="title"/>.
@@ -81,16 +81,18 @@
             </ol>
         </p>
         <p>
-            We can apply this <term>interval bisection method</term> over and over again, on each repetition cutting the width of the interval in half. Since the initial (<m>0^\text{th}</m>) interval width is <m>w = b-a</m>, we know on the <m>n^\text{th}</m> iteration that we'll be looking at an interval of width <m>\frac{w}{2^n}</m>. Eventually this will be <q>arbitrarily close</q> to a root <emdash /> which is to say, for any <m>\delta \gt 0</m> there is some <m>n>0</m> such that <m>0\lt \frac{w}{2^n}\lt \delta</m>. Thus when we know that the midpoint of our interval is <q>close enough</q> to a root, we can terminate the algorithm!
+            We can apply this <term>interval bisection method</term> over and over again, on each repetition cutting the width of the interval in half. Since the initial (<m>0^\text{th}</m>) interval width is <m>w = b-a</m>, we know on the <m>n^\text{th}</m> iteration that we'll be looking at an interval of width <m>\frac{w}{2^n}</m>. Eventually this will be <q>arbitrarily close</q> to a root <emdash /> which is to say, for any <m>\delta \gt 0</m> there is some <m>n>0</m> such that <m>0\lt \frac{w}{2^n}\lt \delta</m>. Thus when we know that the midpoint of our interval is <q>close enough</q> to a root, we can terminate the algorithm! This is called <term>convergence</term> of the algorithm, because the sequence of successive approximations always converges.
         </p>
-        <definition xml:id="def-ceiling">
-            <title>Ceiling function</title>
+        <definition xml:id="def-convergence">
+            <idx><h>convergence</h><h>of a sequence</h></idx>
+            <title>Convergence of a sequence</title>
             <statement>
-                <p>
-                    Suppose <m>x\in \R</m>. Then <me>\ceil{x} = \min\set{k\in\Z : k\geq x}</me> is the least integer greater than or equal to <m>x</m>, called the <term>ceiling of <m>x</m></term>.
-                </p>
+                A sequence <m>\set{a_n:n\in\Z^+}</m><nbsp /> <term>converges to A</term> if and only if for every <m>\epsilon\gt 0</m> there is some sufficiently large <m>N</m> such that <m>\abs{a_n - A}\lt \epsilon</m> whenever <m>n\gt N</m>.
             </statement>
         </definition>
+        <p>
+            Generally speaking, mathematical algorithms will have certain <term>input</term> and <term>output</term>; when we write an algorithm as a function, the arguments to the function are its inputs and the value it returns (along with any displayed intermediate results) are its output.
+        </p>
         <algorithm xml:id="alg-interval_bisection">
             <idx><h>root</h><h>interval bisection method</h></idx>
             <idx><h>algorithm</h><h>root-finding by interval bisection</h></idx>
@@ -98,23 +100,69 @@
             <shorttitle>Interval bisection method</shorttitle>
             <statement>
                 <p>
-                    Suppose <m>f:\R\to\R</m> is a function which is continuous on the closed interval <m>[a,b]</m> and satisfies <m>f(a)\lt 0\lt f(b)</m>. Let <m>\delta\gt 0</m> be some <term>tolerance</term>, so that when the value <m>x_{r}</m> is calculated, <m>\abs{x_r-x_0}\lt \delta</m> for some root <m>x_0\in [a,b]</m> of <m>f</m>. Define <m>w = b-a</m>.
+                    Suppose <m>f:\R\to\R</m> is a function which is continuous on the closed interval <m>[a,b]</m> and satisfies <m>f(a)\lt 0\lt f(b)</m>.
                 </p>
-                <ol>
-                    <li> 
-                        Calculate <m>r = \left\lceil\log_2\left(\frac{w}{\delta}\right)\right\rceil.</m> 
+                <ol label="1.">
+                    <li>
+                        Decide on a level of tolerance <m>\delta \gt 0</m>. When a subinterval midpoint is at most <m>\delta</m> from a root <m>x_0</m> of <m>f</m>, we will use that midpoint as our approximation.
+                    </li>
+                    <li>
+                        <idx>ceiling</idx>
+                        Define <m>w = b-a</m>, and calculate <m>r = \left\lceil\log_2\left(\frac{w}{\delta}\right)\right\rceil.</m> 
                         Then <m>2^r \geq \frac{w}{\delta}</m> so that <m>\frac{w}{2^r}\leq\delta</m> as desired.
                     </li>
-                    <li> Let <m>a_0 = a</m>, <m>b_0 = b</m>, and <m>m_0 = (a_0+b_0)/2</m>. </li>
-                    <li><p>
-                             For each <m>i\in\set{1,2,\dotsc,r}</m>, do the following:
+                    <li>
+                        Let <m>a_0 = a</m>, <m>b_0 = b</m>, and <m>m_0 = (a_0+b_0)/2</m>.
+                    </li>
+                    <li>
+                        <p>
+                            For each <m>i\in\set{1,2,\dotsc,r}</m>, do the following:
                         </p>
-                        <ol>
-                            <li></li>
+                        <ol label="1.">
+                            <li>
+                                If <m>f(m_{i-1})=0</m>, <m>m_{i-1}</m> is a root of <m>f</m> in the interval <m>(a,b)</m>. Return <m>m_{i-1}</m>.
+                            </li>
+                            <li>
+                                If <m>f(m_{i-1})\gt 0</m>, let <m>a_i = a_{i-1}</m>, <m>b_i = m_{i-1}</m>, and <m>m_i = (a_i+b_i)/2</m>.
+                            </li>
+                            <li>
+                                If <m>f(m_{i-1})\lt 0</m>, let <m>a_i = m_{i-1}</m>, <m>b_i = b_{i-1}</m>, and <m>m_i = (a_i+b_i)/2</m>.
+                            </li>
                         </ol>
+                    </li>
+                    <li>
+                        Unless a true root has previously been found (<m>f(m_i)=0</m> for some <m>i</m>), return <m>m_r</m> as the approximate root of the function <m>f</m>.
                     </li>
                 </ol>
             </statement>
         </algorithm>
+        <p>
+            There are two disadvantages to this method: it has a bias in that it will tend to find roots in the subinterval <m>(a,\frac{a+b}2)</m> rather than in <m>(\frac{a+b}2,b)</m> when both exist, and also you must provide two endpoints between which a change of sign occurs.
+        </p>
+        <exercise>
+            <statement>
+                Consider the function <m>f(x) = x^3+2</m> on the interval <m>[-2,2]</m>.
+                <sage>
+                    <input>
+                        x = var('x')
+                        plot(x^3+2,(x,-2,2))
+                    </input>
+                </sage>
+                Apply the interval bisection method to approximate the root of <m>f</m> in the interval <m>[-2,2]</m> to a tolerance of <m>\delta = 10^{-6}</m>.
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                Consider the function <m>f(x) = 1+\sin x</m> on the interval <m>[-2\pi,2\pi]</m>. 
+                <sage>
+                    <input>
+                        x = var('x')
+                        plot(1+sin(x), (x,-2*pi,2*pi))
+                    </input>
+                </sage>
+                Can we apply the method of interval bisection to find any of the roots of <m>f</m>?
+            </statement>
+        </exercise>
     </subsection>
+    
 </section>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appendix xml:id="ap-LOR">
+    <title>Lists of Results</title>
+    <!--assemblage>
+        <title>Terms</title>
+        <p>
+            <list-of elements = "term" scope = "book" />
+        </p>
+    </assemblage-->
+    <section xml:id="s-LOR-DEF">
+        <title>Definitions</title>
+        <p>
+            <list-of elements="definition" scope="book" />
+        </p>
+    </section>
+    <section xml:id="s-LOR-ATC">
+        <title>Axioms, Theorems, and Corollaries</title>
+        <p>
+            <list-of elements="axiom theorem corollary" scope="book" />
+        </p>
+    </section>
+    <section xml:id="s-LOR-ALG">
+        <title>Algorithms</title>
+        <p>
+            <list-of elements="algorithm" scope="book" />
+        </p>
+    </section>
+
+
+</appendix>

@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<exercises xml:id="p-W">
-    <title>Welcome: Project</title>
-    <introduction>
-        <p>
-            We're going to test your familiarity with CoCalc.
-        </p>
-    </introduction>
-    <exercise xml:id="p-W-1" text="auto">
-        <title>Starting everything up</title>
-        <p>
-            This is an exercise. There are many like it but this one is mine.
-        </p>
-        <sage>
-            <input>
-                text = "Bob is a hooker"
-                print text
-            </input>
-        </sage>
-    </exercise>
+<exercises xml:id="pr-W">
+    <title>Project</title>
+    <project xml:id="pr-W-GSWS">
+        <title>Getting started with Sage</title>
+        <introduction>
+            <p>
+                We're going to introduce all the coding structure you'll need for the whole semester, right now.
+            </p>
+        </introduction>
+        <task xml:id="p-W-1" text="auto">
+            <title>Working with variables</title>
+            <p>
+                Mathematically speaking a variable is a symbolic representation -- sometimes of a numerical quantity, sometimes an algebraic concept, other times simply a symbol. As a programmer, variables are similar: symbolic values to which is assigned some value. Value is assigned in Sage by a single equal sign.
+            </p>
+            <sage>
+                <input>
+                    text = "Bob is a hooker"
+                    print text
+                </input>
+            </sage>
+        </task>
+    </project>
 </exercises>

@@ -101,5 +101,9 @@
             Beginning with the zero flow, we choose as our first augmenting path <me>P_0 = \set{0,3,2,5}, w=1.</me> This <term>saturates</term> the edges <m>(3,2)</m> so that the flow on the edge equals its capacity. The arrows of interest in this graph will always be <m>(1,2)</m>, <m>(3,2)</m>, and <m>(3,4)</m>.
         </p>
         <xi:include href="./tab-maxflow-augpath.xml" />
+        <remark>
+            <title>INCOMPLETE</title>
+            <!-- todo THIS SECTION IS INCOMPLETE -->
+        </remark>
     </subsection>
 </section>

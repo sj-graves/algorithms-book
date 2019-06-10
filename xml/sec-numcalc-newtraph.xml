@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="s-NC-ARF">
+    <title>Advanced root finding</title>
+    <introduction>
+        While interval bisection always works when a continuous function changes sign, it's not a particularly fast algorithm. The Householder's methods, of which the Newton-Raphson method is the first, are much more useful when the function is (repeatedly) differentiable.
+    </introduction>
+    <subsection xml:id="ss-NC-ARF-NRM">
+        <title>Newton-Raphson method</title>
+        <biographical>
+            <title>Sir Isaac Newton</title>
+            <p>
+                Isaac Newton (1643<ndash />1727) is the best-known natural philosopher in the English-speaking world. He developed the details of the differential and integral calculus as early as 1666, but due to early scandal regarding the publication of his work he did not publish the bulk of his material until the appearance of <pubtitle>Philosophi<ae /> Naturalis Principia Mathematica</pubtitle> in 1687. In his <pubtitle>Method of Fluxions</pubtitle> written in 1671 he investigated the method described here, but it was not published by Newton until 1736.
+            </p>
+        </biographical>
+        <p>
+            Not every function with a root changes sign on either side of the root: for instance, one could consider <m>f(x) = x(1-x)^2</m>, which has a <q>double root</q> at <m>x=1</m> but is positive at all values of <m>x</m> close to 1.
+        </p>
+<!--         <figure xml:id="fig-dbl_root_1">
+            <title>Double root</title>
+            <caption>A plot of <m>f(x)=x(1-x)^2</m> showing the double root at <m>x=1</m>.</caption>
+            <image source="./images/raw-double_root.svg" />
+        </figure> -->
+        <figure xml:id="fig-dbl_root_1">
+            <caption>A plot of <m>f(x)=x(1-x)^2</m> showing the double root at <m>x=1</m>.</caption>
+            <image xml:id="img-dbl_root_1">
+                <latex-image>
+                    \begin{tikzpicture}[scale=4]
+                    \draw[help lines] (-.5,-.5) grid[step=.125] (1.5,.5);
+                    \draw[Stealth-Stealth] (-.5,0) -- (1.5,0);
+                    \draw[Stealth-Stealth] (0,-.5)--(0,.5);
+                    \draw \foreach \x in {-.5,-.25,.25,.5,...,1.5}{(\x,0) node [below] {\tiny \x}};
+                    \draw \foreach \y in {-.5,-.25,.25,.5}{(0,\y) node [left] {\tiny \y}};
+                    \draw[blue, thick] (-0.285, -0.471) \foreach \x/\y in {-0.25/-0.391, -0.215/-0.317, -0.18/-0.251, -0.145/-0.19, -0.11/-0.136, -0.075/-0.087, -0.04/-0.043, -0.005/-0.005, 0.03/0.028, 0.065/0.057, 0.1/0.081, 0.135/0.101, 0.17/0.117, 0.205/0.13, 0.24/0.139, 0.275/0.145, 0.31/0.148, 0.345/0.148, 0.38/0.146, 0.415/0.142, 0.45/0.136, 0.485/0.129, 0.52/0.12, 0.555/0.11, 0.59/0.099, 0.625/0.088, 0.66/0.076, 0.695/0.065, 0.73/0.053, 0.765/0.042, 0.8/0.032, 0.835/0.023, 0.87/0.015, 0.905/0.008, 0.94/0.003, 0.975/0.001, 1.01/0.0, 1.045/0.002, 1.08/0.007, 1.115/0.015, 1.15/0.026, 1.185/0.041, 1.22/0.059, 1.255/0.082, 1.29/0.108, 1.325/0.14, 1.36/0.176, 1.395/0.218, 1.43/0.264, 1.465/0.317, 1.5/0.375}{
+                        -- (\x,\y)
+                    };
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+        <p>
+            This example is easy enough to find the root at <m>x=1</m>, since the polynomial is written nicely; consider instead the polynomial 
+            <md>
+                <mrow>g(x) \amp= \left(f(x)-1\right)^2 </mrow>
+                <mrow>\amp= (x^3 - 2 x^2 + x - 1)^2</mrow>
+                <mrow>\amp= x^6 - 4 x^5 + 6 x^4 - 6 x^3 + 5 x^2 - 2 x + 1</mrow>
+            </md>.
+            Since this polynomial doesn't have a nice factorization, we either resort to numerical approximation of the roots or the cubic formula <ndash /> which is related to the quadratic formula but significantly more complicated. 
+        </p>
+        <p>
+            Before we begin attempting to calculate the root of this polynomial <m>g(x)</m>, let's carefully reason out that it has a unique root: observing the plot of <m>f(x)</m> given in <xref ref="fig-dbl_root_1" />, we see that <m>f(x)</m> has a <term>local maximum</term> between <m>x=0</m> and <m>x=1/2</m> with value less than <m>\frac15</m>. Hence <m>f(x)-1</m> has only one root, and when squared we see that <m>g(x)</m> must have a double root at this value. If we apply this analysis, we could now use the fact that the root of <m>g(x)</m> and of <m>f(x)-1</m> are identical and solve the problem by applying the method of interval bisection to <m>f(x)-1</m>!
+        </p>
+        <biographical>
+            <title>Joseph Raphson</title>
+            <p>
+                Little is known of Raphson, including his actual years of birth and death, but his work <pubtitle>Analysis Aequationum Universalis</pubtitle> from 1690 is the first published account of the method described in <xref ref="ss-NC-ARF-NRM" text="title" />. Moreover, Raphson's approach to the method was simpler than Newton's, and so Raphson's variant is what is taught here.
+            </p>
+        </biographical>
+        <exercise>
+            <statement>
+                Approximate the root to <m>g(x)</m> by approximating the root of <m>f(x)-1</m> by interval bisection in an appropriate interval.
+            </statement>
+        </exercise>
+        <p>
+            Instead, we want to use a little differential calculus to attack the problem, by recognizing that the <term>linear approximation</term> to a function is easy to determine when the function has a nice derivative. Since <m>g(x)</m> is a polynomial, its derivative is easy to compute:
+            <me>g'(x) = 6x^5 - 20x^4 + 24x^3 - 18x^2 + 10x - 2</me>.
+        </p>
+        <definition xml:id="def-linear_approximation">
+            <statement>
+                The <term>linear approximation</term> to a differentiable function <m>f(x)</m> at a point <m>(x_0, f(x_0))</m> is
+                <me>\ell(x) = f'(x_0)(x-x_0) + f(x_0).</me>
+            </statement>
+        </definition>
+        <p>
+            As we don't have a good guess to the value of the root of <m>g(x)</m>, let's look at the linear approximation to <m>g(x)</m> at <m>x=1.25</m>.
+        </p>
+        <figure xml:id="fig-dbl_root_2">
+            <caption>The function <m>g(x)=(x^3 - 2 x^2 + x - 1)^2</m> and its linear approximation at <m>(1.25, g(1.25))</m>.</caption>
+            <image xml:id="img-dbl_root_2">
+                <latex-image>
+                    \begin{tikzpicture}[xscale=8, yscale=4]
+                    \draw[help lines] (1, 0) grid[step=.1] (2, 1);
+                    \draw[Stealth-Stealth] (1,0) ++(-.1,0)-- (2,0);
+                    \draw[Stealth-Stealth] (1,0) ++(0,-.1) --(1,1);
+                    \draw \foreach \x in {1.2,1.4,1.6,1.8,2.0}{(\x,0) node [below] {\tiny \x}};
+                    \draw \foreach \y in {0.2,0.4,0.6,0.8,1.0}{(1,\y) node [left] {\tiny \y}};
+                    \draw[blue, thick] (1.0, 1.0) \foreach \x/\y in {1.02/0.999, 1.04/0.997, 1.06/0.992, 1.08/0.986, 1.1/0.978, 1.12/0.968, 1.14/0.956, 1.16/0.941, 1.18/0.925, 1.2/0.906, 1.22/0.885, 1.24/0.862, 1.26/0.837, 1.28/0.809, 1.3/0.78, 1.32/0.748, 1.34/0.714, 1.36/0.679, 1.38/0.641, 1.4/0.602, 1.42/0.562, 1.44/0.52, 1.46/0.478, 1.48/0.434, 1.5/0.391, 1.52/0.347, 1.54/0.304, 1.56/0.261, 1.58/0.219, 1.6/0.18, 1.62/0.142, 1.64/0.108, 1.66/0.077, 1.68/0.05, 1.7/0.028, 1.72/0.012, 1.74/0.002, 1.76/0.0, 1.78/0.007, 1.8/0.023, 1.82/0.05, 1.84/0.089, 1.86/0.141, 1.88/0.208, 1.9/0.291, 1.92/0.391, 1.94/0.51, 1.96/0.65, 1.98/0.813, 2.0/1.0}{
+                        -- (\x,\y)
+                    };
+                    \draw [thick, dashed, red] (1.132,1) -- (1.92,0);
+                    \draw (1.25, .85) node[fill=red, circle, inner sep=1.5pt] (pt) {};
+
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+        <p>
+            Observing <xref ref="fig-dbl_root_2" />, we see that the <m>x</m>-intercept of the linear approximation is nearer the root than the initial point <m>x=1.25</m>; the <m>x</m>-coordinate of this intercept is the solution to 
+            <me>0 = g'(1.25)(x-1.25)+g(1.25)</me>. This calculation is the center of the Newton-Raphson method, starting from an initial guess near a root, take successive approximations to be <m>x</m>-intercepts to linear approximations; that is, given an approximation <m>x_i</m> to a root, the next approximation is the solution <m>x_{i+1}</m> to 
+            <me>0 = g'(x_i)(x_{i+1}-x_i) + g(x_i),</me>
+            namely
+            <me>x_{i+1} = x_i - \frac{g(x_i)}{g'(x_i)},</me>
+            so long as <m>g'(x_i)\neq 0</m>.
+        </p>
+        <p>
+            Unlike the method of interval bisection, Newton-Raphson can fail to converge for several reasons: <term>overshoot</term>, where the linear approximation is a nearly-horizontal line which causes a large difference <m>\abs{x_{i+1}-x_i}</m>; the method can encounter a <term>stationary point</term>, where <m>g'(x_i)=0</m>; or the <term>initial guess may be poor</term> and lead to non-convergence. Moreover, the function might not be nicely differentiable or the derivative might be computationally expensive; numerical methods for approximating the derivative
+        </p>
+        <algorithm xml:id="alg-NewtonRaphson">
+            <title>Newton-Raphson Root Approximation</title>
+            <idx><h>root</h><h>Newton-Raphson approximation</h></idx>
+            <idx><h>algorithm</h><h>Newton-Raphson</h></idx>
+            <statement>
+                <p>Let <m>g</m> be a differentiable function.
+                <ol label="1.">
+                    <li>Choose <m>x_{\text{old}}</m> an initial guess to the root of <m>g</m>.</li>
+                    <li>Specify a tolerance <m>\delta\gt 0</m> and a maximum number of steps <m>M</m>. Good suggestions are <m>\delta=10^{-9}</m> and <m>M=10000</m>.</li>
+                    <li>Calculate <m>x_{\text{new}} = x_{\text{old}} - g(x_{\text{old}})/g'(x_{\text{old}})</m>.</li>
+                    <li>Set <m>i=1</m></li>
+                    <li>
+                        <p>While <m>\abs{x_{\text{new}}-x_{\text{old}}}\geq\delta</m> and <m>i\lt M</m>, do the following:</p>
+                        <ol label="1.">
+                            <li>Set <m>x_{\text{old}} = x_{\text{new}}.</m></li>
+                            <li>If <m>g'(x_{\text{old}}) = 0</m>, the algorithm diverges. Raise an error and exit.</li>
+                            <li>Increase <m>i</m> by 1.</li>
+                            <li>Calculate <m>x_{\text{new}} = x_{\text{old}} - g(x_{\text{old}})/g'(x_{\text{old}}).</m></li>
+                        </ol>
+                    </li>
+                    <li>If <m>i\geq M</m>, the algorithm has failed to converge. Raise an error and exit.</li>
+                    <li> Return <m>x_{\text{new}}.</m></li>
+                </ol>
+                    </p>
+            </statement>
+        </algorithm>
+        <figure xml:id="fig-dbl_roots_3">
+            <caption>Several iterations of the Newton-Raphson method.</caption>
+            <image xml:id="img-dbl_roots_3">
+                <latex-image>
+                    \begin{tikzpicture}[xscale=8, yscale=4]
+                    \draw[help lines] (1, 0) grid[step=.1] (2, 1);
+                    \draw[Stealth-Stealth] (1,0) ++(-.1,0)-- (2,0);
+                    \draw[Stealth-Stealth] (1,0) ++(0,-.1) --(1,1);
+                    \draw \foreach \x in {1.2,1.4,1.6,1.8,2.0}{(\x,0) node [below] {\tiny \x}};
+                    \draw \foreach \y in {0.2,0.4,0.6,0.8,1.0}{(1,\y) node [left] {\tiny \y}};
+                    \draw[blue, thick] (1.0, 1.0) \foreach \x/\y in {1.02/0.999, 1.04/0.997, 1.06/0.992, 1.08/0.986, 1.1/0.978, 1.12/0.968, 1.14/0.956, 1.16/0.941, 1.18/0.925, 1.2/0.906, 1.22/0.885, 1.24/0.862, 1.26/0.837, 1.28/0.809, 1.3/0.78, 1.32/0.748, 1.34/0.714, 1.36/0.679, 1.38/0.641, 1.4/0.602, 1.42/0.562, 1.44/0.52, 1.46/0.478, 1.48/0.434, 1.5/0.391, 1.52/0.347, 1.54/0.304, 1.56/0.261, 1.58/0.219, 1.6/0.18, 1.62/0.142, 1.64/0.108, 1.66/0.077, 1.68/0.05, 1.7/0.028, 1.72/0.012, 1.74/0.002, 1.76/0.0, 1.78/0.007, 1.8/0.023, 1.82/0.05, 1.84/0.089, 1.86/0.141, 1.88/0.208, 1.9/0.291, 1.92/0.391, 1.94/0.51, 1.96/0.65, 1.98/0.813, 2.0/1.0}{
+                        -- (\x,\y)
+                    };
+                    \draw [dashed, red] \foreach \a/\b/\c/\d in {1.92/0.0/1.132/1.0, 1.849/0.0/2.0/0.829, 1.806/0.0/2.0/0.499, 1.782/0.0/2.0/0.269, 1.769/0.0/2.0/0.141}{(\a,\b) -- (\c,\d)};
+                    \draw \foreach \x/\y in {1.25/0.85, 1.92/0.391, 1.849/0.111, 1.806/0.03, 1.782/0.008}{(\x,\y) node[fill=red, circle, inner sep=1.5pt] {}};
+
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+        <p>
+            In fact, the Newton-Raphson method is the first of a family of methods called <term>Householder's methods</term>.
+        </p>
+        <biographical>
+            <title>Alston Scott Householder</title>
+            <p>
+                Householder was first prepared in his undergraduate and master's degrees as a philosopher, and only in his doctoral work in the calculus of variations did he specialize in mathematics. Householder's main work is in mathematical biology, hence applied mathematics and numerical analysis. More commonly he is known for the method of <xref provisional="s-QR-HH" text="Householder reflectors" />.
+            </p>
+        </biographical>
+    </subsection>
+    <subsection xml:id="ss-NC-ARF-HM">
+        <title>Householder's methods</title>
+        <p>
+            Householder's methods iterate in exactly the same way as the Newton-Raphson method, but rather than using the linear approximation to a once-differentiable function to calculate the next iteration, the following iterative calculation is used:
+            <me>x_{n+1} = x_n + d \frac {\left(1/f\right)^{(d-1)}(x_n)} {\left(1/f\right)^{(d)}(x_n)}</me>,
+            where <m>f</m> has at least <m>d</m> continuous derivatives. While this equation in the case <m>d=1</m> is exactly the Newton-Raphson method, the higher values of <m>d</m> do not coincide with approximations similar to the linear approximation, but rather to ideas from complex analysis involving Taylor series of meromorphic functions.
+        </p>
+    </subsection>
+</section>

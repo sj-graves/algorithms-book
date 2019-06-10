@@ -1,7 +1,7 @@
 #!/bin/bash
 
 rm ~/algorithms-book/html/*.html
-xsltproc -stringparam html.css.colorfile colors_pastel_blue_orange.css --xinclude ~/mathbook/xsl/mathbook-html.xsl ./aam-index.xml
+xsltproc --stringparam numbering.projects.level 0 --stringparam html.css.colorfile colors_pastel_blue_orange.css --xinclude ~/mathbook/xsl/mathbook-html.xsl ./aam-index.xml
 mv *.html ../html/
 cp -R knowl ../html
 cp -R images ../html

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-
 <backmatter xmlns:xi="http://www.w3.org/2001/XInclude">
-    <appendix xml:id="AAM-BM-AR">
-        <title>Additional Resources</title>
-        <p>
-            The source code for this textbook is written in XML and parsed into various forms, including HTML and <latex />, using the PreTeXt processing script and language. Since the book is distributed under the CC BY-NC-SA 4.0 license, the full source code is available on Github at <url href="https://github.com/sj-graves/algorithms-book" />.
-        </p>
-    </appendix>
+
     
+    <xi:include href="./aam-bm-ar.xml" />
+    <xi:include href="./aam-bm-lor.xml" />
+
+<!--     REFERENCES -->
     <xi:include href="./aam-bib.xml" />
 
+    
     <index xml:id="AAM-BM-index">
         <title>Index</title>
         <index-list />
