@@ -3,15 +3,12 @@
     <title>Getting started with Sage</title>
     <introduction>
         <p>
-            Programming in Sage has a low barrier to entry, because Sage code follows Python syntax. This is not perfect, but this is a better first programming language than many alternatives both because of the general utility of Python and its cross-platform availability. No matter what operating system you use, you can write and execute Python! Installing and running Sage on your own computer presents many technical hurdles, especially for a multi-user installation: this is why the lead developer of Sage introduced SageMathCloud, the project which turned into <url href="https://cocalc.com">CoCalc</url>. Using CoCalc means you don't have to install Sage on your own computer, and as long as you have internet access you have access to your projects.
-        </p>
-        <p>
-            For now we'll use embedded <term>Sage cells</term> to discuss the basics of interacting with Sage.
+            Unlike with most programming languages, you don't need to have anything other than a web browser installed to work with Sage. Although Sage code is written using Python syntax, to interact with Sage you must access a <term>Sage server</term>: the two which we will discuss are the <term>Sage Cell Server</term> and <term>CoCalc</term>. A third option for the technically savvy user is to install and run your own Sage server, but this is an unnecessary hurdle in most cases <mdash /> as long as you have internet access, you can access the Sage Cell Server or CoCalc.
         </p>
         <technology xml:id="tech-W-S-sagecell">
             <title>Sage cells</title>
             <p>
-                Sage cells link to the <url href="https://sagecell.sagemath.org/">Sage Cell Server</url>, which is very, very convenient. Sage cells allow you to embed active calculations in almost any website. These will appear strangely in the printed version of the text.
+                Sage cells link to the <url href="https://sagecell.sagemath.org/">Sage Cell Server</url> and allow you to embed active calculations in almost any website. These will appear strangely in the printed version of the text.
             </p>
             <sage language="sage">
                 <input>
@@ -69,11 +66,50 @@
         <exercise>
             <p>What is different about the use of <c>print</c> in the two Sage cells above?</p>
         </exercise>
+        <p>
+            Finally, a last difference between the CoCalc implementation of Sage worksheets and the embedded Sage cells is that in a Sage cell, only the last line of input will print its return value. All other output must arise from a <c>show</c> or <c>print</c> command. In CoCalc, every command which returns a value will have its returned value printed. While this is occasionally unwelcome behavior, it serves well when using CoCalc <q>as a calculator</q>.
+        </p>
     </subsection>
     <subsection xml:id="ss-W-S-BO">
         <title>Basic operations</title>
         <p>
-            From the examples above we see that Sage accepts a variety of formats of numbers, notably integers, approximate real numbers (called <term>floating point numbers</term>), and exact rational numbers. Sage can also understand many other things, and since the arithmetic operations are constantly useful Sage allows all basic arithmetic operations between mathematical objects in exactly the sense that a mathematician would hope.
+            Sage works naturally as a calculator and automatically uses the most sensible mathematical data type to store variables. Integers are treated as mathematical integers (members of an integer ring), ratios of integers are treated as rational numbers, and decimal numbers are treated as floating-point numbers.
+                <aside>
+                    Floating-point arithmetic was developed with the need to approximate real numbers with their binary counterparts: while some numbers can be represented by a finite sequence in binary, others cannot. Consider <me>677/32 = (10101.00101)_2</me> versus <me>1/3 = (0.01010101010\ldots)_2.</me> Floating point arithmetic generally involves additional computational measures to minimize various types of rounding error.
+                </aside>
+                Arithmetic operations in Sage are carried out by the <q>normal</q> keyboard equivalents of the symbols we write.
+                <table>
+                    <title>Mathematical operators in Sage</title>
+                    <tabular>
+                        <col halign="center" />
+                        <col halign="center" />
+                        <row header="yes" bottom="medium">
+                            <cell>Math</cell>
+                            <cell>Sage</cell>
+                        </row>
+                        <row><!-- Addition -->
+                            <cell><m>x + y</m></cell>
+                            <cell><c>x + y</c></cell>
+                        </row>
+                        <row><!-- Subtraction -->
+                            <cell><m>x - y</m></cell>
+                            <cell><c>x - y</c></cell>
+                        </row>
+                        <row><!-- Multiplication -->
+                            <cell><m>x\times y</m> or <m>x\cdot y</m></cell>
+                            <cell><c>x * y</c></cell>
+                        </row>
+                        <row><!-- Division -->
+                            <cell><m>x\div y</m> or <m>x/y</m></cell>
+                            <cell><c>x / y</c></cell>
+                        </row>
+                        <row><!-- Exponentiation -->
+                            <cell><m>x^2</m></cell>
+                            <cell><c>x^2</c></cell>
+                        </row>
+                    </tabular>
+                </table>
+                You cannot use parentheses in Sage to imply multiplication. Parentheses in Sage are used for only two reasons: association and passing input to functions.
         </p>
         <sage>
             <input>
@@ -95,6 +131,11 @@
         </sage>
         <exercise>
             <p> What is the effect of having a comma between two objects in a <c>print</c> statement? </p>
+        </exercise>
+        <exercise>
+            <p>
+                What does the <c>I</c> mean in <c>z = a+b*I</c>?
+            </p>
         </exercise>
         <p>
             There are mathematical operations which are perhaps less well known but often important for computation which deserve special treament: integer division and remainder calculations. We recall some basic mathematical facts. As this text will not focus upon proof, the proofs of theorems whenever given are provided solely for the pleasure of the reader.

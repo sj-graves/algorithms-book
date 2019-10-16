@@ -7,7 +7,7 @@
             <li>Introduce the textbook, its organization, and its formatting.</li>
             <li>Introduce <url href="https://cocalc.com/">CoCalc</url>.</li>
             <li>Introduce the Sage programming language.</li>
-            <li><xref ref="ex-W" text="title"/> and <xref ref="pr-W" text="title"/></li>
+            <li> <xref ref="pr-W" text="title"/> and <xref ref="ex-W" text="title"/></li>
         </ol>
     </objectives>
 
@@ -38,8 +38,8 @@
     <xi:include href="./sec-welcome-text.xml" />
     <xi:include href="./sec-welcome-cocalc.xml" />
     <xi:include href="./sec-welcome-sage.xml" />
-    <xi:include href="./ex-welcome.xml" />
     <xi:include href="./proj-welcome.xml" />
+    <xi:include href="./ex-welcome.xml" />
 
     
     <conclusion xml:id="c-W-conc">

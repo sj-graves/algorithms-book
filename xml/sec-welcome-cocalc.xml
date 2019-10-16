@@ -5,7 +5,7 @@
         <title>Your CoCalc account</title>
         <introduction>
             <p>
-                Everyone working in mathematics should have a <url href="https://cocalc.com">CoCalc</url> account, if simply for the reason that <latex /> is the language of mathematical typesetting and CoCalc provides a robust <latex /> editor with collaboration features. For anyone who wants to work computationally and does not want to bear the cost of expensive commercial mathematics software, here's a partial list of what is installed in CoCalc:
+                Here's a strong opening statement: everyone working in mathematics should have a <url href="https://cocalc.com">CoCalc</url> account. Even if you don't need access to most of the strong features installed in the CoCalc environment, there's an excellent editor for working with <latex />, which is the typesetting language of professional mathematics. Moreover the editor allows for seamless collaboration... that's what CoCalc means: <em>Co</em>llaborative <em>Calc</em>ulation. For anyone who wants to work computationally and does not want to bear the cost of expensive commercial mathematics software, here's a partial list of what is installed in CoCalc:
             </p>
             <ul cols="2">
                 <li>Sagemath</li>
@@ -27,6 +27,12 @@
                 If this sounds like an advertisement, it is! All drafts of this text after the first were authored in CoCalc, since the editor handles XML remarkably well.
             </p>
         </introduction>
+        <subsubsection>
+            <title>The CoCalc User Manual</title>
+            <p>
+                For a high-level overview of what is possible with CoCalc, see the <url href="https://doc.cocalc.com/">CoCalc User Manual</url>; specifically there is a section for students called the <url href="https://doc.cocalc.com/teaching-students.html">Student Guide</url>.
+            </p>
+        </subsubsection>
         <subsubsection>
             <title>Paid CoCalc accounts</title>
             <p>
@@ -60,6 +66,9 @@
                 Who are the collaborators on your CoCalc projects?
             </p>
         </exercise>
+        <p>
+            An important feature of CoCalc which you will use throughout this course for communication with your professor is the integrated chat feature.
+        </p>
     </subsection>
     <reading-questions>
         <exercise>
