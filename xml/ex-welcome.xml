@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<exercises xmlns:xi="http://www.w3.org/2001/XInclude"  xml:id="ex-W">
-<!--     <exercisegroup>
-        <title>Sage exercises</title>
-        <introduction>
-            <p>
-                Let's use this sequence of exercieses to become familiar with the basic features of programming in Sage.
-            </p>
-        </introduction>
-    </exercisegroup> -->
+<?xml version="1.0" encoding="utf-8"?>
+<exercises xml:id="ex-W" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Welcome Exercises</title>
+    <introduction>
+        <p>
+            These exercises are intended to be challenging for those students who have never before written a computer program. By analogy with riding a bicycle, the best way to learn to program is to get on a computer and start pedaling!
+        </p>
+        <p>
+            To work the computational exercises in this section, create a new working folder called <c>~/working/ex-1/</c>. Then if you have questions, you can easily interact with your instructor from within the Chat window.
+        </p>
+    </introduction>
     <exercisegroup>
         <title>CoCalc exercises</title>
         <introduction>
@@ -16,35 +17,40 @@
             </p>
         </introduction>
         <exercise>
-            <title>Cell formatting</title>
-            <statement>
-                There are many different types of <term>cell formatting mode commands</term> which make the current cell of a Sage worksheet behave in a non-Sage way: primarily useful are the mode commands <c>%md</c> which creates a Markdown cell for unsophisticated text, <c>%html</c> which creates a HTML cell for web-formatted text (which generally you'll use Markdown to replicate!), and perhaps most importantly for a working mathematician, <c>%latex</c> which activates the full <latex /> installation of CoCalc.
-                <task>
-                    <p>
-                        Use a Markdown cell and the Github guide <url href="https://guides.github.com/features/mastering-markdown/">Mastering Markdown</url> to format a cell of output, consisting of:
-                        <ol label="i.">
-                            <li></li>
-                        </ol>
-                    </p>
-                </task>
-            </statement>
+            <title>Jupyter notebooks</title>
+            <idx><h>CoCalc</h><h>Jupyter notebooks</h></idx>
+            <introduction>
+                In addition to the standard Sage worksheet, CoCalc now allows users to develop using 
+                <url href="http://jupyter.org">Jupyter</url> notebooks. The primary benefit to using Jupyter notebooks rather than Sage worksheets is that the implementation of <term>interactive features</term> is much more seamless in Jupyter than in the Sage worksheet. A major sacrifice of the Jupyter notebook is the apparent loss of the <latex /> interface!
+            </introduction>
+            <task>
+                Create a Jupyter notebook called <c>ex-jupyter.ipynb</c>
+            </task>
+            <task>
+                <p>
+                    In your new Jupyter notebook, replicate the following code:
+                </p>
+                <sidebyside>
+                    <program language="sage">
+                        <input>
+                            count = 1
+                            print "{i}: Input an integer".format(i = count)
+                            while count &lt; 20:
+                                in_val = raw_input()
+                                try:
+                                    print("We have '%d' as a successful integer input on attempt #%d!"%(int(in_val),count))
+                                    break
+                                except:
+                                    count = count + 1
+                                    print "{i}:That's no integer. Try again.".format(i = count)
+                        </input>
+                    </program>
+                </sidebyside>
+            </task>
+            <conclusion>
+                The notebook interface of a standalone Sage installation now uses the Jupyter notebook server by default.
+            </conclusion>
         </exercise>
-        <exercise>
-            <statement>
-                Bork bork bork bork.
-            </statement>
-        </exercise>
-        <exercise>
-        <title>Python 2 vs. Python 3 in CoCalc</title>
-        <statement>
-            <p>
-                Several things changed between the development of Python 2.7 and Python 3, and while many of them are minor changes some of those minor changes made parts of Sage not work correctly with Python 3; hence Sage uses Python 2. CoCalc can use both! You can use mode commands to change into a pure Python work space.
-            </p>
-            <p>
-                Investigate the difference between Python 2 and Python 3 by executing the command <c>print "hello world!"</c> in a worksheet cell formatted to <c>%python</c> and a cell formatted to <c>%python3</c>.
-            </p>
-        </statement>
-    </exercise>
     </exercisegroup>
-<!--     <xi:include href="./proj-welcome.xml" /> -->
+    <!--     <xi:include href="./proj-welcome.xml" /> -->
 </exercises>

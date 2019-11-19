@@ -116,7 +116,7 @@
                 If we begin the application of <xref ref="alg-upgrade_dijkstra" /> from source vertex <m>v_1</m>, we get the following tabulation of our information.
             </p>
             <table xml:id="tab-din_layered_graph_1">
-                <caption>First phase of steps in creation of the layered graph for Dinitz' algorithm.</caption>
+                <title>First phase of steps in creation of the layered graph for Dinitz' algorithm.</title>
                 <tabular top="major">
                     <col halign="center" /><col halign="center" />
                     <col halign="center" /><col halign="center" />
@@ -363,7 +363,7 @@
                 We next repeat the application of <xref ref="alg-upgrade_dijkstra" /> to this graph <m>L(s)</m> but with its arrows reversed and its source vertex reset to <m>v_7</m>.
             </p>
             <table xml:id="tab-din_layered_graph_2">
-                <caption>First phase of steps in creation of the layered graph for Dinitz' algorithm.</caption>
+                <title>First phase of steps in creation of the layered graph for Dinitz' algorithm.</title>
                 <tabular top="major">
                     <col halign="center" /><col halign="center" />
                     <col halign="center" /><col halign="center" />
@@ -647,43 +647,51 @@
             </p>
             <figure xml:id="fig-dinitz_maintenance_1">
                 <caption>First maintenance of the layered graph</caption>
-                <image xml:id="img-dinitz_maintenance_1" width="100%">
+                <sidebyside>
+                    <image xml:id="img-dinitz_maintenance_1a" width="90%">
+                        <latex-image>
+                            \begin{tikzpicture}[scale=2]
+                            \draw \foreach \n/\x/\y in {2/1/.5, 3/1/-.5, 5/2/.5, 6/2/-.5}{
+                                (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                            }
+                            (0,0) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                            (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                            \graph[nodes={}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                                (1)/1 ->[-Stealth, "\tt 42"] (2)/2,
+                                (1)/1 ->[-Stealth, "\tt 10"] (3)/3,
+                                (2)/2 ->[-Stealth, thick, dashed, red, "\tt  0"] (5)/5,
+                                (3)/3 ->[-Stealth, "\tt 20"] (5)/5,
+                                (3)/3 ->[-Stealth, "\tt 20"] (6)/6,
+                                (5)/5 ->[-Stealth, "\tt 22"] (7)/7,
+                                (6)/6 ->[-Stealth, "\tt 10"] (7)/7
+                            };
+                            \draw (current bounding box.south) node [below] {(a)};
+                            \end{tikzpicture}
+                        </latex-image>
+                    </image>
+                    <image xml:id="img-dinitz_maintenance_1b" width="90%">
+                        <latex-image>
+                            \begin{tikzpicture}[scale=2]
+                            \draw \foreach \n/\x/\y in {2/1/.5, 3/1/-.5, 5/2/.5, 6/2/-.5}{
+                                (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
+                            }
+                            (0,0) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
+                            (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
+                            \graph[nodes={}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
+                                (1)/1 ->[-Stealth,thick, dashed, draw=red, "\tt 42"] (2)/2,
+                                (1)/1 ->[-Stealth, "\tt 10"] (3)/3,
+                                (3)/3 ->[-Stealth, "\tt 20"] (5)/5,
+                                (3)/3 ->[-Stealth, "\tt 20"] (6)/6,
+                                (5)/5 ->[-Stealth, "\tt 22"] (7)/7,
+                                (6)/6 ->[-Stealth, "\tt 10"] (7)/7
+                            };
+                            \draw (current bounding box.south) node [below] {(b)};
+                            \end{tikzpicture}
+                        </latex-image>
+                    </image>
+                </sidebyside>
+                <image xml:id="img-dinitz_maintenance_1c" width="50%">
                     <latex-image>
-                        \[\begin{array}{cc}
-                        \begin{tikzpicture}[scale=2]
-                        \draw \foreach \n/\x/\y in {2/1/.5, 3/1/-.5, 5/2/.5, 6/2/-.5}{
-                            (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
-                        }
-                        (0,0) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
-                        (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
-                        \graph[nodes={}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
-                            (1)/1 ->[-Stealth, "\tt 42"] (2)/2,
-                            (1)/1 ->[-Stealth, "\tt 10"] (3)/3,
-                            (2)/2 ->[-Stealth, thick, dashed, red, "\tt  0"] (5)/5,
-                            (3)/3 ->[-Stealth, "\tt 20"] (5)/5,
-                            (3)/3 ->[-Stealth, "\tt 20"] (6)/6,
-                            (5)/5 ->[-Stealth, "\tt 22"] (7)/7,
-                            (6)/6 ->[-Stealth, "\tt 10"] (7)/7
-                        };
-                        \end{tikzpicture}
-                        \amp
-                        \begin{tikzpicture}[scale=2]
-                        \draw \foreach \n/\x/\y in {2/1/.5, 3/1/-.5, 5/2/.5, 6/2/-.5}{
-                            (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
-                        }
-                        (0,0) node [draw=black, fill=red, text=white, circle, inner sep=1pt] (1) {\tt 1}
-                        (3,0) node [draw=black, fill=blue, text=white, circle, inner sep=1pt] (7) {\tt 7};
-                        \graph[nodes={}, edge quotes={fill=white, text=blue, inner sep=1pt}]{
-                            (1)/1 ->[-Stealth,thick, dashed, draw=red, "\tt 42"] (2)/2,
-                            (1)/1 ->[-Stealth, "\tt 10"] (3)/3,
-                            (3)/3 ->[-Stealth, "\tt 20"] (5)/5,
-                            (3)/3 ->[-Stealth, "\tt 20"] (6)/6,
-                            (5)/5 ->[-Stealth, "\tt 22"] (7)/7,
-                            (6)/6 ->[-Stealth, "\tt 10"] (7)/7
-                        };
-                        \end{tikzpicture}\\
-                        \text{(a)} \amp \text{(b)} \\
-                        \multicolumn{2}{c}{
                         \begin{tikzpicture}[scale=2]
                         \draw \foreach \n/\x/\y in {3/1/-.5, 5/2/.5, 6/2/-.5}{
                             (\x,\y) node[draw=black, circle, inner sep=1pt] (\n) {\tt \n}
@@ -697,11 +705,11 @@
                             (5)/5 ->[-Stealth, "\tt 22"] (7)/7,
                             (6)/6 ->[-Stealth, "\tt 10"] (7)/7
                         };
-                        \end{tikzpicture}} \\
-                        \multicolumn{2}{c}{\text{(c)}}
-                        \end{array}\]
+                        \draw (current bounding box.south) node [below] {(c)};
+                        \end{tikzpicture}}
                     </latex-image>
                 </image>
+
             </figure>
             <p>
                 We next choose the path <m>P_2 = (v_1,v_3,v_5,v_7)</m>, along which we can augment the flow by 10. As this saturates the <m>(v_1,v_3)</m> arrow, we remove it; but then <m>v_1</m> has no outgoing arrows and is deleted; moreover <m>v_3</m> has no incoming arrows, so must be deleted along with its outgoing arrows. This in turn causes <m>v_5</m> and <m>v_6</m> to lose their incoming arrows, so we must remove them and their outgoing arrows, leaving <m>v_7</m> with no incoming arrows. We thus remove <m>v_7</m> from <m>\hat{L}(x,t)</m> and are left with an empty graph! We must be finished with our first pass through the algorithm.
@@ -771,7 +779,7 @@
                 </image>
             </figure>
             <table xml:id="tab-dinitz-flow_1">
-                <caption>Value of flow is <m>\abs{f}=18</m> after all possible augmentation in first layered graph.</caption>
+                <title>Value of flow is <m>\abs{f}=18</m> after all possible augmentation in first layered graph.</title>
                 <tabular top="major">
                     <col halign="left" />
                     <col halign="center" />
@@ -990,7 +998,7 @@
                 </image>
             </figure>
             <table xml:id="tab-dinitz-flow_2">
-                <caption>Value of flow is <m>\abs{f}=30</m> after all possible augmentation in second layered graph.</caption>
+                <title>Value of flow is <m>\abs{f}=30</m> after all possible augmentation in second layered graph.</title>
                 <tabular top="major">
                     <col halign="left" />
                     <col halign="center" />

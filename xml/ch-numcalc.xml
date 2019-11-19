@@ -7,7 +7,7 @@
                 <p>Discuss approximations to calculus problems</p>
                 <ul>
                     <li>Root finding</li>
-<!--                     <li>Instantaneous rate of change</li> -->
+                    <li>Instantaneous rate of change</li>
                     <li>Quadrature</li>
                     <li>Advanced root-finding</li>
                 </ul>
@@ -23,7 +23,7 @@
     </introduction>
     
     <xi:include href="sec-numcalc-roots.xml" />
-<!--     <xi:include href="sec-numcalc-derivatives.xml" /> -->
+    <xi:include href="sec-numcalc-derivatives.xml" />
     <xi:include href="sec-numcalc-quadrature.xml" />
     <xi:include href="sec-numcalc-newtraph.xml" />
     <xi:include href="proj-numcalc.xml" />

@@ -1,142 +1,258 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="s-W-S">
     <title>Getting started with Sage</title>
+<!--############################
+    ############################-->
     <introduction>
         <p>
             Unlike with most programming languages, you don't need to have anything other than a web browser installed to work with Sage. Although Sage code is written using Python syntax, to interact with Sage you must access a <term>Sage server</term>: the two which we will discuss are the <term>Sage Cell Server</term> and <term>CoCalc</term>. A third option for the technically savvy user is to install and run your own Sage server, but this is an unnecessary hurdle in most cases <mdash /> as long as you have internet access, you can access the Sage Cell Server or CoCalc.
         </p>
+    </introduction>
+<!--############################
+    ############################-->
+    <subsection xml:id="ss-W-S-IO">
+        <title>Input and output</title>
         <technology xml:id="tech-W-S-sagecell">
+            <idx><h>Sage cell</h></idx>
             <title>Sage cells</title>
             <p>
-                Sage cells link to the <url href="https://sagecell.sagemath.org/">Sage Cell Server</url> and allow you to embed active calculations in almost any website. These will appear strangely in the printed version of the text.
+                Embedded Sage cells link to the <url href="https://sagecell.sagemath.org/">Sage Cell Server</url> and allow you to make active calculations in almost any website.
             </p>
             <sage language="sage">
                 <input>
-                    print 5*"This is a Sage Cell.\n"
-                    print 5*"If you're online, press 'Evaluate' now!\n"
+                    
                 </input>
                 <output>
-                    This is a Sage Cell.
-                    This is a Sage Cell.
-                    This is a Sage Cell.
-                    This is a Sage Cell.
-                    This is a Sage Cell.
-
-                    If you're online, press 'Evaluate (Sage)' now!
-                    If you're online, press 'Evaluate (Sage)' now!
-                    If you're online, press 'Evaluate (Sage)' now!
-                    If you're online, press 'Evaluate (Sage)' now!
-                    If you're online, press 'Evaluate (Sage)' now!
-
+                    
                 </output>
             </sage>
+            <p>
+                These will appear strangely in a PDF version of the text.
+            </p>
         </technology>
-    </introduction>
-    <subsection xml:id="ss-W-S-IO">
-        <title>Input and output</title>
-        <p>
-            Sage cells are plain text cells in whatever editor you use, be it an embedded Sage cell as above or a cell of a Sage worksheet in CoCalc. The input consists of whatever you type in the cell, whether it be meaningful to Sage or not! <term>Values</term> are assigned to <term>variables</term> by using a single <c>=</c>. Assigning a value to a variable produces no output, so the first built-in command function we will use is <c>print</c>. 
-        </p>
-        <sage>
-            <input>
-                a = 12
-                b = 12.3
-                c = 5/6
-                print(a*b)
-                print(a*c)
-                print c
-            </input>
-            <output>
-                147.600000000000
-                10
-                5/6
-            </output>
-        </sage>
-        <p>
-            Embedded Sage cells on a single page behave the same way multiple cells of a Sage worksheet behave in CoCalc: the value stored in a variable is kept in memory until the page is reloaded or the worksheet restarted. This does require that evaluation of Sage cells happens in the same order every time. For instance, if the cell below is executed <em>before</em> the cell above, an error would result, because the variables <c>a</c> and <c>c</c> are undefined in the cell below, if the cell above is never evaluated!
-        </p>
-        <sage>
-            <input>
-                print a > a*c
-            </input>
-            <output>
-                True
-            </output>
-        </sage>
         <exercise>
-            <p>What is different about the use of <c>print</c> in the two Sage cells above?</p>
+            <statement>
+                Type the command <c>print("Hello, world!")</c> into a Sage cell and then press Shift-Enter. You have successfully written your first Sage program!
+            </statement>
         </exercise>
         <p>
-            Finally, a last difference between the CoCalc implementation of Sage worksheets and the embedded Sage cells is that in a Sage cell, only the last line of input will print its return value. All other output must arise from a <c>show</c> or <c>print</c> command. In CoCalc, every command which returns a value will have its returned value printed. While this is occasionally unwelcome behavior, it serves well when using CoCalc <q>as a calculator</q>.
+            Sage does not automatically execute your <term>input</term> as soon as you press Enter (or Return, depending upon your keyboard). Both the Sage Cell server and CoCalc will wait for you to <term>evaluate</term> the cell where you are typing; the normal keyboard-based way to execute a cell is to press Shift-Enter. Alternately, both methods provide an "evaluate" button.
         </p>
+        <warning>
+            <title>Execute all the cells!</title>
+            <idx><h>Sage cell</h><h>execution</h></idx>
+            <p>
+                When working with this book in its natural format as an online ebook, it is very important to execute all Sage cells in a section <em>in order!</em> Sage cells store the values of variables beyond the execution of a single cell on a web page <mdash /> any section of this book containing multiple Sage cells expects them to be executed in top-to-bottom order in the online version of the book!
+            </p>
+        </warning>
+        <p>
+            The method of <term>output</term> will differ slightly between CoCalc and the Sage Cell server. When using embedded Sage cells, only the last line of input will print its value, unless the <c>print</c> command is used. CoCalc, on the other hand, outputs the value of every line of input.
+        </p>
+        <sage>
+            <input>
+                12
+                24.3
+                print(51)
+                19
+            </input>
+            <output>
+                51
+                19
+            </output>
+        </sage>
+        <technology xml:id="tech-print">
+            <title><c>print</c></title>
+            <idx><h>Sage</h><h>commands</h><h><c>print</c></h></idx>
+            <statement>
+                The normal way to produce output in Sage is using the <c>print</c> command. It can be used as a function or as a special keyword command.
+                <sage>
+                    <input>
+                        print "This is a special command."
+                        print("This is how you use print as a function.")
+                        print "There are some","special things about using","print","as a keyword command."
+                        print("What is","the difference?")
+                    </input>
+                    <output>
+                        This is a special command.
+                        This is how you use print as a function.
+                        There are some special things about using print as a keyword command.
+                        ('What is', 'the difference?')
+                    </output>
+                </sage>
+            </statement>
+        </technology>
+        <exercise>
+            <statement>
+                What is the difference in trying to output a comma-separated list of values when <c>print</c> is used as a function rather than as a keyword command?
+            </statement>
+        </exercise>
     </subsection>
-    <subsection xml:id="ss-W-S-BO">
-        <title>Basic operations</title>
+<!--############################
+    ############################-->
+    <subsection xml:id="ss-W-S-BAO">
+        <title>Basic arithmetic operations</title>
         <p>
-            Sage works naturally as a calculator and automatically uses the most sensible mathematical data type to store variables. Integers are treated as mathematical integers (members of an integer ring), ratios of integers are treated as rational numbers, and decimal numbers are treated as floating-point numbers.
-                <aside>
-                    Floating-point arithmetic was developed with the need to approximate real numbers with their binary counterparts: while some numbers can be represented by a finite sequence in binary, others cannot. Consider <me>677/32 = (10101.00101)_2</me> versus <me>1/3 = (0.01010101010\ldots)_2.</me> Floating point arithmetic generally involves additional computational measures to minimize various types of rounding error.
-                </aside>
-                Arithmetic operations in Sage are carried out by the <q>normal</q> keyboard equivalents of the symbols we write.
-                <table>
-                    <title>Mathematical operators in Sage</title>
-                    <tabular>
-                        <col halign="center" />
-                        <col halign="center" />
-                        <row header="yes" bottom="medium">
-                            <cell>Math</cell>
-                            <cell>Sage</cell>
-                        </row>
-                        <row><!-- Addition -->
-                            <cell><m>x + y</m></cell>
-                            <cell><c>x + y</c></cell>
-                        </row>
-                        <row><!-- Subtraction -->
-                            <cell><m>x - y</m></cell>
-                            <cell><c>x - y</c></cell>
-                        </row>
-                        <row><!-- Multiplication -->
-                            <cell><m>x\times y</m> or <m>x\cdot y</m></cell>
-                            <cell><c>x * y</c></cell>
-                        </row>
-                        <row><!-- Division -->
-                            <cell><m>x\div y</m> or <m>x/y</m></cell>
-                            <cell><c>x / y</c></cell>
-                        </row>
-                        <row><!-- Exponentiation -->
-                            <cell><m>x^2</m></cell>
-                            <cell><c>x^2</c></cell>
-                        </row>
-                    </tabular>
-                </table>
-                You cannot use parentheses in Sage to imply multiplication. Parentheses in Sage are used for only two reasons: association and passing input to functions.
+            Sage works naturally as a calculator using the closest approximations to our arithmetic symbols.
         </p>
+        <table>
+            <title>Mathematical operators in Sage</title>
+            <idx><h>Sage</h><h>basic math operators</h></idx>
+            <tabular>
+                <col halign="center" />
+                <col halign="center" />
+                <row header="yes" bottom="medium">
+                    <cell>Math</cell>
+                    <cell>Sage</cell>
+                </row>
+                <row><!-- Addition -->
+                    <cell><m>x + y</m></cell>
+                    <cell><c>x + y</c></cell>
+                </row>
+                <row><!-- Subtraction -->
+                    <cell><m>x - y</m></cell>
+                    <cell><c>x - y</c></cell>
+                </row>
+                <row><!-- Multiplication -->
+                    <cell><m>x\times y</m> or <m>x\cdot y</m></cell>
+                    <cell><c>x * y</c></cell>
+                </row>
+                <row><!-- Division -->
+                    <cell><m>x\div y</m> or <m>x/y</m></cell>
+                    <cell><c>x / y</c></cell>
+                </row>
+                <row><!-- Exponentiation -->
+                    <cell><m>x^2</m></cell>
+                    <cell><c>x^2</c></cell>
+                </row>
+            </tabular>
+        </table>
         <sage>
             <input>
-                z = a+b*I
-                w = c+a*I
-                print(z)
-                print w
-                print w^2 + 2*w + 5
-                print z/w
-                print exp(a), log(c)
+                print(12+13)
+                print(15.6/3)
+                print(2^4)
+                print( (-2+3*I)/(5+4*I) )
             </input>
             <output>
-                12.0000000000000 + 12.3000000000000*I
-                12*I + 5/6
-                44*I - 4919/36
-                1.08919178345172 - 0.924361681704742*I
-                e^12 log(5/6)
+                25
+                5.20000000000000
+                16
+                23/41*I + 2/41
             </output>
         </sage>
-        <exercise>
-            <p> What is the effect of having a comma between two objects in a <c>print</c> statement? </p>
-        </exercise>
         <exercise>
             <p>
-                What does the <c>I</c> mean in <c>z = a+b*I</c>?
+                What does the <c>I</c> mean in <c>-2+3*I</c>?
             </p>
         </exercise>
+
+    </subsection>
+<!--############################
+    ############################-->
+    <subsection xml:id="ss-W-S-BDT">
+        <title>Basic data types</title>
+        <p>
+            We have just seen some values with which Sage can work. Each of those values falls into some category of values, called a <term>type</term>.
+        </p>
+        <definition xml:id="def-type">
+            <title>Data type</title>
+            <idx><h>data type</h></idx>
+            <statement>
+                A <term>data type</term> is a specific category of values.
+            </statement>
+        </definition>
+        <p>
+            Another important but basic data type is the <term>string</term>, the data type of which is <c>str</c>.
+        </p>
+        <definition xml:id="def-string">
+            <title>Strings</title>
+            <idx><h>string</h></idx>
+            <statement>
+                A <term>string</term> is a sequence of letters or other characters.
+            </statement>
+        </definition>
+        
+        <example>
+            <title>Different types of strings</title>
+            <p>
+                Strings are represented in Sage by the <c>str</c> type. In order to input a string, it is necessary to enclose it in some form of matchinq quotation marks. The allowable forms are given in the table below.
+            </p>
+            <table>
+                <title>Input formats for <c>str</c> in Sage</title>
+                <tabular>
+                    <row bottom="major">
+                        <cell>Enclosed by</cell>
+                        <cell>Example</cell>
+                    </row>
+                    <row>
+                        <cell>Single quotes</cell>
+                        <cell><c>'Make it so, number one.'</c></cell>
+                    </row>
+                    <row>
+                        <cell>Double quotes</cell>
+                        <cell><c>"Engage!"</c></cell>
+                    </row>
+                    <row>
+                        <cell>Three single quotes</cell>
+                        <cell><c>'''These can contain line breaks!'''</c></cell>
+                    </row>
+                    <row>
+                        <cell>Three double quotes</cell>
+                        <cell><c>"""These can contain line breaks too!"""</c></cell>
+                    </row>
+                </tabular>
+            </table>
+            <p>
+                The triple-enclosed strings can span line breaks. These are <term>multiline strings</term>.
+            </p>
+            <sage>
+                <input>
+                    '''Space: the final frontier. These are the voyages of the starship Enterprise. 
+                    Its continuing mission: to explore strange new worlds, 
+                    to seek out new life and new civilizations, 
+                    to boldly go where no one has gone before.'''
+                </input>
+            </sage>
+        </example>
+        
+        <exercise>
+            <statement>What is the data type of <c>'4'</c>?</statement>
+        </exercise>
+        
+        <technology xml:id="tech-type">
+            <idx><h>Sage</h><h>commands</h><h><c>type</c></h></idx>
+            <title><c>type</c></title>
+            <statement>
+                The function for checking the type of a value in Sage is <c>type</c>. The output of this is sometimes confusing.
+            </statement>
+            <sage>
+                <input>
+                    print(type('bob'))
+                    print(type(1.3))
+                    print(type(1+2*I))
+                    print(type(42))
+                </input>
+            </sage>
+        </technology>
+
+        <exercise>
+            <statement>
+                When a <c>str</c> is evaluated, it is enclosed in quotes, and those quotes sometimes contain special two-letter codes like <c>\n</c> or <c>\t</c>. What does <c>"\n"</c> become when the string is printed instead of being evaluated?
+            </statement>
+        </exercise>
+        <exercise>
+            <statement>
+                How would you output the string <c>Quoth the raven, "Nevermore!"</c>?
+            </statement>
+            <hint>
+                <p>You're allowed to alternate quotation marks in written English. What happens here?</p>
+            </hint>
+        </exercise>
+    </subsection>
+<!--############################
+    ############################-->
+    <subsection xml:id="ss-W-S-AAO">
+        <title>Advanced arithmetical operations</title>
         <p>
             There are mathematical operations which are perhaps less well known but often important for computation which deserve special treament: integer division and remainder calculations. We recall some basic mathematical facts. As this text will not focus upon proof, the proofs of theorems whenever given are provided solely for the pleasure of the reader.
         </p>
@@ -211,28 +327,33 @@
                 <sage>
                     <input>
                         help(math.floor)
+                        floor(pi)
+                    </input>
+                </sage>
+                <sage>
+                    <input>
                         math.ceil?
+                        ceil(pi)
                     </input>
                 </sage>
                 <p>
-                    We see in this Sage cell that there are two interfaces to find help about commands in Sage: <c>help(command_name)</c> and <c>command_name?</c>.
+                    We see in these Sage cells that there are two interfaces to find help about commands in Sage: <c>help(command_name)</c> and <c>command_name?</c>.
                 </p>
             </statement>
         </exercise>
-<!--         <p>
-            For more complicated mathematical functions, especially those which have a symbolic representation which is difficult to type, Sage provides a different mechanism. As an example, consider the number <m>w = \frac56+12 i </m> given above; its 
-        </p> -->
     </subsection>
-    <subsection>
+<!--############################
+    ############################-->
+    <conclusion>
         <title>An in-depth introduction</title>
         <p>
-            The best way to learn Sage is the same as the best way to learn any other programming language: open it up and play with it. The great joy of Sage is that there is essentially no barrier to entry, because you can immediately execute whatever you type. It may not work, but you'll just get an error message and be able to learn from it. With a more traditional language like C++, you have to go through the process of learning how to compile, link, load, and execute your program. With Sage, you either click <q>Evaluate</q> or press <em>Shift-Enter</em>!
+            The best way to learn Sage is the same as the best way to learn any other programming language: open it up and play with it. A great joy of Sage is that there is essentially no barrier to entry, because you can immediately execute whatever you type. It may not work, but you'll just get an error message and be able to learn from it. With a more traditional language like C++, you have to go through the process of learning how to compile, link, load, and execute your program. With Sage, you either click <q>Evaluate</q> or press <em>Shift-Enter</em>!
         </p>
         <p>
-            For a longer treatment of the basic uses of Sage, <url href="http://www.gregory-bard.com/home.html"><pubtitle>Sage for Undergraduates</pubtitle></url><xref ref="bib_SageBook"/> is a very strong introduction. For a course only in <em>using Sage</em>, Bard's book does not have any real competition; as a book in programming in Sage, it has shortfalls, because that was not its intent. <pubtitle>Sage for Undergraduates</pubtitle> remains a very good explanation of how to use routine commands in Sage, as the assistance provided by <c>help(command_name)</c> or <c>command_name?</c> is often extremely technical.
+            For a longer treatment of the basic uses of Sage, <url href="http://www.gregory-bard.com/home.html"><pubtitle>Sage for Undergraduates</pubtitle></url><xref ref="bib_SageBook"/> is a very strong introduction. For a course only in <em>using Sage</em>, Bard's book does not have any real competition; as a book in programming in Sage, it has shortfalls, because that was not its intent. <pubtitle>Sage for Undergraduates</pubtitle> remains a very good explanation of how to use routine commands in Sage, as the assistance provided by <c>help(command_name)</c> or <c>command_name?</c> is often extremely technical. Finally, when working with CoCalc, you can use <term>tab-completion</term>; starting to type a command in a Sage worksheet and then pressing <c>tab</c> on your keyboard will open a pull-down list of all the possible commands you could enter which begin with your partial command. There are many times when wanting to perform a mathematical task combined with a willingness to read the help files and use tab-completion allows for complicated problems to be solved simply using built-in features of CoCalc.
         </p>
-    </subsection>
-    <reading-questions>
+    </conclusion>
+<!--     <reading-questions>
         <exercise>
             <p>What does <c>print</c> do?</p>
         </exercise>
@@ -242,5 +363,5 @@
         <exercise>
             <p>What do <c>floor</c> and <c>ceil</c> do?</p>
         </exercise>
-    </reading-questions>
+    </reading-questions> -->
 </section>

@@ -1,6 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <exercises xml:id="pr-NC">
-    <title>Project</title>
+    <title>Numerical Calculus Project</title>
+    <project>
+        <title>Basic introduction to programming in Sage</title>
+        <introduction>
+            <p>
+                If we want to do anything mathematically interesting in Sage, we need to be able to work with some basic programming ideas. 
+                Mostly these are processes we already consider when we work an algorithm by hand, but we need to convince the computer to do the same work that we are able to do as thinking and reasoning humans.
+            </p>
+            <p>
+                Let's learn the process by analyzing the steps of <xref ref="alg-interval_bisection" title="title" /> to create a working code.
+            </p>
+        </introduction>
+        <task>
+            <title>What does <m>=</m> mean?</title>
+            <task>
+                <prelude>
+                     Mathematicians use the equal sign (<m>=</m>) in two distinct and incompatible ways. The first is in the declarative sense, where we might say <q>Let <m>x</m> be a real number and let <m>f(x)=x^2</m> be a function.</q> Here we are using the equal sign as an <term>assignment operator</term> where after the statement we want the symbolic function <m>f</m> to be identified as the action of squaring its argument.
+                </prelude>
+                <statement>
+                    Assign the appropriate value to a variable named <c>my_age</c>, using the <term>assignment operator</term>, <c>=</c>. For example, I might type <c>my_age = 41</c>.
+                </statement>
+            </task>
+            <task>
+                Put that in your pipe and smoke it
+            </task>
+        </task>
+    </project>
+    <project xml:id="pr-NC-BICS">
+        <title>Basic introduction to programming in Sage</title>
+        <prelude>
+            <p>
+                If we want to do anything mathematically interesting in Sage, we need to be able to work with some basic programming ideas. 
+                Mostly these are processes we already consider when we work an algorithm by hand, but we need to convince the computer to do the same work that we are able to do as thinking and reasoning humans.
+            </p>
+            <p>
+                Let's learn the process by analyzing the steps of <xref ref="alg-interval_bisection" title="title" /> to create a working code.
+            </p>
+        </prelude>
+        <introduction>
+            <title>Assigning values</title>
+            <p>
+            To assign a basic numerical value to a variable in Sage is straightforward: we use the <term>assignment operator.</term> Working mathematically, we declare the value of a variable by using the equal sign (<m>=</m>) along with some context, like when we say <q>let <m>x</m> be a real number and let <m>f(x) = x^2</m>.</q> However we also use the equal sign to make a logical statement that two expressions are actually equal, as when we say <q>if <m>ab=0</m> then either <m>a=0</m> or <m>b=0</m>.</q> This use of equality is the <term>comparison operator</term>. Sage requires that these be different.
+            </p>
+        </introduction>
+        <task>
+            <title> Can I name a task? No I cannot.</title>
+            <statement>
+                Do some very interesting things.
+            </statement>
+            <hint>
+                If you need a hint here, you are helpless and fail at life.
+            </hint>
+        </task>
+        <task>
+            <title>Task 2</title>
+            <introduction>
+                <p>
+                    Explanation explainy explain explain
+                </p>
+            </introduction>
+            This is anoter task!
+        </task>
+    </project>
     <project xml:id="pr-NC-ICA">
         <title>Implementing calculus approximations</title>
         <introduction>

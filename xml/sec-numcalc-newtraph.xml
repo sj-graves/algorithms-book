@@ -165,7 +165,7 @@
         <p>
             Householder's methods iterate in exactly the same way as the Newton-Raphson method, but rather than using the linear approximation to a once-differentiable function to calculate the next iteration, the following iterative calculation is used:
             <me>x_{n+1} = x_n + d \frac {\left(1/f\right)^{(d-1)}(x_n)} {\left(1/f\right)^{(d)}(x_n)}</me>,
-            where <m>f</m> has at least <m>d</m> continuous derivatives. While this equation in the case <m>d=1</m> is exactly the Newton-Raphson method, the higher values of <m>d</m> do not coincide with approximations similar to the linear approximation, but rather to ideas from complex analysis involving Taylor series of meromorphic functions.
+            where <m>f</m> has at least <m>d</m> continuous derivatives. While this equation in the case <m>d=1</m> is exactly the Newton-Raphson method, the higher values of <m>d</m> do not coincide with approximations similar to the linear approximation. Instead, they are drawn from ideas in complex analysis involving Taylor series of meromorphic functions!
         </p>
     </subsection>
 </section>

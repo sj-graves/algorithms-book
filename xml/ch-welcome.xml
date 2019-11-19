@@ -22,7 +22,7 @@
             Introduction to programming books focus exclusively on <em>getting computers to work for you</em>, but not necessarily in a way aimed at solving mathematical problems. Most of the applied math books assume an intermediate familiarity with programming. And the books on Sage, while excellent, are more focused on showing off the bells and whistles of Sage than using the basics to solve interesting problems. This textbook tries to approach these problems by the <em>via media</em>, the middle way. We discuss an introduction to programming <em>through</em> learning to solve mathematical problems.
         </p>
         <p>
-            How do we solve mathematical problems computationally? We apply some <term>algorithm</term>.
+            How do we solve mathematical problems? Often, we apply some <term>algorithm</term>.
         </p>
         <definition xml:id="def-algorithm">
             <title>Algorithm</title>
@@ -33,6 +33,25 @@
                 </p>
             </statement>
         </definition>
+        <p>
+            Sometimes an algorithm is simple, but takes a long time to complete because it has many repetitive steps. Sometimes an algorithm is very complicated. In both cases it is useful to allow a computer to perform the algorithm on our behalf.
+        </p>
+        <definition xml:id="def-program">
+            <title>Program</title>
+            <idx><h>program</h></idx>
+            <idx><h>programming language</h></idx>
+            <statement>
+                <p>
+                    A <term>program</term> is an implementation of an algorithm in such a way that it can be executed by a computer. A <term>programming language</term> is the language that is used to tell the computer what to do.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            Programming languages are wildly varied. <term>Low-level</term> programming languages interact with the basic hardware of a computer, and are difficult to master. <term>High-level</term> programming languages are much closer to spoken or written languages, and allow an easier introduction to programming for beginners, at a small cost of speed of execution.
+        </p>
+        <p>
+            We will be working this semester in a very high-level language, <term>Sage</term>. Sage is essentially a mathematical and scientific superset of another language, Python 2.7. This is not important unless you want to be a Python programmer later in life.
+        </p>
     </introduction>
     
     <xi:include href="./sec-welcome-text.xml" />

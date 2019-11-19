@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <table xml:id="tab-fordfulkfail">
-    <caption>Steps in a Ford-Fulkerson attempt on a pathological network.</caption>
+    <title>Steps in a Ford-Fulkerson attempt on a pathological network.</title>
     <tabular width="100%" top="major">
         <col halign="left" />
         <col halign="center" />

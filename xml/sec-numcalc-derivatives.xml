@@ -61,7 +61,7 @@
                 </md>
             </p>
             <figure xml:id="fig-secant_exmp">
-                <caption>The line depicted in <xref ref="xmp-secant_line" />.</caption>
+                <caption>A sixth-degree polynomial and a secant line through two of its points.</caption>
                 <image xml:id="img-secant_exmp">
                     <latex-image>
                         \begin{tikzpicture}[xscale = 6, yscale = 3]
@@ -78,7 +78,7 @@
                                     \foreach \x in {1.0, 1.25, 1.5, 1.75, 2.0}{ (\x, 0.0) -- (\x, 1.0)}
                                     \foreach \y in {0.0, 0.25, 0.5, 0.75, 1.0}{ (1.0, \y) -- (2.0, \y)};
 
-                        \draw[color = red,dashed, thickness=2] (1.162, 1.0) -- (1.75, 0.0) 
+                        \draw[color = red,dashed, thick] (1.162, 1.0) -- (1.75, 0.0) 
                             (1.25,0.85) node [fill=red, inner sep=2pt] {}
                             (1.75,0.00) node [fill=red, inner sep=2pt] {};
                         \end{tikzpicture}

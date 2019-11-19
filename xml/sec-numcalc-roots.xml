@@ -14,6 +14,9 @@
                 </p>
             </statement>
         </definition>
+        <p>
+            It is clearly of interest to find a root of a function, as any attempt to solve <m>f(x) = c</m> for a constant <m>c</m> is able to be translated into finding a root of <m>g(x)=f(x)-c</m>.
+        </p>
         <definition xml:id="def-function_limit">
             <idx><h>limit</h><h>of a function</h></idx>
             <title>Limit of a function</title>
@@ -21,11 +24,11 @@
                 <p>
                     The function <m>f:\R\to\R</m> has a <term>limit</term> of <m>L</m> at <m>a\in \R</m>, written <m>\lim_{x\to a}f(x) = L</m>, if and only if for every <m>\epsilon\gt 0</m> there is a corresponding <m>\delta\gt 0</m> such that <m>\abs{f(x)-L}\lt\epsilon</m> whenever <m>\abs{x-a}\lt\delta</m>.
                 </p>
-                <p>
-                    Loosely speaking, this says that the value of <m>f(x)</m> approaches <m>L</m> as <m>x</m> approaches <m>a</m>.
-                </p>
             </statement>
         </definition>
+        <p>
+            Loosely speaking, this says that the value of <m>f(x)</m> approaches <m>L</m> as <m>x</m> approaches <m>a</m>. This definition is the fundamental definition of all of differential and integral calculus. The idea of the limit ()and the handling of infinitesimal quantities which it allows) is precisely the necessary idea which allowed the discovery of the discipline at the end of the 17th century.
+        </p>
         <definition xml:id="def-continuous_function">
             <title>Continuous function</title>
             <idx><h>continuous function</h><h>at a point</h></idx>
@@ -45,13 +48,13 @@
             </statement>
         </definition>
         <p>
-            <xref ref="def-function_limit"/> is arguably the only <q>real</q> definition in all of Calculus, as the idea of the limit (and the handling of infinitesimal quantities in general) is precisely the idea that was needed for the discovery of the discipline at the end of the 17th century.
+            Continuity is the rigorous notion behind the idea of being able to trace a curve without breaks, jumps, or holes.
         </p>
     </introduction>
     <subsection xml:id="ss-NC-RF-IB">
         <title>Interval bisection</title>
         <p>
-            For continuous functions there are cases when we can ensure that at least one root exists in a given interval, via the <xref ref="thm-intermediate_value_theorem"  text="title"/>.
+            When treating continuous functions there are cases when we can ensure that at least one root exists in a given interval.
         </p>
         <theorem xml:id="thm-intermediate_value_theorem">
             <idx>Intermediate value theorem</idx>
@@ -73,7 +76,7 @@
             </answer>
         </exercise>
         <p>
-            Intermediate value theorem in hand we are able to consider a process for finding a root in an interval when the root provably exists. Suppose we know that <m>f</m> has a root in the interval <m>[a,b]</m>: <m>f</m> is continuous on the interval <m>[a,b]</m> and <m>f(a)\lt 0\lt f(b)</m>. Now consider the midpoint of the interval, <m>m = (a+b)/2</m>. There are only three possibilities for the value of <m>f(m)</m>:
+            With the intermediate value theorem in hand we are able to consider a process for finding a root in an interval when the root provably exists. Suppose we know that <m>f</m> has a root in the interval <m>[a,b]</m>: <m>f</m> is continuous on the interval <m>[a,b]</m> and <m>f(a)\lt 0\lt f(b)</m>. Now consider the midpoint of the interval, <m>m = (a+b)/2</m>. There are only three possibilities for the value of <m>f(m)</m>:
             <ol>
                 <li><m>f(m) = 0</m>, and we have discovered a root in the interval <m>(a,b)</m>, </li>
                 <li><m>f(m) \lt 0</m>, and we have a smaller interval <m>[m,b]</m> on which <m>f</m> is continuous, satisfying <m>f(m)\lt 0\lt f(b)</m>,</li>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="s-W-CC">
     <title>Getting started with CoCalc</title>
+    <idx><h>CoCalc</h></idx>
     <subsection xml:id="ss-W-CC-A">
         <title>Your CoCalc account</title>
         <introduction>
@@ -59,6 +60,7 @@
             The name of CoCalc is an abbreviation for <em>Co</em>llaborative <em>Calc</em>ulation. As such, project owners can add other CoCalc users as collaborators on any project. However, this is <em>project-level collaboration</em>. You cannot share a single file or collaborate on a single file. Also, collaborators have full read/write privilege in the project.
         </p>
         <warning xml:id="warn-CoCalc_trust">
+            <title>Trusted collaborators</title>
             Only add CoCalc collaborators you actually trust!
         </warning>
         <exercise>

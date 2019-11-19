@@ -9,7 +9,7 @@
                 The first fact to understand is that CoCalc runs on Linux, which is more like Mac OS X than Windows. The home directory of your project will be referred to as <c>~</c>, the <term>project root</term>. When you first open your project, <c>~</c> is the only folder you have. There are two main ways that files will be distributed to you through CoCalc by your instructor: <term>assignments</term> and <term>handouts</term>. It should be clear that assignments can be graded, while handouts are just all the various files your instructor may wish to share with you throughout the semester.
             </p>
             <p>
-                To keep things organized, let's assume that all assignments will be passed out in the <c>~/assign</c> folder and all handouts will be passed out in the <c>~/handouts</c> folder. If you're ready to work on an assigned version of this project, try to find the folder <c>~/assign/p1-welcome</c>. If you're working this on your own, you should make a temporary folder where you can work on problems which you are not ready to have collected; this will avoid a problem of having some of your work overwritten. I recommend using a folder named <c>~/working</c>.
+                To keep things organized, let's assume that all assignments will be passed out in the <c>~/assign</c> folder and all handouts will be passed out in the <c>~/handouts</c> folder. If you're ready to work on an assigned version of this project, try to find the folder <c>~/assign/p01-welcome</c>. If you're working this on your own, you should make a temporary folder where you can work on problems which you are not ready to have collected; this will avoid a problem of having some of your work overwritten. I recommend using a folder named <c>~/working</c>.
             </p>
     </introduction>
     <remark>
@@ -17,29 +17,32 @@
             CoCalc does not alert you when a new assignment or handout has been distributed. It is your responsibility to check and make sure that you are keeping up with everything distributed by the instructor. Assignment due dates are included as a <c>DUE_DATE.txt</c> file within the folder of an assignment, but you may or may not receive any other notification of an assignment.
         </p>
     </remark>
-    <exercise xml:id="pr-W-GSWSC">
+    <project xml:id="pr-W-GSWC">
         <title>Getting started with CoCalc</title>
-        <p>
-            Let's make sure that your file structure is organized and ready to work on material for this course.
-        </p>
+        <introduction>
+            <p>
+                Let's make sure that your file structure is organized and ready to work on material for this course.
+            </p>
+        </introduction>
         <task>
             <p>
-                Create a new folder within your project root called <c>working</c>, which will have path <c>~/working</c>. Create a subfolder <c>~/working/p1-welcome</c>. Create and open a file <c>~/working/p1-welcome/p1-submit.sagews</c>. 
+                Create a new folder within your project root called <c>working</c>, which will have path <c>~/working</c>. Create a subfolder <c>~/working/p01-welcome</c>. Create and open a file <c>~/working/p01-welcome/p01-submit.sagews</c>. 
             </p>
         </task>
         <task>
             <p>
-                Every assignment should have a nice header so it is clear who and what is being graded. Use a <c>%md</c> Markdown mode command to turn the first cell of <c>p1-submit.sagews</c> into a Markdown cell. In the cell, type the following:
+                Every assignment should have a nice header so it is clear who and what is being graded. Use a <c>%md</c> Markdown mode command to turn the first cell of <c>p01-submit.sagews</c> into a Markdown cell. In the cell, type the following:
                 <sidebyside>
                     <program language="sage">
                         <input>
                             %md
                             # Project 1
-                            ## Jebediah Springfield
+                            ## Author: H. Rider Haggard
+                            Collaborators: Allan Quatermain, Henry Curtis
                         </input>
                     </program>
                 </sidebyside>
-                It should be fairly obvious to you that unless your name is <q>Jebediah Springfield</q>, you should use your own name instead.
+                It should be fairly obvious to you that unless your name is <q>H. Rider Haggard</q>, you should use your own name instead; likewise list your actual collaborators rather than Misters Quatermain and Curtis.
             </p>
         </task>
         <task>
@@ -47,7 +50,33 @@
                 The point of Markdown is that it <em>greatly</em> simplifies the production of web text with basic formatting. Take a look at the Github guide <url href="https://guides.github.com/features/mastering-markdown/">Mastering Markdown</url>. CoCalc uses Markdown everywhere: in <c>.md</c> and <c>.markdown</c> files (obviously), but more interestingly in every chat window (see <xref ref="rmk-CoCalc_chat"/>) and description box.
             </p>
             <p>
-                Following the table syntax specified in the <url href="https://guides.github.com/features/mastering-markdown/">Mastering Markdown</url> guide, create a table in your <c>p1-submit.sagews</c> file consisting of the following information:
+                Since the project number is the primary header of the submission file and your name is the secondary header, each individual portion of the project should be a tertiary header. To put such a header at the beginning of a Markdown cell is straightforward:
+            </p>
+            <sidebyside>
+                <program language="sage">
+                    <input>
+                        %md
+                        ### Project 1.1. Getting started with CoCalc
+                    </input>
+                </program>
+            </sidebyside>
+            <p>
+                To put the same header at the beginning of a Sage cell, you can use the <c>md(...)</c> function, like so:
+                <sidebyside>
+                    <program language="sage">
+                        <input>
+                            md("### Project 1.1. Getting started with CoCalc")
+                        </input>
+                    </program>
+                </sidebyside>
+            </p>
+            <p>
+                Do so now.
+            </p>
+        </task>
+        <task>
+            <p>
+                Following the table syntax specified in the <url href="https://guides.github.com/features/mastering-markdown/">Mastering Markdown</url> guide, create a table in your <c>p01-submit.sagews</c> file consisting of the following information:
                 <sidebyside>
                     <tabular halign="center">
                         <row bottom="major">
@@ -64,29 +93,85 @@
                         </row>
                     </tabular>
                 </sidebyside>
-                The rows of your table should consist of the mathematics courses you have taken since you began your time at UT Tyler, by number and name, along with the semester you took the course and your <em>personal</em> feeling about the outcome of the course: you don't need to give a letter grade (although your professors have access to all of your course history, so it's not really private) but rather state what level of personal success you achieved in the course. For some students, earning a C is a great success, but for others it is a weak achievement at best. This is totally up to you and the level at which you believe you can perform.
+                The rows of your table should consist of the mathematics courses you have taken since you began your time at UT Tyler, by number and name, along with the semester you took the course and your <em>personal</em> feeling about the outcome of the course: you don't need to give a letter grade (although your professors have access to all of your course history, so it's not really private) but rather state what level of personal success you achieved in the course. For some students, earning a C is a great success, but for others it is a weak achievement at best. This is totally determined by you and the level at which you believe you can perform.
             </p>
         </task>
-        
-    </exercise>
+    </project>
+    <p>
+        There are many important and interesting other things built into CoCalc, including the ability to insert Libraries. Libraries are cut-and-paste subdirectories which have been put together by the development team at CoCalc and members of the CoCalc community to make it easier to use CoCalc for many, many topics. We won't be using them but you are encouraged to explore them at your leisure.
+    </p>
     <remark xml:id="rmk-CoCalc_chat">
+        <title>Chat windows</title>
+        <idx><h>CoCalc</h><h>chat window</h></idx>
         Every file in CoCalc gets its own chat window to allow the <em>Co</em>llaborative <em>Calc</em>ulation to be very easy. Chat is accessed through the chat bubble icon in the upper right of the CoCalc window; once open, a video camera icon will also appear allowing you to use the integrated <url href="https://jitsi.org">Jitsi</url> videoconferencing. If you chat in a chat window, all collaborators on that file will receive a notification; notably, your course instructor will be notified.
     </remark>
-    <exercisegroup>
-        <title>Introduction to programming in Sage using Python syntax</title>
+    <project xml:id="pr-W-GSWS">
+        <title>Getting started with Sage</title>
         <introduction>
             <p>
-                It is important to recognize that learning to program in Sage is very much like learning to program in Python, but there are many features of Sage which are not immediately available in Python. These will not be remarked upon, in general; if and when you need to write code in Python you will already know the necessary syntax by having learned Sage.
+                Go ahead and put a new Markdown header in signifying the beginning of the second part of the porject, like so:
             </p>
+            <sidebyside>
+                <program language="sage">
+                    <input>
+                        md("### Project 1.2. Getting started with Sage")
+                    </input>
+                </program>
+            </sidebyside>
             <p>
-                This portion of the project will walk you through the very basics of programming in Sage.
+                We're going to use basic data types as our introduction to Sage and the CoCalc interface.
             </p>
         </introduction>
-        <exercise>
-            <title>Sage is a super-calculator!</title>
-            <statement>
-                
-            </statement>
-        </exercise>
-    </exercisegroup>
+        <task>
+            Assign to the variable <c>my_age</c> your age as an integer number of years.
+        </task>
+        <task>
+            <introduction>
+                <p>
+                    Assign to the variable <c>my_name</c> the string consisting of your full given name. 
+                </p>
+                <figure xml:id="fig-string_slicing">
+                    <caption>Index positions for slicing strings</caption>
+                    <image xml:id="img-string-slicing">
+                        <latex-image>
+                            \begin{tikzpicture}
+                            \draw \foreach \j/\i/\c in {-16/0/t, -15/1/h, -14/2/i, -13/3/s, -12/4/ , -11/5/i, -10/6/s, -9/7/ , -8/8/a, -7/9/ , -6/10/s, -5/11/t, -4/12/r, -3/13/i, -2/14/n, -1/15/g, -0/16/ }{
+                                (-8 + 16*\i pt, -8pt) node [below] {\tiny\tt \i} 
+                                    -- ++(0,16pt) node [above] {\tiny\tt \j}
+                                (0 + 16*\i pt, -3pt) node [anchor=base] {\tt \c}
+                            };
+                            \end{tikzpicture}
+                        </latex-image>
+                    </image>
+                </figure>
+            </introduction>
+            <task>
+                <p>
+                    The <term>index</term> of a character within a string is its position in the string. In Sage, the individual entries of an indexed object like a string are accessed using <q>square bracket notation</q>: that is, if <c>i</c> is a valid index, then <c>my_name[i]</c> would give the single character in position number <c>i</c>. In <xref ref="fig-string_slicing" text="name"/>, the index of a character is given by the integer below the line to the left of the character.
+                </p>
+                <p>
+                     In a Markdown cell, give a possible explanation why it is that the initial index of a string is zero. Also explain to what the negative numbers in the figure refer.
+                </p>
+            </task>
+            <task>
+                <p>
+                    Another useful string manipulation is called <term>slicing</term>. Examine the slices <c>my_name[2:-2]</c>, <c>my_name[2:-2:2]</c>, and <c>my_name[2:-2:5]</c>, and explain the use of slicing in a Markdown cell.
+                </p>
+            </task>
+            <task>
+                Finally, what is the result of <c>my_name[::-1]</c>?
+            </task>
+        </task>
+
+        <conclusion>
+            It is always possible to delete extra cells from your Sage worksheets. At the beginning of a cell, pressing backspace will delete the division between the cell and its predecessor; likewise, at the end of a cell pressing delete will delete output of the cell and the division between the cell and its successor.
+        </conclusion>
+    </project>
+    <conclusion>
+        <title>Important final step</title>
+            <p>
+                When you're finished with the projects for a chapter, make sure to copy any important files from your <c>working</c> directory to the proper subdirectory of <c>~/assign/</c>. You should consider this to be your method of submitting a file to be graded. When the projects are collected to be graded, they are automatically copied from the <c>~/assign</c> directory to the root project for the course, on the instructor's account. If the files aren't in the right location, they won't be collected.
+            </p>
+
+    </conclusion>
 </exercises>

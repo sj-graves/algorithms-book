@@ -28,14 +28,14 @@
 
     <acknowledgement xml:id="AAM-FM-ack">
         <p>
-            Thank you to the University of Texas at Tyler students of Math 3380: Algorithms for Applied Mathematics. You were my guinea pigs as I initially drafted this manuscript as lecture notes.
+            Thank you to the University of Texas at Tyler students of Math 3380: Algorithms for Applied Mathematics. You have been my guinea pigs as I initially drafted this manuscript as lecture notes, then as I converted into an ebook, and then as I have repeatedly revised the text.
         </p>
         <p>
             Thank you also to Rob Beezer and David Farmer, the core of the team responsible for the PreTeXt XML processor which makes the authoring of this book independent of the precise means of publishing.
         </p>
     </acknowledgement>
 
-    <preface xml:id="AAM-FM-pref">
+<!--     <preface xml:id="AAM-FM-pref">
         <p>
             When researching the topic for the last chapter of this book, I was struck by the following passage in Yefim Dinitz’s discussion<xref ref="bib_Din2006"></xref> of the algorithm which bears his name: 
             <blockquote>
@@ -69,6 +69,6 @@
         <p>
             It is important to note that Sage already includes nearly all these algorithms, or in fact better versions of them, in its preinstalled software. The availability of these algorithms is not the desired result of this course, but rather that students build an understanding of how mathematical algorithms can be devised and implemented. Why? Because there are still questions which can be answered algorithmically which have either never been answered or never been asked.
         </p>
-    </preface>
+    </preface> -->
 
 </frontmatter>

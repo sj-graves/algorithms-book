@@ -11,7 +11,7 @@
         <p>
             There are a few common styles of text you'll read in this book which bear explanation:
             <table>
-                <caption>Meaning of text styles</caption>
+                <title>Meaning of text styles</title>
                 <tabular top="major" bottom="none">
                     <col halign="left" />
                     <col halign="left" width="40%"/>
@@ -30,6 +30,10 @@
                     <row>
                         <cell> <term>terminology</term> </cell>
                         <cell> the first use of a technical term </cell>
+                    </row>
+                    <row>
+                        <cell> <em>emphasized text</em> </cell>
+                        <cell> text being used emphatically! </cell>
                     </row>
 <!--                     <row>
                         <cell> <tt>plain text</tt> </cell>
@@ -60,8 +64,9 @@
             Finally, at the end of each chapter will be a section of <term>exercises</term>. These will range in difficulty and should remind you of the types of exercises you've seen in textbooks in the past.
         </p>
         <warning xml:id="warn_exercises">
+            <title>Exercise is good for you</title>
             <p>
-            The purpose of having exercises is similar to the purpose of physical exercise: it makes you stronger, or maintains what strength you already have. The same holds for mathematical exercises. <em>If you ignore exercises and only attempt work that is collected for a grade, you miss the purpose of education.</em>
+            Mathematical exercises serve much the same purpose as physical exercises: they both build strength in their respective area and help you to maintain strength you already have. Any exercises included in the text are solely included for the benefit of the reader <mdash/> the author can already solve them. <em>If you ignore exercises and only attempt work that is collected for a grade, you miss the purpose of education.</em>
             </p>
         </warning>
     </subsection>
@@ -71,6 +76,31 @@
             The central feature of the redesign of the text is to orient all content around chapter-level projects. These should be challenging but solvable using the content of the textbook, and lectures on course material should be a sort of <q>artistic accompaniment</q> to the text.
         </p>
     </subsection>
+    <conclusion>
+        <title>A philosophy</title>
+        <p>
+            There are many good strategies for effective thinking. The goal of this text is to help you think effectively about algorithms and computationally solving interesting mathematical problems. Paraphrasing a broad strategy from Burger and Starbird's <pubtitle>The 5 Elements of Effective Thinking</pubtitle>, we should:
+        </p>
+        <ol>
+            <li>Understand the fundamentals.</li>
+            <li>Make mistakes in order to learn.</li>
+            <li>Ask basic questions challenging what we know.</li>
+            <li>Follow the flow of ideas.</li>
+            <li>Change what we're doing to adapt and do <em>better</em>.</li>
+        </ol>
+        <p>
+            As a final thought, consider the following:
+        </p>
+        <blockquote>
+            <p>If a thing is worth doing, it is worth doing badly.</p>
+            <attribution>G. K. Chesterton, in <pubtitle>What's Wrong with the World</pubtitle></attribution>
+        </blockquote>
+        <p>
+            In this often-repeated quote, Chesterton was specifically discussing hobbies and recreational activities, but there is a great deal of truth in the quote when applied to <q>important</q> activities as well. Specifically, if a thing is worth doing, it's worth doing badly long enough to get it right.
+<!--             As an organizational philosophy for the course, let's think about ideas as follows:
+ -->
+        </p>
+    </conclusion>
     <reading-questions>
         <exercise>
             <statement>
