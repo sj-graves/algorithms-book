@@ -12,7 +12,7 @@
     ############################-->
     <subsection xml:id="ss-W-S-IO">
         <title>Input and output</title>
-        <technology xml:id="tech-W-S-sagecell">
+        <technology xml:id="tech-sagecell">
             <idx><h>Sage cell</h></idx>
             <title>Sage cells</title>
             <p>
@@ -64,28 +64,19 @@
             <title><c>print</c></title>
             <idx><h>Sage</h><h>commands</h><h><c>print</c></h></idx>
             <statement>
-                The normal way to produce output in Sage is using the <c>print</c> command. It can be used as a function or as a special keyword command.
+                The normal way to produce output in Sage is using the <c>print</c> command. In CoCalc it can be used as a function or as a special keyword command; as of January 2020, the embedded Sage cells require the new function call syntax for <c>print</c> statements.
                 <sage>
                     <input>
-                        print "This is a special command."
                         print("This is how you use print as a function.")
-                        print "There are some","special things about using","print","as a keyword command."
-                        print("What is","the difference?")
+                        print("The print","command is very","well behaved.")
                     </input>
                     <output>
-                        This is a special command.
                         This is how you use print as a function.
-                        There are some special things about using print as a keyword command.
-                        ('What is', 'the difference?')
+                        The print command is very well behaved.
                     </output>
                 </sage>
             </statement>
         </technology>
-        <exercise>
-            <statement>
-                What is the difference in trying to output a comma-separated list of values when <c>print</c> is used as a function rather than as a keyword command?
-            </statement>
-        </exercise>
     </subsection>
 <!--############################
     ############################-->
@@ -154,7 +145,7 @@
         <p>
             We have just seen some values with which Sage can work. Each of those values falls into some category of values, called a <term>type</term>.
         </p>
-        <definition xml:id="def-type">
+        <definition xml:id="def-datatype">
             <title>Data type</title>
             <idx><h>data type</h></idx>
             <statement>
@@ -172,8 +163,8 @@
             </statement>
         </definition>
         
-        <example>
-            <title>Different types of strings</title>
+        <technology xml:id="tech-str">
+            <title><c>str</c></title>
             <p>
                 Strings are represented in Sage by the <c>str</c> type. In order to input a string, it is necessary to enclose it in some form of matchinq quotation marks. The allowable forms are given in the table below.
             </p>
@@ -213,7 +204,7 @@
                     to boldly go where no one has gone before.'''
                 </input>
             </sage>
-        </example>
+        </technology>
         
         <exercise>
             <statement>What is the data type of <c>'4'</c>?</statement>
@@ -295,12 +286,12 @@
             <input>
                 a = 123456789
                 b = 951847
-                print a//b, a%b
+                print(a//b, a%b)
                 q = a//b
                 r = a%b
-                print a-(b*q+r)
+                print(a-(b*q+r))
                 q1, r1 = divmod(a,b)
-                print a-(b*q1+r1)
+                print(a-(b*q1+r1))
             </input>
             <output>
                 129 668526

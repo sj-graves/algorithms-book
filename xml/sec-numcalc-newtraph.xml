@@ -65,6 +65,7 @@
             <me>g'(x) = 6x^5 - 20x^4 + 24x^3 - 18x^2 + 10x - 2</me>.
         </p>
         <definition xml:id="def-linear_approximation">
+            <title>Linear approximation</title>
             <statement>
                 The <term>linear approximation</term> to a differentiable function <m>f(x)</m> at a point <m>(x_0, f(x_0))</m> is
                 <me>\ell(x) = f'(x_0)(x-x_0) + f(x_0).</me>

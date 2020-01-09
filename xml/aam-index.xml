@@ -34,6 +34,7 @@
         <xi:include href="./aam-fm.xml" />
 <!-- MAIN MATTER          -->
         <xi:include href="./ch-welcome.xml" />
+        <xi:include href="./ch-coding.xml" />
         <xi:include href="./ch-numcalc.xml" />
         <chapter xml:id="ch-P"><title>Permutations</title>
             <section xml:id="s-P-MB">

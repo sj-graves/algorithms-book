@@ -8,9 +8,9 @@
         </p>
     </assemblage-->
     <section xml:id="s-LOR-DEF">
-        <title>Definitions</title>
+        <title>Definitions and Technology</title>
         <p>
-            <list-of elements="definition" scope="book" />
+            <list-of elements="definition technology" scope="book" />
         </p>
     </section>
     <section xml:id="s-LOR-ATC">

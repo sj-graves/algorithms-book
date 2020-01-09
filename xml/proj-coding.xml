@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<exercises xml:id="pr-c">
+    <title>Intro to coding project</title>
+    <objectives>
+        <ol>
+            <li> Learn to use the simple container data types </li>
+            <li> Learn to use logical statements </li>
+            <li> Learn to use iteration </li>
+            <li> Learn to use <em>list comprehension</em> </li>
+            <li> Learn and implement some simple sorting algorithms </li>
+        </ol>
+    </objectives>
+    <exercise xml:id="ex-c-nsf">
+        <title>New submission file</title>
+        <statement>
+            Create a new working folder called <c>~/working/p02-coding</c> and a submission file inside it 
+            called <c>~/working/p02-coding/p02-submit.sagews</c>. Give the appropriate heading to the file.
+        </statement>
+    </exercise>
+    <exercisegroup xml:id="pr-c-ltd">
+        <title>Lists, tuples, and dictionaries</title>
+        <introduction>
+            <p>
+                A <term>container data type</term> is a data type which (unsurprisingly) contains other data. We've already met the first of these, the <term>string</term>. Strings are strange in Sage in that what they must contain are strings! The individual elements of a string are accessed by indexing, and we know that a nonempty string contains in each index a string of length 1. In that way, we can think of a long string as a finite sequence of single-character strings. We'll now explore some other ways to store finite sequences of other data.
+            </p>
+        </introduction>
+        <p>
+            The two most basic container data types are <term>lists</term> and <term>tuples</term>. A list is a finite sequence of arbitrary data values enclosed in square brackets. 
+        </p>
+        <p>
+            It should be apparent from the example listing that the contents of lists are not necessarily of any particular data type; in fact, list elements can be of any data type whatsoever, including other lists!
+        </p>
+        <exercise xml:id="ex-c-ltd-isl">
+            <title>Indexing and slicing lists</title>
+            <introduction>
+                Create a list <c>tens</c> consisting of the first ten positive integer multiples of 10, and a list <c>fives</c> consisting of the first twenty positive integer multiples of 5.
+            </introduction>
+            <ol>
+                <li>
+                    Assign the value <c>-50</c> to <c>tens[3]</c>. What is the output?
+                </li>
+                <li>
+                    Assign the value <c>fives</c> to <c>tens[7:9]</c>. What is the output?
+                </li>
+                <li>
+                    Explain in a Markdown cell whether or not lists are mutable, according to <xref ref="def-mutable" text="type-global"/>.
+                </li>
+            </ol>
+        </exercise>
+        <p>
+            A tuple is very similar, in that it is a finite sequence of arbitrary data values enclosed in parentheses. 
+        </p>
+        <listing xml:id="list-c-ltd-tuple">
+            <program language="sage">
+            <input>
+                a_tuple = (1, 2, 'reginald', pi, [1, 2, 3], sqrt(2))
+                print a_tuple
+                print type(a_tuple)
+            </input>
+            </program>
+            <caption>A simple example working with tuples</caption>
+        </listing>
+        <p>
+            Sometimes there is information to be learned by reading carefully the error messages provided by Sage; at other times, the error message will seem useless and incomprehensible.
+        </p>
+        <exercise xml:id="ex-c-ltd-ic">
+            <title>Immutable containers</title>
+            <statement>
+                Create a tuple <c>threes</c> consisting of the first ten positive integer multiples of 3. Attempt to assign the value 5 to <c>threes[3]</c> and explain in your own words the error which results.
+            </statement>
+        </exercise>
+        <p>
+            A good reason to use tuples rather than lists when writing a program is to enforce this immutability. Often it is important that the contents of a variable not be able to be altered without changing the entire value of the variable.
+        </p>
+        <exercise xml:id="ex-c-ltd-d">
+            <title>Dictionaries</title>
+            <statement>
+                <p>
+                    The figure below is an abstract graph. The circles are called vertices and the arrows each have a head (where the arrow tip is) and a tail.
+                </p>
+                <sidebyside  width="25%">
+                    <image xml:id="img-simple_graph_dictionary">
+                        <latex-image>
+                            \begin{tikzpicture}
+                            \graph[nodes={draw, circle, inner sep=1pt, minimum size = 0.5cm}]{e->{a ->{b,d}, c -> b}, d->c};
+                            \end{tikzpicture}
+                        </latex-image>
+                    </image>
+                </sidebyside>
+                <ol>
+                    <li>
+                        Create a dictionary <c>arrows</c> whose keys are strings of the labels of each vertex and the associated value of each key is a string consisting of all the vertiex labels which are at the head of an arrow for which the key is the tail.
+                    </li>
+                    <li>
+                        <c>dict</c> is a mutable container: change the value of the key <c>'e'</c> to the string <c>'bd'</c> by using <c>arrows['e']='bd'</c>.
+                    </li>
+                    <li>
+                        Print the new value of <c>arrows</c>.
+                    </li>
+                </ol>
+            </statement>
+            
+        </exercise>
+    </exercisegroup>
+</exercises>

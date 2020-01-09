@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<chapter xmlns:xi="http://www.w3.org/2001/XInclude"  xml:id="ch-W">
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude"  xml:id="ch-w">
     <title>Welcome to Algorithms for Applied Mathematics</title>
     <shorttitle>Welcome to AAM</shorttitle>
     <objectives>
@@ -7,11 +7,11 @@
             <li>Introduce the textbook, its organization, and its formatting.</li>
             <li>Introduce <url href="https://cocalc.com/">CoCalc</url>.</li>
             <li>Introduce the Sage programming language.</li>
-            <li> <xref ref="pr-W" text="title"/> and <xref ref="ex-W" text="title"/></li>
+            <li><xref ref="s-w-wp" text="title"/></li>
         </ol>
     </objectives>
 
-    <introduction xml:id="ch-W-intro">
+    <introduction xml:id="ch-w-intro">
         <p>
             There are many programming textbooks in the world, and any text teaching Python programming is just a step away from being a Sage textbook. There are many applied mathematics textbooks as well, covering continuous and discrete applied mathematics. Some of them contain instructions on how to implement their algorithms in one language or another. There are even books which attempt to teach the use of Sage to solve difficult mathematical problems.
         </p>
@@ -61,7 +61,7 @@
     <xi:include href="./ex-welcome.xml" />
 
     
-    <conclusion xml:id="c-W-conc">
+    <conclusion xml:id="c-w-conc">
         <title>Help! I've never programmed before!</title>
         <p>
             For some of you, this course will provide your first experience of writing code. This is great! We'll try to ease you into programming through chapter-level projects at a rate of about one per week. There are some very important tips for new programmers:

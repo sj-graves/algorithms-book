@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="s-C-F">
+    <title>Functional programming</title>
+    <introduction>
+        <p>
+            This is some placeholder introductory text.
+        </p>
+    </introduction>
+    <subsection>
+        <title>A subsection!</title>
+        <p>
+            This is fake news!
+        </p>
+    </subsection>
+    <conclusion>
+        <p>
+            This is the bottoms.
+        </p>
+    </conclusion>
+</section>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="s-c-ltd">
+    <title>Containers</title>
+    <introduction>
+        <title>Lists, tuples, and dictionaries: the simple containers</title>
+        <p>
+            Let's move beyond the simple arithmetic and consider the purpose for which computers were invented: to do those simple arithmetic tasks repeatedly over large collections of numbers. Recall that the first devices which could really be called computers were built in order to rapidly (for the time) perform the calculations necessary to break state-of-the-art cryptography during World War II. We'll discuss these later in the semester.
+        </p>
+        <p>
+            If we want to be able to work with large collections of numbers, we need to come up with a way of representing them to the computer. The three easiest ways to work in Sage with collections of data are <term>lists</term>, <term>tuples</term>, and <term>dictionaries</term>.
+        </p>
+
+    </introduction>
+    <subsection xml:id="ss-c-ltd-l">
+        <title>Lists</title>
+        <introduction>
+            The simplest of these three containers, and the most frequently useful, is the <term>list</term>. We're not going to try to define a list as a mathematical object. Some things you just have to understand.
+        </introduction>
+        <technology xml:id="tech-list">
+            <title><c>list</c></title>
+            <statement>
+                A Sage <c>list</c> is a finite comma-separated sequence of data enclosed in <em>square brackets</em>; that is, <c>[</c> and <c>]</c>. Here's a basic example.
+            </statement>
+            <listing xml:id="list-simple_lists">
+                <program language="sage">
+                    <input>
+                        a_list = [1, 2, "Bob", pi, [1, 2, 3], sqrt(2)]
+
+                        print a_list
+                        print type(a_list)
+                    </input>
+                </program>
+                <caption>A simple example working with lists.</caption>
+            </listing>
+        </technology>
+
+        <p>
+            Individual positions in a list are indexed in the same way as strings (look back to <xref ref="fig-string_slicing" /> for details), and slicing also works in exactly the same way. An interesting difference between strings and lists is that you can individually change list elements but not string elements: this is the difference between <term>mutable</term> and <term>immutable</term> containers.
+        </p>
+        <definition xml:id="def-mutable">
+            <title>Mutable containers</title>
+            <statement>
+                A container data type is <term>mutable</term> if the items contained in the container can be changed one-by-one using indexing. If this is impossible, we call the container <term>immutable</term>.
+            </statement>
+        </definition>
+        <p>
+            You'll discover the difference in application of mutable and immutable data types in <xref ref="pr-c-ltd" text="type-global" />.
+        </p>
+
+    </subsection>
+    <subsection xml:id="ss-c-ltd-t">
+        <title>Tuples</title>
+        <introduction>
+            <p>
+                Mathematically, tuples have a longer and more specific name <term>ordered <m>n</m>-tuples</term>.
+            </p>
+            <definition xml:id="def-tuple">
+                <title>Ordered tuple</title>
+                <statement>
+                    An <term>ordered pair</term>, written <m>(x,y)</m> is a mathematical object consisting of two <term>components</term>, the arrangement of which matters: that is, if <m>x\neq y</m> then <m>(x,y)\neq (y,x)</m>. An <term>ordered triple</term> is the extension of this to three components. In general an <term>ordered <m>n</m>-tuple</term> consists of <m>n</m> components whose arrangement matters, so that <me>(x_1,x_2,\dotsc,x_n) = (y_1,y_2,\dotsc,y_n)</me> if and only if <m>x_i = y_i</m> for each <m>i\in\set{1,2,\dotsc,n}</m>.
+                </statement>
+            </definition>
+        </introduction>
+        <technology xml:id="tech-tuple">
+            <title><c>tuple</c></title>
+            <p>
+                A Sage <c>tuple</c> is a finite comma-separated sequence of data enclosed in <em>parentheses</em>; that is, <c>(</c> and <c>)</c>.
+            </p>
+            <listing xml:id="list-simple_tuples">
+                <program language="sage">
+                    <input>
+                        a_tuple = (1, 2, "Bob", pi, (1, 2, 3), sqrt(2))
+                        
+                        print a_tuple
+                        print type(a_tuple)
+                    </input>
+                </program>
+                <caption>A simple example working with tuples.</caption>
+            </listing>
+        </technology>
+    </subsection>
+    <subsection xml:id="ss-c-ltd-D">
+        <title>Dictionaries</title>
+        <p>
+            A <term>dictionary</term> is the third simple container data type. The interesting difference of a dictionary is that the indices of a dictionary, called <term>keys</term>, need not be integers! The restriction on keys is essentially that they be immutable containers or simple data types <mdash /> it's slightly more complicated than that, but this suffices as a basic introduction. The <term>values</term> associated with each key can be of any type, including other dictionaries. 
+        </p>
+        <example xml:id="exmp-dictionary">
+            <title>A use case for dictionaries</title>
+            <p>
+                Consider the normal information given out by the instructor of a class at the beginning of the semester. You learn their name, their office location, office hours, email address, maybe a phone number <mdash /> all sorts of information. But what is the <q>natural</q> order of those pieces of information? If you have many professors, maybe you would store this information in a spreadsheet, where each row represents a distinct member of the faculty and each column represents a different piece of associated information.
+            </p>
+            <p>
+                Storing each of these pieces of data as a value attached to the appropriately named key string in a dictionary is a natural way to represent this data.
+            </p>
+        </example>
+        <technology xml:id="tech-dict">
+            <title><c>dict</c></title>
+            <p>
+                The implementation of a dictionary in Sage is the <c>dict</c> data type, and these can be constructed in several ways. The first way is to provide the keys and values explicitly, as a finite comma-separated sequence of terms of the form <c>key : value</c>, enclosed in <q>curly brackets</q>, <c>{</c> and <c>}</c>.
+            </p>
+            <listing xml:id="list-simple_dictionaries">
+                <program language="sage">
+                    <input>
+                        a_dict = {'a_key':(1,2,34), (15, 'bob'):"here's a value"}
+                        
+                        print a_dict
+                        print type(a_dict)
+                    </input>
+                </program>
+                <caption>A simple example using the <c>{key:value}</c> construction of a <c>dict</c>.</caption>
+            </listing>
+            <p>
+                Alternatively the keys and values can be associated by being the first and second components in a list of ordered pairs, all wrapped in a <c>dict(...)</c> constructor.
+            </p>
+            <listing xml:id="list-tuple_dictionaries">
+                <program language="sage">
+                    <input>
+                        pair_list = [('a_key', (1,2,34)), ((15, 'bob'), "here's a value")]
+                        b_dict = dict(pair_list)
+                        
+                        print b_list
+                        print type(b_list)
+                    </input>
+                </program>
+                <caption>An example constructing a <c>dict</c> from a list of ordered pairs. </caption>
+            </listing>
+        </technology>
+        <p>
+            The nearest mathematical object to a dictionary is an abstract function.
+        </p>
+        <definition xml:id="def-function">
+            <title>Function</title> 
+            <idx>relation</idx>
+            <idx><h>relation</h><h>well-defined relation</h></idx>
+            <idx><h>product</h><h>cartesian product</h></idx>
+            <idx><h>function</h><h>mathematical function</h></idx>
+            <statement>
+                Suppose <m>X</m> and <m>Y</m> are abstract mathematical sets, and define the <term>cartesian product of <m>X</m> and <m>Y</m></term> to be the set of ordered pairs with first component an element of <m>X</m> and second component an element of <m>Y</m>; that is, <me>X\times Y = \set{(x,y)|x\in X\text{ and }y\in Y}.</me> A <term>relation <m>R</m> from <m>X</m> to <m>Y</m></term> is a subset of <m>X\times Y</m>. The relation is <term>well-defined</term> if each element of the <term>domain <m>X</m></term> is related to at most one element of the <term>codomain <m>Y</m></term>. Well-defined relations are mathematical <term>functions</term>.
+            </statement>
+        </definition>
+        <conclusion>
+            Using a clever combination of these three container data types assigned to various variables can provide almost all the simple data storage a beginning programmer can need. This is especially true due to the flexibility of list and dictionary comprehension which we will explore in <xref ref="s-c-c" text="phrase-hybrid" />.
+        </conclusion>
+    </subsection>
+    <subsection xml:id="ss-c-ltd-meth">
+        <title>Methods</title>
+        <p>
+            A powerful feature of modern programming is the use of data methods, which can be considered as operations which are so intrinsicly important to a type of data that they are actually part of the definition of the data type.
+        </p>
+        <technology xml:id="tech-c-ltd-meth-methods">
+            <title>Using methods</title>
+            <p>
+                In Sage, if a variable named <c>my_var</c> has a method called <c>my_method</c>, it is accessed using <c>my_var.my_method(...)</c>.
+            </p>
+        </technology>
+    </subsection>
+</section>

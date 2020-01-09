@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<exercises xml:id="pr-NC">
+<exercises xml:id="pr-nc">
     <title>Numerical Calculus Project</title>
     <project>
         <title>Basic introduction to programming in Sage</title>
@@ -27,7 +27,7 @@
             </task>
         </task>
     </project>
-    <project xml:id="pr-NC-BICS">
+    <project xml:id="pr-nc-BICS">
         <title>Basic introduction to programming in Sage</title>
         <prelude>
             <p>
@@ -63,7 +63,7 @@
             This is anoter task!
         </task>
     </project>
-    <project xml:id="pr-NC-ICA">
+    <project xml:id="pr-nc-ICA">
         <title>Implementing calculus approximations</title>
         <introduction>
             <p>

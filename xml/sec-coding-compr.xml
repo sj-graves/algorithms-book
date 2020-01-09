@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="s-c-c">
+    <title>Comprehension</title>
+    <introduction>
+        <title>A power tool for constructing iterables</title>
+        <p>
+            Mathematicians often use a very compact description of large sets called set-builder notation. When it is first encountered it can be quite confusing, but it is so overwhelmingly useful in mathematics that it merits some discussion. In fact, set-builder notation is so useful that something very similar, called comprehension, is a standard part of the Python programming language which is inherited in Sage!
+        </p>
+    </introduction>
+    <subsection xml:id="ss-c-c-sbn">
+        <title>Set-builder notation</title>
+        <p>
+            Let's take a very basic mathematical example and use it to explain set-builder notation: say that <m>S</m> is the set of all non-negative integers which are the perfect square of another non-negative integer. This is easy enough to represent in plain English, and if we tolerate the use of <q>ellipsis notation</q> to denote a continued pattern, we could write
+            <me>S = \set{0, 1, 4, 9, 16, 25, \dotsc}.</me>
+        </p>
+        <p>
+            The trouble with this way of writing the set is that it doesn't explicitly state all the elements of the set, but instead provides a pattern which allows a reader to guess what the next elements are. Can we do better? Yes we can! Consider writing a set in the format where first we tell you what type of things are the elements and then we provide a condition <m>P</m> which must be satisfied for an element to be included. This is generally denoted in either of the two notations
+            <me>A = \set{x:P(x)} = \set{x\mid P(x)}.</me>
+            Both of these are read as <q><m>A</m> is the set of all <m>x</m> such that <m>P(x)</m> is true.</q>
+        </p>
+        <p>
+            This is <term>set-builder</term> notation. The set-builder notation for our set <m>S</m> described above is 
+            <me>S = \set{x^2\mid x\in\N}</me>
+            where <m>\in</m> means <q>is an element of</q> and <m>\N</m> is the set containing all the natural numbers, which are the non-negative integers.
+            <footnote>In this class, we will consider 0 to be a natural number. The set of integers greater than zero is the set <m>\Z^+</m>.</footnote>
+        </p>
+        <p>
+            Set builder notation is great for describing infinite sets in abstract mathematics, since the real notion of <q>knowing a set</q> is exactly the notion of being able to say whether or not a particular object belongs to that set. This is simple, since defining <m>A=\set{x\min P(x)}</m> allows one to say <m>P(y)</m> is false, so <m>y\notin A</m>.
+        </p>
+    </subsection>
+    <subsection xml:id="ss-c-c-lc">
+        <title>List comprehension</title>
+        <p>
+            The easiest type of comprehension to begin with is a <term>list comprehension</term>. Consider a very short <c>for</c> loop which squares every element of a list of numbers.
+        </p>
+        <listing xml:id="list-c-c-for_loop">
+            <program language="sage">
+                <input>
+                    old_list = [1,2,3,4,5,6,7,8,9,317]
+                    new_list = []
+                    for x in old_list:
+                        new_list.append(x^2)
+                    
+                    print(old_list)
+                    print(new_list)
+                </input>
+            </program>
+            <caption>A simple <c>for</c> loop which can be easily replaced by a list comprehension.</caption>
+        </listing>
+        <p>
+            If we were to describe <c>new_list</c> after the code runs, we could do so easily by using set-builder notation. Letting <m>T</m> be the set containing the elements of <c>new_list</c> and <m>S</m> the set containing the elements of <c>old_list</c>, we would simply write <me>T = \set{x^2 \mid x\in S}.</me> That tells us that <c>new_list</c> is the list of squared elements of <c>old_list</c>. List comprehension replaces the two lines of the <c>for</c> loop with a single line.
+        </p>
+        <listing xml:id="list-c-c-list_comp">
+            <program language="sage">
+                <input>
+                    old_list = [1,2,3,4,5,6,7,8,9,317]
+                    new_list = [x^2 for x in old_list]
+
+                    print(old_list)
+                    print(new_list)
+                </input>
+            </program>
+            <caption>A simple list comprehension for squaring.</caption>
+        </listing>
+        <p>
+            Since lists can easily contain other containers, the <q>action</q> part of the list comprehension can easily be another container <mdash /> even another list comprehension! Sometimes more strangely we can also iterate over the elements of a list comprehension when building a list comprehension.
+        </p>
+        <sage>
+            <input>
+                new_data = [[x^2 for x in in_row] for in_row in [range(1+x) for x in range(5)]]
+                print(new_data)
+            </input>
+        </sage>
+        <p>
+            You can also include a condition in your comprehension!
+        </p>
+        <exercise xml:id="ex-c-c-odd_squares">
+            <title>Comprehensions with conditions</title>
+            <statement>
+                What is the result of <c>[(x,x^2,x^3) for x in range(50) if x%2==0]</c>?
+            </statement>
+        </exercise>
+    </subsection>
+    <subsection xml:id="ss-c-c-oc">
+        <title>Other comprehensions</title>
+        <p>
+            Creating a dictionary via a comprehension is very easy and is sometimes useful, and follows the natural scheme: <c>{k(x):v(x) for x in an_iterable}</c>.
+        </p>
+        <listing xml:id="list-c-c-dict_comp">
+            <program language="sage">
+                <input>
+                    a_string = "This is a strange string."
+                    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+                    a_dict = {c:a_string.find(c) for c in alphabet if c in a_string}
+
+                    print(a_dict)
+                </input>
+            </program>
+            <caption>An example of a dictionary comprehension.</caption>
+        </listing>
+        <exercise xml:id="ex-c-c-dict_comp">
+            <title>Comprehensions without conditions</title>
+            <statement>
+                Read <c>help(str.find)</c> and explain what would be the result of <xref ref="list-c-c-dict_comp" text="global-type" /> if the condition <c>if c in a_string</c> was removed.
+            </statement>
+        </exercise>
+    </subsection>
+</section>

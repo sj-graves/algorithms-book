@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xmlns:xi="http://www.w3.org/2001/XInclude"  xml:id="ch-C">
+    <title>A (fast) introduction to coding</title>
+    <shorttitle>Intro to coding</shorttitle>
+    <introduction>
+        <p>
+            To really begin life as a programmer you only need to understand a few essentials, and everything else builds from these. The basic ideas are how to store more than one piece of related data at a time (containers), how to make decisions based upon the value of variables (conditionals) and how to repeat processes (iteration), and how to make this repeatable for a variety of input data (functional programming). 
+        </p>
+        <p>
+            We add here a section on <q>comprehension</q>, a Python programming technique which combines containers, conditionals, and iteration into a power tool for modern programming.
+        </p>
+    </introduction>
+    <xi:include href="sec-coding-ltd.xml" />
+    <xi:include href="sec-coding-itercond.xml" />
+    <xi:include href="sec-coding-compr.xml" />
+    <xi:include href="sec-coding-funcs.xml" />
+    <xi:include href="proj-coding.xml" />
+
+</chapter>

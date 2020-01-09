@@ -68,9 +68,11 @@
                 Who are the collaborators on your CoCalc projects?
             </p>
         </exercise>
-        <p>
-            An important feature of CoCalc which you will use throughout this course for communication with your professor is the integrated chat feature.
-        </p>
+    <remark xml:id="rmk-CoCalc_chat">
+        <title>Chat windows</title>
+        <idx><h>CoCalc</h><h>chat window</h></idx>
+        Every file in CoCalc gets its own chat window to allow the <em>Co</em>llaborative <em>Calc</em>ulation to be very easy. Chat is accessed through the chat bubble icon in the upper right of the CoCalc window; once open, a video camera icon will also appear allowing you to use the integrated <url href="https://jitsi.org">Jitsi</url> videoconferencing. If you chat in a chat window, all collaborators on that file will receive a notification; notably, your course instructor will be notified.
+    </remark>
     </subsection>
     <reading-questions>
         <exercise>
