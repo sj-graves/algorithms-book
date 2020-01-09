@@ -36,7 +36,7 @@
         <xi:include href="./ch-welcome.xml" />
         <xi:include href="./ch-coding.xml" />
         <xi:include href="./ch-numcalc.xml" />
-        <chapter xml:id="ch-P"><title>Permutations</title>
+<!--         <chapter xml:id="ch-P"><title>Permutations</title>
             <section xml:id="s-P-MB">
                 <title>Mathematical basics</title>
             </section>
@@ -85,7 +85,7 @@
             <section xml:id="s-MST-IKA"><title>Implementing Kruskal's algorithm</title></section>
             <section xml:id="s-MST-H"><title>Advanced topic: Heaps</title></section>
         </chapter>
-        <xi:include href="./ch-maxflow.xml" />
+        <xi:include href="./ch-maxflow.xml" /> -->
         
 <!-- BACK MATTER          -->
         <xi:include href="./aam-bm.xml" />

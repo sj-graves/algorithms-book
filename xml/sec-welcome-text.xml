@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section xml:id="s-W-TB">
+<section xml:id="s-w-tb">
     <title>Organization of the text</title>
     <introduction>
         <p>
-            The book is divided into chapters, each of which centers around the project at the end of the chapter; the goal is that each chapter will be covered in a regular week of classes. The intention is that the vast majority of people reading the book will do so in the browser as a webpage, in which case each section of a chapter is its own page. Errors in the online web version of the book will be caught regularly, corrected, and pushed out to Github; see <xref ref="AAM-BM-AR" text="auto"/>.
+            The book is divided into chapters, each of which centers around the project at the end of the chapter; the goal is that each chapter will be covered in a regular week of classes. The intention is that the vast majority of people reading the book will do so in the browser as a webpage, in which case each section of a chapter is its own page. Errors in the online web version of the book will be caught regularly, corrected, and pushed out to Github; see <xref ref="aam-bm-ar" text="title"/>.
         </p>
     </introduction>
-    <subsection xml:id="ss-W-TB-NT">
+    <subsection xml:id="ss-w-tb-nt">
         <title>Notation and terminology</title>
         <p>
             There are a few common styles of text you'll read in this book which bear explanation:
@@ -43,7 +43,7 @@
             </table>
         </p>
     </subsection>
-    <subsection xml:id="ss-W-TB-CRQE">
+    <subsection xml:id="ss-w-tb-crqe">
         <title>Checkpoints, reading questions, and exercises</title>
         <p>
             The intention in the current revision of the text is to include many questions of several types. These different types serve different needs.
@@ -70,7 +70,7 @@
             </p>
         </warning>
     </subsection>
-    <subsection xml:id="ss-W-TB-P">
+    <subsection xml:id="ss-w-tb-p">
         <title>Projects</title>
         <p>
             The central feature of the redesign of the text is to orient all content around chapter-level projects. These should be challenging but solvable using the content of the textbook, and lectures on course material should be a sort of <q>artistic accompaniment</q> to the text.
