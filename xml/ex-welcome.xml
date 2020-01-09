@@ -34,7 +34,7 @@
                     <program language="sage">
                         <input>
                             count = 1
-                            print "{i}: Input an integer".format(i = count)
+                            print("{i}: Input an integer".format(i = count))
                             while count &lt; 20:
                                 in_val = raw_input()
                                 try:
@@ -42,7 +42,7 @@
                                     break
                                 except:
                                     count = count + 1
-                                    print "{i}:That's no integer. Try again.".format(i = count)
+                                    print("{i}:That's no integer. Try again.".format(i = count))
                         </input>
                     </program>
                 </sidebyside>

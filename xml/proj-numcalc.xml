@@ -93,7 +93,7 @@
                     x = var('x')
                     f(x) = 3-x^2
                     a,b,m = bisection(f,0,4)
-                    print m[-1]
+                    print(m[-1])
                 </input>
             </sage>
         </task>

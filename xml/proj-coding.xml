@@ -54,8 +54,8 @@
             <program language="sage">
             <input>
                 a_tuple = (1, 2, 'reginald', pi, [1, 2, 3], sqrt(2))
-                print a_tuple
-                print type(a_tuple)
+                print(a_tuple)
+                print(type(a_tuple))
             </input>
             </program>
             <caption>A simple example working with tuples</caption>

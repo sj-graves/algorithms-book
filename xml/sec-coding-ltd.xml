@@ -26,8 +26,8 @@
                     <input>
                         a_list = [1, 2, "Bob", pi, [1, 2, 3], sqrt(2)]
 
-                        print a_list
-                        print type(a_list)
+                        print(a_list)
+                        print(type(a_list))
                     </input>
                 </program>
                 <caption>A simple example working with lists.</caption>
@@ -71,8 +71,8 @@
                     <input>
                         a_tuple = (1, 2, "Bob", pi, (1, 2, 3), sqrt(2))
                         
-                        print a_tuple
-                        print type(a_tuple)
+                        print(a_tuple)
+                        print(type(a_tuple))
                     </input>
                 </program>
                 <caption>A simple example working with tuples.</caption>
@@ -103,8 +103,8 @@
                     <input>
                         a_dict = {'a_key':(1,2,34), (15, 'bob'):"here's a value"}
                         
-                        print a_dict
-                        print type(a_dict)
+                        print(a_dict)
+                        print(type(a_dict))
                     </input>
                 </program>
                 <caption>A simple example using the <c>{key:value}</c> construction of a <c>dict</c>.</caption>
@@ -118,8 +118,8 @@
                         pair_list = [('a_key', (1,2,34)), ((15, 'bob'), "here's a value")]
                         b_dict = dict(pair_list)
                         
-                        print b_list
-                        print type(b_list)
+                        print(b_list)
+                        print(type(b_list))
                     </input>
                 </program>
                 <caption>An example constructing a <c>dict</c> from a list of ordered pairs. </caption>
