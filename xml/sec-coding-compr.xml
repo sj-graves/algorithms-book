@@ -104,5 +104,55 @@
                 Read <c>help(str.find)</c> and explain what would be the result of <xref ref="list-c-c-dict_comp" text="global-type" /> if the condition <c>if c in a_string</c> was removed.
             </statement>
         </exercise>
+        <p>
+            Finally, attempting to create a <q>tuple comprehension</q> does something strange.
+        </p>
+        <sage>
+            <input>
+                compr = (x^2 for x in range(5))
+                print(compr)
+                print(type(compr))
+            </input>
+            <output>
+                &lt;generator object &lt;genexpr&gt; at 0x7fdd703d7f48&gt;
+                &lt;class 'generator'&gt;
+            </output>
+        </sage>
+        <p>
+             The output of <c>(x^2 for x in range(5))</c> is actually a <term>generator object</term>, which stores a rule for producing the elements of <c>[x^2 for x in range(5)]</c> without actually using up the memory to store the list. This is more memory efficient if you're working with large lists and is marginally faster to iterate through, but the strongest advantage of <c>generator</c> objects is that they allow Sage to iterate through <term>countably infinite</term> sets!
+        </p>
+        <technology xml:id="tech-break">
+            <title><c>break</c> command</title>
+            <p>
+                A <c>break</c> command inside a loop will, when executed, immediately terminate the loop.
+            </p>
+        </technology>
+        <exercise xml:id="ex-c-c-br">
+            <title>Countable sets</title>
+            <sage>
+                <input>
+                    for x in ZZ:
+                        print("{}\t->\t{}".format(x, x^2))
+                        if x^2 > 100:
+                            break
+                </input>
+            </sage>
+            <p>
+                Execute the above code and explain what <c>ZZ</c> is in Sage.
+            </p>
+        </exercise>
+        <technology xml:id="tech-nonprinting">
+            <title>Non-printing control characters</title>
+            <p>
+                In strings, the character <c>\</c> serves a special role as the <term>escape character</term>. There are certain characters which cannot be represented on a keyboard which are important to include in strings. For instance, in order to print a <term>line break</term> inside a string, the special escaped character <c>\n</c> must be included in the string; another special character is <c>\t</c> which inserts a tab.
+            </p>
+            <sidebyside>
+                <program language="sage">
+                    <input>
+                        print("Here's the first line.\nHere's the second.\n\tThe third line is indented.")
+                    </input>
+                </program>
+            </sidebyside>
+        </technology>
     </subsection>
 </section>

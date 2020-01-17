@@ -1,20 +1,206 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<section xml:id="s-C-F">
+<section xml:id="s-c-f">
     <title>Functional programming</title>
     <introduction>
         <p>
-            This is some placeholder introductory text.
+            While we can now write small snippets of code, they are necessarily very specific. More importantly, if we have a longer task which requires at several different points the same process in a non-iterative way, we are forced to have the same code appear in our program at multiple points! This is particularly annoying if you find that there is a <q>bug</q> in that repeated code, because you then have to find all of the places where the code occurs and make sure all are changed. A better way to write code that is <term>generalized</term> and <term>encapsulated</term> is to write your own functions.
         </p>
     </introduction>
-    <subsection>
-        <title>A subsection!</title>
+    <subsection xml:id="ss-c-f-udf">
+        <title>User-defined functions</title>
         <p>
-            This is fake news!
+            Much as with mathematical functions, programming functions can have input and output. A shocking difference is that a programming function need not have any input and might not produce any output! For this reason it is also appropriate to call a programmed function a <term>procedure</term> or <term>subroutine</term>. The inputs to a function are called its <term>arguements</term>, and the output from a function is called its <term>return value</term>. 
         </p>
+        <technology xml:id="tech-def">
+            <title><c>def</c> functions</title>
+            <p>
+                The typical way to define a function is to use the <c>def</c> keyword. A line beginning with <c>def</c> indicates that the word following <c>def</c> is the identifier of a function, and its arguments are specified immediately afterward in parentheses, followed finally by a colon and an indented block of code. If that code executes a <c>return</c> command, the associated value is returned to where the function was called. If not, the return value is the special value <c>None</c> of type <c>NoneType</c>.
+            </p>
+        </technology>
+        <listing>
+            <caption>A minimal working function defined using <c>def</c> with no arguments and no return value.</caption>
+            <program language="sage">
+                <input>
+                    def my_func():
+                        pass
+                </input>
+            </program>
+        </listing>
+        <example xml:id="exmp-c-f-udf-def">
+            <title>Working with <c>def</c></title>
+            <p>
+                If the indented block of code contains a <c>return</c> keyword, upon executing that line the value returned is sent back to wherever the function was called.
+            </p>
+            <sage>
+                <input>
+                    def squares(n):
+                        out = ""
+                        for i in range(n):
+                            out = out + str(i^2) + ", "
+                        print("Squares: {}".format(out[:-2]))
+                        return i
+                </input>
+            </sage>
+            <p>
+                Notice that executing the above Sage cell doesn't actually seem to do anything. However, executing the next cell will show that the function as defined is usable.
+            </p>
+            <sage>
+                <input>
+                    def squares(n):
+                        out = ""
+                        for i in range(n):
+                            out = out + str(i^2) + ", "
+                        print("Squares: {}".format(out[:-2]))
+                        return i
+
+                    print(squares(15))
+                </input>
+            </sage>
+            <p>
+                Using a <c>print</c> statement within a function produces output immediately upon execution. However the returned value and the printed output are different.
+            </p>
+            <sage>
+                <input>
+                    def squares(n):
+                        out = ""
+                        for i in range(n):
+                            out = out + str(i^2) + ", "
+                        print("Squares: {}".format(out[:-2]))
+                        return i
+
+                    big = squares(15)
+                    big^2
+                </input>
+            </sage>
+            <p>
+                Let's go back to that do-nothing function and see what it gives as a return value.
+            </p>
+            <sage>
+                <input>
+                    def my_func():
+                        pass
+                    
+                    print(my_func())
+                    print(type(my_func()))
+                </input>
+            </sage>
+            <p>
+                The function <c>squares</c> written above has one argument, <c>n</c>. From the use of the value <c>n</c> in the code it is clear that <c>n</c> should be a meaningful input to the <c>range</c> function. The function <c>squares</c> will accept as input anything, and inside the function specification the value of that <q>anything</q> is <c>n</c>. If the input provided makes something bad happen inside of the code, an error should occur. The error may not be easy to decipher.
+            </p>
+            <sage>
+                <input>
+                    def squares(n):
+                        out = ""
+                        for i in range(n):
+                            out = out + str(i^2) + ", "
+                        print("Squares: {}".format(out[:-2]))
+                        return i
+                    
+                    print(squares("reginald"))
+                </input>
+            </sage>
+            <p>
+                It is possible to speficy a <term>default value</term> for an argument, a value which is to be used for an argument if nothing else is specificd. This is actually what happend when we evaluate <c>range(5)</c>: the real function call is <c>range(0, 5, 1)</c> but the values of 0 and 1 are specified as defaults.
+            </p>
+            <sage>
+                <input>
+                    print(range(0,5,1)==range(5))
+                </input>
+            </sage>
+            <p>
+                A default value is specified in a <c>def</c> statement by assigning the default value to the argument in the list of arguments.
+            </p>
+            <sage>
+                <input>
+                    def squares(n, i=-1):
+                        out = ""
+                        for i in range(n):
+                            out = out + str(i^2) + ", "
+                        print("Squares: {}".format(out[:-2]))
+                        return i
+                    
+                    squares(-5)
+                </input>
+            </sage>
+            <p>
+                As you can see, arguments can have defaults or not; the only rule is that arguments which do not have default values have to come first, because they are <em>mandatory</em> arguments.
+            </p>
+       </example>
     </subsection>
-    <conclusion>
+    <subsection xml:id="ss-c-f-af">
+        <title><q>Anonymous</q> functions</title>
         <p>
-            This is the bottoms.
+            When we want to write a simple mathematical function, often the best way to express it is algebraically: for instance, <m>f(x) = x^2 - 2x + 1</m>. To accomplish the same thing in Sage we use the <c>lambda</c> keyword. This strange keyword comes from an older programming language, Scheme.
         </p>
-    </conclusion>
+        <technology xml:id="tech-lambda">
+            <title><c>lambda</c> functions</title>
+            <p>
+                A <c>lambda</c> function is a simple function which requires at most one line of code and returns the value obtained by executing that code for the given inputs. For example, if we want to write a simple function to replicate <m>f(x) = x^2-2x+1</m> we can write
+            </p>
+            <sidebyside>
+                <program language="sage">
+                    <input>
+                        f = lambda x: x^2 - 2*x + 1
+                    </input>
+                </program>
+            </sidebyside>
+        </technology>
+        <exercise xml:id="ex-f-c-af-padding">
+            <title>Padding a string</title>
+            <p>
+                Explore the following lambda function and explain what it does.
+            </p>
+            <sidebyside>
+                <program language="sage">
+                    <input>
+                        pad_left = lambda a_str, spaces: " "*spaces + a_str
+                    </input>
+                </program>
+            </sidebyside>
+        </exercise>
+    </subsection>
+    <subsection xml:id="ss-c-f-nf">
+        <title>Nesting functions</title>
+        <p>
+            Functions declared using <c>def</c> can contain other functions in their definitions. You should think of these as <term>helper functions</term>, especially when they are <c>lambda</c> functions.
+        </p>
+        <example xml:id="exmp-c-f-nf">
+            <title>A nesting example</title>
+            <p>
+                Suppose we want to write an <term>absolute value function</term>. This simple piecewise function can be written using just an if statement.
+            </p>
+            <sidebyside>
+                <program language="sage">
+                    <input>
+                        def absval(yval):
+                            if yval &lt; 0:
+                                return -yval
+                            else:
+                                return yval
+                    </input>
+                </program>
+            </sidebyside>
+            <p>
+                Recalling that the domain of <m>\log(x)</m> is the set <m>\set{x\in\R | x>0}</m> we choose to extend this by adding an absolute value function, so that our procedure <c>logabs</c> returns logarithm of the absolute value of the input.
+            </p>
+            <sidebyside>
+                <program language="sage">
+                    <input>
+                        def logabs(x_in, base):
+                            # Here's the helper function
+                            def absval(yval):
+                                if yval &lt; 0:
+                                    return -yval
+                                else:
+                                    return yval
+                            # Here's the main body of the procedure logabs
+                            if x_in != 0:
+                                return log(absval(x),base)
+                            else:
+                                return -oo
+                    </input>
+                </program>
+            </sidebyside>
+        </example>
+    </subsection>
 </section>

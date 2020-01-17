@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="s-c-fc">
+    <title>Flow control</title>
+    <introduction>
+        <title>Boolean logic</title>
+        <p>
+            One of the fundamental data types which we haven't discussed is the <term>Boolean</term> data type.
+        </p>
+        <technology xml:id="tech-c-fc-bool">
+            <title><c>bool</c></title>
+            <statement>
+                Variables of type <c>bool</c> take one of two values: either <c>True</c> or <c>False</c>.
+            </statement>
+        </technology>
+        <p>
+            All of symbolic logic becomes available if you combine variables of type <c>bool</c> with the <term>logical operators</term>.
+        </p>
+        <definition xml:id="def-c-fc-log_ops">
+            <p>
+                The simple logical operators are <term>and</term>, <term>or</term>, and <term>not</term>. It is commonly useful to explain the values of the logical operators using a <term>truth table</term>.
+            </p>
+            <table>
+                <title>Truth table of the simple logical operators</title>
+                <tabular  top="major">
+                    <col halign="center" />
+                    <col halign="center" />
+                    <col halign="center" />
+                    <col halign="center" />
+                    <col halign="center" />
+                    <row bottom="medium">
+                        <cell><m>p</m></cell>
+                        <cell><m>q</m></cell>
+                        <cell>not <m>p</m></cell>
+                        <cell><m>p</m> and <m>q</m></cell>
+                        <cell><m>p</m> or <m>q</m></cell>
+                    </row>
+                    <row>
+                        <cell>True</cell>
+                        <cell>True</cell>
+                        <cell>False</cell>
+                        <cell>True</cell>
+                        <cell>True</cell>
+                    </row>
+                    <row>
+                        <cell>True</cell>
+                        <cell>False</cell>
+                        <cell>False</cell>
+                        <cell>False</cell>
+                        <cell>True</cell>
+                    </row>
+                    <row>
+                        <cell>False</cell>
+                        <cell>True</cell>
+                        <cell>True</cell>
+                        <cell>False</cell>
+                        <cell>True</cell>
+                    </row>
+                    <row bottom="major">
+                        <cell>False</cell>
+                        <cell>False</cell>
+                        <cell>True</cell>
+                        <cell>False</cell>
+                        <cell>False</cell>
+                    </row>
+                </tabular>
+            </table>
+        </definition>
+        <technology xml:id="tech-c-fc-log_ops">
+            <title><c>bool</c> operators</title>
+            <statement>
+                The logical operators for and, or, and not in Sage are respectively <c>and</c>, <c>or</c>, and <c>not</c>. This is typical of the design of Python: the keyword or function to do a thing should be sensible.
+            </statement>
+        </technology>
+        <p>
+            A powerful keyword which we saw in <xref ref="tech-w-s-io-vnkw" text="global-type" /> but haven't used is <c>in</c>. The <c>in</c> keyword gives us a useful application of the <c>bool</c> data type.
+        </p>
+        <technology xml:id="tech-s-c-fc-in">
+            <title><c>in</c> keyword</title>
+            <p>
+                The keyword <c>in</c> is a <term>binary operator</term> which returns <c>True</c> if the left operand is an element of the right operand. For this to work, the right operand must be a container.
+            </p>
+            <listing xml:id="list-s-c-fc-in">
+                <caption>Using the <c>in</c> keyword.</caption>
+                <program language="sage">
+                    <input>
+                        print('a' in "This parrot has ceased to be.")
+                        print(1 in [1,2,3,4,5])
+                        print(6 in [1,2,3,4,5])
+                        print([1,2,3] in 1)
+                    </input>
+                </program>
+            </listing>
+            <p>
+                Upon execution of this block of code, you should get three nice results (<c>True</c>, <c>True</c>, and <c>False</c>) and one ugly result, a <c>TypeError</c>. 
+            </p>
+        </technology>
+    </introduction>
+    <subsection xml:id="ss-c-fc-cond">
+        <title>Conditional programming</title>
+        <introduction>
+            <p>
+                A program that performs the same task regardless of the value of its input is very limited. In order to write useful programs we must be able to change the flow of the program so that it doesn't just start at the top and run through to the bottom. As a very basic example consider the absolute value function on the real numbers: if <m>f(x) = \abs{x}</m>, then the way that <m>f(x)</m> is computed depends upon the value of <m>x</m>!
+            </p>
+        </introduction>
+        <technology xml:id="tech-c-fc-cond-if">
+            <title><c>if</c>, <c>else</c>, and <c>elif</c></title>
+            <p>
+                The keywords <c>if</c> and <c>else</c> provide the framework for compond logical statements; in English, this might be something like, <q>if it is raining when I leave for work, then I wear a hat, otherwise I wear sunglasses.</q> Simply this might be written in code as follows:
+            </p>
+            <sidebyside>
+                <program language="sage">
+                    <input>
+                        if is_raining:
+                            head_wear = "hat"
+                        else:
+                            head_wear = "sunglasses"
+                    </input>
+                </program>
+            </sidebyside>
+            <p>
+                The <c>:</c> which appears at the end of the first line indicates to Sage that the block of indented code which follows is an execution block. If the condition <c>is_raining</c> is false, the entire indented block is skipped. The execution can also be modified to take into account other conditions. Perhaps, for example, we want to choose between a hat or umbrella depending upon the chance of lightning. The <c>elif</c> keyword is a contraction of <q>else if</q>.
+            </p>
+            <sidebyside>
+                <program language="sage">
+                    <input>
+                        if not is_raining:
+                            bring = "sunglasses"
+                        elif is_storming:
+                            bring = "hat"
+                        else:
+                            bring = "umbrella"
+                    </input>
+                </program>
+            </sidebyside>
+            <p>
+                Parsing this out logically, we see that if it is not raining, we will bring sunglasses. If it is raining and is storming, we will bring a hat. Otherwise, we will bring an umbrella, because it is raining but is not storming. Were <c>elif</c> not an available keyword, we could obtain the same result by <term>nested blocks</term>.
+            </p>
+            <sidebyside>
+                <program language="sage">
+                    <input>
+                        if not is_raining:
+                            bring = "sunglasses"
+                        else:
+                            if is_storming:
+                                bring = "hat"
+                            else:
+                                bring = "umbrella"
+                    </input>
+                </program>
+            </sidebyside>
+        </technology>
+        <exercise xml:id="ex-c-fc-cond-else">
+            <title>Forgetting <c>else</c></title>
+            <p>
+                Suppose that <c>is_raining</c> is a meaningful <c>bool</c> variable. What is the difference in result between these codes?
+            </p>
+            <sidebyside>
+                <program language="sage">
+                    <input>
+                        if is_raining:
+                            head_wear = "hat"
+                        else:
+                            head_wear = "sunglasses"
+                    </input>
+                </program>
+                <program language="sage">
+                    <input>
+                        if is_raining:
+                            head_wear = "hat"
+                        head_wear = "sunglasses"
+                    </input>
+                </program>
+            </sidebyside>
+            <p>
+                What is the difference between these codes?
+            </p>
+            <sidebyside>
+                <program language="sage">
+                    <input>
+                        if is_raining:
+                            head_wear = "hat"
+                        else:
+                            head_wear = "sunglasses"
+                    </input>
+                </program>
+                <program language="sage">
+                    <input>
+                        head_wear = "sunglasses"
+                        if is_raining:
+                            head_wear = "hat"
+                    </input>
+                </program>
+            </sidebyside>
+        </exercise>
+        <p>
+            Another way contitional statements can be used is to repeat some process as long as the condition evaluates to <c>True</c>. This is the first of two methods of <term>iteration</term> implemented in Sage.
+        </p>
+        <technology xml:id="tech-c-fc-cond-while">
+            <title><c>while</c> loops</title>
+            <p>
+                The <c>pass</c> keyword is a valid command which does nothing. It is a useful placeholder in a block structure which has not yet been written while writing a more complicated program. It does allow us to implement an infinite do-nothing loop.
+            </p>
+            <listing>
+                <caption>A minimal working <c>while</c> loop</caption>
+                <program language="sage">
+                    <input>
+                        while True:
+                            pass
+                    </input>
+                </program>
+            </listing>
+            <p>
+                As should be obvious, a danger of using <c>while</c> loops is that they can run forever if the condition never becomes <c>False</c>.
+            </p>
+        </technology>
+        <example xml:id="ex-c-fc-cond-collatz">
+            <title>The Collatz conjecture</title>
+            <p>
+                An interesting example of a use of <c>while</c> loops is a problem called the <term>Collatz conjecture</term>. Consider a function <m>f</m> defined on the positive integers by the rule such that <m>f(x) = 3x+1</m> when <m>x</m> is odd and <m>f(x) = x/2</m> when <m>x</m> is even. Collatz famously conjectured that for every choice of initial integer <m>a_0</m>, if we define <m>a_n = f(a_{n-1})</m> for all <m>n\geq 1</m> then the sequence <m>\set{a_0,a_1,a_2,\dotsc,}</m> will eventually become <m>\set{\dotsc,4,2,1,4,2,1,4,2,1,\dotsc}</m>.
+            </p>
+            <p>
+                While it is impossible to <em>prove</em> the Collatz conjecture to be true or false using simple loops, it is easy to write a loop which tests whether the conjecture holds for a particular value, using lists and a <c>while</c> loop.
+            </p>
+            <sage>
+                <input>
+                    a = 50
+                    a_sequence = [a]
+                    while a!=1:
+                        if a % 2 == 1:
+                            a = 3 * a + 1
+                        else:
+                            a = a / 2
+                        a_sequence.append(a)
+                    print(a_sequence)
+                </input>
+            </sage>
+            <p>
+                The difficulty in proving (or disproving) the Collatz conjecture is subtle: if the conjecture is false, then either there is some other repeating terminal sequence than <m>\set{\dotsc,4,2,1,4,2,1,4,2,1,\dotsc}</m> or there is some integer <m>a_0</m> for which the sequence never repeats. There is a distributed computing problem checking all small numbers: so far, all numbers up to the order of <m>2^{60}</m> have been checked, and all terminate in the <m>4,2,1</m> sequence.
+            </p>
+            <p>
+                The above code is <q>bad</q> because it might take a very long time to halt; in fact for some very large number perhaps it would take longer to come to the value 1 in the Collatz sequence than the remaining time until the eventual heat death of the universe.
+            </p>
+        </example>
+    </subsection>
+    <subsection xml:id="ss-c-fc-iter">
+        <title>Iteration</title>
+        <p>
+            We've just encountered the first type of iteration implemented in Sage, the <c>while</c> loop. The other iterative structure in Sage is the <c>for</c> loop. A <c>for</c> loop is always paired with an indexing variable and a container, and the purpose of the loop is to execute the enclosed block of code while letting the index variable take success values from the container.
+        </p>
+        <technology xml:id="tech-c-fc-iter-for">
+            <title><c>for</c> loops</title>
+            <p>
+                In Sage and Python, <c>for</c> loops iterate not over a range of integers as in other programming languages, but over the contents of a container. This is especially useful in advanced mathematical programming with Sage, later in your programming careers.
+            </p>
+            <sage>
+                <input>
+                    for i in [1,3,5,7,9,"Graves"]:
+                        print([i, 2*i])
+                </input>
+                <output>
+                    [1, 2]
+                    [3, 6]
+                    [5, 10]
+                    [7, 14]
+                    [9, 18]
+                    ['Graves', 'GravesGraves']
+                </output>
+            </sage>
+        </technology>
+        <p>
+            Other languages restrict the use of <c>for</c> loops to index variables only taking integer values, but as is evident above, this is not the case in Python. A great benefit to using a <c>for</c> loop in place of a <c>while</c> loop is that it is much more difficult to create a non-halting <c>for</c> loop. Since it is necessary that we be able to loop over sets of integers there are several convenient tools provided by Sage for doing so.
+        </p>
+        <exercise xml:id="ex-c-fc-iter-indices">
+            <title>Expected indices</title>
+            <statement>
+                What are the indices of a list variable containing 10 elements?
+            </statement>
+        </exercise>
+        <technology xml:id="tech-range">
+            <title><c>range</c> and related functions</title>
+            <p>
+                Recalling that a list of <m>n</m> objects will have indices 0 through <m>n-1</m> in Sage, the <c>range</c> command produces those indices. However the actual type of the object which is produced can vary depending upon whether you're using Sage in a Sage cell or on CoCalc. Here is an embedded Sage cell. To see the different output in CoCalc, write the code in a Sage worksheet and execute it.
+            </p>
+            <sage>
+                <input>
+                    print(range(5))
+                    print(type(range(5)))
+                </input>
+                <output>
+                    range(0, 5)
+                    &lt;class 'range'&gt;
+                </output>
+            </sage>
+            <p>
+                <c>range</c> operates like slicing, but with commas separating the arguments rather than colons. If you wish to produce the integers starting with 7, counting up by 3 until the maximum is less than 40, you would use <c>range(7,40,3)</c>. 
+            </p>
+            <table xml:id="tab-c-fc-iter-range">
+                <title>Different <c>range</c> commands in CoCalc and the Sage cell.</title>
+                <tabular top="major" bottom="minor">
+                    <col width="20%" />
+                    <col width="40%" />
+                    <col width="40%" />
+                    <row bottom="medium">
+                        <cell>Command</cell>
+                        <cell>Sage cell</cell>
+                        <cell>CoCalc</cell>
+                    </row>
+                    <row>
+                        <cell><c>range(m,n,k)</c></cell>
+                        <cell>
+                            <p>
+                                A <c>range</c> object which generates the <c>int</c> values <m>x</m> where <m>m\leq x\lt n</m> and <m>x-m</m> is divisible by <m>k</m>. This is more memory efficient and is slightly faster when iterating.
+                            </p>
+                        </cell>
+                        <cell>
+                            A <c>list</c> of <c>int</c> values
+                        </cell>
+                    </row>
+                    <row>
+                        <cell><c>srange(m,n,k)</c></cell>
+                        <cell><p>
+                                A <c>list</c> of Sage <c>Integer</c> values.
+                            </p></cell>
+                        <cell><p>
+                                A <c>list</c> of Sage <c>Integer</c> values.
+                            </p></cell>
+                    </row>
+                    <row bottom="major">
+                        <cell><c>xrange</c></cell>
+                        <cell>Not available</cell>
+                        <cell>
+                            <p>
+                                An <c>xrange</c> object which generates the <c>int</c> values <m>x</m> where <m>m\leq x\lt n</m> and <m>x-m</m> is divisible by <m>k</m>.
+                            </p>
+                        </cell>
+                    </row>
+                </tabular>
+            </table>
+        </technology>
+        <example xml:id="exmp-c-fc-iter-for">
+            <title>A typical use</title>
+            <p>
+                Let's say we wanted to know the sum of the first <m>n</m> positive integers. We might begin by seeing if we can determine a pattern by looking at some examples, but this is tedious to look at a lot of examples by hand. Hence we'll just see what a computer can help us do!
+            </p>
+
+            <sage>
+                <input>
+                    max_n = 20
+                    total = 0
+                    for i in range(1,max_n+1):
+                        total = total + i
+                        print("Sum up to {} is {}".format(i,total))
+                </input>
+            </sage>
+        </example>
+        <technology xml:id="tech-str_format">
+            <title><c>str.format</c> method</title>
+            <p>
+                A convenient way to produce nice-looking printed output in Sage involves the use of the <c>str.format</c> method, as shown above in <xref ref="exmp-c-fc-iter-for" type="title"/>. The <c>format</c> method allows you to replace substrings with other objects passed as arguments to the method. There are essentially three ways to do this: replacing substrings in consecutive order of the arguments to <c>format</c>, replacing them by index of the arguments, or replacing them by keywords of the argument. Here's a small example demonstrating how each replacement works:
+            </p>
+            <sage>
+                <input>
+                    print("Here are some {} things we want to {}".format("fun",71))
+                    print("Here are some more {1} things we want to {0}".format("fun", 71))
+                    print("Here is a {key1} way to {key2}, {0} and {1}".format("zeroth","first", key1=8675309,key2="Jenny"))
+                </input>
+            </sage>
+        </technology>
+    </subsection>
+    <conclusion>
+        Having covered two important methods of writing better programs (conditioning and iteration) we move to the next concept: encapsulating code into functions.
+    </conclusion>
+</section>

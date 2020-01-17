@@ -4,16 +4,27 @@
     <shorttitle>Intro to coding</shorttitle>
     <introduction>
         <p>
-            To really begin life as a programmer you only need to understand a few essentials, and everything else builds from these. The basic ideas are how to store more than one piece of related data at a time (containers), how to make decisions based upon the value of variables (conditionals) and how to repeat processes (iteration), and how to make this repeatable for a variety of input data (functional programming). 
+            To really begin life as a programmer you only need to understand a few essentials, and everything else builds from these. Here's a list of the basics:
         </p>
+        <ul>
+            <li>
+                <term>Containers</term> are used to store more than one item of data at a time;
+            </li>
+            <li>
+                <term>Flow control</term> is how a program changes the order of execution based upon the values of variables (conditioning) and in order to repeat simpler tasks (iteration);
+            </li>
+            <li>
+                <term>Functions</term> are used by a program to encapsulate tasks which are useful for a variety of different,
+            </li>
+        </ul>
         <p>
-            We add here a section on <q>comprehension</q>, a Python programming technique which combines containers, conditionals, and iteration into a power tool for modern programming.
+            We also add a section on <term>comprehension</term>, a Python programming technique which combines containers, conditionals, and iteration into a power tool for modern programming.
         </p>
     </introduction>
     <xi:include href="sec-coding-ltd.xml" />
-    <xi:include href="sec-coding-itercond.xml" />
-    <xi:include href="sec-coding-compr.xml" />
+    <xi:include href="sec-coding-flowcontrol.xml" />
     <xi:include href="sec-coding-funcs.xml" />
+    <xi:include href="sec-coding-compr.xml" />
     <xi:include href="proj-coding.xml" />
 
 </chapter>

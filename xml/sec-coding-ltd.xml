@@ -44,7 +44,7 @@
             </statement>
         </definition>
         <p>
-            You'll discover the difference in application of mutable and immutable data types in <xref ref="pr-c-ltd" text="type-global" />.
+            You'll discover the difference in application of mutable and immutable data types in <xref ref="ss-c-cp-ltd" text="type-global" />.
         </p>
 
     </subsection>
@@ -145,7 +145,7 @@
     <subsection xml:id="ss-c-ltd-meth">
         <title>Methods</title>
         <p>
-            A powerful feature of modern programming is the use of data methods, which can be considered as operations which are so intrinsicly important to a type of data that they are actually part of the definition of the data type.
+            A powerful feature of modern programming is the use of data methods, which can be considered as operations which are so intrinsicly important to a type of data that they are actually part of the definition of the data type. Many of the normal operations on a data type are built in as <q>hidden</q> methods; these will be discussed later in the course.
         </p>
         <technology xml:id="tech-c-ltd-meth-methods">
             <title>Using methods</title>
@@ -153,5 +153,17 @@
                 In Sage, if a variable named <c>my_var</c> has a method called <c>my_method</c>, it is accessed using <c>my_var.my_method(...)</c>.
             </p>
         </technology>
+        <exercise xml:id="ex-c-ltd-meth-lists">
+            <title><c>list</c> methods</title>
+            <statement>
+                What are the methods available to the <c>list</c> data type? Find out by typing <c>[].</c> in a Sage cell in CoCalc and then pressing the <c>tab</c> key on your keyboard. You may have to wait a bit for anything interesting to happen, especially if you've just opened the work sheet.
+            </statement>
+        </exercise>
+        <exercise xml:id="ex-c-ltd-meth-other">
+            <title>Methods for other types</title>
+            <statement>
+                Make a list of each data type discussed up until now and, for each, make a list of all the methods available.
+            </statement>
+        </exercise>
     </subsection>
 </section>

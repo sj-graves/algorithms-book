@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section xml:id="s-w-wp">
-    <title>Welcome Project</title>
+    <title>Welcome project</title>
     <objectives>
         <ol>
             <li>Getting comfortable in CoCalc</li>
@@ -8,54 +8,54 @@
         </ol>
     </objectives>
     <introduction>
-        Since the goal of the course is to focus primarily upon these projects, the projects must come first! Develop the surrounding text later!
+        <p>
+            This book is written from the point of view of working within a CoCalc project; many of the same ideas hold if you are working from a local installation of Sage, but this has not been tested.
+        </p>
     </introduction>
-    <subsection xml:id="ss-w-gcicc">
+    <subsection xml:id="ss-w-wp-gcicc">
         <title>Getting comfortable in CoCalc</title>
-        <introduction>
-            <p>
-                If you don't already have one, go to <url href="https://cocalc.com" /> and get a CoCalc account associated with your <c>@patriots.uttyler.edu</c> email address. If you are working this book independently of the Math 3380: Algorithms for Applied Mathematics course at the University of Texas at Tyler, you'll want to start a new project called <q>AAM</q> or something equally catchy. If you are an Algorithms student, you'll probably already have a project started for you for this course by the professor.
-            </p>
-            <p>
-                Either way, you'll want to be working inside your project for this subject matter, and the assumption is that it is a project just for this material. If this is a new project, you probably don't have very much to look at yet.
-            </p>
-        </introduction>
-        <project xml:id="prj-w-gcicc-sf">
+        <subsubsection xml:id="sss-w-wp-gcicc-sf">
             <title>Submission file</title>
             <p>
-                Create a new folder within your project root called working, which will have path <c>~/working</c>. Create a subfolder <c>~/working/p01-welcome</c>. Create and open a file <c>~/working/p01-welcome/p01-submit.sagews</c>.
+                Create a new folder within your project root called <c>working</c>, which will have path <c>~/working</c>. Create a subfolder <c>~/working/wp01-welcome</c>. Create and open a file <c>~/working/wp01-welcome/wp01-submit.sagews</c>. To make sure you have any necessary files from the assignment, a good way to do this is to go to your <c>~/assign</c> directory and check the box of whichever assignment you would like to work on, and then use the <em>Copy</em> button to copy that into the <c>~/working/</c> directory.
             </p>
-        </project>
-        <p>
-            Often you will be asked to insert simple formatted text into your Sage worksheets; the means to do this is the <term>Markdown</term> language. Entire input cells can be turned into Markdown cells by using a <term>mode command</term>, which is simply a line at the beginning of the cell beginning with <c>%</c>. The mode command to start a Markdown cell is <c>%md</c>.
-        </p>
-        <project xml:id="prj-w-gcicc-ph">
+            <p>
+                Often you will be asked to insert simple formatted text into your Sage worksheets; the means to do this is the <term>Markdown</term> language. Entire input cells can be turned into Markdown cells by using a <term>mode command</term>, which is simply a line at the beginning of the cell beginning with <c>%</c>. The mode command to start a Markdown cell is <c>%md</c>.
+            </p>
+            <p>
+                The ultimate point of Markdown is to greatly simplify the production of web text with basic formatting. There are many really good sites online for learning to use Markdown. Two are:
+                <ul>
+                    <li>the Github guide Mastering Markdown available at <url href="https://guides.github.com/features/mastering-markdown/" />, which focuses on <em>Github-flavored</em> Markdown, and</li>
+                    <li> <url href="https://www.markdowntutorial.com" />, which is what CoCalc links to from its own documentation. </li>
+                </ul>
+                The <em>flavor</em> of a Markdown is just a descriptive way of expressing that implementations of Markdown have various features in various contexts. In CoCalc, for instance, simple mathematical expressions can be included by using LaTeX expressions inside dollar signs, like <c>$\int_0^1 x^2\,dx$</c> to produce <m>\int_0^1 x^2\,dx</m>.
+            </p>
+            <p>
+                CoCalc uses Markdown everywhere: in <c>.md</c> and <c>.markdown</c> files (obviously), but more interestingly in every chat window!
+            </p>
+        </subsubsection>
+        <subsubsection xml:id="sss-w-wp-gcicc-ph">
             <title>Project header</title>
                 <p>
                     You will be required to put a nice Markdown header at the beginning of every submission file. A nice header cell might be input as follows:
                 </p>
-                <listing xml:id="list-w-gcicc-ph">
-                    <caption>Project Headers</caption>
+                <sidebyside>
                     <program language="sage">
                         <input>
                             %md
                             # Project 1
                             ## Author: H. Rider Haggard
                             Collaborators: Allan Quatermain, Henry Curtis
+                            
+                            ---
                         </input>
                     </program>
-                </listing>
+                </sidebyside>
                 <p>
                     It should be fairly obvious to you that unless your name is <q>H. Rider Haggard,</q> you should use your own name instead; likewise list your actual collaborators rather than Misters Quatermain and Curtis.
                 </p>
-                <p>
-                    Use a <c>%md</c> Markdown mode command to turn the first cell of <c>p01-submit.sagews</c> into a Markdown cell as shown in <xref ref="list-w-gcicc-ph" />. This is <em>Project 1</em>.
-                </p>
-        </project>
-        <p>
-            The point of Markdown is that it <em>greatly</em> simplifies the production of web text with basic formatting. Take a look at the Github guide <url href="https://guides.github.com/features/mastering-markdown/">Mastering Markdown</url>. CoCalc uses Markdown everywhere: in <c>.md</c> and <c>.markdown</c> files (obviously), but more interestingly in every chat window (see <xref ref="rmk-CoCalc_chat"/>) and description box.
-        </p>
-        <project xml:id="prj-w-gcicc-sph">
+        </subsubsection>
+        <subsubsection xml:id="prj-w-wp-gcicc-sph">
             <title>Subproject header</title>
             <p>
                 Since the project number is the primary header of the submission file and your name is the secondary header, each individual portion of the project should be a tertiary header. To put such a header at the beginning of a Markdown cell is straightforward:
@@ -69,16 +69,41 @@
                 </program>
             </sidebyside>
             <p>
-                To put the same header at the beginning of a Sage cell, you can use the <c>md(...)</c> function, like <c>md("### Project 1.1. Getting comfortable in CoCalc")</c>. <em>Do so now.</em>
+                To put the same header at the beginning of a Sage cell, you can use the <c>md(...)</c> function, like so:
             </p>
+            <sidebyside>
+                <program language="sage">
+                    <input>
+                        md("### Project 1.1. Getting comfortable in CoCalc")
+                    </input>
+                </program>
+            </sidebyside>
+        </subsubsection>
+        <project xml:id="prj-w-wp-gcicc-headers">
+            <title>Headers</title>
+            <statement>
+                Put all the discussed headers in your project file <c>wp01-submit.sagews</c>. Every individual project problem (like this one) should also have a Markdown cell. This is the equivalent of numbering your problems on a written homework in a Calculus class.
+            </statement>
         </project>
-        <project xml:id="prj-w-gcicc-mdhi">
+        <project xml:id="prj-w-wp-gcicc-mdhi">
             <title>Markdown's implementation of headers</title>
             <p>
                 In a Markdown cell, explain the way that Markdown is used to produce headers of decreasing importance.
             </p>
         </project>
-        <project xml:id="prj-w-gcicc-mdtab">
+        <project xml:id="prj-w-wp-gcicc-mdd">
+            <title>Playing with Markdown</title>
+            <statement>
+                What is the effect of the <c>---</c> at the bottom of the project header cell? Does the spacing around the <c>---</c> change its behavior?
+            </statement>
+        </project>
+        <project xml:id="prj-w-wp-gcicc-mdl">
+            <title>Markdown lists</title>
+            <statement>
+                Is there anything strange about list numbering in Markdown? Experiment with repeated numbers in a numbered list and explain something interesting about list numbering in a new cell of <c>wp01-submit.sagews</c>.
+            </statement>
+        </project>
+        <project xml:id="prj-w-wp-gcicc-mdtab">
             <title>Markdown tables</title>
             <p>
                 Following the table syntax specified in the <url href="https://guides.github.com/features/mastering-markdown/">Mastering Markdown</url> guide, create a table in a new cell of your <c>p01-submit.sagews</c> file formatted as follows:</p>
@@ -102,7 +127,7 @@
                 The rows of your table should consist of the mathematics courses you have taken since you began your time at UT Tyler, by number and name, along with the semester you took the course and whether or not you felt personally successful in the course. Do not tell me your grade, just whether the outcome was successful or not successful.
             </p>
         </project>
-        <project xml:id="prj-w-gcicc-chat">
+        <project xml:id="prj-w-wp-gcicc-chat">
             <title>CoCalc chat</title>
             <p>
                 Use the chat window attached to <c>p01-submit.sagews</c> to say <q>Hello</q> to your collaborators
@@ -114,64 +139,47 @@
             </p>
         </conclusion>
     </subsection>
-    <subsection xml:id="pr-w-gcis">
+    <subsection xml:id="pr-w-wp-gcis">
         <title>Getting comfortable in Sage</title>
         <introduction>
             <p>
-                Go ahead and put a new Markdown header in signifying the beginning of the second part of the project, like so:
-            </p>
-            <sidebyside>
-                <program language="sage">
-                    <input>
-                        md("### Project 1.2. Getting comfortable in Sage")
-                    </input>
-                </program>
-            </sidebyside>
-            <p>
-                We're going to use basic data types as our introduction to Sage and the CoCalc interface.
+                We're going to use a basic data type as our introduction to Sage and the CoCalc interface.
             </p>
         </introduction>
-        <project xml:id="prj-w-gcis-sph">
-            <title>Another subproject header</title>
-            <statement>
-                Create an appropriate subproject header cell as per the format specified above in 
-                <xref ref="prj-w-gcicc-sph" />.
-            </statement>
-        </project>
-        <project xml:id="prj-w-gcis-ya">
+        <project xml:id="prj-w-wp-gcis-ya">
             <title>Your age</title>
             Assign to the variable <c>my_age</c> your age as an integer number of years.
         </project>
-        <project xml:id="prj-w-gcis-yn">
+        <project xml:id="prj-w-wp-gcis-yn">
             <title>Your name</title>
             Assign to the variable <c>my_name</c> the string consisting of your full given name. 
         </project>
-        <project xml:id="prj-w-gcis-is">
+        <p>
+            The <term>index</term> of a character within a string is its position in the string. In Sage, the individual entries of an indexed object like a string are accessed using <q>square bracket notation</q>: that is, if <c>i</c> is a valid index, then <c>my_name[i]</c> would give the single character in position number <c>i</c>. In <xref ref="fig-string_slicing" text="name"/>, the index of a character is given by the integer below the line to the left of the character.
+        </p>
+        <figure xml:id="fig-string_slicing">
+            <caption>Index positions for slicing strings</caption>
+            <image xml:id="img-string-slicing">
+                <latex-image>
+                    \begin{tikzpicture}
+                    \draw \foreach \j/\i/\c in {-16/0/t, -15/1/h, -14/2/i, -13/3/s, -12/4/~, -11/5/i, -10/6/s, -9/7/~, -8/8/a, -7/9/~, -6/10/s, -5/11/t, -4/12/r, -3/13/i, -2/14/n, -1/15/g, -0/16/~ ~}{
+                        (-8 + 16*\i pt, -8pt) node (b\i) [below] {\tiny\tt \i} 
+                            -- ++(0,16pt) node (t\i) [above] {\tiny\tt \j}
+                        (0 + 16*\i pt, -3pt) node [anchor=base] {\tt \c}
+                    } 
+                    (b0.north) -- (b16.north)
+                    (t0.south) -- (t16.south);
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+        </figure>
+        <project xml:id="prj-w-wp-gcis-is">
             <title>Indexing in a string</title>
-            <figure xml:id="fig-string_slicing">
-                <caption>Index positions for slicing strings</caption>
-                <image xml:id="img-string-slicing">
-                    <latex-image>
-                        \begin{tikzpicture}
-                        \draw \foreach \j/\i/\c in {-16/0/t, -15/1/h, -14/2/i, -13/3/s, -12/4/~, -11/5/i, -10/6/s, -9/7/~, -8/8/a, -7/9/~, -6/10/s, -5/11/t, -4/12/r, -3/13/i, -2/14/n, -1/15/g, -0/16/~ ~}{
-                            (-8 + 16*\i pt, -8pt) node (b\i) [below] {\tiny\tt \i} 
-                                -- ++(0,16pt) node (t\i) [above] {\tiny\tt \j}
-                            (0 + 16*\i pt, -3pt) node [anchor=base] {\tt \c}
-                        } 
-                        (b0.north) -- (b16.north)
-                        (t0.south) -- (t16.south);
-                        \end{tikzpicture}
-                    </latex-image>
-                </image>
-            </figure>
-            <p>
-                The <term>index</term> of a character within a string is its position in the string. In Sage, the individual entries of an indexed object like a string are accessed using <q>square bracket notation</q>: that is, if <c>i</c> is a valid index, then <c>my_name[i]</c> would give the single character in position number <c>i</c>. In <xref ref="fig-string_slicing" text="name"/>, the index of a character is given by the integer below the line to the left of the character.
-            </p>
             <p>
                  In a Markdown cell, give a possible explanation why it is that the initial index of a string is zero. Also explain to what the negative numbers in the figure refer.
             </p>
         </project>
-        <project xml:id="prj-w-gcis-strslice">
+        <project xml:id="prj-w-wp-gcis-strslice">
             <title>String slicing</title>
                 <p>
                     Another useful string manipulation is called <term>slicing</term>. 
@@ -180,13 +188,13 @@
                 Examine the slices <c>my_name[2:-2]</c>, <c>my_name[2:-2:2]</c>, and <c>my_name[2:-2:5]</c>, and explain the use of slicing in a Markdown cell. Finally, what is the result of <c>my_name[::-1]</c>?
             </p>
         </project>
-        <project xml:id="prj-w-gcis-stradd">
+        <project xml:id="prj-w-wp-gcis-stradd">
             <title>Adding strings</title>
                 <p>
                     You can combine strings arithmetically, as well as using the arithmetic operators for actual arithmetic. String arithmetic isn't necessarily what you might think, though; for instance, addition of strings is a noncommutative addition! You can also multiply a string by an integer, which (as is appropriate) performs repeated addition.
                 </p>
             <p>
-                What is <c>my_name[:5] + my_name[-5:]</c>? What is <c>5*my_name</c>?
+                What is <c>my_name[:5] + my_name[-5:]</c>? What is <c>my_age * my_name</c>?
             </p>
         </project>
         <conclusion>
@@ -199,7 +207,20 @@
             The course functionality of CoCalc does not have anything like a <q>submit</q> button for assignments. Instead, you will have a folder created in your project by the assignment from the instructor; when your instructor is ready to collect the assignment, he presses a <q>collect</q> button in his course controls which then copies all the files in your project's assigned folder back to his project for grading. Then when he completes grading of the work, he presses a <q>return</q> button which sends the graded work back to you.
         </p>
         <p>
-            When you're finished with the projects for a chapter, make sure to copy any important files from your <c>working</c> directory to the proper subdirectory of <c>~/assign/</c>. You should consider this to be your method of submitting a file to be graded. When the projects are collected to be graded, they are automatically copied from the <c>~/assign</c> directory to the root project for the course, on the instructor's account. If the files aren't in the right location, they won't be collected.
+            When you're finished with the projects for a chapter, make sure to copy or move your working project directory to the proper subdirectory of <c>~/assign/</c>. You should consider this to be your method of submitting a file to be graded. When the projects are collected to be graded, they are automatically copied from the <c>~/assign</c> directory to the root project for the course, on the instructor's account. If the files aren't in the right location, they won't be collected.
+        </p>
+        <project xml:id="prj-w-wp-conc-ss">
+            <title>Submission step</title>
+            <statement>
+                <em>Copy</em> (not move) your <c>wp01-submit.sagews</c> file and any other files created for this project into the directory <c>~/assign/wp01-welcome</c>.
+            </statement>
+        </project>
+        <p>
+            Eventually, someone will delete their assignment files. This is not a big deal for two reasons:
+            <ul>
+                <li>the assignment can be redistributed in a CoCalc course on a per-student basis, rewriting everything in its subdirectory of <c>~/assign/</c></li>
+                <li>CoCalc keeps backups of our files. These are slightly harder to recover but in the event of disaster, contact the instructor!</li>
+            </ul>
         </p>
     </conclusion>
 </section>

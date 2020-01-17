@@ -1,36 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<exercises xml:id="pr-c">
+<section xml:id="s-c-cp">
     <title>Intro to coding project</title>
     <objectives>
         <ol>
             <li> Learn to use the simple container data types </li>
-            <li> Learn to use logical statements </li>
-            <li> Learn to use iteration </li>
-            <li> Learn to use <em>list comprehension</em> </li>
+            <li> Learn to use flow control </li>
+            <li> Learn to use functions </li>
+            <li> Learn to use list comprehension </li>
             <li> Learn and implement some simple sorting algorithms </li>
         </ol>
     </objectives>
-    <exercise xml:id="ex-c-nsf">
-        <title>New submission file</title>
-        <statement>
-            Create a new working folder called <c>~/working/p02-coding</c> and a submission file inside it 
-            called <c>~/working/p02-coding/p02-submit.sagews</c>. Give the appropriate heading to the file.
-        </statement>
-    </exercise>
-    <exercisegroup xml:id="pr-c-ltd">
-        <title>Lists, tuples, and dictionaries</title>
+    <introduction>
+        <title>Working folder and file</title>
+        <p>
+            Remember to create a subdirectory <c>working/wp02-coding</c> in your home directory. The path to your home directory is <c>~</c>, which is a standard convention in the Unix and Linux operating systems (as well as Mac OS). Inside that folder you'll create your working file, so it's path should be <c>~/working/wp02-coding/wp02-submit.sagews</c>. Start putting in your Markdown headings!
+        </p>
+    </introduction>
+    <subsection xml:id="ss-c-cp-ltd">
+        <title>Containers</title>
         <introduction>
             <p>
                 A <term>container data type</term> is a data type which (unsurprisingly) contains other data. We've already met the first of these, the <term>string</term>. Strings are strange in Sage in that what they must contain are strings! The individual elements of a string are accessed by indexing, and we know that a nonempty string contains in each index a string of length 1. In that way, we can think of a long string as a finite sequence of single-character strings. We'll now explore some other ways to store finite sequences of other data.
             </p>
         </introduction>
-        <p>
-            The two most basic container data types are <term>lists</term> and <term>tuples</term>. A list is a finite sequence of arbitrary data values enclosed in square brackets. 
-        </p>
-        <p>
-            It should be apparent from the example listing that the contents of lists are not necessarily of any particular data type; in fact, list elements can be of any data type whatsoever, including other lists!
-        </p>
-        <exercise xml:id="ex-c-ltd-isl">
+        <project xml:id="pr-c-cp-ltd-isl">
             <title>Indexing and slicing lists</title>
             <introduction>
                 Create a list <c>tens</c> consisting of the first ten positive integer multiples of 10, and a list <c>fives</c> consisting of the first twenty positive integer multiples of 5.
@@ -46,34 +39,15 @@
                     Explain in a Markdown cell whether or not lists are mutable, according to <xref ref="def-mutable" text="type-global"/>.
                 </li>
             </ol>
-        </exercise>
-        <p>
-            A tuple is very similar, in that it is a finite sequence of arbitrary data values enclosed in parentheses. 
-        </p>
-        <listing xml:id="list-c-ltd-tuple">
-            <program language="sage">
-            <input>
-                a_tuple = (1, 2, 'reginald', pi, [1, 2, 3], sqrt(2))
-                print(a_tuple)
-                print(type(a_tuple))
-            </input>
-            </program>
-            <caption>A simple example working with tuples</caption>
-        </listing>
-        <p>
-            Sometimes there is information to be learned by reading carefully the error messages provided by Sage; at other times, the error message will seem useless and incomprehensible.
-        </p>
-        <exercise xml:id="ex-c-ltd-ic">
+        </project>
+        <project xml:id="pr-c-cp-ltd-ic">
             <title>Immutable containers</title>
             <statement>
                 Create a tuple <c>threes</c> consisting of the first ten positive integer multiples of 3. Attempt to assign the value 5 to <c>threes[3]</c> and explain in your own words the error which results.
             </statement>
-        </exercise>
-        <p>
-            A good reason to use tuples rather than lists when writing a program is to enforce this immutability. Often it is important that the contents of a variable not be able to be altered without changing the entire value of the variable.
-        </p>
-        <exercise xml:id="ex-c-ltd-d">
-            <title>Dictionaries</title>
+        </project>
+        <project xml:id="pr-c-cp-ltd-d">
+            <title>Uses for dictionaries</title>
             <statement>
                 <p>
                     The figure below is an abstract graph. The circles are called vertices and the arrows each have a head (where the arrow tip is) and a tail.
@@ -92,14 +66,186 @@
                         Create a dictionary <c>arrows</c> whose keys are strings of the labels of each vertex and the associated value of each key is a string consisting of all the vertiex labels which are at the head of an arrow for which the key is the tail.
                     </li>
                     <li>
-                        <c>dict</c> is a mutable container: change the value of the key <c>'e'</c> to the string <c>'bd'</c> by using <c>arrows['e']='bd'</c>.
+                        <c>dict</c> is a mutable container: change the value of the key <c>'e'</c> to the list of strings <c>['b','d']</c> by using <c>arrows['e']=['b','d']</c>.
                     </li>
                     <li>
                         Print the new value of <c>arrows</c>.
                     </li>
+                    <li>
+                        To see a very basic example of things Sage can do, run <c>plot(DiGraph(arrows))</c>.
+                    </li>
                 </ol>
             </statement>
-            
-        </exercise>
-    </exercisegroup>
-</exercises>
+        </project>
+    </subsection>
+    <subsection xml:id="ss-c-cp-fc">
+        <title>Flow control</title>
+        <project xml:id="pr-c-cp-fc-ly">
+            <title>Leap years</title>
+            <p>
+                 In the Gregorian calendar (which we use), a year is a leap year if it is divisible by 4, unless it is divisible by 100, unless that is divisible by 400. Set the variable <c>year</c> to the current year and write a conditional block to determine if it is a leap year. Remember that <c>elif</c> is a single keyword.
+            </p>
+            <sidebyside>
+                <program language="sage">
+                    <input>
+                        if condition1:
+                            ...
+                        elif condition2:
+                            ...
+                        else:
+                            ...
+                    </input>
+                </program>
+            </sidebyside>
+        </project>
+<!--         <project xml:id="pr-c-cp-fc-yaid">
+            <title>Your age in days</title>
+            <p>
+                Counting leap days, compute your age in days. Explain all your reasoning.
+            </p>
+        </project> -->
+        <project xml:id="pr-c-cp-fc-fn">
+            <title>Fibonacci numbers</title>
+            <p>
+                Leonardo of Pisa, nicknamed Fibonacci, popularized a mathematically interesting set of numbers by posing a problem involving theoretical rabbit populations. Let <c>fib = [0,1]</c> be the 0th and 1st Fibonacci numbers. If <m>f_j</m> denotes the <m>j^\text{th}</m> Fibonacci number, the fomular for computing <m>f_j</m> is <m>f_{j} = f_{j-1}+f_{j-2}</m> for every <m>j\geq 2</m>.
+            </p>
+            <p>
+                Create a <c>for</c> loop after which <c>fib</c> contains the first 50 Fibonacci numbers.
+            </p>
+        </project>
+        <project xml:id="pr-c-cp-fc-mfn">
+            <title>More Fibonacci numbers</title>
+            <p>
+                Change the preceding problem and write a <c>while</c> loop that lengthens the list <c>fib</c> so long as the last element is less than 1,000,000. What is the greatest Fibonacci number less than 1,000,000?
+            </p>
+        </project>
+    </subsection>
+    <subsection xml:id="ss-c-cp-funcs">
+        <title>Functions</title>
+        <project xml:id="pr-c-cp-funcs-yaid">
+            <title>Your age in days</title>
+            <p>
+                Explain the process which must be followed to compute the number of days since your birth. Use <em>exclusive counting</em>, so that the day of your birth is day 0.
+            </p>
+        </project>
+        <project xml:id="pr-c-cp-funcs-diam">
+            <title>Days in a month</title>
+            <p>
+                Write a function <c>days</c> which takes two inputs, a <c>month</c> integer from <m>\{1,2,3,\dotsc,12\}</m> and a <c>year</c> integer (from the Gregorian AD calendar which begins with year 1) and returns the integer number of days in that month.
+            </p>
+            <p>
+                nterestingly, the year 1582 had only 21 days in October; for all other month/year combinations use the current computation of leap years. This is called the <em>proleptic Gregorian calendar</em> for all dates prior to 4 October 1582. The date following that was 15 October 1582, hence the shortened October.
+            </p>
+        </project>
+        <project xml:id="pr-c-cp-funcs-hms">
+            <title>How many sleeps?</title>
+            <p>
+                Write a function <c>days_from</c> which takes two inputs <c>from_date</c> and <c>to_date</c>. The two inputs should consist of tuples <c>(year,mo,day)</c>, and the function should compute the number of days elapsed between <c>from_date</c> and <c>to_date</c>. In my home we refer to this as the <em>number of sleeps</em> between two dates, so that there are three sleeps between a Sunday and the subsequent Wednesday.
+            </p>
+        </project>
+    </subsection>
+    <subsection xml:id="pr-c-cp-comp">
+        <title>Comprehension</title>
+        <project xml:id="pr-c-cp-comp-wuc">
+            <title>Why use comprehension?</title>
+            <statement>
+                Explain in your own words:
+                <ol>
+                    <li>A case where list comprehension is the <q>smart choice</q> than a <c>for</c> loop, and</li>
+                    <li>a case where a <c>for</c> loop is the <q>smarter choice</q> than a list comprehension.</li>
+                </ol>
+            </statement>
+        </project>
+        <project xml:id="pr-c-cp-comp-sc">
+            <title>Strange comprehensions</title>
+            <p>
+                Write a list comprehension which calculates the square of each even integer less than 50 but the square root of the negation of each odd integer less than 50.
+            </p>
+        </project>
+    </subsection>
+    <subsection xml:id="ss-c-cp-s">
+        <title>Sorting</title>
+        <introduction>
+            <p>
+                There are many, many algorithms available for sorting a list. To make this as painless as possible, let's talk about sorting a list of integers. Now, to get this out of the way: you don't ever need to use your own sorting algorithm in Sage.
+            </p>
+            <listing xml:id="list-c-cp-sort">
+                <caption>Using the <c>.sort()</c> method of a list.</caption>
+                <program language="sage">
+                    <input>
+                        a_list = [76, 16, 10, 14, 51, 78, 86, 57, 59, 26, 
+                                  94, 94, 73,  5, 33,  1, 12, 77, 63, 64]
+                        a_list.sort()
+                        print(a_list)
+                    </input>
+                </program>
+            </listing>
+            <p>
+                So what's the point? The point is that learning how to sort numbers is beneficial because the introductory sorting algorithms teach you something beautiful about lists, loops, and conditionals.
+            </p>
+            <p>
+    There are many skills humans can do instinctively which computers cannot, because computers have not had millions of years of evolution to worth with; one such skill is visual recognition of patterns. This is an evolved trait that makes humans better at hunting animals (or avoiding being hunted by animals) which we now use for playing Where's Waldo. Thus when we look at the above list of numbers, we don't need to look at all of the numbers individually comparing values one by one  to see that 1 is the smallest value and 94 the largest.
+            </p>
+        </introduction>
+        <subsubsection xml:id="sss-c-cp-sort-ss">
+            <title>Selection sort</title>
+            <introduction>
+                <p>
+                    Selection sort is slow, because it has to make many comparisons. Here's the procedure:
+                </p>
+                <ol>
+                    <li>Begin with a list of integers <c>a_list</c> and an empty list <c>b_list</c>.</li>
+                    <li>
+                        <p>
+                            Until <c>a_list</c> is empty, do the following:
+                        </p>
+                        <ol>
+                            <li>Find the smallest element <c>small</c> of <c>a_list</c></li>
+                            <li>Take <c>small</c> out of <c>a_list</c></li>
+                            <li>Append <c>small</c> to the last position of <c>b_list</c></li>
+                        </ol>
+                    </li>
+                </ol>
+                <p>
+                    When the process stops looping, <c>b_list</c> is a sorted copy of <c>a_list</c>, as desired.
+                </p>
+            </introduction>
+            <project xml:id="pr-c-cp-sort-ss-se">
+                <title>Smallest element</title> 
+                <p>
+                    Just by using iteration and conditionals, without using any special built-in functions, how do you find the smallest element in a list? Explain in an algorithm like above.
+                </p>
+            </project>
+            <project xml:id="pr-c-cp-sort-ss-tmf">
+                <title><c>the_min</c> function</title>
+                <p>
+                    Write a function <c>the_min</c> which takes as input a list whose smallest element is <m>x</m>, and returns as a tuple the index of <m>x</m> in the list and the value <m>x</m>.
+                </p>
+            </project>
+            <project xml:id="pr-c-cp-sort-ss-ssf">
+                <title><c>sel_sort</c> function</title>
+                <p>
+                    Write a function <c>sel_sort</c> which implements the selection sort algorithm given above.
+                </p>
+            </project>
+        </subsubsection>
+        <subsubsection xml:id="sss-c-cp-sort-bs">
+            <title>Bogosort</title>
+            <introduction>
+                <p>
+                    Bogosort (a mashup of <em>bog</em>us <em>sort</em>) is a stupid sorting algorithm.
+                </p>
+                <ol>
+                    <li>Begin with a list of integers <c>a_list</c>.</li>
+                    <li>While <c>a_list</c> is not sorted, shuffle <c>a_list</c> randomly.</li>
+                </ol>
+            </introduction>
+            <project xml:id="pr-c-cp-sort-bs-isf">
+                <title><c>is_sorted</c> function</title>
+                <p>
+                    Write a function <c>is_sorted</c> which takes a list as input and returns <c>True</c> if the input is sorted in increasing order and <c>False</c> if otherwise.
+                </p>
+            </project>
+        </subsubsection>
+    </subsection>
+</section>
