@@ -103,7 +103,7 @@
             so long as <m>g'(x_i)\neq 0</m>.
         </p>
         <p>
-            Unlike the method of interval bisection, Newton-Raphson can fail to converge for several reasons: <term>overshoot</term>, where the linear approximation is a nearly-horizontal line which causes a large difference <m>\abs{x_{i+1}-x_i}</m>; the method can encounter a <term>stationary point</term>, where <m>g'(x_i)=0</m>; or the <term>initial guess may be poor</term> and lead to non-convergence. Moreover, the function might not be nicely differentiable or the derivative might be computationally expensive; numerical methods for approximating the derivative
+            Unlike the method of interval bisection, Newton-Raphson can fail to converge for several reasons: <term>overshoot</term>, where the linear approximation is a nearly-horizontal line which causes a large difference <m>\abs{x_{i+1}-x_i}</m>; the method can encounter a <term>stationary point</term>, where <m>g'(x_i)=0</m>; or the <term>initial guess may be poor</term> and lead to non-convergence. Moreover, the function might not be nicely differentiable or the derivative might be computationally expensive; numerical methods for approximating the derivative may aid this.
         </p>
         <algorithm xml:id="alg-NewtonRaphson">
             <title>Newton-Raphson Root Approximation</title>

@@ -26,5 +26,5 @@
     <xi:include href="sec-numcalc-derivatives.xml" />
     <xi:include href="sec-numcalc-quadrature.xml" />
     <xi:include href="sec-numcalc-newtraph.xml" />
-    <xi:include href="proj-numcalc.xml" />
+<!--     <xi:include href="proj-numcalc.xml" /> -->
 </chapter>
