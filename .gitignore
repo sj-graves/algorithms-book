@@ -1,56 +1,11 @@
-# Compiled source #
-###################
-*.com
-*.class
-*.dll
-*.exe
-*.o
-*.so
+# unpublished builds
+output
 
-# Packages #
-############
-# it's better to unpack these files and commit the raw source
-# git has its own built in compression methods
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
+# assets generated from source
+generated-assets
 
-# Logs and databases #
-######################
-*.log
-*.sql
-*.sqlite
-
-# OS generated files #
-######################
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-*.sage-chat
-.*.sage-chat
-.*.term
-
-# LATEX temp files #
-####################
-*.aux
-*.synctex*
-*.toc
-*.bbl
-*.out
-
-mathbook
-knowl
-html
-*.html
-latex/*.pdf
-xml/*.sage
-xml/*.sagews
+# error logs
+.error-schema.log
+error-schema.log
+.error-syntax.log
+error-syntax.log

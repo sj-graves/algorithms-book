@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-intro-shortest-path" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Shortest Paths in Graphs</title>
+    <introduction>
+        <p>
+            As a beginning problem, let's consider a problem from <term>graph theory</term>.
+        </p>
+    </introduction>
+
+    <subsection xml:id="subsec-graph-definitions">
+        <title>Preliminary graph theory definitions</title>
+        <p>
+            We start at the very beginning, which is a very good place to start.
+        </p>
+        <definition xml:id="defn-graph">
+            <title>Graph</title>
+            <statement>
+                A <term>graph</term> is an ordered pair <m>G = (V,E)</m> of a set <m>V</m> whose elements are called <term>vertices</term> (singular <term>vertex</term>) and a set <m>E</m> of unordered pairs of elements of <m>V</m>. Those unordered pairs in <m>E</m> are called <term>edges</term>. When there is a risk of confusion, we denote the <term>vertex set</term> of <m>G</m> as <m>V_G</m> and the <term>edge set</term> of <m>G</m> as <m>E_G</m>. On the other hand, we write the edge <m>\set{u,v}</m> in a graph as <m>uv</m> when there is no risk of confusion.
+            </statement>
+        </definition>
+        <p>
+            Graphs serve as mathematical models of all types of networks, among other applications, and the field of graph theory belongs in the larger category of <term>combinatorics</term> or <term>discrete math</term>.
+        </p>
+        <definition xml:id="defn-subgraph">
+            <title>Subgraph</title>
+            <statement>
+                Let <m>G = (V_G, E_G)</m> and <m>H = (V_H,E_H)</m> be graphs. Then <m>G</m> is a <term>subgraph</term> of <m>H</m> if and only if <m>V_G\subseteq V_H</m> and <m>E_G\subseteq E_H</m>.
+            </statement>
+        </definition>
+
+        <definition xml:id="defn-path">
+            <title>Path</title>
+            <statement>
+                <p>
+                    Let <m>G=(V,E)</m> be a graph. Then a subgraph <m>P=(V_P,E_P)</m> of <m>G</m> is a <term>path</term> if <m>V_P</m> can be enumerated <m>V_P = \set{v_0,v_1,v_2,\dotsc, v_k}</m> such that <m>E_p = \set{v_0v_1, v_1v_2, \dotsc, v_{k-1}v_k}</m>. Such a path has <term>length <m>k</m></term>. If <m>u=v_0</m> and <m>w = v_k</m>, we refer to the path <m>P</m> as a <m>u,v</m>-path.
+                </p>
+                <p>
+                Once vertices <m>u</m> and <m>v</m> have been selected in a given graph <m>G</m>, there may be many <m>u,v</m>-paths which are subgraphs of <m>G</m>; a <m>u,v</m>-path of minimum length is a <term>shortest path</term>.
+            </p>
+            </statement>
+        </definition>
+
+        
+    </subsection>
+
+    <conclusion>
+        <p></p>
+    </conclusion>
+</section>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This frontmatter division will contain all content before the -->
+<!-- first chapter.  Fill in and comment/uncomment to see how this -->
+<!-- works.                                                        -->
+
+<frontmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="frontmatter">
+  <titlepage>
+    <author>
+      <personname>Stephen J. Graves</personname>
+      <department>Department of Mathematics</department>
+      <institution>The University of Texas at Tyler</institution>
+      <email>sgraves@uttyler.edu</email>
+    </author>
+    <date>Most Recently Updated: <today/></date>
+  </titlepage>
+
+  <colophon xml:id="AAM-fm-col">
+    <copyright>
+      <year>2016 - 2021</year>
+      <holder>Stephen J. Graves</holder>
+      <shortlicense>
+          Permission is granted to copy, distribute and/or modify this document under the 
+          terms of the Creative Commons Attribution-Noncommercial-Share Alike 4.0 license. 
+          A human readable version of this license can be read at 
+          <url href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA-4.0</url> 
+          or at its <url href="http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode">full legal code</url>.
+      </shortlicense>
+  </copyright>
+
+  </colophon>
+
+  <!-- <dedication>
+    <p>
+      For ...
+    </p>
+  </dedication> -->
+
+  <acknowledgement xml:id="AAM-fm-ack">
+    <p>
+      Thank you to the University of Texas at Tyler students of Math 3380: Algorithms for Applied Mathematics. You were my guinea pigs as I initially drafted this manuscript as lecture notes, and as I have continued to massage the text over time.
+    </p>
+    <p>Moreover, thank you to Rob Beezer, who made possible the conversion of this book to Mathbook XML, and to David Farmer, who used his excellent S2LX script to bulk-convert the original <latex /> source to Mathbook XML, which morphed into PreTeXt.
+    </p>
+  </acknowledgement>
+
+  <preface xml:id="AAM-fm-pref">
+    <!-- You should be a little careful about what you put here -->
+    <!-- Avoid elements that should have a number, for example  -->
+    <p>
+      Write this later!!!
+    </p>
+
+  </preface>
+
+  <!-- You can have more than one preface. -->
+</frontmatter>
+
