@@ -35,13 +35,13 @@
     </target>
   </targets>
   <executables>
-      <tex>xelatex</tex>
+      <tex>lualatex</tex>
       <pdfsvg>pdf2svg</pdfsvg>
       <asy>asy</asy>
       <sage>sage</sage>
       <pdfpng>convert</pdfpng>
       <pdfeps>pdftops</pdfeps>
-      <pdfcrop>pdf-crop-margins</pdfcrop>
+      <pdfcrop>python -m pdf-crop-margins</pdfcrop>
       <pageres>pageres</pageres>
       <node>node</node>
       <liblouis>file2brl</liblouis>
