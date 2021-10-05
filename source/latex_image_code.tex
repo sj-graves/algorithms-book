@@ -1,44 +1,36 @@
 \documentclass[10 pt]{amsart}
-\usepackage{tikz, pgfplots, mathtools}
+\usepackage{tikz, mathtools}
 \usetikzlibrary{graphs, arrows.meta, shapes, quotes, backgrounds, graphdrawing}
 \usegdlibrary{force}
 
 \begin{document}
     
-\definecolor{vc0}{rgb}{1,1,1}
-\definecolor{ec0}{rgb}{0,0,0}
-\tikzset{
-    vstyle0/.style = {fill=vc0,draw=black,circle,inner sep=1pt, outer sep=0pt},
-}
-\begin{tikzpicture}[xscale = 4.0, yscale = 3.33]
-
-
-\path \foreach \n/\x/\y in {0/0.25/0.75, 1/0.0/1.0, 2/1.25/1.0, 3/0.25/0.5, 4/0.0/0.5, 5/0.0/0.0, 6/0.0/-0.5, 7/1.0/0.75, 8/1.25/-0.5, 9/1.0/0.5, 10/0.5/0.5, 11/0.25/0.0, 12/0.5/0.25, 13/0.25/-0.25, 14/0.5/0.0, 15/1.0/0.25, 16/0.75/0.25, 17/0.5/-0.25, 18/1.0/-0.25, 19/0.75/0.0} { (\x,\y) node [vstyle0] (\n)  {\tiny\tt\n}};
-
-\begin{scope}[on background layer]
-\graph[edges = {ec0}]{
-(0) -- { (3), (4), (10) },
-(1) -- { (2), (4), (7) },
-(2) -- { (7), (8) },
-(3) -- { (5), (10) },
-(4) -- { (5) },
-(5) -- { (11) },
-(6) -- { (8), (11), (13) },
-(7) -- { (9) },
-(8) -- { (9) },
-(9) -- { (15) },
-(10) -- { (12) },
-(11) -- { (12) },
-(12) -- { (14) },
-(13) -- { (14), (17) },
-(14) -- { (16) },
-(15) -- { (16), (18) },
-(16) -- { (19) },
-(17) -- { (18), (19) },
-(18) -- { (19) }
-};
-
-\end{scope}
-\end{tikzpicture}
+\definecolor{smallnet_vc0}{rgb}{1,1,1}
+\definecolor{smallnet_ec0}{rgb}{0, 0, 0}
+{\footnotesize\begin{tikzpicture}[xscale = 5.0, yscale=5.0,
+    vx_0/.style = {circle, draw, fill=smallnet_vc0, inner sep = 1pt}]
+\node (0) [vx_0] at (0.0,0.0) { \tt $v_{0}$};
+\node (1) [vx_0] at (1.0,0.0) { \tt $v_{1}$};
+\node (2) [vx_0] at (1.0,1.0) { \tt $v_{2}$};
+\node (3) [vx_0] at (0.0,1.0) { \tt $v_{3}$};
+\node (4) [vx_0] at (0.333,0.333) { \tt $v_{4}$};
+\node (5) [vx_0] at (0.667,0.333) { \tt $v_{5}$};
+\node (6) [vx_0] at (0.667,0.667) { \tt $v_{6}$};
+\node (7) [vx_0] at (0.333,0.667) { \tt $v_{7}$};
+\graph[edge quotes={pos=0.5, draw, fill=white, inner sep=1pt}]{(import nodes);
+(0) --[smallnet_ec0, "\footnotesize \tt 16", ] (1),
+(0) --[smallnet_ec0, "\footnotesize \tt 12", ] (3),
+(0) --[smallnet_ec0, "\footnotesize \tt 4", ] (7),
+(1) --[smallnet_ec0, "\footnotesize \tt 14", ] (2),
+(1) --[smallnet_ec0, "\footnotesize \tt 17", ] (4),
+(1) --[smallnet_ec0, "\footnotesize \tt 6", ] (5),
+(2) --[smallnet_ec0, "\footnotesize \tt 9", ] (6),
+(2) --[smallnet_ec0, "\footnotesize \tt 5", ] (7),
+(3) --[smallnet_ec0, "\footnotesize \tt 15", ] (7),
+(4) --[smallnet_ec0, "\footnotesize \tt 6", ] (6),
+(4) --[smallnet_ec0, "\footnotesize \tt 13", ] (7),
+(5) --[smallnet_ec0, "\footnotesize \tt 12", ] (6),
+(6) --[smallnet_ec0, "\footnotesize \tt 3", ] (7);};
+\end{tikzpicture}}
 
 \end{document}
