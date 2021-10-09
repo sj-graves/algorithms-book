@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<section xml:id="sec-intro-kruskal"
+  xmlns:xi="http://www.w3.org/2001/XInclude">
+  <title>Kruskal's Minimum Spanning Tree</title>
+  <p>
+    In the last section, we began at a specified vertex and tried to find the shortest path to every other vertex. In this section, let's try to do something similar: let's try to include the fewest, lightest-weight edges in a graph to make it connected.
+  </p>
+
+</section>

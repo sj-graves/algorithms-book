@@ -12,6 +12,13 @@
     <p>
       This is the text for a course about <term>Algorithms</term>, so the choice is to begin by teaching programming and then move into interesting algorithms, or vice versa. Let's choose to begin with some interesting mathematical algorithms.
     </p>
+    <definition xml:id="def-algorithm">
+      <statement>
+        <p>
+          An <term>algorithm</term> is a detailed procedure for completing a task (which is usually computational or mathematical).
+        </p>
+      </statement>
+    </definition>
   </introduction>
 
   <!-- Sections can be written directly here, but it might help  -->
@@ -19,6 +26,7 @@
   <!-- That way it is easy to include the section in a different -->
   <!-- chapter later if you change your mind about the order.    -->
   <xi:include href="./sec_intro_shortest_path.ptx" />
+  <xi:include href="./sec_intro_kruskal.ptx" />
   <!-- <xi:include href="./sec_firstch-examples.ptx" /> -->
 
   <!-- One or more of the sections of a chapter might be exercises-->
