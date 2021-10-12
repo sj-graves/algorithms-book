@@ -2,823 +2,837 @@
 <section xml:id="sec-intro-shortest-path"
     xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>All Shortest Paths in a Graph</title>
-    <p>Let us begin with an example.</p>
-    <figure xml:id="fig-smallnetwork">
-        <caption>A small network with connection costs.</caption>
-        <p>Small Net</p>
-    </figure>
-    <p>
-        In <xref ref="fig-smallnetwork" />
- we see a diagram of a network where connections between nodes are marked with a <q>cost</q>. We're going to refer to the nodes as <term>vertices</term> and the connections as <term>edges</term> in keeping with the language of <term>graph theory</term> which we'll study later in the course. The task associated with the digram is to determine the least-cost path from the node marked <m>v_0</m> to each other node. 
-</p>
-<p>
-        If you imagine that you are standing on <m>v_0</m> and can only see another vertex <m>v_i</m> if there is a <m>v_0,v_i</m>-edge. Moreover, you can see how much it costs to use each edge. We will record a step number, the vertex <m>v</m> visited on that step, the predecessor vertex (denoted <m>p(v)</m>) which was used to reach <m>v</m>, as well as the total cost necessary to get to <m>v</m> (denoted <m>c(v)</m>). Until we can see a vertex, it will be assumed that there is an infinite cost to reach it. We'll mark the predecessor and cost to reach <m>v_0</m> both with an X to indicate that we've already visited vertex <m>v_0</m>.
-</p>
-<sidebyside>
-    <tabular halign="center">
-        <col />
-        <col />
-        <col />
-        <col right="major" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <row>
-            <cell colspan="4" />
-            <cell colspan="2">
-                <m>v_0</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_1</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_2</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_3</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_4</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_5</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_6</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_7</m>
-            </cell>
-        </row>
-        <row bottom="major">
-            <cell>Step</cell>
-            <cell>
-                <m>v</m>
-            </cell>
-            <cell>
-                <m>p(v)</m>
-            </cell>
-            <cell>
-                <m>c(v)</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-        </row>
-        <row>
-            <cell>0</cell>
-            <cell>
-                <m>v_0</m>
-            </cell>
-            <cell> None </cell>
-            <cell> 0 </cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>0</cell>
-            <cell>0+16=16</cell>
-            <cell>-</cell>
-            <cell>
-                <m>\infty</m>
-            </cell>
-            <cell>0</cell>
-            <cell>0+12=12</cell>
-            <cell>-</cell>
-            <cell>
-                <m>\infty</m>
-            </cell>
-            <cell>-</cell>
-            <cell>
-                <m>\infty</m>
-            </cell>
-            <cell>-</cell>
-            <cell>
-                <m>\infty</m>
-            </cell>
-            <cell>0</cell>
-            <cell>0+4=4</cell>
-        </row>
-    </tabular>
-</sidebyside>
-<p>
-        We see by inspecting this table that the least-expensive vertex we can see that has not been visited is <m>v_7</m>, with a total cost of <m>c(v_7)=4</m>, and in the interest of producing a least-cost path we'll choose <m>v_7</m> as our next vertex to visit. This requires us to add a new row to the table, but we remark that we only want to change the entry for a vertex <m>v_i</m> if the cost to reach <m>v_i</m> through <m>v_7</m> is less than the currently known cost, and since we now have visited <m>v_7</m> we'll mark its predecessor and cost with Xs since they will not change and their final values are recorded on the left side of our table.
-</p>
-<sidebyside>
-    <tabular halign="center">
-        <col />
-        <col />
-        <col />
-        <col right="major" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <row>
-            <cell colspan="4" />
-            <cell colspan="2">
-                <m>v_0</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_1</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_2</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_3</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_4</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_5</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_6</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_7</m>
-            </cell>
-        </row>
-        <row bottom="major">
-            <cell>Step</cell>
-            <cell>
-                <m>v</m>
-            </cell>
-            <cell>
-                <m>p(v)</m>
-            </cell>
-            <cell>
-                <m>c(v)</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-        </row>
-        <row>
-            <cell>0</cell>
-            <cell>
-                <m>v_0</m>
-            </cell>
-            <cell> None </cell>
-            <cell> 0 </cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>0</cell>
-            <cell>0+16=16</cell>
-            <cell>-</cell>
-            <cell>
-                <m>\infty</m>
-            </cell>
-            <cell>0</cell>
-            <cell>0+12=12</cell>
-            <cell>-</cell>
-            <cell>
-                <m>\infty</m>
-            </cell>
-            <cell>-</cell>
-            <cell>
-                <m>\infty</m>
-            </cell>
-            <cell>-</cell>
-            <cell>
-                <m>\infty</m>
-            </cell>
-            <cell>0</cell>
-            <cell>0+4=4</cell>
-        </row>
-        <row>
-            <cell>1</cell>
-            <cell>
-                <m>v_7</m>
-            </cell>
-            <cell>0</cell>
-            <cell>4</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>0</cell>
-            <cell>16</cell>
-            <cell>7</cell>
-            <cell>4+5=9</cell>
-            <cell>0</cell>
-            <cell>12</cell>
-            <cell>7</cell>
-            <cell>4+13=17</cell>
-            <cell>-</cell>
-            <cell>
-                <m>\infty</m>
-            </cell>
-            <cell>7</cell>
-            <cell>4+3=7</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-        </row>
-    </tabular>
-</sidebyside>
-<p>
-        In fact, this process will continue: at each step, choose the least-cost vertex which still has entries in the right side of the table, and visit it next. As you visit a vertex, update the predecessor and cost of any neighboring vertices which require it. The final table follows.
-</p>
-<table>
-    <title>Predecessor and cost table for a least-cost network path</title>
-    <tabular halign="center">
-        <col />
-        <col />
-        <col />
-        <col right="major" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <col />
-        <col right="minor" />
-        <row>
-            <cell colspan="4" />
-            <cell colspan="2">
-                <m>v_0</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_1</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_2</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_3</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_4</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_5</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_6</m>
-            </cell>
-            <cell colspan="2">
-                <m>v_7</m>
-            </cell>
-        </row>
-        <row bottom="major">
-            <cell>Step</cell>
-            <cell>
-                <m>v</m>
-            </cell>
-            <cell>
-                <m>p(v)</m>
-            </cell>
-            <cell>
-                <m>c(v)</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-            <cell>
-                <m>p</m>
-            </cell>
-            <cell>
-                <m>c</m>
-            </cell>
-        </row>
-        <row>
-            <cell>0</cell>
-            <cell>
-                <m>v_0</m>
-            </cell>
-            <cell> None </cell>
-            <cell> 0 </cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>0</cell>
-            <cell>0+16=16</cell>
-            <cell>-</cell>
-            <cell>
-                <m>\infty</m>
-            </cell>
-            <cell>0</cell>
-            <cell>0+12=12</cell>
-            <cell>-</cell>
-            <cell>
-                <m>\infty</m>
-            </cell>
-            <cell>-</cell>
-            <cell>
-                <m>\infty</m>
-            </cell>
-            <cell>-</cell>
-            <cell>
-                <m>\infty</m>
-            </cell>
-            <cell>0</cell>
-            <cell>0+4=4</cell>
-        </row>
-        <row>
-            <cell>1</cell>
-            <cell>
-                <m>v_7</m>
-            </cell>
-            <cell>0</cell>
-            <cell>4</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>0</cell>
-            <cell>16</cell>
-            <cell>7</cell>
-            <cell>5+4=9</cell>
-            <cell>0</cell>
-            <cell>12</cell>
-            <cell>7</cell>
-            <cell>13+4=17</cell>
-            <cell>-</cell>
-            <cell>
-                <m>\infty</m>
-            </cell>
-            <cell>7</cell>
-            <cell>3+4=7</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-        </row>
-        <row>
-            <cell>2</cell>
-            <cell>
-                <m>v_6</m>
-            </cell>
-            <cell>7</cell>
-            <cell>6</cell>
-            <!-- -->
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>0</cell>
-            <cell>16</cell>
-            <cell>7</cell>
-            <cell>9</cell>
-            <cell>0</cell>
-            <cell>12</cell>
-            <cell>6</cell>
-            <cell>7+6=13</cell>
-            <cell>6</cell>
-            <cell>7+12=19</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-        </row>
-        <row>
-            <cell>3</cell>
-            <cell>
-                <m>v_2</m>
-            </cell>
-            <cell>7</cell>
-            <cell>9</cell>
-            <!--  -->
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>0</cell>
-            <cell>16</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>0</cell>
-            <cell>12</cell>
-            <cell>6</cell>
-            <cell>13</cell>
-            <cell>6</cell>
-            <cell>19</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-        </row>
-        <row>
-            <cell>4</cell>
-            <cell>
-                <m>v_3</m>
-            </cell>
-            <cell>0</cell>
-            <cell>12</cell>
-            <!--    -->
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>0</cell>
-            <cell>16</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>6</cell>
-            <cell>13</cell>
-            <cell>6</cell>
-            <cell>19</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-        </row>
-        <row>
-            <cell>5</cell>
-            <cell>
-                <m>v_4</m>
-            </cell>
-            <cell>6</cell>
-            <cell>13</cell>
-            <!-- -->
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>0</cell>
-            <cell>16</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>6</cell>
-            <cell>19</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-        </row>
-        <row>
-            <cell>6</cell>
-            <cell>
-                <m>v_1</m>
-            </cell>
-            <cell>0</cell>
-            <cell>16</cell>
-            <!-- -->
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>6</cell>
-            <cell>19</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-        </row>
-        <row>
-            <cell>7</cell>
-            <cell>
-                <m>v_5</m>
-            </cell>
-            <cell>6</cell>
-            <cell>19</cell>
-            <!-- -->
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-            <cell>X</cell>
-        </row>
-    </tabular>
-</table>
-<p>
-        We can summarize this by giving a table of the path from <m>v_0</m> to each other vertex along with its total cost, in the order they were found:
-</p>
-<sidebyside>
-    <tabular>
-        <col />
-        <col halign="center"/>
-        <row bottom="major">
-            <cell>Path</cell>
-            <cell>Total Cost</cell>
-        </row>
-        <row>
-            <cell>
-                <m>v_0, v_7</m>
-            </cell>
-            <cell>4</cell>
-        </row>
-        <row>
-            <cell>
-                <m>v_0, v_7, v_6</m>
-            </cell>
-            <cell>6</cell>
-        </row>
-        <row>
-            <cell>
-                <m>v_0, v_7, v_3</m>
-            </cell>
-            <cell>9</cell>
-        </row>
-        <row>
-            <cell>
-                <m>v_0, v_3</m>
-            </cell>
-            <cell>12</cell>
-        </row>
-        <row>
-            <cell>
-                <m>v_0, v_7, v_6, v_4</m>
-            </cell>
-            <cell>13</cell>
-        </row>
-        <row>
-            <cell>
-                <m>v_0, v_1</m>
-            </cell>
-            <cell>16</cell>
-        </row>
-        <row>
-            <cell>
-                <m>v_0, v_7, v_6, v_5 </m>
-            </cell>
-            <cell>19</cell>
-        </row>
-    </tabular>
-</sidebyside>
-<problem>
-    <statement>
-            The edges of a network are given below as a table of triples <m>(u,v,w(u,v))</m>. Find the least-cost path from <m>v_0</m> to each other vertex.
+    <subsection xml:id="subsec-">
+        <p>Let us begin with an example.</p>
+        <figure xml:id="fig-smallnetwork">
+            <caption>A small network with connection costs.</caption>
+            <p>Small Net</p>
+        </figure>
+        <p>
+            In <xref ref="fig-smallnetwork" /> we see a diagram of a network where connections between nodes are marked with a <q>cost</q>. We're going to refer to the nodes as <term>vertices</term> and the connections as <term>edges</term> in keeping with the language of <term>graph theory</term> which we'll study later in the course. The task associated with the diagram is to determine the least-cost path from the node marked <m>v_0</m> to each other node. 
+        </p>
+        <question>
+            <title>Shortest Paths</title>
+            <statement>
+                <p>
+                    How can we find the lowest-cost path from the vertex <m>v_0</m> to each other vertex?
+                </p>
+            </statement>
+        </question>
+        <p>
+            How can we organize a solution to the problem?
+        </p>
+
+
+        <p>
+            If you imagine that you are standing on <m>v_0</m> and can only see another vertex <m>v_i</m> if there is a <m>v_0,v_i</m>-edge. Moreover, you can see how much it costs to use each edge. We will record a step number, the vertex <m>v</m> visited on that step, the predecessor vertex (denoted <m>p(v)</m>) which was used to reach <m>v</m>, as well as the total cost necessary to get to <m>v</m> (denoted <m>c(v)</m>). Until we can see a vertex, it will be assumed that there is an infinite cost to reach it. We'll mark the predecessor and cost to reach <m>v_0</m> both with an X to indicate that we've already visited vertex <m>v_0</m>.
+        </p>
         <sidebyside>
             <tabular halign="center">
+                <col />
+                <col />
+                <col />
+                <col right="major" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <row>
+                    <cell colspan="4" />
+                    <cell colspan="2">
+                        <m>v_0</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_1</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_2</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_3</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_4</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_5</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_6</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_7</m>
+                    </cell>
+                </row>
                 <row bottom="major">
+                    <cell>Step</cell>
                     <cell>
-                        <m>(u,v,w(u,v))</m>
+                        <m>v</m>
                     </cell>
                     <cell>
-                        <m>(u,v,w(u,v))</m>
+                        <m>p(v)</m>
                     </cell>
                     <cell>
-                        <m>(u,v,w(u,v))</m>
+                        <m>c(v)</m>
                     </cell>
                     <cell>
-                        <m>(u,v,w(u,v))</m>
+                        <m>p</m>
                     </cell>
                     <cell>
-                        <m>(u,v,w(u,v))</m>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
                     </cell>
                 </row>
                 <row>
-                    <cell>(0, 1, 8)</cell>
-                    <cell>(2, 4, 1)</cell>
-                    <cell>(4, 13, 1)</cell>
-                    <cell>(5, 17, 6)</cell>
-                    <cell>(9, 16, 8)</cell>
-                </row>
-                <row>
-                    <cell>(0, 3, 3)</cell>
-                    <cell>(2, 10, 9)</cell>
-                    <cell>(4, 15, 5)</cell>
-                    <cell>(5, 19, 7)</cell>
-                    <cell>(9, 17, 6)</cell>
-                </row>
-                <row>
-                    <cell>(0, 4, 8)</cell>
-                    <cell>(2, 11, 5)</cell>
-                    <cell>(4, 16, 9)</cell>
-                    <cell>(6, 12, 8)</cell>
-                    <cell>(10, 13, 7)</cell>
-                </row>
-                <row>
-                    <cell>(0, 8, 10)</cell>
-                    <cell>(2, 18, 8)</cell>
-                    <cell>(4, 18, 3)</cell>
-                    <cell>(7, 8, 9)</cell>
-                    <cell>(10, 16, 8)</cell>
-                </row>
-                <row>
-                    <cell>(0, 10, 4)</cell>
-                    <cell>(2, 19, 6)</cell>
-                    <cell>(5, 6, 5)</cell>
-                    <cell>(7, 13, 3)</cell>
-                    <cell>(11, 12, 10)</cell>
-                </row>
-                <row>
-                    <cell>(0, 13, 1)</cell>
-                    <cell>(3, 5, 10)</cell>
-                    <cell>(5, 7, 8)</cell>
-                    <cell>(7, 15, 10)</cell>
-                    <cell>(11, 18, 8)</cell>
-                </row>
-                <row>
-                    <cell>(0, 16, 4)</cell>
-                    <cell>(3, 13, 9)</cell>
-                    <cell>(5, 8, 10)</cell>
-                    <cell>(7, 18, 6)</cell>
-                    <cell>(12, 19, 1)</cell>
-                </row>
-                <row>
-                    <cell>(1, 4, 4)</cell>
-                    <cell>(3, 14, 6)</cell>
-                    <cell>(5, 10, 8)</cell>
-                    <cell>(8, 11, 1)</cell>
-                    <cell>(13, 14, 7)</cell>
-                </row>
-                <row>
-                    <cell>(1, 6, 10)</cell>
-                    <cell>(3, 19, 6)</cell>
-                    <cell>(5, 14, 6)</cell>
-                    <cell>(8, 19, 7)</cell>
-                    <cell>(15, 17, 7)</cell>
-                </row>
-                <row>
-                    <cell>(1, 18, 5)</cell>
-                    <cell>(4, 10, 5)</cell>
-                    <cell>(5, 16, 4)</cell>
-                    <cell>(9, 15, 5)</cell>
-                    <cell>(16, 18, 9)</cell>
+                    <cell>0</cell>
+                    <cell>
+                        <m>v_0</m>
+                    </cell>
+                    <cell> None </cell>
+                    <cell> 0 </cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>0</cell>
+                    <cell>0+16=16</cell>
+                    <cell>-</cell>
+                    <cell>
+                        <m>\infty</m>
+                    </cell>
+                    <cell>0</cell>
+                    <cell>0+12=12</cell>
+                    <cell>-</cell>
+                    <cell>
+                        <m>\infty</m>
+                    </cell>
+                    <cell>-</cell>
+                    <cell>
+                        <m>\infty</m>
+                    </cell>
+                    <cell>-</cell>
+                    <cell>
+                        <m>\infty</m>
+                    </cell>
+                    <cell>0</cell>
+                    <cell>0+4=4</cell>
                 </row>
             </tabular>
         </sidebyside>
-    </statement>
-    <solution>
         <p>
-
+            We see by inspecting this table that the least-expensive vertex we can see that has not been visited is <m>v_7</m>, with a total cost of <m>c(v_7)=4</m>, and in the interest of producing a least-cost path we'll choose <m>v_7</m> as our next vertex to visit. This requires us to add a new row to the table, but we remark that we only want to change the entry for a vertex <m>v_i</m> if the cost to reach <m>v_i</m> through <m>v_7</m> is less than the currently known cost, and since we now have visited <m>v_7</m> we'll mark its predecessor and cost with Xs since they will not change and their final values are recorded on the left side of our table.
         </p>
-    </solution>
-</problem>
-<p>
-        Since we've computed the least-cost path to every vertex from <m>v_0</m>, we've actually determined not just a shortest path but a <term>minimum spanning tree</term> for the graph, using the <term>Jarnik-Prim Algorithm</term>! Normally the algorithm for shortest path would be given two inputs, a start vertex <m>v_{start}</m> and an end vertex <m>v_{end}</m> and would stop after the vertex <m>v_{end}</m> is visited: that's called <term>Dijkstra's algorithm</term>!
-</p>
-<!-- <introduction>
-        
-</introduction>
-<subsection xml:id="subsec-Graph-Definitions">
-    <title>Graph Definitions</title>
-    <definition xml:id="def-Graph">
-        <statement>
-            <p>A <term>graph</term> is an ordered pair <m>G=(V,E)</m> of a set of <term>vertices</term>
-                <m>V</m> and a set <m>E</m> of unordered pairs of vertices, called <term>edges</term>.
-            </p>
-        </statement>
-    </definition>
-</subsection>
-<conclusion>
-    <p></p>
-</conclusion> -->
+        <sidebyside>
+            <tabular halign="center">
+                <col />
+                <col />
+                <col />
+                <col right="major" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <row>
+                    <cell colspan="4" />
+                    <cell colspan="2">
+                        <m>v_0</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_1</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_2</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_3</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_4</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_5</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_6</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_7</m>
+                    </cell>
+                </row>
+                <row bottom="major">
+                    <cell>Step</cell>
+                    <cell>
+                        <m>v</m>
+                    </cell>
+                    <cell>
+                        <m>p(v)</m>
+                    </cell>
+                    <cell>
+                        <m>c(v)</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                </row>
+                <row>
+                    <cell>0</cell>
+                    <cell>
+                        <m>v_0</m>
+                    </cell>
+                    <cell> None </cell>
+                    <cell> 0 </cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>0</cell>
+                    <cell>0+16=16</cell>
+                    <cell>-</cell>
+                    <cell>
+                        <m>\infty</m>
+                    </cell>
+                    <cell>0</cell>
+                    <cell>0+12=12</cell>
+                    <cell>-</cell>
+                    <cell>
+                        <m>\infty</m>
+                    </cell>
+                    <cell>-</cell>
+                    <cell>
+                        <m>\infty</m>
+                    </cell>
+                    <cell>-</cell>
+                    <cell>
+                        <m>\infty</m>
+                    </cell>
+                    <cell>0</cell>
+                    <cell>0+4=4</cell>
+                </row>
+                <row>
+                    <cell>1</cell>
+                    <cell>
+                        <m>v_7</m>
+                    </cell>
+                    <cell>0</cell>
+                    <cell>4</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>0</cell>
+                    <cell>16</cell>
+                    <cell>7</cell>
+                    <cell>4+5=9</cell>
+                    <cell>0</cell>
+                    <cell>12</cell>
+                    <cell>7</cell>
+                    <cell>4+13=17</cell>
+                    <cell>-</cell>
+                    <cell>
+                        <m>\infty</m>
+                    </cell>
+                    <cell>7</cell>
+                    <cell>4+3=7</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                </row>
+            </tabular>
+        </sidebyside>
+        <p>
+            In fact, this process will continue: at each step, choose the least-cost vertex which still has entries in the right side of the table, and visit it next. As you visit a vertex, update the predecessor and cost of any neighboring vertices which require it. The final table follows.
+        </p>
+        <table>
+            <title>Predecessor and cost table for a least-cost network path</title>
+            <tabular halign="center">
+                <col />
+                <col />
+                <col />
+                <col right="major" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <col />
+                <col right="minor" />
+                <row>
+                    <cell colspan="4" />
+                    <cell colspan="2">
+                        <m>v_0</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_1</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_2</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_3</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_4</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_5</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_6</m>
+                    </cell>
+                    <cell colspan="2">
+                        <m>v_7</m>
+                    </cell>
+                </row>
+                <row bottom="major">
+                    <cell>Step</cell>
+                    <cell>
+                        <m>v</m>
+                    </cell>
+                    <cell>
+                        <m>p(v)</m>
+                    </cell>
+                    <cell>
+                        <m>c(v)</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                    <cell>
+                        <m>p</m>
+                    </cell>
+                    <cell>
+                        <m>c</m>
+                    </cell>
+                </row>
+                <row>
+                    <cell>0</cell>
+                    <cell>
+                        <m>v_0</m>
+                    </cell>
+                    <cell> None </cell>
+                    <cell> 0 </cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>0</cell>
+                    <cell>0+16=16</cell>
+                    <cell>-</cell>
+                    <cell>
+                        <m>\infty</m>
+                    </cell>
+                    <cell>0</cell>
+                    <cell>0+12=12</cell>
+                    <cell>-</cell>
+                    <cell>
+                        <m>\infty</m>
+                    </cell>
+                    <cell>-</cell>
+                    <cell>
+                        <m>\infty</m>
+                    </cell>
+                    <cell>-</cell>
+                    <cell>
+                        <m>\infty</m>
+                    </cell>
+                    <cell>0</cell>
+                    <cell>0+4=4</cell>
+                </row>
+                <row>
+                    <cell>1</cell>
+                    <cell>
+                        <m>v_7</m>
+                    </cell>
+                    <cell>0</cell>
+                    <cell>4</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>0</cell>
+                    <cell>16</cell>
+                    <cell>7</cell>
+                    <cell>5+4=9</cell>
+                    <cell>0</cell>
+                    <cell>12</cell>
+                    <cell>7</cell>
+                    <cell>13+4=17</cell>
+                    <cell>-</cell>
+                    <cell>
+                        <m>\infty</m>
+                    </cell>
+                    <cell>7</cell>
+                    <cell>3+4=7</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                </row>
+                <row>
+                    <cell>2</cell>
+                    <cell>
+                        <m>v_6</m>
+                    </cell>
+                    <cell>7</cell>
+                    <cell>6</cell>
+                    <!-- -->
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>0</cell>
+                    <cell>16</cell>
+                    <cell>7</cell>
+                    <cell>9</cell>
+                    <cell>0</cell>
+                    <cell>12</cell>
+                    <cell>6</cell>
+                    <cell>7+6=13</cell>
+                    <cell>6</cell>
+                    <cell>7+12=19</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                </row>
+                <row>
+                    <cell>3</cell>
+                    <cell>
+                        <m>v_2</m>
+                    </cell>
+                    <cell>7</cell>
+                    <cell>9</cell>
+                    <!--  -->
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>0</cell>
+                    <cell>16</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>0</cell>
+                    <cell>12</cell>
+                    <cell>6</cell>
+                    <cell>13</cell>
+                    <cell>6</cell>
+                    <cell>19</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                </row>
+                <row>
+                    <cell>4</cell>
+                    <cell>
+                        <m>v_3</m>
+                    </cell>
+                    <cell>0</cell>
+                    <cell>12</cell>
+                    <!--    -->
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>0</cell>
+                    <cell>16</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>6</cell>
+                    <cell>13</cell>
+                    <cell>6</cell>
+                    <cell>19</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                </row>
+                <row>
+                    <cell>5</cell>
+                    <cell>
+                        <m>v_4</m>
+                    </cell>
+                    <cell>6</cell>
+                    <cell>13</cell>
+                    <!-- -->
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>0</cell>
+                    <cell>16</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>6</cell>
+                    <cell>19</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                </row>
+                <row>
+                    <cell>6</cell>
+                    <cell>
+                        <m>v_1</m>
+                    </cell>
+                    <cell>0</cell>
+                    <cell>16</cell>
+                    <!-- -->
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>6</cell>
+                    <cell>19</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                </row>
+                <row>
+                    <cell>7</cell>
+                    <cell>
+                        <m>v_5</m>
+                    </cell>
+                    <cell>6</cell>
+                    <cell>19</cell>
+                    <!-- -->
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                    <cell>X</cell>
+                </row>
+            </tabular>
+        </table>
+        <p>
+            We can summarize this by giving a table of the path from <m>v_0</m> to each other vertex along with its total cost, in the order they were found:
+        </p>
+        <sidebyside>
+            <tabular>
+                <col />
+                <col halign="center"/>
+                <row bottom="major">
+                    <cell>Path</cell>
+                    <cell>Total Cost</cell>
+                </row>
+                <row>
+                    <cell>
+                        <m>v_0, v_7</m>
+                    </cell>
+                    <cell>4</cell>
+                </row>
+                <row>
+                    <cell>
+                        <m>v_0, v_7, v_6</m>
+                    </cell>
+                    <cell>6</cell>
+                </row>
+                <row>
+                    <cell>
+                        <m>v_0, v_7, v_3</m>
+                    </cell>
+                    <cell>9</cell>
+                </row>
+                <row>
+                    <cell>
+                        <m>v_0, v_3</m>
+                    </cell>
+                    <cell>12</cell>
+                </row>
+                <row>
+                    <cell>
+                        <m>v_0, v_7, v_6, v_4</m>
+                    </cell>
+                    <cell>13</cell>
+                </row>
+                <row>
+                    <cell>
+                        <m>v_0, v_1</m>
+                    </cell>
+                    <cell>16</cell>
+                </row>
+                <row>
+                    <cell>
+                        <m>v_0, v_7, v_6, v_5 </m>
+                    </cell>
+                    <cell>19</cell>
+                </row>
+            </tabular>
+        </sidebyside>
+        <problem>
+            <statement>
+                The edges of a network are given below as a table of triples <m>(u,v,w(u,v))</m>. Find the least-cost path from <m>v_0</m> to each other vertex.
+                <sidebyside>
+                    <tabular halign="center">
+                        <row bottom="major">
+                            <cell>
+                                <m>(u,v,w(u,v))</m>
+                            </cell>
+                            <cell>
+                                <m>(u,v,w(u,v))</m>
+                            </cell>
+                            <cell>
+                                <m>(u,v,w(u,v))</m>
+                            </cell>
+                            <cell>
+                                <m>(u,v,w(u,v))</m>
+                            </cell>
+                            <cell>
+                                <m>(u,v,w(u,v))</m>
+                            </cell>
+                        </row>
+                        <row>
+                            <cell>(0, 1, 8)</cell>
+                            <cell>(2, 4, 1)</cell>
+                            <cell>(4, 13, 1)</cell>
+                            <cell>(5, 17, 6)</cell>
+                            <cell>(9, 16, 8)</cell>
+                        </row>
+                        <row>
+                            <cell>(0, 3, 3)</cell>
+                            <cell>(2, 10, 9)</cell>
+                            <cell>(4, 15, 5)</cell>
+                            <cell>(5, 19, 7)</cell>
+                            <cell>(9, 17, 6)</cell>
+                        </row>
+                        <row>
+                            <cell>(0, 4, 8)</cell>
+                            <cell>(2, 11, 5)</cell>
+                            <cell>(4, 16, 9)</cell>
+                            <cell>(6, 12, 8)</cell>
+                            <cell>(10, 13, 7)</cell>
+                        </row>
+                        <row>
+                            <cell>(0, 8, 10)</cell>
+                            <cell>(2, 18, 8)</cell>
+                            <cell>(4, 18, 3)</cell>
+                            <cell>(7, 8, 9)</cell>
+                            <cell>(10, 16, 8)</cell>
+                        </row>
+                        <row>
+                            <cell>(0, 10, 4)</cell>
+                            <cell>(2, 19, 6)</cell>
+                            <cell>(5, 6, 5)</cell>
+                            <cell>(7, 13, 3)</cell>
+                            <cell>(11, 12, 10)</cell>
+                        </row>
+                        <row>
+                            <cell>(0, 13, 1)</cell>
+                            <cell>(3, 5, 10)</cell>
+                            <cell>(5, 7, 8)</cell>
+                            <cell>(7, 15, 10)</cell>
+                            <cell>(11, 18, 8)</cell>
+                        </row>
+                        <row>
+                            <cell>(0, 16, 4)</cell>
+                            <cell>(3, 13, 9)</cell>
+                            <cell>(5, 8, 10)</cell>
+                            <cell>(7, 18, 6)</cell>
+                            <cell>(12, 19, 1)</cell>
+                        </row>
+                        <row>
+                            <cell>(1, 4, 4)</cell>
+                            <cell>(3, 14, 6)</cell>
+                            <cell>(5, 10, 8)</cell>
+                            <cell>(8, 11, 1)</cell>
+                            <cell>(13, 14, 7)</cell>
+                        </row>
+                        <row>
+                            <cell>(1, 6, 10)</cell>
+                            <cell>(3, 19, 6)</cell>
+                            <cell>(5, 14, 6)</cell>
+                            <cell>(8, 19, 7)</cell>
+                            <cell>(15, 17, 7)</cell>
+                        </row>
+                        <row>
+                            <cell>(1, 18, 5)</cell>
+                            <cell>(4, 10, 5)</cell>
+                            <cell>(5, 16, 4)</cell>
+                            <cell>(9, 15, 5)</cell>
+                            <cell>(16, 18, 9)</cell>
+                        </row>
+                    </tabular>
+                </sidebyside>
+            </statement>
+            <solution>
+                <p>
+
+                </p>
+            </solution>
+        </problem>
+        <p>
+            Since we've computed the least-cost path to every vertex from <m>v_0</m>, we've actually determined not just a shortest path but a <term>minimum spanning tree</term> for the graph, using the <term>Jarnik-Prim Algorithm</term>! Normally the algorithm for shortest path would be given two inputs, a start vertex <m>v_{start}</m> and an end vertex <m>v_{end}</m> and would stop after the vertex <m>v_{end}</m> is visited: that's called <term>Dijkstra's algorithm</term>!
+        </p>
+    </subsection>
+    <subsection xml:id="subsec-Graph-Definitions">
+        <title>Graph Definitions</title>
+        <p>
+            Now that we've walked through an example, we can discuss the underlying terminology and ideas of graph theory.
+        </p>
+        <definition xml:id="def-Graph">
+            <statement>
+                <p>
+                    A <term>graph</term> is an ordered pair <m>G=(V,E)</m> of a set of <term>vertices</term> <m>V</m> and a set <m>E</m> of unordered pairs of vertices, called <term>edges</term>.
+                </p>
+            </statement>
+        </definition>
+    </subsection>
+    <conclusion>
+        <p></p>
+    </conclusion> -->
 </section>

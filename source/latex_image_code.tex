@@ -4,33 +4,39 @@
 \usegdlibrary{force}
 
 \begin{document}
-    
 \definecolor{smallnet_vc0}{rgb}{1,1,1}
 \definecolor{smallnet_ec0}{rgb}{0, 0, 0}
-{\footnotesize\begin{tikzpicture}[xscale = 5.0, yscale=5.0,
-    vx_0/.style = {circle, draw, fill=smallnet_vc0, inner sep = 1pt}]
-\node (0) [vx_0] at (0.0,0.0) { \tt $v_{0}$};
-\node (1) [vx_0] at (1.0,0.0) { \tt $v_{1}$};
-\node (2) [vx_0] at (1.0,1.0) { \tt $v_{2}$};
-\node (3) [vx_0] at (0.0,1.0) { \tt $v_{3}$};
-\node (4) [vx_0] at (0.333,0.333) { \tt $v_{4}$};
-\node (5) [vx_0] at (0.667,0.333) { \tt $v_{5}$};
-\node (6) [vx_0] at (0.667,0.667) { \tt $v_{6}$};
-\node (7) [vx_0] at (0.333,0.667) { \tt $v_{7}$};
-\graph[edge quotes={pos=0.5, draw, fill=white, inner sep=1pt}]{(import nodes);
-(0) --[smallnet_ec0, "\footnotesize \tt 16", ] (1),
-(0) --[smallnet_ec0, "\footnotesize \tt 12", ] (3),
-(0) --[smallnet_ec0, "\footnotesize \tt 4", ] (7),
-(1) --[smallnet_ec0, "\footnotesize \tt 14", ] (2),
-(1) --[smallnet_ec0, "\footnotesize \tt 17", ] (4),
-(1) --[smallnet_ec0, "\footnotesize \tt 6", ] (5),
-(2) --[smallnet_ec0, "\footnotesize \tt 9", ] (6),
-(2) --[smallnet_ec0, "\footnotesize \tt 5", ] (7),
-(3) --[smallnet_ec0, "\footnotesize \tt 15", ] (7),
-(4) --[smallnet_ec0, "\footnotesize \tt 6", ] (6),
-(4) --[smallnet_ec0, "\footnotesize \tt 13", ] (7),
-(5) --[smallnet_ec0, "\footnotesize \tt 12", ] (6),
-(6) --[smallnet_ec0, "\footnotesize \tt 3", ] (7);};
-\end{tikzpicture}}
+{\footnotesize
+    \begin{tikzpicture}[xscale = 5.0, yscale=5.0,
+            vx_0/.style = {circle, draw, fill=smallnet_vc0, inner sep = 1pt}]
+        \node (0) [vx_0] at (0.0,0.0) { \tt $v_{0}$};
+        \node (1) [vx_0] at (1.0,0.0) { \tt $v_{1}$};
+        \node (2) [vx_0] at (1.0,1.0) { \tt $v_{2}$};
+        \node (3) [vx_0] at (0.0,1.0) { \tt $v_{3}$};
+        \node (4) [vx_0] at (0.333,0.333) { \tt $v_{4}$};
+        \node (5) [vx_0] at (0.667,0.333) { \tt $v_{5}$};
+        \node (6) [vx_0] at (0.667,0.667) { \tt $v_{6}$};
+        \node (7) [vx_0] at (0.333,0.667) { \tt $v_{7}$};
+        \graph[edge quotes={pos=0.5, draw, fill=white, inner sep=1pt}]{(import nodes);
+        (0) --[smallnet_ec0, "\footnotesize \tt 16", ] (1),
+        (0) --[smallnet_ec0, "\footnotesize \tt 12", ] (3),
+        (0) --[smallnet_ec0, "\footnotesize \tt 4", ] (7),
+        (1) --[smallnet_ec0, "\footnotesize \tt 14", ] (2),
+        (1) --[smallnet_ec0, "\footnotesize \tt 17", ] (4),
+        (1) --[smallnet_ec0, "\footnotesize \tt 6", ] (5),
+        (2) --[smallnet_ec0, "\footnotesize \tt 9", ] (6),
+        (2) --[smallnet_ec0, "\footnotesize \tt 5", ] (7),
+        (3) --[smallnet_ec0, "\footnotesize \tt 15", ] (7),
+        (4) --[smallnet_ec0, "\footnotesize \tt 6", ] (6),
+        (4) --[smallnet_ec0, "\footnotesize \tt 13", ] (7),
+        (5) --[smallnet_ec0, "\footnotesize \tt 12", ] (6),
+        (6) --[smallnet_ec0, "\footnotesize \tt 3", ] (7);};
+    \end{tikzpicture}
+}
 
+\begin{tabular}{cccc|cccccccccccccccc}
+         &     &        &        & \multicolumn{2}{c}{$v_0$} & \multicolumn{2}{c}{$v_1$} & \multicolumn{2}{c}{$v_2$} & \multicolumn{2}{c}{$v_3$} & \multicolumn{2}{c}{$v_4$} & \multicolumn{2}{c}{$v_5$} & \multicolumn{2}{c}{$v_6$} & \multicolumn{2}{c}{$v_7$}                                                 \\
+    Step & $v$ & $p(v)$ & $c(v)$ & $p$                       & $c$                       & $p$                       & $c$                       & $p$                       & $c$                       & $p$                       & $c$                       & $p$ & $c$ & $p$ & $c$ & $p$ & $c$ & $p$ & $c$ \\ \hline
+    & & & & - & \infty & - & \infty & - & \infty & - & \infty & - & \infty & - & \infty & - & \infty & - & \infty 
+\end{tabular}
 \end{document}
