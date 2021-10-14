@@ -17,15 +17,10 @@
 
   <colophon xml:id="AAM-fm-col">
     <copyright>
-      <year>2016 - 2021</year>
       <holder>Stephen J. Graves</holder>
-      <shortlicense>
-          Permission is granted to copy, distribute and/or modify this document under the 
-          terms of the Creative Commons Attribution-Noncommercial-Share Alike 4.0 license. 
-          A human readable version of this license can be read at 
-        <url href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC-BY-NC-SA-4.0</url> 
-          or at its <url href="http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode">full legal code</url>.
-      </shortlicense>
+        <year>2021</year>
+      <minilicense>GFDL License</minilicense>
+            <shortlicense>Permission is granted to copy, distribute and/or modify this document under the terms of the GNU Free Documentation License, Version 1.3 or any later version published by the Free Software Foundation; with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A copy of the license is included in the appendix entitled <q>GNU Free Documentation License.</q>  All trademarks<trademark /> are the registered<registered /> marks of their respective owners.</shortlicense>
     </copyright>
 
   </colophon>

@@ -16,7 +16,7 @@
   <!-- it defines.                                                    -->
   <macros>
         <!-- I'll include macros here as I need them in rewriting the text. -->
-  \usepackage{mathtools}
+<!--   \usepackage{mathtools} -->
   \newcommand{\set}[1]{\left\{#1\right\}}
   \newcommand{\R}{\mathbb{R}}
   </macros>
@@ -26,10 +26,10 @@
   <!-- for those in the next element.                                 -->
   <latex-image-preamble>
   \usepackage{tikz}
-  \usetikzlibrary{graphs, arrows.meta, shapes, quotes, backgrounds, graphdrawing}
+  \usetikzlibrary{graphs, arrows.meta, shapes, quotes, backgrounds}
   \usetikzlibrary{shapes,decorations,shadows,fadings,patterns}
   \usetikzlibrary{decorations.markings}
-  \usegdlibrary{force}
+<!--   \usetikzlibrary{graphdrawing}\usegdlibrary{force} -->
   </latex-image-preamble>
 
   <!-- It is possible to rename elements using the tags below -->

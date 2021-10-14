@@ -20,3 +20,6 @@ error_schema.log
 *.log
 *.fls
 *.synctex.gz
+
+# CoCalc term files
+*.term
