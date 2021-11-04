@@ -14,11 +14,31 @@
   <!-- macros for defining latex math shortcuts. It is good practice  -->
   <!-- to define these semantically, so that the macro relates to what-->
   <!-- it defines.                                                    -->
-  <macros>
+    <macros>
         <!-- I'll include macros here as I need them in rewriting the text. -->
-<!--   \usepackage{mathtools} -->
-  \newcommand{\set}[1]{\left\{#1\right\}}
-  \newcommand{\R}{\mathbb{R}}
+        \usepackage{mathtools}
+
+        \DeclareMathOperator{\fixedset}{fix}
+        \DeclareMathOperator{\support}{supp}
+        \DeclateMathOperator{\lcm}{lcm}
+
+        \newcommand{\set}[1]{\left\{#1\right\}}
+        \newcommand{\abs}[1]{\left|#1\right|}
+        \newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+        \newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+        \newcommand{\after}[2]{#1\circ #2}
+        \newcommand{\sym}[1]{\mathcal{S}_{#1}}
+        \newcommand{\fix}[1]{\fixedset{#1}}
+        \newcommand{\supp}[1]{\support{#1}}
+        \newcommand{\xto}[1]{\xrightarrow{#1}}
+<!--         \newcommand{\lcm}[1]{\leastcommonmultiple{#1}} -->
+
+        \newcommand{\Nats}{\mathbb{N}}
+        \newcommand{\Ints}{\mathbb{Z}}
+        \newcommand{\Zp}{\Ints^+}
+        \newcommand{\Rats}{\mathbb{Q}}
+        \newcommand{\Reals}{\mathbb{R}}
+        \newcommand{\Comps}{\mathbb{C}}
   </macros>
 
 
@@ -27,7 +47,7 @@
   <latex-image-preamble>
   \usepackage{tikz}
   \usetikzlibrary{graphs, arrows.meta, shapes, quotes, backgrounds}
-  \usetikzlibrary{shapes,decorations,shadows,fadings,patterns}
+  \usetikzlibrary{decorations,shadows,fadings,patterns}
   \usetikzlibrary{decorations.markings}
 <!--   \usetikzlibrary{graphdrawing}\usegdlibrary{force} -->
   </latex-image-preamble>

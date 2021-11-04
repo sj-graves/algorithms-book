@@ -1,0 +1,591 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<section xml:id="sec-perms-def" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Mathematical permutations</title>
+    <introduction>
+        <definition>
+            <statement>
+                <p>
+                    Suppose <m>A</m> is a set. Then a function <m>\sigma</m> with domain <m>A</m> and codomain <m>A</m> is a <term>permutation of <m>A</m></term> if and only if <m>\sigma</m> satisfies the following two criteria:
+
+                    <ol type="bfseriesi">
+                        <li><p>(Surjective/Onto) For each element <m>a\in A</m>, there is an element <m>a'\in A</m> such that <m>{\sigma(a') = a}</m>.</p></li>
+                        <li><p>(Injective/One-to-one) For any elements <m>a,b\in A</m>, if <m>f(a)=f(b)</m> then <m>a=b</m>.</p></li>
+                    </ol>
+
+                </p>
+            </statement>
+        </definition>
+        <p>
+            Functions which are both one-to-one and onto are also called <em>bijections</em>, so an easier definition of a permutation <m>\sigma</m> of <m>A</m> is that <m>\sigma</m> is a bijection from <m>A</m> to itself. It is important to note that the definition of a permutation of <m>A</m> does not require that the set <m>A</m> be finite. However, we will be considering only finite sets as a rule.
+        </p>
+        <convention>
+            <statement>
+                <p>
+                    There are certain sets we will use frequently in our study of permutations, namely the set of letters of the English alphabet and subsets of the positive inteegrs. For convenience sake, we denote them as follows:
+                    <ul>
+                        <li><p>
+                            <m>\mathcal{E}</m> is the set of letters in the English alphabet.
+                            </p></li>
+                        <li><p>
+                            <m>[n] = \set{1,2,3,\ldots,n}</m> whenever <m>n\in \Zp</m>.
+                            </p></li>
+                    </ul>
+                </p>
+
+                <p>
+                    For a finite set <m>A</m> which is not a subset of <m>[n]</m> for any <m>n</m>, we denote the set of all permutations of <m>A</m> by <m>\sym{A}</m>. The set of all permutations of <m>[n]</m> is denoted <m>\sym{n}</m>.
+                </p>
+            </statement>
+        </convention>
+    </introduction>
+
+
+    <subsection xml:id="sub-perms-def-linenotations">
+        <title>One-line and two-line notations</title>
+        <p>
+            There are several distinct ways of representing permutations which are useful in different situations. The first two are <em>one-line notation</em> and <em>two-line notation</em>.
+        </p>
+        <definition xml:id="def-linenotations">
+            <title>Two-line notation</title>
+            <statement>
+                Let <m>\sigma\in\sym{A}</m> be a permutation of a set <m>A=\set{a_1,a_2,\dotsc,a_n}</m>. Then the <term>two-line notation</term> for <m>\sigma</m> is
+                <me>
+                    \sigma = \begin{bmatrix}
+                        a_1 \amp a_2 \amp a_3 \amp \cdots \amp a_n \\
+                        \sigma(a_1) \amp \sigma(a_2) \amp \sigma(a_3) \amp \cdots \amp \sigma(a_n)
+                    \end{bmatrix}.
+                </me>
+                The <term>one-line</term> notation for <m>\sigma</m> is
+                <me>
+                    \sigma = \sigma(a_1) ~ \sigma(a_2) ~ \sigma(a_3) ~ \cdots ~ \sigma(a_n).
+                </me>
+            </statement>
+        </definition>
+
+        <convention xml:id="conv-oneline">
+            <statement>
+                There is considerable disagreement in the literature as to whether the symbols in one-line notation should be separated by a comma, a space, or nothing at all. We adopt the convention that permutations listed in one-line notation will have no spaces between symbols for permutations of just a few symbols, but with a space between symbols for longer permutations. For instance,
+                <me>\tau = \begin{bmatrix}1 \amp 2 \amp 3 \\ 3 \amp 1 \amp 2\end{bmatrix}</me>
+                will be represented by <m>\tau=312</m>, but
+                <me>\gamma = \begin{bmatrix}
+                1 \amp 2 \amp 3 \amp 4 \amp 5 \amp 6 \amp 7 \amp 8 \amp 9 \amp 10 \\
+                10 \amp 3 \amp 2 \amp 9 \amp 4 \amp 8 \amp 7 \amp 5 \amp 1 \amp 6
+                \end{bmatrix}</me> will be represented by
+                <m>\gamma = 10~3~2~9~4~8~7~5~1~6</m>.
+            </statement>
+        </convention>
+        <p>
+            Two line notation is especially useful when there is no natural order for the symbols in the set being permuted. For example, if <m>A=\set{\clubsuit, \diamondsuit, \heartsuit, \spadesuit, \nabla, \surd, \infty}</m>, then the following is a valid permutation of <m>A</m>:
+            <me>
+                \phi = \begin{bmatrix}
+                \clubsuit \amp \diamondsuit \amp \heartsuit \amp \spadesuit \amp
+                    \nabla \amp \surd \amp \infty \\
+                \diamondsuit \amp \heartsuit \amp \spadesuit \amp \clubsuit \amp
+                    \surd \amp \infty \amp \nabla
+                \end{bmatrix}.
+            </me>
+        </p>
+        <p>
+            Since the set <m>A=\set{\clubsuit, \diamondsuit, \heartsuit, \spadesuit, \nabla, \sqrt{x}, \infty}</m> defined above has no clear order, we should not impose one in order to use one-line notation to represent <m>\phi</m>.
+        </p>
+    </subsection>
+
+    <subsection xml:id="sub-perms-def-groups">
+        <title>Permutation groups</title>
+        <introduction>
+            <p>
+                Since permutations of a set <m>A</m> are bijections from <m>A</m> to <m>A</m>, each element of <m>\sym{A}</m> has the same domain and codomain; thus they can be composed.
+            </p>
+
+            <theorem>
+                <statement>
+                    <p>
+                        Suppose <m>\sigma,\tau\in S_A</m> for some set <m>A</m>. Then the composition of <m>\tau</m> after <m>\sigma</m> is a permutation <m>\tau\circ\sigma:A\to A</m> defined by
+                        <me>
+                            (\tau\circ\sigma)(a) = \tau(\sigma(a))
+                        </me>
+                        for each <m>a\in A</m>. Moreover, the composition symbol <m>\circ</m> will be suppressed, and we will write <m>\tau\sigma</m> as a product rather than a composition.
+                    </p>
+                </statement>
+            </theorem>
+            <remark xml:id="rem-after">
+                <title>Composition order</title>
+                <statement>
+                    We must be careful to always consider permutation multiplication in the correct order. An easy way to remember this is to think of the composition symbol as being pronounced <q>after</q>. Then <m>\tau\sigma = \after{\tau}{\sigma}</m> is the permutation which performs <m>\tau</m> after performing <m>\sigma</m>.
+                </statement>
+            </remark>
+
+            <p>
+               We need not prove that the composition of permutations exists and is a function, but we do need to be careful to show that it is a permutation: that is, we must show that if <m>\sigma,\tau\in \sym{A}</m> for a set <m>A</m>, then both <m>\tau\sigma,\sigma\tau\in\sym{A}</m>. When an operator (like <m>\circ</m>) on a set satisfies the property that its output remains in the set, it is a <term>closed</term> operator.
+            </p>
+            <theorem xml:id="thm-perm-multiplication-closed">
+                <title><m>\sym{A}</m> is closed under composition</title>
+                <statement>
+                    Let <m>A</m> be a set and <m>\sym{A}</m> the set of permutations of <m>A</m>, and suppose <m>\sigma,\tau\in\sym{A}</m>. Then <m>\after{\sigma}{\tau}\in\sym{A}</m> and <m>\after{\tau}{\sigma}\in\sym{A}</m>.
+                </statement>
+                <proof>
+                    <p>
+                        Let <m>\sigma,\tau\in\sym{A}</m> for a set <m>A</m>. It suffices to show that <m>\tau\sigma\in\sym{A}</m>, for then the case <m>\sigma\tau\in\sym{A}</m> holds by a symmetric argument exchanging the roles of <m>\sigma</m> and <m>\tau</m>.
+                    </p>
+                    <p>
+                        In order to show that <m>\tau\sigma</m> is injective, suppose that <m>a_1,a_2\in A</m> such that <m>(\tau\sigma)(a_1) = (\tau\sigma)(a_2).</m> Then by definition, <m>\tau(\sigma(a_1)) = \tau(\sigma(a_2))</m>; but since <m>\tau</m> is injective, this necessitates that <m>\sigma(a_1) = \sigma(a_2)</m>. In turn, since <m>\sigma</m> is injective, we have that <m>a_1 = a_2</m>, and thus have shown that <m>a_1=a_2</m> whenever <m>(\tau\sigma)(a_1) = (\tau\sigma)(a_2)</m>. Therefore <m>\tau\sigma</m> is injective.
+                    </p>
+                    <p>
+                        In order to show that <m>\tau\sigma</m> is surjective, let <m>a_3\in A</m>. Since <m>\tau</m> is surjective, there is some <m>a_2\in A</m> such that <m>\tau(a_2) = a_3</m>; likewise, since <m>\sigma</m> is surjective, there is some <m>a_1\in A</m> such that <m>\sigma(a_1)=a_2</m>. But then
+                        <me>(\tau\sigma)(a_1) = \tau(\sigma(a_1)) = \tau(a_2) = a_3,</me>
+                        and hence <m>a_3\in (\tau\sigma)(A)</m>. Since our selection of <m>a_3</m> was arbitrary, we have that <m>\tau\sigma</m> is surjective.
+                    </p>
+                    <p>
+                        As we have shown <m>\tau\sigma</m> to be both injective and surjective on <m>A</m>, we have establised <m>\tau\sigma\in\sym{A}</m> as desired.
+                    </p>
+                </proof>
+            </theorem>
+            <p>
+                Closure is only one of the many important properties of the multiplication operator. The next most common property we expect operators to have is the associative property.
+            </p>
+            <definition xml:id="def-associativity">
+                <title>Associative multiplication</title>
+                <statement>
+                    Multiplication is <term>associative</term> if and only if <m>(ab)c = a(bc).</m>
+                </statement>
+            </definition>
+            <theorem xml:id="thm-permprod-assoc">
+                <title>Composition in <m>\sym{A}</m> is associative</title>
+                <statement>
+                    Let <m>A</m> be a set, and suppose <m>\phi,\sigma,\tau\in\sym{A}</m>. Then
+                    <me>
+                        \after{\rho}{(\after{\sigma}{\tau})} = \after{(\after{\rho}{\sigma})}{\tau}.
+                    </me>
+                </statement>
+                <proof>
+                    Let <m>\rho,\sigma,\tau\in\sym{A}</m> for a set <m>A</m>. Then for every <m>a\in A</m>,
+                    <md>
+                        <mrow>
+                            (\after{\rho}{(\after{\sigma}{\tau})})(a)
+                            \amp= \rho((\after{\sigma}{\tau})(a))
+                        </mrow>
+                        <mrow>
+                            \amp= \rho(\sigma(\tau(a)))
+                        </mrow>
+                        <mrow>
+                            \amp= (\after{\rho}{\sigma})(\tau(a))
+                        </mrow>
+                        <mrow>
+                            \amp= ( \after{( \after{\rho}{\sigma} )}{\tau} )(a),
+                        </mrow>
+                    </md>
+                    with all equalities justified by the definition of composition.
+                </proof>
+            </theorem>
+            <p>
+                Since multiplication is associative, we can safely write <m>\rho\sigma\tau</m> rather than <m>\rho(\sigma\tau)</m>, since the product is unique as long as the relative order of the terms is preserved: <m>\rho</m> must be applied after <m>\sigma</m>, which must be applied after <m>\tau</m>.
+            </p>
+        </introduction>
+
+        <subsubsection xml:id="subsub-perms-def-groups-products">
+            <title>Calculating permutation products</title>
+            <p>
+                Calculating products of permutations can be a frustrating exercise. Thankfully, there is a simple algorithm to determine the product.
+            </p>
+            <algorithm xml:id="alg-permproducts">
+                <title>Left-multiplication of permutations</title>
+                <statement>
+                    <p>
+                        Suppose <m>\sigma_1,\sigma_2,\dotsc,\sigma_k</m> are permutations of the set <m>A=\set{a_1,a_2,\dotsc,a_n}</m>, and further suppose the product <m>\sigma_k\circ\sigma_{k-1}\circ\cdots\circ\sigma_2\circ\sigma_1</m> is desired.
+                    </p>
+                    <ol>
+                        <li><p>
+                            For each <m>i\in [n]</m>, do the following:
+                            <ol>
+                                <li><p>
+                                    Let <m>x=a_i</m>.
+                                    </p></li>
+                                <li><p>
+                                    For each <m>j\in[k]</m>, do the following:
+                                    <ol>
+                                        <li><p>
+                                            Update <m>x = \sigma_j(x)</m>.
+                                            </p></li>
+                                    </ol>
+                                    </p></li>
+                                <li><p>
+                                    Write <m>(\sigma_k\circ\sigma_{k-1}\circ\cdots\circ\sigma_2\circ\sigma_1)(a_i) = x</m>.
+                                    </p></li>
+                            </ol>
+                            </p></li>
+                    </ol>
+                </statement>
+            </algorithm>
+            <p>
+                This algorithm can be effectively visualized (for a small number of permutations) using a diagram, as follows.
+            </p>
+            <example xml:id="exmp-permproducts-stack">
+                <title>Stacking permutation products</title>
+                <statement>
+                    <p>
+                        Consider the permutations
+                        <md>
+                            <mrow>
+                                \sigma_1 \amp = 10~3~4~6~9~2~5~8~1~7,
+                            </mrow>
+                            <mrow>
+                                \sigma_2 \amp = 7~10~2~9~3~1~4~6~8~5,
+                            </mrow>
+                            <mrow>
+                                \sigma_3 \amp = 4~2~3~6~9~1~10~7~8~5,
+                            </mrow>
+                            <mrow>
+                                \sigma_4 \amp = 10~7~5~2~6~1~4~3~8~9,
+                            </mrow>
+                            <mrow>
+                                \sigma_5 \amp = 3~6~10~4~1~9~2~7~5~8,
+                            </mrow>
+                        </md>
+                        and suppose we want to determine the product <m>\sigma_5\sigma_4\sigma_3\sigma_2\sigma_1</m>. Now write the two-line notation for each permutation in a single column, where the top of the column is the rightmost permutation in the product; in this case, <m>\sigma_1</m>. To find the value of <m>\sigma_5\sigma_4\sigma_3\sigma_2\sigma_1(1)</m>, for instance, you can trace the output of a permutation into the input of the next permutation, and so on.
+                    </p>
+                    <figure xml:id="fig-stackedpermproduct">
+                        <caption>A stacked permutation product diagram demonstrating <m>\sigma_5\sigma_4\sigma_3\sigma_2\sigma_1(1) = 7</m>.</caption>
+                        <image xml:id="img-stackedpermproduct" width="50%">
+                            <xi:include href="./img_perms_stackedpermproduct.ptx" />
+                        </image>
+                    </figure>
+                    <p>
+                        This idea will be extended when we talk about cryptography later in <xref provisional="ch-cryptography" />.
+                    </p>
+                </statement>
+            </example>
+            </subsubsection>
+
+        <subsubsection xml:id="subsub-perms-def-groups-multprops">
+            <title>Properties of permutation multiplication</title>
+            <p>
+                Having defined multiplication of permutations, it is natural to consider whether there is a <em>multiplicative identity</em>.
+            </p>
+            <definition xml:id="def-identity-perm">
+                <title>Identity permutation</title>
+                <statement>
+                    <p>
+                        Suppose <m>A</m> is a set, and let <m>e_A:A\to A</m> be the function such that <m>e_A(a)=a</m> for each <m>a\in A</m>. Then <m>e_A</m> is the <term>identity permutation on <m>A</m></term>. When the set <m>A</m> being permuted is clear by context, the identity permutation will simply be denoted <m>e</m>.
+                    </p>
+                    <p>
+                        Particularly, if <m>A=\set{a_1,a_2,\dotsc,a_n}</m> is a finite set, then
+                        <me>e_A = \begin{bmatrix}
+                            a_1 \amp a_2 \amp \cdots \amp a_n \\
+                            a_1 \amp a_2 \amp \cdots \amp a_n
+                            \end{bmatrix}.
+                        </me>
+                    </p>
+                </statement>
+            </definition>
+
+            <p>
+                Having a good algorithm for permutation products inspires us to want to apply the same permutation repeatedly, and so we can define the power of a permutation.
+            </p>
+            <definition xml:id="def-perm-powers">
+                <title>Natural powers of a permutation</title>
+                <statement>
+                    Let <m>A</m> be a set and <m>\sigma\in\sym{A}</m>.
+                    Define <m>\sigma^0 = e_A</m>, and for each <m>k\in\Zp</m> define recursively <m>\sigma^k = \sigma(\sigma^{k-1})</m> to be the <term>kth power</term> of <m>\sigma</m>.
+                </statement>
+            </definition>
+
+            <theorem xml:id="thm-perm-inverse">
+                <statement>
+                    <p>
+                        Suppose <m>\sigma\in S_A</m>. Then there is a unique <term>inverse</term> for <m>\sigma</m>, denoted <m>\sigma^{-1}</m>, such that <m>\sigma^{-1}\sigma = e_A = \sigma\sigma^{-1}.</m>
+                    </p>
+                </statement>
+            </theorem>
+
+            <p>
+                Having inverses we can extend the definition of powers of permutations to all integer powers: if <m>\sigma\in\sym{A}</m> for some set <m>A</m>, then
+                <me>
+                    \sigma^k = \begin{cases}
+                    e_A, \amp \text{ if }k=0 \\
+                    \sigma\left(\sigma^{k-1}\right), \amp \text{ if }k \gt 0 \\
+                    \left(\sigma^{-1}\right)^{-k}, \amp \text{ if }k \lt 0.
+                    \end{cases}
+                </me>
+                Note that this is exactly analogous to the definition of integer powers of a nonzero real number.
+            </p>
+
+            <example xml:id="exmp-permprod-noncomm">
+                <title>Composition is not commutative</title>
+                <statement>
+                    <p>
+                        We need to note that composition is <em>not commutative</em>. Generally speaking for <m>\sigma,\tau\in\sym{A}</m>, <m>\sigma\tau\neq\tau\sigma</m>. To demonstrate, consider the simple permutations <m>\tau_1 = 23451</m> and <m>\tau_2 = 54213</m> on the set <m>[5]</m>.
+                    </p>
+                    <figure xml:id="fig-permprod-noncomm">
+                        <caption>Permutation products (as a composition) are not commutative.</caption>
+                        <image xml:id="img-permprod-noncomm" width="75%">
+                            <xi:include href="./img_permprod_noncomm.ptx" />
+                        </image>
+                    </figure>
+                    <p>
+                        The color pattern indicates the output of each permutation, so we see <m>\tau_2\tau_1 = 42135</m>, but <m>\tau_1\tau_2 = 15324</m>.
+                    </p>
+                </statement>
+            </example>
+
+        </subsubsection>
+
+        <subsubsection xml:id="subsub-perms-def-groups-absalg">
+            <title>Abstract algebra and permutation groups</title>
+            <definition xml:id="def-group">
+                <statement>
+                    <p>
+                        A <term>group</term> <m>(G,*)</m> is a set <m>G</m> along with a closed associative operation <m>*</m> which has an identity element <m>e_G</m> and for which each element <m>g\in G</m> has a unique inverse <m>g^{-1}\in G</m>.
+                    </p>
+                </statement>
+            </definition>
+            <definition xml:id="def-symmetric-group">
+                <title>Symmetric Group</title>
+                <statement>
+                    If <m>A</m> is a set, then <m>\sym{A}</m> is the <term>symmetric group</term> over <m>A</m>, and <m>\sym{n}</m> is the <term>symmetric group over <m>n</m> symbols</term>.
+                </statement>
+            </definition><p>
+                The study of group theory was inspired by the work of Lagrange on generalizations of permutation groups. This and many other topics are introduced to undergraduate math majors in their first course in Abstract Algebra, which is almost totally focused on group theory. An important result in group theory  is <em>Cayley's Theorem</em>, which is especially important for those working with groups in an applied setting.
+            </p>
+            <definition xml:id="def-group-isomorphism">
+                <title>Group isomorphism</title>
+                <statement>
+                    Suppose <m>(G,*)</m> and <m>(H,\cdot)</m> are groups, and suppose there is a bijection <m>\phi:G\to H</m> such that <m>\phi(g_1*g_2) = \phi(g_1)\cdot\phi(g_2)</m> for every <m>g_1,g_2\in G</m>. Then <m>G</m> is <term>isomorphic</term> to <m>H</m> and the bijection <m>\phi</m> is a <term>group isomorphism</term>.
+                </statement>
+            </definition>
+            <theorem xml:id="thm-cayleys-theorem">
+                <title>Cayley's Theorem</title>
+                <statement>
+                    Every abstract group is isomorphic to a subgroup of a symmetric group.
+                </statement>
+            </theorem>
+            <p>
+                Technically, a subgroup hasn't yet been defined, but it is simply a subset of a group which satisfies the definition of a group under the same operation as its parent group.
+            </p>
+        </subsubsection>
+    </subsection>
+
+    <subsection xml:id="sub-perms-def-cycles">
+        <title>Cycles and disjoint cycle decomposition</title>
+        <p>
+            Having now built all the definitions and theory necessary for an algebraic study of groups, we introduce the preferred notation for writing permutations used by group theorists. Called the <em>disjoint cycle notation</em>, it allows several important characteristics of permutations to be made very visible.
+        </p>
+        <definition xml:id="def-fixedpts-supports">
+            <title>Fixed points and supports of permutations</title>
+            <statement>
+                <p>
+                    Suppose <m>a\in A</m> and <m>\sigma\in S_A</m>. Then <term><m>\sigma</m> fixes <m>a</m></term>, or equivalently <m>a</m> is a <term>fixed point of <m>\sigma</m></term>, if and only if <m>\sigma(a)=a</m>. These elements are collected into a set <me>\fix{\sigma} = \set{a\in A:\sigma(a) = a}</me> whose complement is the <term>support</term> of the permutation, <me>\supp{\sigma} = \set{a\in A: \sigma(a)\neq a}.</me>
+                </p>
+            </statement>
+        </definition>
+        <p>
+            There is an interesting type of permutation whose behavior on its support behaves in a predictable fashion.
+        </p>
+        <definition xml:id="def-cyclic-permutation">
+            <title>Cyclic permutations</title>
+            <statement>
+                <p>
+                    Let <m>i_1, i_2, \ldots, i_r</m> be distinct integers in <m>[n]</m>, where <m>n\geq r</m>. Suppose <m>\alpha\in S_n</m> has <m>\supp{\alpha} = \set{i_1,i_2,\dotsc,i_r}</m> and also that
+                    <me>
+                        \alpha(i_1)=i_2, \alpha(i_2)=i_3, \ldots \alpha(i_{r-1})=i_r, \alpha(i_r)=i_1.
+                    </me>
+                </p>
+                <p>
+                    Then <m>\alpha</m> is an <term><m>r</m>-cycle</term>, or equivalently a <term>cycle of length <m>r</m></term>, and is denoted in <term>cycle notation</term> by
+                    <me>
+                        \alpha = (i_1~i_2~\cdots~i_r),
+                    </me>
+                    or by
+                    <me>
+                        \alpha = (i_1,i_2,\dotsc,i_r)
+                    </me>
+                    when necessary for clarity.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            An interesting result of the definition of cycles is that every <m>1</m>-cycle is equivalent to the identity: if <m>a\in[n]</m> and <m>\alpha=(a)</m>, then <m>\supp{\alpha} = \emptyset</m>, so <m>\fix{\alpha}=[n]</m> and <m>\alpha=e.</m> For this reason it is common to write the identity in <m>\sym{n}</m> as <m>(1)</m>.
+        </p>
+        <exercise xml:id="exc-perms-support">
+            <title>Behavior of permutation supports</title>
+            <statement>
+                Suppose <m>\alpha\in\sym{N}</m> and suppose <m>x\in \supp{\alpha}</m>. Prove that <m>\alpha(x)\in\supp{\alpha}.</m>
+            </statement>
+            <solution>
+                If <m>\alpha\in\sym{N}</m> and <m>x\in \supp{\alpha}</m>, but we assume towards a contradiction that <m>\alpha(x)\in\fix{\alpha}</m>, then we have <m>\alpha(x) = \alpha(\alpha(x))</m>, but <m>x\neq\alpha(x)</m>; this contradicts that <m>\alpha</m> is injective! Hence it must be that <m>\alpha(x)\in\supp{\alpha}</m>.
+            </solution>
+        </exercise>
+        <definition xml:id="def-disjoint-cycles">
+            <statement>
+                <p>
+                    Two cycles <m>\alpha</m> and <m>\beta</m> are <term>disjoint</term> if and only if <m>\supp{\alpha}\cap\supp{\beta} = \emptyset.</m>
+                </p>
+            </statement>
+        </definition>
+        <p>
+            While it is not true in the general case, one of the important reasons we consider cyclic permutations is that disjoint cycles commute.
+        </p>
+        <lemma xml:id="lem-disjoint-cycles-commute">
+            <statement>
+                <p>
+                    Let <m>n\in\Zp</m>. If <m>\alpha</m> and <m>\beta</m> are disjoint cycles in <m>S_n</m>, then <m>\alpha\beta=\beta\alpha</m>.
+                </p>
+            </statement>
+            <proof>
+                <p>
+                    Suppose <m>\alpha,\beta\in\sym{n}</m> are disjoint cycles and <m>x\in[n]</m>. First assume <m>x\in\supp{\alpha}</m>. Since <m>\supp{\alpha}\cap\supp{\beta}=\emptyset</m>, it must be that <m>x\in\fix{\beta}</m>. However by <xref ref="exc-perms-support" /> we know <m>\alpha(x)\in\supp{\alpha}</m>, so likewise <m>\alpha(x)\in\\fix{\beta}</m>. But then
+                    <me>
+                        (\alpha\beta)(x) = \alpha(\beta(x)) = \alpha(x) = \beta(\alpha(x)) = (\beta\alpha(x)).
+                    </me>
+                    By an analogous argument, if we instead assume <m>x\in\supp{\beta}</m> then <m>(\alpha\beta)(x)=(\beta\alpha)(x)</m>.
+                </p>
+                <p>
+                    Since <m>\alpha</m> and <m>\beta</m> are disjoint, there is no <m>x\in\supp{\alpha}\cap\supp{\beta}</m>. So finally, we assume <m>x\in\fix{\alpha}\cap\fix{\beta}</m>; but then obviously
+                    <me>
+                        (\alpha\beta)(x)=\alpha(\beta(x))=\alpha(x)=x=\beta(x) = \beta(\alpha(x)) = (\beta\alpha)(x).
+                    </me>
+                </p>
+            </proof>
+        </lemma>
+
+        <theorem xml:id="thm-cycdecomp">
+            <title>Disjoint cycle decomposition</title>
+            <statement>
+                <p>
+                    Every permutation in <m>\sym{n}</m> is either a cycle or a product of disjoint cycles.
+                </p>
+            </statement>
+            <proof>
+                <p>
+                    If <m>\sigma</m> is the identity, we write <m>\sigma=(1)</m> and the proof is trivial. Therefore let us suppose <m>\sigma\in\sym{n}</m> is not the identity, so that <m>\supp{\sigma}\neq\emptyset</m>. Then let <m>a_1 = \min\supp{\sigma}</m>. Since <m>[n]</m> is finite, the set <m>\set{k\in\Zp:\sigma^k(a_1)\neq a_1}</m> must be finite; let
+                    <me>k_1 = 1+\max\set{k\in\Zp:\sigma^k(a_1)\neq a_1}</me>. But then <m>\sigma^{k_1}(a_1) = a_1</m>, or <m>\sigma</m> is not a permutation! Therefore we can define <m>\alpha_1 = (\sigma^{0}(a_1), \sigma^1(a_1), \dotsc, \sigma^{k_1-1}(a_1))</m>, and we have constructed <m>\alpha_1</m> to be a cyclic permutation.
+                </p>
+                <p>
+                    Proceeding in the same manner, define <m>a_j</m> to be the mimimal element of <m>\supp{\sigma}</m> which is not an element of <m>\supp{\alpha_i}</m> for any <m>i\lt j</m>. Then define <m>k_j = 1+\max\set{k\in\Zp:\sigma^{k}(a_j)\neq a_j}</m> so that <m>\alpha_j = (\sigma^{0}(a_j), \sigma^1(a_j), \dotsc, \sigma^{k_j-1}(a_j))</m> is a cyclic permutation. Let the set of indices be <m>J</m>. By our construction, <m>\supp{\alpha_i}\cap\supp{\alpha_j}=\emptyset</m> whenever <m>i\lt j</m>.
+                </p>
+                <p>
+                    By the finiteness of <m>[n]</m> and the preceding construction, we have <m>\sigma=\prod_{j\in J}\alpha_j</m> as desired.
+                </p>
+            </proof>
+        </theorem>
+
+        <p>
+            Moreover, this decomposition into disjoint cycles can be written uniquely up to the order in which the cycles appear, and the proof of the preceding theorem gives us exactly the method we use to obtain the decomposition.
+        </p>
+
+        <example>
+            <title>Writing a permutation in disjoint cycle notation</title>
+            <statement>
+                <p>
+                    Consider the permutation <m>\sigma</m> written in one-line notation as
+                    <me>
+                        \sigma = 8~1~5~9~4~6~7~3~10~2.
+                    </me>
+                    We can write the cycle decomposition of <m>\sigma</m> by starting with <m>1</m>: the first cycle of the decomposition will be
+                    <m>(1,\sigma(1),\sigma^2(1),\sigma^3(1),\cdots,\sigma^r(1))</m> for some <m>r\leq n</m>. In fact,
+                    <md>
+                        <mrow>
+                            1 \xto{\sigma} 8 \xto{\sigma} 3 \xto{\sigma} 5 \xto{\sigma} 4 \xto{\sigma} 9 \xto{\sigma} 10 \xto{\sigma} 2 \xto{\sigma} 1
+                        </mrow>
+                    </md>
+                    completes a cycle, and we also can see that <m>\sigma(6)=6</m> and <m>\sigma(7)=7</m>. Hence the disjoint cycle notation for <m>\sigma</m> is
+                    <me>
+                        \sigma = (1~8~3~5~4~9~10~2)(6)(7).
+                    </me>
+                </p>
+            </statement>
+        </example>
+        <p>
+            While cycle notation is useful for many purposes, some find it difficult to multiply permutations written in their cycle decompositions. Remember <xref ref="rem-after" />! Multiplication of permutations is always left composition using <q>after</q>. All permutations are applied in right-to-left order.
+        </p>
+        <example xml:id="exmp-products-of-cycles">
+            <title>Products of cycles</title>
+            <statement>
+                <p>
+                    Consider the following permutations in <m>\sym{8}</m>:
+                    <md>
+                        <mrow>\rho \amp= (1~2~7~4)(3~5~6~8)</mrow>
+                        <mrow>\sigma \amp= (1~3~5~8~2~4)</mrow>
+                        <mrow>\tau \amp = (2~4~3).</mrow>
+                    </md>
+                    We can compute <m>\rho\sigma\tau</m> from right to left!
+                </p>
+                <sidebyside>
+                    <tabular align="left">
+                        <row bottom="major">
+                            <cell><m>x</m></cell>
+                            <cell><m>\tau(x)</m></cell>
+                            <cell><m>\sigma(\tau(x))</m></cell>
+                            <cell><m>\rho(\sigma(\tau(x)))</m></cell>
+                        </row>
+                        <row>
+                            <cell>1</cell>
+                            <cell><m>(2~4~3)(1) = 1</m></cell>
+                            <cell><m>(1~3~5~8~2~4)(1) = 3</m></cell>
+                            <cell><m>(1~2~7~4)(3~5~6~8)(3) = 5</m></cell>
+                        </row>
+                        <row>
+                            <cell>2</cell>
+                            <cell><m>(2~4~3)(2) = 4</m></cell>
+                            <cell><m>(1~3~5~8~2~4)(4) = 1</m></cell>
+                            <cell><m>(1~2~7~4)(3~5~6~8)(1) = 2</m></cell>
+                        </row>
+                        <row>
+                            <cell>3</cell>
+                            <cell><m>(2~4~3)(1) = 2</m></cell>
+                            <cell><m>(1~3~5~8~2~4)(2) = 4</m></cell>
+                            <cell><m>(1~2~7~4)(3~5~6~8)(3) = 1</m></cell>
+                        </row>
+                        <row>
+                            <cell>4</cell>
+                            <cell><m>(2~4~3)(1) = 3</m></cell>
+                            <cell><m>(1~3~5~8~2~4)(3) = 5</m></cell>
+                            <cell><m>(1~2~7~4)(3~5~6~8)(3) = 6</m></cell>
+                        </row>
+                        <row>
+                            <cell>5</cell>
+                            <cell><m>(2~4~3)(5) = 5</m></cell>
+                            <cell><m>(1~3~5~8~2~4)(5) = 8</m></cell>
+                            <cell><m>(1~2~7~4)(3~5~6~8)(3) = 3</m></cell>
+                        </row>
+                        <row>
+                            <cell>6</cell>
+                            <cell><m>(2~4~3)(6) = 6</m></cell>
+                            <cell><m>(1~3~5~8~2~4)(6) = 6</m></cell>
+                            <cell><m>(1~2~7~4)(3~5~6~8)(6) = 8</m></cell>
+                        </row>
+                        <row>
+                            <cell>7</cell>
+                            <cell><m>(2~4~3)(7) = 7</m></cell>
+                            <cell><m>(1~3~5~8~2~4)(7) = 7</m></cell>
+                            <cell><m>(1~2~7~4)(3~5~6~8)(7) = 4</m></cell>
+                        </row>
+                        <row>
+                            <cell>8</cell>
+                            <cell><m>(2~4~3)(8) = 8</m></cell>
+                            <cell><m>(1~3~5~8~2~4)(8) = 2</m></cell>
+                            <cell><m>(1~2~7~4)(3~5~6~8)(2) = 7</m></cell>
+                        </row>
+                    </tabular>
+                </sidebyside>
+                <p>
+                    So we write <m>\rho\sigma\tau = (1~5~3)(2)(4~6~8~7) = (1~5~3)(4~6~8~7).</m>
+                </p>
+            </statement>
+        </example>
+        <exercise xml:id="exc-calc-perm-prods">
+            <title>Calculating products in cycle notation</title>
+            <statement>
+                There are six ways to arrange a product of <m>\rho</m>, <m>\sigma</m>, and <m>\tau</m>; find the other five and write them in cycle notation.
+            </statement>
+        </exercise>
+        <exercise xml:id="exc-calc-perm-powers">
+            <title>Calculating powers using cycle notation</title>
+            <statement>
+                Use the long permutation in <m>\sym{24}</m>
+                <me>\sigma=(1,7,10,18,3,21)(2,14,12,13,5,8,19,15,17,11,24,4,20,9,16,22,23,6)</me>
+                to investigate powers of permutations. What does the cycle decomposition allow you to do in finding <m>\sigma^k</m>?
+            </statement>
+        </exercise>
+    </subsection>
+</section>

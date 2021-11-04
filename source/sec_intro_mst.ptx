@@ -7,20 +7,20 @@
     that there is a certain cost associated with connecting pairs of nodes. It
     should be obvious that we wish to minimize the cost of connecting our
     network, and for the sake of simplicity we will make the assumption that
-    our network is reliable 
+    our network is reliable
     <mdash />once two nodes are connected, they will stay connected. Therefore
     we only need to make sure everything is connected to the network once.</p>
-    <p>Without worrying about technical definitions until a later chapter ( 
-    <xref provisional="ch-graphs" />), we will refer to the nodes as 
-    <term>vertices</term> and the connections as 
+    <p>Without worrying about technical definitions until a later chapter (
+    <xref provisional="ch-graphs" />), we will refer to the nodes as
+    <term>vertices</term> and the connections as
     <term>edges</term> .</p>
   </introduction>
   <subsection xml:id="subsec-intro-mst-example">
     <title>Working from an example</title>
     <figure xml:id="fig-smallnetwork">
       <caption>A small network with connection costs.</caption>
-      <image width="50%">
-        <xi:include href="./fig_intro_smallnet.ptx" />
+      <image xml:id="img-smallnetwork" width="50%">
+        <xi:include href="./img_intro_smallnet.ptx" />
       </image>
     </figure>
     <p>We can approach the problem very logically by organizing our list of
@@ -35,16 +35,16 @@
         <col />
         <row bottom="major">
           <cell>
-            <m>(u,v)</m> 
+            <m>(u,v)</m>
           </cell>
           <cell>
-            <m>w(u,v)</m> 
+            <m>w(u,v)</m>
           </cell>
           <cell>
-            <m>(u,v)</m> 
+            <m>(u,v)</m>
           </cell>
           <cell>
-            <m>w(u,v)</m> 
+            <m>w(u,v)</m>
           </cell>
         </row>
         <row>
@@ -126,10 +126,10 @@
         <row bottom="major">
           <cell>Step</cell>
           <cell>
-            <m>(u,v)</m> 
+            <m>(u,v)</m>
           </cell>
           <cell>
-            <m>w</m> 
+            <m>w</m>
           </cell>
           <cell>0</cell>
           <cell>1</cell>
@@ -287,81 +287,76 @@
     <p>Taking a look at what we actually did, we can explain our process in
     more detail so that for a bigger, more complicated problem (specifically
     one with a larger set of vertices or of edges) the solution could be
-    extended. In fact, we have just implemented a famous 
+    extended. In fact, we have just implemented a famous
     <term>algorithm</term> , known as Kruskal's Algorithm.</p>
     <definition xml:id="def-algorithm">
       <statement>
-        <p>An 
+        <p>An
         <term>algorithm</term> is a formal procedure for completing a
         computational or mathematical task.</p>
       </statement>
     </definition>
     <p>In order to communicate our algorithm efficiently, we have to analyze
     what our steps actually entailed. Later on, we'll give a more rigorous
-    statement of the same algorithm, in 
+    statement of the same algorithm, in
     <xref provisional="alg-kruskal" /></p>
     <algorithm xml:id="alg-intro-kruskal">
       <title>Mathematical Kruskal's Algorithm</title>
       <statement>
-        <p>Let a graph 
-        <m>G=(V,E)</m> with vertex set 
-        <m>V=\set{0,1,2,\dotsc,n-1}</m> be given which has a cost 
-        <m>w(e)</m> associated with each edge 
-        <m>e</m>. Each edge will be denoted 
-        <m>(u,v)</m> with 
-        <m>u\lt v</m> , where 
-        <m>u,v\in V</m>.</p>
+        <p>
+            Let a graph <m>G=(V,E)</m> with vertex set <m>V=\set{0,1,2,\dotsc,n-1}</m> be given which has a cost <m>w(e)</m> associated with each edge <m>e</m>. Each edge will be denoted <m>(u,v)</m> with <m>u\lt v</m> , where <m>u,v\in V</m>.
+          </p>
         <ol>
           <li>
-            <p>Sort the edges by increasing cost, so that whenever 
-            <m>i\lt j</m> then also 
-            <m>w(e_i)\lt w(e_j)</m> , where 
-            <m>i</m> and 
-            <m>j</m> are 
+            <p>Sort the edges by increasing cost, so that whenever
+            <m>i\lt j</m> then also
+            <m>w(e_i)\lt w(e_j)</m> , where
+            <m>i</m> and
+            <m>j</m> are
             <q>counting variables</q>.</p>
           </li>
           <li>
-            <p>Write 
+            <p>Write
             <m>n</m> different sets representing components of the network,
-            denoted 
-            <m>c_v=\set{v}</m> for each 
-            <m>v\in V</m>. Also let 
+            denoted
+            <m>c_v=\set{v}</m> for each
+            <m>v\in V</m>. Also let
             <m>F=\emptyset</m> be an empty collection of edges.</p>
           </li>
           <li xml:id="alg-intro-kruskal-edges">
-            <p>Looking at each edge 
-            <m>e_i=(u_i,v_i)</m> in increasing order of cost, do the following. 
+            <p>Looking at each edge
+            <m>e_i=(u_i,v_i)</m> in increasing order of cost, do the following.
             <ol>
               <li>
-                <p>If 
-                <m>u_i</m> and 
+                <p>If
+                <m>u_i</m> and
                 <m>v_i</m> are in the same component, skip immediately to the
                 next edge.</p>
               </li>
               <li>
-                <p>Otherwise, say that 
-                <m>c_u</m> is the component containing 
-                <m>u_i</m> and 
-                <m>c_v</m> is the component containing 
-                <m>v_i</m> , and do the following: 
+                <p>Otherwise, say that
+                <m>c_u</m> is the component containing
+                <m>u_i</m> and
+                <m>c_v</m> is the component containing
+                <m>v_i</m> , and do the following:
                 <ol>
                   <li>
-                    <p>If 
-                    <m>c_u</m> contains fewer vertices than 
-                    <m>c_v</m> , put all of the elements from 
-                    <m>c_u</m> into 
-                    <m>c_v</m> instead and leave 
+                    <p>If
+                    <m>c_u</m> contains fewer vertices than
+                    <m>c_v</m> , put all of the elements from
+                    <m>c_u</m> into
+                    <m>c_v</m> instead and leave
                     <m>c_u</m> empty.</p>
                   </li>
                   <li>
-                    <p>Otherwise, put all of the elements from 
-                    <m>c_v</m> into 
-                    <m>c_u</m> and leave 
+                    <p>Otherwise, put all of the elements from
+                    <m>c_v</m> into
+                    <m>c_u</m> and leave
                     <m>c_v</m> empty.</p>
                   </li>
                   <li>
-                    <p>In either case, include the edge 
-                    <m>(u_i,v_i)</m> in 
+                    <p>In either case, include the edge
+                    <m>(u_i,v_i)</m> in
                     <m>F</m>.</p>
                   </li>
                 </ol></p>
@@ -371,9 +366,9 @@
         </ol>
         <p>After Step 3 finishes, all of the edges will have been inspected and
         either included in the network or skipped; there will be as many
-        nonempty components 
+        nonempty components
         <m>c_v</m> as needed to connect the network, and the algorithm is
-        finished! The cost-minimal set of edges is 
+        finished! The cost-minimal set of edges is
         <m>F</m>.</p>
       </statement>
     </algorithm>
@@ -383,26 +378,26 @@
     <problem>
       <title>A 50-edge network</title>
       <statement>
-        <p>The connections of a network are given below as a table of triples 
-        <m>(u,v,w(u,v))</m>. Find the least expensive set 
+        <p>The connections of a network are given below as a table of triples
+        <m>(u,v,w(u,v))</m>. Find the least expensive set
         <m>F</m> of edges needed to connect the components of this network.</p>
         <sidebyside>
           <tabular halign="center">
             <row bottom="major">
               <cell>
-                <m>(u,v,w(u,v))</m> 
+                <m>(u,v,w(u,v))</m>
               </cell>
               <cell>
-                <m>(u,v,w(u,v))</m> 
+                <m>(u,v,w(u,v))</m>
               </cell>
               <cell>
-                <m>(u,v,w(u,v))</m> 
+                <m>(u,v,w(u,v))</m>
               </cell>
               <cell>
-                <m>(u,v,w(u,v))</m> 
+                <m>(u,v,w(u,v))</m>
               </cell>
               <cell>
-                <m>(u,v,w(u,v))</m> 
+                <m>(u,v,w(u,v))</m>
               </cell>
             </row>
             <row>
@@ -521,16 +516,16 @@
   </subsection>
   <conclusion>
     <p>It is important to note that throughout the process of applying the
-    algorithm, the values of some of the quantities changed: 
+    algorithm, the values of some of the quantities changed:
     <em>this is only natural!</em>We expect this just from what we observed
     initially in our small example network. Speaking algorithmically, we will
-    say that 
-    <term>variables</term> are these changeable quantities and 
-    <term>constants</term> or 
+    say that
+    <term>variables</term> are these changeable quantities and
+    <term>constants</term> or
     <term>parameters</term> are those quantities which do not change once the
     algorithm begins. In this case, the numbers of vertices and edges are both
     parameters for a given graph.</p>
-    <p>Finally, this algorithm is labeled as a 
+    <p>Finally, this algorithm is labeled as a
     <q>mathematical</q>algorithm because it is not sufficiently detailed to
     actually implement in a computer program. To program the algorithm, several
     of the steps-as-written would need to be explained as algorithms in their

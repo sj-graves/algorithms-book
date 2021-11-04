@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<pretext xml:lang="en-US" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <!-- we first include a file which contains the docinfo element: -->
+    <xi:include href="./docinfo.ptx" />
+    <book xml:id="AAM">
+        <!-- The book needs a title and can have a subtitle  -->
+        <title>Algorithms for Applied Mathematics</title>
+<!--         <author>Stephen J. Graves</author> -->
+
+    <xi:include href="./aam_frontmatter.ptx" />
+    <!-- Chapters/Topics/Projects -->
+    <xi:include href="./ch_intro.ptx" />
+    <xi:include href="./ch_perms.ptx"/>
+    <!-- <xi:include href="./ch_pretext-features.ptx" /> -->
+
+    <!-- Finaly we place the backmatter in its own file and inlcude-->
+    <xi:include href="./backmatter.ptx" />
+  </book>
+</pretext>

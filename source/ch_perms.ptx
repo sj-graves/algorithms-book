@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<chapter xml:id="ch-perms" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Permutations</title>
+    <introduction>
+        <objectives>
+            <ol>
+                <li><p>
+                    Define permutations
+                    </p></li>
+                <li><p>
+                    Explore permutation operations
+                    </p></li>
+                <li><p>
+                    Implementing permutations: object oriented programming
+                    </p></li>
+                <li><p>
+                    Using permutations: cryptography
+                    </p></li>
+            </ol>
+        </objectives>
+        <p>
+            Basic counting theory introduces students to the idea of the <term>multiplicative principle</term>.
+        </p>
+        <theorem xml:id="thm-perms-mult-princ">
+            <title>Multiplicative Principle</title>
+            <statement>
+                Suppose there are some number <m>k</m> of finite sets <m>A_1, A_2, \dotsc, A_k</m> such that for each <m>j\in\set{1,2,\dotsc,k}</m> the cardinality of <m>A_j</m> is <m>\abs{A_j} = \alpha_j</m>. Let  the <term>Cartesian product</term> of the sets <m>A_1, A_2, \dotsc, A_k</m> be <me>A_1\times A_2\times \cdots \times A_k = \set{(a_1,a_2,\dotsc,a_k):a_j\in A_j\text{ for each }j\in\set{1,\dotsc,k}}</me>, which is the set of ordered pairs whose jth coordinate is a member of <m>A_j</m>. Then
+                <me>
+                    \abs{A_1\times A_2\times \cdots \times A_k} = \prod_{j=1}^k \alpha_j = \alpha_1\alpha_2\cdots\alpha_k.
+                </me>
+            </statement>
+        </theorem>
+        <p>
+            An immediate application of this is to consider a problem of counting the number of orderings of a finite set: while the choice of a first element alters the possibilities for choosing a second element in the ordering, it does not change the number of such choices. Hence the multiplicative principle can be used to count orderings. This only leaves a fundamental question: what is an ordering of a set?
+        </p>
+    </introduction>
+    <xi:include href="./sec_perms_def.ptx" />
+    <xi:include href="./sec_perms_groups.ptx" />
+    <!--
+    <xi:include href=".sec-emp-intro.ptx" />
+    <xi:include href=".sec-emp-next.ptx" />
+    <xi:include href=".sec-emp-conc.ptx" />
+    -->
+
+</chapter>

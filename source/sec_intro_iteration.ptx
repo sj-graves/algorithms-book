@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<section xml:id="sec-intro-iteration" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Iteration</title>
+    <introduction>
+        Computers were invented initially for the purpose of performing normal calculations quickly and repeatedly. There are two simple ways to think of repeating a task: either one sets out to repeat the task on each element of some list, or one performs a task repeatedly so long as some condition is met. These correspond to the two fundamental methods of iteration available to Python programmers: <term>for loops</term> and <term>while loops</term>.
+    </introduction>
+    <subsection xml:id="sub-intro-iteration-for">
+        <title>For loops</title>
+        <p>
+            Consider the mathematical problem of finding the equation of a straight line containing both of the points <m>(x_1,y_1)</m> and <m>(x_2,y_2)</m>. It takes just a moment to write down the formula <m>x=x_1</m>, <m>y=y_1</m>, or <me>\ell(x) = \frac{x_1-x_2}{y_1-y_2}(x-x_1)+y_1 = mx+b</me> and plug in the respective constants. However it becomes more costly in terms of time if the same calculation needs to be carried out for several hundred pairs of points! In fact, even reading it several hundred pairs of points from a file in order to do such a calculation is tedious.
+        </p>
+        <p>
+            For loops are the ideal programming construction to use when a repetitive task or procedure must be performed on a predetermined set of inputs or a predetermined number of times. Specifically, Python will allow a for loop to repeat over any container which is an <term>iterable</term>, like a <c>tuple</c> or <c>list</c>.
+        </p>
+        <technology xml:id="tech-forloop">
+            <title><c>for</c> loops</title>
+            <statement>
+                <p>To perform a task repeatedly while a variable <c>loop_var</c> successively takes each value in a list, tuple, or other iterable <c>my_container</c>, we use the <term>for loop block structure</term>, as follows:</p>
+                <sidebyside>
+                    <program language="python">
+                        <input>
+                            for loop_var in my_container:
+                                # Print the value of loop_var
+                                print(loop_var)
+                                # Perform a task
+                                # Perform another task
+                                # And so on
+                        </input>
+                    </program>
+                </sidebyside>
+                <p>
+                    This is shown as part of a module rather than input to the Python console to emphasize the block structure. In Python, blocks of code are indicated by the level of indentation of the code. It is normal for Python editors to insert 2 or 4 spaces when the <c>tab</c> key on the keyboard is pressed, rather than the special <term>tab character</term> represented in Python by <c>'\t'</c>. This is an important behavior to the Python interpreter, and provides a very good reason to use a Python editor or IDE instead of a text editor for writing Python code!
+                </p>
+                <p>
+                    The colon <c>:</c> at the end of the first line indicates to Python that the interpreter should expect an indented block starting on the next line.
+                </p>
+            </statement>
+        </technology>
+        <p>
+            The hash marks appearing in the above technology description are an important code-writing tool.
+        </p>
+        <technology xml:id="tech-comments">
+            <title>Comments</title>
+            <statement>
+                A <term>comment</term> is any code which is not evaluated by Python. The special symbol <c>#</c> in Python denotes the start of a comment, and so whenever <c>#</c> occurs <em>outside of a string</em> it begins a comment. Comments are used to make a note for someone reading the code.
+            </statement>
+        </technology>
+        <p>
+            The Python implementation of <c>for</c> loops is very practical. Given a finite mathematical sequence of elements <m>(a_i: i\in\set{0,1,2,\dotsc,n-1})</m> the important values are the values <m>a_i</m>, not the values of <m>i</m>itself! This is one way Python differs from the implementation by more earlier programming languages.
+        </p>
+        <remark>
+            <title>For loops in other languages</title>
+            <statement>
+                <p>
+                    In many other languages the normal behavior is different, and for loops can only take successive integer values. For instance, in C++ the following code starts the integer <m>i</m> at the value 0 and so long as <m>i\lt 20</m> prints the value of <m>i</m> (that's the <c>cout &lt;&lt; i;</c> part) and then increases the value of <m>i</m> by one (that's the <c>i++</c>) part.
+                </p>
+                <sidebyside>
+                    <program langauge="c++">
+                        <input>
+                            for (int i = 0; i &lt; 20; i++ ){
+                               cout &lt;&lt; i;
+                            }
+                        </input>
+                    </program>
+                </sidebyside>
+                <p>
+                    This is the traditional use of a for loop: the looping variable serves as an index variable (like a subscript variable) and is changed until a certain range condition is met. This behavior is still available in Python, using the <term>range function</term>. To produce the same output as the above C++ code in Python is uncomplicated.
+                </p>
+                <sidebyside>
+                    <program language="python">
+                        <input>
+                            for i in range(20):
+                                print(i)
+                        </input>
+                    </program>
+                </sidebyside>
+            </statement>
+        </remark>
+        <p>
+            The <c>range</c> function as remarked above is an iterable, since it can be iterated over by a <c>for</c> loop. The several ways to call the <c>range</c> function and its output in each case are important.
+        </p>
+        <technology xml:id="tech-rangefunction">
+            <title>The <c>range</c> function</title>
+            <statement>
+                <p>
+                    The output of a <c>range</c> function is not a <c>list</c> or a <c>tuple</c>, though it acts like one. It is a special <q>range object</q>, but can be easily converted to a <c>list</c> or <c>tuple</c> by type casting. Here are the basic uses of the <c>range</c> function, assuming <c>my_list</c>, <c>m</c>, <c>n</c>, and <c>k</c> are defined.
+                </p>
+                <sidebyside>
+                    <tabular>
+                        <row bottom="major">
+                            <cell>Command</cell>
+                            <cell>Output</cell>
+                        </row>
+                        <row>
+                            <cell><c>range(m)</c></cell>
+                            <cell>The indices of a container of length <m>m</m></cell>
+                        </row>
+                        <row>
+                            <cell><c>range(m,n)</c></cell>
+                            <cell>The indices sliced by <c>my_list[m:n]</c></cell>
+                        </row>
+                        <row>
+                            <cell><c>range(m,n,k)</c></cell>
+                            <cell>The indices sliced by <c>my_list[m:n:k]</c></cell>
+                        </row>
+                    </tabular>
+                </sidebyside>
+                <p>
+                    As an example, the following would be produced at the Python console. The fourth input shows that the <c>range</c> object output on its own is not a list.
+                </p>
+                <sidebyside>
+                    <console>
+                        <prompt>>>> </prompt>
+                        <input>list(range(5))</input>
+                        <output>[0, 1, 2, 3, 4]</output>
+                        <prompt>>>> </prompt>
+                        <input>list(range(5,10))</input>
+                        <output>[5, 6, 7, 8, 9]</output>
+                        <prompt>>>> </prompt>
+                        <input>list(range(5,20,3))</input>
+                        <output>[5, 8, 11, 14, 17]</output>
+                        <prompt>>>> </prompt>
+                        <input>print(range(5))</input>
+                        <output>range(0, 5)</output>
+                    </console>
+                </sidebyside>
+            </statement>
+        </technology>
+    </subsection>
+
+
+    <subsection xml:id="sub-intro-iteration-while">
+        <title>While loops</title>
+        <p>
+            The other type of common iteration is to repeatedly perform a task so long as some condition is true, which is a sort of transition between talking about iteration and conditional statements!
+        </p>
+        <technology xml:id="tech-whileloop">
+            <title><c>while</c> loops</title>
+            <statement>
+                <p>
+                    A <c>while</c> block depends for its execution on a conditioning expression, and the block executes repeatedly so long as the expression evaluates to <c>True</c>. Here is a short example of a <c>while</c> loop which will terminate after a few iterations.
+                </p>
+                <sidebyside>
+                    <program language="python">
+                        <input>
+                            counter = 10
+                            while (counter > 0):
+                                print( counter )
+                                counter = counter - 1
+                        </input>
+                    </program>
+                </sidebyside>
+                <p>
+                    Note that the parentheses on the second line are unnecessary, but they help a reader recognize the condition for the loop. Any statement which can evaluate to either <c>True</c> or <c>False</c> can appear as the condition of a <c>while</c> loop.
+                </p>
+
+            </statement>
+        </technology>
+        <p>
+            The following example of a <c>while</c> loop is called an <term>infinite loop</term>, because it will never terminate. Generally speaking, a program stuck in an infinite loop in Python can be terminated by pressing <c>Ctrl-C</c>, which triggers a <c>KeyboardInterrupt</c>.
+        </p>
+        <sidebyside>
+            <program language="python">
+                <input>
+                    while True:
+                        pass
+                </input>
+            </program>
+        </sidebyside>
+        <p>
+            The <c>pass</c> statement is a do-nothing statement which is syntactically valid to be a do-nothing statement. This means an indented block containing a <c>pass</c> statement will do nothing. This is especially useful when first learning programming.
+        </p>
+    </subsection>
+    <conclusion>
+        <p>
+            All of these concepts will combine in the next section as we move towards building useful programs in functions.
+        </p>
+    </conclusion>
+</section>

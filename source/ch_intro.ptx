@@ -3,41 +3,47 @@
 <!-- uniquely identify the chapter.  The @xmlns:xi attribute  -->
 <!-- is needed if you use xi:include in this file             -->
 <chapter xml:id="ch-intro"
-  xmlns:xi="http://www.w3.org/2001/XInclude">
+    xmlns:xi="http://www.w3.org/2001/XInclude">
 
-  <!-- Change title when you have one: -->
-  <title>Welcome!</title>
-  <objectives>
-    <ol>
-      <li>
-        <p>Investigate a problem from graph theory.</p>
-      </li>
-      <li>
-        <p>Introducing IDLE</p>
-      </li>
-      <li>
-        <p>Working with basic data types</p>
-      </li>
-      <li>
-        <p>Working with container data types</p>
-      </li>
-      <li>
-        <p>Defining functions in Python</p>
-      </li>
-      <li>
-        <p>Conditional statements</p>
-      </li>
-      <li>
-        <p>Iteration: repeating statements repeatedly</p>
-      </li>
-    </ol>
-  </objectives>
+    <!-- Change title when you have one: -->
+    <title>Welcome!</title>
+    <objectives>
+        <ol>
+            <li><p>
+                Investigate a problem from graph theory.
+                </p></li>
+            <li><p>
+                Introducing IDLE
+                </p></li>
+            <li><p>
+                Working with basic data types
+                </p></li>
+            <li><p>
+                Working with container data types
+                </p></li>
+            <li><p>
+                Iteration: repeating statements repeatedly
+                </p></li>
+            <li><p>
+                Defining functions in Python
+                </p></li>
+            <li><p>
+                Conditional statements
+                </p></li>
+        </ol>
+    </objectives>
+    <introduction>
+        This first chapter serves as a rapid introduction to the basics of programming in Python, with the intent of getting readers through to solving mathematical problems computationally in as little time as possible.
+    </introduction>
+    <!-- <xi:include href="./sec_intro_shortest_path.ptx" /> -->
+    <xi:include href="./sec_intro_mst.ptx" />
+    <xi:include href="./sec_intro_idle.ptx" />
+    <xi:include href="./sec_intro_basicdata.ptx" />
+    <xi:include href="./sec_intro_containers.ptx" />
+    <xi:include href="./sec_intro_iteration.ptx" />
+    <xi:include href="./sec_intro_functions.ptx" />
+    <!-- <xi:include href="./sec_firstch-examples.ptx" /> -->
 
-  <!-- <xi:include href="./sec_intro_shortest_path.ptx" /> -->
-  <xi:include href="./sec_intro_mst.ptx" />
-  <xi:include href="./sec_intro_idle.ptx" />
-  <!-- <xi:include href="./sec_firstch-examples.ptx" /> -->
-
-  <!-- One or more of the sections of a chapter might be exercises-->
-  <!-- <xi:include href="./ex_firstch.ptx"/> -->
+    <!-- One or more of the sections of a chapter might be exercises-->
+    <!-- <xi:include href="./ex_firstch.ptx"/> -->
 </chapter>

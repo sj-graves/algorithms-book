@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<latex-image>
+\tikzset{
+    pics/perm/.style n args = {4}{
+        code = {
+            \draw (0,0) coordinate (#1_pos) coordinate (#1_bl)
+                \foreach \num/\val in {#2}{
+                    (#1_pos.north east) node [below right] (#1_pos) {\val} (#1_pos.north) node [above] (#1_val_\num) {\num}
+                    (#1_pos.south east) coordinate (#1_br_\val)
+                    (#1_val_\num.north east) coordinate (#1_tr_\num)
+                } (#1_pos.north east) coordinate (#1_tr)
+                (#1_bl |- #1_br_#3) coordinate (#1_bl)
+                (#1_bl) ++(.1,0) -- (#1_bl) -- (#1_bl |- #1_tr_#3) -- ++(.1,0)
+                (#1_tr_#3 |- #1_br_#3) ++(-.1,0) -- (#1_tr_#3 |- #1_br_#3) -- node [pos=1/2, right] {#4} (#1_tr_#3) -- ++(-.1,0);
+        }
+    }
+}
+\begin{tikzpicture}[x=1cm, y=1cm]
+    \draw (0,0) pic {perm={s1}{1/2, 2/3, 3/4, 4/5, 5/1}{5}{$=\tau_1$}}
+    (s1_bl) ++(0,-1) pic {perm={s2}{1/5, 2/4, 3/2, 4/1, 5/3}{5}{$=\tau_2$}};
+    \begin{scope}[on background layer]
+        \draw[white]
+            (s1_tr) -- coordinate [pos=1/2] (s1_s2) (s2_tr)
+            ;
+    \draw[red, line width=5pt, opacity=.5]
+        (s1_val_1.north)
+        -- (s1_val_1.mid |- s1_s2)
+        -- (s2_val_2.mid |- s1_s2)
+        -- (s2_val_2.mid |- s2_bl)
+        ;
+    \draw[yellow, line width=5pt, opacity=.5]
+        (s1_val_2.north)
+        -- (s1_val_2.mid |- s1_s2)
+        -- (s2_val_3.mid |- s1_s2)
+        -- (s2_val_3.mid |- s2_bl)
+        ;
+    \draw[green, line width=5pt, opacity=.5]
+        (s1_val_3.north)
+        -- (s1_val_3.mid |- s1_s2)
+        -- (s2_val_4.mid |- s1_s2)
+        -- (s2_val_4.mid |- s2_bl)
+        ;
+    \draw[blue, line width=5pt, opacity=.5]
+        (s1_val_4.north)
+        -- (s1_val_4.mid |- s1_s2)
+        -- (s2_val_5.mid |- s1_s2)
+        -- (s2_val_5.mid |- s2_bl)
+        ;
+    \draw[violet, line width=5pt, opacity=.5]
+        (s1_val_5.north)
+        -- (s1_val_5.mid |- s1_s2)
+        -- (s2_val_1.mid |- s1_s2)
+        -- (s2_val_1.mid |- s2_bl)
+        ;
+    \end{scope}
+    \draw (s1_tr) ++(1.5,0)
+        pic {perm={t2}{1/5, 2/4, 3/2, 4/1, 5/3}{5}{$=\tau_2$}}
+        (t2_bl) ++(0,-1)  pic {perm={t1}{1/2, 2/3, 3/4, 4/5, 5/1}{5}{$=\tau_1$}};
+    \begin{scope}[on background layer]
+        \draw[white]
+            (t1_tr) -- coordinate [pos=1/2] (t2_t1) (t2_tr)
+            ;
+    \draw[red, line width=5pt, opacity=.5]
+        (t2_val_1.north)
+        -- (t2_val_1.mid |- t2_t1)
+        -- (t1_val_5.mid |- t2_t1)
+        -- (t1_val_5.mid |- t1_bl)
+        ;
+    \draw[yellow, line width=5pt, opacity=.5]
+        (t2_val_2.north)
+        -- (t2_val_2.mid |- t2_t1)
+        -- (t1_val_4.mid |- t2_t1)
+        -- (t1_val_4.mid |- t1_bl)
+        ;
+    \draw[green, line width=5pt, opacity=.5]
+        (t2_val_3.north)
+        -- (t2_val_3.mid |- t2_t1)
+        -- (t1_val_2.mid |- t2_t1)
+        -- (t1_val_2.mid |- t1_bl)
+        ;
+    \draw[blue, line width=5pt, opacity=.5]
+        (t2_val_4.north)
+        -- (t2_val_4.mid |- t2_t1)
+        -- (t1_val_1.mid |- t2_t1)
+        -- (t1_val_1.mid |- t1_bl)
+        ;
+    \draw[violet, line width=5pt, opacity=.5]
+        (t2_val_5.north)
+        -- (t2_val_5.mid |- t2_t1)
+        -- (t1_val_3.mid |- t2_t1)
+        -- (t1_val_3.mid |- t1_bl)
+        ;
+    \end{scope}
+\end{tikzpicture}
+</latex-image>

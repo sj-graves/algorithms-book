@@ -1,10 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 
 <section xml:id="sec-empty" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title></title>
-  <introduction>
-    <p></p>
-  </introduction>
+    <title></title>
+    <introduction>
+        <p>
+        </p>
+    </introduction>
   <!--
   <xi:include href=".subsec-emp-intro.ptx" />
   <xi:include href=".subsec-emp-next.ptx" />

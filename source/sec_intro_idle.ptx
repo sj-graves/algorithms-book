@@ -4,11 +4,11 @@
     <title>Getting started with Python</title>
     <introduction>
         <p>
-            We began with a neat practical algorithm, but we need to dial it down to basics to get to where we can go from a stated problem to an implemented Python program; not the least step is we need to make sure everyone can run Python.
+            We began with a neat practical algorithm. Unfortunately, even with a very good understanding of the problem and its solution a beginner is not ready to turn the complete algorithm into a working computer code, or <term>program</term>.
         </p>
     </introduction>
 
-    <subsection xml:id="subsec-intro-idle-gettingidle">
+    <subsection xml:id="sub-intro-idle-gettingidle">
         <title>Getting IDLE</title>
         <p>
           There are many, many different ways to get started as a Python programmer, but the first thing you need is to download Python itself. Download the latest version (3.10 as of this writing) from <url href="http://python.org"/>. Once you have Python, the next tool you should have is an IDE (integrated development environment). The default Python IDE which comes bundled with Python is called IDLE.
@@ -27,8 +27,10 @@
                     </p>
                     <p>
                         Thonny is actually designed for absolute beginners and is so user-friendly that it is pre-installed in the Raspbian operating system for RaspberryPi microcomputers, often used to teach programming to children. That being said it is still a functional Python IDE.
-                    </p>
-                </li>
+                    </p></li>
+                <li><p>
+                    A final alternative, and a strong one, is to sign up for an account at <url href="http://cocalc.com" /> and use CoCalc as your development environment. The major caveat here is that you must be online to access your files. This textbook was rewritten on CoCalc!
+                    </p></li>
             </ul>
 
         </remark>
@@ -36,7 +38,7 @@
             All that being said, the basic assumption of this text is that you are working in IDLE.
         </p>
     </subsection>
-    <subsection xml:id="subsec-intro-idle-interactivemode">
+    <subsection xml:id="sub-intro-idle-interactivemode">
         <title>Interactive Mode</title>
         <p>
             When you first run IDLE, you're greeted with a box that looks like this:
@@ -75,8 +77,21 @@ Type "help", "copyright", "credits" or "license()" for more information.</output
         <p>
             Python was designed to be as easy to write and read as possible, and to be very easy to go from an algorithm to a working program. Anything more complicated than a single line will be written in a <term>module</term>, which is a sequence of Python commands saved in a text file (usually with file extension <c>.py</c>). Python modules can be opened, edited, and executed all within IDLE.
         </p>
+        <technology xml:id="tech-quitting-python">
+            <title>Quitting Python</title>
+            <statement>
+                If you're using Python via IDLE, just close all of your IDLE windows to quit the program. If not, you can use
+                <sidebyside>
+                    <console>
+                        <prompt>>>> </prompt>
+                        <input>quit()</input>
+                        <output />
+                    </console>
+                </sidebyside>
+            </statement>
+        </technology>
     </subsection>
-    <subsection xml:id="subsec-intro-idle-firstprogram">
+    <subsection xml:id="sub-intro-idle-firstprogram">
         <title>A first Python module</title>
         <p>
             From within IDLE, do the following:
@@ -107,6 +122,9 @@ Hello, world!
                 <input />
             </console>
         </listing>
+        <p>
+            Congratulations! You can no longer say you have never written a computer program.
+        </p>
         <p>
             We will frequently be writing modules and listing code examples in the text, so they will appear like so:
         </p>
