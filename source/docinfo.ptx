@@ -20,7 +20,7 @@
 
         \DeclareMathOperator{\fixedset}{fix}
         \DeclareMathOperator{\support}{supp}
-        \DeclateMathOperator{\lcm}{lcm}
+        \DeclareMathOperator{\lcm}{lcm}
 
         \newcommand{\set}[1]{\left\{#1\right\}}
         \newcommand{\abs}[1]{\left|#1\right|}

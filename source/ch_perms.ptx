@@ -9,10 +9,10 @@
                     Define permutations
                     </p></li>
                 <li><p>
-                    Explore permutation operations
+                    Implementing permutations: object oriented programming
                     </p></li>
                 <li><p>
-                    Implementing permutations: object oriented programming
+                    Explore permutation operations
                     </p></li>
                 <li><p>
                     Using permutations: cryptography
@@ -36,7 +36,7 @@
         </p>
     </introduction>
     <xi:include href="./sec_perms_def.ptx" />
-    <xi:include href="./sec_perms_groups.ptx" />
+    <xi:include href="./sec_perms_oop.ptx" />
     <!--
     <xi:include href=".sec-emp-intro.ptx" />
     <xi:include href=".sec-emp-next.ptx" />

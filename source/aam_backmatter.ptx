@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<backmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="aam-backmatter">
+    <title>Backmatter</title>
+        <appendix xml:id="appendix-list-results">
+            <title>List of Results</title>
+            <list-of elements="theorem lemma proposition" divisions="chapter" empty="yes" />
+        </appendix>
+
+        <xi:include href="./gfdl-aam.ptx" />
+        <colophon>
+            <p>
+                This book was authored in <pretext />.
+            </p>
+        </colophon>
+</backmatter>

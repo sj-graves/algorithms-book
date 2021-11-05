@@ -102,185 +102,182 @@
     large piece, or if the two pieces have the same number of vertices we will
     merge into the piece whose initial vertex had a smaller numerical
     index.</p>
-    <sidebyside>
-      <tabular halign="center">
-        <col />
-        <col />
-        <col right="minor" />
-        <col />
-        <col />
-        <col />
-        <col />
-        <col />
-        <col />
-        <col />
-        <col right="minor" />
-        <col />
-        <col />
-        <row>
-          <cell colspan="3" />
-          <cell colspan="8">Components</cell>
-          <cell>Use</cell>
-          <cell>Total</cell>
-        </row>
-        <row bottom="major">
-          <cell>Step</cell>
-          <cell>
-            <m>(u,v)</m>
-          </cell>
-          <cell>
-            <m>w</m>
-          </cell>
-          <cell>0</cell>
-          <cell>1</cell>
-          <cell>2</cell>
-          <cell>3</cell>
-          <cell>4</cell>
-          <cell>5</cell>
-          <cell>6</cell>
-          <cell>7</cell>
-          <cell>Edge?</cell>
-          <cell>Cost</cell>
-        </row>
-        <row>
-          <cell>0</cell>
-          <cell>-</cell>
-          <cell>-</cell>
-          <cell>[0]</cell>
-          <cell>[1]</cell>
-          <cell>[2]</cell>
-          <cell>[3]</cell>
-          <cell>[4]</cell>
-          <cell>[5]</cell>
-          <cell>[6]</cell>
-          <cell>[7]</cell>
-          <cell>-</cell>
-          <cell>0</cell>
-        </row>
-        <row>
-          <cell>1</cell>
-          <cell>(6,7)</cell>
-          <cell>3</cell>
-          <cell>[0]</cell>
-          <cell>[1]</cell>
-          <cell>[2]</cell>
-          <cell>[3]</cell>
-          <cell>[4]</cell>
-          <cell>[5]</cell>
-          <cell>[6,7]</cell>
-          <cell>-</cell>
-          <cell>Yes</cell>
-          <cell>3</cell>
-        </row>
-        <row>
-          <cell>2</cell>
-          <cell>(0,7)</cell>
-          <cell>4</cell>
-          <cell>-</cell>
-          <cell>[1]</cell>
-          <cell>[2]</cell>
-          <cell>[3]</cell>
-          <cell>[4]</cell>
-          <cell>[5]</cell>
-          <cell>[0,6,7]</cell>
-          <cell>-</cell>
-          <cell>Yes</cell>
-          <cell>7</cell>
-        </row>
-        <row>
-          <cell>3</cell>
-          <cell>(2,7)</cell>
-          <cell>5</cell>
-          <cell>-</cell>
-          <cell>[1]</cell>
-          <cell>-</cell>
-          <cell>[3]</cell>
-          <cell>[4]</cell>
-          <cell>[5]</cell>
-          <cell>[0,2,6,7]</cell>
-          <cell>-</cell>
-          <cell>Yes</cell>
-          <cell>12</cell>
-        </row>
-        <row>
-          <cell>4</cell>
-          <cell>(1,5)</cell>
-          <cell>6</cell>
-          <cell>-</cell>
-          <cell>[1,5]</cell>
-          <cell>-</cell>
-          <cell>[3]</cell>
-          <cell>[4]</cell>
-          <cell>-</cell>
-          <cell>[0,2,6,7]</cell>
-          <cell>-</cell>
-          <cell>Yes</cell>
-          <cell>18</cell>
-        </row>
-        <row>
-          <cell>5</cell>
-          <cell>(4,6)</cell>
-          <cell>6</cell>
-          <cell>-</cell>
-          <cell>[1,5]</cell>
-          <cell>-</cell>
-          <cell>[3]</cell>
-          <cell>-</cell>
-          <cell>-</cell>
-          <cell>[0,2,4,6,7]</cell>
-          <cell>-</cell>
-          <cell>Yes</cell>
-          <cell>24</cell>
-        </row>
-        <row>
-          <cell>6</cell>
-          <cell>(2,6)</cell>
-          <cell>9</cell>
-          <cell>-</cell>
-          <cell>[1,5]</cell>
-          <cell>-</cell>
-          <cell>[3]</cell>
-          <cell>-</cell>
-          <cell>-</cell>
-          <cell>[0,2,4,6,7]</cell>
-          <cell>-</cell>
-          <cell>
-            <alert>No!</alert>
-          </cell>
-          <cell>24</cell>
-        </row>
-        <row>
-          <cell>7</cell>
-          <cell>(0,3)</cell>
-          <cell>12</cell>
-          <cell>-</cell>
-          <cell>[1,5]</cell>
-          <cell>-</cell>
-          <cell>-</cell>
-          <cell>-</cell>
-          <cell>-</cell>
-          <cell>[0,2,3,4,6,7]</cell>
-          <cell>-</cell>
-          <cell>Yes</cell>
-          <cell>36</cell>
-        </row>
-        <row>
-          <cell>8</cell>
-          <cell>(5,6)</cell>
-          <cell>12</cell>
-          <cell>-</cell>
-          <cell>-</cell>
-          <cell>-</cell>
-          <cell>-</cell>
-          <cell>-</cell>
-          <cell>-</cell>
-          <cell>[0,1,2,3,4,5,6,7]</cell>
-          <cell>-</cell>
-          <cell>Yes</cell>
-          <cell>48</cell>
-        </row>
+    <table xml:id="tab-kruskal-smallexample" width="75%">
+        <title>The small network connection example.</title>
+        <tabular halign="center">
+            <col />
+            <col />
+            <col right="minor" />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col />
+            <col right="minor" />
+            <col />
+            <col />
+            <row>
+                <cell colspan="3" />
+                <cell colspan="8">Components</cell>
+                <cell>Use</cell>
+                <cell>Total</cell>
+            </row>
+            <row bottom="major">
+                <cell>Step</cell>
+                <cell><m>(u,v)</m></cell>
+                <cell><m>w</m></cell>
+                <cell>0</cell>
+                <cell>1</cell>
+                <cell>2</cell>
+                <cell>3</cell>
+                <cell>4</cell>
+                <cell>5</cell>
+                <cell>6</cell>
+                <cell>7</cell>
+                <cell>Edge?</cell>
+                <cell>Cost</cell>
+            </row>
+            <row>
+                <cell>0</cell>
+                <cell>-</cell>
+                <cell>-</cell>
+                <cell>[0]</cell>
+                <cell>[1]</cell>
+                <cell>[2]</cell>
+                <cell>[3]</cell>
+                <cell>[4]</cell>
+                <cell>[5]</cell>
+                <cell>[6]</cell>
+                <cell>[7]</cell>
+                <cell>-</cell>
+                <cell>0</cell>
+            </row>
+            <row>
+                <cell>1</cell>
+                <cell>(6,7)</cell>
+                <cell>3</cell>
+                <cell>[0]</cell>
+                <cell>[1]</cell>
+                <cell>[2]</cell>
+                <cell>[3]</cell>
+                <cell>[4]</cell>
+                <cell>[5]</cell>
+                <cell>[6,7]</cell>
+                <cell>-</cell>
+                <cell>Yes</cell>
+                <cell>3</cell>
+            </row>
+            <row>
+                <cell>2</cell>
+                <cell>(0,7)</cell>
+                <cell>4</cell>
+                <cell>-</cell>
+                <cell>[1]</cell>
+                <cell>[2]</cell>
+                <cell>[3]</cell>
+                <cell>[4]</cell>
+                <cell>[5]</cell>
+                <cell>[0,6,7]</cell>
+                <cell>-</cell>
+                <cell>Yes</cell>
+                <cell>7</cell>
+            </row>
+            <row>
+                <cell>3</cell>
+                <cell>(2,7)</cell>
+                <cell>5</cell>
+                <cell>-</cell>
+                <cell>[1]</cell>
+                <cell>-</cell>
+                <cell>[3]</cell>
+                <cell>[4]</cell>
+                <cell>[5]</cell>
+                <cell>[0,2,6,7]</cell>
+                <cell>-</cell>
+                <cell>Yes</cell>
+                <cell>12</cell>
+            </row>
+            <row>
+                <cell>4</cell>
+                <cell>(1,5)</cell>
+                <cell>6</cell>
+                <cell>-</cell>
+                <cell>[1,5]</cell>
+                <cell>-</cell>
+                <cell>[3]</cell>
+                <cell>[4]</cell>
+                <cell>-</cell>
+                <cell>[0,2,6,7]</cell>
+                <cell>-</cell>
+                <cell>Yes</cell>
+                <cell>18</cell>
+            </row>
+            <row>
+                <cell>5</cell>
+                <cell>(4,6)</cell>
+                <cell>6</cell>
+                <cell>-</cell>
+                <cell>[1,5]</cell>
+                <cell>-</cell>
+                <cell>[3]</cell>
+                <cell>-</cell>
+                <cell>-</cell>
+                <cell>[0,2,4,6,7]</cell>
+                <cell>-</cell>
+                <cell>Yes</cell>
+                <cell>24</cell>
+            </row>
+            <row>
+                <cell>6</cell>
+                <cell>(2,6)</cell>
+                <cell>9</cell>
+                <cell>-</cell>
+                <cell>[1,5]</cell>
+                <cell>-</cell>
+                <cell>[3]</cell>
+                <cell>-</cell>
+                <cell>-</cell>
+                <cell>[0,2,4,6,7]</cell>
+                <cell>-</cell>
+                <cell>
+                <alert>No!</alert>
+                </cell>
+                <cell>24</cell>
+            </row>
+            <row>
+                <cell>7</cell>
+                <cell>(0,3)</cell>
+                <cell>12</cell>
+                <cell>-</cell>
+                <cell>[1,5]</cell>
+                <cell>-</cell>
+                <cell>-</cell>
+                <cell>-</cell>
+                <cell>-</cell>
+                <cell>[0,2,3,4,6,7]</cell>
+                <cell>-</cell>
+                <cell>Yes</cell>
+                <cell>36</cell>
+            </row>
+            <row>
+                <cell>8</cell>
+                <cell>(5,6)</cell>
+                <cell>12</cell>
+                <cell>-</cell>
+                <cell>-</cell>
+                <cell>-</cell>
+                <cell>-</cell>
+                <cell>-</cell>
+                <cell>-</cell>
+                <cell>[0,1,2,3,4,5,6,7]</cell>
+                <cell>-</cell>
+                <cell>Yes</cell>
+                <cell>48</cell>
+            </row>
       </tabular>
-    </sidebyside>
+    </table>
   </subsection>
   <subsection xml:id="subsec-intro-mst-algorithm">
     <title>Algorithm</title>
@@ -382,7 +379,7 @@
         <m>(u,v,w(u,v))</m>. Find the least expensive set
         <m>F</m> of edges needed to connect the components of this network.</p>
         <sidebyside>
-          <tabular halign="center">
+          <tabular halign="center" width="50%">
             <row bottom="major">
               <cell>
                 <m>(u,v,w(u,v))</m>
@@ -476,8 +473,18 @@
         consist only of the set of included edges.</p>
       </statement>
       <answer>
-        <p>The minimal-cost connecting set consists of the following edges:</p>
-        <sidebyside>
+          <p>
+              The minimal-cost connecting set consists of the following edges:
+              <me>
+                  \begin{matrix}
+                  (0,3) \amp (2,4) \amp (4,15) \amp (7,13) \\
+                  (0,10) \amp (2,11) \amp (4,18) \amp (8,11) \\
+                  (0,13) \amp (2,19) \amp (5,6) \amp (9,15) \\
+                  (0,16) \amp (3,14) \amp (5,16) \amp (12,19) \\
+                  (1,4) \amp (4,13) \amp (5,17) \amp
+                  \end{matrix}
+              </me></p>
+<!--         <sidebyside width="50%">
           <tabular halign="center">
             <row>
               <cell>(0, 3)</cell>
@@ -510,7 +517,7 @@
               <cell />
             </row>
           </tabular>
-        </sidebyside>
+        </sidebyside>-->
       </answer>
     </problem>
   </subsection>

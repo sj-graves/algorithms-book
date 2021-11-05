@@ -17,7 +17,8 @@
             <title><c>for</c> loops</title>
             <statement>
                 <p>To perform a task repeatedly while a variable <c>loop_var</c> successively takes each value in a list, tuple, or other iterable <c>my_container</c>, we use the <term>for loop block structure</term>, as follows:</p>
-                <sidebyside>
+                <listing>
+                    <caption>A typical use of the <c>for</c> block structure</caption>
                     <program language="python">
                         <input>
                             for loop_var in my_container:
@@ -28,7 +29,7 @@
                                 # And so on
                         </input>
                     </program>
-                </sidebyside>
+                </listing>
                 <p>
                     This is shown as part of a module rather than input to the Python console to emphasize the block structure. In Python, blocks of code are indicated by the level of indentation of the code. It is normal for Python editors to insert 2 or 4 spaces when the <c>tab</c> key on the keyboard is pressed, rather than the special <term>tab character</term> represented in Python by <c>'\t'</c>. This is an important behavior to the Python interpreter, and provides a very good reason to use a Python editor or IDE instead of a text editor for writing Python code!
                 </p>
@@ -55,7 +56,8 @@
                 <p>
                     In many other languages the normal behavior is different, and for loops can only take successive integer values. For instance, in C++ the following code starts the integer <m>i</m> at the value 0 and so long as <m>i\lt 20</m> prints the value of <m>i</m> (that's the <c>cout &lt;&lt; i;</c> part) and then increases the value of <m>i</m> by one (that's the <c>i++</c>) part.
                 </p>
-                <sidebyside>
+                <listing xml:id="list-forloop-cplusplus">
+                    <caption>An example of a <c>for</c> loop in C++</caption>
                     <program langauge="c++">
                         <input>
                             for (int i = 0; i &lt; 20; i++ ){
@@ -63,18 +65,19 @@
                             }
                         </input>
                     </program>
-                </sidebyside>
+                </listing>
                 <p>
                     This is the traditional use of a for loop: the looping variable serves as an index variable (like a subscript variable) and is changed until a certain range condition is met. This behavior is still available in Python, using the <term>range function</term>. To produce the same output as the above C++ code in Python is uncomplicated.
                 </p>
-                <sidebyside>
+                <listing>
+                    <caption>The same <c>for</c> loop as <xref ref="list-forloop-cplusplus"/> reproduced in Python</caption>
                     <program language="python">
                         <input>
                             for i in range(20):
                                 print(i)
                         </input>
                     </program>
-                </sidebyside>
+                </listing>
             </statement>
         </remark>
         <p>
@@ -86,7 +89,8 @@
                 <p>
                     The output of a <c>range</c> function is not a <c>list</c> or a <c>tuple</c>, though it acts like one. It is a special <q>range object</q>, but can be easily converted to a <c>list</c> or <c>tuple</c> by type casting. Here are the basic uses of the <c>range</c> function, assuming <c>my_list</c>, <c>m</c>, <c>n</c>, and <c>k</c> are defined.
                 </p>
-                <sidebyside>
+                <table xml:id="tab-range-function">
+                    <title>The uses of the <c>range</c> function in Python</title>
                     <tabular>
                         <row bottom="major">
                             <cell>Command</cell>
@@ -105,11 +109,12 @@
                             <cell>The indices sliced by <c>my_list[m:n:k]</c></cell>
                         </row>
                     </tabular>
-                </sidebyside>
+                </table>
                 <p>
                     As an example, the following would be produced at the Python console. The fourth input shows that the <c>range</c> object output on its own is not a list.
                 </p>
-                <sidebyside>
+                <listing>
+                    <caption>Some <c>range</c> examples</caption>
                     <console>
                         <prompt>>>> </prompt>
                         <input>list(range(5))</input>
@@ -124,7 +129,7 @@
                         <input>print(range(5))</input>
                         <output>range(0, 5)</output>
                     </console>
-                </sidebyside>
+                </listing>
             </statement>
         </technology>
     </subsection>
@@ -141,7 +146,8 @@
                 <p>
                     A <c>while</c> block depends for its execution on a conditioning expression, and the block executes repeatedly so long as the expression evaluates to <c>True</c>. Here is a short example of a <c>while</c> loop which will terminate after a few iterations.
                 </p>
-                <sidebyside>
+                <listing>
+                    <caption>A small example of a <c>while</c> loop</caption>
                     <program language="python">
                         <input>
                             counter = 10
@@ -150,7 +156,7 @@
                                 counter = counter - 1
                         </input>
                     </program>
-                </sidebyside>
+                </listing>
                 <p>
                     Note that the parentheses on the second line are unnecessary, but they help a reader recognize the condition for the loop. Any statement which can evaluate to either <c>True</c> or <c>False</c> can appear as the condition of a <c>while</c> loop.
                 </p>
@@ -160,14 +166,15 @@
         <p>
             The following example of a <c>while</c> loop is called an <term>infinite loop</term>, because it will never terminate. Generally speaking, a program stuck in an infinite loop in Python can be terminated by pressing <c>Ctrl-C</c>, which triggers a <c>KeyboardInterrupt</c>.
         </p>
-        <sidebyside>
+        <listing>
+            <caption>The canonical example of an infinite <c>while</c> loop</caption>
             <program language="python">
                 <input>
                     while True:
                         pass
                 </input>
             </program>
-        </sidebyside>
+        </listing>
         <p>
             The <c>pass</c> statement is a do-nothing statement which is syntactically valid to be a do-nothing statement. This means an indented block containing a <c>pass</c> statement will do nothing. This is especially useful when first learning programming.
         </p>

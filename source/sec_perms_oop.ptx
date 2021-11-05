@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<section xml:id="sec-perms-oop" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Implementing permutations in Python</title>
+    <shorttitle>Permutations in Python</shorttitle>
+    <introduction>
+        <p>
+            We will use permutations to investigate the Python ideas of <em>classes</em>, <em>objects</em>, <em>attributes</em>, and <em>methods</em>.
+        </p>
+        <definition xml:id="def-oop">
+            <title>Object-oriented programming</title>
+            <statement>
+                In the viewpoint of object-oriented programming (OOP), <term>objects</term> contain data in the form of <term>attributes</term> and code in the form of <term>methods</term>. Python is a <term>class-based</term> language, where the class of an object determines its type; an object is a programming construct that can refer to itself, has certain data associated with itself, and can act in certain ways.
+            </statement>
+        </definition>
+        <p>
+            This is a different way of thinking about the organization of data than what you may have previously experienced. As an example, you can consider the concept of <em>factorization</em> as a function or procedure which takes integers as inputs. In the OOP way of thinking, integers are a class of object, and factorization is an action that an integer can perform.
+        </p>
+        <p>
+            Permutations provide an exceptional introduction to the topic of OOP since every permutation is an interesting object in its own right (as a group element) but also performs an action (as a function)! <em>For implementation purposes, we will only consider permutations with a finite domain.</em>
+        </p>
+    </introduction>
+    <subsection xml:id="sec-perms-oop-classes">
+        <title>Classes</title>
+        <technology xml:id="tech-class">
+            <title>The <c>class</c> command</title>
+            <statement>
+                <p>
+                    Classes in Python are defined via a block structure, similarly to functions.
+                </p>
+                <listing xml:id="list-class">
+                    <caption>Python <c>class</c> definition</caption>
+                    <program language="python">
+                        <input>
+                            class MyClass:
+                                statement_1
+                                statement_2
+                                ...
+                                statement_n
+                        </input>
+                    </program>
+                </listing>
+                <p>
+                    Most of the <c>statement_i</c> lines at the first level of indentation to a class definition should be the definitions of <term>methods</term>. Assignments at the first level of indentation define <term>class attributes</term>, the values of which are held in common by all members of the class. <term>Object attributes</term> are defined within methods.
+                </p>
+                <p>
+                    A method is a function defined within the first level of indentation of a class, and the first argument to a method is special: it is the name used within the method to refer to the object itself. In Python, the convention is to use <c>self</c> as the name for the first argument, and every method should require it.
+                </p>
+            </statement>
+        </technology>
+        <p>
+            Mathematicians love the class/object dichotomy, whether or not they know it: think about a proof which begins with the words, <q>let <m>p/q</m> be a rational number.</q> Once the statement is pronounced, there are so many truths implied about <m>p</m>, <m>q</m>, and <m>p/q</m>, all of which come just from knowing that <m>p/q\in\Rats</m>. All of that works because we recognize that the object named <m>p/q</m> is a particular instance of the class of things called rational numbers.
+        </p>
+        <definition xml:id="def-instantiation">
+            <title>Instantiation</title>
+            <statement>
+                An <term>instance</term> is a particular member of a class. <term>Class instantiation</term> is the declaration that a named object belongs to a certain class. For example, <q>Fido is a dog</q> is an instantiation of the class of <q>dog</q> to the object named <q>Fido</q>. Mathematically, this is allows an <term>existential quantification</term>: there exists a dog, named Fido.
+            </statement>
+        </definition>
+        <p>
+            The examples of how technology is defined and used throughout the remainder of this section will serve to piece together the beginning of a valid and useful package of permutations in Python, which we will call <c>AlgoPerm</c>.
+        </p>
+        <technology xml:id="tech-instantiation">
+            <title>How to instantiate an object from a <c>class</c> in Python</title>
+            <shorttitle>Python object instantiation</shorttitle>
+            <statement>
+                <p>
+                    The first method to be considered for a new class is the method by which objects of that class are to be instantiated. This is implemented by a method called <c>__init__</c>. The name of this method is very important: it begins and ends with two underscore characters <c>_</c>. It is also very important that the <c>__init__</c> method takes as arguments anything necessary to define a new object in the class.
+                </p>
+                <listing xml:id="list-__init__">
+                    <caption>The <c>__init__</c> method for a <c>class</c> definition</caption>
+                    <program language="python">
+                        <input>
+                            class AlgoPerm:
+                                """A permutation class for Python written for Algorithms in
+                                    Applied Math."""
+                                def __init__(self, domain, mapping):
+                                    statement_1
+                                    statement_2
+                                    statement_3
+                                    ...
+                        </input>
+                    </program>
+                </listing>
+            </statement>
+        </technology>
+    </subsection>
+</section>

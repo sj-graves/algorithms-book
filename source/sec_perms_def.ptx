@@ -3,7 +3,7 @@
 <section xml:id="sec-perms-def" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Mathematical permutations</title>
     <introduction>
-        <definition>
+        <definition xml:id="def-permutation">
             <statement>
                 <p>
                     Suppose <m>A</m> is a set. Then a function <m>\sigma</m> with domain <m>A</m> and codomain <m>A</m> is a <term>permutation of <m>A</m></term> if and only if <m>\sigma</m> satisfies the following two criteria:
@@ -19,7 +19,7 @@
         <p>
             Functions which are both one-to-one and onto are also called <em>bijections</em>, so an easier definition of a permutation <m>\sigma</m> of <m>A</m> is that <m>\sigma</m> is a bijection from <m>A</m> to itself. It is important to note that the definition of a permutation of <m>A</m> does not require that the set <m>A</m> be finite. However, we will be considering only finite sets as a rule.
         </p>
-        <convention>
+        <convention xml:id="conv-english-and-bracketn">
             <statement>
                 <p>
                     There are certain sets we will use frequently in our study of permutations, namely the set of letters of the English alphabet and subsets of the positive inteegrs. For convenience sake, we denote them as follows:
@@ -98,17 +98,17 @@
                 Since permutations of a set <m>A</m> are bijections from <m>A</m> to <m>A</m>, each element of <m>\sym{A}</m> has the same domain and codomain; thus they can be composed.
             </p>
 
-            <theorem>
+            <definition xml:id="def-composition">
                 <statement>
                     <p>
-                        Suppose <m>\sigma,\tau\in S_A</m> for some set <m>A</m>. Then the composition of <m>\tau</m> after <m>\sigma</m> is a permutation <m>\tau\circ\sigma:A\to A</m> defined by
+                        Suppose <m>\sigma,\tau\in S_A</m> for some set <m>A</m>. Then the <term>composition</term> of <m>\tau</m> after <m>\sigma</m> is the function <m>\tau\circ\sigma:A\to A</m> defined by
                         <me>
                             (\tau\circ\sigma)(a) = \tau(\sigma(a))
                         </me>
                         for each <m>a\in A</m>. Moreover, the composition symbol <m>\circ</m> will be suppressed, and we will write <m>\tau\sigma</m> as a product rather than a composition.
                     </p>
                 </statement>
-            </theorem>
+            </definition>
             <remark xml:id="rem-after">
                 <title>Composition order</title>
                 <statement>
@@ -344,7 +344,8 @@
                 <statement>
                     If <m>A</m> is a set, then <m>\sym{A}</m> is the <term>symmetric group</term> over <m>A</m>, and <m>\sym{n}</m> is the <term>symmetric group over <m>n</m> symbols</term>.
                 </statement>
-            </definition><p>
+            </definition>
+            <p>
                 The study of group theory was inspired by the work of Lagrange on generalizations of permutation groups. This and many other topics are introduced to undergraduate math majors in their first course in Abstract Algebra, which is almost totally focused on group theory. An important result in group theory  is <em>Cayley's Theorem</em>, which is especially important for those working with groups in an applied setting.
             </p>
             <definition xml:id="def-group-isomorphism">
@@ -473,7 +474,7 @@
             Moreover, this decomposition into disjoint cycles can be written uniquely up to the order in which the cycles appear, and the proof of the preceding theorem gives us exactly the method we use to obtain the decomposition.
         </p>
 
-        <example>
+        <example xml:id="exmp-disjoint-cycles">
             <title>Writing a permutation in disjoint cycle notation</title>
             <statement>
                 <p>
@@ -482,7 +483,8 @@
                         \sigma = 8~1~5~9~4~6~7~3~10~2.
                     </me>
                     We can write the cycle decomposition of <m>\sigma</m> by starting with <m>1</m>: the first cycle of the decomposition will be
-                    <m>(1,\sigma(1),\sigma^2(1),\sigma^3(1),\cdots,\sigma^r(1))</m> for some <m>r\leq n</m>. In fact,
+                    <me>(1,\sigma(1),\sigma^2(1),\sigma^3(1),\cdots,\sigma^r(1))</me>
+                    for some <m>r\leq n</m>. In fact,
                     <md>
                         <mrow>
                             1 \xto{\sigma} 8 \xto{\sigma} 3 \xto{\sigma} 5 \xto{\sigma} 4 \xto{\sigma} 9 \xto{\sigma} 10 \xto{\sigma} 2 \xto{\sigma} 1
