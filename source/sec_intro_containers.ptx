@@ -1,45 +1,57 @@
 <?xml version='1.0' encoding='utf-8'?>
 
 <section xml:id="sec-intro-containers" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>Container data types</title>
-  <introduction>
+    <title>Container data types</title>
+    <introduction>
     <p>
         In Python, data types which can contain other data are called <term>container</term> data types. The three easiest general containers to work with are <term>lists</term>, <term>tuples</term>, and <term>dictionaries.</term> A typical use of a container is to store data collected in a repeated operation of a program.
     </p>
-  </introduction>
-  <subsection xml:id="sub-intro-containers-lists">
-      <title>The <c>list</c> data type</title>
-    <introduction>
-      <p>
-        Lists serve as a general purpose container.
-      </p>
-      <technology xml:id="tech-lists">
-        <title>Defining a <c>list</c></title>
-        <statement>
-          Any comma-separated sequence of syntactically valid expressions enclosed in a matching pair of square brackets <c>[</c> and <c>]</c> is a <c>list</c>. The <term>empty list</term> <c>[]</c> is a valid list.
-        </statement>
-        <listing xml:id="list-lists">
-          <caption>Some <c>list</c> data</caption>
-          <console>
-            <prompt>>>> </prompt>
-            <input>foo = "This is a string, not a list"</input>
-            <prompt>>>> </prompt>
-            <input>bar = [1, 2, foo, [5, 5, 5]]</input>
-            <prompt>>>> </prompt>
-            <input>type(bar)</input>
-            <output>&lt;class 'list'></output>
-            <prompt>>>> </prompt>
-            <input>print( bar )</input>
-            <output>[1, 2, 'This is a string, not a list', [5, 5, 5]]</output>
-          </console>
-        </listing>
-      </technology>
-      <p>
-        Since lists contain other data it is very important to be able to access that data. Python provides two related ways to access the data contained in a list: <term>indexing</term> and <term>slicing</term>.
-      </p>
     </introduction>
+    <subsection xml:id="sub-intro-containers-lists">
+        <title>The <c>list</c> data type</title>
+        <introduction>
+        <p>
+            Lists serve as a general purpose container.
+        </p>
+        <technology xml:id="tech-lists">
+            <title>Defining a <c>list</c></title>
+            <statement>
+                Any comma-separated sequence of syntactically valid expressions enclosed in a matching pair of square brackets <c>[</c> and <c>]</c> is a <c>list</c>. The <term>empty list</term> <c>[]</c> is a valid list.
+            </statement>
+            <listing xml:id="list-lists">
+                <caption>Some <c>list</c> data</caption>
+                <console>
+                    <prompt>>>> </prompt>
+                    <input>
+                        foo = "This is a string, not a list"
+                    </input>
+                    <prompt>>>> </prompt>
+                    <input>
+                        bar = [1, 2, foo, [5, 5, 5]]
+                    </input>
+                    <prompt>>>> </prompt>
+                    <input>
+                        type(bar)
+                    </input>
+                    <output>
+                        &lt;class 'list'>
+                    </output>
+                    <prompt>>>> </prompt>
+                    <input>
+                        print( bar )
+                    </input>
+                    <output>
+                        [1, 2, 'This is a string, not a list', [5, 5, 5]]
+                    </output>
+                </console>
+            </listing>
+        </technology>
+        <p>
+        Since lists contain other data it is very important to be able to access that data. Python provides two related ways to access the data contained in a list: <term>indexing</term> and <term>slicing</term>.
+        </p>
+        </introduction>
     <subsubsection xml:id="subsub-intro-containers-lists-slices">
-          <title>Indexing and Slicing</title>
+          <title>Indexing and slicing</title>
           <p>
               The <term>index</term> of an element of a list is the distance in the list from that element to the start of the list. The element at the start of the list is thus in index 0, the next element in index 1, the next in index 2, and so on. Thus a list consisting of 10 elements has indices 0 through 9. For a list <c>the_list</c>, we access the element in index <m>i</m> by using <c>the_list[i]</c>; this is similar to indexing a mathematical sequence as <m>(a_0,a_1,a_2,\dotsc,a_k)</m>.
           </p>
@@ -84,10 +96,20 @@
           <sidebyside>
               <console>
                   <prompt>>>> </prompt>
-                  <input>new_list = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946]</input>
+                  <input>
+                      new_list = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377,
+                  </input>
+                  <prompt>... </prompt>
+                  <input>
+                          610, 987, 1597, 2584, 4181, 6765, 10946]
+                  </input>
                   <prompt>>>> </prompt>
-                  <input>new_list[1:5]</input>
-                  <output>[2, 3, 5, 8]</output>
+                  <input>
+                      new_list[1:5]
+                  </input>
+                  <output>
+                      [2, 3, 5, 8]
+                  </output>
               </console>
           </sidebyside>
           <p>
@@ -101,7 +123,7 @@
               </console>
           </sidebyside>
           <remark>
-              Strange behavior: while you cannot index beyond the bounds of a list (<c>the_list[8]</c> would generate an <c>IndexError</c>) you are always permitted to slice beyond the bounds of the list (<c>new_list[50:100:3]</c> would output the empty list, <c>[]</c>).
+              Python allows an interesting behavior with regard to indexing and slicing. While you cannot index beyond the bounds of a list, you are always permitted to slice beyond the bounds of the list. Thus with the above code, <c>the_list[8]</c> would generate an <c>IndexError</c>, but <c>new_list[50:100:3]</c> would output the empty list, <c>[]</c>.
           </remark>
           <p>
               Finally, if you want to slice from the beginning of the list up to the <m>j</m>  th index, you use <c>new_list[:j]</c>. If you want to slice from the <m>i</m>  th index to the end of the list, you use <c>new_list[i:]</c>. If you want to slice a whole copy of a list (there are valid reasons to do this), use <c>new_list[:]</c>. If you want the reverse of a list, you slice the whole thing from beginning to end using a skip of negative one: <c>new_list[::-1]</c>.
