@@ -13,8 +13,11 @@
         <p>
           There are many, many different ways to get started as a Python programmer, but the first thing you need is to download Python itself. Download the latest version (3.10 as of this writing) from <url href="http://python.org"/>. Once you have Python, the next tool you should have is an IDE (integrated development environment). The default Python IDE which comes bundled with Python is called IDLE.
         </p>
-        <remark>
-            You do not have to use IDLE. Any text editor will work to edit your files (such as Notepad) and once you have the Python interpreter installed, you can run Python scripts. That being said, it's often easiest to write code inside an IDE so that you can use some sort of debugging.
+        <remark xml:id="rem-other-ides">
+            <title>Other IDEs</title>
+            <p>
+                You do not have to use IDLE. Any text editor will work to edit your files (such as Notepad) and once you have the Python interpreter installed, you can run Python scripts. That being said, it's often easiest to write code inside an IDE so that you can use some sort of debugging.
+            </p>
             <ul>
                 <li><p>
                     <url href="https://code.visualstudio.com/">Visual Studio Code</url>, by Microsoft, with the <url href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python extension</url> installed. Code is an extremely full-featured IDE, but is a fairly big program.
@@ -32,7 +35,6 @@
                     A final alternative, and a strong one, is to sign up for an account at <url href="http://cocalc.com" /> and use CoCalc as your development environment. The major caveat here is that you must be online to access your files. This textbook was rewritten on CoCalc!
                     </p></li>
             </ul>
-
         </remark>
         <p>
             All that being said, the basic assumption of this text is that you are working in IDLE.
@@ -70,6 +72,7 @@ Type "help", "copyright", "credits" or "license()" for more information.</output
             Interactive mode is of limited use, but is very good for doing quick calculations or checking to see if your syntax is correct.
         </p>
         <definition xml:id="def-intro-syntax">
+            <title>Syntax</title>
             <statement>
                 The <term>syntax</term> of a programming language is the set of rules which decide what combinations of symbols are meaningful in the language.
             </statement>

@@ -3,12 +3,14 @@
 <section xml:id="sec-intro-iteration" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Iteration</title>
     <introduction>
-        Computers were invented initially for the purpose of performing normal calculations quickly and repeatedly. There are two simple ways to think of repeating a task: either one sets out to repeat the task on each element of some list, or one performs a task repeatedly so long as some condition is met. These correspond to the two fundamental methods of iteration available to Python programmers: <term>for loops</term> and <term>while loops</term>.
+        <p>
+            Computers were invented initially for the purpose of performing normal calculations quickly and repeatedly. There are two simple ways to think of repeating a task: either one sets out to repeat the task on each element of some list, or one performs a task repeatedly so long as some condition is met. These correspond to the two fundamental methods of iteration available to Python programmers: <term>for loops</term> and <term>while loops</term>.
+        </p>
     </introduction>
     <subsection xml:id="sub-intro-iteration-for">
         <title>For loops</title>
         <p>
-            Consider the mathematical problem of finding the equation of a straight line containing both of the points <m>(x_1,y_1)</m> and <m>(x_2,y_2)</m>. It takes just a moment to write down the formula <m>x=x_1</m>, <m>y=y_1</m>, or <me>\ell(x) = \frac{x_1-x_2}{y_1-y_2}(x-x_1)+y_1 = mx+b</me> and plug in the respective constants. However it becomes more costly in terms of time if the same calculation needs to be carried out for several hundred pairs of points! In fact, even reading it several hundred pairs of points from a file in order to do such a calculation is tedious.
+            Consider the mathematical problem of finding the equation of a straight line containing both of the points <m>(x_1,y_1)</m> and <m>(x_2,y_2)</m>. It takes just a moment to write down the formula <m>x=x_1</m>, <m>y=y_1</m>, or <me>\ell(x) = \frac{x_1-x_2}{y_1-y_2}(x-x_1)+y_1 = mx+b</me> and plug in the respective constants. However it becomes more costly in terms of time if the same calculation needs to be carried out for several hundred pairs of points! In fact, even reading in several hundred pairs of points from a file in order to do such a calculation is tedious.
         </p>
         <p>
             For loops are the ideal programming construction to use when a repetitive task or procedure must be performed on a predetermined set of inputs or a predetermined number of times. Specifically, Python will allow a for loop to repeat over any container which is an <term>iterable</term>, like a <c>tuple</c> or <c>list</c>.

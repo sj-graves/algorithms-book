@@ -23,6 +23,7 @@
         \DeclareMathOperator{\lcm}{lcm}
 
         \newcommand{\set}[1]{\left\{#1\right\}}
+        \newcommand{\seq}[1]{\left(#1\right)}
         \newcommand{\abs}[1]{\left|#1\right|}
         \newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
         \newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
@@ -32,7 +33,7 @@
         \newcommand{\supp}[1]{\support{#1}}
         \newcommand{\xto}[1]{\xrightarrow{#1}}
 <!--         \newcommand{\lcm}[1]{\leastcommonmultiple{#1}} -->
-
+        \newcommand{\divides}{\mid}
         \newcommand{\Nats}{\mathbb{N}}
         \newcommand{\Ints}{\mathbb{Z}}
         \newcommand{\Zp}{\Ints^+}

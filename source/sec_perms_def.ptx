@@ -4,6 +4,7 @@
     <title>Mathematical permutations</title>
     <introduction>
         <definition xml:id="def-permutation">
+            <title>Permutation</title>
             <statement>
                 <p>
                     Suppose <m>A</m> is a set. Then a function <m>\sigma</m> with domain <m>A</m> and codomain <m>A</m> is a <term>permutation of <m>A</m></term> if and only if <m>\sigma</m> satisfies the following two criteria:
@@ -54,12 +55,12 @@
                     \sigma = \begin{bmatrix}
                         a_1 \amp a_2 \amp a_3 \amp \cdots \amp a_n \\
                         \sigma(a_1) \amp \sigma(a_2) \amp \sigma(a_3) \amp \cdots \amp \sigma(a_n)
-                    \end{bmatrix}.
-                </me>
+                    \end{bmatrix}
+                </me>.
                 The <term>one-line</term> notation for <m>\sigma</m> is
                 <me>
-                    \sigma = \sigma(a_1) ~ \sigma(a_2) ~ \sigma(a_3) ~ \cdots ~ \sigma(a_n).
-                </me>
+                    \sigma = \sigma(a_1) ~ \sigma(a_2) ~ \sigma(a_3) ~ \cdots ~ \sigma(a_n)
+                </me>.
             </statement>
         </definition>
 
@@ -83,8 +84,8 @@
                     \nabla \amp \surd \amp \infty \\
                 \diamondsuit \amp \heartsuit \amp \spadesuit \amp \clubsuit \amp
                     \surd \amp \infty \amp \nabla
-                \end{bmatrix}.
-            </me>
+                \end{bmatrix}
+            </me>.
         </p>
         <p>
             Since the set <m>A=\set{\clubsuit, \diamondsuit, \heartsuit, \spadesuit, \nabla, \sqrt{x}, \infty}</m> defined above has no clear order, we should not impose one in order to use one-line notation to represent <m>\phi</m>.
@@ -99,6 +100,7 @@
             </p>
 
             <definition xml:id="def-composition">
+                <title>Permutation composition</title>
                 <statement>
                     <p>
                         Suppose <m>\sigma,\tau\in S_A</m> for some set <m>A</m>. Then the <term>composition</term> of <m>\tau</m> after <m>\sigma</m> is the function <m>\tau\circ\sigma:A\to A</m> defined by
@@ -290,12 +292,25 @@
                 </statement>
             </definition>
 
-            <theorem xml:id="thm-perm-inverse">
+            <definition xml:id="def-perm-inverse">
+                <title>Inverse of a permutation</title>
+                <statement>
+                    Suppose <m>\sigma,\tau\in\sym{A}</m> for some set <m>A</m>. Then <m>\tau</m> is an <term>inverse</term> of <m>\sigma</m> if and only if <m>\sigma\tau = e_A = \tau\sigma</m>.
+                </statement>
+            </definition>
+            <theorem xml:id="thm-perm-inverse-unique">
+                <title>Unique inverses</title>
                 <statement>
                     <p>
-                        Suppose <m>\sigma\in S_A</m>. Then there is a unique <term>inverse</term> for <m>\sigma</m>, denoted <m>\sigma^{-1}</m>, such that <m>\sigma^{-1}\sigma = e_A = \sigma\sigma^{-1}.</m>
+                        Suppose <m>\rho,\sigma,\tau\in S_A</m> such that <m>\rho\sigma=e_A=\sigma\rho</m> and <m>\tau\sigma=e_A=\sigma\tau</m>. Then <m>\rho=\tau</m>.
                     </p>
                 </statement>
+                <proof>
+                    If <m>\rho</m>, <m>\sigma</m>, and <m>\tau</m> are as hypothesized, then
+                    <me>
+                        \rho = \rho e_A = \rho(\sigma \tau) = (\rho\sigma)\tau) = e_A\tau = \tau.
+                    </me>
+                </proof>
             </theorem>
 
             <p>
@@ -333,6 +348,7 @@
         <subsubsection xml:id="subsub-perms-def-groups-absalg">
             <title>Abstract algebra and permutation groups</title>
             <definition xml:id="def-group">
+                <title>Groups</title>
                 <statement>
                     <p>
                         A <term>group</term> <m>(G,*)</m> is a set <m>G</m> along with a closed associative operation <m>*</m> which has an identity element <m>e_G</m> and for which each element <m>g\in G</m> has a unique inverse <m>g^{-1}\in G</m>.
@@ -405,7 +421,7 @@
             </statement>
         </definition>
         <p>
-            An interesting result of the definition of cycles is that every <m>1</m>-cycle is equivalent to the identity: if <m>a\in[n]</m> and <m>\alpha=(a)</m>, then <m>\supp{\alpha} = \emptyset</m>, so <m>\fix{\alpha}=[n]</m> and <m>\alpha=e.</m> For this reason it is common to write the identity in <m>\sym{n}</m> as <m>(1)</m>.
+            An interesting result of the definition of cycles is that every <m>1</m>-cycle is equivalent to the identity: if <m>a\in[n]</m> and <m>\alpha=(a)</m>, then <m>\supp{\alpha} = \emptyset</m>, so <m>\fix{\alpha}=[n]</m> and <m>\alpha=e</m>. For this reason it is common to write the identity in <m>\sym{n}</m> as <m>(1)</m>.
         </p>
         <exercise xml:id="exc-perms-support">
             <title>Behavior of permutation supports</title>
@@ -417,6 +433,7 @@
             </solution>
         </exercise>
         <definition xml:id="def-disjoint-cycles">
+            <title>Disjoint cycles</title>
             <statement>
                 <p>
                     Two cycles <m>\alpha</m> and <m>\beta</m> are <term>disjoint</term> if and only if <m>\supp{\alpha}\cap\supp{\beta} = \emptyset.</m>
@@ -427,6 +444,7 @@
             While it is not true in the general case, one of the important reasons we consider cyclic permutations is that disjoint cycles commute.
         </p>
         <lemma xml:id="lem-disjoint-cycles-commute">
+            <title>Disjoint cyclic permutations commute</title>
             <statement>
                 <p>
                     Let <m>n\in\Zp</m>. If <m>\alpha</m> and <m>\beta</m> are disjoint cycles in <m>S_n</m>, then <m>\alpha\beta=\beta\alpha</m>.

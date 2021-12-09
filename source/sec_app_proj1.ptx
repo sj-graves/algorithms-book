@@ -1,0 +1,396 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<section xml:id="sec-app-proj1" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Familiarity with Python</title>
+    <p>
+                As a gentle introduction to working with Python, we will implement a teaching algorithm called <term>Kid RSA</term>. The Kid RSA algorithm serves as a teaching introduction to the idea of public key cryptography, which will be investigated further in <xref provisional="ch-crypto" title="text"/>. It is important that you complete each Checkpoint exercise in order.
+    </p>
+    <objectives>
+        <ol>
+            <li><p>
+                Create properly named and properly formatted files in <xref ref="app-proj1-files"/>
+                </p></li>
+            <li><p>
+                Calculate your Kid RSA keypair in <xref ref="app-proj1-calculator" />
+                </p></li>
+        </ol>
+    </objectives>
+    <exercise xml:id="app-proj1-files">
+        <title>Create your project files</title>
+        <task>
+            <p>
+                Using IDLE, create a blank Python module file named <c>aam_proj1.py</c> in an easy-to-find folder on your computer. This will eventually be submitted via Canvas or some other digital method for grading.
+            </p>
+        </task>
+        <task>
+            <p>
+                As header information, every submitted project file should begin with a block of comments. Your header should look like the following example, with the information changed to reflect your information and situation.
+            </p>
+            <listing xml:id="list-projfile-header">
+                <caption>A sample header for Math 3380 Project Files</caption>
+                <program language="python">
+                    <input>
+                        # Math 3380 Project 1
+                        # Filename: aam_proj1.py
+                        #
+                        # Name: Frodo Baggins
+                        # Date: 25 March, T.A. 3019
+                        #
+                    </input>
+                </program>
+            </listing>
+            <p>
+                All files submitted for these projects should have a similar header.
+            </p>
+        </task>
+    </exercise>
+    <p>
+        Public key cryptography first requires the generation of a <term>keypair</term>, consisting of a <term>public key</term> and a <term>private key</term>.
+    </p>
+    <algorithm xml:id="alg-kidrsa">
+        <title>Kid RSA Key Generation</title>
+        <statement>
+            <p>
+                Let <m>a, b, a', b'\in\Zp</m> be arbitrary positive integers. Calculate the following:
+                <md>
+                    <mrow>  M \amp = a b-1</mrow>
+                    <mrow>  e \amp = a'M + a</mrow>
+                    <mrow>  d \amp = b'M + b</mrow>
+                    <mrow>  n \amp = (ed-1)/M </mrow>
+                    <mrow> \amp = a'b'M+ab'+a'b+1</mrow>
+                </md>
+                Then the public key is the ordered pair <m>(n,e)</m> and the private key is the ordered pair <m>(n,d)</m>.
+                </p>
+        </statement>
+    </algorithm>
+    <p>
+        Now use the algorithm to generate your own Kid RSA keypair.
+    </p>
+    <exercise xml:id="app-proj1-calculator">
+        <title>Using Python as a simple calculator</title>
+        <task>
+            <p>
+                In the file created in <xref ref="app-proj1-files"/>, declare values for <c>a</c>, <c>b</c>, <c>a_prime</c>, and <c>b_prime</c>. The variable names in Python cannot include the prime symbol, hence the change of name.
+            </p>
+            <p>
+                Make sure you include <term>comments</term> in your code explaining what you're doing. Comments are lines (or ends of lines) which begin with the symbol called either <q>pound</q> or <q>hash</q>, specifically <c>#</c>.
+            </p>
+        </task>
+        <task>
+            <p>
+                Calculate the values of <c>M</c>, <c>e</c>, <c>d</c>, and <c>n</c> from <c>a</c>, <c>b</c>, <c>a_prime</c>, and <c>b_prime</c> using Python, as explained in <xref ref="alg-kidrsa" text="title" />. Make sure your program displays the public and private key using statements such as <c>print(f"Public key: {(n,e)}")</c>.
+            </p>
+        </task>
+        <task>
+            <p>
+                Prove mathematically that there is a value <m>k\in\Ints</m> such that <m>ed = nk+1</m>, and verify that your code works by printing the result of <c>(e * d) % n</c>.
+            </p>
+        </task>
+    </exercise>
+    <p>
+        The fundamental idea behind public key cryptography is that given a public key it should be easy to mathematically compute the encrypted version of a message. However, without the private key it should ideally be impossible to compute the original message from the encrypted version. Unfortunately this is precisely why the Kid RSA algorithm is suitable only for teaching purposes: it is very easy to produce the private key <m>d</m> with a little arithmetic from the numbers <m>n</m> and <m>e</m> in the public key.
+    </p>
+    <axiom xml:id="axiom-division-algorithm">
+        <title>The Division Algorithm</title>
+        <statement>
+            <p>
+                Given <m>a,b\in\Ints</m> with <m>b>0</m>, there is a unique pair <m>q,r\in\Ints</m> with <m>0\leq r \lt b</m> such that <m>a = bq+r</m>. The number <m>q</m> is the <term>integer quotient</term> of <m>a</m> divided by <m>b</m>, while <m>r</m> is the <term>remainder</term>.
+            </p>
+
+        </statement>
+    </axiom>
+    <p>
+        We can denote the quotient by
+        <me>q = \floor{a/b} = \max\set{k\in\Ints:bk \leq a}</me>, but there is no notation for the remainder which is universally agreed upon by mathematicians.
+    </p>
+    <technology xml:id="tech-divmod">
+        <title>Python <c>divmod</c> built-in function</title>
+        <p>
+            To compute the quotient and remainder of integer division separately, use <c>//</c> and <c>%</c>; to compute the tuple of the quotient and remainder simultaneously, use <c>divmod</c>.
+        </p>
+        <listing xml:id="list-divmod-example">
+            <caption>An example demonstrating the use of <c>divmod(...)</c> in Python</caption>
+            <program language='python'>
+                <input>
+                    a, b = 8675309, 512
+                    q, r = divmod(a, b)
+                    print(a == b*q+r)
+                </input>
+            </program>
+        </listing>
+    </technology>
+    <definition xml:id="def-divides">
+        <title>Division</title>
+        <statement>
+            <p>
+                If <m>a,b\in\Ints</m>, we say that <m>b</m> <term>divides</term> <m>a</m> and write <m>b\divides a</m> if and only if there is <m>q\in\Ints</m> such that <m>a=bq</m>. That is to say, the remainder when <m>a</m> is divided by <m>b</m> is zero.
+            </p>
+        </statement>
+    </definition>
+
+    <definition xml:id="def-kidrsa-function">
+        <title>Kid RSA encryption/decryption function</title>
+        <statement>
+            Let <m>(n,e)</m> and <m>(n,d)</m> respectively be the public and private keys generated by the Kid RSA key generation algorithm. Suppose <m>x\in\Nats</m>, then let <m>q_e,r_e,q_d,r_d\in\Ints</m> be the unique results of the Division Algorithm such that
+            <md>
+                <mrow>
+                    n \amp = (x\cdot e)\cdot q_e + r_e
+                </mrow>
+                <mrow>
+                    n \amp = (x\cdot d)\cdot q_d + r_d
+                </mrow>
+            </md>. Then the functions <m>f_{n,e}(x) = r_e</m> and <m>g_{n,d}(x) = r_d</m> are respectively the encryption and decryption functions for Kid RSA.
+        </statement>
+    </definition>
+    <exercise xml:id="exc-encoding-characters">
+        <title>Encoding strings into lists of integers</title>
+        <statement>
+            <p>
+                 Encryption was used historically by military commanders seeking to send orders to remote troops, so permutation-based encryption on the letters of the alphabet was the ideal method of encryption. The invention of computers changed that by making it much more feasible to apply brute-force solutions to code breaking. Now that we use digital encryption it is necessary to convert the messages we want to send from strings of characters to lists of integers in order to perform mathematical functions on those integers.
+            </p>
+            <p>
+                In Python, the paired commands <c>ord</c> and <c>chr</c> convert characters to integers and back.
+            </p>
+            <listing xml:id='list-ord_chr'>
+                <caption>An example using the Python <c>ord</c> command</caption>
+                <program language='python'>
+                    <input>
+                        out = [ ]
+                        for c in "Hello world!":
+                            out.append( ord(c) )
+                        print(out)
+                        for k in out:
+                            print( f"chr({k:>3}) -> {chr(k)}")
+                    </input>
+                </program>
+            </listing>
+            <p>
+                Every printable (or type-able) character has an <term>ordinal</term>, which is what is returned by <c>ord</c>; the valid ordinals each map to a character, but not every <c>int</c> is valid input for <c>chr</c>. The valid input range of <c>chr</c> is all values in <c>range(0x110000)</c>; in turn, <c>0x110000</c> is the hexadecimal (base-16) number with base-10 value 1114112.
+            </p>
+            <task>
+                <p>
+                    Find the ordinals of the letters <c>A</c> and <c>a</c>
+                </p>
+            </task>
+            <task>
+                <p>
+                    Use ordinals along with a <c>range(26)</c> to print the capital and miniscule letters, in the format <c>Aa</c> through <c>Zz</c>.
+                </p>
+            </task>
+            <p>
+                To make a notational distinction, we will separate the ideas of <term>encoding</term> and <term>encrypting</term>. Encoding is the process by which a natural written language is transferred into a different symbol set, usually for the purpose of transmission.
+            </p>
+            <task>
+                <p>
+                    Fill in the remainder of the following code to produce a working program which takes a string as input and returns the list of ordinals of the characters in the string.
+                </p>
+                <sidebyside>
+                    <program language='python'>
+                        <input>
+                            def encode(input_string):
+                                out = [ ]
+                                for c in input_string:
+                                    #
+                                    # Fill in your code here
+                                    #
+                                return out
+                        </input>
+                    </program>
+                </sidebyside>
+            </task>
+            <task>
+                <p>
+                    Fill in the remainder of the following code to produce a working program which takes a list of integers output by the <c>ord</c> command and returns a string of the characters with those ordinals.
+                </p>
+                <sidebyside>
+                    <program language='python'>
+                        <input>
+                            def decode(input_list):
+                                out = ""
+                                for x in input_list:
+                                    #
+                                    # Fill in your code here
+                                    #
+                                return out
+                        </input>
+                    </program>
+                </sidebyside>
+            </task>
+        </statement>
+    </exercise>
+
+
+    <definition xml:id="def-gcd">
+        <title>Greatest Common Divisor</title>
+        <statement>
+            <p>
+                Suppose <m>a,b\in\Ints</m>. Then <m>k</m> is a <term>common divisor</term> of <m>a</m> and <m>b</m> if and only if <m>k\divides a</m> and <m>k\divides b</m>. The integer <m>\gcd(a,b)</m> is the <term>greatest common divisor</term> of <m>a</m> and <m>b</m>, given by <me>\gcd(a,b) = \max\set{k\in\Ints:k\divides a\text{ and }k\divides b}</me>.
+            </p>
+        </statement>
+    </definition>
+    <p>
+        Equipped with these definitions, we can prove an important early result from number theory.
+    </p>
+    <theorem xml:id="thm-gcd-of-remainders">
+        <title>Greatest common divisors with remainders</title>
+        <statement>
+            <p>
+                Let <m>a,b\in\Ints</m> with <m>b > 0</m>, and let <m>q,r\in\Ints</m> with <m>0\leq r\lt b</m> be the result of the Division Algorithm; namely, suppose <m>a = bq+r</m>. Then <m>\gcd(a,b) = \gcd(b,r)</m>.
+            </p>
+        </statement>
+        <proof>
+            <p>
+                Let <m>a</m>, <m>b</m>, <m>q</m>, and <m>r</m> be as hypothesized, and let <m>g=\gcd(a,b)</m>. Then <m>g\divides a</m> and <m>g\divides b</m>, so there are <m>k,\ell\in\Ints</m> such that <m>a=gk</m> and <m>b=g\ell</m>. But then since <me>r=a-bq = gk-(g\ell)q = g(k-\ell q)</me>, we have that <m>g</m> divides <m>r</m> as well. So <m>g</m> is a common divisor of <m>b</m> and <m>r</m>.
+            </p>
+            <p>
+                Now assume that there is a common divisor <m>h</m> of <m>b</m> and <m>r</m> satisfying <m>g\lt h</m>. Then there are other integers <m>k',\ell'</m> such that <m>hk' = b</m> and <m>h\ell' = r</m>. But then <me>a = bq+r = (hk')q+h\ell' = h(k'q + \ell')</me>, making <m>h</m> a divisor of <m>a</m> as well; This contradicts our choice that <m>g</m> was the greatest common divisor of <m>a</m> and <m>b</m>, and hence we see <m>g = \gcd(b,r)</m>.
+            </p>
+        </proof>
+    </theorem>
+    <p>
+        If we repeatedly apply this theorem to a pair of integers and the successive results of the division algorithm, the final nonzero remainder must actually be the greatest common divisor of the two initial integers!
+    </p>
+    <algorithm xml:id="algo-euclid-gcd">
+        <title>Euclid's Algorithm</title>
+        <statement>
+            <p>
+                Let <m>a,b\in\Zp</m> be given. By repeatedly applying <xref ref="axiom-division-algorithm" text="title" /> to the pair <m>a,b</m>, produce the sequences <m>(q_1,q_2,\dotsc,q_k)</m> and <m>(r_1,r_2,\dotsc,r_k)</m> where <m>r_k=0</m>, such that
+                <md>
+                    <mrow> a   \amp= b \cdot q_1 + r_1</mrow>
+                    <mrow> b   \amp= r_1 \cdot q_2 + r_2</mrow>
+                    <mrow> r_1 \amp= r_2 \cdot q_3 + r_3</mrow>
+                    <intertext>and so on until</intertext>
+                    <mrow> r_{k-3} \amp= r_{k-2} \cdot q_{k-1} + r_{k-1}</mrow>
+                    <mrow> r_{k-2} \amp= r_{k-1} \cdot q_k + r_k </mrow>
+                    <mrow> &amp;= r_{k-1}\cdot q_k</mrow>
+                </md>. Then <m>\gcd(a,b) = r_{k-1}</m>.
+            </p>
+        </statement>
+        <proof>
+            By repeated application of <xref ref="thm-gcd-of-remainders" text="title"/> we know that <m>\gcd(a,b) = \gcd(r_{k-2},r_{k-1})</m>, but we also see that <m>r_{k-1}\divides{} r_{k-2}</m>, so the greatest common divisor of <m>r_{k-1}</m> and <m>r_{k-2}</m> is <m>r_{k-1}</m> itself.
+        </proof>
+    </algorithm>
+    <p>
+        We need another theorem if we want to develop a tool to break a keypair.
+    </p>
+    <theorem xml:id="thm-gcd-linear-comb">
+        <title>Greatest common divisor is a linear combination</title>
+        <statement>
+            <p>
+                Let <m>a,b\in\Zp</m>. Then there are <m>s,t\in\Ints</m> such that <m>sa+tb = \gcd(a,b)</m>.
+            </p>
+        </statement>
+        <proof>
+            <p>
+                The proof is actually an extension of <xref ref="algo-euclid-gcd" text='title' />. We will again apply the Division Algorithm, but at each step we will rewrite the equation to solve for the remainder. In the first iteration, we see the following: <me>a = b\cdot q_1 + r_1 \implies r_1 = a - q_1 b</me>. Hence we define <m>s_1 = 1</m> and <m>t_1 = -q_1</m>, so that <me>r_1 = s_1\cdot a + t_1\cdot b</me>.
+            </p>
+            <p>
+                In the second iteration, we find
+                <me>b = r_1\cdot q_2 + r_2 \implies r_2 = b-q_2\cdot r_1</me>, but we can replace <m>r_1</m> with the result of the previous iteration, giving
+                <md>
+                    <mrow>
+                        r_2 \amp = b-q_2 \cdot r_1
+                    </mrow>
+                    <mrow>
+                        \amp = b-q_2\left(s_1\cdot a + t_1\cdot b\right)
+                    </mrow>
+                    <mrow>
+                        \amp = \left(0-q_2s_1\right)\cdot a + \left(1-q_2 t_1\right)\cdot b
+                    </mrow>
+                    <mrow>
+                        \amp = s_2\cdot a + t_2\cdot b
+                    </mrow>
+                </md>
+            </p>
+            <p>
+                In order to see the pattern fully emerge, the third iteration consists of
+                <me>r_1 = r_2\cdot q_3 + r_3 \implies r_3 = r_1 - q_3\cdot r_2</me>, and we can again replace the <m>r_1</m> and <m>r_2</m> with the results of the previous two computations. Thus we obtain
+                <md>
+                    <mrow>
+                        r_3 \amp = r_1 - q_3\cdot r_2
+                    </mrow>
+                    <mrow>
+                        \amp = (s_1\cdot a + t_1\cdot b) - q_3(s_2\cdot a + t_2\cdot b)
+                    </mrow>
+                    <mrow>
+                        \amp = (s_1-q_3s_2)\cdot a + (t_1-q_3 t_2)\cdot b
+                    </mrow>
+                    <mrow>
+                        \amp = s_3\cdot a + t_3\cdot b
+                    </mrow>
+                </md>.
+            </p>
+            <p>
+                We have established enough iterations to suggest recursive formulas
+                <me>
+                    s_n = s_{n-2} + q_n s_{n-1}\text{ and }
+                    t_n = t_{n-2} + q_n t_{n-1}
+                </me> for <m>n\geq 3</m>, where
+                <md>
+                    <mrow>
+                        s_1 \amp= 1, \amp s_2\amp = -q_2s_1,\amp t_1\amp= -q_1\amp t_2\amp = 1-q_2t_1
+                    </mrow>
+                </md>. But then there is <m>k\in\Zp</m> such that <m>\gcd(a,b) = r_{k-1} = s_{k-1}a + t_{k-1}b</m>.
+            </p>
+        </proof>
+    </theorem>
+    <p>
+        To apply this theorem to breaking the Kid RSA algorithm, we write a simple algorithm to extend Euclid's Algorithm and keep track of the list of computed values of <m>t_k</m> on each iteration. The values of <m>s_k</m> are unnecessary in our particular application of computing a reciprocal modulo n
+    </p>
+    <algorithm xml:id="algo-euclid-gcd-inverses">
+        <title>Euclid's Algorithm Extended</title>
+        <statement>
+            <p>
+                Let <m>\alpha, \beta \in \Zp</m> be given with <m>\alpha\gt \beta</m>. Define the following initial conditions:
+                <md>
+                    <mrow>
+                        \amp\amp\amp\amp
+                        s_0 \amp= 1 \amp
+                        t_0 \amp= 0
+                    </mrow>
+                    <mrow>
+                        a_1 \amp= \alpha \amp
+                        b_1 \amp= \beta \amp
+                        s_1 \amp= 0 \amp
+                        t_1 \amp= 1
+                    </mrow>
+                </md>
+                For each <m>k \geq 1</m>, do the following:
+                <ol>
+                    <li><p>
+                        Compute <m>q_k, r_k</m> by <xref ref="axiom-division-algorithm" text="title" /> such that <m>a_k = b_k\cdot q_k + r_k</m>.
+                        </p></li>
+                    <li><p>
+                        If <m>r_k\neq 0</m>, then:
+                        <ol>
+                            <li><p>
+                                Compute <m>t_k = t_{k-2} - q_k\cdot t_{k-1}</m>.
+                                </p></li>
+                            <li><p>
+                                Let <m>a_{k+1} = b_k</m> and <m>b_{k+1} = r_k</m>.
+                                </p></li>
+                        </ol>
+                        </p></li>
+                    <li><p>
+                        On the other hand, when <m>r_k = 0</m>, then do the following:
+                        <ol>
+                            <li><p>
+                                The value <m>r_{k-1}</m> is the last nonzero remainder, so <m>\gcd(\alpha,\beta) = r_{k-1}</m>.
+                                </p></li>
+                            <li><p>
+                                If <m>r_{k-1} = 1</m>, then <m>\beta\cdot t_{k-1} = 1\pmod{\alpha}</m>.
+                                </p></li>
+                        </ol>
+                        </p></li>
+                </ol>
+            </p>
+        </statement>
+    </algorithm>
+  <!--
+  <xi:include href=".subsec-emp-intro.ptx" />
+  <xi:include href=".subsec-emp-next.ptx" />
+  <xi:include href=".subsec-emp-conc.ptx" />
+  -->
+
+</section>
+

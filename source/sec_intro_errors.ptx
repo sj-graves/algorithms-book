@@ -1,0 +1,260 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<section xml:id="sec-intro-errors" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Errors and exception handling</title>
+    <introduction>
+        There's only one way for a program to run correctly, but so many different ways errors can appear. Some errors are easy to diagnose and fix and others can ruin whole days trying to pin down. Errors in programming fall broadly into two classes: exceptions and bugs.
+    </introduction>
+    <subsection xml:id="sub-intro-errors-exceptions">
+        <title>Exceptions</title>
+        <p>
+            Exceptions are those errors which (left untreated) stop the execution of code abruptly. On the scale of all possible errors, this is clearly worse than <em>executes flawlessly</em>, but not much. In Python an <c>Exception</c> is a special data type which is used for all sorts of regularly-occurring programming errors. The following are some of the more common exceptions which arise when working with Python, in no particular order.
+        </p>
+        <technology xml:id="tech-syntaxerror">
+            <title>Syntax Error</title>
+                <p>A Python <c>SyntaxError</c> is the programming equivalent of a grammatically incorrect sentence, where you've written something which violates the basic rules of the Python language. Python will show you in the <term>error message</term> exactly where your Syntax error occurs. Here's an example:
+            </p>
+            <listing xml:id="list-syntaxerror">
+                <caption>An example which will produce a <c>SyntaxError</c></caption>
+                <console>
+                    <prompt>>>> </prompt>
+                    <input>
+                        foo = "This is a test"
+                    </input>
+                    <prompt>>>> </prompt>
+                    <input>
+                        bar =
+                    </input>
+                    <output>
+                        SyntaxError: invalid syntax
+                    </output>
+                </console>
+            </listing>
+        </technology>
+
+        <technology xml:id="tech-indexerror">
+            <title>Index errors</title>
+            <p>
+                An <c>IndexError</c> is raised when you try to access an index of a container with <q>regular</q> indexing (like lists, tuples, and strings, but not dictionaries) but outside the bounds of the valid indices.
+            </p>
+            <listing xml:id="list-indexerror">
+                <caption>An example which will produce a <c>IndexError</c></caption>
+                <console>
+                    <prompt>>>> </prompt>
+                    <input>
+                        foo = "this is a string"
+                    </input>
+                    <prompt>>>> </prompt>
+                    <input>
+                        bar = len(foo) + 5
+                    </input>
+                    <prompt>>>> </prompt>
+                    <input>
+                        foo[bar]
+                    </input>
+                    <output>
+                        Traceback (most recent call last):
+                          File "&lt;pyshell#8&gt;", line 1, in &lt;module&gt;
+                            foo[bar]
+                        IndexError: string index out of range
+                    </output>
+                </console>
+            </listing>
+        </technology>
+
+        <technology xml:id="tech-keyerror">
+            <title>Key errors</title>
+            <p>
+                The <c>KeyError</c> is closely related to the <c>IndexError</c>, but for dictionaries! If a key is attempted to be referenced which has not been declared to have a value, a <c>KeyError</c> will result.
+            </p>
+            <listing xml:id="list-keyerror">
+                <caption>An example which will produce a <c>KeyError</c></caption>
+                <console language="python">
+                    <prompt>>>> </prompt>
+                    <input>
+                        foo = {'bob':[1, 'the shrimp'], (2,3): (1,2,3,'the pineapple')}
+                    </input>
+                    <prompt>>>> </prompt>
+                    <input>
+                        print( list( foo.keys() ) )
+                    </input>
+                    <output>
+                        ['bob', (2, 3)]
+                    </output>
+                    <prompt>>>> </prompt>
+                    <input>
+                        print( foo['bar'] )
+                    </input>
+                    <output>
+                        Traceback (most recent call last):
+                          File "&lt;pyshell#3&gt;", line 1, in &lt;module&gt;
+                            print( foo['bar'] )
+                        KeyError: 'bar'
+                    </output>
+                </console>
+            </listing>
+        </technology>
+        <technology xml:id="tech-typeerror">
+            <title>Type errors</title>
+            <statement>
+                <p>
+                    Another very common error is the <c>TypeError</c>, which is raised whenever the data type of a variable used in a computation is unexpected by the function being called. For instance, many mathematical functions expect numerical input, but the Python interpreter won't know the error exists until it attempts to execute the expression.
+                </p>
+                <listing xml:id="list-typeerror">
+                    <caption>An example which will produce a <c>TypeError</c></caption>
+                    <console>
+                        <prompt>>>> </prompt>
+                        <input>
+                            "This is a string"/2
+                        </input>
+                        <output>
+                            Traceback (most recent call last)
+                              File "&lt;stdin>", line 1, in &lt;module>
+                            TypeError: unsupported operand type(s) for /: 'str' and 'int'
+                        </output>
+                    </console>
+                </listing>
+            </statement>
+        </technology>
+        <conclusion>
+            <p>
+                There are many other types of errors which will be encountered as you try to write codes, too many to describe. Other common exceptions you might see are <c>ValueError</c>, <c>AttributeError</c>, <c>DivideByZeroError</c>, and one which I use frequently as a control mechanism, <c>RuntimeError</c>. In most cases, the well written code underlying whatever you are attempting involves a <c>raise</c> command, the method by which an exception is generally triggered. A notable exception to this is the <c>KeyboardInterrupt</c>, which us useful to remember: it is triggered by pressign <c>Ctrl-C</c> on your keyboard while a program is running in Python.
+            </p>
+        </conclusion>
+    </subsection>
+    <subsection xml:id="sub-intro-errors-handling">
+        <title>Handling exceptions</title>
+        <p>
+            There is a school of engineering design called by many names which expresses the belief that <q>a system should only fail into a known state</q> or that <q>a system that fails should do so securely.</q> Applied to programming this idea is expressed in <term>exception handling</term> where  violations of the logic of a program are anticipated and treated before they occur. As we should perhaps expect, Python implements this with a block data structure, the <c>try:... except:...</c> block.
+        </p>
+        <technology xml:id="tech-try-except">
+            <title>Python exception handling</title>
+            <statement>
+                <p>
+                    Any exception generated in the indented block following a <c>try:</c> command will attempt to be caught by one of a sequence of <c>except ... :</c> blocks which follow. As only one exception is generated at a time, this behaves as an <c>if:... elif:...</c> sequence; for instance, if one of the blocks begins with <c>except RuntimeError as error_message:</c>, then that block will only be executed when the body of the <c>try:</c> block raises a <c>RuntimeError(...)</c>; the optional argument to the error is named <c>error_message</c> within this <c>except</c> block.
+                </p>
+                <p>
+                    These exceptions are usually triggered by a <c>raise</c> command. Here is a meaningless example demonstrating the use of the structure.
+                </p>
+                <listing>
+                    <caption>An example of a <c>try:... except:... </c> block</caption>
+                    <program language="python">
+                        <input>
+                            n = 1
+                            try:
+                                if n==1:
+                                    raise RuntimeError('First error')
+                                elif n==2:
+                                    raise ValueError('Second error')
+                                else:
+                                    raise TypeError('Third error')
+                            except RuntimeError as error_message:
+                                print "We have encountered a RuntimeError, specifically {0}".format(error_message)
+                                pass
+                            except:
+                                print "All errors but RuntimeErrors are caught here!"
+                                pass
+                            print "The program now exits cleanly."
+                        </input>
+                    </program>
+                </listing>
+            </statement>
+        </technology>
+        <p>
+            The code listing in <xref ref="tech-try-except" /> is intentionally stupid. The code doesn't actually do anything except demonstrate the <c>try:... except:...</c> block structure.
+        </p>
+        <exercise xml:id="exc-memoization">
+            <title>Memo-ization</title>
+            <statement>
+                <p>
+                    A cool use of dictionaries and the <c>try:... except:...</c> block is called <term>memo-ization</term>, although it is usually written without the hyphen. Consider the following implementation of the Collatz sequence.
+                </p>
+                <listing xml:id="list-memoized-collatz">
+                    <caption>An implementation of the Collatz sequence problem using a dictionary to store previously-computed resluts.</caption>
+                    <program language="python">
+                        <input>
+                            coll_mem = {1:[1], 2:[2,1], 4:[4,2,1]}
+                            def memoized_coll(x):
+                                try:
+                                    return coll_mem[x]
+                                except KeyError:
+                                    if not type(x)==int or x&lt;1:
+                                        return None
+                                    elif x%2==0:
+                                        next_val = x//2
+                                    else:
+                                        next_val = 3 * x + 1
+                                    coll_mem[x] = [x] + memoized_coll(next_val)
+                                    return coll_mem[x]
+                        </input>
+                    </program>
+                </listing>
+                <p>
+                    Picking apart the code, we see that first it sets up a dictionary of known values. Then when asked to produce the Collatz sequence from a given input, the function tries to return the value stored in that key of the dictionary. If no such key exists, a <c>KeyError</c> is generated; when that happens, the program falls back on the <m>3x+1</m> form of generating the sequence.
+                </p>
+                <p>
+                    Suppose this task is iterated over all integers up to some given value; that is, <m>x=1,2,3,\dotsc</m> are checked. For a given input value <m>x</m>, when will the memoized version of the function always have the key stored in the dictionary? What has to happen to the <c>next_val</c> in the sequence for this to be the case?
+                </p>
+            </statement>
+        </exercise>
+        <remark xml:id="rem-recursion">
+            <title>Recursively-defined functions</title>
+            <statement>
+                <p>
+                    A function like <c>memoized_coll</c> in <xref ref="exc-memoization" /> which refers to itself is a <term>recursive</term> function. Typically the first recursively-defined function seen by students is the function which defines the <term>Fibonacci sequence</term>, <m>F_{n+2} = F_{n+1} + F_n</m> for <m>n\in\Nats</m> when <m>F_0 = F_1 = 1</m>.
+                </p>
+            </statement>
+        </remark>
+    </subsection>
+    <subsection xml:id="sub-intro-errors-flow">
+        <title>Controlling the flow of a program</title>
+        <p>
+            Generating errors via the <c>raise</c> command is an extremely powerful way to disrupt the flow of a program. A <c>raise</c> statement outside of a <c>try:... except:...</c> block will halt the program, so they are to be used sparingly. Two other statements which modify the flow of a program in an abrupt way are <c>continue</c> and <c>break</c>.
+        </p>
+        <technology xml:id="tech-continue">
+            <title>Python <c>continue</c> statements</title>
+            <statement>
+                <p>
+                    When <c>continue</c> is encountered during the execution of a loop, the current step of the loop immediately completes and the loop condition is reevaluated, moving to the next object in a <c>for</c> loop or retesting the conditional of a <c>while</c> loop.
+                </p>
+                <p>
+                    This is particularly useful in cases where the code must handle cases for the loop which do nothing, or are exempt from the behavior encoded in the block structure of the loop, but that do not halt the execution of the loop.
+                </p>
+            </statement>
+        </technology>
+        <technology xml:id="tech-break">
+            <title>Python <c>break</c> statements</title>
+            <statement>
+                <p>
+                    When <c>break</c> is encountered in the execution of a loop, the loop immediately terminates and the program continues past the looping block structure. Unlike with a <c>continue</c> statement, any further elements over which a <c>for</c> loop was programmed to iterate are skipped.
+                </p>
+            </statement>
+        </technology>
+    </subsection>
+    <subsection xml:id="sub-intro-errors-bugs">
+        <title>Semantic errors, or bugs</title>
+        <p>
+            When left unhandled, exceptions halt the flow of the program, which may be undesirable but at least allows the programmer to detect that an error has occurred with great ease. On the other hand, <term>semantic errors</term> are discreet.
+        </p>
+        <def xml:id="def-semantic-error">
+            <title>Semantic errors are bugs</title>
+            <statement>
+                A <term>semantic error</term> or <term>bug</term> occurs when a program appears to work, but produces a result other than what was expected. This can occur either due to an error in the algorithm or an error in the implementation of the algorithm.
+            </statement>
+        </def>
+        <p>
+            Bugs are called semantic errors because they do not violate the syntactic rules of the language, but rather are syntactically valid but semantically meaningless. The following English sentence is likewise grammatically well-formed but semantically meaningless:
+        </p>
+        <blockquote>
+            <p>
+                Colorless green ideas sleep furiously.
+            </p>
+            <attribution>
+                Noam Chomsky, Syntactic Structures, 1957
+            </attribution>
+        </blockquote>
+        <p>
+            Semantic errors are sometiems difficult to remedy; one strategy is to simulate the execution of a code by hand, writing down all of the state changes of variables as they occur to see when the error actually arises. Many programming IDEs include automatic debuggers which assist with this, allowing for more complicated problems to be remedied. For a discussion on why software errors are called bugs, see <url href="https://en.wikipedia.org/wiki/Debugging#Etymology">Wikipedia.</url>
+        </p>
+    </subsection>
+</section>

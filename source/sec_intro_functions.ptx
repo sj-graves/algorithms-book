@@ -6,7 +6,7 @@
             We already have a good, useable definition of functions in <xref ref="def-math-function" />. That definition still actually holds for programming functions.
         </p>
         <definition xml:id="def-function">
-            <title>Function</title>
+            <title>Programming function</title>
             <statement>
                 <p>
                     Also called a <term>subroutine</term>, a <term>function</term> in computer programming is a sequence of program instructions encapsulated into a unit which can be references elsewhere in a program.
@@ -23,11 +23,13 @@
             As hinted by the title of this subsection, the command in Python which allows functions to be defined is <c>def</c>.
         </p>
         <technology xml:id="tech-def">
+            <title>Defining functions with <c>def</c></title>
             <statement>
                 <p>
                     In order to define a function in Python, we use the <c>def</c> block structure as follows:
                 </p>
-                <sidebyside>
+                <listing>
+                    <caption>An example of using a <c>def</c> block structure</caption>
                     <program language="python">
                         <input>
                             def my_func(arg1, arg2, arg3=default_val):
@@ -42,7 +44,7 @@
                                 return arg1
                         </input>
                     </program>
-                </sidebyside>
+                </listing>
                 <p>
                     The expression <c>my_func</c> is the name of the function, the values <c>arg1</c>, <c>arg2</c>, and <c>arg3</c> are <term>arguments</term> to the function, and <c>arg3=default_val</c> indicates that the third argument is <term>optional</term> as a <term>default value</term> is provided. Whatever follows the <c>return</c> statement, or is passed to the <c>return</c> statement in parentheses, is the value sent back to the <term>calling routine</term> where the function was invoked.
                 </p>

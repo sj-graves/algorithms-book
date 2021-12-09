@@ -284,9 +284,8 @@
     <p>Taking a look at what we actually did, we can explain our process in
     more detail so that for a bigger, more complicated problem (specifically
     one with a larger set of vertices or of edges) the solution could be
-    extended. In fact, we have just implemented a famous
-    <term>algorithm</term> , known as Kruskal's Algorithm.</p>
-    <definition xml:id="def-algorithm">
+    extended. In fact we have just implemented a famous result known as Kruskal's Algorithm.</p>
+    <definition xml:id="def-algorithm"><title>Algorithm</title>
       <statement>
         <p>An
         <term>algorithm</term> is a formal procedure for completing a

@@ -13,22 +13,22 @@
                 Investigate a problem from graph theory.
                 </p></li>
             <li><p>
-                Introducing IDLE
+                Introduce IDLE
                 </p></li>
             <li><p>
-                Working with basic data types
+                Work with basic data types
                 </p></li>
             <li><p>
-                Working with container data types
+                Work with container data types
                 </p></li>
             <li><p>
-                Iteration: repeating statements repeatedly
+                Learn to iterate by repeating statements repeatedly
                 </p></li>
             <li><p>
-                Defining functions in Python
+                Write interesting functions in Python
                 </p></li>
             <li><p>
-                Conditional statements
+                Handle errors when they arise
                 </p></li>
         </ol>
     </objectives>
@@ -42,6 +42,7 @@
     <xi:include href="./sec_intro_containers.ptx" />
     <xi:include href="./sec_intro_iteration.ptx" />
     <xi:include href="./sec_intro_functions.ptx" />
+    <xi:include href="./sec_intro_errors.ptx" />
     <!-- <xi:include href="./sec_firstch-examples.ptx" /> -->
 
     <!-- One or more of the sections of a chapter might be exercises-->

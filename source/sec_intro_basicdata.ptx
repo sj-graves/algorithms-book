@@ -293,8 +293,8 @@ NameError: name 'y' is not defined</output>
                             <input>be enclosed in three double quotes."""</input>
                             <output>'Alternately, they may\nbe enclosed in three double quotes.'</output>
                             <prompt>>>> </prompt>
-                            <input>'"Quotes, may be mixed," said he, "but I may not quote nor contract."'</input>
-                            <output>'"Quotes, may be mixed," said he, "but I may not quote nor contract."'</output>
+                            <input>'"Quotes may be mixed," said he, "but I may not quote nor contract."'</input>
+                            <output>'"Quotes may be mixed," said he, "but I may not quote nor contract."'</output>
                             <prompt>>>> </prompt>
                             <input>"They've been reversed here."</input>
                             <output>"They've been reversed here."</output>
@@ -307,7 +307,7 @@ NameError: name 'y' is not defined</output>
                         </console>
                     </listing>
                     <p>
-                        As can be seen above, Python <q>prefers</q> single quotes internally. Also the line break character is changed to <c>\n</c> for internal storage. This is called an <term>escape character</term>, and there are several: <c>\'</c>, <c>\"</c>, <c>\n</c>, <c>\t</c>, and <c>\\</c>, among them.
+                        As can be seen above, Python uses single quotes internally. Also the line break character is changed to <c>\n</c> for internal storage. This is called an <term>escape character</term>, and there are several: <c>\'</c>, <c>\"</c>, <c>\n</c>, <c>\t</c>, and <c>\\</c>, among them.
                     </p>
                     <p>
                         To see a <c>str</c> in its proper form, with all escape characters replaced with the correct output, we use the <c>print(...)</c> function, as shown above.
@@ -317,6 +317,86 @@ NameError: name 'y' is not defined</output>
             <p>
                 There are many other things one can do with strings, since the <c>str</c> class comes equipped with many interesting <term>attributes</term> and <term>methods</term>, but those topics are best saved for later.
             </p>
+            <technology xml:id="tech-formatted-strings">
+                <title>Formatted strings</title>
+                <statement>
+                    <p>
+                        The one additional feature of strings that can be used early and to great gain is the ability to modify strings for output based upon <term>string formatting</term>. There are several ways to do this:
+                    </p>
+                    <ul>
+                        <li><p><term><c>printf</c>-style String Formatting</term> is named after the <c>printf</c> command for the C/C++ programming languages. In this mode, certain percent-codes (such as <c>%s</c>, <c>%d</c>, and <c>%f</c>) can be included in a string and then replaced via the <c>%</c> operator.
+                            </p></li>
+                        <li><p>
+                            The <term>String Format Method</term> allows keywords enclosed in curly brackets (like <c>{keyword}</c>) to be replaced as arguments to the <c>str.format(...)</c> method.
+                            </p></li>
+                        <li><p>
+                            <term>Formatted string literals</term> allow a string to be defined similarly to the string format method, but using Python evaluation within the string.
+                            </p></li>
+                    </ul>
+                    <p>
+                        First see a demonstration of the <c>%</c> operator for strings.
+                    </p>
+                    <listing xml:id="list-string-mod">
+                        <caption>Changing a string using the <c>%</c> operator</caption>
+                        <console>
+                            <prompt>>>> </prompt>
+                            <input>print("""This %s contains several (%d) percent codes, </input>
+                            <prompt>... </prompt>
+                            <input>which are replaced (%f) by using the percent operator.</input>
+                            <prompt>... </prompt>
+                            <input>""" % ('string', 3, 3.15926535) )</input>
+                            <output>This string contains several (3) percent codes,
+        which are replaced (3.159265) by using the percent operator.
+
+        </output>
+                        </console>
+                    </listing>
+                    <p>
+                        Next consider an example of the use of the <c>str.format(...)</c> method.
+                    </p>
+                    <listing xml:id="list-string-dot-format">
+                        <caption>The <c>str.format</c> method</caption>
+                        <console>
+                            <prompt>>>> </prompt>
+                            <input>print("""A similar {a} which has {num} replacements.</input>
+                            <prompt>... </prompt>
+                            <input>Notice that the {lcb}...{rcb} keywords can be replaced</input>
+                            <prompt>... </prompt>
+                            <input>by any value whatsoever.""".format(a='StRiNg', num=7.31,</input>
+                            <prompt>... </prompt>
+                            <input>lcb="{", rcb="}") )</input>
+                            <output>
+                                A similar StRiNg which has 7.31 replacements.
+                                Notice that the {...} keywords can be replaced
+                                by any value whatsoever.
+                            </output>
+                        </console>
+                    </listing>
+                    <p>
+                        Finally, the method using <term>f-strings</term>.
+                    </p>
+                    <listing xml:id="list-fstring">
+                        <caption>Formatted string literals, called <term>fstrings</term></caption>
+                        <console>
+                            <prompt>>>> </prompt>
+                            <input>name = "Bob the Tomato"</input>
+                            <prompt>>>> </prompt>
+                            <input>multiplicity = 5</input>
+                            <prompt>>>> </prompt>
+                            <input>out = f"{name} can be copied {multiplicity} times: {multiplicity*name}"</input>
+                            <prompt>>>> </prompt>
+                            <input>name = "Larry the Cucumber"</input>
+                            <input>multiplicity = 2</input>
+                            <prompt>>>> </prompt>
+                            <input>print(out)</input>
+                            <output>Bob the Tomato can be copied 5 times: Bob the TomatoBob the TomatoBob the TomatoBob the TomatoBob the Tomato</output>
+                        </console>
+                    </listing>
+                    <p>
+                    Note in this last example that the value of the fstring <c>out</c> is not changed even when the values associated with the names used to construct <c>out</c> changed.
+                    </p>
+                </statement>
+            </technology>
         </subsubsection>
     </subsection>
 

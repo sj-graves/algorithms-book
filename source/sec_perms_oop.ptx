@@ -49,7 +49,7 @@
             </statement>
         </technology>
         <p>
-            Mathematicians love the class/object dichotomy, whether or not they know it: think about a proof which begins with the words, <q>let <m>p/q</m> be a rational number.</q> Once the statement is pronounced, there are so many truths implied about <m>p</m>, <m>q</m>, and <m>p/q</m>, all of which come just from knowing that <m>p/q\in\Rats</m>. All of that works because we recognize that the object named <m>p/q</m> is a particular instance of the class of things called rational numbers.
+            Mathematicians love the class/object organization, whether or not they know it: think about a proof which begins with the words, <q>let <m>p/q</m> be a rational number.</q> Once the statement is pronounced, there are so many truths implied about <m>p</m>, <m>q</m>, and <m>p/q</m>, all of which come just from knowing that <m>p/q\in\Rats</m>. All of that works because we recognize that the object named <m>p/q</m> is a particular instance of the class of things called rational numbers.
         </p>
         <definition xml:id="def-instantiation">
             <title>Instantiation</title>
@@ -82,7 +82,136 @@
                         </input>
                     </program>
                 </listing>
+                <p>
+                    After executing this <c>class</c> block containing a valid <c>__init__</c> method, all that is necessary to create a new <c>AlgoPerm</c> object is to assign the class to a name.
+                </p>
+                <listing xml:id="list-instantiating-AlgoPerm">
+                    <caption>Instantiation of a new <c>AlgoPerm</c></caption>
+                    <console>
+                        <prompt>>>> </prompt>
+                        <input>new_perm = AlgoPerm(some_domain, some_mapping)</input>
+                    </console>
+                </listing>
             </statement>
         </technology>
+        <convention xml:id="python-self">
+            <title>The <c>self</c> argument of a method</title>
+            <statement>
+                <p>
+                    The first argument to a method is always the object upon which the method is called, via the dot notation or any other process. It is good programming style to name this argument <c>self</c>, so almost all Python documentation assumes that <c>self</c> is the name assigned.
+                </p>
+            </statement>
+        </convention>
+        <p>
+            We have specified that the domain and the mapping are the two pieces of information necessary to specify a permutation, and that makes perfect sense. A permutation, after all, is a mapping <m>\sigma:A\to A</m>, so once we know the domain and how it is mapped we have everything necessary. The only thing left to do is use the <c>__init__</c> method to validate that the values passed into the arguments <c>domain</c> and <c>mapping</c> provide valid information to define a permutation!
+        </p>
+    </subsection>
+    <subsection xml:id="sub-perms-oop-inputvalidation">
+        <title>Input validation</title>
+        <p>
+            Input validation is required whenever there is a possibility that any user of code (including the original programmer) might make a mistake on using the code that renders the code incorrect. It takes some extra work to make sure that you have covered all the possible input cases and either correctly handled them or provided meaningful error messages. That said, there is a serious benefit to having performed a strong input validation on the <c>__init__</c> method of a class: now everything in the class is guaranteed to have the right form. You never need to wonder whether or not <c>self</c> is going to have the correct attributes and work correctly.
+        </p>
+        <p>
+            In order to begin a class of permutations, we first need a clear understanding of what we should consider to be valid input to a permutation. Once we can describe what data is necessary and sufficient to determine the permutation uniquely, we can construct an algorithm to determine whether input satisfies the criteria, and then implement the algorithm. We will restrict our investigation to permutations in <m>\sym{n}</m>.
+        </p>
+        <p>
+            If a list is to be used as the one-line notation for a permutation in <m>\sym{n}</m>, then the list must then be a rearrangement of the numbers <m>\set{1,2,\dotsc,n}</m>.
+        </p>
+        <fact xml:id="fact-list-is-permutation">
+            <statement>
+                A <c>list</c> named <c>in_list</c> represents the one-line notation of a permutation if and only if
+                <ol>
+                    <li><p>
+                        every element of <c>in_list</c> is an <c>int</c>
+                        </p></li>
+                    <li><p>
+                        the length of <c>in_list</c> is equal to the maximum element of <c>in_list</c>
+                        </p></li>
+                    <li><p>
+                        and the minimum element of <c>in_list</c> is 1.
+                        </p></li>
+                </ol>
+            </statement>
+        </fact>
+        <p>
+            This allows us to introduce three new tools.
+        </p>
+        <technology xml:id="tech-len">
+            <title>Python <c>len</c> built-in function</title>
+            <statement>
+                <p>
+                    The <c>len(arg1)</c> function in Python returns the length of its argument <c>arg1</c>, unless the object does not naturally have a length. For instance, <c>str</c>, <c>tuple</c>, and <c>list</c> objects all have a length but an <c>int</c> does not.
+                </p>
+                <listing xml:id="list-python-len">
+                    <caption>An example using the <c>len</c> function</caption>
+                    <console>
+                        <prompt>>>> </prompt>
+                        <input>
+                            len("This is a string")
+                        </input>
+                        <output>
+                            16
+                        </output>
+                    </console>
+                </listing>
+            </statement>
+        </technology>
+        <technology xml:id="tech-min-max">
+            <title>Python <c>min</c> and <c>max</c> built-in functions</title>
+            <statement>
+                <p>
+                    The <c>min</c> function can be used in two ways: if given a single iterable argument <c>arg1</c>, then <c>min(arg1)</c> returns the minimum element of <c>arg1</c>. Given two or more arguments, <c>min(arg1, arg2, ...)</c> returns the minimum argument.
+                </p>
+                <p>
+                    As should be obvious, <c>max</c> behaves in the corresponding manner but returns the maximum value.
+                </p>
+                <listing xml:id="list-min-max">
+                    <caption>An example using the <c>min</c> and <c>max</c> commands in Python</caption>
+                    <console>
+                        <prompt>>>> </prompt>
+                        <input>
+                            min("This is a string")
+                        </input>
+                        <output>
+                            ' '
+                        </output>
+                        <prompt>>>> </prompt>
+                        <input>
+                            max("Bob", "bob", "Larry")
+                        </input>
+                        <output>
+                            'bob'
+                        </output>
+                    </console>
+                </listing>
+            </statement>
+        </technology>
+        <p>
+            A natural representation of a permutation in Python is a dictionary. To validate a dictionary as the input of a permutation, we will use the <c>sorted</c> function.
+        </p>
+        <technology xml:id="tech-sorted">
+            <title>Python <c>sorted</c> built-in function</title>
+            <statement>
+                <p>
+                    Given an iterable argument <c>arg1</c>, the built-in function <c>sorted(arg1)</c> returns an increasing sorted list of the contents of <c>arg1</c>.
+                </p>
+                <listing xml:id="list-sorted">
+                    <caption>An example of the <c>sorted</c> built-in Python function</caption>
+                    <console>
+                        <prompt>>>> </prompt>
+                        <input>
+                            sorted("This is a string".split())
+                        </input>
+                        <output>
+                            ['This', 'a', 'is', 'string']
+                        </output>
+                    </console>
+                </listing>
+                <p>
+                    That example also contains a sneaky example of the <c>str.split()</c> method.
+                </p>
+            </statement>
+        </technology>
+
     </subsection>
 </section>

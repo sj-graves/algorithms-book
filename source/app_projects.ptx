@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<appendix xml:id="app-projects" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Weekly Projects</title>
+    <introduction>
+        <p>
+            The contents of this appendix are the projects intended for use as regular weekly assignments in teaching from this book.
+        </p>
+    </introduction>
+    <xi:include href="./sec_app_proj1.ptx" />
+<!--     <xi:include href=".sec-emp-next.ptx" /> -->
+<!--     <xi:include href=".sec-emp-conc.ptx" /> -->
+
+</appendix>
