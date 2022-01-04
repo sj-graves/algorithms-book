@@ -14,13 +14,24 @@
             </statement>
         </definition>
         <p>
-            This is a different way of thinking about the organization of data than what you may have previously experienced. As an example, you can consider the concept of <em>factorization</em> as a function or procedure which takes integers as inputs. In the OOP way of thinking, integers are a class of object, and factorization is an action that an integer can perform.
-        </p>
-        <p>
             Permutations provide an exceptional introduction to the topic of OOP since every permutation is an interesting object in its own right (as a group element) but also performs an action (as a function)! <em>For implementation purposes, we will only consider permutations with a finite domain.</em>
         </p>
+        <p>
+            A strong benefit to the OOP mode of thinking is that it eliminates much type checking: functions which act on an object in a specific class can be written under the assumption that the object is, in fact, a valid class member. For instance, if we want to determine the <term>disjoint cycle notation</term> for a permutation written in one-line notation, our cycle code doesn't need to check to see whether the one-line notation validly defines a permutation, since that is handled when new permutation objects are named.
+        </p>
+        <objectives>
+            <ol>
+                <li><p>
+                    Create properly named and properly formatted files in <xref ref="prj-perms-projfiles" /> and write the class definition and docstring.
+                    </p></li>
+                <li><p>
+                    Combine <xref ref="proj-perms-initmethod" />, <xref ref="proj-perms-validation" />, and <xref ref="proj-perms-attributes" /> to initialize an object of type <c>AlgoPerm</c>.
+                    </p></li>
+            </ol>
+        </objectives>
     </introduction>
-    <subsection xml:id="sec-perms-oop-classes">
+    <!--#############################################-->
+    <subsection xml:id="sec-perms-oop_classes">
         <title>Classes</title>
         <technology xml:id="tech-class">
             <title>The <c>class</c> command</title>
@@ -51,30 +62,76 @@
         <p>
             Mathematicians love the class/object organization, whether or not they know it: think about a proof which begins with the words, <q>let <m>p/q</m> be a rational number.</q> Once the statement is pronounced, there are so many truths implied about <m>p</m>, <m>q</m>, and <m>p/q</m>, all of which come just from knowing that <m>p/q\in\Rats</m>. All of that works because we recognize that the object named <m>p/q</m> is a particular instance of the class of things called rational numbers.
         </p>
+        <project xml:id="prj-perms-projfiles">
+            <title>Permutation project files</title>
+            <introduction>
+                In this project, we'll be working in tandem in two files, the first containing our Class definition and the second being our main execution file. We want to separate the two so that we can use our permutation class file later in other projects via the <c>import</c> command without generating a bunch of output relating to this current project.
+            </introduction>
+            <task>
+                <statement>
+                    Using IDLE, create a blank Python module file called <c>AlgoPerm.py</c> in the same easy-to-find folder on your computer as you used for <xref ref="prj-kidrsa-files" text="title"/>. The header information should have a file title of <c>Math 3380 Permutations Class</c>.
+                </statement>
+            </task>
+            <task>
+                <statement>
+                    Create another blank file in the same location, called <c>aam_proj2.py</c>, and give it the correct header information.
+                </statement>
+            </task>
+            <task>
+                <statement>
+                    <p>
+                        On the first non-comment line of <c>aam_proj2.py</c>, insert the command <c>from AlgoPerm import *</c>. This will allow you to use all of the classes and functions defined in the <c>AlgoPerm.py</c> module in this file.
+                    </p>
+                </statement>
+            </task>
+        </project>
+    </subsection>
+    <!--#############################################-->
+    <subsection xml:id="sub-perms-oop_instantiation">
+        <title>Creating new objects</title>
+        <p>
+            Given an empty class definition we cannot do anything. In order for a class to be useful it must be possible to create objects in the class. This is variously called <term>instantiation</term> or <term>initialization</term>.
+        </p>
         <definition xml:id="def-instantiation">
             <title>Instantiation</title>
             <statement>
-                An <term>instance</term> is a particular member of a class. <term>Class instantiation</term> is the declaration that a named object belongs to a certain class. For example, <q>Fido is a dog</q> is an instantiation of the class of <q>dog</q> to the object named <q>Fido</q>. Mathematically, this is allows an <term>existential quantification</term>: there exists a dog, named Fido.
+                <p>
+                    An <term>instance</term> is a particular member of a class. <term>Class instantiation</term> is the declaration that a named object belongs to a certain class. For example, declaring <q>Fido is a dog</q> is an instantiation of the class of <q>dog</q> to the object named <q>Fido</q>. Mathematically, this is allows an <term>existential quantification</term>: there exists a dog, named Fido.
+                </p>
+                <aside>
+                    This sidesteps the philosophical question of realism (the universal category of <q>dog</q> exists) versus nominalism (the category of <q>dog</q> only exists because we have objects so labeled).
+                </aside>
             </statement>
         </definition>
         <p>
-            The examples of how technology is defined and used throughout the remainder of this section will serve to piece together the beginning of a valid and useful package of permutations in Python, which we will call <c>AlgoPerm</c>.
+            A slightly less complicated way of thinking of this is to recognize that until a value is assigned to a variable name, the variable name does not mean anything to Python. Instantiation is the way of giving a type to a particular name. For a simple type like <c>int</c>, we do this just by assigning the value to a name: <c>bob = 5</c>. However we could first instantiate that <c>bob</c> is to be an integer, by declaring <c>bob = int()</c>, but in this case the <c>int</c> class comes equipped with a <term>default value</term>.
         </p>
+        <listing xml:id="list-instantiating_ints">
+            <caption>Predefined types do not require instantiation, but permit it.</caption>
+            <console>
+                <prompt>>>> </prompt>
+                <input>
+                    bob = int(); print(bob)
+                </input>
+                <output>
+                    0
+                </output>
+            </console>
+        </listing>
         <technology xml:id="tech-instantiation">
             <title>How to instantiate an object from a <c>class</c> in Python</title>
             <shorttitle>Python object instantiation</shorttitle>
             <statement>
                 <p>
-                    The first method to be considered for a new class is the method by which objects of that class are to be instantiated. This is implemented by a method called <c>__init__</c>. The name of this method is very important: it begins and ends with two underscore characters <c>_</c>. It is also very important that the <c>__init__</c> method takes as arguments anything necessary to define a new object in the class.
+                    Important methods for Python classes often have a strange naming convention, having the form <c>__methodname__</c>. The first of these we will use is the <term>initialization method</term>, called <c>__init__</c>. It is very important that the <c>__init__</c> method must have at least the <c>self</c> argument, along with arguments for any other information which must be known when creating a new object.
                 </p>
                 <listing xml:id="list-__init__">
                     <caption>The <c>__init__</c> method for a <c>class</c> definition</caption>
                     <program language="python">
                         <input>
-                            class AlgoPerm:
-                                """A permutation class for Python written for Algorithms in
-                                    Applied Math."""
-                                def __init__(self, domain, mapping):
+                            class MyClass:
+                                """This is the class docstring which is printed by `help(MyClass)`"""
+                                def __init__(self, *args, **kwargs):
                                     statement_1
                                     statement_2
                                     statement_3
@@ -83,30 +140,105 @@
                     </program>
                 </listing>
                 <p>
-                    After executing this <c>class</c> block containing a valid <c>__init__</c> method, all that is necessary to create a new <c>AlgoPerm</c> object is to assign the class to a name.
+                    After executing this <c>class</c> block containing a valid <c>__init__</c> method, all that is necessary to create a new <c>MyClass</c> object is to assign the class to a name.
                 </p>
-                <listing xml:id="list-instantiating-AlgoPerm">
-                    <caption>Instantiation of a new <c>AlgoPerm</c></caption>
+                <sidebyside>
                     <console>
                         <prompt>>>> </prompt>
-                        <input>new_perm = AlgoPerm(some_domain, some_mapping)</input>
+                        <input>new_obj = MyClass(arg0, arg1, arg2, keya = "bob", keyb = "larry")</input>
                     </console>
+                </sidebyside>
+                <p>
+                    Using the class name <c>MyClass</c> as a function invokes the <c>__init__</c> method in such a way that the name <c>new_obj</c> is associated with an object of <c>MyClass</c> and then automatically used as the <c>self</c> argument of the <c>__init__</c> method.
+                </p>
+            </statement>
+        </technology>
+        <technology xml:id="tech-argument_lists">
+            <title>Function argument lists</title>
+            <statement>
+                In <xref ref="list-__init__" /> we see two special arguments used in a function definition, <c>*args</c> and <c>**kwargs</c>. The names of the local variables defined by these arguments are respectively <c>args</c> and <c>kwargs</c>. The first, <c>args</c>, consists of a tuple of all <term>positionally-determined arguments</term> passed to the function. The second, <c>kwargs</c>, consists of a dictionary whose keys are the keywords of arguments passed to the function, and the associated values are the values of those arguments.
+
+                <listing xml:id="list-argument_lists">
+                    <caption>Functions allowing arbitrary arguments</caption>
+                    <statement>
+                        <console>
+                            <prompt>>>> </prompt>
+                            <input>
+                                def my_func(*args, **kwargs):
+                            </input>
+                            <prompt>...     </prompt>
+                            <input>
+                                print(type(args), len(args))
+                            </input>
+                            <prompt>...     </prompt>
+                            <input>
+                                print(type(kwargs), list(kwargs.items()))
+                            </input>
+                            <prompt>...     </prompt>
+                            <input>
+                            </input>
+                            <prompt>>>> </prompt>
+                            <input>
+                                my_func(13, 17, 19,
+                            </input>
+                            <prompt>...     </prompt>
+                            <input>
+                                keya="a first keyword argument"
+                            </input>
+                            <prompt>...     </prompt>
+                            <input>
+                                keyb="A SECOND!!" )
+                            </input>
+                            <output>
+                                &lt;class 'tuple'> 3
+                                &lt;class 'dict'> [('keya', 'a first keyword argument'), ('keyb', 'A SECOND!!')]
+                            </output>
+                        </console>
+                    </statement>
                 </listing>
             </statement>
         </technology>
-        <convention xml:id="python-self">
+        <technology xml:id="tech-self-argument">
             <title>The <c>self</c> argument of a method</title>
             <statement>
                 <p>
-                    The first argument to a method is always the object upon which the method is called, via the dot notation or any other process. It is good programming style to name this argument <c>self</c>, so almost all Python documentation assumes that <c>self</c> is the name assigned.
+                    When defining a method for a class there are vanishingly few cases where the method does not need to be able to refer to the object on which it is called. This referent object is most often called <c>self</c> and is always the first argument of the function definition.
+                </p>
+                <p>
+                    Remember: even if you forget to name the first argument to a method <c>self</c>, it <alert>always</alert> takes the value of the object on which the method is called, regardless of whether or not other arguments are provided or needed by the method definition.
                 </p>
             </statement>
-        </convention>
+        </technology>
         <p>
             We have specified that the domain and the mapping are the two pieces of information necessary to specify a permutation, and that makes perfect sense. A permutation, after all, is a mapping <m>\sigma:A\to A</m>, so once we know the domain and how it is mapped we have everything necessary. The only thing left to do is use the <c>__init__</c> method to validate that the values passed into the arguments <c>domain</c> and <c>mapping</c> provide valid information to define a permutation!
         </p>
+        <project xml:id="proj-perms-initmethod">
+            <title>Start the <c>__init__</c> method</title>
+            <statement>
+                Explain why
+                <sidebyside>
+                    <program language="python">
+                        <input>
+                                def __init__(self, domain, mapping):
+                                    """docstring"""
+                                    # Check to see whether mapping provides a valid
+                                    # permutation of domain.
+                                    'Valid'
+                                    # Turn mapping into the canonical data storage
+                                    # format of AlgoPerm
+                                    'Storage'
+                                    # Set all attributes other than the canonical
+                                    # data storage.
+                                    pass
+                        </input>
+                    </program>
+                </sidebyside>
+                might be a good start to the <c>__init__</c> method and write a docstring that explains how the arguments are used.
+            </statement>
+        </project>
     </subsection>
-    <subsection xml:id="sub-perms-oop-inputvalidation">
+    <!--#############################################-->
+    <subsection xml:id="sub-perms-oop_validation">
         <title>Input validation</title>
         <p>
             Input validation is required whenever there is a possibility that any user of code (including the original programmer) might make a mistake on using the code that renders the code incorrect. It takes some extra work to make sure that you have covered all the possible input cases and either correctly handled them or provided meaningful error messages. That said, there is a serious benefit to having performed a strong input validation on the <c>__init__</c> method of a class: now everything in the class is guaranteed to have the right form. You never need to wonder whether or not <c>self</c> is going to have the correct attributes and work correctly.
@@ -160,10 +292,10 @@
             <title>Python <c>min</c> and <c>max</c> built-in functions</title>
             <statement>
                 <p>
-                    The <c>min</c> function can be used in two ways: if given a single iterable argument <c>arg1</c>, then <c>min(arg1)</c> returns the minimum element of <c>arg1</c>. Given two or more arguments, <c>min(arg1, arg2, ...)</c> returns the minimum argument.
+                    The <c>min</c> function can be used in two ways: if given a single iterable argument <c>arg1</c>, then <c>min(arg1)</c> returns the minimum element of <c>arg1</c>. Given two or more arguments, <c>min(arg1, arg2, ...)</c> returns the minimum argument. As should be expected, <c>max</c> behaves in the corresponding manner but returns the maximum value.
                 </p>
                 <p>
-                    As should be obvious, <c>max</c> behaves in the corresponding manner but returns the maximum value.
+                    It is not always clear what ordering is used among comparable items.
                 </p>
                 <listing xml:id="list-min-max">
                     <caption>An example using the <c>min</c> and <c>max</c> commands in Python</caption>
@@ -208,10 +340,50 @@
                     </console>
                 </listing>
                 <p>
-                    That example also contains a sneaky example of the <c>str.split()</c> method.
+                    That example also contains a sneaky example of the <c>str.split()</c> method. The ordering used on strings is lexicographic (dictionary) ordering with the caveat that the order of characters is per their ordinal, via the <c>ord</c> function.
                 </p>
             </statement>
         </technology>
 
+        <project xml:id="proj-perms-validation">
+            <title>Flesh out <c>__init__</c> with input validation</title>
+            <statement>
+                In order to start building a useful permutation class, we make the assumption that the input has to be in one-line notation. This is easy to change later once we have a better understanding of what we want from our permutation code.
+                <task>
+                    <statement>
+                        Write an algorithm (not code!) which takes an input called <c>mapping</c> and checks to see if it is a valid one-line notation.
+                    </statement>
+                </task>
+                <task>
+                    <statement>
+                        Implement your algorithm in the <c>AlgoPerm</c> class.
+                    </statement>
+                </task>
+            </statement>
+        </project>
+        <project xml:id="proj-perms-attributes">
+            <title>Defining attributes of permutations</title>
+            <statement>
+                <p>
+                    The primary attributes needed for our <c>AlgoPerm</c> class are the storage of the domain of the permutation and its mapping.
+                </p>
+                <task>
+                    <statement>
+                        <p>
+                            Regardless of the type by which the mapping was specified, we want to store it as a dictionary. Suppose that <c>mapping</c> is a list which validly gives the one-line notation of the permutation, and that the length of the list is <m>k</m>. Then the ordered pairs <c>(i+1, mapping[i])</c> for <m>i\in\set{0,1,2,\dotsc,k-1}</m> each specify an input and output pair for the permutation.
+                        </p>
+                        <p>
+                            Create an empty list called <c>map_pairs</c>, and use a <c>for</c> loop to fill it with tuples of the form <c>(i+1, mapping[i])</c>. Assign the attribute <c>self.mapping</c> the value of <c>dict(map_pairs)</c>.
+                        </p>
+                    </statement>
+                </task>
+                <task>
+                    <statement>
+                        After input validation is successful, assign to the attrbiute <c>self.domain</c> the value <c>set(domain)</c>. The <c>set</c> data type implements many of the mathematical notions of set as a built-in class!
+                    </statement>
+                </task>
+            </statement>
+        </project>
     </subsection>
+
 </section>

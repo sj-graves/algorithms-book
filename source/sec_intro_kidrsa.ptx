@@ -1,61 +1,71 @@
 <?xml version='1.0' encoding='utf-8'?>
 
-<section xml:id="sec-app-proj1" xmlns:xi="http://www.w3.org/2001/XInclude">
+<section xml:id="sec-intro-kidrsa" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Familiarity with Python</title>
     <p>
-                As a gentle introduction to working with Python, we will implement a teaching algorithm called <term>Kid RSA</term>. The Kid RSA algorithm serves as a teaching introduction to the idea of public key cryptography, which will be investigated further in <xref provisional="ch-crypto" title="text"/>. It is important that you complete each Checkpoint exercise in order; it is a safe assumption that as you work through the checkpoints you are adding to the same file or files.
+                As a gentle introduction to working with Python, we will implement an easily-teachable algorithm called <term>Kid RSA</term>. The Kid RSA algorithm serves as an introduction to the idea of public key cryptography, which will be investigated further in <xref provisional="ch-crypto" title="text"/>. It is important that you complete each Checkpoint project in order; it is a safe assumption that as you work through the checkpoints you are adding to the same file or files.
+    </p>
+    <p>
+        If you are not already familiar with programming and with Python, now would be a very good time to read the <xref ref="app-python" text="title"/> appendix.
     </p>
     <objectives>
         <ol>
             <li><p>
-                Create properly named and properly formatted files in <xref ref="app-proj1-files"/>
+                Create properly named and properly formatted files in <xref ref="prj-kidrsa-files"/>
                 </p></li>
             <li><p>
-                Calculate your Kid RSA keypair in <xref ref="app-proj1-calculator" />
+                Calculate your Kid RSA keypair in <xref ref="prj-kidrsa-calculator" />
                 </p></li>
             <li><p>
-                Learn how to encode and decode between typed strings and lists of integers in <xref ref="app-proj1-encoding-characters" />
+                Learn how to encode and decode between typed strings and lists of integers in <xref ref="prj-kidrsa-encoding-characters" />
                 </p></li>
             <li><p>
-                Combine all of the work to create a KidRSA encryption program in <xref ref="app-proj1-kidrsa" />
+                Combine all of the work to create a KidRSA encryption program in <xref ref="prj-kidrsa-kidrsa" />
                 </p></li>
             <li><p>
-                Write a simple function to calculate the greatest common divisor of two integers in <xref ref="app-proj1-euclid1" />
+                Write a simple function to calculate the greatest common divisor of two integers in <xref ref="prj-kidrsa-euclid1" />
+                </p></li>
+            <li><p>
+                Engage in mathematically hacking a KidRSA key in <xref ref="prj-kidrsa-hacking-kidrsa" />
                 </p></li>
         </ol>
     </objectives>
-    <exercise xml:id="app-proj1-files">
-        <title>Create your project files</title>
+    <project xml:id="prj-kidrsa-files">
+        <title>KidRSA project files</title>
+        <prelude>
+            A first task for any of the projects will be to set up a good environment to work in, choosing an appropriate working directory and filenames for the project.
+        </prelude>
         <statement>
             <task>
-            <p>
+                <statement>
                 Using IDLE, create a blank Python module file named <c>aam_proj1.py</c> in an easy-to-find folder on your computer. This will eventually be submitted via Canvas or some other digital method for grading.
-            </p>
-        </task>
-        <task>
-            <p>
-                As header information, every submitted project file should begin with a block of comments. Your header should look like the following example, with the information changed to reflect your information and situation.
-            </p>
-            <listing xml:id="list-projfile-header">
-                <caption>A sample header for Math 3380 Project Files</caption>
-                <program language="python">
-                    <input>
-                        # Math 3380 Project 1
-                        # Filename: aam_proj1.py
-                        #
-                        # Name: Frodo Baggins
-                        # Date: 25 March, T.A. 3019
-                        #
-                    </input>
-                </program>
-            </listing>
+                </statement>
+            </task>
+            <task>
+                <statement>
+                    <p>
+                        As header information, every submitted project file should begin with a block of comments. Your header should look like the following example, with the information changed to reflect your information and situation.
+                    </p>
+                    <listing xml:id="list-projfile-header">
+                        <caption>A sample header for Math 3380 Project Files</caption>
+                        <program language="python">
+                            <input>
+                                # Math 3380 Project 1
+                                # Filename: aam_proj1.py
+                                #
+                                # Name: Frodo Baggins
+                                # Date: 25 March, T.A. 3019
+                                #
+                            </input>
+                        </program>
+                    </listing>
+                </statement>
+            </task>
             <p>
                 All files submitted for these projects should have a similar header.
             </p>
-        </task>
-
         </statement>
-    </exercise>
+    </project>
     <p>
         Public key cryptography first requires the generation of a <term>keypair</term>, consisting of a <term>public key</term> and a <term>private key</term>.
     </p>
@@ -78,12 +88,12 @@
     <p>
         Now use the algorithm to generate your own Kid RSA keypair.
     </p>
-    <exercise xml:id="app-proj1-calculator">
+    <project xml:id="prj-kidrsa-calculator">
         <title>Using Python as a simple calculator</title>
         <statement>
             <task>
                 <p>
-                    In the file created in <xref ref="app-proj1-files"/>, declare values for <c>a</c>, <c>b</c>, <c>a_prime</c>, and <c>b_prime</c>. The variable names in Python cannot include the prime symbol, hence the change of name.
+                    In the file created in <xref ref="prj-kidrsa-files"/>, declare values for <c>a</c>, <c>b</c>, <c>a_prime</c>, and <c>b_prime</c>. The variable names in Python cannot include the prime symbol, hence the change of name.
                 </p>
                 <p>
                     Make sure you include <term>comments</term> in your code explaining what you're doing. Comments are lines (or ends of lines) which begin with the symbol called either <q>pound</q> or <q>hash</q>, specifically <c>#</c>.
@@ -117,7 +127,7 @@
                 </sidebyside>
             </task>
         </statement>
-    </exercise>
+    </project>
     <p>
         The fundamental idea behind public key cryptography is that given a public key it should be easy to mathematically compute the encrypted version of a message. However, without the private key it should ideally be impossible to compute the original message from the encrypted version. Unfortunately this is precisely why the Kid RSA algorithm is suitable only for teaching purposes: it is very easy to produce the private key <m>d</m> with a little arithmetic from the numbers <m>n</m> and <m>e</m> in the public key.
     </p>
@@ -173,7 +183,7 @@
             </md>. Then the functions <m>f_{n,e}(x) = r_e</m> and <m>g_{n,d}(x) = r_d</m> are respectively the encryption and decryption functions for Kid RSA.
         </statement>
     </definition>
-    <exercise xml:id="app-proj1-encoding-characters">
+    <project xml:id="prj-kidrsa-encoding-characters">
         <title>Encoding strings into lists of integers</title>
         <statement>
             <p>
@@ -248,8 +258,8 @@
                 </sidebyside>
             </task>
         </statement>
-    </exercise>
-    <exercise xml:id="app-proj1-kidrsa">
+    </project>
+    <project xml:id="prj-kidrsa-kidrsa">
         <title>Applying KidRSA</title>
         <statement>
             <p>
@@ -327,7 +337,7 @@
                 </p>
             </task>
         </statement>
-    </exercise>
+    </project>
 
     <definition xml:id="def-gcd">
         <title>Greatest Common Divisor</title>
@@ -380,11 +390,11 @@
         </proof>
     </algorithm>
 
-    <exercise xml:id="app-proj1-euclid1">
+    <project xml:id="prj-kidrsa-euclid1">
         <title>Implementing Euclid's algorithm</title>
         <statement>
             <p>
-                In order to find the greatest common divisor, we apply the division algorithm repeatedly in the form of Python's <c>divmod(...)</c> command, stopping when the remainder it produces is zero. Once the remainder is 0, we know that the previous remainder was the <m>\gcd{}</m>. This is a great use case for a <c>while</c> loop. First define a function in the same file created in <xref ref="app-proj1-files" />
+                In order to find the greatest common divisor, we apply the division algorithm repeatedly in the form of Python's <c>divmod(...)</c> command, stopping when the remainder it produces is zero. Once the remainder is 0, we know that the previous remainder was the <m>\gcd{}</m>. This is a great use case for a <c>while</c> loop. First define a function in the same file created in <xref ref="prj-kidrsa-files" />
             </p>
             <task>
                 <p>
@@ -428,7 +438,7 @@
                 </p>
             </task>
         </statement>
-    </exercise>
+    </project>
     <p>
         We need another theorem if we want to develop a tool to break a keypair.
     </p>
@@ -545,7 +555,7 @@
             </p>
         </statement>
     </algorithm>
-    <exercise xml:id="app-proj1-hacking-kidrsa">
+    <project xml:id="prj-kidrsa-hacking-kidrsa">
         <title>Hacking KidRSA</title>
         <statement>
             <task>
@@ -570,7 +580,7 @@
                 </sidebyside>
             </task>
         </statement>
-    </exercise>
+    </project>
   <!--
   <xi:include href=".subsec-emp-intro.ptx" />
   <xi:include href=".subsec-emp-next.ptx" />

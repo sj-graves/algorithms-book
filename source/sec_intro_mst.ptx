@@ -293,7 +293,7 @@
       </statement>
     </definition>
     <p>In order to communicate our algorithm efficiently, we have to analyze
-    what our steps actually entailed. Later on, we'll give a more rigorous
+    what our steps actually entailed. Later on, we'll give a more computational
     statement of the same algorithm, in
     <xref provisional="alg-kruskal" /></p>
     <algorithm xml:id="alg-intro-kruskal">
@@ -377,7 +377,8 @@
         <p>The connections of a network are given below as a table of triples
         <m>(u,v,w(u,v))</m>. Find the least expensive set
         <m>F</m> of edges needed to connect the components of this network.</p>
-        <sidebyside>
+        <table>
+            <title>The weighted edges of a 50-edge network</title>
           <tabular halign="center" width="50%">
             <row bottom="major">
               <cell>
@@ -467,7 +468,7 @@
               <cell>(16, 18, 9)</cell>
             </row>
           </tabular>
-        </sidebyside>
+        </table>
         <p>Your solution should include all the steps, but your answer will
         consist only of the set of included edges.</p>
       </statement>
@@ -483,40 +484,6 @@
                   (1,4) \amp (4,13) \amp (5,17) \amp
                   \end{matrix}
               </me></p>
-<!--         <sidebyside width="50%">
-          <tabular halign="center">
-            <row>
-              <cell>(0, 3)</cell>
-              <cell>(2, 4)</cell>
-              <cell>(4, 15)</cell>
-              <cell>(7, 13)</cell>
-            </row>
-            <row>
-              <cell>(0, 10)</cell>
-              <cell>(2, 11)</cell>
-              <cell>(4, 18)</cell>
-              <cell>(8, 11)</cell>
-            </row>
-            <row>
-              <cell>(0, 13)</cell>
-              <cell>(2, 19)</cell>
-              <cell>(5, 6)</cell>
-              <cell>(9, 15)</cell>
-            </row>
-            <row>
-              <cell>(0, 16)</cell>
-              <cell>(3, 14)</cell>
-              <cell>(5, 16)</cell>
-              <cell>(12, 19)</cell>
-            </row>
-            <row>
-              <cell>(1, 4)</cell>
-              <cell>(4, 13)</cell>
-              <cell>(5, 17)</cell>
-              <cell />
-            </row>
-          </tabular>
-        </sidebyside>-->
       </answer>
     </problem>
   </subsection>
@@ -531,10 +498,8 @@
     <term>parameters</term> are those quantities which do not change once the
     algorithm begins. In this case, the numbers of vertices and edges are both
     parameters for a given graph.</p>
-    <p>Finally, this algorithm is labeled as a
-    <q>mathematical</q>algorithm because it is not sufficiently detailed to
-    actually implement in a computer program. To program the algorithm, several
-    of the steps-as-written would need to be explained as algorithms in their
-    own right!</p>
+    <p>
+        Finally, this algorithm is labeled as a <q>mathematical</q> algorithm because it is not sufficiently detailed to actually implement in a computer program. To program the algorithm, several of the steps-as-written would need to be explained as algorithms in their own right!
+    </p>
   </conclusion>
 </section>

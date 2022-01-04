@@ -13,36 +13,21 @@
                 Investigate a problem from graph theory.
                 </p></li>
             <li><p>
-                Introduce IDLE
-                </p></li>
-            <li><p>
-                Work with basic data types
-                </p></li>
-            <li><p>
-                Work with container data types
-                </p></li>
-            <li><p>
-                Learn to iterate by repeating statements repeatedly
-                </p></li>
-            <li><p>
-                Write interesting functions in Python
-                </p></li>
-            <li><p>
-                Handle errors when they arise
+                Learn to program quickly by implementing a pedagogical encryption system.
                 </p></li>
         </ol>
     </objectives>
     <introduction>
-        This first chapter serves as a rapid introduction to the basics of programming in Python, with the intent of getting readers through to solving mathematical problems computationally in as little time as possible.
+        This first chapter serves as a rapid introduction to the algorithms, including the basics of programming in Python, with the intent of getting readers through to solving mathematical problems computationally in as little time as possible.
     </introduction>
     <!-- <xi:include href="./sec_intro_shortest_path.ptx" /> -->
     <xi:include href="./sec_intro_mst.ptx" />
-    <xi:include href="./sec_intro_idle.ptx" />
-    <xi:include href="./sec_intro_basicdata.ptx" />
-    <xi:include href="./sec_intro_containers.ptx" />
-    <xi:include href="./sec_intro_iteration.ptx" />
-    <xi:include href="./sec_intro_functions.ptx" />
-    <xi:include href="./sec_intro_errors.ptx" />
+    <xi:include href="./sec_intro_kidrsa.ptx" />
+<!--     <xi:include href="./sec_intro_basicdata.ptx" /> -->
+<!--     <xi:include href="./sec_intro_containers.ptx" /> -->
+<!--     <xi:include href="./sec_intro_iteration.ptx" /> -->
+<!--     <xi:include href="./sec_intro_functions.ptx" /> -->
+<!--     <xi:include href="./sec_intro_errors.ptx" /> -->
     <!-- <xi:include href="./sec_firstch-examples.ptx" /> -->
 
     <!-- One or more of the sections of a chapter might be exercises-->

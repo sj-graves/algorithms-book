@@ -9,7 +9,7 @@
             <p>Small Net</p>
         </figure>
         <p>
-            In <xref ref="fig-smallnetwork" /> we see a diagram of a network where connections between nodes are marked with a <q>cost</q>. We're going to refer to the nodes as <term>vertices</term> and the connections as <term>edges</term> in keeping with the language of <term>graph theory</term> which we'll study later in the course. The task associated with the diagram is to determine the least-cost path from the node marked <m>v_0</m> to each other node. 
+            In <xref ref="fig-smallnetwork" /> we see a diagram of a network where connections between nodes are marked with a <q>cost</q>. We're going to refer to the nodes as <term>vertices</term> and the connections as <term>edges</term> in keeping with the language of <term>graph theory</term> which we'll study later in the course. The task associated with the diagram is to determine the least-cost path from the node marked <m>v_0</m> to each other node.
         </p>
         <question>
             <title>Shortest Paths</title>
@@ -29,50 +29,21 @@
         </p>
         <sidebyside>
             <tabular halign="center">
-                <col />
-                <col />
-                <col />
-                <col right="major" />
-                <col />
-                <col right="minor" />
-                <col />
-                <col right="minor" />
-                <col />
-                <col right="minor" />
-                <col />
-                <col right="minor" />
-                <col />
-                <col right="minor" />
-                <col />
-                <col right="minor" />
-                <col />
-                <col right="minor" />
+                <col /><col /><col />
+                <col right="major" /><col /><col right="minor" /><col />
+                <col right="minor" /><col /><col right="minor" /><col />
+                <col right="minor" /><col /><col right="minor" /><col />
+                <col right="minor" /><col /><col right="minor" />
                 <row>
                     <cell colspan="4" />
-                    <cell colspan="2">
-                        <m>v_0</m>
-                    </cell>
-                    <cell colspan="2">
-                        <m>v_1</m>
-                    </cell>
-                    <cell colspan="2">
-                        <m>v_2</m>
-                    </cell>
-                    <cell colspan="2">
-                        <m>v_3</m>
-                    </cell>
-                    <cell colspan="2">
-                        <m>v_4</m>
-                    </cell>
-                    <cell colspan="2">
-                        <m>v_5</m>
-                    </cell>
-                    <cell colspan="2">
-                        <m>v_6</m>
-                    </cell>
-                    <cell colspan="2">
-                        <m>v_7</m>
-                    </cell>
+                    <cell colspan="2"> <m>v_0</m> </cell>
+                    <cell colspan="2"> <m>v_1</m> </cell>
+                    <cell colspan="2"> <m>v_2</m> </cell>
+                    <cell colspan="2"> <m>v_3</m> </cell>
+                    <cell colspan="2"> <m>v_4</m> </cell>
+                    <cell colspan="2"> <m>v_5</m> </cell>
+                    <cell colspan="2"> <m>v_6</m> </cell>
+                    <cell colspan="2"> <m>v_7</m> </cell>
                 </row>
                 <row bottom="major">
                     <cell>Step</cell>

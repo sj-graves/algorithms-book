@@ -20,7 +20,7 @@
             </p>
             <ul>
                 <li><p>
-                    <url href="https://code.visualstudio.com/">Visual Studio Code</url>, by Microsoft, with the <url href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python extension</url> installed. Code is an extremely full-featured IDE, but is a fairly big program.
+                    <url href="https://code.visualstudio.com/">Visual Studio Code</url>, by Microsoft, with the <url href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">Python extension</url> installed. Code is an extremely full-featured IDE, but is a fairly big program. This is the current IDE of choice of the author of this textbook since it can flexibly work in the <LaTeX /> typesetting language for mathematics as well, if the right extensions are enabled.
                     </p></li>
                 <li><p>
                     <url href="https://atom.io/">Atom</url>, by Github, with the <url href="https://atom.io/packages/script">script package</url> installed. Atom is a very hackable text editor which can be treated as an IDE by adding enough packages.
