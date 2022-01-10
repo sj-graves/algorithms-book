@@ -220,11 +220,43 @@
       <p>
           Python dictionaries are mutable, and in fact once a <c>dict</c> has been defined, new key-value pairs can be added to the dictionary simply by assigning the new value to the correct key: <c>my_dict[new_key] = new_value</c>.
       </p>
-  </subsection>
-  <subsection xml:id="sub-intro-containers-strs">
+      <fact xml:id="fact-intro-containers-strs">
         <title>Strings are containers, too!</title>
         <p>
             It is very important to recognize that strings can be sliced and indexed exactly as can lists and tuples, which makes <c>str</c> a container data type as well. <em>Strings are immutable!</em>
         </p>
+        </fact>
+  </subsection>
+    <subsection>
+        <title>Sets are a special container</title>
+        <p>
+            It is also possible to construct mathematical sets in Python, using the <c>set(some_object)</c> constructor. The argument <c>some_object</c> must be itself a container of <em>hashable</em> objects, much like the keys of a <c>dict</c>.
+        </p>
+        <technology xml:id="tech-defining-sets">
+            <title>Defining a <c>set</c></title>
+            <statement>
+                Usually the argument to <c>set</c> is a <c>list</c> or <c>tuple</c>, but <c>str</c> is also permitted since strings (of length 1) are hashable. Otherwise, all normal mathematical properties of expected for sets hold for the <c>set</c> class.
+                <listing xml:id="list-defining-sets">
+                    <caption>Defining sets removes repeated elements</caption>
+                    <console>
+                        <prompt>>>> </prompt>
+                        <input>
+                            a = set([1,2,3,4])
+                        </input>
+                        <prompt>>>> </prompt>
+                        <input>
+                            b = set([1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,4])
+                        </input>
+                        <prompt>>>> </prompt>
+                        <input>
+                            print(a==b)
+                        </input>
+                        <output>
+                            True
+                        </output>
+                    </console>
+                </listing>
+            </statement>
+        </technology>
     </subsection>
 </section>

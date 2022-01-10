@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<section xml:id="sec-crypto-perms" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Finishing the <c>AlgoPerm</c> class</title>
+    <introduction>
+        We left some pieces of the <c>AlgoPerm</c> class unfinished, due to the complexity of the project. Those should be completed before trying to use <c>AlgoPerm</c> to perform cryptography.
+    </introduction>
+    <!-- ################################### -->
+    <subsection xml:id="sub-crypto-perms-algoperm">
+        <title>Dealing with cycle notation</title>
+        <p>
+            There are two algorithms necessary to handle cycle notation: one produces the cycle notation from a valid permutation, and the other is the input validation and conversion from a tuple of tuples into a mapping dictionary. Since we have already discussed the first in <xref ref="exmp-disjoint-cycles" text="title" />, we will implement that algorithm first. We see the flexibility of Python as we write the algorithm in a combination of plain language and Python code, called <q>pseudocode</q>.
+        </p>
+        <algorithm xml:id="algo-disjoint_cycle_notation">
+            <title>Computing disjoint cycle notation of a permutation</title>
+            <statement>
+                <p>
+                    Suppose that <m>A</m> is a finite set written in increasing order and <m>\sigma:A\to A</m> is a permutation.
+                </p>
+                <ol>
+                    <li><p>
+                        Set <c>C = [ ]</c>.
+                        </p></li>
+                    <li><p>
+                        While <m>\set{u:u\in U}\neq A</m>, repeat the following:
+                        </p>
+                        <ol>
+                            <li><p>
+                                Let <m>x</m> be the least element of <m>A\setminus U</m> and define <m>c = (x)</m> to be a sequence.
+                                </p></li>
+                            <li><p>
+                                While <m>\sigma(x) != c_0</m>, repeat the following:
+                                </p>
+                                <ol>
+                                    <li><p>
+                                        Let <m>y = \sigma(x)</m> and append <m>y</m> to <m>c</m>.
+                                        </p></li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </statement>
+        </algorithm>
+    </subsection>
+    <!--
+  <xi:include href=".subsec-emp-intro.ptx" />
+  <xi:include href=".subsec-emp-next.ptx" />
+  <xi:include href=".subsec-emp-conc.ptx" />
+  -->
+
+</section>

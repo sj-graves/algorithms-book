@@ -20,7 +20,7 @@
         </p>
         <list-of xml:id="listof-algos" elements="algorithm technology" divisions="chapter appendix" empty="no" />
     </section>
-
+    <!-- ###################################### -->
     <section xml:id="app-find-results"><title>Lemmas, Propositions, and Theorems</title>
         <p>
             This section provides a comprehensive list of all mathematical theorems throughout the text.
@@ -29,5 +29,14 @@
             <list-of xml:id="listof-results" elements="axiom theorem lemma proposition" divisions="chapter appendix" empty="no" />
         </p>
     </section>
+    <!-- ###################################### -->
+    <section xml:id="app-find-projects">
+    <title>Projects</title>
+        <p>
+        A comprehensive guide to all the parts of all of the projects for the text.
+        </p>
+        <list-of xml:id="listof-projects" elements="project activity" divisions="section" empty="no" />
 
+
+    </section>
 </appendix>

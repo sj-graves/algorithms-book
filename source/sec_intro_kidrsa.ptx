@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 
 <section xml:id="sec-intro-kidrsa" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Familiarity with Python</title>
+    <title>Project: Gaining Familiarity with Python</title>
+    <shorttitle>Familiarity with Python</shorttitle>
     <p>
                 As a gentle introduction to working with Python, we will implement an easily-teachable algorithm called <term>Kid RSA</term>. The Kid RSA algorithm serves as an introduction to the idea of public key cryptography, which will be investigated further in <xref provisional="ch-crypto" title="text"/>. It is important that you complete each Checkpoint project in order; it is a safe assumption that as you work through the checkpoints you are adding to the same file or files.
     </p>
@@ -30,7 +31,7 @@
                 </p></li>
         </ol>
     </objectives>
-    <project xml:id="prj-kidrsa-files">
+    <activity xml:id="prj-kidrsa-files">
         <title>KidRSA project files</title>
         <prelude>
             A first task for any of the projects will be to set up a good environment to work in, choosing an appropriate working directory and filenames for the project.
@@ -65,7 +66,7 @@
                 All files submitted for these projects should have a similar header.
             </p>
         </statement>
-    </project>
+    </activity>
     <p>
         Public key cryptography first requires the generation of a <term>keypair</term>, consisting of a <term>public key</term> and a <term>private key</term>.
     </p>
@@ -88,7 +89,7 @@
     <p>
         Now use the algorithm to generate your own Kid RSA keypair.
     </p>
-    <project xml:id="prj-kidrsa-calculator">
+    <activity xml:id="prj-kidrsa-calculator">
         <title>Using Python as a simple calculator</title>
         <statement>
             <task>
@@ -127,7 +128,7 @@
                 </sidebyside>
             </task>
         </statement>
-    </project>
+    </activity>
     <p>
         The fundamental idea behind public key cryptography is that given a public key it should be easy to mathematically compute the encrypted version of a message. However, without the private key it should ideally be impossible to compute the original message from the encrypted version. Unfortunately this is precisely why the Kid RSA algorithm is suitable only for teaching purposes: it is very easy to produce the private key <m>d</m> with a little arithmetic from the numbers <m>n</m> and <m>e</m> in the public key.
     </p>
@@ -168,7 +169,6 @@
             </p>
         </statement>
     </definition>
-
     <definition xml:id="def-kidrsa-function">
         <title>Kid RSA encryption/decryption function</title>
         <statement>
@@ -183,7 +183,7 @@
             </md>. Then the functions <m>f_{n,e}(x) = r_e</m> and <m>g_{n,d}(x) = r_d</m> are respectively the encryption and decryption functions for Kid RSA.
         </statement>
     </definition>
-    <project xml:id="prj-kidrsa-encoding-characters">
+    <activity xml:id="prj-kidrsa-encoding-characters">
         <title>Encoding strings into lists of integers</title>
         <statement>
             <p>
@@ -258,8 +258,8 @@
                 </sidebyside>
             </task>
         </statement>
-    </project>
-    <project xml:id="prj-kidrsa-kidrsa">
+    </activity>
+    <activity xml:id="prj-kidrsa-kidrsa">
         <title>Applying KidRSA</title>
         <statement>
             <p>
@@ -337,8 +337,7 @@
                 </p>
             </task>
         </statement>
-    </project>
-
+    </activity>
     <definition xml:id="def-gcd">
         <title>Greatest Common Divisor</title>
         <statement>
@@ -389,8 +388,7 @@
             By repeated application of <xref ref="thm-gcd-of-remainders" text="title"/> we know that <m>\gcd(a,b) = \gcd(r_{k-2},r_{k-1})</m>, but we also see that <m>r_{k-1}\divides{} r_{k-2}</m>, so the greatest common divisor of <m>r_{k-1}</m> and <m>r_{k-2}</m> is <m>r_{k-1}</m> itself.
         </proof>
     </algorithm>
-
-    <project xml:id="prj-kidrsa-euclid1">
+    <activity xml:id="prj-kidrsa-euclid1">
         <title>Implementing Euclid's algorithm</title>
         <statement>
             <p>
@@ -438,7 +436,7 @@
                 </p>
             </task>
         </statement>
-    </project>
+    </activity>
     <p>
         We need another theorem if we want to develop a tool to break a keypair.
     </p>
@@ -555,7 +553,7 @@
             </p>
         </statement>
     </algorithm>
-    <project xml:id="prj-kidrsa-hacking-kidrsa">
+    <activity xml:id="prj-kidrsa-hacking-kidrsa">
         <title>Hacking KidRSA</title>
         <statement>
             <task>
@@ -580,12 +578,7 @@
                 </sidebyside>
             </task>
         </statement>
-    </project>
-  <!--
-  <xi:include href=".subsec-emp-intro.ptx" />
-  <xi:include href=".subsec-emp-next.ptx" />
-  <xi:include href=".subsec-emp-conc.ptx" />
-  -->
+    </activity>
 
 </section>
 

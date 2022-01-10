@@ -3,16 +3,19 @@
 <section xml:id="sec-perms-def" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Mathematical permutations</title>
     <introduction>
+        <p>
+            Our first topic introduces a special kind of function; recall from differential calculus that a <term>function</term> is a rule <m>f</m> which assigns to each value in a set <m>A</m> exactly one value in a set <m>B</m>. We denote this by <m>f:A\to B</m> and name the sets <m>A</m> and <m>B</m> respectively the <term>domain</term> and <term>codomain</term> of <m>f</m>. Moreover, if <m>a\in A</m> is assigned by <m>f</m> to the value <m>b\in B</m>, we write <m>b=f(a)</m>.
+        </p>
         <definition xml:id="def-permutation">
             <title>Permutation</title>
             <statement>
                 <p>
-                    Suppose <m>A</m> is a set. Then a function <m>\sigma</m> with domain <m>A</m> and codomain <m>A</m> is a <term>permutation of <m>A</m></term> if and only if <m>\sigma</m> satisfies the following two criteria:
+                    Suppose <m>A</m> is a set. Then a function <m>\sigma:A\to A</m> is a <term>permutation of <m>A</m></term> if and only if <m>\sigma</m> satisfies the following two criteria:
 
-                    <ol type="bfseriesi">
+                    <ul>
                         <li><p>(Surjective/Onto) For each element <m>a\in A</m>, there is an element <m>a'\in A</m> such that <m>{\sigma(a') = a}</m>.</p></li>
                         <li><p>(Injective/One-to-one) For any elements <m>a,b\in A</m>, if <m>f(a)=f(b)</m> then <m>a=b</m>.</p></li>
-                    </ol>
+                    </ul>
 
                 </p>
             </statement>
@@ -23,19 +26,19 @@
         <convention xml:id="conv-english-and-bracketn">
             <statement>
                 <p>
-                    There are certain sets we will use frequently in our study of permutations, namely the set of letters of the English alphabet and subsets of the positive inteegrs. For convenience sake, we denote them as follows:
+                    There are certain sets we will use frequently in our study of permutations, namely the set of letters of the English alphabet and subsets of the natural numbers. For convenience sake, we denote them as follows:
                     <ul>
                         <li><p>
                             <m>\mathcal{E}</m> is the set of letters in the English alphabet.
                             </p></li>
                         <li><p>
-                            <m>[n] = \set{1,2,3,\ldots,n}</m> whenever <m>n\in \Zp</m>.
+                            <m>[n] = \set{0,1,2,3,\ldots,n-1}</m> whenever <m>n\in \Nats</m>.
                             </p></li>
                     </ul>
                 </p>
 
                 <p>
-                    For a finite set <m>A</m> which is not a subset of <m>[n]</m> for any <m>n</m>, we denote the set of all permutations of <m>A</m> by <m>\sym{A}</m>. The set of all permutations of <m>[n]</m> is denoted <m>\sym{n}</m>.
+                    For a finite set <m>A</m> which is not a subset of <m>[n]</m> for any <m>n</m>, we denote the set of all permutations of <m>A</m> by <m>\sym{A}</m>.
                 </p>
             </statement>
         </convention>
@@ -141,7 +144,7 @@
             <remark xml:id="rem-after">
                 <title>Composition order</title>
                 <statement>
-                    We must be careful to always consider permutation multiplication in the correct order. An easy way to remember this is to think of the composition symbol as being pronounced <q>after</q>. Then <m>\tau\sigma = \after{\tau}{\sigma}</m> is the permutation which performs <m>\tau</m> after performing <m>\sigma</m>.
+                    We must be careful to always consider permutation multiplication in the correct order. An easy way to remember this is to think of the composition symbol as being pronounced <q>after</q>. Then <m>\tau\sigma = \tau\after\sigma</m> is the permutation which performs <m>\tau</m> after performing <m>\sigma</m>.
                 </statement>
             </remark>
 
@@ -151,7 +154,7 @@
             <theorem xml:id="thm-perm-multiplication-closed">
                 <title><m>\sym{A}</m> is closed under composition</title>
                 <statement>
-                    Let <m>A</m> be a set and <m>\sym{A}</m> the set of permutations of <m>A</m>, and suppose <m>\sigma,\tau\in\sym{A}</m>. Then <m>\after{\sigma}{\tau}\in\sym{A}</m> and <m>\after{\tau}{\sigma}\in\sym{A}</m>.
+                    Let <m>A</m> be a set and <m>\sym{A}</m> the set of permutations of <m>A</m>, and suppose <m>\sigma,\tau\in\sym{A}</m>. Then <m>\sigma\after\tau\in\sym{A}</m> and <m>\tau\after\sigma\in\sym{A}</m>.
                 </statement>
                 <proof>
                     <p>
@@ -184,24 +187,24 @@
                 <statement>
                     Let <m>A</m> be a set, and suppose <m>\phi,\sigma,\tau\in\sym{A}</m>. Then
                     <me>
-                        \after{\rho}{(\after{\sigma}{\tau})} = \after{(\after{\rho}{\sigma})}{\tau}.
+                        \rho\after(\sigma\after\tau) = (\rho\after\sigma)\after\tau
                     </me>
                 </statement>
                 <proof>
                     Let <m>\rho,\sigma,\tau\in\sym{A}</m> for a set <m>A</m>. Then for every <m>a\in A</m>,
                     <md>
                         <mrow>
-                            (\after{\rho}{(\after{\sigma}{\tau})})(a)
-                            \amp= \rho((\after{\sigma}{\tau})(a))
+                            (\rho\after(\sigma\after\tau))(a)
+                            \amp= \rho((\sigma\after\tau)(a))
                         </mrow>
                         <mrow>
                             \amp= \rho(\sigma(\tau(a)))
                         </mrow>
                         <mrow>
-                            \amp= (\after{\rho}{\sigma})(\tau(a))
+                            \amp= (\rho\after\sigma)(\tau(a))
                         </mrow>
                         <mrow>
-                            \amp= ( \after{( \after{\rho}{\sigma} )}{\tau} )(a),
+                            \amp= ((\rho\after\sigma)\after\tau)(a),
                         </mrow>
                     </md>
                     with all equalities justified by the definition of composition.
