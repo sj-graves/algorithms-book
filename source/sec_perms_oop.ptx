@@ -72,35 +72,33 @@
                 In this project, we'll be working in tandem in two files, the first containing our Class definition and the second being our main execution file. We want to separate the two so that we can use our permutation class file later in other projects via the <c>import</c> command without generating a bunch of output relating to this current project.
             </introduction>
             <task>
-                <statement>
+                <p>
                     Using IDLE, create a blank Python module file called <c>AlgoPerm.py</c> in the same easy-to-find folder on your computer as you used for <xref ref="prj-kidrsa-files" text="title"/>. The header information should have a file title of <c>Math 3380 Permutations Class</c>.
-                </statement>
+                </p>
             </task>
             <task>
-                <statement>
+                <p>
                     Create another blank file in the same location, called <c>aam_proj2.py</c>, and give it the correct header information.
 
-                </statement>
+                </p>
             </task>
             <task>
-                <statement>
+                <p>
                     On the first non-comment line of <c>aam_proj2.py</c>, insert the command <c>from AlgoPerm import *</c>. This will allow you to use all of the classes and functions defined in the <c>AlgoPerm.py</c> module in this file.
-                </statement>
+                </p>
             </task>
             <task>
-                <statement>
-                    <p>
-                        Start the class definition at the bottom of the file using
-                    </p>
-                    <sidebyside>
-                        <program language="python">
-                            <input>
-                                class AlgoPerm:
-                                    """A class of permutations useable for AAM."""
-                            </input>
-                        </program>
-                    </sidebyside>
-                </statement>
+                <p>
+                    Start the class definition at the bottom of the file using
+                </p>
+                <sidebyside>
+                    <program language="python">
+                        <input>
+                            class AlgoPerm:
+                                """A class of permutations useable for AAM."""
+                        </input>
+                    </program>
+                </sidebyside>
             </task>
         </activity>
     </subsection>
@@ -174,8 +172,9 @@
         <technology xml:id="tech-argument_lists">
             <title>Function argument lists</title>
             <statement>
-                In <xref ref="list-__init__" /> we see two special arguments used in a function definition, <c>*args</c> and <c>**kwargs</c>. The names of the local variables defined by these arguments are respectively <c>args</c> and <c>kwargs</c>. The first, <c>args</c>, consists of a tuple of all <term>positionally-determined arguments</term> passed to the function. The second, <c>kwargs</c>, consists of a dictionary whose keys are the keywords of arguments passed to the function, and the associated values are the values of those arguments.
-
+                <p>
+                    In <xref ref="list-__init__" /> we see two special arguments used in a function definition, <c>*args</c> and <c>**kwargs</c>. The names of the local variables defined by these arguments are respectively <c>args</c> and <c>kwargs</c>. The first, <c>args</c>, consists of a tuple of all <term>positionally-determined arguments</term> passed to the function. The second, <c>kwargs</c>, consists of a dictionary whose keys are the keywords of arguments passed to the function, and the associated values are the values of those arguments.
+                </p>
                 <listing xml:id="list-argument_lists">
                     <caption>Functions allowing arbitrary arguments</caption>
                     <statement>
@@ -430,7 +429,7 @@
             </introduction>
             <task>
                 <p>
-                    Implement your algorithm in the <c>AlgoPerm</c> class. Begin by editing the <c>__init__</c> class so that it looks as follows:
+                    Implement your algorithm in the <c>AlgoPerm</c> class. Begin by editing the <c>__init__</c> method of <c>AlgoPerm</c> so that it looks as follows:
                 </p>
                 <sidebyside>
                     <program language='python'>
@@ -487,27 +486,25 @@
                 </p>
             </task>
             <task>
-                <statement>
+                <p>
                     Correct the two data validation lines from the code.
-                </statement>
+                </p>
             </task>
             <task>
-                <statement>
-                    <p>
-                        In your <c>aam_proj2.py</c> file, test your newly defined and corrected class. Add the following lines to the bottom of the <c>aam_proj2.py</c> file and execute it.
-                    </p>
-                    <sidebyside>
-                        <program language='python'>
-                            <input>
-                                a = AlgoPerm([2, 1, 5, 6, 3, 4, 10, 9, 8, 7])
-                                print(f"a = {a}")
+                <p>
+                    In your <c>aam_proj2.py</c> file, test your newly defined and corrected class. Add the following lines to the bottom of the <c>aam_proj2.py</c> file and execute it.
+                </p>
+                <sidebyside>
+                    <program language='python'>
+                        <input>
+                            a = AlgoPerm([2, 1, 5, 6, 3, 4, 10, 9, 8, 7])
+                            print(f"a = {a}")
 
-                                b = AlgoPerm({1: 2, 2: 3, 3: 5, 5: 1, 4: 4, 6: 6, 7: 7, 8: 8})
-                                print(f"b = {b}")
-                            </input>
-                        </program>
-                    </sidebyside>
-                </statement>
+                            b = AlgoPerm({1: 2, 2: 3, 3: 5, 5: 1, 4: 4, 6: 6, 7: 7, 8: 8})
+                            print(f"b = {b}")
+                        </input>
+                    </program>
+                </sidebyside>
             </task>
         </activity>
         <!-- ###################################### -->

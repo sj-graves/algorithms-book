@@ -4,7 +4,7 @@
     <title>Project: Gaining Familiarity with Python</title>
     <shorttitle>Familiarity with Python</shorttitle>
     <p>
-                As a gentle introduction to working with Python, we will implement an easily-teachable algorithm called <term>Kid RSA</term>. The Kid RSA algorithm serves as an introduction to the idea of public key cryptography, which will be investigated further in <xref provisional="ch-crypto" title="text"/>. It is important that you complete each Checkpoint project in order; it is a safe assumption that as you work through the checkpoints you are adding to the same file or files.
+                As a gentle introduction to working with Python, we will implement an easily-teachable algorithm called <term>Kid RSA</term>. The Kid RSA algorithm serves as an introduction to the idea of public key cryptography, which will be investigated further in <xref ref="ch-crypto"/>. It is important that you complete each Checkpoint project in order; it is a safe assumption that as you work through the checkpoints you are adding to the same file or files.
     </p>
     <p>
         If you are not already familiar with programming and with Python, now would be a very good time to read the <xref ref="app-python" text="title"/> appendix.
@@ -34,38 +34,38 @@
     <activity xml:id="prj-kidrsa-files">
         <title>KidRSA project files</title>
         <prelude>
-            A first task for any of the projects will be to set up a good environment to work in, choosing an appropriate working directory and filenames for the project.
+            <p>
+                A first task for any of the projects will be to set up a good environment to work in, choosing an appropriate working directory and filenames for the project.
+            </p>
         </prelude>
-        <statement>
-            <task>
-                <statement>
+        <task>
+            <p>
                 Using IDLE, create a blank Python module file named <c>aam_proj1.py</c> in an easy-to-find folder on your computer. This will eventually be submitted via Canvas or some other digital method for grading.
-                </statement>
-            </task>
-            <task>
-                <statement>
-                    <p>
-                        As header information, every submitted project file should begin with a block of comments. Your header should look like the following example, with the information changed to reflect your information and situation.
-                    </p>
-                    <listing xml:id="list-projfile-header">
-                        <caption>A sample header for Math 3380 Project Files</caption>
-                        <program language="python">
-                            <input>
-                                # Math 3380 Project 1
-                                # Filename: aam_proj1.py
-                                #
-                                # Name: Frodo Baggins
-                                # Date: 25 March, T.A. 3019
-                                #
-                            </input>
-                        </program>
-                    </listing>
-                </statement>
-            </task>
+            </p>
+        </task>
+        <task>
+            <p>
+                As header information, every submitted project file should begin with a block of comments. Your header should look like the following example, with the information changed to reflect your information and situation.
+            </p>
+            <listing xml:id="list-projfile-header">
+                <caption>A sample header for Math 3380 Project Files</caption>
+                <program language="python">
+                    <input>
+                        # Math 3380 Project 1
+                        # Filename: aam_proj1.py
+                        #
+                        # Name: Frodo Baggins
+                        # Date: 25 March, T.A. 3019
+                        #
+                    </input>
+                </program>
+            </listing>
+        </task>
+        <conclusion>
             <p>
                 All files submitted for these projects should have a similar header.
             </p>
-        </statement>
+        </conclusion>
     </activity>
     <p>
         Public key cryptography first requires the generation of a <term>keypair</term>, consisting of a <term>public key</term> and a <term>private key</term>.
@@ -91,43 +91,41 @@
     </p>
     <activity xml:id="prj-kidrsa-calculator">
         <title>Using Python as a simple calculator</title>
-        <statement>
-            <task>
-                <p>
-                    In the file created in <xref ref="prj-kidrsa-files"/>, declare values for <c>a</c>, <c>b</c>, <c>a_prime</c>, and <c>b_prime</c>. The variable names in Python cannot include the prime symbol, hence the change of name.
-                </p>
-                <p>
-                    Make sure you include <term>comments</term> in your code explaining what you're doing. Comments are lines (or ends of lines) which begin with the symbol called either <q>pound</q> or <q>hash</q>, specifically <c>#</c>.
-                </p>
-            </task>
-            <task>
-                <p>
-                    Calculate the values of <c>M</c>, <c>e</c>, <c>d</c>, and <c>n</c> from <c>a</c>, <c>b</c>, <c>a_prime</c>, and <c>b_prime</c> using Python, as explained in <xref ref="alg-kidrsa" text="title" />. Make sure your program displays the public and private key using statements such as <c>print(f"Public key: {(n,e)}")</c>.
-                </p>
-            </task>
-            <task>
-                <p>
-                    Prove mathematically that there is a value <m>k\in\Ints</m> such that <m>ed = nk+1</m>, and verify that your code works by printing the result of <c>(e * d) % n</c>.
-                </p>
-            </task>
-            <task>
-                <p>
-                    Write a function which takes <c>a</c>, <c>b</c>, <c>a_prime</c>, and <c>b_prime</c> as input and returns the key values <c>(n,e)</c> and <c>(n,d)</c>.
-                </p>
-                <sidebyside>
-                    <program language="python">
-                        <input>
-                            def kidrsa_keygen(a, b, a_prime, b_prime):
-                                """A function generating KidRSA keypairs."""
-                                #
-                                # Fill in the code to calculate n, e, d
-                                #
-                                return (n,e,d)
-                        </input>
-                    </program>
-                </sidebyside>
-            </task>
-        </statement>
+        <task>
+            <p>
+                In the file created in <xref ref="prj-kidrsa-files"/>, declare values for <c>a</c>, <c>b</c>, <c>a_prime</c>, and <c>b_prime</c>. The variable names in Python cannot include the prime symbol, hence the change of name.
+            </p>
+            <p>
+                Make sure you include <term>comments</term> in your code explaining what you're doing. Comments are lines (or ends of lines) which begin with the symbol called either <q>pound</q> or <q>hash</q>, specifically <c>#</c>.
+            </p>
+        </task>
+        <task>
+            <p>
+                Calculate the values of <c>M</c>, <c>e</c>, <c>d</c>, and <c>n</c> from <c>a</c>, <c>b</c>, <c>a_prime</c>, and <c>b_prime</c> using Python, as explained in <xref ref="alg-kidrsa" text="title" />. Make sure your program displays the public and private key using statements such as <c>print(f"Public key: {(n,e)}")</c>.
+            </p>
+        </task>
+        <task>
+            <p>
+                Prove mathematically that there is a value <m>k\in\Ints</m> such that <m>ed = nk+1</m>, and verify that your code works by printing the result of <c>(e * d) % n</c>.
+            </p>
+        </task>
+        <task>
+            <p>
+                Write a function which takes <c>a</c>, <c>b</c>, <c>a_prime</c>, and <c>b_prime</c> as input and returns the key values <c>(n,e)</c> and <c>(n,d)</c>.
+            </p>
+            <sidebyside>
+                <program language="python">
+                    <input>
+                        def kidrsa_keygen(a, b, a_prime, b_prime):
+                            """A function generating KidRSA keypairs."""
+                            #
+                            # Fill in the code to calculate n, e, d
+                            #
+                            return (n,e,d)
+                    </input>
+                </program>
+            </sidebyside>
+        </task>
     </activity>
     <p>
         The fundamental idea behind public key cryptography is that given a public key it should be easy to mathematically compute the encrypted version of a message. However, without the private key it should ideally be impossible to compute the original message from the encrypted version. Unfortunately this is precisely why the Kid RSA algorithm is suitable only for teaching purposes: it is very easy to produce the private key <m>d</m> with a little arithmetic from the numbers <m>n</m> and <m>e</m> in the public key.
@@ -185,7 +183,7 @@
     </definition>
     <activity xml:id="prj-kidrsa-encoding-characters">
         <title>Encoding strings into lists of integers</title>
-        <statement>
+        <introduction>
             <p>
                  Encryption was used historically by military commanders seeking to send orders to remote troops, so permutation-based encryption on the letters of the alphabet was the ideal method of encryption. The invention of computers changed that by making it much more feasible to apply brute-force solutions to code breaking. Now that we use digital encryption it is necessary to convert the messages we want to send from strings of characters to lists of integers in order to perform mathematical functions on those integers.
             </p>
@@ -208,116 +206,122 @@
             <p>
                 Every printable (or type-able) character has an <term>ordinal</term>, which is what is returned by <c>ord</c>; the valid ordinals each map to a character, but not every <c>int</c> is valid input for <c>chr</c>. The valid input range of <c>chr</c> is all values in <c>range(0x110000)</c>; in turn, <c>0x110000</c> is the hexadecimal (base-16) number with base-10 value 1114112.
             </p>
-            <task>
-                <p>
-                    Find the ordinals of the letters <c>A</c> and <c>a</c>
-                </p>
-            </task>
-            <task>
-                <p>
-                    Use ordinals along with a <c>range(26)</c> to print the capital and miniscule letters, in the format <c>Aa</c> through <c>Zz</c>.
-                </p>
-            </task>
+        </introduction>
+        <task>
+            <p>
+                Find the ordinals of the letters <c>A</c> and <c>a</c>
+            </p>
+        </task>
+        <task>
+            <p>
+                Use ordinals along with a <c>range(26)</c> to print the capital and miniscule letters, in the format <c>Aa</c> through <c>Zz</c>.
+            </p>
             <p>
                 To make a notational distinction, we will separate the ideas of <term>encoding</term> and <term>encrypting</term>. Encoding is the process by which a natural written language is transferred into a different symbol set, usually for the purpose of transmission. Encryption, on the other hand, is the process by which information is hidden from unintended recipients. Sometimes a simple encoding is used as encryption, but there are relatively easy mathematical tools to decode messages which have been encoded but not encrypted. Some of the same tools are useful to break low-security encryption, as well!
             </p>
-            <task>
-                <p>
-                    Fill in the remainder of the following code to produce a working program which takes a string as input and returns the list of ordinals of the characters in the string.
-                </p>
-                <sidebyside>
-                    <program language='python'>
-                        <input>
-                            def encode(input_string):
-                                out = [ ]
-                                for c in input_string:
-                                    #
-                                    # Fill in your code here
-                                    #
-                                return out
-                        </input>
-                    </program>
-                </sidebyside>
-            </task>
-            <task>
-                <p>
-                    Fill in the remainder of the following code to produce a working program which takes a list of integers output by the <c>ord</c> command and returns a string of the characters with those ordinals.
-                </p>
-                <sidebyside>
-                    <program language='python'>
-                        <input>
-                            def decode(input_list):
-                                out = ""
-                                for x in input_list:
-                                    #
-                                    # Fill in your code here
-                                    #
-                                return out
-                        </input>
-                    </program>
-                </sidebyside>
-            </task>
-        </statement>
+        </task>
+        <task>
+            <p>
+                Fill in the remainder of the following code to produce a working program which takes a string as input and returns the list of ordinals of the characters in the string.
+            </p>
+            <sidebyside>
+                <program language='python'>
+                    <input>
+                        def encode(input_string):
+                            out = [ ]
+                            for c in input_string:
+                                #
+                                # Fill in your code here
+                                #
+                            return out
+                    </input>
+                </program>
+            </sidebyside>
+        </task>
+        <task>
+            <p>
+                Fill in the remainder of the following code to produce a working program which takes a list of integers output by the <c>ord</c> command and returns a string of the characters with those ordinals.
+            </p>
+            <sidebyside>
+                <program language='python'>
+                    <input>
+                        def decode(input_list):
+                            out = ""
+                            for x in input_list:
+                                #
+                                # Fill in your code here
+                                #
+                            return out
+                    </input>
+                </program>
+            </sidebyside>
+        </task>
+        <conclusion>
+            <p>
+                You now have most of the pieces put together to encrypt messages using KidRSA.
+            </p>
+        </conclusion>
     </activity>
     <activity xml:id="prj-kidrsa-kidrsa">
         <title>Applying KidRSA</title>
-        <statement>
+        <introduction>
             <p>
                 Now it is time to combine all this work and write our first encryption program! KidRSA is a <term>symmetric</term> encryption algorithm where the same function is used with different inputs to encrypt and decrypt.
             </p>
-            <task>
-                <p>
-                    Write the function which applies KidRSA to a single integer.
-                </p>
-                <sidebyside>
-                    <program language="python">
-                        <input>
-                            def kidrsa_single(key, msg_int):
-                                "Apply KidRSA using key = (n,x) to the integer msg_int."
-                                n, x = key
-                                return (x*msg_int) % n
-                        </input>
-                    </program>
-                </sidebyside>
-            </task>
-            <task>
-                <p>
-                    Now, combine this with <c>encode</c> and <c>decode</c> to encrypt and decrypt a <c>msg_str</c>! Correct the following function and include it in your file.
-                </p>
-                <listing xml:id="list-apply-kidrsa">
-                    <caption>Applying KidRSA to messages</caption>
-                    <program language="python">
-                        <input>
-                            def kidrsa(key, msg):
-                                """Apply KidRSA using key = (n,x) to encrypt or decrypt
-                                    the message msg, which is either a string to be encrypted
-                                    or a list of integers to be decrypted."""
-                                n,x = key
-                                if type(msg) == str:
-                                    # We were given a string, so we must be trying to encrypt,
-                                    # so first we have to encode the string.
-                                    msg_list = [ 65 ] ########### FIX THIS ###########
-                                elif type(msg) == list:
-                                    # We were given a list, so we must be trying to decrypt,
-                                    # so let's just make msg_list a copy of msg.
-                                    msg_list = msg[:]
-                                # Now we can apply the kidRSA_single function to everything
-                                # in msg_list.
-                                out_list = [ ]
-                                for number in msg_list:
-                                    out_list.append( 65 ) ########### FIX THIS ###########
-                                if type(msg) == list:
-                                    # We must need to decode whatever we've decrypted.
-                                    return "A"  ########### FIX THIS ###########
-                                else:
-                                    # Otherwise we want to return the list of encrypted
-                                    # integers without trying to decode it.
-                                    return [65] ########### FIX THIS ###########
-                        </input>
-                    </program>
-                </listing>
-            </task>
-            <task>
+        </introduction>
+        <task>
+            <p>
+                Write the function which applies KidRSA to a single integer.
+            </p>
+            <sidebyside>
+                <program language="python">
+                    <input>
+                        def kidrsa_single(key, msg_int):
+                            "Apply KidRSA using key = (n,x) to the integer msg_int."
+                            n, x = key
+                            return (x*msg_int) % n
+                    </input>
+                </program>
+            </sidebyside>
+        </task>
+        <task>
+            <p>
+                Now, combine this with <c>encode</c> and <c>decode</c> to encrypt and decrypt a <c>msg_str</c>! Correct the following function and include it in your file.
+            </p>
+            <listing xml:id="list-apply-kidrsa">
+                <caption>Applying KidRSA to messages</caption>
+                <program language="python">
+                    <input>
+                        def kidrsa(key, msg):
+                            """Apply KidRSA using key = (n,x) to encrypt or decrypt
+                                the message msg, which is either a string to be encrypted
+                                or a list of integers to be decrypted."""
+                            n,x = key
+                            if type(msg) == str:
+                                # We were given a string, so we must be trying to encrypt,
+                                # so first we have to encode the string.
+                                msg_list = [ 65 ] ########### FIX THIS ###########
+                            elif type(msg) == list:
+                                # We were given a list, so we must be trying to decrypt,
+                                # so let's just make msg_list a copy of msg.
+                                msg_list = msg[:]
+                            # Now we can apply the kidRSA_single function to everything
+                            # in msg_list.
+                            out_list = [ ]
+                            for number in msg_list:
+                                out_list.append( 65 ) ########### FIX THIS ###########
+                            if type(msg) == list:
+                                # We must need to decode whatever we've decrypted.
+                                return "A"  ########### FIX THIS ###########
+                            else:
+                                # Otherwise we want to return the list of encrypted
+                                # integers without trying to decode it.
+                                return [65] ########### FIX THIS ###########
+                    </input>
+                </program>
+            </listing>
+        </task>
+        <task>
                 <p>
                     Test your work! Use <c>a, b, a_prime, b_prime = 4, 81, 123, 19963</c> to generate a keypair and then use that to decrypt the following:
                     <sidebyside>
@@ -336,7 +340,11 @@
                     </sidebyside>
                 </p>
             </task>
-        </statement>
+        <conclusion>
+            <p>
+                The next part of the project will be to undo all this hard work by devising a method to find the private part of a KidRSA key pair when given the public part.
+            </p>
+        </conclusion>
     </activity>
     <definition xml:id="def-gcd">
         <title>Greatest Common Divisor</title>
@@ -390,52 +398,52 @@
     </algorithm>
     <activity xml:id="prj-kidrsa-euclid1">
         <title>Implementing Euclid's algorithm</title>
-        <statement>
+        <introduction>
             <p>
                 In order to find the greatest common divisor, we apply the division algorithm repeatedly in the form of Python's <c>divmod(...)</c> command, stopping when the remainder it produces is zero. Once the remainder is 0, we know that the previous remainder was the <m>\gcd{}</m>. This is a great use case for a <c>while</c> loop. First define a function in the same file created in <xref ref="prj-kidrsa-files" />
             </p>
-            <task>
-                <p>
-                    Create the following function:
-                </p>
-                <sidebyside>
-                    <program language="python">
-                        <input>
-                            def gcd(left, right):
-                                """An iterative greatest common divisor function."""
-                                # Set the initial value of a and b to the input
-                                a, b = left, right
-                                # Calculate the quotient and remainder
-                                q, r = divmod(a, b)
-                                while r != 0:
-                                    #
-                                    # Leave this blank for now
-                                    #
-                                # Return the correct final value by changing None
-                                return None
-                        </input>
-                    </program>
-                </sidebyside>
-                <p>
-                    As written, if you execute <c>gcd(123,457)</c> the program will crash with an <c>IndentationError</c>. This is a very specific type of syntax error which occurs when a colon (<c>:</c>) has been left dangling at the opening of a block structure, but the next line was not indented to start the block!
-                </p>
-            </task>
-            <task>
-                <p>
-                    Inspecting <xref ref="algo-euclid-gcd" text="title" /> shows you what needs to change inside the loop: we need to update the values of <c>a</c> and <c>b</c> and then recompute the values of <c>q</c> and <c>r</c>. Change the contents of the loop so that the correct new values are assigned to <c>a</c> and <c>b</c>, and include another <c>q, r = divmod(a, b)</c> line at the end of the loop.
-                </p>
-            </task>
-            <task>
-                <p>
-                    Once you reach this point, your loop will correctly end. Now change the <c>return None</c> line so that the correct number is returned, instead of the do-nothing value <c>None</c>.
-                </p>
-            </task>
-            <task>
-                <p>
-                    Verify your work! Add the line <c>print( gcd(123321, 345345543) )</c> to the end of your file at the leftmost indendation level and then run it. You should obtain an answer of 3.
-                </p>
-            </task>
-        </statement>
+        </introduction>
+        <task>
+            <p>
+                Create the following function:
+            </p>
+            <sidebyside>
+                <program language="python">
+                    <input>
+                        def gcd(left, right):
+                            """An iterative greatest common divisor function."""
+                            # Set the initial value of a and b to the input
+                            a, b = left, right
+                            # Calculate the quotient and remainder
+                            q, r = divmod(a, b)
+                            while r != 0:
+                                #
+                                # Leave this blank for now
+                                #
+                            # Return the correct final value by changing None
+                            return None
+                    </input>
+                </program>
+            </sidebyside>
+            <p>
+                As written, if you execute <c>gcd(123,457)</c> the program will crash with an <c>IndentationError</c>. This is a very specific type of syntax error which occurs when a colon (<c>:</c>) has been left dangling at the opening of a block structure, but the next line was not indented to start the block!
+            </p>
+        </task>
+        <task>
+            <p>
+                Inspecting <xref ref="algo-euclid-gcd" text="title" /> shows you what needs to change inside the loop: we need to update the values of <c>a</c> and <c>b</c> and then recompute the values of <c>q</c> and <c>r</c>. Change the contents of the loop so that the correct new values are assigned to <c>a</c> and <c>b</c>, and include another <c>q, r = divmod(a, b)</c> line at the end of the loop.
+            </p>
+        </task>
+        <task>
+            <p>
+                Once you reach this point, your loop will correctly end. Now change the <c>return None</c> line so that the correct number is returned, instead of the do-nothing value <c>None</c>.
+            </p>
+        </task>
+        <task>
+            <p>
+                Verify your work! Add the line <c>print( gcd(123321, 345345543) )</c> to the end of your file at the leftmost indendation level and then run it. You should obtain an answer of 3.
+            </p>
+        </task>
     </activity>
     <p>
         We need another theorem if we want to develop a tool to break a keypair.
@@ -555,29 +563,27 @@
     </algorithm>
     <activity xml:id="prj-kidrsa-hacking-kidrsa">
         <title>Hacking KidRSA</title>
-        <statement>
-            <task>
-                <p>
-                    We can use <xref ref="algo-euclid-gcd-inverses" text="title" /> to reverse-engineer the number <m>d</m> of a KidRSA triple <m>(n,e,d)</m> if we know <m>(n,e)</m>, because <m>d</m> is simply the reciprocal of <m>e</m> modulo <m>n</m>. Write a new function called <c>big_gcd</c> which modifies your previous <c>gcd</c> function by adding exactly two lines: <c>t = [0,1]</c> and <c> t.append( t[-2] - q * t[-1] )</c>. You'll need to determine carefully where these lines must be added.
-                </p>
-                <p>
-                    Finally, change the return statement so that it returns the greatest common divisor as well as <c>t[-1]</c> in an ordered pair.
-                </p>
-            </task>
-            <task>
-                <p>
-                    Find <c>d</c> if my public KidRSA key is <c>(n,e)</c> where
-                </p>
-                <sidebyside>
-                    <program language="python">
-                        <input>
-                            n = 168702191480379745583323186370491914430362515412305925474315373302579709429
-                            e = 169514405816166316269158771599355601156883726762227835237
-                        </input>
-                    </program>
-                </sidebyside>
-            </task>
-        </statement>
+        <task>
+            <p>
+                We can use <xref ref="algo-euclid-gcd-inverses" text="title" /> to reverse-engineer the number <m>d</m> of a KidRSA triple <m>(n,e,d)</m> if we know <m>(n,e)</m>, because <m>d</m> is simply the reciprocal of <m>e</m> modulo <m>n</m>. Write a new function called <c>big_gcd</c> which modifies your previous <c>gcd</c> function by adding exactly two lines: <c>t = [0,1]</c> and <c> t.append( t[-2] - q * t[-1] )</c>. You'll need to determine carefully where these lines must be added.
+            </p>
+            <p>
+                Finally, change the return statement so that it returns the greatest common divisor as well as <c>t[-1]</c> in an ordered pair.
+            </p>
+        </task>
+        <task>
+            <p>
+                Find <c>d</c> if my public KidRSA key is <c>(n,e)</c> where
+            </p>
+            <sidebyside>
+                <program language="python">
+                    <input>
+                        n = 168702191480379745583323186370491914430362515412305925474315373302579709429
+                        e = 169514405816166316269158771599355601156883726762227835237
+                    </input>
+                </program>
+            </sidebyside>
+        </task>
     </activity>
 
 </section>

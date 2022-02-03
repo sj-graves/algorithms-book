@@ -22,6 +22,8 @@
         \DeclareMathOperator{\support}{supp}
         \DeclareMathOperator{\lcm}{lcm}
 
+<!--         \newcommand{\mathscr}[1]{\mathcal{#1}} -->
+        
         \newcommand{\set}[1]{\left\{#1\right\}}
         \newcommand{\seq}[1]{\left(#1\right)}
         \newcommand{\abs}[1]{\left|#1\right|}

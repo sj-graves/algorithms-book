@@ -1,74 +1,97 @@
 \documentclass[10pt, letter]{amsart}
 \usepackage{tikz}
-\usetikzlibrary{graphs, graphdrawing, quotes}
+\usetikzlibrary{graphs, graphdrawing, quotes, calc}
 \usetikzlibrary{arrows.meta, backgrounds, shapes}
 \usegdlibrary{force}
 
 \begin{document}
-\definecolor{smallnet_vc0}{rgb}{1,1,1}
-\definecolor{smallnet_ec0}{rgb}{0, 0, 0}
-{\footnotesize
-    \begin{tikzpicture}[xscale = 5.0, yscale=5.0,
-            vx_0/.style = {circle, draw, fill=smallnet_vc0, inner sep = 1pt}]
-        \node (0) [vx_0] at (0.0,0.0) { \tt $v_{0}$};
-        \node (1) [vx_0] at (1.0,0.0) { \tt $v_{1}$};
-        \node (2) [vx_0] at (1.0,1.0) { \tt $v_{2}$};
-        \node (3) [vx_0] at (0.0,1.0) { \tt $v_{3}$};
-        \node (4) [vx_0] at (0.333,0.333) { \tt $v_{4}$};
-        \node (5) [vx_0] at (0.667,0.333) { \tt $v_{5}$};
-        \node (6) [vx_0] at (0.667,0.667) { \tt $v_{6}$};
-        \node (7) [vx_0] at (0.333,0.667) { \tt $v_{7}$};
-        \graph[edge quotes={pos=0.5, draw, fill=white, inner sep=1pt}]{(import nodes);
-        (0) --[smallnet_ec0, "\footnotesize \tt 16", ] (1),
-        (0) --[smallnet_ec0, "\footnotesize \tt 12", ] (3),
-        (0) --[smallnet_ec0, "\footnotesize \tt 4", ] (7),
-        (1) --[smallnet_ec0, "\footnotesize \tt 14", ] (2),
-        (1) --[smallnet_ec0, "\footnotesize \tt 17", ] (4),
-        (1) --[smallnet_ec0, "\footnotesize \tt 6", ] (5),
-        (2) --[smallnet_ec0, "\footnotesize \tt 9", ] (6),
-        (2) --[smallnet_ec0, "\footnotesize \tt 5", ] (7),
-        (3) --[smallnet_ec0, "\footnotesize \tt 15", ] (7),
-        (4) --[smallnet_ec0, "\footnotesize \tt 6", ] (6),
-        (4) --[smallnet_ec0, "\footnotesize \tt 13", ] (7),
-        (5) --[smallnet_ec0, "\footnotesize \tt 12", ] (6),
-        (6) --[smallnet_ec0, "\footnotesize \tt 3", ] (7);};
-    \end{tikzpicture}
-}
+  \begin{tikzpicture}[x=1.25em, y=1.25em]
+    
 
-\tikzset{
-    pics/perm/.style n args = {3}{
-        code = {
-            \draw (0,0) coordinate (#1_pos) coordinate (#1_bl)
-                \foreach \num/\val in {#2}{
-                    (#1_pos.north east) node [below right] (#1_pos) {\val} (#1_pos.north) node [above] (#1_val_\num) {\num}
-                    (#1_pos.south east) coordinate (#1_br_\val)
-                    (#1_val_\num.north east) coordinate (#1_tr_\num)
-                } (#1_pos.north east) coordinate (#1_tr)
-                (#1_bl |- #1_br_#3) coordinate (#1_bl)
-                (#1_bl) ++(.1,0) -- (#1_bl) -- (#1_bl |- #1_tr_#3) -- ++(.1,0)
-                (#1_tr_#3 |- #1_br_#3) ++(-.1,0) -- (#1_tr_#3 |- #1_br_#3) -- (#1_tr_#3) -- ++(-.1,0);
-        }
-    }
-}
-\begin{tikzpicture}
-    \draw (0,0) pic {perm={s1}{1/10, 2/3, 3/4, 4/6, 5/9, 6/2, 7/5, 8/8, 9/1, 10/7}{10}}
-    (s1_bl) ++(0,-1/2) coordinate (s1_s2) ++(0,-1/2) pic {perm={s2}{1/7, 2/10, 3/2, 4/9, 5/3, 6/1, 7/4, 8/6, 9/8, 10/5}{10}}
-    (s2_bl) ++(0,-1/2) coordinate (s2_s3) ++(0,-1/2) pic {perm={s3}{1/4, 2/2, 3/3, 4/6, 5/9, 6/1, 7/10, 8/7, 9/8, 10/5}{10}}
-    (s3_bl) ++(0,-1/2) coordinate (s3_s4) ++(0,-1/2) pic {perm={s4}{1/10, 2/7, 3/5, 4/2, 5/6, 6/1, 7/4, 8/3, 9/8, 10/9}{10}}
-    (s4_bl) ++(0,-1/2) coordinate (s4_s5) ++(0,-1/2) pic {perm={s5}{1/3, 2/6, 3/10, 4/4, 5/1, 6/9, 7/2, 8/7, 9/5, 10/8}{10}};
-    \begin{scope}[on background layer]
-        \draw[yellow, line width=5pt]
-        (s1_val_1.north) 
-        -- (s1_val_1.mid |- s1_s2) 
-        -- (s2_val_10.mid |- s1_s2) 
-        -- (s2_val_10.mid |- s2_s3) 
-        -- (s3_val_5.mid |- s2_s3)
-        -- (s3_val_5.mid |- s3_s4)
-        -- (s4_val_9.mid |- s3_s4)
-        -- (s4_val_9.mid |- s4_s5)
-        -- (s5_val_8.mid |- s4_s5)
-        -- (s5_val_8.mid |- s5_bl)
-        ;
-        \end{scope}
-\end{tikzpicture}
+  \end{tikzpicture}
+
+
+
+%     \begin{tikzpicture}[x=1.25 em, y=1.25 em]
+%         \foreach \row/\col/\letter in {0/0/G, 0/1/O, 0/2/P, 0/3/A, 0/4/T, 1/0/R, 1/1/J, 1/2/S, 1/3/L, 1/4/N, 2/0/U, 2/1/B, 2/2/C, 2/3/D, 2/4/E, 3/0/F, 3/1/H, 3/2/K, 3/3/M, 3/4/Q, 4/0/V, 4/1/W, 4/2/X, 4/3/Y, 4/4/Z}{
+%             \draw
+%             (\col+.5,-\row-.5) node {\texttt{\letter}}
+%             (\col,   -\row  ) coordinate (_\letter_nw)
+%             (\col+1, -\row  ) coordinate (_\letter_ne)
+%             (\col,   -\row-1) coordinate (_\letter_sw)
+%             (\col+1, -\row-1) coordinate (_\letter_se);
+%         };
+%         \draw \foreach \x in {0,...,5}{(\x,0) -- (\x,-5) (0,-\x) -- (5,-\x)};
+%         \draw [ultra thick, red] (_H_sw) rectangle (_T_ne);
+%         \draw [ultra thick, blue] (_B_nw) rectangle (_E_se);
+%         \draw [ultra thick, green] (_A_nw) rectangle (_M_se);
+%     \end{tikzpicture}
+
+
+% \definecolor{smallnet_vc0}{rgb}{1,1,1}
+% \definecolor{smallnet_ec0}{rgb}{0, 0, 0}
+% {\footnotesize
+%     \begin{tikzpicture}[xscale = 5.0, yscale=5.0,
+%             vx_0/.style = {circle, draw, fill=smallnet_vc0, inner sep = 1pt}]
+%         \node (0) [vx_0] at (0.0,0.0) { \tt $v_{0}$};
+%         \node (1) [vx_0] at (1.0,0.0) { \tt $v_{1}$};
+%         \node (2) [vx_0] at (1.0,1.0) { \tt $v_{2}$};
+%         \node (3) [vx_0] at (0.0,1.0) { \tt $v_{3}$};
+%         \node (4) [vx_0] at (0.333,0.333) { \tt $v_{4}$};
+%         \node (5) [vx_0] at (0.667,0.333) { \tt $v_{5}$};
+%         \node (6) [vx_0] at (0.667,0.667) { \tt $v_{6}$};
+%         \node (7) [vx_0] at (0.333,0.667) { \tt $v_{7}$};
+%         \graph[edge quotes={pos=0.5, draw, fill=white, inner sep=1pt}]{(import nodes);
+%         (0) --[smallnet_ec0, "\footnotesize \tt 16", ] (1),
+%         (0) --[smallnet_ec0, "\footnotesize \tt 12", ] (3),
+%         (0) --[smallnet_ec0, "\footnotesize \tt 4", ] (7),
+%         (1) --[smallnet_ec0, "\footnotesize \tt 14", ] (2),
+%         (1) --[smallnet_ec0, "\footnotesize \tt 17", ] (4),
+%         (1) --[smallnet_ec0, "\footnotesize \tt 6", ] (5),
+%         (2) --[smallnet_ec0, "\footnotesize \tt 9", ] (6),
+%         (2) --[smallnet_ec0, "\footnotesize \tt 5", ] (7),
+%         (3) --[smallnet_ec0, "\footnotesize \tt 15", ] (7),
+%         (4) --[smallnet_ec0, "\footnotesize \tt 6", ] (6),
+%         (4) --[smallnet_ec0, "\footnotesize \tt 13", ] (7),
+%         (5) --[smallnet_ec0, "\footnotesize \tt 12", ] (6),
+%         (6) --[smallnet_ec0, "\footnotesize \tt 3", ] (7);};
+%     \end{tikzpicture}
+% }
+
+% \tikzset{
+%     pics/perm/.style n args = {3}{
+%         code = {
+%             \draw (0,0) coordinate (#1_pos) coordinate (#1_bl)
+%                 \foreach \num/\val in {#2}{
+%                     (#1_pos.north east) node [below right] (#1_pos) {\val} (#1_pos.north) node [above] (#1_val_\num) {\num}
+%                     (#1_pos.south east) coordinate (#1_br_\val)
+%                     (#1_val_\num.north east) coordinate (#1_tr_\num)
+%                 } (#1_pos.north east) coordinate (#1_tr)
+%                 (#1_bl |- #1_br_#3) coordinate (#1_bl)
+%                 (#1_bl) ++(.1,0) -- (#1_bl) -- (#1_bl |- #1_tr_#3) -- ++(.1,0)
+%                 (#1_tr_#3 |- #1_br_#3) ++(-.1,0) -- (#1_tr_#3 |- #1_br_#3) -- (#1_tr_#3) -- ++(-.1,0);
+%         }
+%     }
+% }
+% \begin{tikzpicture}
+%     \draw (0,0) pic {perm={s1}{1/10, 2/3, 3/4, 4/6, 5/9, 6/2, 7/5, 8/8, 9/1, 10/7}{10}}
+%     (s1_bl) ++(0,-1/2) coordinate (s1_s2) ++(0,-1/2) pic {perm={s2}{1/7, 2/10, 3/2, 4/9, 5/3, 6/1, 7/4, 8/6, 9/8, 10/5}{10}}
+%     (s2_bl) ++(0,-1/2) coordinate (s2_s3) ++(0,-1/2) pic {perm={s3}{1/4, 2/2, 3/3, 4/6, 5/9, 6/1, 7/10, 8/7, 9/8, 10/5}{10}}
+%     (s3_bl) ++(0,-1/2) coordinate (s3_s4) ++(0,-1/2) pic {perm={s4}{1/10, 2/7, 3/5, 4/2, 5/6, 6/1, 7/4, 8/3, 9/8, 10/9}{10}}
+%     (s4_bl) ++(0,-1/2) coordinate (s4_s5) ++(0,-1/2) pic {perm={s5}{1/3, 2/6, 3/10, 4/4, 5/1, 6/9, 7/2, 8/7, 9/5, 10/8}{10}};
+%     \begin{scope}[on background layer]
+%         \draw[yellow, line width=5pt]
+%         (s1_val_1.north)
+%         -- (s1_val_1.mid |- s1_s2)
+%         -- (s2_val_10.mid |- s1_s2)
+%         -- (s2_val_10.mid |- s2_s3)
+%         -- (s3_val_5.mid |- s2_s3)
+%         -- (s3_val_5.mid |- s3_s4)
+%         -- (s4_val_9.mid |- s3_s4)
+%         -- (s4_val_9.mid |- s4_s5)
+%         -- (s5_val_8.mid |- s4_s5)
+%         -- (s5_val_8.mid |- s5_bl)
+%         ;
+%         \end{scope}
+% \end{tikzpicture}
 \end{document}

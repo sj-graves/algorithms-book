@@ -185,7 +185,7 @@
             <theorem xml:id="thm-permprod-assoc">
                 <title>Composition in <m>\sym{A}</m> is associative</title>
                 <statement>
-                    Let <m>A</m> be a set, and suppose <m>\phi,\sigma,\tau\in\sym{A}</m>. Then
+                    Let <m>A</m> be a set, and suppose <m>\rho,\sigma,\tau\in\sym{A}</m>. Then
                     <me>
                         \rho\after(\sigma\after\tau) = (\rho\after\sigma)\after\tau
                     </me>

@@ -1,13 +1,12 @@
 <?xml version='1.0' encoding='utf-8'?>
 
-<section xml:id="sec-crypto-perms" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <title>Permutations as substitution ciphers</title>
-    <shorttitle>Substitution ciphers</shorttitle>
+<section xml:id="sec-crypto-subst" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Simple substitution ciphers</title>
     <introduction>
-        A <term>substitution cipher</term> is simply a permutation of the letters in an alphabet; more complicated substitution ciphers might map single characters to fixed-size blocks of characters. Recall that an <term>alphabet</term> is a finite set of symbols, and that we will use two special set notations: <m>\scr{E}</m> to denote the set of capital letters of the English alphabet, and <m>[n]=\set{1,2,3,\dotsc,n}</m>.
+        A <term>substitution cipher</term> is a permutation of the letters in an alphabet. Recall that an <term>alphabet</term> is a finite set of symbols, and that we will use two special set notations: <m>\mathcal{E}</m> to denote the set of capital letters of the English alphabet, and <m>[n]=\set{1,2,3,\dotsc,n}</m>.
     </introduction>
     <!-- ################################### -->
-    <subsection xml:id="sub-crypto-perms-simple">
+    <subsection xml:id="sub-crypto-subst-simple">
         <title>Monoalphabetic substitution</title>
         <p>
             Also called <term>simple substitution</term>, encryption of a message by performing a single permutation is a <term>monoalphabetic substitution.</term> The <term>Caesar cipher</term> is one of the earliest known uses, and was a simple three-character shift of the alphabet. Represented in two-line notation over a ten-element set <c>range(10)</c>, this is
@@ -48,7 +47,7 @@
         </p>
     </subsection>
     <!-- ################################### -->
-    <subsection xml:id="sub-crypto-perms-freqanalysis">
+    <subsection xml:id="sub-crypto-subst-freqanalysis">
         <title>Frequency analysis</title>
         <p>
             Thankfully we are not unarmed when it comes to decrypting a monoalphabetic substitution. Even though the pool of possible permutations is vast, we can analyze the frequencies with which each letter is used in normal text to try to determine parts of the mapping. It is quite easy to write a program in Python counting the frequency of occurrence of each letter in a string. For instance, taking the original 1972 etext of the Declaration of Independence from <href a="https://www.gutenberg.org/cache/epub/1/pg1.txt">Project Gutenberg</href> and converting it into all capital letters (which is how it was produced in 1972 since computers didn't have minuscule letters at that early date), we obtain the following results for the 8133 characters in the text:
@@ -92,10 +91,10 @@
         <table xml:id="table-letter_freq-declaration">
             <title>Letter frequencies in the Declaration of Independence of the United States of America</title>
             <tabular>
-                <col /><col right="minor" />
-                <col /><col right="minor" />
-                <col /><col right="minor" />
-                <col /><col />
+                <col /><col /><col right="minor" />
+                <col /><col /><col right="minor" />
+                <col /><col /><col right="minor" />
+                <col /><col /><col />
                 <row bottom="major">
                     <cell>#</cell><cell>Letter</cell><cell>Frequency</cell>
                     <cell>#</cell><cell>Letter</cell><cell>Frequency</cell>
@@ -214,10 +213,107 @@
                 </program>
             </sidebyside>
             <p>
-                Since we see <c>GPN</c> and <c>VIH</c> at the front of that list, and we already suspect that <c>H</c> has replaced <c>E</c>, we now have a strong argument that <c>GPN</c> is actually <c>AND</c> and <c>VIH</c> is actually <c>THE</c>.
+                Since we see <c>GPN</c> and <c>VIH</c> at the front of that list, and we already suspect that <c>H</c> has replaced <c>E</c>, we now have a strong argument that <c>GPN</c> is actually <c>AND</c> and <c>VIH</c> is actually <c>THE</c>. Here's a code that allows for replacement of guesses in a pair of <q>decoder strings</q>, passed as a two-element list called <c>decoder</c>.
+            </p>
+            <listing xml:id="list-breaking_monoalp_tester">
+                <caption>A code to test the decoding guesses determined by frequency analysis of a monoalphabetic substitution</caption>
+                <program language="python">
+                    <input>
+                        def test_decode(cmsg, decoder, chars=40):
+                            decoder_dict = {}
+                            for x,y in zip(decoder[0],decoder[1]):
+                                decoder_dict[x] = y
+                            msg_blanks = [ ]
+                            for x in cmsg:
+                                if x in decoder[0]:
+                                    y = decoder_dict[x]
+                                    msg_blanks += [y.lower()]
+                                else:
+                                    msg_blanks += '_'
+                            out = [ ]
+                            for i in range(len(cmsg)//chars + 1):
+                                out.append( "".join(cmsg[i*chars:(i+1)*chars] ))
+                                out.append( "".join(msg_blanks[i*chars:(i+1)*chars] ))
+                                out.append("")
+                            return "\n".join(out)
+
+                        trial = [' VIHGPN',' THEAND']
+                        print(test_decode(cmsg, trial, 60))
+                    </input>
+                </program>
+            </listing>
+            <p>
+                Assuming <c>cmsg</c> in the listing above is the encrypted message of this problem, here is the beginning of the output of <c>test_decode(cmsg, trial, 60)</c>:
+            </p>
+            <sidebyside>
+                <console>
+                    <output>
+                        KP GP HMBHZVXKPGRRY IKV HEHPXPJ HGURY XP CTRY G YKTPJ OGP BG
+                        _n an e__e_t__na___ h_t e_en_n_ ea___ _n ____ a ___n_ _an _a
+
+                        OH KTV KW VIH JGUUHV XP FIXBI IH RKNJHN XP BGUZHPVHUD ZRGBH
+                        _e __t __ the _a__et _n _h__h he __d_ed _n _a__ente__ __a_e
+
+                        GPN FGRSHN DRKFRY GD VIKTJI XP IHDXVGVXKP VKFGUND SKSTDISXP
+                        and _a__ed ______ a_ th___h _n he__tat__n t__a_d_ _____h__n
+
+                        QUXNJH IH IGN DTBBHDDWTRRY GEKXNHN OHHVXPJ IXD RGPNRGNY KP V
+                        ___d_e he had ____e_______ a___ded _eet_n_ h__ _and_ad_ _n t
+
+                        IH DVGXUBGDH IXD JGUUHV FGD TPNHU VIH UKKW KW G IXJI WXEHDVK
+                        he _ta___a_e h__ _a__et _a_ _nde_ the ____ __ a h__h ___e_t_
+
+                        UXHN IKTDH GPN FGD OKUH RXSH G BTZQKGUN VIGP G UKKO VIH RGPN
+                        __ed h___e and _a_ ___e ___e a _____a_d than a ____ the _and
+
+                        RGNY FIK ZUKEXNHN IXO FXVI JGUUHV NXPPHUD GPN GVVHPNGPBH RXE
+                        _ad_ _h_ _____ded h__ __th _a__et d_nne__ and attendan_e ___
+                    </output>
+                </console>
+            </sidebyside>
+            <p>
+                We have no guarantee that the decoding we've supplied is absolutely correct, but the last line shows a clear indication that it might be: the word <c>attendan_e</c> is most likely <c>attendance</c>; this tells us that <c>B</c> probably maps to <c>C</c>. Moreover, we see several times the undecrypted word <c>KW</c>; since the first word <c>KP</c> is decoded as <c>_n</c>, it is likely that <c>K</c> should decode to either <c>I</c> or <c>O</c>, but the most commonly used two-letter word in English is <q>of</q>. Moreover, we see the third word <c>HMBHZVXKPGRRY</c> of the encoded message ends with <c>RRY</c>. It is very common in English to see words ending <q>-lly</q>, so we reason that <c>RY</c> should decode to <c>LY</c>, giving us a <term>fixed point</term>: the letter <c>Y</c> appears to have been encoded to itself! But then that would make the translation of the third word (after all these substitutions) <c>e_ce_t_onally</c>. As a first guess to that, we suppose that it is <c>exceptionally</c>, giving us the decoding of <c>MZX</c> as <c>XPI</c>. Since <c>X</c> and <c>P</c> are nowhere near the most-frequently used letters, this is exceptional deduction on our part!
+            </p>
+            <p>
+                We change <c>trial</c> in the above code and try again:
+            </p>
+            <sidebyside>
+                <console>
+                    <prompt>>>> </prompt>
+                    <input>
+                        trial = [' VIHGPNBKWRYMZ',' THEANDCOFLYXP']
+                    </input>
+                    <output>
+                        KP GP HMBHZVXKPGRRY IKV HEHPXPJ HGURY XP CTRY G YKTPJ OGP BG
+                        on an exceptionally hot e_enin_ ea_ly in __ly a yo_n_ _an ca
+
+                        OH KTV KW VIH JGUUHV XP FIXBI IH RKNJHN XP BGUZHPVHUD ZRGBH
+                        _e o_t of the _a__et in _hich he lod_ed in ca_pente__ place
+
+                        GPN FGRSHN DRKFRY GD VIKTJI XP IHDXVGVXKP VKFGUND SKSTDISXP
+                        and _al_ed _lo_ly a_ tho__h in he_itation to_a_d_ _o___h_in
+
+                        QUXNJH IH IGN DTBBHDDWTRRY GEKXNHN OHHVXPJ IXD RGPNRGNY KP V
+                        __id_e he had __cce__f_lly a_oided _eetin_ hi_ landlady on t
+
+                        IH DVGXUBGDH IXD JGUUHV FGD TPNHU VIH UKKW KW G IXJI WXEHDVK
+                        he _tai_ca_e hi_ _a__et _a_ _nde_ the _oof of a hi_h fi_e_to
+
+                        UXHN IKTDH GPN FGD OKUH RXSH G BTZQKGUN VIGP G UKKO VIH RGPN
+                        _ied ho__e and _a_ _o_e li_e a c_p_oa_d than a _oo_ the land
+
+                        RGNY FIK ZUKEXNHN IXO FXVI JGUUHV NXPPHUD GPN GVVHPNGPBH RXE
+                        lady _ho p_o_ided hi_ _ith _a__et dinne__ and attendance li_
+                    </output>
+                </console>
+            </sidebyside>
+            <p>
+                At this point, the human brain becomes wonderfully competent at filling in blanks, even without knowing the source text; making reasonable guesses allows you to deduce all of the remaining mappings of the encoding. The only letter not occuring in the original encrypted message was <c>L</c>. Make sure you know what character was mapped to <c>L</c> in the encryption!
             </p>
         </example>
     </subsection>
+    <!-- ################################### -->
+
     <!--
   <xi:include href=".subsec-emp-intro.ptx" />
   <xi:include href=".subsec-emp-next.ptx" />

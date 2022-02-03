@@ -1,505 +1,525 @@
 <?xml version='1.0' encoding='utf-8'?>
-<section xml:id="sec-intro-mst" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <title>Connecting a network</title>
-  <introduction>
-    <p>We begin with a problem posed in concrete terms: we have a network
-    consisting of several nodes which we wish to connect together, and we know
-    that there is a certain cost associated with connecting pairs of nodes. It
-    should be obvious that we wish to minimize the cost of connecting our
-    network, and for the sake of simplicity we will make the assumption that
-    our network is reliable
-    <mdash />once two nodes are connected, they will stay connected. Therefore
-    we only need to make sure everything is connected to the network once.</p>
-    <p>Without worrying about technical definitions until a later chapter (
-    <xref provisional="ch-graphs" />), we will refer to the nodes as
-    <term>vertices</term> and the connections as
-    <term>edges</term> .</p>
-  </introduction>
-  <subsection xml:id="subsec-intro-mst-example">
-    <title>Working from an example</title>
-    <figure xml:id="fig-smallnetwork">
-      <caption>A small network with connection costs.</caption>
-      <image xml:id="img-smallnetwork" width="50%">
-        <xi:include href="./img_intro_smallnet.ptx" />
-      </image>
-    </figure>
-    <p>We can approach the problem very logically by organizing our list of
-    edges carefully. Since we want to include edges with the least cost first,
-    it makes sense to list the edges in that order.</p>
-    <table>
-      <title>Cost-increasing list of edges of a small network</title>
-      <tabular>
-        <col />
-        <col right="minor" />
-        <col />
-        <col />
-        <row bottom="major">
-          <cell>
-            <m>(u,v)</m>
-          </cell>
-          <cell>
-            <m>w(u,v)</m>
-          </cell>
-          <cell>
-            <m>(u,v)</m>
-          </cell>
-          <cell>
-            <m>w(u,v)</m>
-          </cell>
-        </row>
-        <row>
-          <cell>(6, 7)</cell>
-          <cell>3</cell>
-          <cell>(5, 6)</cell>
-          <cell>12</cell>
-        </row>
-        <row>
-          <cell>(0, 7)</cell>
-          <cell>4</cell>
-          <cell>(4, 7)</cell>
-          <cell>13</cell>
-        </row>
-        <row>
-          <cell>(2, 7)</cell>
-          <cell>5</cell>
-          <cell>(1, 2)</cell>
-          <cell>14</cell>
-        </row>
-        <row>
-          <cell>(1, 5)</cell>
-          <cell>6</cell>
-          <cell>(3, 7)</cell>
-          <cell>15</cell>
-        </row>
-        <row>
-          <cell>(4, 6)</cell>
-          <cell>6</cell>
-          <cell>(0, 1)</cell>
-          <cell>16</cell>
-        </row>
-        <row>
-          <cell>(2, 6)</cell>
-          <cell>9</cell>
-          <cell>(1, 4)</cell>
-          <cell>17</cell>
-        </row>
-        <row>
-          <cell>(0, 3)</cell>
-          <cell>12</cell>
-          <cell />
-          <cell />
-        </row>
-      </tabular>
-    </table>
-    <p>To connect our network is now a matter of looking at each edge in order
-    of increasing cost and including that edge as a connection exactly when the
-    two ends of the edge are not already connected together!</p>
-    <p>For our very small example here it is easy enough to do this on a piece
-    of paper, keeping track of all of the connected pieces in a table. As soon
-    as we look at the first edge, we have to make a decision about which piece
-    of the network is will gain a vertex and which piece will become empty; in
-    order to make this easy for ourselves, we opt to always merge into the
-    large piece, or if the two pieces have the same number of vertices we will
-    merge into the piece whose initial vertex had a smaller numerical
-    index.</p>
-    <table xml:id="tab-kruskal-smallexample" width="75%">
-        <title>The small network connection example.</title>
-        <tabular halign="center">
-            <col />
-            <col />
-            <col right="minor" />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col right="minor" />
-            <col />
-            <col />
-            <row>
-                <cell colspan="3" />
-                <cell colspan="8">Components</cell>
-                <cell>Use</cell>
-                <cell>Total</cell>
-            </row>
-            <row bottom="major">
-                <cell>Step</cell>
-                <cell><m>(u,v)</m></cell>
-                <cell><m>w</m></cell>
-                <cell>0</cell>
-                <cell>1</cell>
-                <cell>2</cell>
-                <cell>3</cell>
-                <cell>4</cell>
-                <cell>5</cell>
-                <cell>6</cell>
-                <cell>7</cell>
-                <cell>Edge?</cell>
-                <cell>Cost</cell>
-            </row>
-            <row>
-                <cell>0</cell>
-                <cell>-</cell>
-                <cell>-</cell>
-                <cell>[0]</cell>
-                <cell>[1]</cell>
-                <cell>[2]</cell>
-                <cell>[3]</cell>
-                <cell>[4]</cell>
-                <cell>[5]</cell>
-                <cell>[6]</cell>
-                <cell>[7]</cell>
-                <cell>-</cell>
-                <cell>0</cell>
-            </row>
-            <row>
-                <cell>1</cell>
-                <cell>(6,7)</cell>
-                <cell>3</cell>
-                <cell>[0]</cell>
-                <cell>[1]</cell>
-                <cell>[2]</cell>
-                <cell>[3]</cell>
-                <cell>[4]</cell>
-                <cell>[5]</cell>
-                <cell>[6,7]</cell>
-                <cell>-</cell>
-                <cell>Yes</cell>
-                <cell>3</cell>
-            </row>
-            <row>
-                <cell>2</cell>
-                <cell>(0,7)</cell>
-                <cell>4</cell>
-                <cell>-</cell>
-                <cell>[1]</cell>
-                <cell>[2]</cell>
-                <cell>[3]</cell>
-                <cell>[4]</cell>
-                <cell>[5]</cell>
-                <cell>[0,6,7]</cell>
-                <cell>-</cell>
-                <cell>Yes</cell>
-                <cell>7</cell>
-            </row>
-            <row>
-                <cell>3</cell>
-                <cell>(2,7)</cell>
-                <cell>5</cell>
-                <cell>-</cell>
-                <cell>[1]</cell>
-                <cell>-</cell>
-                <cell>[3]</cell>
-                <cell>[4]</cell>
-                <cell>[5]</cell>
-                <cell>[0,2,6,7]</cell>
-                <cell>-</cell>
-                <cell>Yes</cell>
-                <cell>12</cell>
-            </row>
-            <row>
-                <cell>4</cell>
-                <cell>(1,5)</cell>
-                <cell>6</cell>
-                <cell>-</cell>
-                <cell>[1,5]</cell>
-                <cell>-</cell>
-                <cell>[3]</cell>
-                <cell>[4]</cell>
-                <cell>-</cell>
-                <cell>[0,2,6,7]</cell>
-                <cell>-</cell>
-                <cell>Yes</cell>
-                <cell>18</cell>
-            </row>
-            <row>
-                <cell>5</cell>
-                <cell>(4,6)</cell>
-                <cell>6</cell>
-                <cell>-</cell>
-                <cell>[1,5]</cell>
-                <cell>-</cell>
-                <cell>[3]</cell>
-                <cell>-</cell>
-                <cell>-</cell>
-                <cell>[0,2,4,6,7]</cell>
-                <cell>-</cell>
-                <cell>Yes</cell>
-                <cell>24</cell>
-            </row>
-            <row>
-                <cell>6</cell>
-                <cell>(2,6)</cell>
-                <cell>9</cell>
-                <cell>-</cell>
-                <cell>[1,5]</cell>
-                <cell>-</cell>
-                <cell>[3]</cell>
-                <cell>-</cell>
-                <cell>-</cell>
-                <cell>[0,2,4,6,7]</cell>
-                <cell>-</cell>
-                <cell>
-                <alert>No!</alert>
-                </cell>
-                <cell>24</cell>
-            </row>
-            <row>
-                <cell>7</cell>
-                <cell>(0,3)</cell>
-                <cell>12</cell>
-                <cell>-</cell>
-                <cell>[1,5]</cell>
-                <cell>-</cell>
-                <cell>-</cell>
-                <cell>-</cell>
-                <cell>-</cell>
-                <cell>[0,2,3,4,6,7]</cell>
-                <cell>-</cell>
-                <cell>Yes</cell>
-                <cell>36</cell>
-            </row>
-            <row>
-                <cell>8</cell>
-                <cell>(5,6)</cell>
-                <cell>12</cell>
-                <cell>-</cell>
-                <cell>-</cell>
-                <cell>-</cell>
-                <cell>-</cell>
-                <cell>-</cell>
-                <cell>-</cell>
-                <cell>[0,1,2,3,4,5,6,7]</cell>
-                <cell>-</cell>
-                <cell>Yes</cell>
-                <cell>48</cell>
-            </row>
-      </tabular>
-    </table>
-  </subsection>
-  <subsection xml:id="subsec-intro-mst-algorithm">
-    <title>Algorithm</title>
-    <p>Taking a look at what we actually did, we can explain our process in
-    more detail so that for a bigger, more complicated problem (specifically
-    one with a larger set of vertices or of edges) the solution could be
-    extended. In fact we have just implemented a famous result known as Kruskal's Algorithm.</p>
-    <definition xml:id="def-algorithm"><title>Algorithm</title>
-      <statement>
-        <p>An
-        <term>algorithm</term> is a formal procedure for completing a
-        computational or mathematical task.</p>
-      </statement>
-    </definition>
-    <p>In order to communicate our algorithm efficiently, we have to analyze
-    what our steps actually entailed. Later on, we'll give a more computational
-    statement of the same algorithm, in
-    <xref provisional="alg-kruskal" /></p>
-    <algorithm xml:id="alg-intro-kruskal">
-      <title>Mathematical Kruskal's Algorithm</title>
-      <statement>
+<section xml:id="sec-intro-mst"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Connecting a network</title>
+    <introduction>
         <p>
-            Let a graph <m>G=(V,E)</m> with vertex set <m>V=\set{0,1,2,\dotsc,n-1}</m> be given which has a cost <m>w(e)</m> associated with each edge <m>e</m>. Each edge will be denoted <m>(u,v)</m> with <m>u\lt v</m> , where <m>u,v\in V</m>.
-          </p>
-        <ol>
-          <li>
-            <p>Sort the edges by increasing cost, so that whenever
-            <m>i\lt j</m> then also
-            <m>w(e_i)\lt w(e_j)</m> , where
-            <m>i</m> and
-            <m>j</m> are
-            <q>counting variables</q>.</p>
-          </li>
-          <li>
-            <p>Write
-            <m>n</m> different sets representing components of the network,
-            denoted
-            <m>c_v=\set{v}</m> for each
-            <m>v\in V</m>. Also let
-            <m>F=\emptyset</m> be an empty collection of edges.</p>
-          </li>
-          <li xml:id="alg-intro-kruskal-edges">
-            <p>Looking at each edge
-            <m>e_i=(u_i,v_i)</m> in increasing order of cost, do the following.
-            <ol>
-              <li>
-                <p>If
-                <m>u_i</m> and
-                <m>v_i</m> are in the same component, skip immediately to the
-                next edge.</p>
-              </li>
-              <li>
-                <p>Otherwise, say that
-                <m>c_u</m> is the component containing
-                <m>u_i</m> and
-                <m>c_v</m> is the component containing
-                <m>v_i</m> , and do the following:
-                <ol>
-                  <li>
-                    <p>If
-                    <m>c_u</m> contains fewer vertices than
-                    <m>c_v</m> , put all of the elements from
-                    <m>c_u</m> into
-                    <m>c_v</m> instead and leave
-                    <m>c_u</m> empty.</p>
-                  </li>
-                  <li>
-                    <p>Otherwise, put all of the elements from
-                    <m>c_v</m> into
-                    <m>c_u</m> and leave
-                    <m>c_v</m> empty.</p>
-                  </li>
-                  <li>
-                    <p>In either case, include the edge
-                    <m>(u_i,v_i)</m> in
-                    <m>F</m>.</p>
-                  </li>
-                </ol></p>
-              </li>
-            </ol></p>
-          </li>
-        </ol>
-        <p>After Step 3 finishes, all of the edges will have been inspected and
-        either included in the network or skipped; there will be as many
-        nonempty components
-        <m>c_v</m> as needed to connect the network, and the algorithm is
-        finished! The cost-minimal set of edges is
-        <m>F</m>.</p>
-      </statement>
-    </algorithm>
-    <p>This algorithm works even when there is not a possible way to connect
-    all of the nodes into one network! If several disconnected networks are
-    needed, this algorithm will find the least expensive way to do so.</p>
-    <problem>
-      <title>A 50-edge network</title>
-      <statement>
-        <p>The connections of a network are given below as a table of triples
-        <m>(u,v,w(u,v))</m>. Find the least expensive set
-        <m>F</m> of edges needed to connect the components of this network.</p>
+            We begin with a problem posed in concrete terms: we have a network consisting of several nodes which we wish to connect together, and we know that there is a certain cost associated with connecting pairs of nodes. It should be obvious that we wish to minimize the cost of connecting our network, and for the sake of simplicity we will make the assumption that our network is reliable; that is, once two nodes are connected, they will stay connected. Therefore we only need to make sure everything is connected to the network once.
+        </p>
+        <p>
+            Without worrying about technical definitions until a later chapter (<xref provisional="ch-graphs" />
+), we will refer to the nodes as <term>vertices</term>and the connections as <term>edges</term>.
+        </p>
+    </introduction>
+    <subsection xml:id="subsec-intro-mst-example">
+        <title>Working from an example</title>
+        <figure xml:id="fig-smallnetwork">
+            <caption>A small network with connection costs.</caption>
+            <image width="50%" xml:id="img-smallnetwork">
+                <xi:include href="./img_intro_smallnet.ptx" />
+            </image>
+        </figure>
+        <p>
+                We can approach the problem very logically by organizing our list of
+            edges carefully. Since we want to include edges with the least cost first,
+            it makes sense to list the edges in that order.
+        </p>
         <table>
-            <title>The weighted edges of a 50-edge network</title>
-          <tabular halign="center" width="50%">
-            <row bottom="major">
-              <cell>
-                <m>(u,v,w(u,v))</m>
-              </cell>
-              <cell>
-                <m>(u,v,w(u,v))</m>
-              </cell>
-              <cell>
-                <m>(u,v,w(u,v))</m>
-              </cell>
-              <cell>
-                <m>(u,v,w(u,v))</m>
-              </cell>
-              <cell>
-                <m>(u,v,w(u,v))</m>
-              </cell>
-            </row>
-            <row>
-              <cell>(0, 1, 8)</cell>
-              <cell>(2, 4, 1)</cell>
-              <cell>(4, 13, 1)</cell>
-              <cell>(5, 17, 6)</cell>
-              <cell>(9, 16, 8)</cell>
-            </row>
-            <row>
-              <cell>(0, 3, 3)</cell>
-              <cell>(2, 10, 9)</cell>
-              <cell>(4, 15, 5)</cell>
-              <cell>(5, 19, 7)</cell>
-              <cell>(9, 17, 6)</cell>
-            </row>
-            <row>
-              <cell>(0, 4, 8)</cell>
-              <cell>(2, 11, 5)</cell>
-              <cell>(4, 16, 9)</cell>
-              <cell>(6, 12, 8)</cell>
-              <cell>(10, 13, 7)</cell>
-            </row>
-            <row>
-              <cell>(0, 8, 10)</cell>
-              <cell>(2, 18, 8)</cell>
-              <cell>(4, 18, 3)</cell>
-              <cell>(7, 8, 9)</cell>
-              <cell>(10, 16, 8)</cell>
-            </row>
-            <row>
-              <cell>(0, 10, 4)</cell>
-              <cell>(2, 19, 6)</cell>
-              <cell>(5, 6, 5)</cell>
-              <cell>(7, 13, 3)</cell>
-              <cell>(11, 12, 10)</cell>
-            </row>
-            <row>
-              <cell>(0, 13, 1)</cell>
-              <cell>(3, 5, 10)</cell>
-              <cell>(5, 7, 8)</cell>
-              <cell>(7, 15, 10)</cell>
-              <cell>(11, 18, 8)</cell>
-            </row>
-            <row>
-              <cell>(0, 16, 4)</cell>
-              <cell>(3, 13, 9)</cell>
-              <cell>(5, 8, 10)</cell>
-              <cell>(7, 18, 6)</cell>
-              <cell>(12, 19, 1)</cell>
-            </row>
-            <row>
-              <cell>(1, 4, 4)</cell>
-              <cell>(3, 14, 6)</cell>
-              <cell>(5, 10, 8)</cell>
-              <cell>(8, 11, 1)</cell>
-              <cell>(13, 14, 7)</cell>
-            </row>
-            <row>
-              <cell>(1, 6, 10)</cell>
-              <cell>(3, 19, 6)</cell>
-              <cell>(5, 14, 6)</cell>
-              <cell>(8, 19, 7)</cell>
-              <cell>(15, 17, 7)</cell>
-            </row>
-            <row>
-              <cell>(1, 18, 5)</cell>
-              <cell>(4, 10, 5)</cell>
-              <cell>(5, 16, 4)</cell>
-              <cell>(9, 15, 5)</cell>
-              <cell>(16, 18, 9)</cell>
-            </row>
-          </tabular>
+            <title>Cost-increasing list of edges of a small network</title>
+            <tabular>
+                <col />
+                <col right="minor" />
+                <col />
+                <col />
+                <row bottom="major">
+                    <cell>
+                        <m>(u,v)</m>
+                    </cell>
+                    <cell>
+                        <m>w(u,v)</m>
+                    </cell>
+                    <cell>
+                        <m>(u,v)</m>
+                    </cell>
+                    <cell>
+                        <m>w(u,v)</m>
+                    </cell>
+                </row>
+                <row>
+                    <cell>(6, 7)</cell>
+                    <cell>3</cell>
+                    <cell>(5, 6)</cell>
+                    <cell>12</cell>
+                </row>
+                <row>
+                    <cell>(0, 7)</cell>
+                    <cell>4</cell>
+                    <cell>(4, 7)</cell>
+                    <cell>13</cell>
+                </row>
+                <row>
+                    <cell>(2, 7)</cell>
+                    <cell>5</cell>
+                    <cell>(1, 2)</cell>
+                    <cell>14</cell>
+                </row>
+                <row>
+                    <cell>(1, 5)</cell>
+                    <cell>6</cell>
+                    <cell>(3, 7)</cell>
+                    <cell>15</cell>
+                </row>
+                <row>
+                    <cell>(4, 6)</cell>
+                    <cell>6</cell>
+                    <cell>(0, 1)</cell>
+                    <cell>16</cell>
+                </row>
+                <row>
+                    <cell>(2, 6)</cell>
+                    <cell>9</cell>
+                    <cell>(1, 4)</cell>
+                    <cell>17</cell>
+                </row>
+                <row>
+                    <cell>(0, 3)</cell>
+                    <cell>12</cell>
+                    <cell />
+                    <cell />
+                </row>
+            </tabular>
         </table>
-        <p>Your solution should include all the steps, but your answer will
-        consist only of the set of included edges.</p>
-      </statement>
-      <answer>
-          <p>
-              The minimal-cost connecting set consists of the following edges:
-              <me>
-                  \begin{matrix}
-                  (0,3) \amp (2,4) \amp (4,15) \amp (7,13) \\
-                  (0,10) \amp (2,11) \amp (4,18) \amp (8,11) \\
-                  (0,13) \amp (2,19) \amp (5,6) \amp (9,15) \\
-                  (0,16) \amp (3,14) \amp (5,16) \amp (12,19) \\
-                  (1,4) \amp (4,13) \amp (5,17) \amp
-                  \end{matrix}
-              </me></p>
-      </answer>
-    </problem>
-  </subsection>
-  <conclusion>
-    <p>It is important to note that throughout the process of applying the
-    algorithm, the values of some of the quantities changed:
-    <em>this is only natural!</em>We expect this just from what we observed
-    initially in our small example network. Speaking algorithmically, we will
-    say that
-    <term>variables</term> are these changeable quantities and
-    <term>constants</term> or
-    <term>parameters</term> are those quantities which do not change once the
-    algorithm begins. In this case, the numbers of vertices and edges are both
-    parameters for a given graph.</p>
-    <p>
-        Finally, this algorithm is labeled as a <q>mathematical</q> algorithm because it is not sufficiently detailed to actually implement in a computer program. To program the algorithm, several of the steps-as-written would need to be explained as algorithms in their own right!
-    </p>
-  </conclusion>
+        <p>
+                To connect our network is now a matter of looking at each edge in order of
+                increasing cost and including that edge as a connection exactly when the two
+                ends of the edge are not already connected together!
+        </p>
+        <p>
+                For our very small example here it is easy enough to do this on a piece
+            of paper, keeping track of all of the connected pieces in a table. As soon
+            as we look at the first edge, we have to make a decision about which piece
+            of the network is will gain a vertex and which piece will become empty; in
+            order to make this easy for ourselves, we opt to always merge into the
+            large piece, or if the two pieces have the same number of vertices we will
+            merge into the piece whose initial vertex had a smaller numerical
+            index.
+        </p>
+        <table width="75%" xml:id="tab-kruskal-smallexample">
+            <title>The small network connection example.</title>
+            <tabular halign="center">
+                <col />
+                <col />
+                <col right="minor" />
+                <col />
+                <col />
+                <col />
+                <col />
+                <col />
+                <col />
+                <col />
+                <col right="minor" />
+                <col />
+                <col />
+                <row>
+                    <cell colspan="3" />
+                    <cell colspan="8">Components</cell>
+                    <cell>Use</cell>
+                    <cell>Total</cell>
+                </row>
+                <row bottom="major">
+                    <cell>Step</cell>
+                    <cell>
+                        <m>(u,v)</m>
+                    </cell>
+                    <cell>
+                        <m>w</m>
+                    </cell>
+                    <cell>0</cell>
+                    <cell>1</cell>
+                    <cell>2</cell>
+                    <cell>3</cell>
+                    <cell>4</cell>
+                    <cell>5</cell>
+                    <cell>6</cell>
+                    <cell>7</cell>
+                    <cell>Edge?</cell>
+                    <cell>Cost</cell>
+                </row>
+                <row>
+                    <cell>0</cell>
+                    <cell>-</cell>
+                    <cell>-</cell>
+                    <cell>[0]</cell>
+                    <cell>[1]</cell>
+                    <cell>[2]</cell>
+                    <cell>[3]</cell>
+                    <cell>[4]</cell>
+                    <cell>[5]</cell>
+                    <cell>[6]</cell>
+                    <cell>[7]</cell>
+                    <cell>-</cell>
+                    <cell>0</cell>
+                </row>
+                <row>
+                    <cell>1</cell>
+                    <cell>(6,7)</cell>
+                    <cell>3</cell>
+                    <cell>[0]</cell>
+                    <cell>[1]</cell>
+                    <cell>[2]</cell>
+                    <cell>[3]</cell>
+                    <cell>[4]</cell>
+                    <cell>[5]</cell>
+                    <cell>[6,7]</cell>
+                    <cell>-</cell>
+                    <cell>Yes</cell>
+                    <cell>3</cell>
+                </row>
+                <row>
+                    <cell>2</cell>
+                    <cell>(0,7)</cell>
+                    <cell>4</cell>
+                    <cell>-</cell>
+                    <cell>[1]</cell>
+                    <cell>[2]</cell>
+                    <cell>[3]</cell>
+                    <cell>[4]</cell>
+                    <cell>[5]</cell>
+                    <cell>[0,6,7]</cell>
+                    <cell>-</cell>
+                    <cell>Yes</cell>
+                    <cell>7</cell>
+                </row>
+                <row>
+                    <cell>3</cell>
+                    <cell>(2,7)</cell>
+                    <cell>5</cell>
+                    <cell>-</cell>
+                    <cell>[1]</cell>
+                    <cell>-</cell>
+                    <cell>[3]</cell>
+                    <cell>[4]</cell>
+                    <cell>[5]</cell>
+                    <cell>[0,2,6,7]</cell>
+                    <cell>-</cell>
+                    <cell>Yes</cell>
+                    <cell>12</cell>
+                </row>
+                <row>
+                    <cell>4</cell>
+                    <cell>(1,5)</cell>
+                    <cell>6</cell>
+                    <cell>-</cell>
+                    <cell>[1,5]</cell>
+                    <cell>-</cell>
+                    <cell>[3]</cell>
+                    <cell>[4]</cell>
+                    <cell>-</cell>
+                    <cell>[0,2,6,7]</cell>
+                    <cell>-</cell>
+                    <cell>Yes</cell>
+                    <cell>18</cell>
+                </row>
+                <row>
+                    <cell>5</cell>
+                    <cell>(4,6)</cell>
+                    <cell>6</cell>
+                    <cell>-</cell>
+                    <cell>[1,5]</cell>
+                    <cell>-</cell>
+                    <cell>[3]</cell>
+                    <cell>-</cell>
+                    <cell>-</cell>
+                    <cell>[0,2,4,6,7]</cell>
+                    <cell>-</cell>
+                    <cell>Yes</cell>
+                    <cell>24</cell>
+                </row>
+                <row>
+                    <cell>6</cell>
+                    <cell>(2,6)</cell>
+                    <cell>9</cell>
+                    <cell>-</cell>
+                    <cell>[1,5]</cell>
+                    <cell>-</cell>
+                    <cell>[3]</cell>
+                    <cell>-</cell>
+                    <cell>-</cell>
+                    <cell>[0,2,4,6,7]</cell>
+                    <cell>-</cell>
+                    <cell>
+                        <alert>No!</alert>
+                    </cell>
+                    <cell>24</cell>
+                </row>
+                <row>
+                    <cell>7</cell>
+                    <cell>(0,3)</cell>
+                    <cell>12</cell>
+                    <cell>-</cell>
+                    <cell>[1,5]</cell>
+                    <cell>-</cell>
+                    <cell>-</cell>
+                    <cell>-</cell>
+                    <cell>-</cell>
+                    <cell>[0,2,3,4,6,7]</cell>
+                    <cell>-</cell>
+                    <cell>Yes</cell>
+                    <cell>36</cell>
+                </row>
+                <row>
+                    <cell>8</cell>
+                    <cell>(5,6)</cell>
+                    <cell>12</cell>
+                    <cell>-</cell>
+                    <cell>-</cell>
+                    <cell>-</cell>
+                    <cell>-</cell>
+                    <cell>-</cell>
+                    <cell>-</cell>
+                    <cell>[0,1,2,3,4,5,6,7]</cell>
+                    <cell>-</cell>
+                    <cell>Yes</cell>
+                    <cell>48</cell>
+                </row>
+            </tabular>
+        </table>
+    </subsection>
+    <subsection xml:id="subsec-intro-mst-algorithm">
+        <title>Algorithm</title>
+        <p>
+                Taking a look at what we actually did, we can explain our process in
+                more detail so that for a bigger, more complicated problem (specifically
+                one with a larger set of vertices or of edges) the solution could be
+                extended. In fact we have just implemented a famous result known as
+                Kruskal's Algorithm.
+        </p>
+        <definition xml:id="def-algorithm">
+            <title>Algorithm</title>
+            <statement>
+                <p>
+                        An <term>algorithm</term> is a formal procedure for completing a computational or mathematical task.
+                </p>
+            </statement>
+        </definition>
+        <p>.
+                In order to communicate our algorithm efficiently, we have to analyze what
+                our steps actually entailed. Later on, we'll give a more computational
+                statement of the same algorithm, in <xref provisional="alg-kruskal" />
+    .
+        </p>
+        <algorithm xml:id="alg-intro-kruskal">
+            <title>Mathematical Kruskal's Algorithm</title>
+            <statement>
+                <p>Let a graph
+                    <m>G=(V,E)</m>with vertex set
+                    <m>V=\set{0,1,2,\dotsc,n-1}</m>be given which has a cost
+                    <m>w(e)</m>associated with each edge
+                    <m>e</m>. Each edge will be denoted
+                    <m>(u,v)</m>with
+                    <m>u\lt v</m>, where
+                    <m>u,v\in V</m>.
+                </p>
+                <ol>
+                    <li>
+                        <p>Sort the edges by increasing cost, so that whenever
+                            <m>i\lt j</m>then also
+                            <m>w(e_i)\leq w(e_j)</m>, where
+                            <m>i</m>and
+                            <m>j</m>are
+                            <q>counting variables</q>.
+                        </p>
+                    </li>
+                    <li>
+                        <p>Write
+                            <m>n</m>different sets representing components of the network,
+                    denoted
+                            <m>c_v=\set{v}</m>for each
+                            <m>v\in V</m>. Also let
+                            <m>F=\emptyset</m>be an empty collection of edges.</p>
+                    </li>
+                    <li xml:id="alg-intro-kruskal-edges">
+                        <p>Looking at each edge
+                            <m>e_i=(u_i,v_i)</m>in increasing order of cost, do the following.
+                            <ol>
+                                <li>
+                                    <p>If
+                                        <m>u_i</m>and
+                                        <m>v_i</m>are in the same component, skip immediately to the
+                        next edge.</p>
+                                </li>
+                                <li>
+                                    <p>Otherwise, say that
+                                        <m>c_u</m>is the component containing
+                                        <m>u_i</m>and
+                                        <m>c_v</m>is the component containing
+                                        <m>v_i</m>, and do the following:
+                                        <ol>
+                                            <li>
+                                                <p>If
+                                                    <m>c_u</m>contains fewer vertices than
+                                                    <m>c_v</m>, put all of the elements from
+                                                    <m>c_u</m>into
+                                                    <m>c_v</m>instead and leave
+                                                    <m>c_u</m>empty.</p>
+                                            </li>
+                                            <li>
+                                                <p>Otherwise, put all of the elements from
+                                                    <m>c_v</m>into
+                                                    <m>c_u</m>and leave
+                                                    <m>c_v</m>empty.</p>
+                                            </li>
+                                            <li>
+                                                <p>In either case, include the edge
+                                                    <m>(u_i,v_i)</m>in
+                                                    <m>F</m>.
+                                                </p>
+                                            </li>
+                                        </ol>
+                                    </p>
+                                </li>
+                            </ol>
+                        </p>
+                    </li>
+                </ol>
+                <p>After Step 3 finishes, all of the edges will have been inspected and
+                either included in the network or skipped; there will be as many
+                nonempty components
+                    <m>c_v</m>as needed to connect the network, and the algorithm is
+                finished! The cost-minimal set of edges is
+                    <m>F</m>.
+                </p>
+            </statement>
+        </algorithm>
+        <p>This algorithm works even when there is not a possible way to connect
+            all of the nodes into one network! If several disconnected networks are
+            needed, this algorithm will find the least expensive way to do so.</p>
+        <problem>
+            <title>A 50-edge network</title>
+            <statement>
+                <p>The connections of a network are given below as a table of triples
+                    <m>(u,v,w(u,v))</m>. Find the least expensive set
+                    <m>F</m>of edges needed to connect the components of this network.</p>
+                <table>
+                    <title>The weighted edges of a 50-edge network</title>
+                    <tabular halign="center" width="50%">
+                        <row bottom="major">
+                            <cell>
+                                <m>(u,v,w(u,v))</m>
+                            </cell>
+                            <cell>
+                                <m>(u,v,w(u,v))</m>
+                            </cell>
+                            <cell>
+                                <m>(u,v,w(u,v))</m>
+                            </cell>
+                            <cell>
+                                <m>(u,v,w(u,v))</m>
+                            </cell>
+                            <cell>
+                                <m>(u,v,w(u,v))</m>
+                            </cell>
+                        </row>
+                        <row>
+                            <cell>(0, 1, 8)</cell>
+                            <cell>(2, 4, 1)</cell>
+                            <cell>(4, 13, 1)</cell>
+                            <cell>(5, 17, 6)</cell>
+                            <cell>(9, 16, 8)</cell>
+                        </row>
+                        <row>
+                            <cell>(0, 3, 3)</cell>
+                            <cell>(2, 10, 9)</cell>
+                            <cell>(4, 15, 5)</cell>
+                            <cell>(5, 19, 7)</cell>
+                            <cell>(9, 17, 6)</cell>
+                        </row>
+                        <row>
+                            <cell>(0, 4, 8)</cell>
+                            <cell>(2, 11, 5)</cell>
+                            <cell>(4, 16, 9)</cell>
+                            <cell>(6, 12, 8)</cell>
+                            <cell>(10, 13, 7)</cell>
+                        </row>
+                        <row>
+                            <cell>(0, 8, 10)</cell>
+                            <cell>(2, 18, 8)</cell>
+                            <cell>(4, 18, 3)</cell>
+                            <cell>(7, 8, 9)</cell>
+                            <cell>(10, 16, 8)</cell>
+                        </row>
+                        <row>
+                            <cell>(0, 10, 4)</cell>
+                            <cell>(2, 19, 6)</cell>
+                            <cell>(5, 6, 5)</cell>
+                            <cell>(7, 13, 3)</cell>
+                            <cell>(11, 12, 10)</cell>
+                        </row>
+                        <row>
+                            <cell>(0, 13, 1)</cell>
+                            <cell>(3, 5, 10)</cell>
+                            <cell>(5, 7, 8)</cell>
+                            <cell>(7, 15, 10)</cell>
+                            <cell>(11, 18, 8)</cell>
+                        </row>
+                        <row>
+                            <cell>(0, 16, 4)</cell>
+                            <cell>(3, 13, 9)</cell>
+                            <cell>(5, 8, 10)</cell>
+                            <cell>(7, 18, 6)</cell>
+                            <cell>(12, 19, 1)</cell>
+                        </row>
+                        <row>
+                            <cell>(1, 4, 4)</cell>
+                            <cell>(3, 14, 6)</cell>
+                            <cell>(5, 10, 8)</cell>
+                            <cell>(8, 11, 1)</cell>
+                            <cell>(13, 14, 7)</cell>
+                        </row>
+                        <row>
+                            <cell>(1, 6, 10)</cell>
+                            <cell>(3, 19, 6)</cell>
+                            <cell>(5, 14, 6)</cell>
+                            <cell>(8, 19, 7)</cell>
+                            <cell>(15, 17, 7)</cell>
+                        </row>
+                        <row>
+                            <cell>(1, 18, 5)</cell>
+                            <cell>(4, 10, 5)</cell>
+                            <cell>(5, 16, 4)</cell>
+                            <cell>(9, 15, 5)</cell>
+                            <cell>(16, 18, 9)</cell>
+                        </row>
+                    </tabular>
+                </table>
+                <p>Your solution should include all the steps, but your answer will
+                consist only of the set of included edges.</p>
+            </statement>
+            <answer>
+                <p>The minimal-cost connecting set consists of the following edges:
+                    <me>\begin{matrix} (0,3) \amp (2,4) \amp (4,15) \amp (7,13) \\ (0,10)
+                \amp (2,11) \amp (4,18) \amp (8,11) \\ (0,13) \amp (2,19) \amp (5,6)
+                \amp (9,15) \\ (0,16) \amp (3,14) \amp (5,16) \amp (12,19) \\ (1,4)
+                \amp (4,13) \amp (5,17) \amp \end{matrix}</me>
+                </p>
+            </answer>
+        </problem>
+    </subsection>
+    <conclusion>
+        <p>It is important to note that throughout the process of applying the
+        algorithm, the values of some of the quantities changed:
+            <em>this is only natural!</em>We expect this just from what we observed
+        initially in our small example network. Speaking algorithmically, we will
+        say that
+            <term>variables</term>are these changeable quantities and
+            <term>constants</term>or
+            <term>parameters</term>are those quantities which do not change once the
+        algorithm begins. In this case, the numbers of vertices and edges are both
+        parameters for a given graph.</p>
+        <p>Finally, this algorithm is labeled as a
+            <q>mathematical</q>algorithm because it is not sufficiently detailed to
+        actually implement in a computer program. To program the algorithm, several
+        of the steps-as-written would need to be explained as algorithms in their
+        own right!</p>
+    </conclusion>
 </section>
