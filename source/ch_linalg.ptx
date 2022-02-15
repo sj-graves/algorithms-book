@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<chapter xml:id="ch-linalg" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Linear Algebra</title>
+    <introduction>
+        <p>
+            In keeping with our study of <em>permutations as functions</em> we shift now to a different class of special functions: linear transformations. The study of linear transformations is so special that it deserves its own discipline of mathematics, called <term>Linear Algebra</term>. Since most students who study Algorithms come in via a program which requires some other study of linear algebra, the theoretical parts of this chapter will serve either as an abbreviated introduction or as a brief reminder.
+        </p>
+    </introduction>
+    <xi:include href="./sec_linalg_vectors.ptx" />
+    <!--
+    <xi:include href=".sec-emp-intro.ptx" />
+    <xi:include href=".sec-emp-next.ptx" />
+    <xi:include href=".sec-emp-conc.ptx" />
+    -->
+
+</chapter>

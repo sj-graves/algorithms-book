@@ -64,7 +64,7 @@
             </program>
         </listing>
         <p>
-            This was produced using the following simlpe program.
+            This was produced using the following simple program.
         </p>
         <technology xml:id="tech-tallying_program">
             <title>A Python program to count the frequencies of each character in a string</title>

@@ -23,7 +23,7 @@
         \DeclareMathOperator{\lcm}{lcm}
 
 <!--         \newcommand{\mathscr}[1]{\mathcal{#1}} -->
-        
+
         \newcommand{\set}[1]{\left\{#1\right\}}
         \newcommand{\seq}[1]{\left(#1\right)}
         \newcommand{\abs}[1]{\left|#1\right|}
@@ -43,6 +43,15 @@
         \newcommand{\Rats}{\mathbb{Q}}
         \newcommand{\Reals}{\mathbb{R}}
         \newcommand{\Comps}{\mathbb{C}}
+        \renewcommand{\vec}[1]{\mathbf{#1}}
+        \newcommand{\cvec}[1]{\begin{bmatrix}#1\end{bmatrix}}
+        \newcommand{\vv}{\vec{v}}
+        \newcommand{\CV}[1]{\Comps^{#1}}
+        \newcommand{\entry}[2]{\left[#1\right]_{#2}}
+        \newcommand{\hip}[2]{\left\langle#1,#2\right\rangle}
+        \newcommand{\conj}[1]{\overline{#1}}
+        \newcommand{\norm}[1]{\|#1\|}
+        \newcommand{\bnorm}[1]{\left\|#1\right\|}
   </macros>
 
 
