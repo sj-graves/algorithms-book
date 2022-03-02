@@ -24,23 +24,20 @@
             Functions which are both one-to-one and onto are also called <em>bijections</em>, so an easier definition of a permutation <m>\sigma</m> of <m>A</m> is that <m>\sigma</m> is a bijection from <m>A</m> to itself. It is important to note that the definition of a permutation of <m>A</m> does not require that the set <m>A</m> be finite. However, we will be considering only finite sets as a rule.
         </p>
         <convention xml:id="conv-english-and-bracketn">
-            <statement>
-                <p>
-                    There are certain sets we will use frequently in our study of permutations, namely the set of letters of the English alphabet and subsets of the natural numbers. For convenience sake, we denote them as follows:
-                    <ul>
-                        <li><p>
-                            <m>\mathcal{E}</m> is the set of letters in the English alphabet.
-                            </p></li>
-                        <li><p>
-                            <m>[n] = \set{0,1,2,3,\ldots,n-1}</m> whenever <m>n\in \Nats</m>.
-                            </p></li>
-                    </ul>
-                </p>
-
-                <p>
-                    For a finite set <m>A</m> which is not a subset of <m>[n]</m> for any <m>n</m>, we denote the set of all permutations of <m>A</m> by <m>\sym{A}</m>.
-                </p>
-            </statement>
+            <p>
+                There are certain sets we will use frequently in our study of permutations, namely the set of letters of the English alphabet and subsets of the natural numbers. For convenience sake, we denote them as follows:
+                <ul>
+                    <li><p>
+                        <m>\mathcal{E}</m> is the set of letters in the English alphabet.
+                        </p></li>
+                    <li><p>
+                        <m>[n] = \set{0,1,2,3,\ldots,n-1}</m> whenever <m>n\in \Nats</m>.
+                        </p></li>
+                </ul>
+            </p>
+            <p>
+                For a finite set <m>A</m> which is not a subset of <m>[n]</m> for any <m>n</m>, we denote the set of all permutations of <m>A</m> by <m>\sym{A}</m>.
+            </p>
         </convention>
     </introduction>
 
@@ -53,31 +50,38 @@
         <definition xml:id="def-linenotations">
             <title>Two-line notation</title>
             <statement>
-                Let <m>\sigma\in\sym{A}</m> be a permutation of a set <m>A=\set{a_1,a_2,\dotsc,a_n}</m>. Then the <term>two-line notation</term> for <m>\sigma</m> is
-                <me>
-                    \sigma = \begin{bmatrix}
-                        a_1 \amp a_2 \amp a_3 \amp \cdots \amp a_n \\
-                        \sigma(a_1) \amp \sigma(a_2) \amp \sigma(a_3) \amp \cdots \amp \sigma(a_n)
-                    \end{bmatrix}
-                </me>.
-                The <term>one-line</term> notation for <m>\sigma</m> is
-                <me>
-                    \sigma = \sigma(a_1) ~ \sigma(a_2) ~ \sigma(a_3) ~ \cdots ~ \sigma(a_n)
-                </me>.
+                <p>
+                    Let <m>\sigma\in\sym{A}</m> be a permutation of a set <m>A=\set{a_1,a_2,\dotsc,a_n}</m>. Then the <term>two-line notation</term> for <m>\sigma</m> is
+                    <me>
+                        \sigma = \begin{bmatrix}
+                            a_1 \amp a_2 \amp a_3 \amp \cdots \amp a_n \\
+                            \sigma(a_1) \amp \sigma(a_2) \amp \sigma(a_3) \amp \cdots \amp \sigma(a_n)
+                        \end{bmatrix}
+                    </me>.
+                    The <term>one-line</term> notation for <m>\sigma</m> is
+                    <me>
+                        \sigma = \sigma(a_1) ~ \sigma(a_2) ~ \sigma(a_3) ~ \cdots ~ \sigma(a_n)
+                    </me>.
+                </p>
             </statement>
         </definition>
 
         <convention xml:id="conv-oneline">
-            <statement>
+            <p>
                 There is considerable disagreement in the literature as to whether the symbols in one-line notation should be separated by a comma, a space, or nothing at all. We adopt the convention that permutations listed in one-line notation will have no spaces between symbols for permutations of just a few symbols, but with a space between symbols for longer permutations. For instance,
-                <me>\tau = \begin{bmatrix}1 \amp 2 \amp 3 \\ 3 \amp 1 \amp 2\end{bmatrix}</me>
+                <me>
+                    \tau = \begin{bmatrix}1 \amp 2 \amp 3 \\ 3 \amp 1 \amp 2\end{bmatrix}
+                </me>
                 will be represented by <m>\tau=312</m>, but
-                <me>\gamma = \begin{bmatrix}
-                1 \amp 2 \amp 3 \amp 4 \amp 5 \amp 6 \amp 7 \amp 8 \amp 9 \amp 10 \\
-                10 \amp 3 \amp 2 \amp 9 \amp 4 \amp 8 \amp 7 \amp 5 \amp 1 \amp 6
-                \end{bmatrix}</me> will be represented by
+                <me>
+                    \gamma = \begin{bmatrix}
+                    1 \amp 2 \amp 3 \amp 4 \amp 5 \amp 6 \amp 7 \amp 8 \amp 9 \amp 10 \\
+                    10 \amp 3 \amp 2 \amp 9 \amp 4 \amp 8 \amp 7 \amp 5 \amp 1 \amp 6
+                    \end{bmatrix}
+                </me>
+                will be represented by
                 <m>\gamma = 10~3~2~9~4~8~7~5~1~6</m>.
-            </statement>
+            </p>
         </convention>
         <p>
             Two line notation is especially useful when there is no natural order for the symbols in the set being permuted. For example, if <m>A=\set{\clubsuit, \diamondsuit, \heartsuit, \spadesuit, \nabla, \surd, \infty}</m>, then the following is a valid permutation of <m>A</m>:
@@ -96,28 +100,32 @@
         <exercise xml:id="exc-perms-s4">
             <title>Permutations of <m>\set{1,2,3,4}</m></title>
             <statement>
-                List all permutations of the set <m>\set{1,2,3,4}</m> in one-line notation.
+                <p>
+                    List all permutations of the set <m>\set{1,2,3,4}</m> in one-line notation.
+                </p>
             </statement>
             <answer>
-                The permutations of <m>\set{1,2,3,4}</m> are
-                <md>
-                    <mrow>
-                        1~2~3~4 \amp\amp 1~2~4~3 \amp\amp 1~3~2~4 \amp\amp
-                        1~3~4~2 \amp\amp 1~4~2~3 \amp\amp 1~4~3~2
-                    </mrow>
-                    <mrow>
-                        2~1~3~4 \amp\amp 2~1~4~3 \amp\amp 2~3~1~4 \amp\amp
-                        2~3~4~1 \amp\amp 2~4~1~3 \amp\amp 2~4~3~1
-                    </mrow>
-                    <mrow>
-                        3~1~2~4 \amp\amp 3~1~4~2 \amp\amp 3~2~1~4 \amp\amp
-                        3~2~4~1 \amp\amp 3~4~1~2 \amp\amp 3~4~2~1
-                    </mrow>
-                    <mrow>
-                        4~1~2~3 \amp\amp 4~1~3~2 \amp\amp 4~2~1~3 \amp\amp
-                        4~2~3~1 \amp\amp 4~3~1~2 \amp\amp 4~3~2~1
-                    </mrow>
-                </md>
+                <p>
+                    The permutations of <m>\set{1,2,3,4}</m> are
+                    <md>
+                        <mrow>
+                            1~2~3~4 \amp\amp 1~2~4~3 \amp\amp 1~3~2~4 \amp\amp
+                            1~3~4~2 \amp\amp 1~4~2~3 \amp\amp 1~4~3~2
+                        </mrow>
+                        <mrow>
+                            2~1~3~4 \amp\amp 2~1~4~3 \amp\amp 2~3~1~4 \amp\amp
+                            2~3~4~1 \amp\amp 2~4~1~3 \amp\amp 2~4~3~1
+                        </mrow>
+                        <mrow>
+                            3~1~2~4 \amp\amp 3~1~4~2 \amp\amp 3~2~1~4 \amp\amp
+                            3~2~4~1 \amp\amp 3~4~1~2 \amp\amp 3~4~2~1
+                        </mrow>
+                        <mrow>
+                            4~1~2~3 \amp\amp 4~1~3~2 \amp\amp 4~2~1~3 \amp\amp
+                            4~2~3~1 \amp\amp 4~3~1~2 \amp\amp 4~3~2~1
+                        </mrow>
+                    </md>.
+                </p>
             </answer>
         </exercise>
     </subsection>
@@ -143,9 +151,9 @@
             </definition>
             <remark xml:id="rem-after">
                 <title>Composition order</title>
-                <statement>
+                <p>
                     We must be careful to always consider permutation multiplication in the correct order. An easy way to remember this is to think of the composition symbol as being pronounced <q>after</q>. Then <m>\tau\sigma = \tau\after\sigma</m> is the permutation which performs <m>\tau</m> after performing <m>\sigma</m>.
-                </statement>
+                </p>
             </remark>
 
             <p>
@@ -154,7 +162,9 @@
             <theorem xml:id="thm-perm-multiplication-closed">
                 <title><m>\sym{A}</m> is closed under composition</title>
                 <statement>
-                    Let <m>A</m> be a set and <m>\sym{A}</m> the set of permutations of <m>A</m>, and suppose <m>\sigma,\tau\in\sym{A}</m>. Then <m>\sigma\after\tau\in\sym{A}</m> and <m>\tau\after\sigma\in\sym{A}</m>.
+                    <p>
+                        Let <m>A</m> be a set and <m>\sym{A}</m> the set of permutations of <m>A</m>, and suppose <m>\sigma,\tau\in\sym{A}</m>. Then <m>\sigma\after\tau\in\sym{A}</m> and <m>\tau\after\sigma\in\sym{A}</m>.
+                    </p>
                 </statement>
                 <proof>
                     <p>
@@ -179,35 +189,41 @@
             <definition xml:id="def-associativity">
                 <title>Associative multiplication</title>
                 <statement>
-                    Multiplication is <term>associative</term> if and only if <m>(ab)c = a(bc).</m>
+                    <p>
+                        Multiplication is <term>associative</term> if and only if <m>(ab)c = a(bc).</m>
+                    </p>
                 </statement>
             </definition>
             <theorem xml:id="thm-permprod-assoc">
                 <title>Composition in <m>\sym{A}</m> is associative</title>
                 <statement>
-                    Let <m>A</m> be a set, and suppose <m>\rho,\sigma,\tau\in\sym{A}</m>. Then
-                    <me>
-                        \rho\after(\sigma\after\tau) = (\rho\after\sigma)\after\tau
-                    </me>
+                    <p>
+                        Let <m>A</m> be a set, and suppose <m>\rho,\sigma,\tau\in\sym{A}</m>. Then
+                        <me>
+                            \rho\after(\sigma\after\tau) = (\rho\after\sigma)\after\tau
+                        </me>.
+                    </p>
                 </statement>
                 <proof>
-                    Let <m>\rho,\sigma,\tau\in\sym{A}</m> for a set <m>A</m>. Then for every <m>a\in A</m>,
-                    <md>
-                        <mrow>
-                            (\rho\after(\sigma\after\tau))(a)
-                            \amp= \rho((\sigma\after\tau)(a))
-                        </mrow>
-                        <mrow>
-                            \amp= \rho(\sigma(\tau(a)))
-                        </mrow>
-                        <mrow>
-                            \amp= (\rho\after\sigma)(\tau(a))
-                        </mrow>
-                        <mrow>
-                            \amp= ((\rho\after\sigma)\after\tau)(a),
-                        </mrow>
-                    </md>
-                    with all equalities justified by the definition of composition.
+                    <p>
+                        Let <m>\rho,\sigma,\tau\in\sym{A}</m> for a set <m>A</m>. Then for every <m>a\in A</m>,
+                        <md>
+                            <mrow>
+                                (\rho\after(\sigma\after\tau))(a)
+                                \amp= \rho((\sigma\after\tau)(a))
+                            </mrow>
+                            <mrow>
+                                \amp= \rho(\sigma(\tau(a)))
+                            </mrow>
+                            <mrow>
+                                \amp= (\rho\after\sigma)(\tau(a))
+                            </mrow>
+                            <mrow>
+                                \amp= ((\rho\after\sigma)\after\tau)(a),
+                            </mrow>
+                        </md>
+                        with all equalities justified by the definition of composition.
+                    </p>
                 </proof>
             </theorem>
             <p>
@@ -226,7 +242,7 @@
                     <p>
                         Suppose <m>\sigma_1,\sigma_2,\dotsc,\sigma_k</m> are permutations of the set <m>A=\set{a_1,a_2,\dotsc,a_n}</m>, and further suppose the product <m>\sigma_k\circ\sigma_{k-1}\circ\cdots\circ\sigma_2\circ\sigma_1</m> is desired.
                     </p>
-                    <ol>
+                    <p><ol>
                         <li><p>
                             For each <m>i\in [n]</m>, do the following:
                             <ol>
@@ -246,7 +262,7 @@
                                     </p></li>
                             </ol>
                             </p></li>
-                    </ol>
+                    </ol></p>
                 </statement>
             </algorithm>
             <p>
@@ -317,15 +333,18 @@
             <definition xml:id="def-perm-powers">
                 <title>Natural powers of a permutation</title>
                 <statement>
-                    Let <m>A</m> be a set and <m>\sigma\in\sym{A}</m>.
-                    Define <m>\sigma^0 = e_A</m>, and for each <m>k\in\Zp</m> define recursively <m>\sigma^k = \sigma(\sigma^{k-1})</m> to be the <term>kth power</term> of <m>\sigma</m>.
+                    <p>
+                        Let <m>A</m> be a set and <m>\sigma\in\sym{A}</m>. Define <m>\sigma^0 = e_A</m>, and for each <m>k\in\Zp</m> define recursively <m>\sigma^k = \sigma(\sigma^{k-1})</m> to be the <term>kth power</term> of <m>\sigma</m>.
+                    </p>
                 </statement>
             </definition>
 
             <definition xml:id="def-perm-inverse">
                 <title>Inverse of a permutation</title>
                 <statement>
-                    Suppose <m>\sigma,\tau\in\sym{A}</m> for some set <m>A</m>. Then <m>\tau</m> is an <term>inverse</term> of <m>\sigma</m> if and only if <m>\sigma\tau = e_A = \tau\sigma</m>.
+                    <p>
+                        Suppose <m>\sigma,\tau\in\sym{A}</m> for some set <m>A</m>. Then <m>\tau</m> is an <term>inverse</term> of <m>\sigma</m> if and only if <m>\sigma\tau = e_A = \tau\sigma</m>.
+                    </p>
                 </statement>
             </definition>
             <theorem xml:id="thm-perm-inverse-unique">
@@ -336,10 +355,12 @@
                     </p>
                 </statement>
                 <proof>
-                    If <m>\rho</m>, <m>\sigma</m>, and <m>\tau</m> are as hypothesized, then
-                    <me>
-                        \rho = \rho e_A = \rho(\sigma \tau) = (\rho\sigma)\tau) = e_A\tau = \tau.
-                    </me>
+                    <p>
+                        If <m>\rho</m>, <m>\sigma</m>, and <m>\tau</m> are as hypothesized, then
+                        <me>
+                            \rho = \rho e_A = \rho(\sigma \tau) = (\rho\sigma)\tau) = e_A\tau = \tau.
+                        </me>.
+                    </p>
                 </proof>
             </theorem>
 
@@ -388,7 +409,9 @@
             <definition xml:id="def-symmetric-group">
                 <title>Symmetric Group</title>
                 <statement>
-                    If <m>A</m> is a set, then <m>\sym{A}</m> is the <term>symmetric group</term> over <m>A</m>, and <m>\sym{n}</m> is the <term>symmetric group over <m>n</m> symbols</term>.
+                    <p>
+                        If <m>A</m> is a set, then <m>\sym{A}</m> is the <term>symmetric group</term> over <m>A</m>, and <m>\sym{n}</m> is the <term>symmetric group over <m>n</m> symbols</term>.
+                    </p>
                 </statement>
             </definition>
             <p>
@@ -397,13 +420,17 @@
             <definition xml:id="def-group-isomorphism">
                 <title>Group isomorphism</title>
                 <statement>
-                    Suppose <m>(G,*)</m> and <m>(H,\cdot)</m> are groups, and suppose there is a bijection <m>\phi:G\to H</m> such that <m>\phi(g_1*g_2) = \phi(g_1)\cdot\phi(g_2)</m> for every <m>g_1,g_2\in G</m>. Then <m>G</m> is <term>isomorphic</term> to <m>H</m> and the bijection <m>\phi</m> is a <term>group isomorphism</term>.
+                    <p>
+                        Suppose <m>(G,*)</m> and <m>(H,\cdot)</m> are groups, and suppose there is a bijection <m>\phi:G\to H</m> such that <m>\phi(g_1*g_2) = \phi(g_1)\cdot\phi(g_2)</m> for every <m>g_1,g_2\in G</m>. Then <m>G</m> is <term>isomorphic</term> to <m>H</m> and the bijection <m>\phi</m> is a <term>group isomorphism</term>.
+                    </p>
                 </statement>
             </definition>
             <theorem xml:id="thm-cayleys-theorem">
                 <title>Cayley's Theorem</title>
                 <statement>
-                    Every abstract group is isomorphic to a subgroup of a symmetric group.
+                    <p>
+                        Every abstract group is isomorphic to a subgroup of a symmetric group.
+                    </p>
                 </statement>
             </theorem>
             <p>
@@ -456,10 +483,14 @@
         <exercise xml:id="exc-perms-support">
             <title>Behavior of permutation supports</title>
             <statement>
-                Suppose <m>\alpha\in\sym{N}</m> and suppose <m>x\in \supp{\alpha}</m>. Prove that <m>\alpha(x)\in\supp{\alpha}.</m>
+                <p>
+                    Suppose <m>\alpha\in\sym{N}</m> and suppose <m>x\in \supp{\alpha}</m>. Prove that <m>\alpha(x)\in\supp{\alpha}.</m>
+                </p>
             </statement>
             <solution>
-                If <m>\alpha\in\sym{N}</m> and <m>x\in \supp{\alpha}</m>, but we assume towards a contradiction that <m>\alpha(x)\in\fix{\alpha}</m>, then we have <m>\alpha(x) = \alpha(\alpha(x))</m>, but <m>x\neq\alpha(x)</m>; this contradicts that <m>\alpha</m> is injective! Hence it must be that <m>\alpha(x)\in\supp{\alpha}</m>.
+                <p>
+                    If <m>\alpha\in\sym{N}</m> and <m>x\in \supp{\alpha}</m>, but we assume towards a contradiction that <m>\alpha(x)\in\fix{\alpha}</m>, then we have <m>\alpha(x) = \alpha(\alpha(x))</m>, but <m>x\neq\alpha(x)</m>; this contradicts that <m>\alpha</m> is injective! Hence it must be that <m>\alpha(x)\in\supp{\alpha}</m>.
+                </p>
             </solution>
         </exercise>
         <definition xml:id="def-disjoint-cycles">
@@ -562,7 +593,7 @@
                 </p>
                 <table xml:id="table-products_of_cycles">
                     <title>Calculating a product of cycles</title>
-                    <tabular align="left">
+                    <tabular halign="left">
                         <row bottom="major">
                             <cell><m>x</m></cell>
                             <cell><m>\tau(x)</m></cell>
@@ -627,15 +658,19 @@
         <exercise xml:id="exc-calc-perm-prods">
             <title>Calculating products in cycle notation</title>
             <statement>
-                From <xref ref="exmp-products_of_cycles" text="title"/> there are six ways to arrange a product of <m>\rho</m>, <m>\sigma</m>, and <m>\tau</m>; find the other five and write them in cycle notation.
+                <p>
+                    From <xref ref="exmp-products_of_cycles" text="title"/> there are six ways to arrange a product of <m>\rho</m>, <m>\sigma</m>, and <m>\tau</m>; find the other five and write them in cycle notation.
+                </p>
             </statement>
         </exercise>
         <exercise xml:id="exc-calc-perm-powers">
             <title>Calculating powers using cycle notation</title>
             <statement>
-                Use the long permutation in <m>\sym{24}</m>
-                <me>\sigma=(1,7,10,18,3,21)(2,14,12,13,5,8,19,15,17,11,24,4,20,9,16,22,23,6)</me>
-                to investigate powers of permutations. What does the cycle decomposition allow you to do in finding <m>\sigma^k</m>?
+                <p>
+                    Use the long permutation in <m>\sym{24}</m>
+                    <me>\sigma=(1,7,10,18,3,21)(2,14,12,13,5,8,19,15,17,11,24,4,20,9,16,22,23,6)</me>
+                    to investigate powers of permutations. What does the cycle decomposition allow you to do in finding <m>\sigma^k</m>?
+                </p>
             </statement>
         </exercise>
     </subsection>

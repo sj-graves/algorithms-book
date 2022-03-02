@@ -3,70 +3,68 @@
 <section xml:id="sec-intro_basicdata" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Basic data types</title>
     <introduction>
-        Computers can keep track of all sorts of information, but a good way to classify the basic data types are into <term>numeric</term> and <term>non-numeric</term> data.
+        <p>
+            Computers can keep track of all sorts of information, but a good way to classify the basic data types are into <term>numeric</term> and <term>non-numeric</term> data.
+        </p>
     </introduction>
     <subsection xml:id="sub-intro-basicdata-numbers">
         <title>Numerical data types</title>
         <p>
             In mathematics prior to Calculus, the basic type of things you study are numbers, pretty vaguely defined, and then in calculus you're introduced to the idea of sets of numbers:
+            <md>
+                <mrow>\amp\Nats = \set{0,1,2,3,\dotsc},</mrow>
+                <mrow>\amp\Ints = \set{\dotsc,-2,-1,0,1,2,\dotsc},</mrow>
+                <mrow>\amp\Rats = \set{p/q:p,q\in\Ints,q\neq 0},</mrow>
+                <mrow>\amp\Reals,{}\text{ the set of all real numbers},</mrow>
+                <mrow>\amp\Comps = \set{a+ib:a,b\in\Reals, i^2=-1}.</mrow>
+            </md>
         </p>
-        <md>
-            <mrow>\amp\Nats = \set{0,1,2,3,\dotsc},</mrow>
-            <mrow>\amp\Ints = \set{\dotsc,-2,-1,0,1,2,\dotsc},</mrow>
-            <mrow>\amp\Rats = \set{p/q:p,q\in\Ints,q\neq 0},</mrow>
-            <mrow>\amp\Reals,{}\text{ the set of all real numbers},</mrow>
-            <mrow>\amp\Comps = \set{a+ib:a,b\in\Reals, i^2=-1}.</mrow>
-        </md>
         <p>
             Mathematically, there are certain actions which can be taken using all of these numbers: your basic algebraic operations, with a few notable exceptions. The idea that different kinds of number can have different kinds of properties is the essence of the programming <term>data type</term>. The first and easiest data type to work with in Python is the <c>int</c> type, and the easiest way to start working with <c>int</c>s is to assign one to a name.
         </p>
         <technology xml:id="tech-help">
             <title>The <c>help</c> command</title>
-            <statement>
-                <p>
+            <p>
                 When working in Python, if you're not sure what to do next, you can access Python's built-in help menu from the console.
-                </p>
-                <sidebyside>
-                    <console>
-                        <prompt>&gt;&gt;&gt; </prompt>
-                        <input>help()</input>
-                        <output>
-Welcome to Python 3.8's help utility!
+            </p>
+            <console>
+                <prompt>&gt;&gt;&gt; </prompt>
+                <input>
+                    help()
+                </input>
+                <output>
+                    Welcome to Python 3.8's help utility!
 
-If this is your first time using Python, you should definitely check out
-the tutorial on the Internet at https://docs.python.org/3.8/tutorial/.
+                    If this is your first time using Python, you should definitely check out
+                    the tutorial on the Internet at https://docs.python.org/3.8/tutorial/.
 
-Enter the name of any module, keyword, or topic to get help on writing
-Python programs and using Python modules.  To quit this help utility and
-return to the interpreter, just type "quit".
+                    Enter the name of any module, keyword, or topic to get help on writing
+                    Python programs and using Python modules.  To quit this help utility and
+                    return to the interpreter, just type "quit".
 
-To get a list of available modules, keywords, symbols, or topics, type
-"modules", "keywords", "symbols", or "topics".  Each module also comes
-with a one-line summary of what it does; to list the modules whose name
-or summary contain a given string such as "spam", type "modules spam".
+                    To get a list of available modules, keywords, symbols, or topics, type
+                    "modules", "keywords", "symbols", or "topics".  Each module also comes
+                    with a one-line summary of what it does; to list the modules whose name
+                    or summary contain a given string such as "spam", type "modules spam".
 
-help>
-                        </output>
-                    </console>
-                </sidebyside>
-                <p>
-                    You should freely use help as often as you want.
-                </p>
-            </statement>
+                    help>
+                </output>
+            </console>
+            <p>
+                You should freely use help as often as you want.
+            </p>
         </technology>
         <p>
             Data types matter in programming because computers are brainless machines. This is why syntax matters: the computer needs to know what a thing is to know what to do with it. Mathematically, if we read <m>x+5 = y</m> then we assume that both <m>x</m> and <m>y</m> are things for which the expression is sensible, but that is due to years of learning mathematical syntax.
         </p>
         <technology xml:id="tech-assign_vs_equals">
             <title>Assignment vs. equality</title>
-            <statement>
-                <p>
+            <p>
                     Generally speaking, programming languages use a different syntax for the declarative statement <q>Let <m>x</m> take the value 3</q> than they do for the question <q>Is <m>x</m> equal to 3?</q> Mathematicians do not, relying on the surrounding context to determine what is meant by <m>x=3</m>.
                 </p>
                 <p>
                     To assign the value 3 to the variable named <m>x</m> in python, we use <c>x = 3</c>. To inquire whether or not the variable named <m>x</m> is equal to 3, we use <c>x == 3</c>. The spaces around the operators <c>=</c> and <c>==</c> are conventional and help make readable code.
                 </p>
-            </statement>
             <listing xml:id="lst-assign_vs_equals">
                 <caption>Assignment vs. equality</caption>
                 <console>
@@ -85,9 +83,9 @@ NameError: name 'y' is not defined</output>
         </technology>
         <observation xml:id="obs-assignment-no-output">
             <title>Assignment produces no output</title>
-            <statement>
+            <p>
                 A statement like <c>x = 3</c> in Python never produces output. To see the value of the variable named <c>x</c>, use <c>print(x)</c>.
-            </statement>
+            </p>
         </observation>
         <p>
             All of the common mathematical operations are defined in Python, with only two slightly strange behaviors:
@@ -131,7 +129,7 @@ NameError: name 'y' is not defined</output>
             </tabular>
         </table>
         <p>
-            You might wonder what floating point division is and how it differs from normal division. The difficulty with division on a computer is that not every real number can exactly be represented in computer memory with . For a full explanation of this, see the official <url href="https://doi.org/10.1109%2FIEEESTD.2019.8766229">IEEE Standard 754 for Floating-Point Arithmetic</url> or read the <url href="https://en.wikipedia.org/wiki/IEEE_754">Wikipedia page</url>. In any case, the Python operation <c>a / b</c> produces the floating point approximation of <m>a/b</m> rather than the exact value, even when <m>a</m> and <m>b</m> are integer powers of 2.
+            You might wonder what floating point division is and how it differs from normal division. The difficulty with division on a computer is that not every real number can exactly be represented in computer memory with . For a full explanation of this, see the official <url href="https://doi.org/10.1109%2FIEEESTD.2019.8766229" visual="ieeexplore.ieee.org/document/8766229">IEEE Standard 754 for Floating-Point Arithmetic</url> or read the <url href="https://en.wikipedia.org/wiki/IEEE_754" visual="en.wikipedia.org/wiki/IEEE_754">Wikipedia page</url>. In any case, the Python operation <c>a / b</c> produces the floating point approximation of <m>a/b</m> rather than the exact value, even when <m>a</m> and <m>b</m> are integer powers of 2.
         </p>
         <p>
             The convention that <c>a ** b</c> (rather than <c>a ^ b</c>) represents <m>a^b</m> is the deliberate choice of the developer of Python, allowing <c>a ^ b</c> to represent the <term>bitwise XOR</term> operation. Beginning programmers don't usually need bitwise XOR.
@@ -141,31 +139,30 @@ NameError: name 'y' is not defined</output>
         </p>
         <technology xml:id="tech-import">
             <title>Loading additional packages</title>
-            <statement>
-                <p>
+            <p>
                 Python comes preinstalled with <em>many</em> useful packages, loaded using the <c>import</c> command.
-                </p>
-                <listing>
-                    <caption>Using the <c>import math</c> command</caption>
-                    <console>
-                        <prompt>>>> </prompt>
-                        <input>import math</input>
-                        <prompt>>>> </prompt>
-                        <input>math.sqrt(15)</input>
-                        <output>3.872983346207417</output>
-                    </console>
-                </listing>
-                <p>
-                    The use of <term>dot notation</term> to access functions within a module is standard within Python and will be used extensively.
-                </p>
-            </statement>
-
+            </p>
+            <listing xml:id="list-import_math">
+                <caption>Using the <c>import math</c> command</caption>
+                <console>
+                    <prompt>>>> </prompt>
+                    <input>import math</input>
+                    <prompt>>>> </prompt>
+                    <input>math.sqrt(15)</input>
+                    <output>3.872983346207417</output>
+                </console>
+            </listing>
+            <p>
+                The use of <term>dot notation</term> to access functions within a module is standard within Python and will be used extensively.
+            </p>
         </technology>
     </subsection>
     <subsection xml:id="sub-intro-basicdata-other">
         <title>Non-numeric data types</title>
         <introduction>
-            The two most useful non-numeric data types are <term>Boolean values</term> of <c>True</c> and <c>False</c> (stored in the<c>bool</c> data type) and <term>strings</term>, which encompass every sequence of printable or non-printable character. Strings have data type <c>str</c>.
+            <p>
+                The two most useful non-numeric data types are <term>Boolean values</term> of <c>True</c> and <c>False</c> (stored in the<c>bool</c> data type) and <term>strings</term>, which encompass every sequence of printable or non-printable character. Strings have data type <c>str</c>.
+            </p>
         </introduction>
         <subsubsection xml:id="subsub-intro-basicdata-other-bool">
             <title>Boolean variables</title>
@@ -238,25 +235,23 @@ NameError: name 'y' is not defined</output>
             </table>
             <technology xml:id="tech-typecasting">
                 <title>Type conversion</title>
-                    <statement>
-                    <p>
-                        In Python, <c>True</c> and <c>False</c> are actually integer values. You can always attempt to convert one data type into another by using the name of the target data type like a function.
-                    </p>
-                    <listing xml:id="list-integer_bools">
-                        <caption>Integer values of the <c>bool</c> values</caption>
-                        <console>
-                            <prompt>>>> </prompt>
-                            <input>int(False)</input>
-                            <output>0</output>
-                            <prompt>>>> </prompt>
-                            <input>int(True)</input>
-                            <output>1</output>
-                        </console>
-                    </listing>
-                    <p>
-                        Converting one data type into another this way is called <term>type conversion</term> or <term>type casting</term>, which is not to be confused with <url href="https://en.wikipedia.org/wiki/Typecasting">typecasting</url>.
-                    </p>
-                </statement>
+                <p>
+                    In Python, <c>True</c> and <c>False</c> are actually integer values. You can always attempt to convert one data type into another by using the name of the target data type like a function.
+                </p>
+                <listing xml:id="list-integer_bools">
+                    <caption>Integer values of the <c>bool</c> values</caption>
+                    <console>
+                        <prompt>>>> </prompt>
+                        <input>int(False)</input>
+                        <output>0</output>
+                        <prompt>>>> </prompt>
+                        <input>int(True)</input>
+                        <output>1</output>
+                    </console>
+                </listing>
+                <p>
+                    Converting one data type into another this way is called <term>type conversion</term> or <term>type casting</term>.
+                </p>
             </technology>
             <p>
                 Boolean data types are used extensively to control the flow of execution of an algorithm, as can be seen in <xref ref="alg-intro-kruskal" /> and later in <xref provisional="sec-flowcontrol"/>.
@@ -269,60 +264,58 @@ NameError: name 'y' is not defined</output>
             </p>
             <technology xml:id="tech-strings">
                 <title>Valid strings</title>
-                <statement>
-                    <p>
-                        There are many different valid combinations of quotes which can enclose a string.
-                    </p>
-                    <listing xml:id="list-valid_strings">
-                        <caption>Valid input strings</caption>
-                        <console>
-                            <prompt>>>> </prompt>
-                            <input>'Single quotes may enclose a string'</input>
-                            <output>'Single quotes may enclose a string'</output>
-                            <prompt>>>> </prompt>
-                            <input>"Double quotes may enclose a string"</input>
-                            <output>'Double quotes may enclose a string'</output>
-                            <prompt>>>> </prompt>
-                            <input>'''Multiline strings</input>
-                            <prompt>... </prompt>
-                            <input>may be enclosed in three single quotes'''</input>
-                            <output>'Multiline strings\nmay be enclosed in three single quotes'</output>
-                            <prompt>>>> </prompt>
-                            <input>"""Alternately, they may</input>
-                            <prompt>... </prompt>
-                            <input>be enclosed in three double quotes."""</input>
-                            <output>'Alternately, they may\nbe enclosed in three double quotes.'</output>
-                            <prompt>>>> </prompt>
-                            <input>'"Quotes may be mixed," said he, "but I may not quote nor contract."'</input>
-                            <output>'"Quotes may be mixed," said he, "but I may not quote nor contract."'</output>
-                            <prompt>>>> </prompt>
-                            <input>"They've been reversed here."</input>
-                            <output>"They've been reversed here."</output>
-                            <prompt>>>> </prompt>
-                            <input>print("This isn't the best example.\n\t- Dr. Graves")</input>
-                            <output>
-                            This isn't the best example.
-                                    - Dr. Graves
-                            </output>
-                        </console>
-                    </listing>
-                    <p>
-                        As can be seen above, Python uses single quotes internally. Also the line break character is changed to <c>\n</c> for internal storage. This is called an <term>escape character</term>, and there are several: <c>\'</c>, <c>\"</c>, <c>\n</c>, <c>\t</c>, and <c>\\</c>, among them.
-                    </p>
-                    <p>
-                        To see a <c>str</c> in its proper form, with all escape characters replaced with the correct output, we use the <c>print(...)</c> function, as shown above.
-                    </p>
-                </statement>
+                <p>
+                    There are many different valid combinations of quotes which can enclose a string.
+                </p>
+                <listing xml:id="list-valid_strings">
+                    <caption>Valid input strings</caption>
+                    <console>
+                        <prompt>>>> </prompt>
+                        <input>'Single quotes may enclose a string'</input>
+                        <output>'Single quotes may enclose a string'</output>
+                        <prompt>>>> </prompt>
+                        <input>"Double quotes may enclose a string"</input>
+                        <output>'Double quotes may enclose a string'</output>
+                        <prompt>>>> </prompt>
+                        <input>'''Multiline strings</input>
+                        <prompt>... </prompt>
+                        <input>may be enclosed in three single quotes'''</input>
+                        <output>'Multiline strings\nmay be enclosed in three single quotes'</output>
+                        <prompt>>>> </prompt>
+                        <input>"""Alternately, they may</input>
+                        <prompt>... </prompt>
+                        <input>be enclosed in three double quotes."""</input>
+                        <output>'Alternately, they may\nbe enclosed in three double quotes.'</output>
+                        <prompt>>>> </prompt>
+                        <input>'"Quotes may be mixed," said he, "but I may not quote nor contract."'</input>
+                        <output>'"Quotes may be mixed," said he, "but I may not quote nor contract."'</output>
+                        <prompt>>>> </prompt>
+                        <input>"They've been reversed here."</input>
+                        <output>"They've been reversed here."</output>
+                        <prompt>>>> </prompt>
+                        <input>print("This isn't the best example.\n\t- Dr. Graves")</input>
+                        <output>
+                        This isn't the best example.
+                                - Dr. Graves
+                        </output>
+                    </console>
+                </listing>
+                <p>
+                    As can be seen above, Python uses single quotes internally. Also the line break character is changed to <c>\n</c> for internal storage. This is called an <term>escape character</term>, and there are several: <c>\'</c>, <c>\"</c>, <c>\n</c>, <c>\t</c>, and <c>\\</c>, among them.
+                </p>
+                <p>
+                    To see a <c>str</c> in its proper form, with all escape characters replaced with the correct output, we use the <c>print(...)</c> function, as shown above.
+                </p>
             </technology>
             <p>
                 There are many other things one can do with strings, since the <c>str</c> class comes equipped with many interesting <term>attributes</term> and <term>methods</term>, but those topics are best saved for later.
             </p>
             <technology xml:id="tech-formatted-strings">
                 <title>Formatted strings</title>
-                <statement>
-                    <p>
-                        The one additional feature of strings that can be used early and to great gain is the ability to modify strings for output based upon <term>string formatting</term>. There are several ways to do this:
-                    </p>
+                <p>
+                    The one additional feature of strings that can be used early and to great gain is the ability to modify strings for output based upon <term>string formatting</term>. There are several ways to do this:
+                </p>
+                <p>
                     <ul>
                         <li><p><term><c>printf</c>-style String Formatting</term> is named after the <c>printf</c> command for the C/C++ programming languages. In this mode, certain percent-codes (such as <c>%s</c>, <c>%d</c>, and <c>%f</c>) can be included in a string and then replaced via the <c>%</c> operator.
                             </p></li>
@@ -333,69 +326,69 @@ NameError: name 'y' is not defined</output>
                             <term>Formatted string literals</term> allow a string to be defined similarly to the string format method, but using Python evaluation within the string.
                             </p></li>
                     </ul>
-                    <p>
-                        First see a demonstration of the <c>%</c> operator for strings.
-                    </p>
-                    <listing xml:id="list-string-mod">
-                        <caption>Changing a string using the <c>%</c> operator</caption>
-                        <console>
-                            <prompt>>>> </prompt>
-                            <input>print("""This %s contains several (%d) percent codes, </input>
-                            <prompt>... </prompt>
-                            <input>which are replaced (%f) by using the percent operator.</input>
-                            <prompt>... </prompt>
-                            <input>""" % ('string', 3, 3.15926535) )</input>
-                            <output>This string contains several (3) percent codes,
-        which are replaced (3.159265) by using the percent operator.
+                </p>
+                <p>
+                    First see a demonstration of the <c>%</c> operator for strings.
+                </p>
+                <listing xml:id="list-string-mod">
+                    <caption>Changing a string using the <c>%</c> operator</caption>
+                    <console>
+                        <prompt>>>> </prompt>
+                        <input>print("""This %s contains several (%d) percent codes, </input>
+                        <prompt>... </prompt>
+                        <input>which are replaced (%f) by using the percent operator.</input>
+                        <prompt>... </prompt>
+                        <input>""" % ('string', 3, 3.15926535) )</input>
+                        <output>This string contains several (3) percent codes,
+    which are replaced (3.159265) by using the percent operator.
 
-        </output>
-                        </console>
-                    </listing>
-                    <p>
-                        Next consider an example of the use of the <c>str.format(...)</c> method.
-                    </p>
-                    <listing xml:id="list-string-dot-format">
-                        <caption>The <c>str.format</c> method</caption>
-                        <console>
-                            <prompt>>>> </prompt>
-                            <input>print("""A similar {a} which has {num} replacements.</input>
-                            <prompt>... </prompt>
-                            <input>Notice that the {lcb}...{rcb} keywords can be replaced</input>
-                            <prompt>... </prompt>
-                            <input>by any value whatsoever.""".format(a='StRiNg', num=7.31,</input>
-                            <prompt>... </prompt>
-                            <input>lcb="{", rcb="}") )</input>
-                            <output>
-                                A similar StRiNg which has 7.31 replacements.
-                                Notice that the {...} keywords can be replaced
-                                by any value whatsoever.
-                            </output>
-                        </console>
-                    </listing>
-                    <p>
-                        Finally, the method using <term>f-strings</term>.
-                    </p>
-                    <listing xml:id="list-fstring">
-                        <caption>Formatted string literals, called <term>fstrings</term></caption>
-                        <console>
-                            <prompt>>>> </prompt>
-                            <input>name = "Bob the Tomato"</input>
-                            <prompt>>>> </prompt>
-                            <input>multiplicity = 5</input>
-                            <prompt>>>> </prompt>
-                            <input>out = f"{name} can be copied {multiplicity} times: {multiplicity*name}"</input>
-                            <prompt>>>> </prompt>
-                            <input>name = "Larry the Cucumber"</input>
-                            <input>multiplicity = 2</input>
-                            <prompt>>>> </prompt>
-                            <input>print(out)</input>
-                            <output>Bob the Tomato can be copied 5 times: Bob the TomatoBob the TomatoBob the TomatoBob the TomatoBob the Tomato</output>
-                        </console>
-                    </listing>
-                    <p>
-                    Note in this last example that the value of the fstring <c>out</c> is not changed even when the values associated with the names used to construct <c>out</c> changed.
-                    </p>
-                </statement>
+    </output>
+                    </console>
+                </listing>
+                <p>
+                    Next consider an example of the use of the <c>str.format(...)</c> method.
+                </p>
+                <listing xml:id="list-string-dot-format">
+                    <caption>The <c>str.format</c> method</caption>
+                    <console>
+                        <prompt>>>> </prompt>
+                        <input>print("""A similar {a} which has {num} replacements.</input>
+                        <prompt>... </prompt>
+                        <input>Notice that the {lcb}...{rcb} keywords can be replaced</input>
+                        <prompt>... </prompt>
+                        <input>by any value whatsoever.""".format(a='StRiNg', num=7.31,</input>
+                        <prompt>... </prompt>
+                        <input>lcb="{", rcb="}") )</input>
+                        <output>
+                            A similar StRiNg which has 7.31 replacements.
+                            Notice that the {...} keywords can be replaced
+                            by any value whatsoever.
+                        </output>
+                    </console>
+                </listing>
+                <p>
+                    Finally, the method using <term>f-strings</term>.
+                </p>
+                <listing xml:id="list-fstring">
+                    <caption>Formatted string literals, called <term>fstrings</term></caption>
+                    <console>
+                        <prompt>>>> </prompt>
+                        <input>name = "Bob the Tomato"</input>
+                        <prompt>>>> </prompt>
+                        <input>multiplicity = 5</input>
+                        <prompt>>>> </prompt>
+                        <input>out = f"{name} can be copied {multiplicity} times: {multiplicity*name}"</input>
+                        <prompt>>>> </prompt>
+                        <input>name = "Larry the Cucumber"</input>
+                        <input>multiplicity = 2</input>
+                        <prompt>>>> </prompt>
+                        <input>print(out)</input>
+                        <output>Bob the Tomato can be copied 5 times: Bob the TomatoBob the TomatoBob the TomatoBob the TomatoBob the Tomato</output>
+                    </console>
+                </listing>
+                <p>
+                Note in this last example that the value of the fstring <c>out</c> is not changed even when the values associated with the names used to construct <c>out</c> changed.
+                </p>
             </technology>
         </subsubsection>
     </subsection>

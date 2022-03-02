@@ -3,14 +3,31 @@
 <section xml:id="sec-perms-oop" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Project: Permutations in Python</title>
     <shorttitle>Permutations in Python</shorttitle>
+    <objectives>
+        <introduction>
+            <p>
+                We will use permutations to investigate the Python ideas of <em>classes</em>, <em>objects</em>, <em>attributes</em>, and <em>methods</em>.
+            </p>
+        </introduction>
+        <ol>
+            <li><p>
+                Create properly named and properly formatted files in <xref ref="prj-perms-projfiles" /> and write the class definition and docstring.
+                </p></li>
+            <li><p>
+                Combine <xref ref="proj-perms-initmethod" /> and <xref ref="proj-perms-validation" /> to initialize an object of type <c>AlgoPerm</c>.
+                </p></li>
+            <li><p>
+                Add methods and attributes which round out the utility of the <c>AlgoPerm</c> class in <xref ref="proj-perms-representations"/>, <xref ref="proj-perms-call_method" />, <xref ref="proj-perms-after_method" />, and <xref ref="proj-perms-inverse_method"/>
+                </p></li>
+        </ol>
+    </objectives>
     <introduction>
-        <p>
-            We will use permutations to investigate the Python ideas of <em>classes</em>, <em>objects</em>, <em>attributes</em>, and <em>methods</em>.
-        </p>
         <definition xml:id="def-oop">
             <title>Object-oriented programming</title>
             <statement>
-                In the viewpoint of object-oriented programming (OOP), <term>objects</term> contain data in the form of <term>attributes</term> and code in the form of <term>methods</term>. Python is a <term>class-based</term> language, where the class of an object determines its type; an object is a programming construct that can refer to itself, has certain data associated with itself, and can act in certain ways.
+                <p>
+                    In the viewpoint of object-oriented programming (OOP), <term>objects</term> contain data in the form of <term>attributes</term> and code in the form of <term>methods</term>. Python is a <term>class-based</term> language, where the class of an object determines its type; an object is a programming construct that can refer to itself, has certain data associated with itself, and can act in certain ways.
+                </p>
             </statement>
         </definition>
         <p>
@@ -19,48 +36,33 @@
         <p>
             A strong benefit to the OOP mode of thinking is that it eliminates much type checking: functions which act on an object in a specific class can be written under the assumption that the object is, in fact, a valid class member. For instance, if we want to determine the disjoint cycle notation for a permutation written in one-line notation, our cycle code doesn't need to check to see whether the one-line notation validly defines a permutation, since that is handled when new permutation objects are named.
         </p>
-        <objectives>
-            <ol>
-                <li><p>
-                    Create properly named and properly formatted files in <xref ref="prj-perms-projfiles" /> and write the class definition and docstring.
-                    </p></li>
-                <li><p>
-                    Combine <xref ref="proj-perms-initmethod" /> and <xref ref="proj-perms-validation" /> to initialize an object of type <c>AlgoPerm</c>.
-                    </p></li>
-                <li><p>
-                    Add methods and attributes which round out the utility of the <c>AlgoPerm</c> class in <xref ref="proj-perms-representations"/>, <xref ref="proj-perms-call_method" />, <xref ref="proj-perms-after_method" />, and <xref ref="proj-perms-inverse_method"/>
-                    </p></li>
-            </ol>
-        </objectives>
     </introduction>
-    <!--#############################################-->
+     <!--#############################################-->
     <subsection xml:id="sec-perms-oop_classes">
         <title>Classes</title>
         <technology xml:id="tech-class">
             <title>The <c>class</c> command</title>
-            <statement>
-                <p>
-                    Classes in Python are defined via a block structure, similarly to functions.
-                </p>
-                <listing xml:id="list-class">
-                    <caption>Python <c>class</c> definition</caption>
-                    <program language="python">
-                        <input>
-                            class MyClass:
-                                statement_1
-                                statement_2
-                                ...
-                                statement_n
-                        </input>
-                    </program>
-                </listing>
-                <p>
-                    Most of the <c>statement_i</c> lines at the first level of indentation to a class definition should be the definitions of <term>methods</term>. Assignments at the first level of indentation define <term>class attributes</term>, the values of which are held in common by all members of the class. <term>Object attributes</term> are defined within methods.
-                </p>
-                <p>
-                    A method is a function defined within the first level of indentation of a class, and the first argument to a method is special: it is the name used within the method to refer to the object itself. In Python, the convention is to use <c>self</c> as the name for the first argument, and every method should require it.
-                </p>
-            </statement>
+            <p>
+                Classes in Python are defined via a block structure, similarly to functions.
+            </p>
+            <listing xml:id="list-class">
+                <caption>Python <c>class</c> definition</caption>
+                <program language="python">
+                    <input>
+                        class MyClass:
+                            statement_1
+                            statement_2
+                            ...
+                            statement_n
+                    </input>
+                </program>
+            </listing>
+            <p>
+                Most of the <c>statement_i</c> lines at the first level of indentation to a class definition should be the definitions of <term>methods</term>. Assignments at the first level of indentation define <term>class attributes</term>, the values of which are held in common by all members of the class. <term>Object attributes</term> are defined within methods.
+            </p>
+            <p>
+                A method is a function defined within the first level of indentation of a class, and the first argument to a method is special: it is the name used within the method to refer to the object itself. In Python, the convention is to use <c>self</c> as the name for the first argument, and every method should require it.
+            </p>
         </technology>
         <p>
             Mathematicians love the class/object organization, whether or not they know it: think about a proof which begins with the words, <q>let <m>p/q</m> be a rational number.</q> Once the statement is pronounced, there are so many truths implied about <m>p</m>, <m>q</m>, and <m>p/q</m>, all of which come just from knowing that <m>p/q\in\Rats</m>. All of that works because we recognize that the object named <m>p/q</m> is a particular instance of the class of things called rational numbers.
@@ -69,7 +71,9 @@
         <activity xml:id="prj-perms-projfiles">
             <title>Permutation project files</title>
             <introduction>
-                In this project, we'll be working in tandem in two files, the first containing our Class definition and the second being our main execution file. We want to separate the two so that we can use our permutation class file later in other projects via the <c>import</c> command without generating a bunch of output relating to this current project.
+                <p>
+                    In this project, we'll be working in tandem in two files, the first containing our Class definition and the second being our main execution file. We want to separate the two so that we can use our permutation class file later in other projects via the <c>import</c> command without generating a bunch of output relating to this current project.
+                </p>
             </introduction>
             <task>
                 <p>
@@ -91,14 +95,12 @@
                 <p>
                     Start the class definition at the bottom of the file using
                 </p>
-                <sidebyside>
-                    <program language="python">
-                        <input>
-                            class AlgoPerm:
-                                """A class of permutations useable for AAM."""
-                        </input>
-                    </program>
-                </sidebyside>
+                <program language="python">
+                    <input>
+                        class AlgoPerm:
+                            """A class of permutations useable for AAM."""
+                    </input>
+                </program>
             </task>
         </activity>
     </subsection>
@@ -115,7 +117,9 @@
                     An <term>instance</term> is a particular member of a class. <term>Class instantiation</term> is the declaration that a named object belongs to a certain class. For example, declaring <q>Fido is a dog</q> is an instantiation of the class of <q>dog</q> to the object named <q>Fido</q>. Mathematically, this is allows an <term>existential quantification</term>: there exists a dog, named Fido.
                 </p>
                 <aside>
-                    This sidesteps the philosophical question of realism (the universal category of <q>dog</q> exists) versus nominalism (the category of <q>dog</q> only exists because we have objects so labeled).
+                    <p>
+                        This sidesteps the philosophical question of realism (the universal category of <q>dog</q> exists) versus nominalism (the category of <q>dog</q> only exists because we have objects so labeled).
+                    </p>
                 </aside>
             </statement>
         </definition>
@@ -135,96 +139,87 @@
             </console>
         </listing>
         <technology xml:id="tech-instantiation">
-            <title>How to instantiate an object from a <c>class</c> in Python</title>
-            <shorttitle>Python object instantiation</shorttitle>
-            <statement>
-                <p>
-                    Important methods for Python classes often have a strange naming convention, having the form <c>__methodname__</c>. The first of these we will use is the <term>initialization method</term>, called <c>__init__</c>. It is very important that the <c>__init__</c> method must have at least the <c>self</c> argument, along with arguments for any other information which must be known when creating a new object.
-                </p>
-                <listing xml:id="list-__init__">
-                    <caption>The <c>__init__</c> method for a <c>class</c> definition</caption>
-                    <program language="python">
-                        <input>
-                            class MyClass:
-                                """This is the class docstring which is printed by `help(MyClass)`"""
-                                def __init__(self, *args, **kwargs):
-                                    statement_1
-                                    statement_2
-                                    statement_3
-                                    ...
-                        </input>
-                    </program>
-                </listing>
-                <p>
-                    After executing this <c>class</c> block containing a valid <c>__init__</c> method, all that is necessary to create a new <c>MyClass</c> object is to assign the class to a name.
-                </p>
-                <sidebyside>
-                    <console>
-                        <prompt>>>> </prompt>
-                        <input>new_obj = MyClass(arg0, arg1, arg2, keya = "bob", keyb = "larry")</input>
-                    </console>
-                </sidebyside>
-                <p>
-                    Using the class name <c>MyClass</c> as a function invokes the <c>__init__</c> method in such a way that the name <c>new_obj</c> is associated with an object of <c>MyClass</c> and then automatically used as the <c>self</c> argument of the <c>__init__</c> method.
-                </p>
-            </statement>
+            <title>Python object instantiation</title>
+            <p>
+                Important methods for Python classes often have a strange naming convention, having the form <c>__methodname__</c>. The first of these we will use is the <term>initialization method</term>, called <c>__init__</c>. It is very important that the <c>__init__</c> method must have at least the <c>self</c> argument, along with arguments for any other information which must be known when creating a new object.
+            </p>
+            <listing xml:id="list-__init__">
+                <caption>The <c>__init__</c> method for a <c>class</c> definition</caption>
+                <program language="python">
+                    <input>
+                        class MyClass:
+                            """This is the class docstring which is printed by `help(MyClass)`"""
+                            def __init__(self, *args, **kwargs):
+                                statement_1
+                                statement_2
+                                statement_3
+                                ...
+                    </input>
+                </program>
+            </listing>
+            <p>
+                After executing this <c>class</c> block containing a valid <c>__init__</c> method, all that is necessary to create a new <c>MyClass</c> object is to assign the class to a name.
+            </p>
+            <sidebyside>
+                <console>
+                    <prompt>>>> </prompt>
+                    <input>new_obj = MyClass(arg0, arg1, arg2, keya = "bob", keyb = "larry")</input>
+                </console>
+            </sidebyside>
+            <p>
+                Using the class name <c>MyClass</c> as a function invokes the <c>__init__</c> method in such a way that the name <c>new_obj</c> is associated with an object of <c>MyClass</c> and then automatically used as the <c>self</c> argument of the <c>__init__</c> method.
+            </p>
         </technology>
         <technology xml:id="tech-argument_lists">
             <title>Function argument lists</title>
-            <statement>
-                <p>
-                    In <xref ref="list-__init__" /> we see two special arguments used in a function definition, <c>*args</c> and <c>**kwargs</c>. The names of the local variables defined by these arguments are respectively <c>args</c> and <c>kwargs</c>. The first, <c>args</c>, consists of a tuple of all <term>positionally-determined arguments</term> passed to the function. The second, <c>kwargs</c>, consists of a dictionary whose keys are the keywords of arguments passed to the function, and the associated values are the values of those arguments.
-                </p>
-                <listing xml:id="list-argument_lists">
-                    <caption>Functions allowing arbitrary arguments</caption>
-                    <statement>
-                        <console>
-                            <prompt>>>> </prompt>
-                            <input>
-                                def my_func(*args, **kwargs):
-                            </input>
-                            <prompt>...     </prompt>
-                            <input>
-                                print(type(args), len(args))
-                            </input>
-                            <prompt>...     </prompt>
-                            <input>
-                                print(type(kwargs), list(kwargs.items()))
-                            </input>
-                            <prompt>...     </prompt>
-                            <input>
-                            </input>
-                            <prompt>>>> </prompt>
-                            <input>
-                                my_func(13, 17, 19,
-                            </input>
-                            <prompt>...     </prompt>
-                            <input>
-                                keya="a first keyword argument"
-                            </input>
-                            <prompt>...     </prompt>
-                            <input>
-                                keyb="A SECOND!!" )
-                            </input>
-                            <output>
-                                &lt;class 'tuple'> 3
-                                &lt;class 'dict'> [('keya', 'a first keyword argument'), ('keyb', 'A SECOND!!')]
-                            </output>
-                        </console>
-                    </statement>
-                </listing>
-            </statement>
+            <p>
+                In <xref ref="list-__init__" /> we see two special arguments used in a function definition, <c>*args</c> and <c>**kwargs</c>. The names of the local variables defined by these arguments are respectively <c>args</c> and <c>kwargs</c>. The first, <c>args</c>, consists of a tuple of all <term>positionally-determined arguments</term> passed to the function. The second, <c>kwargs</c>, consists of a dictionary whose keys are the keywords of arguments passed to the function, and the associated values are the values of those arguments.
+            </p>
+            <listing xml:id="list-argument_lists">
+                <caption>Functions allowing arbitrary arguments</caption>
+                <console>
+                    <prompt>>>> </prompt>
+                    <input>
+                        def my_func(*args, **kwargs):
+                    </input>
+                    <prompt>...     </prompt>
+                    <input>
+                        print(type(args), len(args))
+                    </input>
+                    <prompt>...     </prompt>
+                    <input>
+                        print(type(kwargs), list(kwargs.items()))
+                    </input>
+                    <prompt>...     </prompt>
+                    <input>
+                    </input>
+                    <prompt>>>> </prompt>
+                    <input>
+                        my_func(13, 17, 19,
+                    </input>
+                    <prompt>...     </prompt>
+                    <input>
+                        keya="a first keyword argument"
+                    </input>
+                    <prompt>...     </prompt>
+                    <input>
+                        keyb="A SECOND!!" )
+                    </input>
+                    <output>
+                        &lt;class 'tuple'> 3
+                        &lt;class 'dict'> [('keya', 'a first keyword argument'), ('keyb', 'A SECOND!!')]
+                    </output>
+                </console>
+            </listing>
         </technology>
         <technology xml:id="tech-self-argument">
             <title>The <c>self</c> argument of a method</title>
-            <statement>
-                <p>
-                    When defining a method for a class there are vanishingly few cases where the method does not need to be able to refer to the object on which it is called. This referent object is most often called <c>self</c> and is always the first argument of the function definition.
-                </p>
-                <p>
-                    Remember: even if you forget to name the first argument to a method <c>self</c>, it <alert>always</alert> takes the value of the object on which the method is called, regardless of whether or not other arguments are provided or needed by the method definition.
-                </p>
-            </statement>
+            <p>
+                When defining a method for a class there are vanishingly few cases where the method does not need to be able to refer to the object on which it is called. This referent object is most often called <c>self</c> and is always the first argument of the function definition.
+            </p>
+            <p>
+                Remember: even if you forget to name the first argument to a method <c>self</c>, it <alert>always</alert> takes the value of the object on which the method is called, regardless of whether or not other arguments are provided or needed by the method definition.
+            </p>
         </technology>
         <p>
             We have specified that the domain and the mapping are the two pieces of information necessary to specify a permutation, and that makes perfect sense. However, if one-line or two-line notation is the format in which a permutation is specified, then the domain need not be listed separately.
@@ -232,30 +227,27 @@
         <!--#############################################-->
         <activity xml:id="proj-perms-initmethod">
             <title>Start the <c>__init__</c> method</title>
-            <statement>
-                Explain why
-                <sidebyside>
-                    <program language="python">
-                        <input>
-                                class AlgoPerm:
-                                    """A class of permutations for use in Math 3380 Algorithms."""
-                                    def __init__(self, mapping, domain=None):
-                                        """docstring"""
-                                        # Check to see whether mapping provides a valid permutation.
-                                        'Valid'
-                                        # Check to see whether a domain was given, and if so, check
-                                        #     that it agrees with the domain of the mapping.
-                                        'Domain works'
-                                        # Convert the given mapping into a 'canonical' storage format
-                                        #     and assign it to an attribute.
-                                        'Assign mapping'
-                                        # Assign any other interesting attributes
-                                        'Assign attributes'
-                        </input>
-                    </program>
-                </sidebyside>
-                might be a good start to the <c>__init__</c> method and write a docstring that explains how the arguments are used.
-            </statement>
+            <p>
+                Explain why the following might be a good start to the <c>__init__</c> method and write a docstring that explains how the arguments are used.
+            </p>
+            <program language="python">
+                <input>
+                        class AlgoPerm:
+                            """A class of permutations for use in Math 3380 Algorithms."""
+                            def __init__(self, mapping, domain=None):
+                                """docstring"""
+                                # Check to see whether mapping provides a valid permutation.
+                                'Valid'
+                                # Check to see whether a domain was given, and if so, check
+                                #     that it agrees with the domain of the mapping.
+                                'Domain works'
+                                # Convert the given mapping into a 'canonical' storage format
+                                #     and assign it to an attribute.
+                                'Assign mapping'
+                                # Assign any other interesting attributes
+                                'Assign attributes'
+                </input>
+            </program>
         </activity>
         <p>
             One other method should be built into a minimal working class definition. The <c>__repr__(self)</c> method is a method which must always return a <c>str</c> and generally should return a string which provides valid input to the <c>__init__</c> method. This will be discussed after considering what valid input means in the first place!
@@ -275,139 +267,133 @@
         </p>
         <technology xml:id="tech-dict-keys_values_items">
             <title><c>dict.keys()</c>, <c>dict.values()</c>, and <c>dict.items()</c> methods</title>
-            <statement>
-                <p>
-                    The methods <c>dict.keys()</c> and <c>dict.values()</c> produce <c>list</c>-like objects containing the keys and values respectively of a <c>dict</c>. <c>dict.items()</c> produces a <c>list</c>-like object containing tuples <c>(k,v)</c> where <c>k</c> is a key and <c>v</c> its associated value. All three outputs are iterable.
-                </p>
-                <listing xml:id="list-dict-keys_values_items">
-                    <caption>Keys and values of <c>dict</c> show unexpected behavior</caption>
-                    <console>
-                        <prompt>>>> </prompt>
-                        <input>
-                            bob = {1:2, 'fruit':'tomato', 'pi':3.1415926535}
-                        </input>
-                        <prompt>>>> </prompt>
-                        <input>
-                            larry = {'fruit':bob[1], 'pi':bob['fruit'], 1:bob['pi']}
-                        </input>
-                        <prompt>>>> </prompt>
-                        <input>
-                            print(bob.keys(), larry.keys())
-                        </input>
-                        <output>
-                            dict_keys([1, 'fruit', 'pi']) dict_keys(['fruit', 'pi', 1])
-                        </output>
-                        <prompt>>>> </prompt>
-                        <input>
-                            print(bob.keys() == larry.keys())
-                        </input>
-                        <output>
-                            True
-                        </output>
-                        <prompt>>>> </prompt>
-                        <input>
-                            print(bob.values(), larry.values())
-                        </input>
-                        <output>
-                            dict_values([2, 'tomato', 3.1415926535]) dict_values([2, 'tomato', 3.1415926535])
-                        </output>
-                        <prompt>>>> </prompt>
-                        <input>
-                            print(bob.values() == larry.values())
-                        </input>
-                        <output>
-                            False
-                        </output>
-                        <prompt>>>> </prompt>
-                        <input>
-                            print(set(bob.values()) == set(larry.values()))
-                        </input>
-                        <output>
-                            True
-                        </output>
-                    </console>
-                </listing>
-                <p>
-                    As demonstrated above, it is unclear by casual inspection whether the keys or values of a dictionary are in fact equal by using just the <c>dict.keys()</c> and <c>dict.values()</c> methods! Be careful.
-                </p>
-            </statement>
+            <p>
+                The methods <c>dict.keys()</c> and <c>dict.values()</c> produce <c>list</c>-like objects containing the keys and values respectively of a <c>dict</c>. <c>dict.items()</c> produces a <c>list</c>-like object containing tuples <c>(k,v)</c> where <c>k</c> is a key and <c>v</c> its associated value. All three outputs are iterable.
+            </p>
+            <listing xml:id="list-dict-keys_values_items">
+                <caption>Keys and values of <c>dict</c> show unexpected behavior</caption>
+                <console>
+                    <prompt>>>> </prompt>
+                    <input>
+                        bob = {1:2, 'fruit':'tomato', 'pi':3.1415926535}
+                    </input>
+                    <prompt>>>> </prompt>
+                    <input>
+                        larry = {'fruit':bob[1], 'pi':bob['fruit'], 1:bob['pi']}
+                    </input>
+                    <prompt>>>> </prompt>
+                    <input>
+                        print(bob.keys(), larry.keys())
+                    </input>
+                    <output>
+                        dict_keys([1, 'fruit', 'pi']) dict_keys(['fruit', 'pi', 1])
+                    </output>
+                    <prompt>>>> </prompt>
+                    <input>
+                        print(bob.keys() == larry.keys())
+                    </input>
+                    <output>
+                        True
+                    </output>
+                    <prompt>>>> </prompt>
+                    <input>
+                        print(bob.values(), larry.values())
+                    </input>
+                    <output>
+                        dict_values([2, 'tomato', 3.1415926535]) dict_values([2, 'tomato', 3.1415926535])
+                    </output>
+                    <prompt>>>> </prompt>
+                    <input>
+                        print(bob.values() == larry.values())
+                    </input>
+                    <output>
+                        False
+                    </output>
+                    <prompt>>>> </prompt>
+                    <input>
+                        print(set(bob.values()) == set(larry.values()))
+                    </input>
+                    <output>
+                        True
+                    </output>
+                </console>
+            </listing>
+            <p>
+                As demonstrated above, it is unclear by casual inspection whether the keys or values of a dictionary are in fact equal by using just the <c>dict.keys()</c> and <c>dict.values()</c> methods! Be careful.
+            </p>
         </technology>
         <p>
             If a list is to be used as the one-line notation for a permutation in <m>\sym{n}</m>, then the list must then be a rearrangement of the numbers <m>\set{1,2,\dotsc,n}</m>.
         </p>
         <fact xml:id="fact-list-is-permutation">
-            <statement>
+            <p>
                 A <c>list</c> named <c>in_list</c> represents the one-line notation of a permutation if and only if
                 the maximum element of <c>in_list</c> is <c>M</c> and when sorted the values of <c>in_list</c>
                 correspond to the values of <c>range(1, M+1)</c>.
-            </statement>
+            </p>
         </fact>
         <p>
             This allows us to introduce some new tools.
         </p>
         <technology xml:id="tech-min-max">
             <title>Python <c>min</c> and <c>max</c> built-in functions</title>
-            <statement>
-                <p>
-                    The <c>min</c> function can be used in two ways: if given a single iterable argument <c>arg1</c>, then <c>min(arg1)</c> returns the minimum element of <c>arg1</c>. Given two or more arguments, <c>min(arg1, arg2, ...)</c> returns the minimum argument. As should be expected, <c>max</c> behaves in the corresponding manner but returns the maximum value.
-                </p>
-                <p>
-                    It is not always clear what ordering is used among comparable items.
-                </p>
-                <listing xml:id="list-min-max">
-                    <caption>An example using the <c>min</c> and <c>max</c> commands in Python</caption>
-                    <console>
-                        <prompt>>>> </prompt>
-                        <input>
-                            min("This is a string")
-                        </input>
-                        <output>
-                            ' '
-                        </output>
-                        <prompt>>>> </prompt>
-                        <input>
-                            max("Bob", "bob", "Larry")
-                        </input>
-                        <output>
-                            'bob'
-                        </output>
-                    </console>
-                </listing>
-            </statement>
+            <p>
+                The <c>min</c> function can be used in two ways: if given a single iterable argument <c>arg1</c>, then <c>min(arg1)</c> returns the minimum element of <c>arg1</c>. Given two or more arguments, <c>min(arg1, arg2, ...)</c> returns the minimum argument. As should be expected, <c>max</c> behaves in the corresponding manner but returns the maximum value.
+            </p>
+            <p>
+                It is not always clear what ordering is used among comparable items.
+            </p>
+            <listing xml:id="list-min-max">
+                <caption>An example using the <c>min</c> and <c>max</c> commands in Python</caption>
+                <console>
+                    <prompt>>>> </prompt>
+                    <input>
+                        min("This is a string")
+                    </input>
+                    <output>
+                        ' '
+                    </output>
+                    <prompt>>>> </prompt>
+                    <input>
+                        max("Bob", "bob", "Larry")
+                    </input>
+                    <output>
+                        'bob'
+                    </output>
+                </console>
+            </listing>
         </technology>
         <technology xml:id="tech-sorted">
             <title>Python <c>sorted</c> built-in function</title>
-            <statement>
-                <p>
-                    Given an iterable argument <c>arg1</c>, the built-in function <c>sorted(arg1)</c> returns an increasing sorted list of the contents of <c>arg1</c>.
-                </p>
-                <listing xml:id="list-sorted">
-                    <caption>An example of the <c>sorted</c> built-in Python function</caption>
-                    <console>
-                        <prompt>>>> </prompt>
-                        <input>
-                            sorted("This is a string".split())
-                        </input>
-                        <output>
-                            ['This', 'a', 'is', 'string']
-                        </output>
-                    </console>
-                </listing>
-                <p>
-                    That example also contains a sneaky example of the <c>str.split()</c> method. The ordering used on strings is lexicographic (dictionary) ordering with the caveat that the order of characters is per their ordinal, via the <c>ord</c> function.
-                </p>
-            </statement>
+            <p>
+                Given an iterable argument <c>arg1</c>, the built-in function <c>sorted(arg1)</c> returns an increasing sorted list of the contents of <c>arg1</c>.
+            </p>
+            <listing xml:id="list-sorted">
+                <caption>An example of the <c>sorted</c> built-in Python function</caption>
+                <console>
+                    <prompt>>>> </prompt>
+                    <input>
+                        sorted("This is a string".split())
+                    </input>
+                    <output>
+                        ['This', 'a', 'is', 'string']
+                    </output>
+                </console>
+            </listing>
+            <p>
+                That example also contains a sneaky example of the <c>str.split()</c> method. The ordering used on strings is lexicographic (dictionary) ordering with the caveat that the order of characters is per their ordinal, via the <c>ord</c> function.
+            </p>
         </technology>
         <p>
             Now we write an algorithm which applies <xref ref="fact-list-is-permutation" />.
         </p>
         <algorithm xml:id="algo-list-is-oneline">
             <title>Verifying that a sequence is one-line notation</title>
-            <statement>
-                <p>
-                    Suppose that for some fixed <m>n\in\Zp</m> a sequence <m>a = (a_i:i\in [n])</m> is given, and
-                    let <m>s</m> be a function which sorts sequences in ascending order.
-                </p>
+            <p>
+                Suppose that for some fixed <m>n\in\Zp</m> a sequence <m>a = (a_i:i\in [n])</m> is given, and
+                let <m>s</m> be a function which sorts sequences in ascending order.
+            </p>
+            <p>
                 <ol>
                     <li><p>
                         Let <m>M = \max(a_i:i\in[n])</m>.
@@ -416,7 +402,7 @@
                         If <m>s(a) = s([M])</m>, then <m>a</m> is the one-line notation of a permutation of <m>[M]</m>.
                         </p></li>
                 </ol>
-            </statement>
+            </p>
         </algorithm>
         <p>
             For maximum flexibility we will define the canonical data storage of the mapping of a permutation to actually be the <c>dict</c> of its two-line notation.
@@ -425,62 +411,62 @@
         <activity xml:id="proj-perms-validation">
             <title>Flesh out <c>__init__</c> with input validation</title>
             <introduction>
-                In order to start building a useful permutation class, we make the assumption that the input has to be in one-line notation. This is easy to change later once we have a better understanding of what we want from our permutation code.
+                <p>
+                    In order to start building a useful permutation class, we make the assumption that the input has to be in one-line notation. This is easy to change later once we have a better understanding of what we want from our permutation code.
+                </p>
             </introduction>
             <task>
                 <p>
                     Implement your algorithm in the <c>AlgoPerm</c> class. Begin by editing the <c>__init__</c> method of <c>AlgoPerm</c> so that it looks as follows:
                 </p>
-                <sidebyside>
-                    <program language='python'>
-                        <input>
-                            def __init__(self, mapping, domain=None):
-                                # Check to see whether mapping provides a valid permutation.
-                                if type(mapping) == dict:
-                                    # This is effectively two-line notation. Each value must also be a key.
-                                    #
-                                    # Change the following line to validate the input!!!
-                                    keyset_equals_valueset = False
-                                    #
-                                    if keyset_equals_valueset:
-                                        # This use of '.copy()' has to do with data in memory versus
-                                        #    the name of a variable.
-                                        map_dict = mapping.copy()
-                                    else:
-                                        raise ValueError("Mapping does not specify valid permutation as dictionary.")
-                                elif type(mapping) == list:
-                                    # One-line notation. Have to check that the mapping corresponds to
-                                    # the list [1, 2, ..., k] for some k.
-                                    #
-                                    # Change the following line to validate the input!!!
-                                    valid_oneline = False
-                                    #
-                                    if valid_oneline:
-                                        # build the mapping dictionary
-                                        map_dict = { }
-                                        for i in range(maxx):
-                                            map_dict[i+1] = mapping[i]
-                                    else:
-                                        raise ValueError("Mapping does not specify valid one-line notation.")
-                                elif type(mapping) == tuple:
-                                    # Cycle notation. This is tricky! Skip it for now.
-                                    raise NotImplementedError("Cannot currently define a permutation from cycle tuples")
-                                else:
-                                    raise TypeError(f"Mapping must be list (oneline notation), tuple (cycle notation), or dictionary, not {type(mapping)}.")
+                <program language='python'>
+                    <input>
+                        def __init__(self, mapping, domain=None):
+                            # Check to see whether mapping provides a valid permutation.
+                            if type(mapping) == dict:
+                                # This is effectively two-line notation. Each value must also be a key.
                                 #
-                                # We'll rewrite this later:
-                                if domain!=None:
-                                    pass
-                                set_domain = set(map_dict.keys())
+                                # Change the following line to validate the input!!!
+                                keyset_equals_valueset = False
+                                #
+                                if keyset_equals_valueset:
+                                    # This use of '.copy()' has to do with data in memory versus
+                                    #    the name of a variable.
+                                    map_dict = mapping.copy()
+                                else:
+                                    raise ValueError("Mapping does not specify valid permutation as dictionary.")
+                            elif type(mapping) == list:
+                                # One-line notation. Have to check that the mapping corresponds to
+                                # the list [1, 2, ..., k] for some k.
+                                #
+                                # Change the following line to validate the input!!!
+                                valid_oneline = False
+                                #
+                                if valid_oneline:
+                                    # build the mapping dictionary
+                                    map_dict = { }
+                                    for i in range(maxx):
+                                        map_dict[i+1] = mapping[i]
+                                else:
+                                    raise ValueError("Mapping does not specify valid one-line notation.")
+                            elif type(mapping) == tuple:
+                                # Cycle notation. This is tricky! Skip it for now.
+                                raise NotImplementedError("Cannot currently define a permutation from cycle tuples")
+                            else:
+                                raise TypeError(f"Mapping must be list (oneline notation), tuple (cycle notation), or dictionary, not {type(mapping)}.")
+                            #
+                            # We'll rewrite this later:
+                            if domain!=None:
+                                pass
+                            set_domain = set(map_dict.keys())
 
-                                # Assign the value of map_dict into the self.mapping attribute
-                                self._mapping = map_dict
+                            # Assign the value of map_dict into the self.mapping attribute
+                            self._mapping = map_dict
 
-                                # Set all attributes other than the canonical data storage.
-                                self._domain = set_domain
-                        </input>
-                    </program>
-                </sidebyside>
+                            # Set all attributes other than the canonical data storage.
+                            self._domain = set_domain
+                    </input>
+                </program>
                 <p>
                     If you copied and pasted that into your file, it is likely that you are having errors. Try typing it in by hand instead.
                 </p>
@@ -494,39 +480,33 @@
                 <p>
                     In your <c>aam_proj2.py</c> file, test your newly defined and corrected class. Add the following lines to the bottom of the <c>aam_proj2.py</c> file and execute it.
                 </p>
-                <sidebyside>
-                    <program language='python'>
-                        <input>
-                            a = AlgoPerm([2, 1, 5, 6, 3, 4, 10, 9, 8, 7])
-                            print(f"a = {a}")
+                <program language='python'>
+                    <input>
+                        a = AlgoPerm([2, 1, 5, 6, 3, 4, 10, 9, 8, 7])
+                        print(f"a = {a}")
 
-                            b = AlgoPerm({1: 2, 2: 3, 3: 5, 5: 1, 4: 4, 6: 6, 7: 7, 8: 8})
-                            print(f"b = {b}")
-                        </input>
-                    </program>
-                </sidebyside>
+                        b = AlgoPerm({1: 2, 2: 3, 3: 5, 5: 1, 4: 4, 6: 6, 7: 7, 8: 8})
+                        print(f"b = {b}")
+                    </input>
+                </program>
             </task>
         </activity>
         <!-- ###################################### -->
         <activity xml:id="proj-perms-representations">
             <title>Representations of permutations</title>
-            <statement>
-                <p>
-                    Add the <c>__repr__</c> method to your <c>AlgoPerm</c> class.
-                </p>
-                <sidebyside>
-                    <program language='python'>
-                        <input>
-                            def __repr__(self):
-                                """Return a string containing the mapping dictionary of an AlgoPerm."""
-                                return str(self._mapping)
-                        </input>
-                    </program>
-                </sidebyside>
-                <p>
-                    If you execute the <c>aam-proj2.py</c> file after making this change, you'll see that the <c>print</c> statements have a more pleasing output.
-                </p>
-            </statement>
+            <p>
+                Add the <c>__repr__</c> method to your <c>AlgoPerm</c> class.
+            </p>
+            <program language='python'>
+                <input>
+                    def __repr__(self):
+                        """Return a string containing the mapping dictionary of an AlgoPerm."""
+                        return str(self._mapping)
+                </input>
+            </program>
+            <p>
+                If you execute the <c>aam-proj2.py</c> file after making this change, you'll see that the <c>print</c> statements have a more pleasing output.
+            </p>
         </activity>
     </subsection>
     <subsection xml:id="sub-perms-oop_adding_methods">
@@ -536,9 +516,9 @@
         </p>
         <technology xml:id="tech-_call__">
             <title><c>__call__</c> method</title>
-            <statement>
+            <p>
                 An object <c>my_obj</c> which is an instance of <c>MyClass</c> can be called using <c>my_obj(x)</c> if and only if the <c>__call__</c> method is defined in <c>MyClass</c> and <c>x</c> is a valid input.
-            </statement>
+            </p>
         </technology>
         <p>
             The arguments to the <c>__call__</c> method in our <c>AlgoPerm</c> class are simple: the <c>self</c> argument (as always) and one other argument, which we will name <c>other</c>.
@@ -546,33 +526,31 @@
         <!-- ###################################### -->
         <activity xml:id="proj-perms-call_method">
             <title>Calling <c>AlgoPerm</c></title>
-            <statement>
+            <introduction>
                 <p>
                     There is a mathematically important reason and a computationally important reason to define this method. Mathematically, the method is important because permutations are functions, and functions are callable. Computationally it is important because we don't want to have to worry about exactly how the <c>AlgoPerm</c> class is written in order to use it. Specifically, once we write the <c>__call__</c> method we don't have to keep track of the <c>AlgoPerm._mapping</c> most of the time, because we can instead use function notation.
                 </p>
-                <task>
-                    <p>
-                        Define a <c>__call__</c> method in your <c>AlgoPerm</c> class.
-                    </p>
-                    <sidebyside>
-                        <program language='python'>
-                            <input>
-                                def __call__(self, other):
-                                    """Perform self(other)"""
-                                    try:
-                                        return self._mapping[other]
-                                    except KeyError:
-                                        raise ValueError(f"{other} is not in the domain of {self}")
-                            </input>
-                        </program>
-                    </sidebyside>
-                </task>
-                <task>
-                    <p>
-                        Test your new method in <c>aam_proj2.py</c> by adding <c>print(a(8))</c> and <c>print(b(31))</c> lines. Diagnose what occurs and why.
-                    </p>
-                </task>
-            </statement>
+            </introduction>
+            <task>
+                <p>
+                    Define a <c>__call__</c> method in your <c>AlgoPerm</c> class.
+                </p>
+                <program language='python'>
+                    <input>
+                        def __call__(self, other):
+                            """Perform self(other)"""
+                            try:
+                                return self._mapping[other]
+                            except KeyError:
+                                raise ValueError(f"{other} is not in the domain of {self}")
+                    </input>
+                </program>
+            </task>
+            <task>
+                <p>
+                    Test your new method in <c>aam_proj2.py</c> by adding <c>print(a(8))</c> and <c>print(b(31))</c> lines. Diagnose what occurs and why.
+                </p>
+            </task>
         </activity>
         <p>
             With the ability to use our <c>AlgoPerm</c> objects as functions, the next feature we should define is composition. Recalling that we want to read <m>\sigma\after\tau</m> as <q><m>\sigma</m> after <m>\tau</m></q>, we define new methods which are not special double-underscore methods.
@@ -580,91 +558,84 @@
         <!-- ###################################### -->
         <activity xml:id="proj-perms-after_method">
             <title><c>AlgoPerm</c> methods for <c>domain</c> and <c>after</c></title>
-            <statement>
-                <task>
-                    <p>
-                        Define a <c>domain</c> method for <c>AlgoPerm</c> as follows.
-                    </p>
-                    <sidebyside>
-                        <program language = 'python'>
-                            <input>
-                                def domain(self):
-                                    """Return the set consisting of the domain of self."""
-                                    return self._domain
-                            </input>
-                        </program>
-                    </sidebyside>
-                    <p>
-                        While we could just continue to access the <c>_domain</c> attribute, it is <em>good programming style</em> to not refer directly to attributes, but instead use methods to access their values.
-                    </p>
-                </task>
-                <task>
-                    <p>
-                        Define a <c>after</c> method for <c>AlgoPerm</c>, beginning as follows.
-                    </p>
-                    <sidebyside>
-                        <program language="python">
-                            <input>
-                                def after(self, other):
-                                    """Return the AlgoPerm obtained by composition of self after other."""
-                                    # 1. Validate that other is an AlgoPerm
-                                    #
-                                    # 2. Validate that the domain of other is a subset of the domain of self
-                                    #
-                                    # Otherwise, define an empty new mapping dictionary
-                                    else:
-                                        new_mapping = { }
-                                        # 3. Iterate over all the elements of the domain of other, making the
-                                        #    correct assignments in new_mapping
-                                        #
-                                        # 4. Iterate over all the elements of the domain of self which are
-                                        #    not in the domain of other, making the correct assignments
-                                        #    in new_mapping
-                                        #
-                                        # Return the correct AlgoPerm
-                                        return AlgoPerm(new_mapping)
-                            </input>
-                        </program>
-                    </sidebyside>
-                </task>
-                <task>
-                    <p>
-                        The new method <c>after</c> has several steps described in comments. Finish the code so that the result of <c>print(a.after(b))</c> in your <c>aam_proj2.py</c> file is <c>{1: 1, 2: 5, 3: 3, 4: 6, 5: 2, 6: 4, 7: 10, 8: 9, 9: 8, 10: 7}</c>. <em>Hint: You should see what methods are available for the <c>set</c> class, by looking at <c>help(set)</c></em>.
-                    </p>
-                </task>
+            <task>
+                <p>
+                    Define a <c>domain</c> method for <c>AlgoPerm</c> as follows.
+                </p>
+                <program language = 'python'>
+                    <input>
+                        def domain(self):
+                            """Return the set consisting of the domain of self."""
+                            return self._domain
+                    </input>
+                </program>
+                <p>
+                    While we could just continue to access the <c>_domain</c> attribute, it is <em>good programming style</em> to not refer directly to attributes, but instead use methods to access their values.
+                </p>
+            </task>
+            <task>
+                <p>
+                    Define a <c>after</c> method for <c>AlgoPerm</c>, beginning as follows.
+                </p>
+                <program language="python">
+                    <input>
+                        def after(self, other):
+                            """Return the AlgoPerm obtained by composition of self after other."""
+                            # 1. Validate that other is an AlgoPerm
+                            #
+                            # 2. Validate that the domain of other is a subset of the domain of self
+                            #
+                            # Otherwise, define an empty new mapping dictionary
+                            else:
+                                new_mapping = { }
+                                # 3. Iterate over all the elements of the domain of other, making the
+                                #    correct assignments in new_mapping
+                                #
+                                # 4. Iterate over all the elements of the domain of self which are
+                                #    not in the domain of other, making the correct assignments
+                                #    in new_mapping
+                                #
+                                # Return the correct AlgoPerm
+                                return AlgoPerm(new_mapping)
+                    </input>
+                </program>
+            </task>
+            <task>
+                <p>
+                    The new method <c>after</c> has several steps described in comments. Finish the code so that the result of <c>print(a.after(b))</c> in your <c>aam_proj2.py</c> file is <c>{1: 1, 2: 5, 3: 3, 4: 6, 5: 2, 6: 4, 7: 10, 8: 9, 9: 8, 10: 7}</c>. <em>Hint: You should see what methods are available for the <c>set</c> class, by looking at <c>help(set)</c></em>.
+                </p>
+            </task>
+            <task>
                 <p>
                     <term>Operator overloading</term> is the fancy name for when we have one symbol (such as <c>*</c>) which must perform multiple tasks in multiple different contexts. All of the double-underscore <c>__methods__</c> we have been working with are the means by which Python performs operator overloading. Rather than continuing to use <c>after</c> for composition, it becomes much easier to use Python's multiplication operator <c>*</c> as we use it mathematically.
                 </p>
-                <task>
-                    <p>
-                        Overload the <c>*</c> operator for <c>AlgoPerm</c> by defining the following new method.
-                    </p>
-                    <sidebyside>
-                        <program language='python'>
-                            <input>
-                                def __mul__(self, right):
-                                    """Implement self*right."""
-                                    return self.after(right)
-                            </input>
-                        </program>
-                    </sidebyside>
-                    <p>
-                        Since we know it is very important to be consistent with your left and right multiplication, we now note that the <term>left multiplication</term> of <c>self*right</c> is effected using <c>__mul__(self, right)</c> and the <term>right multiplication</term> of <c>left * self</c> is effected using a different method, <c>__rmul__(self, left)</c>. There is an <term>order of operations</term> in Python just as in mathematics, and Python checks for a valid left multiplication before checking for a valid right multiplication.
-                    </p>
-                </task>
-            </statement>
+                <p>
+                    Overload the <c>*</c> operator for <c>AlgoPerm</c> by defining the following new method.
+                </p>
+                <program language='python'>
+                    <input>
+                        def __mul__(self, right):
+                            """Implement self*right."""
+                            return self.after(right)
+                    </input>
+                </program>
+                <p>
+                    Since we know it is very important to be consistent with your left and right multiplication, we now note that the <term>left multiplication</term> of <c>self*right</c> is effected using <c>__mul__(self, right)</c> and the <term>right multiplication</term> of <c>left * self</c> is effected using a different method, <c>__rmul__(self, left)</c>. There is an <term>order of operations</term> in Python just as in mathematics, and Python checks for a valid left multiplication before checking for a valid right multiplication.
+                </p>
+            </task>
         </activity>
         <!-- ###################################### -->
         <activity xml:id="proj-perms-inverse_method">
             <title>Inverses of <c>AlgoPerm</c> objects</title>
-            <p>
-                Since a permutation is a bijection, an important last tool is to build a <c>inverse</c> method in the <c>AlgoPerm</c> class.
-            </p>
+            <introduction>
+                <p>
+                    Since a permutation is a bijection, an important last tool is to build a <c>inverse</c> method in the <c>AlgoPerm</c> class.
+                </p>
+            </introduction>
             <task>
                 <p>
                     Finish the following code.
                 </p>
-                <sidebyside>
                 <program language="python">
                     <input>
                         def inverse(self):
@@ -678,7 +649,6 @@
                             return AlgoPerm(inv_mapping)
                     </input>
                 </program>
-            </sidebyside>
             </task>
             <task>
                 <p>
@@ -688,6 +658,8 @@
         </activity>
     </subsection>
     <conclusion>
-        In the next section, we will investigate an application of permutations that makes all this work helpful.
+        <p>
+            In the next section, we will investigate an application of permutations that makes all this work helpful.
+        </p>
     </conclusion>
 </section>

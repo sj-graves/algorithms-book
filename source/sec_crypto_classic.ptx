@@ -15,10 +15,10 @@
         </p>
         <algorithm xml:id="algo-playfair_cipher">
             <title>Playfair's cipher</title>
-            <statement>
-                <p>
-                    Assume that we have a string <c>pmsg</c> consisting of a message written in English plaintext which we wish to encrypt via Playfair.
-                </p>
+            <p>
+                Assume that we have a string <c>pmsg</c> consisting of a message written in English plaintext which we wish to encrypt via Playfair.
+            </p>
+            <p>
                 <ol>
                     <li><p>
                         Choose and share a key phrase, a short English plaintext.
@@ -38,7 +38,7 @@
                         </p>
                     </li>
                 </ol>
-            </statement>
+            </p>
         </algorithm>
         <p>
             The technical details of each of those subalgorithms appear at the bottom of this section, but it is much easier to describe the process with an example than it is to write a correct and rigorous algorithm.
@@ -99,32 +99,32 @@
             <p>
                 With the digraph boxed, there are three possible next steps.
             </p>
-            <ul>
-                <li><p>
-                    <em>Normal:</em> If the box intersects more than one row and more than one column, then letters in the corners of the box are used to replace the digraph. The upper left letter replaces the upper right letter (and vice versa) and the lower left letter replaces the lower right letter (and vice versa). In <xref ref="fig-playfair-boxed" /> this will result in the digraph <c>TH</c> mapping to <c>OQ</c>.
-                    </p></li>
-                <li><p>
-                    <em>Right shift</em>: If the box is all on one line in the grid, the box shifts one unit to the right, wrapping around the grid if necessary. The left letter of the old box is now replaced by the left letter of the new box, while the right letter of the old box is now replaced by the right letter of the new box. In <xref ref="fig-playfair-boxed" /> this will result in the digraph <c>EB</c> being replaced by <c>UC</c>.
-                    </p></li>
-                <li><p>
-                    <em>Down shift</em>: If the box is all on one column of the grid, the box shifts one unit down, and the similar process is followed as when the letters were in the same row. In <xref ref="fig-playfair-boxed" /> this will result in the digraph <c>MA</c> being replaced by <c>YL</c>.
-                    </p></li>
-            </ul>
+            <p>
+                <ul>
+                    <li><p>
+                        <em>Normal:</em> If the box intersects more than one row and more than one column, then letters in the corners of the box are used to replace the digraph. The upper left letter replaces the upper right letter (and vice versa) and the lower left letter replaces the lower right letter (and vice versa). In <xref ref="fig-playfair-boxed" /> this will result in the digraph <c>TH</c> mapping to <c>OQ</c>.
+                        </p></li>
+                    <li><p>
+                        <em>Right shift</em>: If the box is all on one line in the grid, the box shifts one unit to the right, wrapping around the grid if necessary. The left letter of the old box is now replaced by the left letter of the new box, while the right letter of the old box is now replaced by the right letter of the new box. In <xref ref="fig-playfair-boxed" /> this will result in the digraph <c>EB</c> being replaced by <c>UC</c>.
+                        </p></li>
+                    <li><p>
+                        <em>Down shift</em>: If the box is all on one column of the grid, the box shifts one unit down, and the similar process is followed as when the letters were in the same row. In <xref ref="fig-playfair-boxed" /> this will result in the digraph <c>MA</c> being replaced by <c>YL</c>.
+                        </p></li>
+                </ul>
+            </p>
             <p>
                 Following these steps for each digraph, we obtain the following result, where the input digraph appears on the row above the output digraph.
             </p>
-            <sidebyside>
-                <console>
-                    <output>
-                        TH EB OX OK KE EP ER RE MA JN SX SE QU ES TE RE DT HE
-                        OQ UC PW PH QC CT UN NU YL SR CP NC FE CN NQ NU EA QB
-                    </output>
-                    <output>
-                        SU QX QU ES TJ ON RE MA JN SB JZ AR RE TA XQ XA VJ ER
-                        RC KZ FE CN ON TJ NU YL SR JC NW GL NU GT ZK YP WR UN
-                    </output>
-                </console>
-            </sidebyside>
+            <console>
+                <output>
+                    TH EB OX OK KE EP ER RE MA JN SX SE QU ES TE RE DT HE
+                    OQ UC PW PH QC CT UN NU YL SR CP NC FE CN NQ NU EA QB
+                </output>
+                <output>
+                    SU QX QU ES TJ ON RE MA JN SB JZ AR RE TA XQ XA VJ ER
+                    RC KZ FE CN ON TJ NU YL SR JC NW GL NU GT ZK YP WR UN
+                </output>
+            </console>
             <p>
                 Frequently the ciphertext will be displayed in blocks of a fixed number of characters. Using an odd block size might incline a spy to think that Playfair's cipher was not being used! To reverse Playfair's cipher and decrypt our blocked ciphertext
             </p>
@@ -142,10 +142,10 @@
         </p>
         <algorithm xml:id="algo-playfair_key_preprocessing">
             <title>Playfair's cipher: pre-processing the key phrase</title>
-            <statement>
-                <p>
-                    Suppose <c>key_phrase</c> is a string consisting of the original chosen key phrase.
-                </p>
+            <p>
+                Suppose <c>key_phrase</c> is a string consisting of the original chosen key phrase.
+            </p>
+            <p>
                 <ol>
                 <li><p>
                     Convert all alphabetic characters of <c>key_phrase</c> into capitals and discard any non-alphabetic characters.
@@ -162,22 +162,21 @@
                 <li><p>
                     Write these 25 characters into the positions of a <m>5\times 5</m> grid, beginning at the top left entry. This is the <term>Playfair grid</term>.
                     </p></li>
-            </ol>
-            </statement>
+                </ol>
+            </p>
         </algorithm>
         <algorithm xml:id="algo-playfair_creating_digraphs">
             <title>Playfair's cipher: creating digraphs from an original message</title>
-            <statement>
-                <p>
-                    Suppose that <c>pmsg</c> is a string consisting of a plaintext written in English.
-                </p>
+            <p>
+                Suppose that <c>pmsg</c> is a string consisting of a plaintext written in English.
+            </p>
+            <p>
                 <ol>
                     <li><p>
                         Convert all alphabetic characters of <c>pmsg</c> into capitals and discard any non-alphabetic characters.
                         </p></li>
                     <li><p>
                         From <c>pmsg</c>, create a list <c>digraphs</c> of two-character words.
-                        </p>
                         <ol>
                             <li><p>
                                 Suppose that <c>x1</c> and <c>x2</c> are the first two unused characters of <c>pmsg</c>.
@@ -191,17 +190,16 @@
                             <li><p>
                                 In the event that only one letter remains unused at the end of this process, add <c>x1+'X'</c> to <c>digraphs</c> if the last letter of <c>pmsg</c> is <c>x1 != 'X'</c>, or add <c>x1+'Q'</c> to <c>digraphs</c> if the last letter of <c>pmsg</c> is <c>x1 == 'X'</c>.
                                 </p></li>
-                        </ol>
-                    </li>
+                        </ol></p></li>
                 </ol>
-            </statement>
+            </p>
         </algorithm>
         <algorithm xml:id="algo-playfair_encrypting_digraphs">
             <title>Playfair's cipher: encrypting digraphs</title>
-            <statement>
-                <p>
-                    Suppose that <c>key_phrase</c> is a string consisting of a key phrase pre-processed via <xref ref="algo-playfair_key_preprocessing" text="title"/> and that <c>digraphs</c> is a list of digraphs from the English alphabet, with no letter repeated within a digraph and no characters <c>I</c>.
-                </p>
+            <p>
+                Suppose that <c>key_phrase</c> is a string consisting of a key phrase pre-processed via <xref ref="algo-playfair_key_preprocessing" text="title"/> and that <c>digraphs</c> is a list of digraphs from the English alphabet, with no letter repeated within a digraph and no characters <c>I</c>.
+            </p>
+            <p>
                 <ol>
                     <li><p>
                         If using Playfair's cipher to encrypt a message from plaintext to a ciphertext, let <c>shift = 1</c>. If using the cipher to decrypt an already encrypted message, let <c>shift = -1</c>.
@@ -225,14 +223,16 @@
                         The encrypted version of <c>x1</c> is the character <c>y1</c> in Playfair grid row <c>R1</c> and column <c>C1</c>, and the encrypted version of <c>x2</c> is the character <c>y2</c> in Playfair grid row <c>R2</c> and column <c>C2</c>.
                         </p></li>
                 </ol>
-            </statement>
+            </p>
         </algorithm>
     </subsection>
     <!-- ################################### -->
     <subsection xml:id="sub-crypto-classic-poly">
         <title>Polyalphabetic substitution</title>
         <introduction>
-        Polyalphabetic substitution is perhaps a poor name for these systems, which still have one alphabet but change the permutation used from character to character. More plainly, there is some sequence <m>(\sigma_0,\sigma_1,\sigma_2,\dotsc,\sigma_{k-1})</m> of permutations such that a message <m>a_0a_1a_2\cdots a_n</m> is encrypted to <me>\sigma_0(a_0)\sigma_1(a_1)\sigma_2(a_2)\cdots \sigma_{n\rem k}(a_n)</me>.
+            <p>
+                Polyalphabetic substitution is perhaps a poor name for these systems, which still have one alphabet but change the permutation used from character to character. More plainly, there is some sequence <m>(\sigma_0,\sigma_1,\sigma_2,\dotsc,\sigma_{k-1})</m> of permutations such that a message <m>a_0a_1a_2\cdots a_n</m> is encrypted to <me>\sigma_0(a_0)\sigma_1(a_1)\sigma_2(a_2)\cdots \sigma_{n\rem k}(a_n)</me>.
+            </p>
         </introduction>
         <!-- ################################### -->
         <subsubsection xml:id="ssub-crypto-classic-tabularecta">
@@ -266,12 +266,12 @@
                 Having detected the length <m>k</m> of the key phrase, you next have to examine the letter frequencies in the skipping strings to the expected letter frequencies, to make a best guess at the value of the shift cipher used on each character. It is a relatively safe guess that the encrypted version of the letter <c>E</c> will be one of the 5-most-frequent letters in each skipping string; hence with a value of <m>k=5</m> you will likely have to check around <m>5^5=3125</m> different possible key phrases by brute force to find the actual key phrase.
             </p>
         </subsubsection>
-        <subsection xml:id="ssub-crypto-classic-onetimepad">
+        <subsubsection xml:id="ssub-crypto-classic-onetimepad">
             <title>One-time pads</title>
             <p>
                 A modification to the Vigen&#232;re cipher renders it provably unbreakable. What this specifically means is that all equal-length plaintexts have an equal likelihood of encrypting to the same ciphertext; the modifications, however, are absolutely critical for this. Specifically, the pass phrase must be <em>randomly generated</em>, <em>never reused</em>, and <em>longer than the plaintext</em>. Under these conditions, the pass phrase is called a <term>one-time pad</term>, and Claude Shannon proved that any unbreakable encryption must be equivalent to a one-time pad.
             </p>
-        </subsection>
+        </subsubsection>
     </subsection>
     <subsection xml:id="sub-crypto-classic-enigma">
         <title>The Enigma cipher</title>
@@ -289,8 +289,10 @@
         </p>
         <definition xml:id="def-derangement">
             <title>Derangement</title>
-            <statement> Let <m>A</m> be a set.
-                A permutation <m>\delta:A\to A</m> is a <term>derangement</term> if and only if <m>\supp{\delta} = A</m>; that is, <m>\delta(a)\neq a</m> for every <m>a\in A</m>.
+            <statement>
+                <p>
+                    Let <m>A</m> be a set. A permutation <m>\delta:A\to A</m> is a <term>derangement</term> if and only if <m>\supp{\delta} = A</m>; that is, <m>\delta(a)\neq a</m> for every <m>a\in A</m>.
+                </p>
             </statement>
         </definition>
     </subsection>

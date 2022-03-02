@@ -3,230 +3,224 @@
 <section xml:id="sec-intro-containers" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Container data types</title>
     <introduction>
-    <p>
-        In Python, data types which can contain other data are called <term>container</term> data types. The three easiest general containers to work with are <term>lists</term>, <term>tuples</term>, and <term>dictionaries.</term> A typical use of a container is to store data collected in a repeated operation of a program.
-    </p>
+        <p>
+            In Python, data types which can contain other data are called <term>container</term> data types. The three easiest general containers to work with are <term>lists</term>, <term>tuples</term>, and <term>dictionaries.</term> A typical use of a container is to store data collected in a repeated operation of a program.
+        </p>
     </introduction>
     <subsection xml:id="sub-intro-containers-lists">
         <title>The <c>list</c> data type</title>
         <introduction>
+            <p>
+                Lists serve as a general purpose container.
+            </p>
+            <technology xml:id="tech-lists">
+                <title>Defining a <c>list</c></title>
+                <p>
+                    Any comma-separated sequence of syntactically valid expressions enclosed in a matching pair of square brackets <c>[</c> and <c>]</c> is a <c>list</c>. The <term>empty list</term> <c>[]</c> is a valid list.
+                </p>
+                <listing xml:id="list-lists">
+                    <caption>Some <c>list</c> data</caption>
+                    <console>
+                        <prompt>>>> </prompt>
+                        <input>
+                            foo = "This is a string, not a list"
+                        </input>
+                        <prompt>>>> </prompt>
+                        <input>
+                            bar = [1, 2, foo, [5, 5, 5]]
+                        </input>
+                        <prompt>>>> </prompt>
+                        <input>
+                            type(bar)
+                        </input>
+                        <output>
+                            &lt;class 'list'>
+                        </output>
+                        <prompt>>>> </prompt>
+                        <input>
+                            print( bar )
+                        </input>
+                        <output>
+                            [1, 2, 'This is a string, not a list', [5, 5, 5]]
+                        </output>
+                    </console>
+                </listing>
+            </technology>
+            <p>
+            Since lists contain other data it is very important to be able to access that data. Python provides two related ways to access the data contained in a list: <term>indexing</term> and <term>slicing</term>.
+            </p>
+        </introduction>
+        <subsubsection xml:id="subsub-intro-containers-lists-slices">
+        <title>Indexing and slicing</title>
+            <p>
+                The <term>index</term> of an element of a list is the distance in the list from that element to the start of the list. The element at the start of the list is thus in index 0, the next element in index 1, the next in index 2, and so on. Thus a list consisting of 10 elements has indices 0 through 9. For a list <c>the_list</c>, we access the element in index <m>i</m> by using <c>the_list[i]</c>; this is similar to indexing a mathematical sequence as <m>(a_0,a_1,a_2,\dotsc,a_k)</m>.
+            </p>
+            <console>
+                <prompt>>>> </prompt>
+                <input>the_list = ['bob', 'larry', 3.14159, 1-1j, 'fifth']</input>
+                <prompt>>>> </prompt>
+                <input>the_list[0]</input>
+                <output>'bob'</output>
+            </console>
+            <p>
+                Unlike a mathematical sequence, Python allows indexing from the back of the list as well. When indexing from the back of the list, it is important to remember that the same principle applies as above: the negative index is the distance from the <q>front</q> of an element to the back of the list. Continuing the above, we have:
+            </p>
+            <console>
+                <prompt>>>> </prompt>
+                <input>the_list[-2]</input>
+                <output>(1-1j)</output>
+                <prompt>>>> </prompt>
+                <input>the_list[-1]</input>
+                <output>'fifth'</output>
+            </console>
+            <p>
+                Since <m>0 = -0</m>, the negative zero index is the same as the zero index:
+            </p>
+            <console>
+                <prompt>>>> </prompt>
+                <input>the_list[-0]</input>
+                <output>'bob'</output>
+                <prompt>>>> </prompt>
+                <input>the_list[0]</input>
+                <output>'bob'</output>
+            </console>
+            <p>
+                To access a sublist of a list, we use a <term>slice</term>. The first number of the slice is the index of the element to start the sublist, and the second number of the slice is the index of the first element <em>not</em> to include. To slice starting at index 1 and stopping before index 5 of <c>the_list</c>, we would use <c>the_list[1:5]</c>. Since <c>the_list</c> only had five elements we will define a longer list to experiment.
+            </p>
+            <console>
+                <prompt>>>> </prompt>
+                <input>
+                    new_list = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377,
+                </input>
+                <prompt>... </prompt>
+                <input>
+                    610, 987, 1597, 2584, 4181, 6765, 10946]
+                </input>
+                <prompt>>>> </prompt>
+                <input>
+                    new_list[1:5]
+                </input>
+                <output>
+                    [2, 3, 5, 8]
+                </output>
+            </console>
+            <p>
+                You can slice by skipping indices, as well, by supplying a third term.
+            </p>
+            <console>
+                <prompt>>>> </prompt>
+                <input>new_list[1:15:2]</input>
+                <output>[2, 5, 13, 34, 89, 233, 610]</output>
+            </console>
+            <remark>
+                <p>
+                    Python allows an interesting behavior with regard to indexing and slicing. While you cannot index beyond the bounds of a list, you are always permitted to slice beyond the bounds of the list. Thus with the above code, <c>the_list[8]</c> would generate an <c>IndexError</c>, but <c>new_list[50:100:3]</c> would output the empty list, <c>[]</c>.
+                </p>
+            </remark>
+            <p>
+                Finally, if you want to slice from the beginning of the list up to the <m>j</m>  th index, you use <c>new_list[:j]</c>. If you want to slice from the <m>i</m>  th index to the end of the list, you use <c>new_list[i:]</c>. If you want to slice a whole copy of a list (there are valid reasons to do this), use <c>new_list[:]</c>. If you want the reverse of a list, you slice the whole thing from beginning to end using a skip of negative one: <c>new_list[::-1]</c>.
+            </p>
+        </subsubsection>
+        <subsubsection xml:id="subsub-intro-containers-lists-ops_meths">
+            <title>Operators and methods</title>
+            <p>
+                Indexing and slicing are just the beginnings of what can be done with lists. We can also combine two lists into a longer one (additively) or elongate a list by making it contain several copied of itself (multiplicatively). Continuing the above examples, we have:
+            </p>
+            <console>
+                <prompt>>>> </prompt>
+                <input>the_list + new_list</input>
+                <output>['bob', 'larry', 3.14159, (1-1j), 'fifth', 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946]</output>
+                <prompt>>>> </prompt>
+                <input>3 * the_list</input>
+                <output>['bob', 'larry', 3.14159, (1-1j), 'fifth', 'bob', 'larry', 3.14159, (1-1j), 'fifth', 'bob', 'larry', 3.14159, (1-1j), 'fifth']</output>
+            </console>
+            <remark>
+                <title><c>list</c> addition is not commutative</title>
+                <p>
+                    Generally speaking, if <c>a</c> and <c>b</c> are lists, then <c>a+b</c> is different from <c>b+a</c>.
+                </p>
+            </remark>
+            <p>
+                These are operators which we are used to working with algebraically, now given new meaning to interact with lists. <term>Methods</term> are different: they are functions specific to the <c>list</c> data type accessed using <em>dot notation</em>. When working with a new data type, a good way to see the full list of all of its methods is to ask for <c>help</c>, but beware! The <c>help</c> files are very detailed. Try <c>help(list)</c> at the Python prompt.
+            </p>
+            <p>
+                Many of the methods (all of those named <c>__likethis__</c>) are special. We will discuss those later in the text when we discuss operator overloading in <xref provisional="sec-overloading" />. The <c>list</c> class has several other methods as well. Assuming that we are using <c>the_list</c> from above, here is a basic overview of several of the more useful methods:
+            </p>
+            <p>
+                <ul>
+                    <li><p>
+                        <c>the_list.append(x)</c>: Increases the length of <c>the_list</c> by sticking the value <c>x</c> at the end
+                        </p></li>
+                    <li><p>
+                        <c>the_list.count(x)</c>: Returns the number of times <c>x</c> occurs in <c>the_list</c> without changing <c>the_list</c>
+                        </p></li>
+                </ul>
+            </p>
+        </subsubsection>
+        <subsubsection xml:id="subsub-intro-containers-lists-mutable">
+            <title>Mutability</title>
+            <p>
+                The property of <term>mutability</term> is special: if a numerically-index contained allows you to assign a new value into a particular index, then that container is <term>mutable</term>. If not, the container is immutable. Lists are a mutable data type, since we can make an assignment <c>new_list[5] = 'reginald'</c>, so long as <c>new_list[5]</c> is a valid index.
+            </p>
+        </subsubsection>
+    </subsection>
+    <subsection xml:id="sub-intro-containers-tuples">
+        <title>The <c>tuple</c> data type</title>
         <p>
-            Lists serve as a general purpose container.
+            A <c>tuple</c> behaves very much like a list, except for two important points: they are enclosed in parentheses <c>(</c> and <c>)</c> instead of square braclets, and they are <em>immutable</em>. You cannout assign a new variable to a particular index of a <c>tuple</c> without instead overwriting the whole <c>tuple</c>.
         </p>
-        <technology xml:id="tech-lists">
-            <title>Defining a <c>list</c></title>
+        <p>
+            Since a <c>tuple</c> must be overwritten to be changed, several of the methods differ from those for the <c>list</c> class. The differences can be seen in a careful comparison of <c>help(tuple)</c> versus <c>help(list)</c>.
+        </p>
+    </subsection>
+    <subsection xml:id="sub-intro-containers-dicts">
+        <title>The <c>dict</c> data type</title>
+        <p>
+            In order to explain how a Python <c>dict</c> behaves, it is instructive to consider the mathematical definition of a function.
+        </p>
+        <definition xml:id="def-math-function">
+            <title>Mathematical function</title>
             <statement>
-                Any comma-separated sequence of syntactically valid expressions enclosed in a matching pair of square brackets <c>[</c> and <c>]</c> is a <c>list</c>. The <term>empty list</term> <c>[]</c> is a valid list.
+                <p>
+                    A <term>function</term> <m>f</m>   from a set <m>X</m>   to a set <m>Y</m>   is a rule which assigns to each value in the set <m>X</m>   exactly one value from the set <m>Y</m>.
+                </p>
+                <p>
+                    The set <m>X</m>   is called the <term>domain of <m>f</m>  </term> and the set <m>Y</m>   is called the <term>codomain of <m>f</m>  </term>. The set <m>\set{f(x):x\in X}</m>   is the <term>image of <m>f</m>  </term>, or sometimes the <term>image of <m>X</m>   under <m>f</m>  </term>.
+                </p>
+                <p>
+                    Hence if <m>f:X\to Y</m>   is a function, <m>x_1,x_2 \in X</m>  , and <m>y_1,y_2\in Y</m>   such that <m>x_1 = x_2</m>  , <m>f(x_1)=y_1</m>  , and <m>f(x_2)=y_2</m>  , then <m>y_1=y_2</m>  .
+                </p>
             </statement>
-            <listing xml:id="list-lists">
-                <caption>Some <c>list</c> data</caption>
-                <console>
-                    <prompt>>>> </prompt>
-                    <input>
-                        foo = "This is a string, not a list"
-                    </input>
-                    <prompt>>>> </prompt>
-                    <input>
-                        bar = [1, 2, foo, [5, 5, 5]]
-                    </input>
-                    <prompt>>>> </prompt>
-                    <input>
-                        type(bar)
-                    </input>
-                    <output>
-                        &lt;class 'list'>
-                    </output>
-                    <prompt>>>> </prompt>
-                    <input>
-                        print( bar )
-                    </input>
-                    <output>
-                        [1, 2, 'This is a string, not a list', [5, 5, 5]]
-                    </output>
-                </console>
-            </listing>
+        </definition>
+        <p>
+            In Python, a <c>dict</c> acts very much like a simple mathematical function, where the domain is a set of <em>hashable objects</em>. The elements of the domain of a <c>dict</c> are called its <term>keys</term> and the elements of its image are called its <term>values</term>. Since the idea of a <em>hashable object</em> is complicated, a simpler idea is to think that keys of a <c>dict</c> must be immutable items or non-containers.
+        </p>
+        <technology xml:id="tech-dicts">
+            <title>Defining a <c>dict</c></title>
+            <p>
+                Dictionaries can be defined in two important ways.
+            </p>
+            <p>
+                <ol>
+                    <li><p>
+                        <c>my_dict = {k1:v1, k2:v2, ..., k100:v100}</c> would produce a <c>dict</c> with 100 paired keys and values.
+                        </p></li>
+                    <li><p>
+                        <c>my_dict = dict( [(k1, v1), (k2, v2), ..., (k100, v100)] )</c> would produce the same <c>dict</c>.
+                        </p></li>
+                </ol>
+            </p>
         </technology>
         <p>
-        Since lists contain other data it is very important to be able to access that data. Python provides two related ways to access the data contained in a list: <term>indexing</term> and <term>slicing</term>.
+            Python dictionaries are mutable, and in fact once a <c>dict</c> has been defined, new key-value pairs can be added to the dictionary simply by assigning the new value to the correct key: <c>my_dict[new_key] = new_value</c>.
         </p>
-        </introduction>
-    <subsubsection xml:id="subsub-intro-containers-lists-slices">
-          <title>Indexing and slicing</title>
-          <p>
-              The <term>index</term> of an element of a list is the distance in the list from that element to the start of the list. The element at the start of the list is thus in index 0, the next element in index 1, the next in index 2, and so on. Thus a list consisting of 10 elements has indices 0 through 9. For a list <c>the_list</c>, we access the element in index <m>i</m> by using <c>the_list[i]</c>; this is similar to indexing a mathematical sequence as <m>(a_0,a_1,a_2,\dotsc,a_k)</m>.
-          </p>
-          <sidebyside>
-              <console>
-                  <prompt>>>> </prompt>
-                  <input>the_list = ['bob', 'larry', 3.14159, 1-1j, 'fifth']</input>
-                  <prompt>>>> </prompt>
-                  <input>the_list[0]</input>
-                  <output>'bob'</output>
-              </console>
-          </sidebyside>
-          <p>
-              Unlike a mathematical sequence, Python allows indexing from the back of the list as well. When indexing from the back of the list, it is important to remember that the same principle applies as above: the negative index is the distance from the <q>front</q> of an element to the back of the list. Continuing the above, we have:
-          </p>
-          <sidebyside>
-              <console>
-                  <prompt>>>> </prompt>
-                  <input>the_list[-2]</input>
-                  <output>(1-1j)</output>
-                  <prompt>>>> </prompt>
-                  <input>the_list[-1]</input>
-                  <output>'fifth'</output>
-              </console>
-          </sidebyside>
-          <p>
-              Since <m>0 = -0</m>, the negative zero index is the same as the zero index:
-          </p>
-          <sidebyside>
-              <console>
-                  <prompt>>>> </prompt>
-                  <input>the_list[-0]</input>
-                  <output>'bob'</output>
-                  <prompt>>>> </prompt>
-                  <input>the_list[0]</input>
-                  <output>'bob'</output>
-              </console>
-          </sidebyside>
-          <p>
-              To access a sublist of a list, we use a <term>slice</term>. The first number of the slice is the index of the element to start the sublist, and the second number of the slice is the index of the first element <em>not</em> to include. To slice starting at index 1 and stopping before index 5 of <c>the_list</c>, we would use <c>the_list[1:5]</c>. Since <c>the_list</c> only had five elements we will define a longer list to experiment.
-          </p>
-          <sidebyside>
-              <console>
-                  <prompt>>>> </prompt>
-                  <input>
-                      new_list = [1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377,
-                  </input>
-                  <prompt>... </prompt>
-                  <input>
-                          610, 987, 1597, 2584, 4181, 6765, 10946]
-                  </input>
-                  <prompt>>>> </prompt>
-                  <input>
-                      new_list[1:5]
-                  </input>
-                  <output>
-                      [2, 3, 5, 8]
-                  </output>
-              </console>
-          </sidebyside>
-          <p>
-              You can slice by skipping indices, as well, by supplying a third term.
-          </p>
-          <sidebyside>
-              <console>
-                  <prompt>>>> </prompt>
-                  <input>new_list[1:15:2]</input>
-                  <output>[2, 5, 13, 34, 89, 233, 610]</output>
-              </console>
-          </sidebyside>
-          <remark>
-              Python allows an interesting behavior with regard to indexing and slicing. While you cannot index beyond the bounds of a list, you are always permitted to slice beyond the bounds of the list. Thus with the above code, <c>the_list[8]</c> would generate an <c>IndexError</c>, but <c>new_list[50:100:3]</c> would output the empty list, <c>[]</c>.
-          </remark>
-          <p>
-              Finally, if you want to slice from the beginning of the list up to the <m>j</m>  th index, you use <c>new_list[:j]</c>. If you want to slice from the <m>i</m>  th index to the end of the list, you use <c>new_list[i:]</c>. If you want to slice a whole copy of a list (there are valid reasons to do this), use <c>new_list[:]</c>. If you want the reverse of a list, you slice the whole thing from beginning to end using a skip of negative one: <c>new_list[::-1]</c>.
-          </p>
-      </subsubsection>
-      <subsubsection xml:id="subsub-intro-containers-lists-ops_meths">
-          <title>Operators and methods</title>
-          <p>
-              Indexing and slicing are just the beginnings of what can be done with lists. We can also combine two lists into a longer one (additively) or elongate a list by making it contain several copied of itself (multiplicatively). Continuing the above examples, we have:
-          </p>
-          <sidebyside>
-              <console>
-                  <prompt>>>> </prompt>
-                  <input>the_list + new_list</input>
-                  <output>['bob', 'larry', 3.14159, (1-1j), 'fifth', 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946]</output>
-                  <prompt>>>> </prompt>
-                  <input>3 * the_list</input>
-                  <output>['bob', 'larry', 3.14159, (1-1j), 'fifth', 'bob', 'larry', 3.14159, (1-1j), 'fifth', 'bob', 'larry', 3.14159, (1-1j), 'fifth']</output>
-              </console>
-          </sidebyside>
-          <remark>
-              <title><c>list</c> addition is not commutative</title>
-              <p>
-                  Generally speaking, if <c>a</c> and <c>b</c> are lists, then <c>a+b</c> is different from <c>b+a</c>.
-              </p>
-          </remark>
-          <p>
-              These are operators which we are used to working with algebraically, now given new meaning to interact with lists. <term>Methods</term> are different: they are functions specific to the <c>list</c> data type accessed using <em>dot notation</em>. When working with a new data type, a good way to see the full list of all of its methods is to ask for <c>help</c>, but beware! The <c>help</c> files are very detailed. Try <c>help(list)</c> at the Python prompt.
-          </p>
-          <p>
-              Many of the methods (all of those named <c>__likethis__</c>) are special. We will discuss those later in the text when we discuss operator overloading in <xref provisional="sec-overloading" />. The <c>list</c> class has several other methods as well. Assuming that we are using <c>the_list</c> from above, here is a basic overview of several of the more useful methods:
-          </p>
-          <ul>
-              <li><p>
-                  <c>the_list.append(x)</c>: Increases the length of <c>the_list</c> by sticking the value <c>x</c> at the end
-                  </p></li>
-              <li><p>
-                  <c>the_list.count(x)</c>: Returns the number of times <c>x</c> occurs in <c>the_list</c> without changing <c>the_list</c>
-                  </p></li>
-          </ul>
-      </subsubsection>
-      <subsubsection xml:id="subsub-intro-containers-lists-mutable">
-          <title>Mutability</title>
-          <p>
-              The property of <term>mutability</term> is special: if a numerically-index contained allows you to assign a new value into a particular index, then that container is <term>mutable</term>. If not, the container is immutable. Lists are a mutable data type, since we can make an assignment <c>new_list[5] = 'reginald'</c>, so long as <c>new_list[5]</c> is a valid index.
-          </p>
-      </subsubsection>
-  </subsection>
-  <subsection xml:id="sub-intro-containers-tuples">
-      <title>The <c>tuple</c> data type</title>
-      <p>
-          A <c>tuple</c> behaves very much like a list, except for two important points: they are enclosed in parentheses <c>(</c> and <c>)</c> instead of square braclets, and they are <em>immutable</em>. You cannout assign a new variable to a particular index of a <c>tuple</c> without instead overwriting the whole <c>tuple</c>.
-      </p>
-      <p>
-          Since a <c>tuple</c> must be overwritten to be changed, several of the methods differ from those for the <c>list</c> class. The differences can be seen in a careful comparison of <c>help(tuple)</c> versus <c>help(list)</c>.
-      </p>
-  </subsection>
-  <subsection xml:id="sub-intro-containers-dicts">
-      <title>The <c>dict</c> data type</title>
-      <p>
-          In order to explain how a Python <c>dict</c> behaves, it is instructive to consider the mathematical definition of a function.
-      </p>
-      <definition xml:id="def-math-function">
-          <title>Mathematical function</title>
-          <statement>
-              <p>
-                  A <term>function</term> <m>f</m>   from a set <m>X</m>   to a set <m>Y</m>   is a rule which assigns to each value in the set <m>X</m>   exactly one value from the set <m>Y</m>  .
-            </p>
+        <fact xml:id="fact-intro-containers-strs">
+            <title>Strings are containers, too!</title>
             <p>
-              The set <m>X</m>   is called the <term>domain of <m>f</m>  </term> and the set <m>Y</m>   is called the <term>codomain of <m>f</m>  </term>. The set <m>\set{f(x):x\in X}</m>   is the <term>image of <m>f</m>  </term>, or sometimes the <term>image of <m>X</m>   under <m>f</m>  </term>.
+                It is very important to recognize that strings can be sliced and indexed exactly as can lists and tuples, which makes <c>str</c> a container data type as well. <em>Strings are immutable!</em>
             </p>
-            <p>
-              Hence if <m>f:X\to Y</m>   is a function, <m>x_1,x_2 \in X</m>  , and <m>y_1,y_2\in Y</m>   such that <m>x_1 = x_2</m>  , <m>f(x_1)=y_1</m>  , and <m>f(x_2)=y_2</m>  , then <m>y_1=y_2</m>  .
-            </p>
-          </statement>
-      </definition>
-      <p>
-          In Python, a <c>dict</c> acts very much like a simple mathematical function, where the domain is a set of <em>hashable objects</em>. The elements of the domain of a <c>dict</c> are called its <term>keys</term> and the elements of its image are called its <term>values</term>. Since the idea of a <em>hashable object</em> is complicated, a simpler idea is to think that keys of a <c>dict</c> must be immutable items or non-containers.
-      </p>
-      <technology xml:id="tech-dicts">
-          <title>Defining a <c>dict</c></title>
-          <statement>
-              Dictionaries can be defined in two important ways.
-              <ol>
-                  <li><p>
-                      <c>my_dict = {k1:v1, k2:v2, ..., k100:v100}</c> would produce a <c>dict</c> with 100 paired keys and values.
-                      </p></li>
-                  <li><p>
-                      <c>my_dict = dict( [(k1, v1), (k2, v2), ..., (k100, v100)] )</c> would produce the same <c>dict</c>.
-                      </p></li>
-              </ol>
-          </statement>
-      </technology>
-      <p>
-          Python dictionaries are mutable, and in fact once a <c>dict</c> has been defined, new key-value pairs can be added to the dictionary simply by assigning the new value to the correct key: <c>my_dict[new_key] = new_value</c>.
-      </p>
-      <fact xml:id="fact-intro-containers-strs">
-        <title>Strings are containers, too!</title>
-        <p>
-            It is very important to recognize that strings can be sliced and indexed exactly as can lists and tuples, which makes <c>str</c> a container data type as well. <em>Strings are immutable!</em>
-        </p>
         </fact>
-  </subsection>
+    </subsection>
     <subsection>
         <title>Sets are a special container</title>
         <p>
@@ -234,29 +228,29 @@
         </p>
         <technology xml:id="tech-defining-sets">
             <title>Defining a <c>set</c></title>
-            <statement>
+            <p>
                 Usually the argument to <c>set</c> is a <c>list</c> or <c>tuple</c>, but <c>str</c> is also permitted since strings (of length 1) are hashable. Otherwise, all normal mathematical properties of expected for sets hold for the <c>set</c> class.
-                <listing xml:id="list-defining-sets">
-                    <caption>Defining sets removes repeated elements</caption>
-                    <console>
-                        <prompt>>>> </prompt>
-                        <input>
-                            a = set([1,2,3,4])
-                        </input>
-                        <prompt>>>> </prompt>
-                        <input>
-                            b = set([1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,4])
-                        </input>
-                        <prompt>>>> </prompt>
-                        <input>
-                            print(a==b)
-                        </input>
-                        <output>
-                            True
-                        </output>
-                    </console>
-                </listing>
-            </statement>
+            </p>
+            <listing xml:id="list-defining-sets">
+                <caption>Defining sets removes repeated elements</caption>
+                <console>
+                    <prompt>>>> </prompt>
+                    <input>
+                        a = set([1,2,3,4])
+                    </input>
+                    <prompt>>>> </prompt>
+                    <input>
+                        b = set([1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,4])
+                    </input>
+                    <prompt>>>> </prompt>
+                    <input>
+                        print(a==b)
+                    </input>
+                    <output>
+                        True
+                    </output>
+                </console>
+            </listing>
         </technology>
     </subsection>
 </section>

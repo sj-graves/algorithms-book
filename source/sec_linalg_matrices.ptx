@@ -1,0 +1,303 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<section xml:id="sec-linalg-matrices" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Matrices over <m>\CV{n}</m></title>
+    <shorttitle>Complex matrices</shorttitle>
+    <introduction>
+        <p>
+            We begin with the traditional definition of a matrix, but we will quickly put it to a non-traditional use to provide motivation for matrix arithmetic.
+        </p>
+        <definition xml:id="defn-matrix">
+            <title>Matrix over <m>\Comps</m></title>
+            <statement>
+                <p>
+                    Consider a set <me>\set{\vec{A}_c:c\in\set{0,1,\dotsc,n-1}}\subset\CV{m}</me>. We denote <me>A = \left[\vec{A}_0|\vec{A}_1|\cdots|\vec{A}_{n-1}\right]</me> to be the <m>m\times n</m> <term>matrix</term> whose cth <term>column</term> is the vector <m>\vec{A}_c</m>, for <m>c\in\set{0,1,\dotsc,n-1}</m>. We extend our bracket notation from vectors as follows:
+                    <me>
+                        \entry{A}{r,c} = \entry{\vec{A}_c}{r}
+                    </me>. To remove the bracket notation, if we define <m>a_{r,c}=\entry{\vec{A}_c}{r}\in\Comps</m> then
+                    <me>
+                        A = \begin{bmatrix}
+                            a_{0,0} \amp a_{0,1} \amp a_{0,2} \amp \cdots \amp a_{0,n-1} \\
+                            a_{1,0} \amp a_{1,1} \amp a_{1,2} \amp \cdots \amp a_{1,n-1} \\
+                            \vdots  \amp \vdots  \amp \vdots  \amp \ddots \amp \vdots    \\
+                            a_{m-1,0} \amp a_{m-1,1} \amp a_{m-1,2} \amp \cdots \amp a_{m-1,n-1}
+                        \end{bmatrix}
+                    </me>.
+                </p>
+                <p>
+                    For a matrix <m>A\in\Mats{m,n}</m> we define the <term>row dimension of <m>A</m></term> to be <m>m</m> and the <term>column dimension of <m>A</m></term> to be <m>n</m>.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            Our use of the bracket notation allows the following theorem.
+        </p>
+        <theorem xml:id='thm-matrices_form_vectorspace'>
+            <title>Matrices form a vector space over <m>\Comps</m></title>
+            <statement>
+                <p>
+                    Let <m>m,n\in\Zp</m> and define <m>\Mats{m,n}</m> to be the set of all <m>m\times n</m> matrices over <m>\Comps</m>, and define operations of addition and scalar multiplication in <m>\Mats{m,n}</m> as follows:
+                    <dl>
+                        <li><title>Matrix addition</title><p>
+                            Let <m>A_1,A_2\in\Mats{m,n}</m>. Then define <m>A_1+A_2</m> to be the unique element of <m>\Mats{m,n}</m> satisfying
+                            <me>
+                                \entry{A_1+A_2}{r,c} = \entry{A_1}{r,c} + \entry{A_2}{r,c}
+                            </me>
+                            for every <m>{r\in\set{0,\dotsc,m-1}}</m> and <m>{c\in\set{0,\dotsc,n-1}}</m>.
+                            </p></li>
+                        <li><title>Scalar-matrix multiplication</title><p>
+                            Let <m>A\in\Mats{m,n}</m> and let <m>z\in\Comps</m>. Then <m>zA</m> is the unique element of <m>\Mats{m,n}</m> satisfying
+                            <me>
+                                \entry{z A}{r,c} = z\entry{A}{r,c}
+                            </me>
+                            for every <m>{r\in\set{0,\dotsc,m-1}}</m> and <m>{c\in\set{0,\dotsc,n-1}}</m>.
+                            </p></li>
+                    </dl>
+                </p>
+                <p>
+                    Under these operations, <m>\Mats{m,n}</m> is a complex vector space.
+                </p>
+            </statement>
+        </theorem>
+    </introduction>
+<!--     <subsection xml:id='sub-linalg-matrices-lincomb'>
+        <title>Linear combinations</title>
+        <p>
+            As we have already seen, many of the important properties of linear algebra are linearity properties. This should be no surprise, given the name of the field! Another important linearity property follows.
+        </p>
+        <definition xml:id="defn-lincomb_span">
+            <title>Linear combination and span of a set</title>
+            <statement>
+                Let <m>S=\set{\vv_0,\vv_1,\vv_2,\dotsc,\vv_{\ell-1}}\subset\CV{n}</m> be a set of <m>\ell</m> complex vectors each of length <m>n</m>. A vector <m>\vec{w}\in\CV{n}</m> is a <term>linear combination from the set <m>S</m></term> if and only if there is a sequence <m>(z_0,z_1,z_2,\dotsc,z_{\ell-1})</m> of complex numbers such that
+                <me>
+                    z_0\vv_0+z_1\vv_1+\cdots+z_{\ell-1}\vv_{\ell-1} = \vec{w}
+                </me>. The set of all such linear combinations from <m>S</m> is the <term>span</term> of <m>S</m>, denoted <m>\spanset{S}</m>.
+            </statement>
+        </definition>
+        <p>
+            An associated idea is that of a spanning set for the vector space.
+        </p>
+        <definition xml:id="defn-spanning_set">
+            <title>Spanning set for <m>\CV{n}</m></title>
+            <statement>
+                Let <m>S=\set{\vv_0,\vv_1,\vv_2,\dotsc,\vv_{\ell-1}}\subset\CV{n}</m> be a set of <m>\ell</m> complex vectors each of length <m>n</m>. Then <m>S</m> is a <term>spanning set</term> for <m>\CV{n}</m> if and only if <m>\spanset{S} = \CV{n}</m>.
+            </statement>
+        </definition>
+        <p>
+            It should be obvious that for any set <m>S\subseteq \CV{n}</m> that <m>\spanset{S}\subseteq\CV{n}</m>, so the necessary condition to test to determine whether <m>S</m> is a spanning set for <m>\CV{n}</m> is to find whether an arbitrary vector in <m>\CV{n}</m> can be written as a linear combination from <m>S</m>.
+        </p>
+    </subsection> -->
+    <subsection xml:id='sub-linalg-matrices-matrix_vector_product'>
+        <title>Matrix-vector products</title>
+        <p>
+            Matrices are more than a convenient way to store rectangular data, but to build their very useful features we need another idea from vector theory.
+        </p>
+        <definition xml:id="defn-lincomb_span">
+            <title>Linear combination and span of a set</title>
+            <statement>
+                <p>
+                    Let <m>S=\set{\vv_0,\vv_1,\vv_2,\dotsc,\vv_{\ell-1}}\subset\CV{n}</m> be a set of <m>\ell</m> complex vectors each of length <m>n</m>. A vector <m>\vec{w}\in\CV{n}</m> is a <term>linear combination from the set <m>S</m></term> if and only if there is a sequence <m>(z_0,z_1,z_2,\dotsc,z_{\ell-1})</m> of complex numbers such that
+                    <me>
+                        z_0\vv_0+z_1\vv_1+\cdots+z_{\ell-1}\vv_{\ell-1} = \vec{w}
+                    </me>. The set of all such linear combinations from <m>S</m> is the <term>span</term> of <m>S</m>, denoted <m>\spanset{S}</m>.
+                </p>
+            </statement>
+        </definition>
+        <example xml:id="exmp-standard_basis">
+            <title>The standard unit basis</title>
+            <statement>
+                <p>
+                    An interesting example of the span of a set arises from looking at a special set of vectors <m>S=\set{\vec{e}_k:k\in\set{0,1,\dotsc,n-1}}\subset \CV{n}</m>, where <m>\vec{e}_k</m> is the unique vector which satisfies
+                    <me>
+                        \entry{\vec{e}_k}{r} = \begin{cases}
+                        1 \amp r=k \\
+                        0 \amp r\neq k
+                        \end{cases}
+                    </me>.
+                    With these vectors and any other vector <m>\vv\in\CV{n}</m> which satisfies <m>\entry{\vv}{r} = z_r\in\Comps</m>, we can write
+                    <md>
+                        <mrow>
+                            \entry{\vv}{r} \amp= z_r = (n-1)\cdot 0 + 1\cdot z_r
+                        </mrow>
+                        <mrow>
+                            \amp= z_0\entry{\vec{e}_0}{r} + z_1\entry{\vec{e}_1}{r} + \cdots + z_r\entry{\vec{e}_r}{r} + \cdots + z_{n-1}\entry{\vec{e}_{n-1}}{r}
+                        </mrow>
+                        <mrow>
+                            \amp= \entry{z_0\vec{e}_0}{r} + \entry{z_1\vec{e}_1}{r} + \cdots + \entry{z_r\vec{e}_r}{r} + \cdots + \entry{z_{n-1}\vec{e}_{n-1}}{r}
+                        </mrow>
+                        <mrow>
+                            \amp= \entry{\sum_{k=0}^{n-1}z_k\vec{e}_k}{r}
+                        </mrow>
+                    </md>.
+                    Thus <m>\spanset{S} = \CV{n}</m>, which means every vector can be written as a linear combination from <m>S</m>.
+                </p>
+            </statement>
+        </example>
+        <definition xml:id="defn-matrix_vector_product">
+            <title>Matrix-vector product</title>
+            <statement>
+                <p>
+                    Let <m>\vec{A}_0,\vec{A}_1,\dotsc,\vec{A}_{n-1}\in\CV{m}</m> be vectors such that
+                    <me>
+                        A=\left[\vec{A}_1|\cdots|\vec{A}_{n-1}\right]\in\Mats{m,n}
+                    </me>
+                    and let <m>\vv\in\CV{n}</m>. Then the <term>matrix-vector product <m>A\vv</m></term> is the linear combination
+                    <me>
+                        A\vv = \vec{A}_0\entry{\vv}{0} + \vec{A}_1\entry{\vv}{1} + \cdots +
+                        \vec{A}_{n-1}\entry{\vv}{n-1}\in\CV{m}
+                    </me>.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            Bracket notation gives us another way to think of the matrix-vector product.
+        </p>
+        <theorem xml:id="thm-components-mvp">
+            <title>Components of a matrix-vector product</title>
+            <statement>
+                <p>
+                    Let <m>\vec{A}_0,\vec{A}_1,\dotsc,\vec{A}_{n-1}\in\CV{m}</m> be vectors such that
+                    <me>
+                        A=\left[\vec{A}_1|\cdots|\vec{A}_{n-1}\right]\in\Mats{m,n}
+                    </me>
+                    and let <m>\vv\in\CV{n}</m>. Then for every <m>{r\in\set{0,\dotsc,m-1}}</m>,
+                    <me>
+                        \entry{A\vv}{r} = \entry{\vv}{0}\entry{A}{r,0}+\entry{\vv}{1}\entry{A}{r,1} +
+                                \cdots + \entry{\vv}{n-1}\entry{A}{r,n-1} = \sum_{c=0}^{n-1} \entry{A}{r,c}\entry{\vv}{c}
+                    </me>.
+                </p>
+            </statement>
+        </theorem>
+        <p>
+            What is more fascinating than this product in its own right is the behavior obtained when you consider products of arbitrary vectors by a fixed matrix.
+        </p>
+        <theorem xml:id="thm-transformation_of_a_matrix">
+            <title>Matrix-vector products are linear transformations</title>
+            <statement>
+                <p>
+                    Let <m>m,n\in\Zp</m> and <m>A\in\Mats{m,n}</m>. Define a function <m>T_A:\CV{n}\to\CV{m}</m> by <m>T_A(\vv) = A\vv</m> for each <m>\vv\in\CV{n}</m>. Then <m>T_A</m> is a linear transformation.
+                </p>
+            </statement>
+            <proof>
+                <p>
+                    Suppose <m>\vv_1,\vv_2\in\CV{n}</m> and <m>z\in\Comps</m>, and assume <m>\vec{A}_0,\vec{A}_1,\dotsc,\vec{A}_{n-1}\in\CV{m}</m> are vectors such that
+                    <me>
+                        A=\left[\vec{A}_1|\cdots|\vec{A}_{n-1}\right]
+                    </me>. Then
+                    <md>
+                        <mrow>
+                            T_A(\vv_1+\vv_2) \amp = A(\vv_1+\vv_2)
+                        </mrow>
+                        <mrow>
+                            \amp = \entry{\vv_1+\vv_2}{0}\vec{A}_0 +
+                                \cdots + \entry{\vv_1+\vv_2}{n-1}\vec{A}_{n-1}
+                        </mrow>
+                        <mrow>
+                            \amp = \left(\entry{\vv_1}{0}+\entry{\vv_2}{0}\right)\vec{A}_0 + \cdots +
+                                \left(\entry{\vv_1}{n-1}+\entry{\vv_2}{n-1}\right)\vec{A}_{n-1}
+                        </mrow>
+                        <mrow>
+                            \amp = \entry{\vv_1}{0}\vec{A}_0+\cdots+\entry{\vv_1}{n-1}\vec{A}_{n-1} +
+                                \entry{\vv_2}{0}\vec{A}_0+\cdots+\entry{\vv_2}{n-1}\vec{A}_{n-1}
+                        </mrow>
+                        <mrow>
+                            \amp = A\vv_1 + A\vv_2 = T_A(\vv_1) + T_A(\vv_2)
+                        </mrow>
+                    </md>. Also,
+                    <md>
+                        <mrow>
+                            T_A(z\vv_1) \amp = A(z\vv_1)
+                        </mrow>
+                        <mrow>
+                            \amp = \entry{z\vv_1}{0}\vec{A}_0 + \cdots + \entry{z\vv_1}{n-1}\vec{A}_{n-1}
+                        </mrow>
+                        <mrow>
+                            \amp = z\entry{\vv_1}{0}\vec{A}_0 + \cdots + z\entry{\vv_1}{n-1}\vec{A}_{n-1}
+                        </mrow>
+                        <mrow>
+                            \amp = z\left(\entry{\vv_1}{0}\vec{A}_0 + \cdots +
+                                \entry{\vv_1}{n-1}\vec{A}_{n-1}\right)
+                        </mrow>
+                        <mrow>
+                            \amp = zA\vv_1 = zT_A(\vv_1)
+                        </mrow>
+                    </md>. Hence <m>T_a</m> is a linear transformation.
+                </p>
+            </proof>
+        </theorem>
+        <p>
+            This might not be surprising, given the fact that we established <m>\Mats{m,n}</m> as a vector space. The following result is perhaps more surprising.
+        </p>
+        <theorem xml:id="thm-every_transformation_has_a_matrix">
+            <title>Matrix representation of a transformation</title>
+            <statement>
+                <p>
+                    Let <m>L:\CV{n}\to\CV{m}</m> be a linear transformation. Then there is a matrix <m>A\in\Mats{m,n}</m> such that <m>L=T_A</m>.
+                </p>
+            </statement>
+            <proof>
+                <p>
+                    For each <m>c\in\set{0,\dotsc,n-1}</m>, let <m>\vec{e}_c\in\CV{m}</m> be the vector satisfying
+                    <me>
+                        \entry{\vec{e}_c}{r} = \begin{cases}
+                            0 \amp \text{if }r\neq c \\
+                            1 \amp \text{if }r=c
+                        \end{cases}
+                    </me>. Further, define <m>\vec{A}_c = L(\vec{e}_c)</m> for each <m>c</m>. It is left as an exercise to the reader to verify that the matrix
+                    <me>
+                        A=\left[\vec{A}_1|\cdots|\vec{A}_{n-1}\right]
+                    </me>
+                    satisfies <m>T_A = L</m>.
+                </p>
+            </proof>
+        </theorem>
+    </subsection>
+    <subsection xml:id='sub-linalg-matrices-matrix_matrix_product'>
+        <title>Matrix-matrix products</title>
+        <p>
+            Since we have established that left-multiplication of a vector by a matrix (the matrix-vector product) is actually the same as an application of a function to a vector, it should be unsurprising that matrix-matrix products act like function composition!
+        </p>
+        <definition xml:id="defn-mmp">
+            <title>Matrix-matrix product</title>
+            <statement>
+                <p>
+                    Let <m>m,n,p,q\in\Zp</m>, <m>A\in\Mats{m,n}</m>, and
+                    <me>
+                        B = \left[\vec{B}_0|\vec{B}_1|\cdots|\vec{B}_{q-1}\right]\in\Mats{p,q}
+                    </me>. Then the matrix-matrix product <m>AB</m> exists if and only if <m>n=p</m>. When <m>n=p</m>, then
+                    <me>
+                        AB = \left[A\vec{B}_0|A\vec{B}_1|\cdots|A\vec{B}_{q-1}\right]
+                    </me>.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            The more traditional way to evaluate matrix-matrix products is component-wise.
+        </p>
+        <theorem xml:id="thm-mmp_by_entry">
+            <title>Entries of a matrix-matrix product</title>
+            <statement>
+                <p>
+                    Suppose that <m>A\in\Mats{m,n}</m> and <m>B\in\Mats{n,q}</m>. Then
+                    <me>
+                        \entry{AB}{r,c} = \sum_{k=0}^{n-1}\entry{A}{r,k}\entry{B}{k,c}
+                    </me> for each <m>{r\in\set{0,\dotsc,m-1}}</m> and <m>{c\in\set{0,\dotsc,q-1}}</m>.
+                </p>
+            </statement>
+        </theorem>
+        <theorem xml:id="thm-mmp_is_composition">
+            <title>Matrix-matrix products do composition</title>
+            <statement>
+                <p>
+                    If <m>A\in\Mats{m,n}</m> and <m>B\in\Mats{n,q}</m>, then <m>T_{AB}:\CV{q}\to\CV{m}</m> satisfies <m>T_{AB}=T_A\circ T_B</m>.
+                </p>
+            </statement>
+        </theorem>
+    </subsection>
+  <!--
+  <xi:include href=".subsec-emp-intro.ptx" />
+  <xi:include href=".subsec-emp-next.ptx" />
+  <xi:include href=".subsec-emp-conc.ptx" />
+  -->
+
+</section>

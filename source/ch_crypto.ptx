@@ -2,23 +2,23 @@
 
 <chapter xml:id="ch-crypto" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Simple Cryptography</title>
+    <objectives>
+        <ol>
+            <li><p>
+                Investigate substitution ciphers
+                </p></li>
+            <li><p>
+                Investigate other shared-key cryptosystems
+                </p></li>
+            <li><p>
+                Implement some cryptographic algorithms
+                </p></li>
+            <li><p>
+                Investigate public key cryptography
+                </p></li>
+        </ol>
+    </objectives>
     <introduction>
-        <objectives>
-            <ol>
-                <li><p>
-                    Investigate substitution ciphers
-                    </p></li>
-                <li><p>
-                    Investigate other shared-key cryptosystems
-                    </p></li>
-                <li><p>
-                    Implement some cryptographic algorithms
-                    </p></li>
-                <li><p>
-                    Investigate public key cryptography
-                    </p></li>
-            </ol>
-        </objectives>
         <p>
             As long as their has been a need to communicate information, there has been a desire to hide that communication from unintended recipients. <term>Cryptography</term>, loosely translated from the Greek roots as <em>secret writing</em>, is the study and implementation of secure communication in the possible presence of adversaries. We will start by extending our investigation of permutations into their application to cryptography before moving through more complicated permutation-based cryptography. Then we will deviate into other cryptosystems not based upon permutations, revisiting the idea of public key cryptography introduced in <xref ref="sec-intro-kidrsa" text="type-hybrid"/>.
         </p>

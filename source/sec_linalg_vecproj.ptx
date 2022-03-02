@@ -1,0 +1,420 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<section xml:id="sec-linalg-vecproj" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Project: Vectors in Python</title>
+    <shorttitle>Vectors in Python</shorttitle>
+    <objectives>
+        <introduction>
+            <p>
+                With a solid foundation of what it means to be a vector space we can turn our attention to developing a class of complex vectors in Python.
+            </p>
+        </introduction>
+        <ol>
+            <li><p>
+                Create a class of vectors in Python, called <c>AlgoVector</c>, including the following methods:
+                <ol>
+                    <li><p>
+                        <c>__init__</c> and <c>__repr__</c>
+                        </p></li>
+                    <li><p>
+                        <c>__mul__</c> and <c>__rmul__</c>
+                        </p></li>
+                    <li><p>
+                        <c>__add__</c> and <c>__radd__</c>
+                        </p></li>
+                    <li><p>
+                        <c>__getitem__</c>, <c>__len__</c>, and <c>__eq__</c>
+                        </p></li>
+                    <li><p>
+                        <c>entries</c>, <c>conjugate</c>, <c>inner_product</c>, and <c>norm</c>
+                        </p></li>
+                </ol>
+                </p></li>
+            <li><p>
+                Test the <c>AlgoVector</c> class by making some <q>simple computations</q>.
+                </p></li>
+        </ol>
+    </objectives>
+    <introduction>
+        <p>
+            Complex numbers are a built-in type in Python, using the <c>complex</c> type. The easiest way to represent a complex number is using a <term>complex literal</term>, matching the form <c>5+3j</c>. We note that Python adopts the engineering and scientific usage of <m>j^2=-1</m> rather than the mathematical usage of <m>i^2 = -1</m>. The easiest ways to convert an arbitrary number <c>x</c> into a complex number are to compute <c>(1+0j)*(x)</c> or to use <c>complex(x)</c>. These use the same number of key-strokes to type, so the latter is probably better than the former as it is more explicitly a conversion of type.
+        </p>
+    </introduction>
+    <subsection xml:id="sub-vecproj-init_and_repr">
+        <title>Getting started with initialization and representation</title>
+        <p>
+            Even though the normal representation of a complex vector in <m>\CV{n}</m> is as a column of numbers, the typical input will be a row of numbers; this allows users to easily input a vector
+            <me>
+                \vv = \cvec{1+3j\\0-5j\\2+0j}
+            </me>
+            via the input <c>(1+3j, -5j, 2)</c>. Some experimentation with Python will quickly demonstrate that an input of <c>1+3j</c> produces an output of <c>(1+3j)</c>, with parentheses added to draw the eye to the complex number.
+        </p>
+        <activity xml:id="proj-vecproj-init_and_repr">
+            <title>Initialization of the <c>AlgoVector</c> class</title>
+            <introduction>
+                <p>
+                    We will want to work in two files again: a file <c>AlgoVector.py</c> containing your class definition and a file <c>aam_proj4.py</c> containing all testing code.
+                </p>
+
+            </introduction>
+            <task><title>Files and headers</title>
+                <p>
+                    Make sure both files have appropriate headers, and start the <c>aam_proj4.py</c> file with <c>from AlgoVector import *</c> so that you have access to your class definition.
+                </p>
+            </task>
+            <task><title>Initialization algorithm</title>
+                <introduction>
+                    <p>
+                        As always, it is important to start by considering what validation must be performed on the input to the <c>__init__</c> method for the new class. Since we want to create vectors from a <c>list</c> or <c>tuple</c> of entries, we will specify our <c>__init__</c> method as follows, which determines both the names of the arguments to the method as well as the important attribute name for the class:
+                    </p>
+                    <program language='python'>
+                        <input>
+                            def __init__(self, entries):
+                                '''The initialization method for class AlgoVector'''
+                                # perform all validation
+                                # build the data that will replace None below:
+                                self._components = None
+                        </input>
+                    </program>
+                </introduction>
+                <task>
+                    <p>
+                        What is a good way to ensure that <c>type(entries)</c> is either <c>list</c> or <c>tuple</c>? Implement that and replace the first comment line in the above code.
+                    </p>
+                </task>
+                <task>
+                    <p>
+                        Since not every literal element of <c>entries</c> will have the <c>complex</c> type, we need to build a new list whose elements are the original elements of <c>entries</c> cast into the <c>complex</c> type; we have done this before using a <c>for</c> loop. Replace the second comment line in the above code with the appropriate for loop, storing the correct list of data in a local variable.
+                    </p>
+                </task>
+                <task>
+                    <p>
+                        We definitely do not want to have mutable vectors. Replace the line <c>self._components = None</c>, assigning to the attribute the <c>tuple</c> of whatever list you constructed in the previous step.
+                    </p>
+                </task>
+                <conclusion>
+                    <p>
+                        You should now have a functional <c>__init__</c> method which defines exactly one attribute.
+                    </p>
+                </conclusion>
+            </task>
+            <task>
+                <title>Representation method</title>
+                <p>
+                    Since <c>__repr__</c> is supposed to produce the string which would exactly recreate your object if it were used as input, we do not want to produce any interesting column vector output. Implement the following:
+                </p>
+                <program language='python'>
+                    <input>
+                        def entries(self):
+                            '''Return the tuple of entries/components of self.'''
+                            return self._components
+
+                        def __repr__(self):
+                            '''Faithful string representation of AlgoVector'''
+                            return str(self.entries())
+                    </input>
+                </program>
+                <p>
+                    In your <c>aam_proj4.py</c> file, test that everything is working by checking the output of the following:
+                </p>
+                <program language='python'>
+                    <input>
+                        vec1 = AlgoVector([0+1j, 1+0j, 1+1j])
+                        vec2 = AlgoVector([1j, 1, '1+1j'])
+                        print(vec1)
+                        print(vec2)
+                    </input>
+                </program>
+            </task>
+            <task><title>Equality of vectors</title>
+                <introduction>
+                    <p>
+                        While the two vectors <c>vec1</c> and <c>vec2</c> produced in the previous step should be equal, adding the line <c>print(vec1 == vec2)</c> to your <c>aam_proj4.py</c> file will quickly demonstrate that they are not equal, as far as Python is concerned. Without a <c>__eq__</c> method, the only way to detemine quality that Python has is to check the memory used by each object, which is not mathematically an interesting notion of equality.
+                    </p>
+                    <p>
+                        Recalling that two column vectors are equal precisely when they agree in each entry, we see that we need a few more tools to define <c>__eq__</c> properly.
+                    </p>
+                </introduction>
+                <task>
+                    <p>
+                        The <c>__getitem__</c> method is used by Python to allow indexing into a container type. To be more specific, when we type <c>container[index]</c>, the Python interpreter translates that to <c>container.__getitem__(index)</c>.
+                    </p>
+                    <p>
+                        Add the following to your <c>AlgoVector.py</c> file, in such a way that <c>print(vec1[1])</c> evaluated at the end of <c>aam_proj4.py</c> will produce the output <c>(1+0j)</c>.
+                    </p>
+                    <program language='python'>
+                        <input>
+                            def __getitem__(self, entry_index):
+                                '''Return self[entry_index]'''
+                                the_entries = self.entries()
+                                # Fix the following line so this method works.
+                                return None
+                        </input>
+                    </program>
+                </task>
+                <task>
+                    <p>
+                        Another build-in that we've used for containers which we now must define is the method to handle <c>len</c>. Unsurprisingly this is defined by <c>__len__</c>. Add this to your class file.
+                    </p>
+                    <program language='python'>
+                        <input>
+                            def __len__(self):
+                                '''Return len(self)'''
+                                return len(self.entries())
+                        </input>
+                    </program>
+                </task>
+                <task>
+                    <p>
+                        Now we can write an equality-testing code, implemented via the <c>__eq__</c> method. Fix the following, and add it to your class file.
+                    </p>
+                    <program language="python">
+                        <input>
+                            def __eq__(self, other):
+                                '''Return self==other, as vectors'''
+                                if type(other) != AlgoVector or len(other) != len(self):
+                                    return False
+                                else:
+                                    compare = [ ]
+                                    for k in range(len(self)):
+                                        # Use our __getitem__ to add the appropriate True or False
+                                        # value to the list `compare`
+                                        compare.append(  None  )
+                                    # The `all` command returns True if every element of the input
+                                    # list evaluates to True. It's like a massive "and" statement.
+                                    return all(compare)
+                        </input>
+                    </program>
+                </task>
+                <conclusion>
+                    <p>
+                        You should now be able to test <c>print(vec1 == vec2)</c> at the end of the <c>aam_proj4.py</c> file and get the mathematically correct answer.
+                    </p>
+                </conclusion>
+            </task>
+        </activity>
+    </subsection>
+    <subsection xml:id="sub-vecproj-add_and_mul">
+        <title>Vector addition and scalar multiplication</title>
+        <p>
+            Our <c>AlgoVector</c> class at this point satisfies very few of the things necessary to represent <m>\CV{n}</m>; we have indexing as in <m>\entry{\vv}{k}</m> and we can test equality, but we have not defined the two operations around which the axioms hinge: vector addition and scalar multiplication. We already learned that multiplication via <c>*</c> is handled by the <c>__mul__</c> and <c>__rmul__</c> methods in <xref ref="proj-perms-after_method" text="global" />. In order to use the <c>+</c> operator, we must likewise define <c>__add__</c> and <c>__radd__</c>.
+        </p>
+        <activity xml:id="proj-vecproj-add_and_mul">
+            <title>Overloading <c>+</c> and <c>*</c></title>
+            <introduction>
+                <p>
+                    In <xref provisional="sec-linalg-matrices" /> we will discover that <c>scalar * AlgoVector</c> is not the only use case for <c>*</c> with vectors; however, until we develop those ideas all that needs to be checked to verify that multiplication will operate is to ensure that the other factor in the product is able to be represented as a <c>complex</c>. On the other hand, in order for vector addition to make sense, not only must summands be complex vectors, they must be vectors of the same dimension.
+                </p>
+            </introduction>
+            <task>
+                <title>Scalar-vector multiplication</title>
+                <introduction>
+                    <p>
+                        In order to be very explicit with our algorithms, we need to enforce the notion that scalar multiplication is actually <em>scalar-vector</em> multiplication. That means our <c>AlgoVector</c> must be the right-hand factor, so we want <c>__mul__(self, right)</c> to always produce an error and for <c>__rmul__(self, left)</c> to be carefully defined.
+                    </p>
+                    <p>
+                        To be very precise with notation, in a product <m>x\cdot y</m>, the value <m>x</m> is the <term>multiplier</term> and <m>y</m> is the <term>multiplicand</term>. This terminology is not often used since most people never advance in mathematics to the point where multiplication is non-commutative.
+                    </p>
+                </introduction>
+                <task>
+                    <p>
+                        Add a <c>__mul__(self, right)</c> method to your <c>AlgoVector</c> class which always raises a <c>TypeError</c>, indicating by the error message that left-multiplication by <c>AlgoVector</c> is invalid.
+                    </p>
+                </task>
+                <task>
+                    <p>
+                        Now add the following to the class:
+                    </p>
+                    <program language='python'>
+                        <input>
+                            def __rmul__(self, left):
+                                '''Return left*self'''
+                                try:
+                                    scalar = complex(left)
+                                except TypeError:
+                                    raise TypeError(f"{left} is unsuitable scalar for scalar-vecprojtor multiplication.")
+                                new_entries = [ ]
+                                for x in self.entries():
+                                    # Fix the following line.
+                                    new_entries.append( None )
+                                return AlgoVector(new_entries)
+                        </input>
+                    </program>
+                    <p>
+                        Fix the <c>for</c> loop so that it works correctly.
+                    </p>
+                </task>
+                <task>
+                    <p>
+                        Test your multiplication code by trying <c>0*vec1</c>, <c>'1-1j'*vec2</c>, and <c>vec1*9</c>.
+                    </p>
+                </task>
+            </task>
+            <task>
+                <title>Vector addition</title>
+                <introduction>
+                    <p>
+                        Since we know from <xref ref="def-vector_space" text="global"/> that vector addition is commutative, we will want <c>vec1 + vec2</c> to have the same result as <c>vec2 + vec1</c>. However the order of operations for Python defaults to attempting <c>__add__</c> before <c>__radd__</c>, which means that <c>__radd__</c> must always raise an error once <c>__add__</c> is correctly defined.
+                    </p>
+                </introduction>
+                <task>
+                    <p>
+                        Implement addition using this code, and replace the comment so that the code works.
+                    </p>
+                    <program language='python'>
+                        <input>
+                            def __add__(self, right):
+                                '''return self+right'''
+                                if type(right)==AlgoVector:
+                                    if len(right)==len(self):
+                                        new_entries = [ ]
+                                        # You can't just loop over the elements of self, and you can't
+                                        # zip(...) self and right together because we haven't made
+                                        # AlgoVector zip-able. Create in this spot a for loop that makes
+                                        # the remaining lines of this method do the right thing.
+                                        #
+                                        return AlgoVector(new_entries)
+                                    else:
+                                        raise ValueError("AlgoVectors have different lengths.")
+                                else:
+                                    raise TypeError(f"Cannot add AlgoVector and {type(right)}.")
+                        </input>
+                    </program>
+                </task>
+                <task>
+                    <p>
+                        With a working <c>__add__</c> method, include the following in your <c>AlgoVector</c> class
+                    </p>
+                    <program language='python'>
+                        <input>
+                            def __radd__(self, left):
+                                '''return left+self'''
+                                # This should never trigger with left being an AlgoVector, so...
+                                raise TypeError(f'Cannot add {type(left)} and AlgoVector.')
+                        </input>
+                    </program>
+                </task>
+            </task>
+        </activity>
+    </subsection>
+    <subsection xml:id="sub-vecproj-extras">
+        <title>Additional class methods</title>
+        <p>
+            In Python the <c>complex</c> class has a method <c>conjugate</c>, which we want to replicate for our <c>AlgoVector</c> class, and we also want to add methods to compute the inner product and the norm according to their definitions.
+        </p>
+        <activity xml:id="proj-vecproj-conjugate">
+            <title>Adding a <c>conjugate</c> method</title>
+            <task>
+                <p>
+                    Describe mathematically what happens when a vector is conjugated, and do so in a written algorithm.
+                </p>
+            </task>
+            <task>
+                <p>
+                    Complete the following method in your <c>AlgoVector</c> class:
+                </p>
+                <program language='python'>
+                    <input>
+                        def conjugate(self):
+                            new_entries = [ ]
+                            for x in self.entries():
+                                #
+                                # Here's what you need to change!
+                                #
+                                new_entries.append( None )
+                            return AlgoVector(new_entries)
+                    </input>
+                </program>
+            </task>
+            <task>
+                <p>
+                    Test your method in the <c>aam_proj4.py</c> file by calculating <c>vec1 + vec2.conjugate()</c> and <c>(vec1 + vec2).conjugate()</c>.
+                </p>
+            </task>
+        </activity>
+        <activity xml:id="proj-vecproj-innerprod_norm">
+            <title>Adding <c>inner_product</c> and <c>norm</c> methods</title>
+            <introduction>
+                <p>
+                    The <c>inner_product</c> method is straight-forward, but in order to define the regular <c>norm</c> we need to add a line to the <em>beginning</em> of the <c>AlgoVector.py</c> file:
+                </p>
+                <program language='python'>
+                    <input>
+                        from math import sqrt
+                    </input>
+                </program>
+                <p>
+                    This gives us access to the mathematical square root function.
+                </p>
+            </introduction>
+            <task>
+                <title>Implementing <c>inner_product</c></title>
+                <p>
+                    Begin with the following code, which is a stub of what you need to have working.
+                </p>
+                <program language="python">
+                    <input>
+                        def inner_product(self, right):
+                            '''Return the value &lt;self, right&gt;, the Hermitian inner
+                                product of self and right.'''
+                            if type(right) != AlgoVector:
+                                raise TypeError('Cannot compute inner product if second argument is not AlgoVector')
+                            elif len(right) != len(self):
+                                raise ValueError('Cannot compute inner product between AlgoVectors of different lengths')
+                            else:
+                                current_total = 0
+                                for x,y in zip(self.entries(), right.entries()):
+                                    #
+                                    # You didn't think I was going to give you the whole thing?
+                                    #
+                                    current_total += 0
+                                return current_total
+                    </input>
+                </program>
+                <p>
+                    Correct the necessary line so that the method returns the Hermitian inner product.
+                </p>
+            </task>
+            <task>
+                <title>Implementing <c>norm</c></title>
+                <p>
+                    Once <c>inner_product</c> works, you can write a single line of code to return the correct norm by combining <c>sqrt</c> and <c>inner_product</c>. Finish this code by replacing the <c>pass</c> statement.
+                </p>
+                <program language="python">
+                    <input>
+                        def norm(self):
+                            '''Return ||self||'''
+                            pass
+                    </input>
+                </program>
+            </task>
+        </activity>
+    </subsection>
+    <subsection xml:id="sub-vecproj-computations">
+        <title><q>Simple</q> computations</title>
+        <activity xml:id="proj-vecproj-computations">
+            <title>Testing <c>AlgoVector</c> by computing interesting values</title>
+            <introduction>
+                <p>
+                    Complete each of the following tasks in <c>aam_proj4.py</c>.
+                </p>
+            </introduction>
+            <task>
+                <p>
+                    Create a list of 10 vectors, <c>veclist</c> which contains in the <m>k</m>th index the vector <m>\vv_k</m> of length 10 whose <m>\ell</m>th index is the number <m>\frac{1}{k+1}+\frac{k+1}{\ell+1}j</m>. That is, make <m>\entry{\vv_k}{\ell} = \frac{1}{k+1}+\frac{k+1}{\ell+1}j</m>.
+                </p>
+            </task>
+            <task>
+                <p>
+                    For each <m>k\in\set{0,1,\dotsc,8}</m>, compute the value of <m>\hip{\vv_k}{\vv_{k+1}}</m>.
+                </p>
+            </task>
+            <task>
+                <p>
+                    For each <m>k\in\set{0,1,\dotsc,9}</m>, compute the value of <m>\norm{(k+1)^2\vv_k-\vv_k}</m>.
+                </p>
+            </task>
+        </activity>
+    </subsection>
+</section>
+

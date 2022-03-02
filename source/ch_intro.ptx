@@ -7,18 +7,10 @@
 
     <!-- Change title when you have one: -->
     <title>Welcome!</title>
-    <objectives>
-        <ol>
-            <li><p>
-                Investigate a problem from graph theory.
-                </p></li>
-            <li><p>
-                Learn to program quickly by implementing a pedagogical encryption system.
-                </p></li>
-        </ol>
-    </objectives>
     <introduction>
-        This first chapter serves as a rapid introduction to the algorithms, including the basics of programming in Python, with the intent of getting readers through to solving mathematical problems computationally in as little time as possible.
+        <p>
+            We introduce the concept of an algorithm not from the theory with formal definitions, but instead choose to begin with a particular exercise from graph theory, the solution to which involves creating an algorithm.
+        </p>
     </introduction>
     <!-- <xi:include href="./sec_intro_shortest_path.ptx" /> -->
     <xi:include href="./sec_intro_mst.ptx" />

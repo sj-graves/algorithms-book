@@ -43,6 +43,7 @@
         \newcommand{\Rats}{\mathbb{Q}}
         \newcommand{\Reals}{\mathbb{R}}
         \newcommand{\Comps}{\mathbb{C}}
+        \newcommand{\Mats}[1]{\mathbb{M}_{#1}}
         \renewcommand{\vec}[1]{\mathbf{#1}}
         \newcommand{\cvec}[1]{\begin{bmatrix}#1\end{bmatrix}}
         \newcommand{\vv}{\vec{v}}
@@ -50,8 +51,10 @@
         \newcommand{\entry}[2]{\left[#1\right]_{#2}}
         \newcommand{\hip}[2]{\left\langle#1,#2\right\rangle}
         \newcommand{\conj}[1]{\overline{#1}}
-        \newcommand{\norm}[1]{\|#1\|}
-        \newcommand{\bnorm}[1]{\left\|#1\right\|}
+<!--         \newcommand{\norm}[1]{\|#1\|} -->
+        \newcommand{\norm}[1]{\left\|#1\right\|}
+        \DeclareMathOperator{\spn}{span}
+        \newcommand{\spanset}[1]{\spn #1}
   </macros>
 
 

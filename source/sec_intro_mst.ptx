@@ -90,23 +90,14 @@
             </tabular>
         </table>
         <p>
-                To connect our network is now a matter of looking at each edge in order of
-                increasing cost and including that edge as a connection exactly when the two
-                ends of the edge are not already connected together!
+                To connect our network is now a matter of looking at each edge in order of increasing cost and including that edge as a connection exactly when the two ends of the edge are not already connected together!
         </p>
         <p>
-                For our very small example here it is easy enough to do this on a piece
-            of paper, keeping track of all of the connected pieces in a table. As soon
-            as we look at the first edge, we have to make a decision about which piece
-            of the network is will gain a vertex and which piece will become empty; in
-            order to make this easy for ourselves, we opt to always merge into the
-            large piece, or if the two pieces have the same number of vertices we will
-            merge into the piece whose initial vertex had a smaller numerical
-            index.
+                For our very small example here it is easy enough to do this on a piece of paper, keeping track of all of the connected pieces in a table. As soon as we look at the first edge, we have to make a decision about which piece of the network is will gain a vertex and which piece will become empty; in order to make this easy for ourselves, we opt to always merge into the large piece, or if the two pieces have the same number of vertices we will merge into the piece whose initial vertex had a smaller numerical index.
         </p>
-        <table width="75%" xml:id="tab-kruskal-smallexample">
+        <table xml:id="tab-kruskal-smallexample">
             <title>The small network connection example.</title>
-            <tabular halign="center">
+            <tabular width="75%" halign="center">
                 <col />
                 <col />
                 <col right="minor" />
@@ -303,89 +294,86 @@
             </statement>
         </definition>
         <p>.
-                In order to communicate our algorithm efficiently, we have to analyze what
-                our steps actually entailed. Later on, we'll give a more computational
-                statement of the same algorithm, in <xref provisional="alg-kruskal" />
-    .
+                In order to communicate our algorithm efficiently, we have to analyze what our steps actually entailed. Later on, we'll give a more computational statement of the same algorithm, in <xref provisional="alg-kruskal" />.
         </p>
         <algorithm xml:id="alg-intro-kruskal">
             <title>Mathematical Kruskal's Algorithm</title>
             <statement>
                 <p>Let a graph
-                    <m>G=(V,E)</m>with vertex set
-                    <m>V=\set{0,1,2,\dotsc,n-1}</m>be given which has a cost
-                    <m>w(e)</m>associated with each edge
+                    <m>G=(V,E)</m>  with vertex set
+                    <m>V=\set{0,1,2,\dotsc,n-1}</m>  be given which has a cost
+                    <m>w(e)</m>  associated with each edge
                     <m>e</m>. Each edge will be denoted
-                    <m>(u,v)</m>with
+                    <m>(u,v)</m>  with
                     <m>u\lt v</m>, where
                     <m>u,v\in V</m>.
+                    <ol>
+                        <li>
+                            <p>Sort the edges by increasing cost, so that whenever
+                                <m>i\lt j</m>  then also
+                                <m>w(e_i)\leq w(e_j)</m>, where
+                                <m>i</m>  and
+                                <m>j</m>  are
+                                <q>counting variables</q>.
+                            </p>
+                        </li>
+                        <li>
+                            <p>Write
+                                <m>n</m>  different sets representing components of the network,
+                        denoted
+                                <m>c_v=\set{v}</m>  for each
+                                <m>v\in V</m>. Also let
+                                <m>F=\emptyset</m>  be an empty collection of edges.</p>
+                        </li>
+                        <li xml:id="alg-intro-kruskal-edges">
+                            <p>Looking at each edge
+                                <m>e_i=(u_i,v_i)</m> in increasing order of cost, do the following.
+                                <ol>
+                                    <li>
+                                        <p>If
+                                            <m>u_i</m> and
+                                            <m>v_i</m> are in the same component, skip immediately to the
+                            next edge.</p>
+                                    </li>
+                                    <li>
+                                        <p>Otherwise, say that
+                                            <m>c_u</m> is the component containing
+                                            <m>u_i</m> and
+                                            <m>c_v</m> is the component containing
+                                            <m>v_i</m>, and do the following:
+                                            <ol>
+                                                <li>
+                                                    <p>If
+                                                        <m>c_u</m> contains fewer vertices than
+                                                        <m>c_v</m>, put all of the elements from
+                                                        <m>c_u</m> into
+                                                        <m>c_v</m> instead and leave
+                                                        <m>c_u</m> empty.</p>
+                                                </li>
+                                                <li>
+                                                    <p>Otherwise, put all of the elements from
+                                                        <m>c_v</m> into
+                                                        <m>c_u</m> and leave
+                                                        <m>c_v</m> empty.</p>
+                                                </li>
+                                                <li>
+                                                    <p>In either case, include the edge
+                                                        <m>(u_i,v_i)</m> in
+                                                        <m>F</m>.
+                                                    </p>
+                                                </li>
+                                            </ol>
+                                        </p>
+                                    </li>
+                                </ol>
+                            </p>
+                        </li>
+                    </ol>
                 </p>
-                <ol>
-                    <li>
-                        <p>Sort the edges by increasing cost, so that whenever
-                            <m>i\lt j</m>then also
-                            <m>w(e_i)\leq w(e_j)</m>, where
-                            <m>i</m>and
-                            <m>j</m>are
-                            <q>counting variables</q>.
-                        </p>
-                    </li>
-                    <li>
-                        <p>Write
-                            <m>n</m>different sets representing components of the network,
-                    denoted
-                            <m>c_v=\set{v}</m>for each
-                            <m>v\in V</m>. Also let
-                            <m>F=\emptyset</m>be an empty collection of edges.</p>
-                    </li>
-                    <li xml:id="alg-intro-kruskal-edges">
-                        <p>Looking at each edge
-                            <m>e_i=(u_i,v_i)</m>in increasing order of cost, do the following.
-                            <ol>
-                                <li>
-                                    <p>If
-                                        <m>u_i</m>and
-                                        <m>v_i</m>are in the same component, skip immediately to the
-                        next edge.</p>
-                                </li>
-                                <li>
-                                    <p>Otherwise, say that
-                                        <m>c_u</m>is the component containing
-                                        <m>u_i</m>and
-                                        <m>c_v</m>is the component containing
-                                        <m>v_i</m>, and do the following:
-                                        <ol>
-                                            <li>
-                                                <p>If
-                                                    <m>c_u</m>contains fewer vertices than
-                                                    <m>c_v</m>, put all of the elements from
-                                                    <m>c_u</m>into
-                                                    <m>c_v</m>instead and leave
-                                                    <m>c_u</m>empty.</p>
-                                            </li>
-                                            <li>
-                                                <p>Otherwise, put all of the elements from
-                                                    <m>c_v</m>into
-                                                    <m>c_u</m>and leave
-                                                    <m>c_v</m>empty.</p>
-                                            </li>
-                                            <li>
-                                                <p>In either case, include the edge
-                                                    <m>(u_i,v_i)</m>in
-                                                    <m>F</m>.
-                                                </p>
-                                            </li>
-                                        </ol>
-                                    </p>
-                                </li>
-                            </ol>
-                        </p>
-                    </li>
-                </ol>
                 <p>After Step 3 finishes, all of the edges will have been inspected and
                 either included in the network or skipped; there will be as many
                 nonempty components
-                    <m>c_v</m>as needed to connect the network, and the algorithm is
+                    <m>c_v</m> as needed to connect the network, and the algorithm is
                 finished! The cost-minimal set of edges is
                     <m>F</m>.
                 </p>
@@ -399,7 +387,7 @@
             <statement>
                 <p>The connections of a network are given below as a table of triples
                     <m>(u,v,w(u,v))</m>. Find the least expensive set
-                    <m>F</m>of edges needed to connect the components of this network.</p>
+                    <m>F</m> of edges needed to connect the components of this network.</p>
                 <table>
                     <title>The weighted edges of a 50-edge network</title>
                     <tabular halign="center" width="50%">

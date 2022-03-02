@@ -1,5 +1,4 @@
 <?xml version='1.0' encoding='utf-8'?>
-
 <latex-image>
     \definecolor{smallnet_vc0}{rgb}{1,1,1}
     \definecolor{smallnet_ec0}{rgb}{0, 0, 0}

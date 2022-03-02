@@ -2,30 +2,32 @@
 
 <appendix xml:id="app-python" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Python crash course</title>
+    <objectives>
+        <ol>
+            <li><p>
+                Introduce IDLE
+                </p></li>
+            <li><p>
+                Work with basic data types
+                </p></li>
+            <li><p>
+                Work with container data types
+                </p></li>
+            <li><p>
+                Learn to iterate by repeating statements repeatedly
+                </p></li>
+            <li><p>
+                Write interesting functions in Python
+                </p></li>
+            <li><p>
+                Handle errors when they arise
+                </p></li>
+        </ol>
+    </objectives>
     <introduction>
-        This appendix serves as a rapid introduction to the basics of programming in Python, with the intent of getting readers through to solving mathematical problems computationally in as little time as possible.
-        <objectives>
-            <ol>
-                <li><p>
-                    Introduce IDLE
-                    </p></li>
-                <li><p>
-                    Work with basic data types
-                    </p></li>
-                <li><p>
-                    Work with container data types
-                    </p></li>
-                <li><p>
-                    Learn to iterate by repeating statements repeatedly
-                    </p></li>
-                <li><p>
-                    Write interesting functions in Python
-                    </p></li>
-                <li><p>
-                    Handle errors when they arise
-                    </p></li>
-            </ol>
-        </objectives>
+        <p>
+            This appendix serves as a rapid introduction to the basics of programming in Python, with the intent of getting readers through to solving mathematical problems computationally in as little time as possible.
+        </p>
     </introduction>
     <xi:include href="./appsec_python_idle.ptx" />
     <xi:include href="./appsec_python_basicdata.ptx" />

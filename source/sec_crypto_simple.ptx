@@ -3,7 +3,9 @@
 <section xml:id="sec-crypto-subst" xmlns:xi="http://www.w3.org/2001/XInclude">
     <title>Simple substitution ciphers</title>
     <introduction>
-        A <term>substitution cipher</term> is a permutation of the letters in an alphabet. Recall that an <term>alphabet</term> is a finite set of symbols, and that we will use two special set notations: <m>\mathcal{E}</m> to denote the set of capital letters of the English alphabet, and <m>[n]=\set{1,2,3,\dotsc,n}</m>.
+        <p>
+            A <term>substitution cipher</term> is a permutation of the letters in an alphabet. Recall that an <term>alphabet</term> is a finite set of symbols, and that we will use two special set notations: <m>\mathcal{E}</m> to denote the set of capital letters of the English alphabet, and <m>[n]=\set{1,2,3,\dotsc,n}</m>.
+        </p>
     </introduction>
     <!-- ################################### -->
     <subsection xml:id="sub-crypto-subst-simple">
@@ -32,14 +34,18 @@
         </p>
         <definition xml:id="def-shift_cipher">
             <title>Shift cipher</title>
-            <a>
-                The easiest type of encryption is a <term>shift cipher</term> of an alphabet <m>\mathcal{A} = \set{a_0,a_1,a_2,\dotsc,a_{n-1}}</m>, defined by <m>\sigma(a_i) = a_{(i+s)\rem n}</m> for some constant <m>s</m>.
-            </a>
+            <statement>
+                <p>
+                    The easiest type of encryption is a <term>shift cipher</term> of an alphabet <m>\mathcal{A} = \set{a_0,a_1,a_2,\dotsc,a_{n-1}}</m>, defined by <m>\sigma(a_i) = a_{(i+s)\rem n}</m> for some constant <m>s</m>.
+                </p>
+            </statement>
         </definition>
         <exercise xml:id="exc-breaking-shift-cipher">
             <title>Breaking a shift cipher</title>
             <statement>
-                The message <c>JYZWKTZGYVIJRIVVRJPKFSIVRB</c> is encrypted with a shift cipher on the 26-letter alphabet <m>\mathcal{E}</m>. Decrypt it, and explain what the shared secret is for a shift cipher.
+                <p>
+                    The message <c>JYZWKTZGYVIJRIVVRJPKFSIVRB</c> is encrypted with a shift cipher on the 26-letter alphabet <m>\mathcal{E}</m>. Decrypt it, and explain what the shared secret is for a shift cipher.
+                </p>
             </statement>
         </exercise>
         <p>
@@ -50,7 +56,9 @@
     <subsection xml:id="sub-crypto-subst-freqanalysis">
         <title>Frequency analysis</title>
         <p>
-            Thankfully we are not unarmed when it comes to decrypting a monoalphabetic substitution. Even though the pool of possible permutations is vast, we can analyze the frequencies with which each letter is used in normal text to try to determine parts of the mapping. It is quite easy to write a program in Python counting the frequency of occurrence of each letter in a string. For instance, taking the original 1972 etext of the Declaration of Independence from <href a="https://www.gutenberg.org/cache/epub/1/pg1.txt">Project Gutenberg</href> and converting it into all capital letters (which is how it was produced in 1972 since computers didn't have minuscule letters at that early date), we obtain the following results for the 8133 characters in the text:
+            Thankfully we are not unarmed when it comes to decrypting a monoalphabetic substitution. Even though the pool of possible permutations is vast, we can analyze the frequencies with which each letter is used in normal text to try to determine parts of the mapping. It is quite easy to write a program in Python counting the frequency of occurrence of each letter in a string. For instance, taking the original 1972 etext of the Declaration of Independence from 
+            <url href="https://www.gutenberg.org/cache/epub/1/pg1.txt" visual="www.gutenberg.org/cache/epub/1/pg1.txt">Project Gutenberg</url> 
+            and converting it into all capital letters (which is how it was produced in 1972 since computers didn't have minuscule letters at that early date), we obtain the following results for the 8133 characters in the text:
         </p>
         <listing xml:id="list-declaration">
             <caption>Dictionary of frequencies of each character in the United States of America's Declaration of Independence</caption>

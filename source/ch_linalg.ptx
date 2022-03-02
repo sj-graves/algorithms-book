@@ -8,10 +8,8 @@
         </p>
     </introduction>
     <xi:include href="./sec_linalg_vectors.ptx" />
-    <!--
-    <xi:include href=".sec-emp-intro.ptx" />
-    <xi:include href=".sec-emp-next.ptx" />
-    <xi:include href=".sec-emp-conc.ptx" />
-    -->
+    <xi:include href="./sec_linalg_vecproj.ptx" />
+    <xi:include href="./sec_linalg_matrices.ptx" />
+    <xi:include href="./sec_linalg_matproj.ptx" />
 
 </chapter>

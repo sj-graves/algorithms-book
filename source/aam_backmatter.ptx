@@ -3,13 +3,13 @@
     <xi:include href="./app_python.ptx" />
 <!--     <xi:include href="./app_projects.ptx" /> -->
     <xi:include href="./app_lists.ptx" />
-    
+
 
 
         <xi:include href="./gfdl-aam.ptx" />
         <colophon>
             <p>
-                This book was authored in <url href="https://pretextbook.org"><pretext /></url>.
+                This book was authored in <url href="https://pretextbook.org" visual="pretextbook.org"><pretext /></url>.
             </p>
         </colophon>
 </backmatter>

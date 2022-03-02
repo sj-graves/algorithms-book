@@ -1,0 +1,2 @@
+#!/bin/bash
+xsltproc -xinclude ~/mathbook/schema/pretext-validation-plus.xsl ./aam-main.ptx

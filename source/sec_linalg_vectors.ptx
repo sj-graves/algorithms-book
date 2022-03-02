@@ -6,6 +6,12 @@
         <p>
             To talk about the type of functions called linear transformations, we need first to talk about what types of things are domains and codomains of these functions. The basic space of intetrest is a <term>vector space</term>. In many physical contexts a vector is simply a <em>directed magnitude</em>, which is to say some amount of measurement pointing along an arrow. Unfortunately, that is not a good definition, because it relies on a property which is not actually necessary for all of the things we want to do with vectors.
         </p>
+        <convention>
+            <title>Notation for complex numbers</title>
+            <p>
+                While most mathematicians prefer the notation <m>z=x+iy</m> for a complex number <m>z\in\Comps</m>, where <m>x,y\in\Reals</m>, programmers, engineers, and scientists have adopted the notation <m>z=x+yj</m>. In the interest of being consistent with Python, we will use <m>z=x+yj</m> notation throughout the text.
+            </p>
+        </convention>
     </introduction>
     <subsection xml:id="sub-linalg-vectors-axioms">
         <title>Vector space axioms</title>
@@ -16,51 +22,53 @@
             <title>Vector space</title>
             <statement>
                 <p>
-                    Let <m>V</m> be a set where addition in <m>V</m> is denoted by <m>\vv_1+\vv_2</m> when <m>\vv_1,\vv_2\in V</m> and where elements of <m>V</m> can be multiplied by complex numbers; that is we can write <m>z \vv_1</m> when <m>z\in\Comps</m> and <m>\vv_1\in V</m>. Then <m>V</m> is a <term>vector space over <m>\Comps</m></term> if and only if all of the following conditions are satisfied:
+                    Let <m>V</m> be a set where addition in <m>V</m> is denoted by <m>\vv_1+\vv_2</m> when <m>\vv_1,\vv_2\in V</m> and where elements of <m>V</m> can be multiplied by complex numbers; that is we can write <m>z \vv_1</m> when <m>z\in\Comps</m> and <m>\vv_1\in V</m>. Moreover, we must have a well-defined notion of equality within <m>V</m>. Then <m>V</m> is a <term>vector space over <m>\Comps</m></term> if and only if all of the following conditions are satisfied:
                 </p>
-                <dl>
-                    <li><title>Additive Closure</title>
-                        <p>
-                            If <m>v_1,v_2\in V</m> then <m>\vv_1+\vv_2\in V</m>.
-                        </p></li>
-                    <li><title>Scalar Closure</title>
-                        <p>
-                            If <m>z\in\Comps</m> and <m>\vv\in V</m> then <m>z \vv\in \Comps</m>.
-                        </p>
-                    </li>
-                    <li><title>Commutativity</title>
-                        <p>
-                            If <m>\vv_1,\vv_2\in V</m> then <m>\vv_1+\vv_2 = \vv_2+\vv_1</m>.
-                        </p></li>
-                    <li><title>Additive Associativity</title>
-                        <p>
-                            If <m>\vv_1,\vv_2,\vv_3\in V</m> then <m>\vv_1+(\vv_2+\vv_3) = (\vv_1+\vv_2)+\vv_3</m>.
-                        </p></li>
-                    <li><title>Additive Zero</title>
-                        <p>
-                            There is a vector <m>\vec{0}\in V</m> such that <m>\vv+\vec{0} = \vv</m> for all <m>\vv\in V</m>.
-                        </p></li>
-                    <li><title>Additive Inverses</title>
-                        <p>
-                            For each <m>\vv\in V</m> there is a vector <m>-\vv\in V</m> such that <m>\vv+(-\vv) = \vec{0}</m>.
-                        </p></li>
-                    <li><title>Scalar Multiplicative Associativity</title>
-                        <p>
-                            If <m>z_1,z_2\in\Comps</m> and <m>\vv\in V</m> then <m>z_1(z_2\vv) = (z_1z_2)\vv</m>.
-                        </p></li>
-                    <li><title>Distributivity across Vector Sums</title>
-                        <p>
-                            If <m>z\in\Comps</m> and <m>\vv_1,\vv_2\in V</m> then <m>z(\vv_1+\vv_2) = z\vv_1 + z\vv_2</m>.
-                        </p></li>
-                    <li><title>Distributivity across Scalar Sums</title>
-                        <p>
-                            If <m>z_1,z_2\in\Comps</m> and <m>\vv\in V</m> then <m>(z_1+z_2)\vv = z_1\vv+z_2\vv</m>.
-                        </p></li>
-                    <li><title>Scalar One</title>
-                        <p>
-                            If <m>\vv\in V</m>, then <m>1\vv = \vv</m>.
-                        </p></li>
-                </dl>
+                <p>
+                    <dl>
+                        <li><title>Additive Closure</title>
+                            <p>
+                                If <m>v_1,v_2\in V</m> then <m>\vv_1+\vv_2\in V</m>.
+                            </p></li>
+                        <li><title>Scalar Closure</title>
+                            <p>
+                                If <m>z\in\Comps</m> and <m>\vv\in V</m> then <m>z \vv\in \Comps</m>.
+                            </p>
+                        </li>
+                        <li><title>Commutativity</title>
+                            <p>
+                                If <m>\vv_1,\vv_2\in V</m> then <m>\vv_1+\vv_2 = \vv_2+\vv_1</m>.
+                            </p></li>
+                        <li><title>Additive Associativity</title>
+                            <p>
+                                If <m>\vv_1,\vv_2,\vv_3\in V</m> then <m>\vv_1+(\vv_2+\vv_3) = (\vv_1+\vv_2)+\vv_3</m>.
+                            </p></li>
+                        <li><title>Additive Zero</title>
+                            <p>
+                                There is a vector <m>\vec{0}\in V</m> such that <m>\vv+\vec{0} = \vv</m> for all <m>\vv\in V</m>.
+                            </p></li>
+                        <li><title>Additive Inverses</title>
+                            <p>
+                                For each <m>\vv\in V</m> there is a vector <m>-\vv\in V</m> such that <m>\vv+(-\vv) = \vec{0}</m>.
+                            </p></li>
+                        <li><title>Scalar Multiplicative Associativity</title>
+                            <p>
+                                If <m>z_1,z_2\in\Comps</m> and <m>\vv\in V</m> then <m>z_1(z_2\vv) = (z_1z_2)\vv</m>.
+                            </p></li>
+                        <li><title>Distributivity across Vector Sums</title>
+                            <p>
+                                If <m>z\in\Comps</m> and <m>\vv_1,\vv_2\in V</m> then <m>z(\vv_1+\vv_2) = z\vv_1 + z\vv_2</m>.
+                            </p></li>
+                        <li><title>Distributivity across Scalar Sums</title>
+                            <p>
+                                If <m>z_1,z_2\in\Comps</m> and <m>\vv\in V</m> then <m>(z_1+z_2)\vv = z_1\vv+z_2\vv</m>.
+                            </p></li>
+                        <li><title>Scalar One</title>
+                            <p>
+                                If <m>\vv\in V</m>, then <m>1\vv = \vv</m>.
+                            </p></li>
+                    </dl>
+                </p>
                 <p>
                     If <m>V</m> is a vector space over <m>\Comps</m> then <m>\Comps</m> is the <term>field of scalars</term> of <m>V</m>, the elements of <m>V</m> are <term>vectors</term>, and when referring to <m>V</m> we say that the elements of <m>\Comps</m> are <term>scalars</term>.
                 </p>
@@ -69,6 +77,61 @@
         <p>
             Those ten conditions are precisely the conditions necessary to make <em>directed magnitude</em> into a rigorous definition which coincides with observable physical phenomena, which is why they are the axioms! Notationally, different texts may use different symbols to represent vectors; <m>\mathbf{v}</m> and <m>\vec{v}</m> are both common.
         </p>
+    </subsection>
+    <subsection xml:id="sub-linalg-vectors-colvecs">
+        <title>Column vectors</title>
+        <p>
+            Our introductory example of a vector space is the fundamentally most important example.
+        </p>
+        <definition xml:id="definition-complex_nspace">
+            <title>The vector space <m>\CV{n}</m></title>
+            <statement>
+                <p>
+                    Let <m>n\in\Zp</m>, and define <m>\CV{n}</m> to be the set
+                    <me>
+                        \CV{n} = \set{ \left.\cvec{z_0 \\ z_1 \\ \vdots \\ z_{n-1}} \right| z_0,z_1,\dotsc,z_{n-1}\in\Comps}
+                    </me>. For any <me>\vv=\cvec{z_0\\z_1\\ \vdots\\ z_{n-1}}\in\CV{n}</me> and <m>k\in\set{0,1,\dotsc,n-1}</m>, we define <m>\entry{\vv}{k} = z_k</m>, the <term>kth component of <m>\vv</m></term>, and we say that when <m>\vv_1,\vv_2\in\CV{n}</m>, <m>\vv_1 = \vv_2</m> precisely when <m>\entry{\vv_1}{k} = \entry{\vv_2}{k}</m> for every <m>{k\in\set{0,1,\dotsc,n-1}}</m>. We further define the following operations on <m>\CV{n}</m>:
+                </p>
+                <p>
+                    <dl>
+                        <li><title>Addition</title><p>
+                            If <m>\vv_1,\vv_2\in\CV{n}</m>, then <m>\vv_1+\vv_2\in\CV{n}</m> is the vector satisfying <m>\entry{\vv_1+\vv_2}{k} = \entry{\vv_1}{k}+\entry{\vv_2}{k}</m> for each <m>{k\in\set{0,1,\dotsc,n-1}}</m>; and
+                            </p></li>
+                        <li><title>Scalar multiplication</title><p>
+                            If <m>\vv\in\CV{n}</m> and <m>z\in\Comps</m>, then <m>z\cdot\vv = z\vv\in\CV{n}</m> is the vector satisfying <m>\entry{z\vv}{k} = z\entry{\vv}{k}</m> for each <m>{k\in\set{0,1,\dotsc,n-1}}</m>.
+                            </p></li>
+                    </dl>
+                </p>
+            </statement>
+        </definition>
+        <theorem xml:id="thm-complex_nspace_is_vectorspace">
+            <title><m>\CV{n}</m> is a vector space</title>
+            <statement>
+                <p>
+                    For every <m>n\in\Zp</m>, the set <m>\CV{n}</m> with addition and multiplication as defined in <xref ref="definition-complex_nspace" text="global"/> is a vector space over <m>\Comps</m>.
+                </p>
+            </statement>
+            <proof>
+                <p>
+                    To prove that a set with given operations is a vector space over <m>\Comps</m> requires verifying that all the axioms hold. This is a standard exercise in any linear algebra textbook and follows directly using the component notation.
+                </p>
+            </proof>
+        </theorem>
+        <p>
+            The vector space <m>\CV{n}</m> also inherits the <term>complex conjugate</term> operation from its underlying field of scalars.
+        </p>
+        <definition xml:id="defn-complex_conjugate">
+            <title>Complex conjugate</title>
+            <statement>
+                <p>
+                    Let <m>z=x+yj\in\Comps</m>, where <m>x,y\in\Reals</m> and <m>j</m> is the unique number such that <m>j^2 = -1</m>. Then the <term>complex conjugate of <m>z</m></term> is <m>\conj{z} = x-yj</m>. If instead the complex number is represented in its <term>polar form</term> as <m>z=r\exp(\theta j)=re^{\theta j}</m>, then <m>\conj{z} = r\exp(-\theta j) = re^{-\theta j}</m>.
+                </p>
+                <p>
+                    In the complex vector space <m>\CV{n}</m> this extends naturally, and for each <m>\vv\in\CV{n}</m> we define the <term>conjugate of <m>\vv</m></term> to be the unique vector <m>\conj{\vv}\in\CV{n}</m> satisfying <me>\entry{\conj{\vv}}{k} = \conj{\entry{\vv}{k}}</me> for every <m>{k\in\set{0,1,2,\dotsc,n-1}}</m>.
+                </p>
+            </statement>
+        </definition>
+
     </subsection>
     <subsection xml:id="sub-linalg-vectors-lintrans">
         <title>Linear transformations</title>
@@ -86,67 +149,83 @@
             </p>
         </example>
         <p>
-            Unlike in multivariate calculus, we are not restricted to order tuples of input; we have defined vector spaces in full generality. So we can define our special class of functions in its full generality as well.
+            Unlike in multivariate calculus, we are not restricted to ordered tuples of input; we have defined vector spaces in full generality. So we can define our special class of functions in its full generality as well.
         </p>
         <definition xml:id="def-linear_transformation">
             <title>Linear transformation</title>
             <statement>
-                Let <m>V,W</m> be vector spaces over <m>\Comps</m> and let <m>f:V\to W</m> be a function. Then <m>f</m> is a <term>linear transformation from <m>V</m> to <m>W</m></term> if and only if:
-                <ul>
-                    <li><p>
-                        <m>f(\vv_1+\vv_2) = f(\vv_1) + f(\vv_2)</m> for any pair of <m>\vv_1,\vv_2\in V</m>, and
-                        </p></li>
-                    <li><p>
-                        <m>f(z\cdot \vv_1) = z\cdot f(\vv_1)</m> for every <m>z\in\Comps</m> and <m>\vv_1\in V</m>.
-                        </p></li>
-                </ul>
+                <p>
+                    Let <m>V,W</m> be vector spaces over <m>\Comps</m> and let <m>f:V\to W</m> be a function. Then <m>f</m> is a <term>linear transformation from <m>V</m> to <m>W</m></term> if and only if:
+                </p>
+                <p>
+                    <ul>
+                        <li><p>
+                            <m>f(\vv_1+\vv_2) = f(\vv_1) + f(\vv_2)</m> for any pair of <m>\vv_1,\vv_2\in V</m>, and
+                            </p></li>
+                        <li><p>
+                            <m>f(z\cdot \vv_1) = z\cdot f(\vv_1)</m> for every <m>z\in\Comps</m> and <m>\vv_1\in V</m>.
+                            </p></li>
+                    </ul>
+                </p>
             </statement>
         </definition>
         <p>
             An effective way to remember this is to think that linear transformations faithfully turn scalar multiplication and addition in the domain vector space into scalar multiplication and addition in the codomain vector space, preserving the scalars. If you add in the bijectivity condition which allowed us to define permutations, you get something even better than a well-behaved mapping between vector spaces.
         </p>
+        <exercise xml:id="exc-linear_transformation">
+            <title>Some linear transformations of <m>\CV{n}</m></title>
+            <statement>
+                <p>
+                    Verify that the following are linear transformations:
+                </p>
+                <p>
+                    <ol>
+                        <li><p>
+                            <m>f_1:\CV{3}\to\CV{4}</m> given by
+                            <me>
+                                f_1\left(\cvec{z_0\\z_1\\z_2}\right)
+                                = \cvec{z_0-z_1\\z_1-2z_2\\2z_2-3z_0\\3z_0+2z_1-z_2}
+                            </me>
+                            </p></li>
+                        <li><p>
+                            <m>f_2:\CV{4}\to\CV{3}</m> given by
+                            <me>
+                                f_2\left(\cvec{z_0 \\ z_1 \\ z_2 \\ z_3}\right)
+                                = \cvec{ \frac13 z_0 + (2-3j)z_1 - \sqrt{2}z_2 + z_3 \\
+                                    z_1 - z_2 \\
+                                    (4-3j) z_3}
+                            </me>
+                            </p></li>
+                        <li><p>
+                            <m>f_3:\CV{2}\to\CV{2}</m> given by
+                            <me>
+                                f_3\left(\cvec{ z_0\\z_1 }\right)
+                                = \cvec{ (1-j)z_0 + (1+j)z_1 \\
+                                    (-1-j)z_0 + (-1+j)z_1}
+                            </me>
+                            </p></li>
+                    </ol>
+                </p>
+            </statement>
+        </exercise>
         <definition xml:id="defn-vector_space_isomorphism">
             <title>Vector space isomorphism</title>
             <statement>
-                A linear transformation <m>f:V\to W</m> which is a bijection is a <term>vector space isomorphism from <m>V</m> to <m>W</m></term>.
+                <p>
+                    A linear transformation <m>f:V\to W</m> which is a bijection is a <term>vector space isomorphism from <m>V</m> to <m>W</m></term>.
+                </p>
             </statement>
         </definition>
         <p>
             As in most settings, isomorphism of vector spaces is important as it shows that the domain and codomain are fundamentally the same structure under different representations.
         </p>
-    </subsection>
-    <subsection xml:id="sub-linalg-vectors-colvecs">
-        <title>Column vectors</title>
-        <p>
-            Our introductory example of a vector space is the fundamentally most important example.
-        </p>
-        <definition xml:id="definition-complex_nspace">
-            <title>The vector space <m>\CV{n}</m></title>
+        <theorem xml:id="thm-every_complex_space_is_nspace">
+            <title>Every complex vector space is a <m>\CV{n}</m></title>
             <statement>
                 <p>
-                    Let <m>n\in\Zp</m>, and define <m>\CV{n}</m> to be the set
-                    <me>
-                        \CV{n} = \set{ \left.\cvec{z_0 \\ z_1 \\ \vdots \\ z_{n-1}} \right| z_0,z_1,\dotsc,z_{n-1}\in\Comps}
-                    </me>. For any <m>\vv\in\CV{n}</m> and <m>k\in\set{0,1,\dotsc,n-1}</m>, we define <m>\entry{\vv}{k} = z_k</m>, the <term>kth component of <m>\vv</m></term>. We further define the following operations on <m>\CV{n}</m>:
+                    If <m>V</m> is a complex vector space, then there is some <m>n\in\Zp</m> such that <m>V</m> is isomorphic to <m>\CV{n}</m>.
                 </p>
-                <dl>
-                    <li><title>Addition</title><p>
-                        If <m>\vv_1,\vv_2\in\CV{n}</m>, then <m>\vv_1+\vv_2\in\CV{n}</m> is the vector satisfying <m>\entry{\vv_1+\vv_2}{k} = \entry{\vv_1}{k}+\entry{\vv_2}{k}</m> for each <m>{k\in\set{0,1,\dotsc,n-1}}</m>; and
-                        </p></li>
-                    <li><title>Scalar multiplication</title><p>
-                        If <m>\vv\in\CV{n}</m> and <m>z\in\Comps</m>, then <m>z\cdot\vv = z\vv\in\CV{n}</m> is the vector satisfying <m>\entry{z\vv}{k} = z\entry{\vv}{k}</m> for each <m>{k\in\set{0,1,\dotsc,n-1}}</m>.
-                        </p></li>
-                </dl>
             </statement>
-        </definition>
-        <theorem xml:id="thm-complex_nspace_is_vectorspace">
-            <title><m>\CV{n}</m> is a vector space</title>
-            <statement>
-                For every <m>n\in\Zp</m>, the set <m>\CV{n}</m> with addition and multiplication as defined in <xref ref="definition-complex_nspace" text="global"/> is a vector space over <m>\Comps</m>.
-            </statement>
-            <proof>
-                To prove that a set with given operations is a vector space over <m>\Comps</m> requires verifying that all the axioms hold. This is a standard exercise in any linear algebra textbook and follows directly using the component notation.
-            </proof>
         </theorem>
     </subsection>
     <subsection xml:id="sub-linalg-vectors-inner_prods">
@@ -154,31 +233,25 @@
         <p>
             The idea of directed magnitude used in many vector contexts is an additional property which can be attached to a complex vector space. It is important for these definitions to remember the idea of <term>conjugation</term> of complex numbers, so we begin there.
         </p>
-        <definition xml:id="defn-complex_conjugate">
-            <title>Complex conjugate</title>
-            <statement>
-                <p>
-                    Let <m>z=x+yj\in\Comps</m>, where <m>x,y\in\Reals</m> and <m>j</m> is the unique number such that <m>j^2 = -1</m>. Then the <term>complex conjugate of <m>z</m></term> is <m>\conj{z} = x-yj</m>. If instead the complex number is represented in its <term>polar form</term> as <m>z=r\exp(\theta j)=re^{\theta j}</m>, then <m>\conj{z} = r\exp(-\theta j) = re^{-\theta j}</m>.
-                </p>
-            </statement>
-        </definition>
         <definition xml:id="defn-inner_prod">
             <title>Inner product</title>
             <statement>
                 <p>
                     Define a function <m>\hip{\cdot}{\cdot}:\CV{n}\times \CV{n}\to \Comps</m>. The function is an <term>inner product</term> if and only if it satisfies the following properties:
                 </p>
-                <dl>
-                    <li><title>Conjugate symmetry</title><p>
-                        <m>\hip{\vv_1}{\vv_2} = \conj{\hip{\vv_2}{\vv_1}}</m> for every <m>\vv_1,\vv_2\in\CV{n}</m>;
-                        </p></li>
-                    <li><title>Linearity in the first argument</title><p>
-                        <m>\hip{z_1\vv_1+z_2\vv_2}{\vv_3} = z_1\hip{\vv_1}{\vv_3} + z_2\hip{\vv_2}{\vv_3}</m> for all <m>\vv_1,\vv_2,\vv_3\in\CV{n}</m> and <m>z_1,z_2\in\Comps</m>; and
-                        </p></li>
-                    <li><title>Positive-definiteness</title><p>
-                        <m>\hip{\vv}{\vv}\gt 0</m> whenever <m>\vv\neq \vec{0}\in\CV{n}.</m>
-                        </p></li>
-                </dl>
+                <p>
+                    <dl>
+                        <li><title>Conjugate symmetry</title><p>
+                            <m>\hip{\vv_1}{\vv_2} = \conj{\hip{\vv_2}{\vv_1}}</m> for every <m>\vv_1,\vv_2\in\CV{n}</m>;
+                            </p></li>
+                        <li><title>Linearity in the first argument</title><p>
+                            <m>\hip{z_1\vv_1+z_2\vv_2}{\vv_3} = z_1\hip{\vv_1}{\vv_3} + z_2\hip{\vv_2}{\vv_3}</m> for all <m>\vv_1,\vv_2,\vv_3\in\CV{n}</m> and <m>z_1,z_2\in\Comps</m>; and
+                            </p></li>
+                        <li><title>Positive-definiteness</title><p>
+                            <m>\hip{\vv}{\vv}\gt 0</m> whenever <m>\vv\neq \vec{0}\in\CV{n}.</m>
+                            </p></li>
+                    </dl>
+                </p>
                 <p>
                     A complex vector space equipped with an inner product is called an <term>inner product space</term>.
                 </p>
@@ -187,30 +260,14 @@
         <definition xml:id='defn-hermitian_ip'>
             <title>Standard Hermitian inner product</title>
             <statement>
-                The <term>standard Hermitian inner product</term> on <m>\CV{n}</m> is defined by
-                <me>
-                    \hip{\vv_1}{\vv_2} = \conj{\entry{\vv_1}{0}}\entry{\vv_2}{0} + \conj{\entry{\vv_1}{1}}\entry{\vv_2}{1} + \cdots + \conj{\entry{\vv_1}{n-1}}\entry{\vv_2}{n-1} = \sum_{k=0}^{n-1} \conj{\entry{\vv_1}{k}}\entry{\vv_2}{k}
-                </me>.
+                <p>
+                    The <term>standard Hermitian inner product</term> on <m>\CV{n}</m> is defined by
+                    <me>
+                        \hip{\vv_1}{\vv_2} = \conj{\entry{\vv_1}{0}}\entry{\vv_2}{0} + \conj{\entry{\vv_1}{1}}\entry{\vv_2}{1} + \cdots + \conj{\entry{\vv_1}{n-1}}\entry{\vv_2}{n-1} = \sum_{k=0}^{n-1} \conj{\entry{\vv_1}{k}}\entry{\vv_2}{k}
+                    </me>.
+                </p>
             </statement>
         </definition>
-        <p>
-            Finally, the magnitude of a vector in an inner product space is closely related to that inner product.
-        </p>
-        <definition xml:id='defn-vector_magnitude'>
-            <title>Magnitude in <m>\CV{n}</m></title>
-            <statement>
-                The <term>magnitude</term> of a vector <m>\vv\in\CV{n}</m> is the scalar quantity
-                <me>
-                    \norm{\vv} = \sqrt{\sum_{k=0}^{n-1}\abs{\entry{\vv}{k}}^2}
-                </me>, more often called the <term>norm of <m>\vv</m></term> by mathematicians.
-            </statement>
-        </definition>
-        <theorem xml:id="thm-hip_and_norm">
-            <title>Hermitian inner product and magnitude</title>
-            <statement>
-                If <m>\vv\in\CV{n}</m>, then <m>\norm{\vv}^2 = \hip{\vv}{\vv}</m>.
-            </statement>
-        </theorem>
         <p>
             In a normal calculus sequence, the vector spaces used restrict the field of scalars from <m>\Comps</m> to <m>\Reals</m>. In this special case the conjugation is irrelevant (since <m>\conj{x} = x</m> for all <m>x\in\Reals</m>) and the Hermitian inner product becomes the ordinary <term>dot product</term>, given by
             <me>
@@ -221,6 +278,31 @@
                 \vv_1\cdot\vv_2 = \norm{\vv_1}\norm{\vv_2}\cos\theta
             </me>.
         </p>
+        <p>
+            It may seem arbitrary to introduce the Hermitian inner product, but the requirement that a complex inner product must be conjugate symmetric makes it necessary: the regular dot product is symmetric, not conjugate symmetric.
+        </p>
+        <p>
+            Finally, the magnitude of a vector in an inner product space is closely related to that inner product.
+        </p>
+        <definition xml:id='defn-vector_magnitude'>
+            <title>Magnitude in <m>\CV{n}</m></title>
+            <statement>
+                <p>
+                    The <term>norm</term> of a vector <m>\vv\in\CV{n}</m> is the scalar quantity
+                    <me>
+                        \norm{\vv} = \sqrt{\sum_{k=0}^{n-1}\abs{\entry{\vv}{k}}^2}
+                    </me>. The value <m>\norm{\vv}\in\Reals</m>, and is also called the <term>magnitude of <m>\vv</m></term>.
+                </p>
+            </statement>
+        </definition>
+        <theorem xml:id="thm-hip_and_norm">
+            <title>Hermitian inner product and magnitude</title>
+            <statement>
+                <p>
+                    If <m>\vv\in\CV{n}</m>, then <m>\norm{\vv}^2 = \hip{\vv}{\vv}</m>.
+                </p>
+            </statement>
+        </theorem>
     </subsection>
   <!--
   <xi:include href=".subsec-emp-intro.ptx" />

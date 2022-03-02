@@ -10,32 +10,32 @@
 
     <section xml:id="app-find-defs">
         <title>Definitions</title>
-        <p>This section provides a comprehensive list of all formal mathematical definitions in the text.</p>
-        <list-of xml:id="listof-defs" elements="definition" divisions="chapter appendix" empty="no" />
+        <p>
+            This section provides a comprehensive list of all formal mathematical definitions in the text.
+        </p>
+        <list-of elements="definition" divisions="chapter appendix" empty="no" />
     </section>
 
     <section xml:id="app-find-tech"><title>Technology and Algorithms</title>
         <p>
             All of the introductions to Python technology and all algorithms.
         </p>
-        <list-of xml:id="listof-algos" elements="algorithm technology" divisions="chapter appendix" empty="no" />
+        <list-of elements="algorithm technology" divisions="chapter appendix" empty="no" />
     </section>
     <!-- ###################################### -->
     <section xml:id="app-find-results"><title>Lemmas, Propositions, and Theorems</title>
         <p>
             This section provides a comprehensive list of all mathematical theorems throughout the text.
         </p>
-        <p>
-            <list-of xml:id="listof-results" elements="axiom theorem lemma proposition" divisions="chapter appendix" empty="no" />
-        </p>
+        <list-of elements="axiom theorem lemma proposition" divisions="chapter appendix" empty="no" />
     </section>
     <!-- ###################################### -->
     <section xml:id="app-find-projects">
     <title>Projects</title>
         <p>
-        A comprehensive guide to all the parts of all of the projects for the text.
+            A comprehensive guide to all the parts of all of the projects for the text.
         </p>
-        <list-of xml:id="listof-projects" elements="project activity" divisions="section" empty="no" />
+        <list-of elements="project activity" divisions="section" empty="no" />
 
 
     </section>
