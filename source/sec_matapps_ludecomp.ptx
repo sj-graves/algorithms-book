@@ -1,0 +1,378 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<section xml:id="sec-matapps-ludecomp" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title><m>PA=LU</m> Decomposition</title>
+    <introduction>
+        <p>
+            An application of the Gaussian elimination algorithm without its Jordan component is involved in a procedure for solving multiple matrix equations. Consider that there is a matrix <m>A\in\Mats{n,n}</m> and a set of vectors
+            <me>
+                B=\set{\vec{b}_k:k\in\set{0,1,\dotsc,\ell-1}}
+            </me>
+            such that all the solutions to <m>A\vv=\vec{b}_k</m> must be determined for all <m>k</m>. In order to solve all of these problems using Gauss-Jordan elimination in a naive manner, it would be necessary to perform the GJE process <m>\ell</m> times. A technique which allows GJE to be performed only once would be of great benefit.
+        </p>
+    </introduction>
+    <subsection xml:id="sub-matapps-ludecomp-theory">
+        <title>Special factors</title>
+        <p>
+            In general, any representation of a matrix <m>A</m> of the form <m>A=BC</m> is referred to as a <term>decomposition</term> or <term>factorization</term> of <m>A</m>; the type of decomposition depends upon the desired properties of the factors. We begin with a definition of two interesting types of square matrices: upper and lower triangular matrices.
+        </p>
+        <definition xml:id="defn-triangular_matrix">
+            <title>Triangular matrices</title>
+            <statement>
+                <p>
+                    A matrix <m>A\in\Mats{m,n}</m> is <term>square</term> if and only if <m>m=n</m>. A square matrix <m>A\in\Mats{n,n}</m> is
+                    <dl>
+                        <li><title>Upper triangular</title><p>
+                            if and only if <m>\entry{A}{r,c} = 0</m> whenever <m>r\gt c</m>,
+                            </p></li>
+                        <li><title>Lower triangular</title><p>
+                            if and only if <m>\entry{A}{r,c}=0</m> whenever <m>r\lt c</m>, and is
+                            </p></li>
+                        <li><title>Diagonal</title><p>
+                            if and only if <m>\entry{A}{r,c}=0</m> whenever <m>r\neq c</m>.
+                            </p></li>
+                    </dl>
+                </p>
+            </statement>
+        </definition>
+        <p>
+            Every square matrix which is in row-echelon form is necessarily upper triangular, and a careful application of the Gaussian elimination algorithm to a matrix <m>A</m> will produce matrices <m>P</m>, <m>L</m>, and <m>U</m> such that
+            <ul>
+                <li><p>
+                    <m>P</m> is a permutation matrix obtained as a product of <m>S_{k,l}</m> row-swapping matrices,
+                    </p></li>
+                <li><p>
+                    <m>L</m> is lower triangular, and
+                    </p></li>
+                <li><p>
+                    <m>U</m> is upper triangular and row-equivalent to <m>PA</m>.
+                    </p></li>
+            </ul>
+        </p>
+        <theorem xml:id="thm-ludecomp">
+            <title><m>PA=LU</m> decomposition of <m>A</m></title>
+            <statement>
+                <p>
+                    Suppose that <m>A\in\Mats{n,n}</m> is an invertible matrix. Then there is a permutation matrix <m>P</m> and a pair of lower and upper triangular matrices <m>L</m> and <m>U</m> such that <m>PA=LU</m>.
+                </p>
+            </statement>
+            <proof>
+                <p>
+                    We will apply the Gaussian elimination algorithm with partial pivoting (GEPP) but limiting the eligible row operations only to swapping rows via <m>\rswap{k}{\ell}</m> and elimination via <m>\relim{\alpha}{k}{\ell}</m>. Initially let <m>P=I_n</m>, the identity matrix in <m>\Mats{n,n}</m>; we will modify a matrix <m>M</m> which is initally equal to <m>A</m>.
+                </p>
+                <p>
+                    In the process of applying the GEPP algorithm to <m>M</m>, whenever an operation <m>M\xmapsto{\rswap{k}{\ell}}M</m> occurs, also perform <m>P\xmapsto{\rswap{k}{\ell}}</m>. Moreover, when the operation <m>M\xmapsto{\relim{\alpha}{k}{\ell}}</m> is applied to eliminate a value in row index <m>\ell</m> and column index <m>k</m>, rather than writing <m>\entry{M}{\ell}{k}=0</m> put <m>\entry{M}{\ell}{k} = -\alpha</m>.
+                </p>
+                <p>
+                    When the GEPP algorithm completes, the matrix <m>P</m> is the correct permutation matrix. The matrix <m>M</m> contains all of the necessary elements of both matrices <m>L</m> and <m>U</m>, which meed to be extracted into the triangular matrices. Specifically we let <m>L\in\Mats{n,n}</m> be the lower triangular matrix satisfying
+                    <me>
+                        \entry{L}{r,c} = \begin{cases}
+                            0\amp\text{if }r \lt c \\
+                            1\amp\text{if }r = c \\
+                            \entry{M}{r,c}\amp\text{if }r\gt c.
+                        \end{cases}
+                    </me>
+                    Further, <m>U\in\Mats{n,n}</m> is the upper triangular matrix satisfying
+                    <me>
+                        \entry{U}{r,c} = \begin{cases}
+                            0 \amp\text{if} r\gt c \\
+                            \entry{M}{r,c}\amp\text{if }r\lt c.
+                        \end{cases}
+                    </me>
+                </p>
+                <p>
+                    Since this matrix <m>L</m> is the product of the inverse matrices <m>E_{\alpha,k,\ell}^{-1}</m> corresponding to each of the eliminations mentioned previously, and <m>U</m> is the result of those eliminations, it is necessarily the case that <m>PA=LU</m>.
+                </p>
+            </proof>
+        </theorem>
+        <example xml:id="exmp-ludecomp-worked">
+            <title>A worked <m>PA=LU</m> decomposition example</title>
+            <statement>
+                <p>
+                    Suppose that
+                    <me>
+                        A = \begin{bmatrix}
+                            1 \amp 4 \amp 9 \amp 7 \\
+                            5 \amp 6 \amp 8 \amp 3 \\
+                            8 \amp 7 \amp 2 \amp 7 \\
+                            5 \amp 4 \amp 1 \amp 2
+                        \end{bmatrix}
+                    </me>.
+                    Then the sequence of row operations and resulting matrices <m>M</m> are as follows below. Notice that the value of the permutation matrix <m>P</m> is only given when it changes, and entries of <m>M</m> enclosed in boxes are those which are recorded to be extracted into <m>L</m>.
+                    <md>
+                        <mrow>
+                            M = \begin{bmatrix}
+                                1 \amp 4 \amp 9 \amp 7 \\
+                                5 \amp 6 \amp 8 \amp 3 \\
+                                8 \amp 7 \amp 2 \amp 7 \\
+                                5 \amp 4 \amp 1 \amp 2
+                            \end{bmatrix}
+                            \xto{\rswap{0}{2}} \amp
+                            \begin{bmatrix}
+                                8 \amp 7 \amp 2 \amp 7 \\
+                                5 \amp 6 \amp 8 \amp 3 \\
+                                1 \amp 4 \amp 9 \amp 7 \\
+                                5 \amp 4 \amp 1 \amp 2
+                            \end{bmatrix}, P=\begin{bmatrix}
+                                0 \amp 0 \amp 1 \amp 0 \\
+                                0 \amp 1 \amp 0 \amp 0 \\
+                                1 \amp 0 \amp 0 \amp 0 \\
+                                0 \amp 0 \amp 0 \amp 1
+                            \end{bmatrix}
+                        </mrow>
+                        <mrow>
+                            \xto{\begin{smallmatrix}
+                                \relim{-5/8}{0}{1}\\
+                                \relim{-1/8}{0}{2} \\
+                                \relim{-5/8}{0}{3}
+                            \end{smallmatrix}} \amp
+                            \begin{bmatrix}
+                                8 \amp 7 \amp 2 \amp 7 \\
+                                \fbox{$5/8$} \amp 13/8 \amp 27/4 \amp -11/8 \\
+                                \fbox{$1/8$} \amp 25/8 \amp 35/4 \amp 49/8 \\
+                                \fbox{$5/8$} \amp -3/8 \amp -1/4 \amp -19/8
+                            \end{bmatrix}
+                        </mrow>
+                        <mrow>
+                            \xto{\rswap{1}{2}} \amp
+                            \begin{bmatrix}
+                                8 \amp 7 \amp 2 \amp 7 \\
+                                \fbox{$1/8$} \amp 25/8 \amp 35/4 \amp 49/8 \\
+                                \fbox{$5/8$} \amp 13/8 \amp 27/4 \amp -11/8 \\
+                                \fbox{$5/8$} \amp -3/8 \amp -1/4 \amp -19/8
+                            \end{bmatrix}, P = \begin{bmatrix}
+                                0 \amp 0 \amp 1 \amp 0 \\
+                                1 \amp 0 \amp 0 \amp 0 \\
+                                0 \amp 1 \amp 0 \amp 0 \\
+                                0 \amp 0 \amp 0 \amp 1
+                            \end{bmatrix}
+                        </mrow>
+                        <mrow>
+                            \xto{\begin{smallmatrix}
+                            \relim{-13/25}{1}{2} \\
+                            \relim{3/25}{1}{3}
+                            \end{smallmatrix}} \amp
+                            \begin{bmatrix}
+                                8 \amp 7 \amp 2 \amp 7 \\
+                                \fbox{$1/8$} \amp 25/8 \amp 35/4 \amp 49/8 \\
+                                \fbox{$5/8$} \amp \fbox{$13/25$} \amp 11/5 \amp -114/25 \\
+                                \fbox{$5/8$} \amp \fbox{$-3/25$} \amp 4/5 \amp -41/25
+                            \end{bmatrix}
+                        </mrow>
+                        <mrow>
+                            \xto{\relim{-4/11}{2}{3}} \amp
+                            \begin{bmatrix}
+                                8 \amp 7 \amp 2 \amp 7 \\
+                                \fbox{$1/8$} \amp 25/8 \amp 35/4 \amp 49/8 \\
+                                \fbox{$5/8$} \amp \fbox{$13/25$} \amp 11/5 \amp -114/25 \\
+                                \fbox{$5/8$} \amp \fbox{$-3/25$} \amp \fbox{$4/11$} \amp 1/55
+                            \end{bmatrix}
+                        </mrow>
+                    </md>
+                </p>
+                <p>
+                    Extracting <m>L</m> and <m>U</m> from this matrix, we obtain
+                    <me>
+                        P = \left[~\begin{smallmatrix}
+                                0 \amp 0 \amp 1 \amp 0 \\
+                                1 \amp 0 \amp 0 \amp 0 \\
+                                0 \amp 1 \amp 0 \amp 0 \\
+                                0 \amp 0 \amp 0 \amp 1
+                            \end{smallmatrix}~\right]\qquad
+                        L = \left[~\begin{smallmatrix}
+                                1 \amp 0 \amp 0 \amp 0 \\
+                                1/8 \amp 1 \amp 0 \amp 0 \\
+                                5/8 \amp 13/25 \amp 1 \amp 0 \\
+                                5/8 \amp -3/25 \amp 4/11 \amp 1
+                            \end{smallmatrix}~\right]\qquad
+                        U = \left[~\begin{smallmatrix}
+                                8 \amp 7 \amp 2 \amp 7 \\
+                                0 \amp 25/8 \amp 35/4 \amp 49/8 \\
+                                0 \amp 0 \amp 11/5 \amp -114/25 \\
+                                0 \amp 0 \amp 0 \amp 1/55
+                            \end{smallmatrix}~\right]
+                    </me>
+                </p>
+            </statement>
+        </example>
+    </subsection>
+    <!-- ###############################     -->
+    <subsection xml:id="sub-matapps-ludecomp-solving">
+        <title>Solving systems via <m>LU</m> decomposition</title>
+        <p>
+            Now we can put this decomposition to work using basic algebra properties of matrices to solve a simple matrix equation. Beginning from <m>A\vec{x} = \vec{b}</m> when <m>PA=LU</m>, we observe that <m>PA\vec{x} = P\vec{b}</m>, so <m>LU\vec{x} = P\vec{b}</m>. Introducing an intermediate equation <m>U\vec{x} = \vec{y}</m> and writing <m>\vec{b}' = P\vec{b}</m>, we have to solve <m>L\vec{y} = \vec{b}'</m> and then <m>U\vec{x} = \vec{y}</m>. These are easy to solve via substitution.
+        </p>
+        <theorem xml:id="thm-forward-sub">
+            <title>Solution via forward substitution</title>
+            <statement>
+                <p>
+                    Given an invertible lower triangular matrix <m>L\in\Mats{n,n}</m> and a vector <m>\vec{b}</m>, the solution <m>\vec{y}</m> to the matrix-vector product equation <m>L\vec{y}=\vec{b}</m> satisfies
+                    <me>
+                        \entry{\vec{y}}{r} =
+                        \left(
+                            \entry{\vec{b}}{r} - \sum_{c=0}^{r-1}\entry{L}{r,c}\entry{\vec{y}}{c}
+                        \right)/\entry{L}{r,r}
+                    </me>,
+                    and as such solving for <m>\entry{y}{r}</m> in the order of <m>r = 0,1,2,\dotsc, n-2,n-1</m> involves only direct substitution.
+                </p>
+            </statement>
+        </theorem>
+        <theorem xml:id="thm-back_sub">
+            <title>Solution via back substitution</title>
+            <statement>
+                <p>
+                    Given an invertible upper triangular matrix <m>U\in\Mats{n,n}</m> and a vector <m>\vec{y}</m>, the solution <m>\vec{x}</m> to the matrix-vector product equation <m>U\vec{x}=\vec{y}</m> satisfies
+                    <me>
+                        \entry{\vec{x}}{r} =
+                        \left(
+                            \entry{\vec{y}}{r} - \sum_{c=r+1}^{n-1}\entry{U}{r,c}\entry{\vec{x}}{c}
+                        \right)/\entry{U}{r,r}
+                    </me>,
+                    and as such solving for <m>\entry{x}{r}</m> in the order of <m>r = n-1,n-2,\dotsc,2,1,0</m> involves only direct substitution.
+                </p>
+            </statement>
+        </theorem>
+    </subsection>
+    <!-- ###############################     -->
+    <subsection xml:id="sub-matapps-ludecomp-algo">
+        <title>Algorithms for <m>LU</m> decomposition</title>
+            <p>
+            The algorithm for <m>PA=LU</m> decomposition is little different from any other Gaussian elimination algorithm. In order to operate efficiently and not require the same row operations to be performed on multiple matrices, we will carefully work in a list of lists and convert the final result to a tuple of three <c>AlgoMatrix</c> objects.
+        </p>
+        <algorithm xml:id='algo-ludecomp'>
+            <title><m>PA=LU</m> decomposition</title>
+            <statement>
+                <p>
+                    Suppose that <m>A\in\Mats{n,n}</m> be a matrix, and initialize <m>P=I_n</m> to  be the identity matrix of size <m>n</m>.
+                    <ol>
+                        <li><p>
+                            Let <m>r=0</m> and <m>c=0</m>
+                            </p></li>
+                        <li><p>
+                            While <m>r\lt n</m> and <m>c\lt n</m>, repeat the following:
+                            <ol>
+                                <li><title>Partial pivoting</title>
+                                    <p><ol>
+                                        <li><p>
+                                            If all <m>\entry{A}{r',c}=0</m> for <m>r'\in\set{r+1,\dotsc,n-1}</m>, increase <m>c</m> by 1 and return to step (2).
+                                            </p></li>
+                                        <li><p>
+                                            Let <m>p</m> be the least row index such that
+                                            <me>
+                                                \abs{\entry{A}{p,c}}=\max\set{\abs{\entry{A}{r',c}}:r'\in\set{r+1,\dotsc,m-1}}
+                                            </me>.
+                                            </p></li>
+                                        <li><p>
+                                            If <m>p\neq r</m>, then <m>A\xmapsto{\rswap{r}{p}} A</m> and <m>P\xmapsto{\rswap{r}{p}} P</m>; otherwise proceed to step (2.b).
+                                            </p></li>
+                                    </ol>
+                                    </p></li>
+                                <li><title>Elimination</title>
+                                    <p>
+                                        For each <m>r'\in\set{r+1,\dotsc,m-1}</m> do the following:
+                                        <ol>
+                                            <li><p>
+                                                If <m>\entry{A}{r',c}=0</m>, continue to the next value of <m>r'</m>.
+                                                </p></li>
+                                            <li><p>
+                                                Otherwise, let <m>\alpha = \entry{A}{r',c}/\entry{A}{r,c}</m>.
+                                                </p></li>
+                                            <li><p>
+                                                For each <m>c'\in\set{c+1,\dotsc,n-1}</m>, update the value of <m>\entry{A}{r',c'}</m> by setting it equal to <m>-\alpha\entry{A}{r,c'} + \entry{A}{r',c'}</m> via the elimination operation.
+                                                </p></li>
+                                            <li><p>
+                                                Reset <m>\entry{A}{r',c} = \alpha</m>.
+                                                </p></li>
+                                        </ol></p>
+                                </li>
+                                <li><p>
+                                    Increase <m>r</m> and <m>c</m> each by 1.
+                                    </p></li>
+                            </ol>
+                            </p></li>
+                        <li><p>
+                            When the while loop in step (2) terminates, the matrix <m>P</m> is the correct permutation matrix, and we may simply extract the values of <m>L</m> and <m>U</m> from <m>A</m>.
+                            <ol>
+                                <li><p>
+                                    Let <m>L\in\Mats{n,n}</m> be the matrix satisfying
+                                    <me>
+                                        \entry{L}{r,c} = \begin{cases}
+                                            0,\amp\text{if }r\lt c \\
+                                            1,\amp\text{if }r=c\\
+                                            \entry{A}{r,c},\amp\text{if }r\gt c
+                                        \end{cases}
+                                    </me>
+                                    </p></li>
+                                <li><p>
+                                    Let <m>U\in\Mats{n,n}</m> be the matrix satisfying
+                                    <me>
+                                        \entry{U}{r,c} = \begin{cases}
+                                            0,\amp\text{if }r\gt c\\
+                                            \entry{A}{r,c},\amp\text{if }r\leq c
+                                        \end{cases}
+                                    </me>
+                                    </p></li>
+                            </ol>
+                            </p></li>
+                    </ol>
+                </p>
+            </statement>
+        </algorithm>
+        <p>
+            A crucial and easy-to-miss part of the <m>PA=LU</m> algorithm is Step (2.b.iii); in order to store the values for <m>L</m> in place of the unnecessary zeroes which normally appear below the diagonal of a matrix in row-echelon form, it is essential that only the values to the right of the diagonal be recomputed during the elimination steps. The elimination which actually is known to send values to zero must not do so, otherwise the lower triangular matrix <m>L</m> is lost. The following is a method implementing our algorithm, suitable fo inclusion in the <c>AlgoMatrix</c> class.
+        </p>
+        <listing>
+            <program language='python'>
+                <input>
+                    def palu(self, debug=False):
+                        m,n = self.dims()
+                        if m!=n: raise ValueError("Cannot PA=LU decompose nonsquare matrix.")
+                        # Initialize grids
+                        grid = [[entry for entry in row] for row in self._data] # Skim the data
+                        pmat = [[1 if r==c else 0 for c in range(n)] for r in range(m)]
+                        debug_out = []
+                        # Start at upper left
+                        r,c = 0,0
+                        while (r &lt; m) and (c &lt; n):
+                            # Check if rows need swapped
+                            debug_out.append( str(grid) )
+                            cur_max = abs(grid[r][c])
+                            piv = r
+                            for r_prime in range(r+1, m):
+                                if abs(grid[r_prime][c]) &gt; cur_max:
+                                    cur_max = abs(grid[r_prime][c])
+                                    piv = r_prime
+                            # if cur_max == 0, shift right.
+                            if cur_max == 0:
+                                c += 1
+                                continue
+                                # otherwise check if rows need swapped
+                            elif piv != r:
+                                debug_out.append(f"Swap R({r})&lt;-&gt;R({r_prime})")
+                                # interchange elements of lists
+                                grid[piv],grid[r] = grid[r],grid[piv]
+                                pmat[piv],pmat[r] = pmat[r],pmat[piv]
+                            # No scaling
+                            # Elimination
+                            for r_prime in range(r+1, m):
+                                if grid[r_prime][c] == 0: continue
+                                alpha = grid[r_prime][c] / grid[r][c]
+                                # Since we want to maintain the lower-triangular part for L, we only alter
+                                # columns c+1 through n of grid[r_prime]
+                                grid[r_prime][c+1:] = [-alpha*grid[r][c_prime] + grid[r_prime][c_prime] for c_prime in range(c+1,n)]
+                                # Then store the alpha value in grid[r_prime][c] to pull out for L later
+                                grid[r_prime][c] = alpha
+                                debug_out.append(f"Elim ({-alpha})*R({r}) + R({r_prime})")
+                            r += 1
+                            c += 1
+                        P = AlgoMatrix(pmat)
+                        L = AlgoMatrix([[1 if r==c else (grid[r][c] if r &gt; c else 0) for c in range(n)] for r in range(m)])
+                        U = AlgoMatrix([[grid[r][c] if r &lt;= c else 0 for c in range(n)] for r in range(m)])
+                        if debug: print("\n".join(debug_out))
+                        return P,L,U
+                </input>
+            </program>
+            <caption>An implementation of the <m>PA=LU</m> algorithm using partial pivoting.</caption>
+        </listing>
+    </subsection>
+</section>

@@ -1,0 +1,247 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<section xml:id="sec-matapps-qrfactor" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title><m>QR</m> factorization</title>
+    <introduction>
+        <p>
+            Like the <m>PA=LU</m> decomposition, the <m>QR</m> factorization of a matrix is a decomposition of an arbirtrary square matrix into a product of matrices with special properties. The algorithm which is easiest to describe to produce the <m>QR</m> factorization is the <term>Modified Gram-Schmidt Orthonormalization</term> method, or <term>mGSO</term>. It is unfortunate that mGSO suffers from inherent numerical instability under floating point arithmetic, because it is an easy algorithm to implement. However the inability of the algorithm to correctly perform even small calculations limits its utility. A more robust algorithm for use in computation is the method of <term>Householder reflectors</term>, but its stability comes at the cost of increased theoretical difficulty.
+        </p>
+    </introduction>
+    <subsection xml:id='sub-matapps-qrfactor-def'>
+        <title>Properties of a <m>QR</m> factorization</title>
+        <p>
+            A <m>QR</m> factorization of a matrix <m>A\in\Mats{m,n}</m> is a decomposition into a product of a unitary matrix <m>Q</m> and an upper triangular matrix <m>R</m>.
+        </p>
+        <definition xml:id="defn-unitary_matrix">
+            <title>Unitary matrix</title>
+            <statement>
+                <p>
+                    The <term>conjugate-transpose</term> of a matrix <m>A\in\Mats{m,n}</m> is the matrix <m>A^*\in\Mats{n,m}</m> satisfying <me>\entry{A^*}{c,r} = \conj{\entry{A}{r,c}}</me>. That is, <m>A^* = \conj{A^T}</m>.
+                </p>
+                <p>
+                    A square matrix <m>A\in\Mats{n,n}</m> is <term>unitary</term> if and only if <m>A^{-1} = A^*</m>. For real matrices, the equivalent terminology is that <m>A</m> is <term>orthogonal</term>, with <m>A^{-1}=A^T</m>.
+                </p>
+            </statement>
+        </definition>
+        <theorem xml:id="thm-conjtrans_of_prod">
+            <title>Conjugate-transpose of a product matrix</title>
+            <statement>
+                <p>
+                    Suppose that <m>A\in\Mats{m,n}</m> and <m>B\in\Mats{n,p}</m>. Then
+                    <me>
+                        (AB)^* = B^*A^*
+                    </me>.
+                </p>
+            </statement>
+        </theorem>
+    </subsection>
+    <subsection xml:id="sub-matapps-qrfactor-inconsistent">
+        <title>Inconsistent systems of linear equations</title>
+        <p>
+            Consider the system
+            <men xml:id="eq_incons">
+                \left\{\begin{aligned}
+                3x_0 - 2x_1 \amp = 4, \\
+                2x_0 +  x_1 \amp = 9, \\
+                -3x_0 + 2x_1 \amp = 6.
+                \end{aligned}\right.
+            </men>
+            There is a problem with this system which will not appear with only a passing glance <mdash /> the first and third equations cannot both hold for elements of the same vector <m>\vec{x}</m>.
+        </p>
+        <definition xml:id="defn-inconsistent_system">
+            <statement>
+                <p>
+                    An <term>inconsistent system of equations</term> in <m>n</m> variables is a system of equations such that no vector <m>\vec{x}</m> simultaneously satisfies all of the equations in the system.
+                </p>
+            </statement>
+        </definition>
+
+        <!--p>
+            It should be immediately clear that this is an inconsistent system, since not both the first and the third equations can be simultaneously valid. Hence there is no <m>\vec{x}=\vc{x_1,x_2}</m> which satisfies the system. Is it possible then to find some <m>\bar{x}</m> which is the ``best" approximate solution?
+        </p-->
+
+        <p>
+            We can recast <xref ref="eq_incons" /> into a matrix-vector multiplication problem <m>A\vec{x}=\vec{b}</m> easily, letting <m>A = \left[\vec{A}_1\mid\vec{A}_2\right]\in\Mats{3,2}</m>, <m>\vec{x}\in\Comps^2</m>, and <m>\vec{b}\in\Comps^3</m> be given by
+            <md>
+                <mrow>
+                    A \amp= \begin{bmatrix}
+                    3 \amp -2 \\
+                    2 \amp 1 \\
+                    -3 \amp 2
+                    \end{bmatrix} \amp
+                    \vec{x} \amp = \cvec{x_0\\x_1} \amp
+                    \vec{b} \amp = \cvec{4\\9\\6}
+                </mrow>
+            </md>.
+            Unfortunately, it should be plain that <m>\vec{b}</m> is not a linear combination of <m>\vec{A}_1</m> and <m>\vec{A}_2</m>, due to the entries in the 0th and 2nd indices.
+        </p>
+        <p>
+            Recalling the definition <xref ref="defn-lincomb_span" text="title" /> allows us to recast our problem in linear algebra terminology <mdash /> we need to find the vector <m>\barx{x}</m> in the span of <m>\set{\vec{v}_1,\vec{v}_2}</m> which is nearest to <m>\vec{b}</m>. Since we are working with real coefficients, it makes perfect sense to assume that the vector space in which we are working is <m>\R^n</m>, and this allows us to appeal to our knowledge of Euclidean geometry.
+            <!--A convenient fact of working over the real numbers is that we already know how to do this: the shortest path from a line <m>\ell</m> to a point <m>P</m> not on the line is the vector <m>\vec{r}</m> from <m>X\in\ell</m> to <m>P</m> where the line <m>\overline{XP}</m> is perpendicular to <m>\ell</m>. To extend this idea to higher dimensions, the vector <m>\vec{r}</m> must be <em>orthogonal</em> to any other vector <m>\vec{v}</m> in the linear subspace<fn>Line, plane, or hyperplane!</fn>.-->
+        </p>
+
+        <theorem>
+            <statement>
+                The shortest path from a line <m>\ell</m> to a point <m>P</m> not on <m>\ell</m> is the vector <m>\vec{r}</m> with tail at a point <m>X\in \ell</m> and head <m>P</m>, such that the line <m>\overline{XP}</m> is perpendicular to <m>\ell</m>.
+            </statement>
+        </theorem>
+        <p>
+            This theorem extends naturally to higher dimensions: the shortest path between a <em>linear subspace</em> <m>H</m> of the vector space and a point <m>P\notin H</m> is along a vector which is orthogonal to every vector <m>\vec{h}\in H</m>. The use of the term <em>orthogonal</em> indicates that these ideas extend beyond regular Euclidean geometry.
+        </p>
+        <definition>
+            <statement>
+                <p> Let <m>\vec{u}, \vec{v}\in\R^n</m>. The <term>dot product of <m>\vec{u}</m> and <m>\vec{v}</m></term> is the scalar quantity
+                    <me>\vec{u}\cdot\vec{v} = u_1v_1+u_2v_2+\cdots+u_nv_n.</me> The vectors <m>\vec{u}</m> and <m>\vec{v}</m> are <term>orthogonal</term> if and only if <m>\vec{u}\cdot\vec{v}=0</m>.
+                </p>
+            </statement>
+        </definition>
+        <lemma>
+            <statement>
+                <p>
+                    If the vectors <m>\vec{u},\vec{v}\in\R^n</m> are considered as <m>n\times 1</m> matrices, then <m>\vec{u}\cdot\vec{v}=\vec{u}^T\vec{v}</m>, where <m>\vec{u}^T</m> is the matrix transpose of <m>\vec{u}</m>.
+                </p>
+            </statement>
+        </lemma>
+
+        <p>
+            An easy fact to prove is that the only vector in a space which is orthogonal to every vector in its space is the zero vector.
+        </p>
+
+        <theorem>
+            <statement>
+                <p>
+                    Suppose <m>\vec{u}_0\in\R^n</m>. If <m>\vec{u}_0\cdot\vec{v}=0</m> for every <m>\vec{v}\in\R^n</m>, then <m>\vec{u}_0 = \vec{0}</m>.
+                </p>
+            </statement>
+        </theorem>
+
+        <proof>
+            <p>
+                Suppose <m>\vec{v}\in\R^n</m> is an arbitrary vector. Then
+                <me>
+                    \vec{0}\cdot \vec{v} = \sum_{i=1}^n 0v_i = 0,
+                </me>
+                so <m>\vec{0}</m> is orthogonal to every vector in <m>\R^n</m>. Now suppose <m>\vec{u}\neq \vec{0}</m>; then at least one of the components of <m>\vec{u}</m> is nonzero; suppose that <m>u_k\neq 0</m>. Then
+                <me>
+                    \vec{u}\cdot\vec{u} = \sum_{i=0}^n u_i^2 \geq u_k^2 > 0.
+                </me>
+            </p>
+
+            <p>
+                Hence <m>\vec{u}</m> is not orthogonal to itself, and therefore there is a nonzero vector in <m>\R^n</m> to which <m>\vec{u}</m> is not orthogonal.
+            </p>
+        </proof>
+
+        <p>
+            The next theorem establishes that if a vector <m>\vec{b}</m> is not in the span of a set <m>S</m> of vectors, then there is a unique vector in <m>\lspan(S)</m> which is the <em>closest approximation to <m>\vec{b}</m> in the span of <m>S</m></em>. As the proof is complicated, it is omitted.
+        </p>
+
+        <theorem>
+            <statement>
+                <p>
+                    Suppose <m>S=\set{\vec{v}_1,\vec{v}_2,\ldots,\vec{v}_k}</m> is a set of linearly independent vectors in <m>\R^n</m> for <m>n>k</m> and <m>\vec{b}\in\R^n\setminus\lspan(S)</m>. Then there is a unique vector <m>\barx{u}\in\lspan(S)</m> such that the magnitude of <m>\vec{r}=\vec{b}-\barx{u}</m> is minimum and <m>\vec{r}</m> is orthogonal to every vector <m>\vec{u}\in\lspan(S)</m>.
+                </p>
+            </statement>
+        </theorem>
+        <p>
+            The vector <m>\barx{u}</m> given in the preceding theorem is the approximation to <m>\vec{b}</m> in the span of <m>S</m>.
+        </p>
+
+        <p>
+            Looking back to <xref ref="eq_incons"  /> we had determined vectors <m>\vec{v}_1 = \vc{3,2,-3}</m> and <m>\vec{v}_2=\vc{-2,1,2}</m>, and a vector <m>\vec{b}=\vc{4,9,6}\notin\lspan\set{\vec{v}_1,\vec{v}_2}</m> such that the system was equivalent to writing
+            <md>
+                <mrow>
+                    x_1\vec{v}_1 + x_2\vec{v}_2 \amp = \vec{b}
+                </mrow><intertext>or</intertext>
+                <mrow>
+                    A\vec{x} \amp = \vec{b}
+                </mrow>
+                <intertext>where</intertext>
+                <mrow>
+                    A =
+                    \begin{bmatrix}
+                    \vec{v}_1 \amp \vec{v}_2
+                    \end{bmatrix} \amp =
+                    \begin{bmatrix}
+                    3\amp -2\\2\amp 1\\-3\amp 2
+                    \end{bmatrix}.
+                </mrow>
+            </md>
+            However, it is also the case that <m>\vec{b}\notin\lspan\set{\vec{v}_1\vec{v}_2}</m>.
+        </p>
+        <p>
+            A vector <m>\vec{u}</m> is in the span of <m>\set{\vec{v}_1,\vec{v}_2}</m> if and only if there is some <m>\vec{x}\in\R^2</m> such that <m>A\vec{x}=\vec{u}</m>.  If we want to find <m>\barx{u}=A\barx{x}</m> such that <m>\vec{r}=\vec{b}-A\barx{x}</m> is minimized, it suffices to find <m>\barx{x}</m> such that <m>(A\vec{x})\cdot(\vec{b}-A\barx{x})=0</m> for every <m>\vec{x}\in\R^2</m>.
+        </p>
+        <p>
+            Supposing such a <m>\vec{\bar{x}}</m> exists,
+            <md>
+                <mrow>  0 = (A\vec{x})\cdot(\vec{b}-A\barx{x}) \amp = (A\vec{x})^T(\vec{b}-A\barx{x})</mrow>
+                <mrow>  \amp = \vec{x}^TA^T(\vec{b}-A\barx{x})</mrow>
+                <mrow> \amp = \vec{x}^T\left( A^T\vec{b}-A^TA\barx{x} \right)</mrow>
+            </md>
+            for every <m>\vec{x}\in\R^2</m>; but by Theorem 8.3 above, this means that for such a <m>\barx{x}</m> to exist it suffices that <m>A^T\vec{b}-A^TA\barx{x}=\vec{0}</m>, or equivalently that <m>(A^TA)\barx{x} = A^T\vec{b}</m>. This vector equation has a unique solution exactly when <m>A^TA</m> can be reduced to the identity matrix via Gauss-Jordan elimination. The system of equations corresponding to the equation <m>(A^TA)\barx{x} = A^T\vec{b}</m> are called the <em>normal equations for least squares</em>.
+        </p>
+
+        <theorem>
+            <title>Normal equations for least squares</title>
+            <statement>
+                <p>
+                    Suppose <m>A</m> is a <m>m\times n</m> real matrix and <m>\vec{b}\in\R^m</m>. The inconsistent system of equations represented by the matrix equation
+                    <me>
+                        A\vec{x}=\vec{b}
+                    </me>
+                    has a <term>least squares approximation <m>\barx{x}</m></term> determined by the solution of the <term>normal equations</term>,
+                    <me>
+                        (A^TA)\barx{x}=A^T\vec{b}.
+                    </me>
+                </p>
+
+                <p>
+                    The <term>residual vector <m>\vec{r}=\vec{b}-A\barx{x}</m></term> is the vector of minimum magnitude in the set
+                    <me>
+                        \set{\vec{b}-A\vec{x}:\vec{x}\in\R^n}.
+                    </me>
+                </p>
+            </statement>
+        </theorem>
+
+        <p>
+            We close this section simply by using Sage to determine the solution to <xref ref="eq_incons" />.
+        </p>
+        <sage>
+            <input>
+                A = matrix([[3,-2],[2,1],[-3,2]])
+                AT = A.transpose()
+                b = vector([4,9,6])
+                show((AT*A).inverse() * AT * b)
+            </input>
+        </sage>
+    </subsection>
+<!--         <p>
+            The power of the <m>QR</m> factorization lies in its application to the problem of <term>linear least squares</term>, where it is necessary to find an approximation to the solution of <m>A\vec{x} = \vec{b}</m> when <m>\vec{b}</m> cannot be written as a linear combination of the columns of <m>A</m> (the set of which is the <term>column space of <m>A</m></term>). The approximate solution is found by computing the projection of <m>\vec{b}</m> into the column space. Specifically, if <m>A = QR</m> then
+            <md>
+                <mrow>
+                    A\vec{x} = \vec{b} \amp\implies (QR)\vec{x} = \vec{b}
+                </mrow>
+                <mrow>
+                    \amp\implies (QR)^*(QR)\vec{x} = (QR)^*\vec{b}
+                </mrow>
+            </md>.
+            Now take <m>\vec{b'}=(QR)^*\vec{b}</m>, and observe
+            <md>
+                <mrow>
+                    (QR)^*(QR)\vec{x} \amp= (R^*Q^*QR)\vec{x}
+                </mrow>
+                <mrow>
+                    \amp= R^* I_n R \vec{x} = (R^*R)\vec{x}
+                </mrow>
+            </md>.
+            Moreover, <m>R^*R</m> is an invertible matrix, and the solution
+            <me>
+                \vec{x'} = (R^*R)^{-1}\vec{b'}
+            </me>
+            is the nearest point in the column space of <m>A</m> to the desired solution <m>\vec{b}</m>.
+        </p>
+  -->
+
+</section>

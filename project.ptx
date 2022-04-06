@@ -28,7 +28,7 @@
         and run `pretext build subset` (or `view` with watch option) -->
     <target name="subset">
       <format>html</format>
-      <source>source/main-subset.ptx</source>
+      <source>source/aam-main-subset.ptx</source>
       <publication>publication/publication.ptx</publication>
       <output-dir>output/subset</output-dir>
       <stringparam key="debug.skip-knowls" value="yes"/>

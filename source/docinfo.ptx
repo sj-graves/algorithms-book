@@ -25,6 +25,7 @@
 <!--         \newcommand{\mathscr}[1]{\mathcal{#1}} -->
 
         \newcommand{\set}[1]{\left\{#1\right\}}
+        \newcommand{\upto}[1]{\set{0,1,\dotsc,#1-1}}
         \newcommand{\seq}[1]{\left(#1\right)}
         \newcommand{\abs}[1]{\left|#1\right|}
         \newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
@@ -55,6 +56,10 @@
         \newcommand{\norm}[1]{\left\|#1\right\|}
         \DeclareMathOperator{\spn}{span}
         \newcommand{\spanset}[1]{\spn #1}
+
+        \newcommand{\rswap}[2]{R_{#1}\leftrightarrow R_{#2}}
+        \newcommand{\rscale}[2]{\left(#1\right) R_{#2}}
+        \newcommand{\relim}[3]{\left(#1\right) R_{#2}+R_{#3}}
   </macros>
 
 

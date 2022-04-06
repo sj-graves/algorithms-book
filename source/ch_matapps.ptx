@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<chapter xml:id="ch-matrix-apps" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Matrix Applications</title>
+    <introduction>
+        <p>
+            Now that we have established classes for interacting with matrices and vectors, we can discuss some practical problems for which matrix techniques are ideally suited.
+        </p>
+    </introduction>
+    <xi:include href="./sec_matapps_ssles.ptx"/>
+    <xi:include href="./sec_matapps_gjepp.ptx" />
+    <xi:include href="./sec_matapps_ludecomp.ptx"/>
+    <xi:include href="./sec_matapps_qrfactor.ptx"/>
+</chapter>

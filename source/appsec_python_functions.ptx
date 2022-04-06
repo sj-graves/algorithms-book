@@ -64,23 +64,21 @@
             <p>
                 The <c>if:... elif:... else:...</c> structure permits a program to execute different subroutines depending upon the state of various <term>conditional variables.</term> Consider the following example.
             </p>
-            <sidebyside>
-                <program language="python">
-                    <input>
-                        if cond1:
-                            # If cond1 evaluate to True, do the following:
-                            opt_function1(...)
-                        elif cond2:
-                            # If cond1 evaluates to False but cond2 evaluates to True, do the
-                            # following:
-                            opt_function2(...)
-                        else:
-                            # If none of the conditions in the original if or any subsequent
-                            # elif statements evaluates to True, then do the following:
-                            else_function(...)
-                    </input>
-                </program>
-            </sidebyside>
+            <program language="python">
+                <input>
+                    if cond1:
+                        # If cond1 evaluate to True, do the following:
+                        opt_function1(...)
+                    elif cond2:
+                        # If cond1 evaluates to False but cond2 evaluates to True, do the
+                        # following:
+                        opt_function2(...)
+                    else:
+                        # If none of the conditions in the original if or any subsequent
+                        # elif statements evaluates to True, then do the following:
+                        else_function(...)
+                </input>
+            </program>
             <p>
                 After an <c>if:... elif:... else:...</c> block executes, the program does not repeat it (because it is a conditional statement, not an iteration) but returns to the same level of indentation as the original <c>if:</c> and continues the execution.
             </p>

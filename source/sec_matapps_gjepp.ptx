@@ -1,0 +1,606 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<section xml:id="sec-matapps-gje_proj" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Project: Gauss-Jordan Elimination</title>
+    <shorttitle>GJE in Python</shorttitle>
+    <objectives>
+        <introduction>
+            <p>
+                This section contains the theoretical descriptions of the Gauss-Jordan Elimination algorithm, in two distinct variations, along with explanations of why the naive method first presented is insufficient in most computational settings.
+            </p>
+        </introduction>
+        <ol>
+            <li><p>
+                Learn the formal techniques of GJE.
+                </p></li>
+            <li><p>
+                Implement the elementary row operations as methods in the <c>AlgoMatrix</c> class.
+                </p></li>
+            <li><p>
+                Combine the elementary row operations to perform Gauss-Jordan elimination with partial pivoting, and add a <c>gje</c> method to the <c>AlgoMatrix</c> class.
+                </p></li>
+            <li><p>
+                Create a method in the <c>AlgoMatrix</c> class to compute the inverse of a square matrix, or to raise an error if the matrix is singular.
+                </p></li>
+        </ol>
+    </objectives>
+    <introduction>
+        <p>
+            Given an arbitrary matrix <m>A\in\Mats{m,n}</m>, <term>Gauss-Jordan elimination (GJE)</term> is the best general-purpose algorithm for producing a matrix <m>A'\in\Mats{m,n}</m> which is row-equivalent to <m>A</m> and is in reduced row-echelon form. The algorithm proceeds iteratively through the matrix by a process of identifying a pivot position, scaling the row containing that pivot position so that the pivot position contains a 1, and then using the 1 in that pivot position to eliminate all nonzero elements in the pivot column. The variations among different types of GJE are referred to as <term>pivoting strategeies</term>, algorithms which choose the optimal row to swap into the preferred row for pivoting. In fact, the pivot selection and swapping of an entry into the pivot position is the only difference in the many algorithms, since the pivot selection step is the only step which does not change the final result of the algorithm.
+        </p>
+        <p>
+            We begin with the algorithm which seems to most easily satisfy the four points of <xref ref="defn-rref"/>, wherein the only time a number in a potential pivot position is swapped is when the pivot position contains a zero.
+        </p>
+    </introduction>
+    <subsection xml:id="sub-matapps-gje_np">
+        <title>Gauss-Jordan elimination with naive pivoting</title>
+        <p>
+            In the algorithms in this section, it is clearest to speak of performing an elementary row operation on a matrix as an in-place change of the matrix. This replaces the awkwardness of keeping track of an index of a last element of a sequence as the sequence is being built. In implementation it is simple enough to perform these changes on a copy of the original matrix, or even simply on a copy of the list-of-lists making up the data of the matrix. We use the notation <m>A\xmapsto{\phi} A</m> to represent that <m>A</m> is transformed by the operation <m>\phi</m>; this shortens the two steps of <m>A\xto{\phi}A'</m> followed by assigning <m>A</m> to take the value of <m>A'</m> into a single step of notation.
+        </p>
+        <algorithm xml:id="algo-gje">
+            <title>Gauss-Jordan elimination</title>
+            <statement>
+                <p>
+                    Given a matrix <m>A'\in\Mats{m,n}</m>, let <m>A</m> be a copy of that matrix.
+                    <ol>
+                        <li><p>
+                            Let <m>r=0</m> and <m>c=0</m>.
+                            </p></li>
+                        <li><p>
+                            While <m>r\lt m</m> and <m>c\lt n</m>, repeat the following:
+                            <ol>
+                                <li><title>Pivot Selection</title><p>
+                                    If <m>\entry{A_{-1}}{r,c} = 0</m>, do the following:
+                                    <ol>
+                                        <li><p>
+                                            Let <m>r'</m> be the least row index satisfying <m>r\lt r'\lt m</m> and <m>\entry{A}{r',c}\neq 0</m>. If no such <m>r'</m> exists, increase <m>c</m> by 1 and return to step (2).
+                                            </p></li>
+                                        <li><p>
+                                            Let <m>A\xmapsto{\rswap{r}{r'}} A</m>.
+                                            </p></li>
+                                    </ol>
+                                    </p></li>
+                                <li><title>Scaling pivot row</title><p>
+                                    Set <m>\alpha = \entry{A}{r,c}</m>, and if <m>\alpha\neq 1</m>, let <m>A\xmapsto{\rscale{\frac1{\alpha}}{r}} A</m>
+                                    </p></li>
+                                <li><title>Elimination phase</title><p>
+                                    For every row index <m>r'\neq r</m>, do the following:
+                                    <ol>
+                                        <li><p>
+                                            Let <m>\alpha = \entry{A}{r',c}</m>.
+                                            </p></li>
+                                        <li><p>
+                                            Let <m>A\xmapsto{\relim{-\alpha}{r}{r'}} A</m>
+                                            </p></li>
+                                    </ol>
+                                    </p></li>
+                                <li><p>
+                                    Increase both <m>r</m> and <m>c</m> by 1.
+                                    </p></li>
+                            </ol>
+                            </p></li>
+                        <li><p>
+                            When step (2) finishes, the matrix <m>A</m> is in reduced row-echelon form and is row-equivalent to the initial matrix <m>A'</m>.
+                            </p></li>
+                    </ol>
+                </p>
+            </statement>
+        </algorithm>
+        <remark>
+            <p>
+                It is frequently useful to preform a GJE algorithm on an augmented matrix <m>[A|B]</m> where <m>A\in\Mats{m,n}</m> and <m>B\in\Mats{m,q}</m>; in this case the <q>augmentation line</q> is treated as the edge of the matrix for the purposes of halting; pivot selection never continues when <m>c\geq n</m> as the algorithm terminates at that point.
+            </p>
+        </remark>
+    </subsection>
+    <subsection xml:id="sub-matapps-gje_naive_flaw">
+        <title>Swamping: the computational flaw in naive pivoting</title>
+        <p>
+            We must frequently recall when performing computational algorithms that an algorithm which works perfectly on paper can fail catastrophically when converted from calculations over <m>\Comps</m> to calculations over the floating-point approximations to <m>\Comps</m>. Consider the following small example.
+        </p>
+        <example xml:id="exmp-no_swamping_exact">
+            <title>Calculations in exact arithmetic</title>
+            <p>
+                Let
+                <md>
+                    <mrow>
+                        A \amp= \begin{bmatrix}10^{-20}\amp 1 \\ 1 \amp 2\end{bmatrix} \amp
+                        \vec{b} \amp= \cvec{1\\4}
+                    </mrow>
+                </md>
+                and consider the SLE with augmented matrix <m>[A\mid\vec{b}]</m>. Then following the naive algorithm and using exact arithmetic, we have
+                <md>
+                    <mrow>
+                        [A\mid \vec{b}] \xto{\rscale{10^{20}}{0}}
+                        \amp\begin{bmatrix}
+                        1 \amp 10^{20} \amp 10^{20} \\
+                        1 \amp 2 \amp 4
+                        \end{bmatrix}
+                    </mrow>
+                    <mrow>
+                        \xto{\relim{-1}{0}{1}}
+                        \amp\begin{bmatrix}
+                        1 \amp 10^{20} \amp 10^{20} \\
+                        0 \amp 2-10^{20} \amp 4-10^{20}
+                        \end{bmatrix}
+                    </mrow>
+                    <mrow>
+                        \xto{\rscale{1/(2-10^{20})}{1}}
+                        \amp\begin{bmatrix}
+                        1 \amp 10^{20} \amp 10^{20} \\
+                        0 \amp 1 \amp \frac{4-10^{20}}{2-10^{20}}
+                        \end{bmatrix}
+                    </mrow>
+                    <mrow>
+                        \xto{\relim{-10^{20}}{1}{0}}
+                        \amp\begin{bmatrix}
+                        1 \amp 0 \amp 10^{20}\left(1- \frac{4-10^{20}}{2-10^{20}} \right) \\
+                        0 \amp 1 \amp \frac{4-10^{20}}{2-10^{20}}
+                        \end{bmatrix}
+                    </mrow>
+                </md>
+                If our solution vector is <m>\vec{x}</m>, then we see
+                <md>
+                    <mrow>
+                        \entry{\vec{x}}{0} \amp= 10^{20}\left(1- \frac{4-10^{20}}{2-10^{20}} \right)
+                    </mrow>
+                    <mrow>
+                        \amp= 10^{20}\left(\frac{2-10^{20}-4+10^{20}}{2-10^{20}} \right)
+                    </mrow>
+                    <mrow>
+                        \amp = 2\left(\frac{10^{20}}{10^{20}-2}\right)
+                    </mrow>
+                    <mrow>
+                        \amp= 2\left(\frac{100000000000000000000}{99999999999999999998}\right)
+                            \approx 2
+                    </mrow>
+                    <intertext>and</intertext>
+                    <mrow>
+                        \entry{\vec{x}}{1} \amp= \frac{10^{20}-4}{10^{20}-2}
+                    </mrow>
+                    <mrow>
+                        \amp = \frac{99999999999999999996}{99999999999999999998} \approx 1
+                    </mrow>
+                </md>.
+            </p>
+        </example>
+        <p>
+            Unfortunately, the 64-bit specification for floating point arithmetic which is in modern use can only see differences larger than about <m>10^{-15}</m> times the scale of the number. Hence in floating point arithmetic, we have staggeringly different results with the naive algorithm.
+        </p>
+        <example xml:id="exmp-swamping">
+            <title>Calculations in floating point arithmetic</title>
+            <p>
+                Let
+                <md>
+                    <mrow>
+                        A \amp= \begin{bmatrix}
+                        1.0\times 10^{-20}\amp 1.0 \\ 1.0 \amp 2.0\end{bmatrix} \amp
+                        \vec{b} \amp= \cvec{1.0\\4.0}
+                    </mrow>
+                </md>
+                and consider the SLE with augmented matrix <m>[A\mid\vec{b}]</m>. Then following the naive algorithm and using floating point arithmetic, we have
+                <md>
+                    <mrow>
+                        [A\mid \vec{b}] \xto{\rscale{10^{20}}{0}}
+                        \amp\begin{bmatrix}
+                        1.0 \amp 1.0\times 10^{20} \amp 1.0\times 10^{20} \\
+                        1.0 \amp 2.0 \amp 4.0
+                        \end{bmatrix}
+                    </mrow>
+                    <mrow>
+                        \xto{\relim{-1.0}{0}{1}}
+                        \amp\begin{bmatrix}
+                        1.0 \amp 1.0\times 10^{20} \amp 1.0\times 10^{20} \\
+                        0.0 \amp -1.0\times 10^{20} \amp -1.0\times 10^{20}
+                        \end{bmatrix}
+                    </mrow>
+                    <mrow>
+                        \xto{\rscale{-10^{-20}}{1}}
+                        \amp\begin{bmatrix}
+                        1.0 \amp 1.0\times 10^{20} \amp 1.0\times 10^{20} \\
+                        0 \amp 1.0 \amp 1.0
+                        \end{bmatrix}
+                    </mrow>
+                    <mrow>
+                        \xto{\relim{1.0\times 10^{20}}{1}{0}}
+                        \amp\begin{bmatrix}
+                        1.0 \amp 0.0 \amp 0.0 \\
+                        0.0 \amp 1.0 \amp 1.0
+                        \end{bmatrix}
+                    </mrow>
+                <intertext>which gives a solution vector</intertext>
+                    <mrow>
+                        \vec{x} \amp= \cvec{0.0\\1.0}
+                    </mrow>
+                </md>.
+                As shown in the previous example, this is <em>very incorrect</em>, even in approximation.
+            </p>
+        </example>
+    </subsection>
+    <subsection xml:id="sub-matapps-gje_pp">
+        <title>Gauss-Jordan elimination with partial pivoting</title>
+        <p>
+            Fortunately the algorithmic modification which overcomes the problem of swamping is minor: the pivot position must be selected so that it is always the element of greatest absolute value in its subcolumn.
+        </p>
+                <algorithm xml:id="algo-gje_pp">
+            <title>Gauss-Jordan elimination with Partial Pivoting</title>
+            <statement>
+                <p>
+                    Given a matrix <m>A'\in\Mats{m,n}</m>, let <m>A</m> be a copy of that matrix.
+                    <ol>
+                        <li><p>
+                            Let <m>r=0</m> and <m>c=0</m>.
+                            </p></li>
+                        <li><p>
+                            While <m>r\lt m</m> and <m>c\lt n</m>, repeat the following:
+                            <ol>
+                                <li><title>Pivot Selection</title><p>
+                                    Let <m>p</m> be the least row index satisfying <m>r\leq p\lt m</m> and such that <m>\abs{\entry{A}{p,c}}\geq \abs{\entry{A}{r',c}}</m> for all <m>r\leq r'\lt m</m>.
+                                    <ol>
+                                        <li><p>
+                                            If <m>\entry{A}{p,c} = 0</m>, increase <m>c</m> by 1 and return to step (2).
+                                            </p></li>
+                                        <li><p>
+                                            If <m>\entry{A}{p,c} > 0</m>, let <m>A\xmapsto{\rswap{p}{r}} A</m>.
+                                            </p></li>
+                                    </ol>
+                                    </p></li>
+                                <li><title>Scaling pivot row</title><p>
+                                    Set <m>\alpha = \entry{A}{r,c}</m>, and if <m>\alpha\neq 1</m>, let <m>A\xmapsto{\rscale{\frac1{\alpha}}{r}} A</m>
+                                    </p></li>
+                                <li><title>Elimination phase</title><p>
+                                    For every row index <m>r'\neq r</m>, do the following:
+                                    <ol>
+                                        <li><p>
+                                            Let <m>\alpha = \entry{A}{r',c}</m>.
+                                            </p></li>
+                                        <li><p>
+                                            Let <m>A\xmapsto{\relim{-\alpha}{r}{r'}} A</m>
+                                            </p></li>
+                                    </ol>
+                                    </p></li>
+                                <li><p>
+                                    Increase both <m>r</m> and <m>c</m> by 1.
+                                    </p></li>
+                            </ol>
+                            </p></li>
+                        <li><p>
+                            When step (2) finishes, the matrix <m>A</m> is in reduced row-echelon form and is row-equivalent to the initial matrix <m>A'</m>.
+                            </p></li>
+                    </ol>
+                </p>
+            </statement>
+        </algorithm>
+        <p>
+            This slight change fixes the swamping even in small example!
+        </p>
+        <example xml:id="exmp-drain_the_swamp">
+            <title>Drain the swamp!</title>
+            <statement>
+                <p>
+                    Let
+                    <md>
+                        <mrow>
+                            A \amp= \begin{bmatrix}
+                            1.0\times 10^{-20}\amp 1.0 \\ 1.0 \amp 2.0\end{bmatrix} \amp
+                            \vec{b} \amp= \cvec{1.0\\4.0}
+                        </mrow>
+                    </md>
+                    and consider the SLE with augmented matrix <m>[A\mid\vec{b}]</m>. Then following the partial pivoting algorithm and using exact arithmetic, we have to swap rows immediately, obtaining
+                    <md>
+                        <mrow>
+                            [A\mid \vec{b}] \xto{\rswap{0}{1}}
+                            \amp\begin{bmatrix}
+                            1.0 \amp 2.0 \amp 4.0 \\
+                            1.0\times 10^{-20}\amp 1.0 \amp 1.0
+                            \end{bmatrix}
+                        </mrow>
+                        <mrow>
+                            \xto{\relim{-10^{-20}}{0}{1}}
+                            \amp\begin{bmatrix}
+                            1.0 \amp 2.0 \amp 4.0 \\
+                            0.0 \amp 1.0 \amp 1.0
+                            \end{bmatrix}
+                        </mrow>
+                        <mrow>
+                            \xto{\relim{-2}{1}{0}}
+                            \amp\begin{bmatrix}
+                            1.0 \amp 0.0 \amp 2.0 \\
+                            0.0 \amp 1.0 \amp 1.0
+                            \end{bmatrix}
+                        </mrow>
+                        <intertext>giving a solution vector of</intertext>
+                        <mrow>
+                            \vec{x} \amp= \cvec{2.0\\1.0}
+                        </mrow>
+                    </md>.
+                    This was our approximate solution in the exact case; we have lost some precision, but very, very little.
+                </p>
+            </statement>
+        </example>
+    </subsection>
+    <subsection xml:id="sub-matapps-implement_gje_pp">
+        <title>Implementing GJE with PP</title>
+        <p>
+            In order to build a working GJE implementation, you need to have a fully functional <c>AlgoMatrix</c> class; everything is built upon that.
+        </p>
+        <activity xml:id="proj-matapps-elem_row_ops">
+            <title>Implementing the elementary row operations</title>
+            <introduction>
+                <p>
+                    We want to build these carefully so that <c>AlgoMatrix</c> has <c>rswap</c>, <c>rscale</c>, and <c>relim</c> methods which return row-equivalent matrices having performed the appropriate operation.
+                </p>
+            </introduction>
+            <task>
+                <title>Swapping rows</title>
+                <introduction>
+                    <p>
+                        We first want to build a function which swaps elements in a <c>list</c>; if we can build such a function, it is an easy application to be able to swap rows in a <c>AlgoMatrix</c>.
+                    </p>
+                </introduction>
+                <task>
+                    <p>
+                        Suppose that <c>grid</c> is a list of <m>m</m> entries and <m>0\leq r_1\lt r_2 \lt m</m> are valid indices of <c>grid</c>. What is the slice of <c>grid</c> prior to <m>r_1</m>? What is the slice of <c>grid</c> containing only the <m>r_1</m>th entry of <c>grid</c>? What is the slice of <c>grid</c> between indices <m>r_1</m> and <m>r_2</m> but not containing either? What is the slice of <c>grid</c> containing only the <m>r_2</m>th element of <c>grid</c>? And finally, what is the slice of <c>grid</c> beyond the index <m>r_2</m> not containing the element in index <m>r_2</m>?
+                    </p>
+                </task>
+                <task>
+                    <p>
+                        How could you add together the slices from the preceding part to swap the elements in indices <m>r_1</m> and <m>r_2</m> of <c>grid</c>?
+                    </p>
+                </task>
+                <task>
+                    <p>
+                        Complete the following function in your <c>aam_proj6.py</c> file by setting <c>out</c> to the appropriate value <em>in a single line</em>.
+                    </p>
+                    <program language="python">
+                        <input>
+                            def gswap(grid, r1, r2):
+                                """Return a list consisting of the contents of grid with elements
+                                    in indices r1 and r2 swapped."""
+                                out = None
+                                return out
+                        </input>
+                    </program>>
+                </task>
+                <task>
+                    <p>
+                        Adapt the function <c>gswap</c> from the previous subtask to the following method in your <c>AlgoMatrix.py</c> class file.
+                    </p>
+                    <program language="python">
+                        <input>
+                            def rswap(self, r1, r2):
+                                """Return the AlgoMatrix obtained from self by swapping rows
+                                    with indices r1 and r2."""
+                                out = None
+                                return AlgoMatrix(out)
+                        </input>
+                    </program>
+                </task>
+            </task>
+            <task>
+                <title>Scaling a row</title>
+                <introduction>
+                    <p>
+                        Similarly to (a), we first work on a <c>list</c>.
+                    </p>
+                </introduction>
+                <task>
+                    <p>
+                        Suppose that <c>grid</c> is a list of <m>m</m> entries and <m>0\leq r_1\lt m</m>, and suppose <m>\alpha\in\Comps</m>. Suppose further that the element of <c>grid</c> in index <m>r_1</m> is a container, like a <c>list</c> or <c>tuple</c>. How could you create a new version of that container whose elements have all been multiplied by <m>\alpha</m>?
+                    </p>
+                </task>
+                <task>
+                    <p>
+                        Complete the following function in your <c>aam_proj6.py</c> file to produce the effect described in the function's docstring.
+                    </p>
+                    <program language="python">
+                        <input>
+                            def gscale(grid, alpha, r1):
+                                """Return a list whose elements are identical to those of grid,
+                                    except in the index r1, which has been scaled by a factor
+                                    of alpha."""
+                                temp_entry = [ ]
+                                for entry in grid[r1]:
+                                    temp_entry.append( None )
+                                # Build out on the next line using slicing and addition.
+                                out = None
+                                return out
+                        </input>
+                    </program>
+                </task>
+                <task>
+                    <p>
+                        Adapt the function <c>gscale</c> from the previous subtask to the following method in your <c>AlgoMatrix.py</c> class file.
+                    </p>
+                    <program language="python">
+                        <input>
+                            def rscale(self, alpha, r1):
+                                """Return the AlgoMatrix obtained from self by scaling the row
+                                    with index r1 by a factor of alpha."""
+                                out = None
+                                return AlgoMatrix(out)
+                        </input>
+                    </program>
+                </task>
+            </task>
+            <task>
+                <title>Eliminating one row using a scalar multiple of another</title>
+                <introduction>
+                    <p>
+                        This task is a combination of tasks (a) and (b).
+                    </p>
+                </introduction>
+                <task>
+                    <p>
+                        Complete the following function in your <c>aam_proj6.py</c> file to produce the effect described in the function's docstring.
+                    </p>
+                    <program language="python">
+                        <input>
+                            def gelim(grid, alpha, r1, r2):
+                                """Return a list whose elements are identical to those of grid,
+                                    except in the index r2, which has been modified by adding to
+                                    it term-by-term the elements of the entry in index r1 scaled
+                                    by a factor of alpha."""
+                                temp_entry = [ ]
+                                for entry1, entry2 in zip(grid[r1], grid[r2]):
+                                    temp_entry.append( None )
+                                # Build out on the next line using slicing and addition.
+                                out = None
+                                return out
+                        </input>
+                    </program>
+                </task>
+                <task>
+                    <p>
+                        In your <c>AlgoMatrix.py</c> class file, complete the method below by adapting the <c>gelim</c> function.
+                    </p>
+                    <program language='python'>
+                        <input>
+                            def relim(self, alpha, r1, r2):
+                                """Return a row-equivalent matrix to self which is obtained
+                                    by performing the elimination operation which adds to the
+                                    row with index r2 term-by-term the elements of the row
+                                    with index r1 scaled by alpha."""
+                                out = None
+                                return AlgoMatrix(out)
+                        </input>
+                    </program>
+                </task>
+            </task>
+        </activity>
+        <p>
+            Now you have adequate tools to combine the row operations and implement the GJE algorithm as a method in the <c>AlgoMatrix</c> class.
+        </p>
+        <activity xml:id="proj-matapps-gje">
+            <title>Implement Gauss-Jordan Elimination with Partial Pivoting</title>
+            <p>
+                Complete the following in <c>AlgoMatrix.py</c> by replacing the well-marked comments with the appropriate code.
+            </p>
+            <program language='python'>
+                <input>
+                    def gje(self, ncols=None):
+                        '''Perform Gauss-Jordan elimination with Partial Pivoting on the first
+                            ncols of self; if ncols is not specified, perform the algorithm on
+                            the entire matrix.'''
+                        m, n = self.dims()
+                        if ncols in range(n):
+                            max_col = ncols
+                        elif ncols == None:
+                            max_col = n
+                        else:
+                            raise ValueError("Invalid number of columns to left of augmentation.")
+                        r, c = 0, 0
+                        grid = AlgoMatrix(self._data)
+                        while r&lt; m and c&lt; max_col:
+                            # Pivot Selection
+                            temp_max = abs(grid[r, c])
+                            piv_row = r
+                            for r_prime in range(r+1, m):
+                                # Find the greatest modulus entry in the subcolumn
+                                if abs(grid[r_prime, c]) > temp_max:
+                                    temp_max = abs(grid[r_prime, c])
+                                    piv_row = r_prime
+                            if temp_max == 0:
+                                #
+                                # Something needs to happen here to move the process to the
+                                # next column; the continue line below makes the process
+                                # go back to the beginning of the while loop, which is
+                                # necessary. What must change to make the process move to
+                                # the next column? Replace this comment.
+                                #
+                                continue
+                            elif piv_row != r:
+                                # Swap rows, we found a bigger pivot!
+                                #
+                                # Remember that grid is an AlgoMatrix and that the
+                                # row operations produce a new row-equivalent matrix
+                                # rather than changing self.
+                                #
+                                grid = None
+                            if grid[r, c] != 1:
+                                # Scale pivot row
+                                alpha = grid[r, c]
+                                #
+                                # Remember that grid is an AlgoMatrix and that the
+                                # row operations produce a new row-equivalent matrix
+                                # rather than changing self.
+                                #
+                                grid = None
+                            for r_prime in range(m):
+                                # Eliminate column entries outside pivot row
+                                if r_prime == r: continue
+                                alpha = grid[r_prime, c]
+                                #
+                                # Remember that grid is an AlgoMatrix and that the
+                                # row operations produce a new row-equivalent matrix
+                                # rather than changing self.
+                                #
+                                grid = None
+                            # Step down and right
+                            r += 1
+                            c += 1
+                        return grid
+                </input>
+            </program>
+        </activity>
+        <activity xml:id="proj-matapps-identity">
+            <title>Identity matrices</title>
+            <p>
+                Write a function in <c>aam_proj6.py</c> which returns the identity <c>AlgoMatrix</c> of size <c>cols</c>.
+            </p>
+            <program language="python">
+                <input>
+                    def idmat(cols):
+                        """Return the identity matrix of size cols"""
+                        if type(cols) != int:
+                            raise TypeError("Bad size")
+                        elif cols &lt;= 0:
+                            raise ValueError("Bad size")
+                        out = [ ]
+                        for r in range(cols):
+                            out.append( [ ] )
+                            for c in range(cols):
+                                if r==c:
+                                    out.append(None)
+                                else:
+                                    out.append(None)
+                        return AlgoMatrix(out)
+                </input>
+            </program>
+        </activity>
+        <activity xml:id="proj-matapps-inverse">
+            <title>Inverse matrices</title>
+            <p>
+                Use augmentation, Gauss-Jordan elimination, and the creation of an <c>AlgoMatrix</c> from a slice of the columns of another <c>AlgoMatrix</c> together to add the following method to the <c>AlgoMatrix</c> class:
+            </p>
+            <program language="python">
+                <input>
+                    def inverse(self):
+                        """Return the inverse of self if self is a nonsingular square matrix."""
+                        m, n = self.dims()
+                        if m == n:
+                            # Build the correct augmented matrix
+                            augmentation = None
+                            bigger_mat = None
+                            # Find the RREF matrix row-equivalent to it.
+                            rref_bigger_mat = None
+                            # Extract the correct columns from it as slices
+                            left_submat = None
+                            right_submat = None
+                            # Return the answer
+                            if SOME_NICE_CONDITION:
+                                return AlgoMatrix(THE_CORRECT_INPUT)
+                            else:
+                                raise ValueError("Singular matrix")
+                        else:
+                            raise ValueError("Non-square matrices are not invertible.")
+                </input>
+            </program>
+        </activity>
+    </subsection>
+  <!--
+  <xi:include href=".subsec-emp-intro.ptx" />
+  <xi:include href=".subsec-emp-next.ptx" />
+  <xi:include href=".subsec-emp-conc.ptx" />
+  -->
+
+</section>

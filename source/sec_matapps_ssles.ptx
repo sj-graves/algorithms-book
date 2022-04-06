@@ -1,0 +1,428 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<section xml:id="sec-matapps-ssles" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Solving Systems of Linear Equations</title>
+    <introduction>
+        <p>
+            Matrix manipulation can be found in many applied mathematical fields, and the principle reason for this is the utility of amtrices in solving systems of simultaneous linear equations.
+        </p>
+        <definition xml:id="defn-sle">
+            <title>System of Linear Equations</title>
+            <statement>
+                <p>
+                    A <term>system of linear equations (SLE)</term> is a collection of <m>m-1</m> equations in variables <m>z_0, z_1, \dotsc, z_{n-1}</m> of the form
+                    <md>
+                        <mrow>
+                            a_{0,0}z_0 + a_{0,1}z_1 + a_{0,2}z_2 + \cdots + a_{0,n-1}z_{n-1} \amp = b_0
+                        </mrow>
+                        <mrow>
+                            a_{1,0}z_0 + a_{1,1}z_1 + a_{1,2}z_2 + \cdots + a_{1,n-1}z_{n-1} \amp = b_1
+                        </mrow>
+                        <mrow>
+                            a_{2,0}z_0 + a_{2,1}z_1 + a_{2,2}z_2 + \cdots + a_{2,n-1}z_{n-1} \amp = b_2
+                        </mrow>
+                        <mrow>\amp\vdots</mrow>
+                        <mrow>
+                            a_{m-1,0}z_0 + a_{m-1,1}z_1 + a_{m-1,2}z_2 + \cdots + a_{m-1,n-1}z_{n-1} \amp = b_{m-1}
+                        </mrow>
+                    </md>
+                    where all the values <m>a_{r,c},b_r\in\Comps</m> for <m>r\in\upto{m}</m> and <m>c\in\upto{n}</m>. A vector <m>\vv\in\CV{n}</m> is a <term>solution</term> to the system of linear equations if and only if
+                    <me>
+                        a_{r,0}\entry{\vv}{0} + a_{r,1}\entry{\vv}{1} + \cdots + a_{r,n-1}\entry{\vv}{n-1} = \sum_{c=0}^{n-1}a_{r,c}\entry{\vv}{c} = b_r
+                    </me>
+                    for all <m>r\in\upto{m}</m>.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            This should look familiar to everyone, as there are also signs of this being a linear combination!
+        </p>
+        <p>
+                Since we already have the language of matrices and vectors, we can take the definition of an SLE and recast it as a vector equation very easily. Consider the following: given
+                <ul>
+                    <li><p>
+                        a constant matrix <m>A\in\Mats{m,n}</m> satisfying <m>\entry{A}{r,c}=a_{r,c},</m>
+                        </p></li>
+                    <li><p>
+                        a variable vector <m>\vv\in\CV{n}</m> satisfying <m>\entry{\vv}{c} = z_c</m>, and
+                        </p></li>
+                    <li><p>
+                        a constant vector <m>\vec{b}\in\CV{m}</m> satisfying <m>\entry{\vec{b}}{r} = b_r</m>
+                        </p></li>
+                </ul>
+                for all <m>r\in\upto{m}</m> and <m>c\in\upto{n}</m>, we can recast the equation using bracket notation for entries. In fact,
+                <me>
+                    \entry{\vec{b}}{r} = \entry{\sum_{c=0}^{n-1}\entry{A}{r,c}\entry{\vv}{c}}{r} = \entry{A\vv}{r}
+                </me>
+                for all <m>r\in\upto{m}</m> by definition of matrix-vector product, and so by definition of vector equality this is the vector equation <me>A\vv = \vec{b}</me>.
+            </p>
+            <definition xml:id="defn-sle_augmented_rep">
+                <title>Augmented matrix representation of a SLE</title>
+                <statement>
+                    <p>
+                        The SLE represented by a vector equation <m>A\vv = \vec{b}</m> will also has an <term>augmented matrix representation</term>, specifically the matrix <m>[A|\vec{b}]\in\Mats{m,n+1}</m>.
+                    </p>
+                </statement>
+            </definition>
+            <p>
+                In order to build an algorithm for solving systems of equations, we need to carefully define a few more matrix operations.
+            </p>
+    </introduction>
+    <subsection xml:id="sub-matapps-sles-rowops">
+        <title>Elementary row operations</title>
+        <p>
+            There are precisely three new operations which must be added to the algebraic operations on <m>\Mats{m,n}</m> to allow us to build an amazing algorithm. We will call these the <term>row swap</term>, the <term>row scaling</term>, and <term>elimination</term> operations; the last name is not necessarily accurate to the operation but is precisely the use to which we will put the operation.
+        </p>
+        <definition xml:id="defn-row_swap">
+            <title>Row swap operation</title>
+            <statement>
+                <p>
+                    The operation <m>\rswap{k}{\ell}</m> applied to the matrix <m>A\in\Mats{m,n}</m> produces the matrix <m>A'\in\Mats{m,n}</m> satisfying
+                    <me>
+                        \entry{A'}{r,c} = \begin{cases}
+                            \entry{A}{r,c} \amp r\notin\set{k,\ell} \\
+                            \entry{A}{k,c} \amp r=\ell \\
+                            \entry{A}{\ell,c} \amp r=k
+                        \end{cases}
+                    </me>.
+                    That is to say, <m>A'</m> is the same as <m>A</m> except rows <m>k</m> and <m>\ell</m> have been swapped.
+                </p>
+            </statement>
+        </definition>
+        <definition xml:id="defn-row_scale">
+            <title>Row scaling operation</title>
+            <statement>
+                <p>
+                    The operation <m>\rscale{\alpha}{k}</m> applied to the matrix <m>A\in\Mats{m,n}</m> produces the matrix <m>A'\in\Mats{m,n}</m> satisfying
+                    <me>
+                        \entry{A'}{r,c} = \begin{cases}
+                            \entry{A}{r,c} \amp r\neq k \\
+                            \alpha\entry{A}{r,c} \amp r=k
+                        \end{cases}
+                    </me>. That is to say, <m>A'</m> is the same as <m>A</m> except all entries in row <m>k</m> have been scaled by a factor of <m>\alpha</m>.
+                </p>
+            </statement>
+        </definition>
+        <definition xml:id="defn-row_elim">
+            <title>Row elimination operation</title>
+            <statement>
+                <p>
+                    The operation <m>\relim{\alpha}{k}{\ell}</m> applied to the matrix <m>A\in\Mats{m,n}</m> produces the matrix <m>A'\in\Mats{m,n}</m> satisfying
+                    <me>
+                        \entry{A'}{r,c} = \begin{cases}
+                            \entry{A}{r,c} \amp r\neq \ell \\
+                            \alpha\entry{A}{k,c}+\entry{A}{\ell,c} \amp r=\ell
+                        \end{cases}
+                    </me>. That is to say, <m>A'</m> is produced from <m>A</m> by scaling row <m>k</m> of <m>A</m> by a factor of <m>\alpha</m>, and adding corresponding entries of that row to the entris of row <m>\ell</m>; the resulting row remains in row <m>\ell</m> and row <m>k</m> of <m>A'</m> is identical to that in <m>A</m>.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            Without examples, these three operations can be quite confusing.
+        </p>
+        <example xml:id="exmp-elem_row_ops">
+            <title>Examples of the elementary row operations</title>
+            <introduction>
+                <p>
+                    Let us begin with a particular matrix <m>A\in\Mats{3,5}</m>,
+                    <me>
+                        A = \begin{bmatrix}
+                            -7 \amp 1 \amp -1+1j \amp 16+8j \amp -44+1j \\
+                            -22j \amp 1-2j \amp 1-11j \amp -1+3j \amp 29+2j \\
+                            -3-3j \amp 90j \amp -2+1j \amp -1-1j \amp 0
+                        \end{bmatrix}
+                    </me>. We will denote the performance of a row operation with an annotated arrow, like so: <m>A\xto{\rswap{0}{2}} A'</m>.
+                </p>
+            </introduction>
+            <task>
+                <title>Swapping rows</title>
+                <p>
+                    This operation does not introduce any problems, as it simply rearranges the elements of a matrix. For instance,
+                    <me>
+                        A \xto {\rswap{0}{2}} \begin{bmatrix}
+                            -3-3j \amp 90j \amp -2+1j \amp -1-1j \amp 0 \\
+                            -22j \amp 1-2j \amp 1-11j \amp -1+3j \amp 29+2j \\
+                            -7 \amp 1 \amp -1+1j \amp 16+8j \amp -44+1j
+                        \end{bmatrix}
+                    </me>
+                </p>
+            </task>
+            <task>
+                <title>Scaling a row</title>
+                <p>
+                    Unlike swapping a row, scaling a row can introduce difficulties as the process of complex multiplication (especially by a reciprocal) can be tedious and reqire a conversion to floating point representations. For an easy example, see this:
+                    <me>
+                        A \xto{\rscale{(2-1j)}{1}} \begin{bmatrix}
+                            -7 \amp 1 \amp -1+1j \amp 16+8j \amp -44+1j \\
+                             -22-44j \amp -5j \amp -9-23j \amp 1+7j \amp 60-25j \\
+                            -3-3j \amp 90j \amp -2+1j \amp -1-1j \amp 0
+                        \end{bmatrix}
+                    </me>
+                    </p>
+            </task>
+            <task>
+                <title>Eliminating a row</title>
+                <p>
+                    While this operation can be used for any <m>\alpha\in\Comps</m> and valid row indices, its most typical use is to change the left-most nonzero entry in a row into a zero, by adding a multiple of another row. For instance, the leftmost nonzero entry of the row index 1 in <m>A</m> is <m>-22j</m>; to add a scalar multiple of the row of index 0 to this and eliminate the <m>-22j</m> requires scaling the top row by the constant <m>-\frac{22}7 j</m>. That is,
+                    <me>
+                            A\xto{\relim{(-\frac{22}7 j)}{0}{1}} \begin{bmatrix}
+                                -7 \amp 1 \amp -1+1j \amp 16+8j \amp -44+1j \\
+                                0 \amp \frac17(1-36j) \amp \frac17(29-55j) \amp \frac17(169-331j) \amp \frac17(225+982j) \\
+                                -3-3j \amp 90j \amp -2+1j \amp -1-1j \amp 0
+                            \end{bmatrix}
+                    </me>.
+                </p>
+            </task>
+            <conclusion>
+                <p>
+                    The difficulties here are not found in exact arithmetic, but in the approximation to exact arithmetic which is carried out during floating point computation. With exact numeric types, none of these problems occur, but this necessitates the use of sophisticated computer algebra systems or more sophisticated mathematical resources than Python's <c>math</c> package. Just in this example, for instance, we see the following:
+                </p>
+                <console>
+                    <prompt>&gt;&gt;&gt; </prompt>
+                    <input>
+                        1-36j/7
+                    </input>
+                    <output>
+                        (1-5.142857142857142j)
+                    </output>
+                </console>
+            </conclusion>
+        </example>
+        <p>
+            It is interesting that for each of these elementary row operations there is an associated <term>elementary matrix</term> which provides by left-multiplication the same effect.
+        </p>
+        <theorem xml:id='thm-elem_matrices'>
+            <title>Elementary matrices</title>
+            <statement>
+                Let <m>I_n\in\Mats{m,m}</m> be the unique <term>identity matrix of size <m>m</m></term>, satisfying
+                <me>
+                    \entry{I_m}{r,c} = \begin{cases}1,\amp r=c\\ 0,\amp r\neq c\end{cases}
+                </me>.
+                Moreover, let
+                <md>
+                    <mrow>
+                        I_m \amp\xto{\rswap{k}{\ell}} S_{k,\ell}
+                        \amp
+                        I_m \amp\xto{\rscale{\alpha}{k}} M_{\alpha, k}
+                        \amp
+                        I_m \amp\xto{\relim{\alpha}{k}{\ell}} E_{\alpha,k,\ell}
+                    </mrow>
+                </md>.
+                Then for any <m>A\in\Mats{m,n}</m>,
+                <md>
+                    <mrow>
+                        A\amp\xto{\rswap{k}{\ell}} S_{k,\ell} A
+                        \amp
+                        A\amp\xto{\rscale{\alpha}{k}} M_{\alpha,k} A
+                        \amp
+                        A\amp\xto{\relim{\alpha}{k}{\ell}} E_{\alpha,k,\ell} A
+                    </mrow>
+                </md>.
+            </statement>
+        </theorem>
+        <p>
+            The matrix <m>I_m\in\Mats{m,m}</m> serves as the <term>left-multiplicative identity</term> on <m>\Mats{m,n}</m>, since <m>I_m A = A</m> for every <m>A\in\Mats{m,n}</m>. Moreover in <m>\Mats{m,m}</m> the matrix <m>I_m</m> is the multiplicative identity for both sides of multiplication, since <m>I_mA = A = AI_m</m> whenever <m>A\in\Mats{m,m}</m>.
+        </p>
+    </subsection>
+    <subsection xml:id="sub-matapps-sles-row_equivalence">
+        <title>Row equivalence and solutions to SLEs</title>
+        <p>
+            It is beyond the scope of this class to prove the following results, but they are intrinsicly important to the study of SLEs.
+        </p>
+        <definition xml:id="defn-row_equivalence">
+            <title>Row-equivalent matrices</title>
+            <statement>
+                <p>
+                    Two matrices <m>A,A'\in\Mats{m,n}</m> are <term>row-equivalent</term> if there is a finite sequence <m>S</m> of elementary row operations such that <m>A\xto{S} A'</m>.
+                </p>
+            </statement>
+        </definition>
+        <theorem xml:id="thm-row_equivalent_same_solution">
+            <title>Row-equivalent augmented matrices have the same solutions</title>
+            <statement>
+                <p>
+                    Suppose that <m>A,A'\in\Mats{m,n}</m> and <m>\vec{b},\vec{b'}\in\CV{m}</m> such that the augmented matrices <m>[A|\vec{b}]</m> and <m>[A'|\vec{b}']</m> are row-equivalent. Then <m>\vv\in\CV{n}</m> is a solution to the augmented system <m>[A|\vec{b}]</m> if and only if <m>\vv</m> is a solution to the augmented system <m>[A'|\vec{b}']</m>; that is, <m>A\vv = \vec{b}</m> if and only if <m>A'\vv = \vec{b}'</m>.
+                </p>
+            </statement>
+        </theorem>
+        <p>
+            This is important but not all-important until we discover that there is a particular form of matrix which allows for easy determination of the solutions of an augmented system.
+        </p>
+        <definition xml:id="defn-rref">
+            <title>Reduced row-echelon form</title>
+            <statement>
+                <p>
+                    A matrix <m>A\in\Mats{m,n}</m> is in <term>reduced row-echelon form</term>, abbreviated <term>RREF</term>, if and only if it satisfies the following conditions:
+                    <dl>
+                        <li><title>ZR@B: Zero-Rows at the Bottom</title>
+                            <p>
+                                Any row of <m>A</m> consisting only of zeros has a greater row index than any row containing any nonzero elements; visually this is further <q>down</q> in the matrix.
+                            </p></li>
+                        <li><title>LMNZ=1: Leftmost Nonzeros Equal 1</title>
+                            <p>
+                                In any row of <m>A</m> not consisting only of zeros, the leftmost nonzero (LMNZ) entry is a 1. The <term>LMNZ</term> is the nonzero entry of least column index.
+                            </p></li>
+                        <li><title>LMNZKC: Leftmost Nonzeros Kill Columns</title>
+                            <p>
+                                In a column containing a LMNZ, the only nonzero entry in the column is the LMNZ.
+                            </p>
+                        </li>
+                        <li><title>LMNZGDR: Leftmost Nonzeros Go Down and Right</title>
+                            <p>
+                                If rows index <m>k</m> and <m>\ell</m> have <m>k\lt\ell</m>, then the column index of the LMNZ in row <m>k</m> is less than the column index of the LMNZ in row <m>\ell</m>; visually that makes the LMNZs go down and right, starting in the upper left corner of the matrix.
+                            </p></li>
+                    </dl>
+                </p>
+                <p>
+                    These can be formalized in terms of entry notation using brackets, but it is not fully necessary to do so. Moreover, let <m>D=\set{d_0,d_1,\dotsc,d_{s-1}}</m> be the set of column indices containing LMNZs; these are called <term>pivot columns</term>, as another term for the matrix position containing a LMNZ is a <term>pivot position</term>. Similarly let <m>F=\set{f_0,f_1,\dotsc,f_{n-s-1}}</m> be the complementary set of column indices not containing a LMNZ, so that <m>D\cup F = \upto{n}</m>.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            The sets <m>D</m> and <m>F</m> will be used algorithmically to produce a general solution to a system of linear equations.
+        </p>
+        <example xml:id="exmp-rref">
+            <title>Matrices in RREF and not in RREF</title>
+            <task>
+                <title>A matrix in RREF</title>
+                <introduction>
+                    <p>
+                        The matrix
+                        <me>
+                            A = \begin{bmatrix}
+                                1 \amp 0 \amp 2 \amp 0 \amp 0 \\
+                                0 \amp 1 \amp 1 \amp 0 \amp 0 \\
+                                0 \amp 0 \amp 0 \amp 1 \amp 0 \\
+                                0 \amp 0 \amp 0 \amp 0 \amp 0
+                                \end{bmatrix}
+                        </me>
+                        is in RREF. Check:
+                    </p>
+                </introduction>
+                <task><title>ZR@B</title>
+                    <p>
+                        The matrix has one row all of zeros, and it occurs at the bottom, beneath any row containing a nonzero element. Good.
+                    </p>
+                </task>
+                <task><title>LMNZ=1</title>
+                    <p>
+                        In the first rows indexed 0, 1, and 2, there are nonzero entries. The leftmost nonzero entries of these rows are <m>\entry{A}{0,0}=1</m>, <m>\entry{A}{1,1}=1</m>, and <m>\entry{A}{2,3}=1</m>. Very good!
+                    </p>
+                </task>
+                <task>
+                    <title>LMNZKC</title>
+                    <p>
+                        Columns indexed 0, 1, and 3 contain LMNZs, and all other elements are 0. Great!
+                    </p>
+                </task>
+                <task>
+                    <title>LMNZGDR</title>
+                    <p>
+                        The pairs of row indices and column indices of LMNZs in <m>A</m> are, in order, <m>(0,0)</m>, <m>(1,1)</m>, and <m>(2,3)</m>, which are in <q>lexicographic</q> order, which is correct. Done!
+                    </p>
+                </task>
+            </task>
+            <task>
+                <title>A matrix not in RREF</title>
+                <p>
+                    The matrix
+                    <me>
+                        B = \begin{bmatrix}
+                        0 \amp 0 \amp 0 \amp 0 \amp 0 \\
+                        0 \amp 0 \amp 3 \amp 0 \amp 1 \\
+                        1 \amp 1 \amp 0 \amp 1 \amp 1 \\
+                        0 \amp 1 \amp 0 \amp 1 \amp 1
+                        \end{bmatrix}
+                    </me>
+                    actually fails all four conditions.
+                </p>
+            </task>
+        </example>
+        <p>
+            We have defined RREF, but not demonstrated its usefulness, nor have we given any additional properties of RREF matrices. The most important property of the RREF is the following result.
+        </p>
+        <theorem xml:id="thm-rref_existence_uniqueness">
+            <title>Existence and Uniqueness of RREF</title>
+            <statement>
+                <p>
+                    Let <m>A\in\Mats{m,n}</m>. Then there is a matrix <m>B\in\Mats{m,n}</m> which is in reduced row-echelon form and is row-equivalent to <m>A</m>; moreover, if there are two such matrices <m>B,B'\in\Mats{m,n}</m> which are both in reduced row-echelon form and each is row-equivalent to <m>A</m>, then <m>B=B'</m>.
+                </p>
+            </statement>
+        </theorem>
+        <p>
+            Due to the existence and uniqueness result, it is common to discuss <q>the reduced row-echelon form of a matrix <m>A</m></q>, when really we mean <q>a matrix <m>A'</m> in RREF which is row-equivalent to the matrix <m>A</m></q>.
+        </p>
+        <remark>
+            <title>GJE notation</title>
+            <p>
+                We often write <m>A\xto{GJE}A'</m> when we mean that <m>A'</m> is the matrix in RREF which is row-equivalent to <m>A</m>, specifically to avoid that lengthy phrase.
+            </p>
+        </remark>
+        <p>
+            Since we mentioned above that the matrix <m>I_n</m> is multiplicative identity in <m>\Mats{n,n}</m>, it is interesting to note which matrices in <m>\Mats{n,n}</m> have multiplicative inverses.
+        </p>
+        <definition xml:id="defn-matrix_inverse">
+            <title>Matrix inverses</title>
+            <statement>
+                <p>
+                    Let <m>A\in\Mats{n,n}</m>. Then a matrix <m>B\in\Mats{n,n}</m> is an <term>inverse</term> of <m>A</m> if and only if <m>AB = I_n = BA</m>. If such a matrix <m>B</m> exists, the matrix <m>A</m> is said to be <term>invertible</term>.
+                </p>
+            </statement>
+        </definition>
+        <theorem xml:id="thm-matrix_inverse-uni">
+            <title>Matrix inverse uniqueness</title>
+            <statement>
+                <p>
+                    Suppose that <m>A, B, C\in\Mats{n,n}</m> with <m>AB=I_n=BA</m> and <m>AC=I_n=CA</m>. Then <m>B=C</m>, and as such the unique inverse of <m>A</m> is denoted <m>A^{-1}</m>.
+                </p>
+            </statement>
+            <proof>
+                <p>
+                    If <m>AB = I_n</m> and <m>CA=I_n</m>, then
+                    <me>
+                        B = I_nB = (CA)B = C(AB) = CI_n = C
+                    </me>.
+                </p>
+            </proof>
+        </theorem>
+        <p>
+            We already have all of the tools to find <m>A^{-1}</m> when it exists.
+        </p>
+        <theorem xml:id="thm-elem_matrix_inverses">
+            <title>Elementary matrices are invertible</title>
+            <statement>
+                <p>
+                    Let <m>0\lt k \lt \ell \lt m</m> be integers and <m>\alpha\neq 0</m> a complex number. Then <m>S_{k,\ell}</m>, <m>M_{\alpha,k}</m>, and <m>E_{\alpha,k,\ell}</m> are all invertible matrices, with <m>S_{k,\ell}^{-1} = S_{k,\ell}</m>, <m>M_{\alpha,k}^{-1} = M_{1/\alpha,k}</m>, and <m>E_{\alpha,k,\ell}^{-1} = E_{-\alpha,k,\ell}</m>.
+                </p>
+            </statement>
+            <proof>
+                <p>
+                    Recalling the definitions of <m>S_{k,\ell}</m>, <m>M_{\alpha,k}</m>, and <m>E_{\alpha,k,\ell}</m> in terms of elementary row operations, we see that we can extend those definitions as follows:
+                    <md>
+                        <mrow>
+                            I_m \xto{\rswap{k}{\ell}} \amp S_{k,\ell} \xto{\rswap{k}{\ell}} I_m
+                        </mrow>
+                        <mrow>
+                            I_m \xto{\rscale{\alpha}{k}} \amp M_{\alpha,k} \xto{\rscale{1/\alpha}{k}} I_m
+                        </mrow>
+                        <mrow>
+                            I_m \xto{\relim{\alpha}{k}{\ell}} \amp E_{\alpha,k,\ell} \xto{\relim{-\alpha}{k}{\ell}} I_m
+                        </mrow>
+                    </md>
+                    as all the row operations are trivially reversible. Each of the second arrows on the above lines corresponds to the row operation which, when performed on <m>I_m</m>, results in the inverse matrices stated in the theorem.
+                </p>
+            </proof>
+        </theorem>
+        <p>
+            There are many proofs of the following theorem via many different techniques, but the result is what we desire.
+        </p>
+        <theorem xml:id="thm-matrix_inverse">
+            <title>GJE produces matrix inverses</title>
+            <statement>
+                <p>
+                    Let <m>A\in\Mats{n,n}</m> and let <m>J,B\in\Mats{n,n}</m> be matrices such that <me>[A\mid I_n]\xto{GJE}[J\mid B]</me>. Then <m>A</m> is invertible if and only if <m>J=I_n</m>, and in that case <m>B=A^{-1}</m>.
+                </p>
+            </statement>
+        </theorem>
+    </subsection>
+</section>

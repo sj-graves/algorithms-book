@@ -7,14 +7,14 @@
         <title>AAM: Algorithms for Applied Mathematics</title>
         <shorttitle>Algorithms for Applied Math</shorttitle>
         <!-- FRONTMATTER -->
-        <xi:include href="./aam_frontmatter.ptx" />
+<!--         <xi:include href="./aam_frontmatter.ptx" /> -->
         <!-- CHAPTERS -->
-        <xi:include href="./ch_intro.ptx"  />
-        <xi:include href="./ch_perms.ptx"  />
-        <xi:include href="./ch_crypto.ptx" />
-        <xi:include href="./ch_linalg.ptx" />
+<!--         <xi:include href="./ch_intro.ptx"  /> -->
+<!--         <xi:include href="./ch_perms.ptx"  /> -->
+<!--         <xi:include href="./ch_crypto.ptx" /> -->
+<!--         <xi:include href="./ch_linalg.ptx" /> -->
         <xi:include href="./ch_matapps.ptx" />
         <!-- BACKMATTER -->
-        <xi:include href="./aam_backmatter.ptx" />
+<!--         <xi:include href="./aam_backmatter.ptx" /> -->
     </book>
 </pretext>

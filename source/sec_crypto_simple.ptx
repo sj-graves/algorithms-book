@@ -56,8 +56,8 @@
     <subsection xml:id="sub-crypto-subst-freqanalysis">
         <title>Frequency analysis</title>
         <p>
-            Thankfully we are not unarmed when it comes to decrypting a monoalphabetic substitution. Even though the pool of possible permutations is vast, we can analyze the frequencies with which each letter is used in normal text to try to determine parts of the mapping. It is quite easy to write a program in Python counting the frequency of occurrence of each letter in a string. For instance, taking the original 1972 etext of the Declaration of Independence from 
-            <url href="https://www.gutenberg.org/cache/epub/1/pg1.txt" visual="www.gutenberg.org/cache/epub/1/pg1.txt">Project Gutenberg</url> 
+            Thankfully we are not unarmed when it comes to decrypting a monoalphabetic substitution. Even though the pool of possible permutations is vast, we can analyze the frequencies with which each letter is used in normal text to try to determine parts of the mapping. It is quite easy to write a program in Python counting the frequency of occurrence of each letter in a string. For instance, taking the original 1972 etext of the Declaration of Independence from
+            <url href="https://www.gutenberg.org/cache/epub/1/pg1.txt" visual="www.gutenberg.org/cache/epub/1/pg1.txt">Project Gutenberg</url>
             and converting it into all capital letters (which is how it was produced in 1972 since computers didn't have minuscule letters at that early date), we obtain the following results for the 8133 characters in the text:
         </p>
         <listing xml:id="list-declaration">
@@ -164,62 +164,60 @@
             <p>
                 Consider the following text:
             </p>
-            <pre>
-                KP GP HMBHZVXKPGRRY IKV HEHPXPJ HGURY XP CTRY G YKTPJ OGP
-                BGOH KTV KW VIH JGUUHV XP FIXBI IH RKNJHN XP BGUZHPVHUD
-                ZRGBH GPN FGRSHN DRKFRY GD VIKTJI XP IHDXVGVXKP VKFGUND
-                SKSTDISXP QUXNJH IH IGN DTBBHDDWTRRY GEKXNHN OHHVXPJ IXD
-                RGPNRGNY KP VIH DVGXUBGDH IXD JGUUHV FGD TPNHU VIH UKKW KW
-                G IXJI WXEHDVKUXHN IKTDH GPN FGD OKUH RXSH G BTZQKGUN VIGP
-                G UKKO VIH RGPNRGNY FIK ZUKEXNHN IXO FXVI JGUUHV NXPPHUD
-                GPN GVVHPNGPBH RXEHN KP VIH WRKKU QHRKF GPN HEHUY VXOH IH
-                FHPV KTV IH FGD KQRXJHN VK ZGDD IHU SXVBIHP VIH NKKU KW
-                FIXBI XPEGUXGQRY DVKKN KZHP GPN HGBI VXOH IH ZGDDHN VIH
-                YKTPJ OGP IGN G DXBS WUXJIVHPHN WHHRXPJ FIXBI OGNH IXO
-                DBKFR GPN WHHR GDIGOHN IH FGD IKZHRHDDRY XP NHQV VK IXD
-                RGPNRGNY GPN FGD GWUGXN KW OHHVXPJ IHU VIXD FGD PKV QHBGTDH
-                IH FGD BKFGUNRY GPN GQCHBV ATXVH VIH BKPVUGUY QTV WKU DKOH
-                VXOH ZGDV IH IGN QHHP XP GP KEHUDVUGXPHN XUUXVGQRH BKPNXVXKP
-                EHUJXPJ KP IYZKBIKPNUXG IH IGN QHBKOH DK BKOZRHVHRY GQDKUQHN
-                XP IXODHRW GPN XDKRGVHN WUKO IXD WHRRKFD VIGV IH NUHGNHN
-                OHHVXPJ PKV KPRY IXD RGPNRGNY QTV GPYKPH GV GRR IH FGD
-                BUTDIHN QY ZKEHUVY QTV VIH GPMXHVXHD KW IXD ZKDXVXKP IGN KW
-                RGVH BHGDHN VK FHXJI TZKP IXO IH IGN JXEHP TZ GVVHPNXPJ VK
-                OGVVHUD KW ZUGBVXBGR XOZKUVGPBH IH IGN RKDV GRR NHDXUH VK NK
-                DK PKVIXPJ VIGV GPY RGPNRGNY BKTRN NK IGN G UHGR VHUUKU WKU
-                IXO QTV VK QH DVKZZHN KP VIH DVGXUD VK QH WKUBHN VK RXDVHP
-                VK IHU VUXEXGR XUUHRHEGPV JKDDXZ VK ZHDVHUXPJ NHOGPND WKU
-                ZGYOHPV VIUHGVD GPN BKOZRGXPVD GPN VK UGBS IXD QUGXPD WKU
-                HMBTDHD VK ZUHEGUXBGVH VK RXH  PK UGVIHU VIGP VIGV IH FKTRN
-                BUHHZ NKFP VIH DVGXUD RXSH G BGV GPN DRXZ KTV TPDHHP
-            </pre>
+            <program>
+                <input>
+                    KP GP HMBHZVXKPGRRY IKV HEHPXPJ HGURY XP CTRY G YKTPJ OGP
+                    BGOH KTV KW VIH JGUUHV XP FIXBI IH RKNJHN XP BGUZHPVHUD
+                    ZRGBH GPN FGRSHN DRKFRY GD VIKTJI XP IHDXVGVXKP VKFGUND
+                    SKSTDISXP QUXNJH IH IGN DTBBHDDWTRRY GEKXNHN OHHVXPJ IXD
+                    RGPNRGNY KP VIH DVGXUBGDH IXD JGUUHV FGD TPNHU VIH UKKW KW
+                    G IXJI WXEHDVKUXHN IKTDH GPN FGD OKUH RXSH G BTZQKGUN VIGP
+                    G UKKO VIH RGPNRGNY FIK ZUKEXNHN IXO FXVI JGUUHV NXPPHUD
+                    GPN GVVHPNGPBH RXEHN KP VIH WRKKU QHRKF GPN HEHUY VXOH IH
+                    FHPV KTV IH FGD KQRXJHN VK ZGDD IHU SXVBIHP VIH NKKU KW
+                    FIXBI XPEGUXGQRY DVKKN KZHP GPN HGBI VXOH IH ZGDDHN VIH
+                    YKTPJ OGP IGN G DXBS WUXJIVHPHN WHHRXPJ FIXBI OGNH IXO
+                    DBKFR GPN WHHR GDIGOHN IH FGD IKZHRHDDRY XP NHQV VK IXD
+                    RGPNRGNY GPN FGD GWUGXN KW OHHVXPJ IHU VIXD FGD PKV QHBGTDH
+                    IH FGD BKFGUNRY GPN GQCHBV ATXVH VIH BKPVUGUY QTV WKU DKOH
+                    VXOH ZGDV IH IGN QHHP XP GP KEHUDVUGXPHN XUUXVGQRH BKPNXVXKP
+                    EHUJXPJ KP IYZKBIKPNUXG IH IGN QHBKOH DK BKOZRHVHRY GQDKUQHN
+                    XP IXODHRW GPN XDKRGVHN WUKO IXD WHRRKFD VIGV IH NUHGNHN
+                    OHHVXPJ PKV KPRY IXD RGPNRGNY QTV GPYKPH GV GRR IH FGD
+                    BUTDIHN QY ZKEHUVY QTV VIH GPMXHVXHD KW IXD ZKDXVXKP IGN KW
+                    RGVH BHGDHN VK FHXJI TZKP IXO IH IGN JXEHP TZ GVVHPNXPJ VK
+                    OGVVHUD KW ZUGBVXBGR XOZKUVGPBH IH IGN RKDV GRR NHDXUH VK NK
+                    DK PKVIXPJ VIGV GPY RGPNRGNY BKTRN NK IGN G UHGR VHUUKU WKU
+                    IXO QTV VK QH DVKZZHN KP VIH DVGXUD VK QH WKUBHN VK RXDVHP
+                    VK IHU VUXEXGR XUUHRHEGPV JKDDXZ VK ZHDVHUXPJ NHOGPND WKU
+                    ZGYOHPV VIUHGVD GPN BKOZRGXPVD GPN VK UGBS IXD QUGXPD WKU
+                    HMBTDHD VK ZUHEGUXBGVH VK RXH  PK UGVIHU VIGP VIGV IH FKTRN
+                    BUHHZ NKFP VIH DVGXUD RXSH G BGV GPN DRXZ KTV TPDHHP
+                </input>
+            </program>
             <p>
                 Applying frequency analysis to this text, we see the following:
             </p>
-            <sidebyside>
-                <program language="python">
-                    <input>
-                        [(148, 'H'), (121, 'G'), (105, 'V'), (102, 'K'), (90, 'P'),
-                        (87, 'X'), (82, 'I'), (76, 'N'), (74, 'D'), (70, 'U'),
-                        (58, 'R'), (37, 'B'), (27, 'Z'), (27, 'O'), (26, 'T'),
-                        (25, 'Y'), (24, 'J'), (24, 'F'), (23, 'W'), (21, 'Q'),
-                        (14, 'E'), (9, 'S'), (3, 'M'), (2, 'C'), (1, 'A')]
-                    </input>
-                </program>
-            </sidebyside>
+            <program language="python">
+                <input>
+                    [(148, 'H'), (121, 'G'), (105, 'V'), (102, 'K'), (90, 'P'),
+                    (87, 'X'), (82, 'I'), (76, 'N'), (74, 'D'), (70, 'U'),
+                    (58, 'R'), (37, 'B'), (27, 'Z'), (27, 'O'), (26, 'T'),
+                    (25, 'Y'), (24, 'J'), (24, 'F'), (23, 'W'), (21, 'Q'),
+                    (14, 'E'), (9, 'S'), (3, 'M'), (2, 'C'), (1, 'A')]
+                </input>
+            </program>
             <p>
                 A first guess we can make from this analysis is that the letter <c>H</c> in the ciphertext is probably an <c>E</c> in the original passage. However, the passage is actually too short to get much more than that from the frequencies of single letters, so instead we use additional clues. The frequencies of three-letter words (not trigraphs, but whole words) are as follows:
             </p>
-            <sidebyside>
-                <program language="python">
-                    <input>
-                        [(12, 'GPN'), (11, 'VIH'), (8, 'IGN'), (8, 'FGD'), (7, 'IXD'),
-                        (4, 'WKU'), (4, 'QTV'), (4, 'IXO'), (3, 'KTV'), (3, 'IHU'),
-                        (2, 'PKV'), (2, 'OGP'), (2, 'GRR'), (1, 'RXH'), (1, 'IKV'),
-                        (1, 'GPY'), (1, 'FIK'), (1, 'BGV')]
-                    </input>
-                </program>
-            </sidebyside>
+            <program language="python">
+                <input>
+                    [(12, 'GPN'), (11, 'VIH'), (8, 'IGN'), (8, 'FGD'), (7, 'IXD'),
+                    (4, 'WKU'), (4, 'QTV'), (4, 'IXO'), (3, 'KTV'), (3, 'IHU'),
+                    (2, 'PKV'), (2, 'OGP'), (2, 'GRR'), (1, 'RXH'), (1, 'IKV'),
+                    (1, 'GPY'), (1, 'FIK'), (1, 'BGV')]
+                </input>
+            </program>
             <p>
                 Since we see <c>GPN</c> and <c>VIH</c> at the front of that list, and we already suspect that <c>H</c> has replaced <c>E</c>, we now have a strong argument that <c>GPN</c> is actually <c>AND</c> and <c>VIH</c> is actually <c>THE</c>. Here's a code that allows for replacement of guesses in a pair of <q>decoder strings</q>, passed as a two-element list called <c>decoder</c>.
             </p>
@@ -253,68 +251,64 @@
             <p>
                 Assuming <c>cmsg</c> in the listing above is the encrypted message of this problem, here is the beginning of the output of <c>test_decode(cmsg, trial, 60)</c>:
             </p>
-            <sidebyside>
-                <console>
-                    <output>
-                        KP GP HMBHZVXKPGRRY IKV HEHPXPJ HGURY XP CTRY G YKTPJ OGP BG
-                        _n an e__e_t__na___ h_t e_en_n_ ea___ _n ____ a ___n_ _an _a
+            <console>
+                <output>
+                    KP GP HMBHZVXKPGRRY IKV HEHPXPJ HGURY XP CTRY G YKTPJ OGP BG
+                    _n an e__e_t__na___ h_t e_en_n_ ea___ _n ____ a ___n_ _an _a
 
-                        OH KTV KW VIH JGUUHV XP FIXBI IH RKNJHN XP BGUZHPVHUD ZRGBH
-                        _e __t __ the _a__et _n _h__h he __d_ed _n _a__ente__ __a_e
+                    OH KTV KW VIH JGUUHV XP FIXBI IH RKNJHN XP BGUZHPVHUD ZRGBH
+                    _e __t __ the _a__et _n _h__h he __d_ed _n _a__ente__ __a_e
 
-                        GPN FGRSHN DRKFRY GD VIKTJI XP IHDXVGVXKP VKFGUND SKSTDISXP
-                        and _a__ed ______ a_ th___h _n he__tat__n t__a_d_ _____h__n
+                    GPN FGRSHN DRKFRY GD VIKTJI XP IHDXVGVXKP VKFGUND SKSTDISXP
+                    and _a__ed ______ a_ th___h _n he__tat__n t__a_d_ _____h__n
 
-                        QUXNJH IH IGN DTBBHDDWTRRY GEKXNHN OHHVXPJ IXD RGPNRGNY KP V
-                        ___d_e he had ____e_______ a___ded _eet_n_ h__ _and_ad_ _n t
+                    QUXNJH IH IGN DTBBHDDWTRRY GEKXNHN OHHVXPJ IXD RGPNRGNY KP V
+                    ___d_e he had ____e_______ a___ded _eet_n_ h__ _and_ad_ _n t
 
-                        IH DVGXUBGDH IXD JGUUHV FGD TPNHU VIH UKKW KW G IXJI WXEHDVK
-                        he _ta___a_e h__ _a__et _a_ _nde_ the ____ __ a h__h ___e_t_
+                    IH DVGXUBGDH IXD JGUUHV FGD TPNHU VIH UKKW KW G IXJI WXEHDVK
+                    he _ta___a_e h__ _a__et _a_ _nde_ the ____ __ a h__h ___e_t_
 
-                        UXHN IKTDH GPN FGD OKUH RXSH G BTZQKGUN VIGP G UKKO VIH RGPN
-                        __ed h___e and _a_ ___e ___e a _____a_d than a ____ the _and
+                    UXHN IKTDH GPN FGD OKUH RXSH G BTZQKGUN VIGP G UKKO VIH RGPN
+                    __ed h___e and _a_ ___e ___e a _____a_d than a ____ the _and
 
-                        RGNY FIK ZUKEXNHN IXO FXVI JGUUHV NXPPHUD GPN GVVHPNGPBH RXE
-                        _ad_ _h_ _____ded h__ __th _a__et d_nne__ and attendan_e ___
-                    </output>
-                </console>
-            </sidebyside>
+                    RGNY FIK ZUKEXNHN IXO FXVI JGUUHV NXPPHUD GPN GVVHPNGPBH RXE
+                    _ad_ _h_ _____ded h__ __th _a__et d_nne__ and attendan_e ___
+                </output>
+            </console>
             <p>
                 We have no guarantee that the decoding we've supplied is absolutely correct, but the last line shows a clear indication that it might be: the word <c>attendan_e</c> is most likely <c>attendance</c>; this tells us that <c>B</c> probably maps to <c>C</c>. Moreover, we see several times the undecrypted word <c>KW</c>; since the first word <c>KP</c> is decoded as <c>_n</c>, it is likely that <c>K</c> should decode to either <c>I</c> or <c>O</c>, but the most commonly used two-letter word in English is <q>of</q>. Moreover, we see the third word <c>HMBHZVXKPGRRY</c> of the encoded message ends with <c>RRY</c>. It is very common in English to see words ending <q>-lly</q>, so we reason that <c>RY</c> should decode to <c>LY</c>, giving us a <term>fixed point</term>: the letter <c>Y</c> appears to have been encoded to itself! But then that would make the translation of the third word (after all these substitutions) <c>e_ce_t_onally</c>. As a first guess to that, we suppose that it is <c>exceptionally</c>, giving us the decoding of <c>MZX</c> as <c>XPI</c>. Since <c>X</c> and <c>P</c> are nowhere near the most-frequently used letters, this is exceptional deduction on our part!
             </p>
             <p>
                 We change <c>trial</c> in the above code and try again:
             </p>
-            <sidebyside>
-                <console>
-                    <prompt>>>> </prompt>
-                    <input>
-                        trial = [' VIHGPNBKWRYMZ',' THEANDCOFLYXP']
-                    </input>
-                    <output>
-                        KP GP HMBHZVXKPGRRY IKV HEHPXPJ HGURY XP CTRY G YKTPJ OGP BG
-                        on an exceptionally hot e_enin_ ea_ly in __ly a yo_n_ _an ca
+            <console>
+                <prompt>>>> </prompt>
+                <input>
+                    trial = [' VIHGPNBKWRYMZ',' THEANDCOFLYXP']
+                </input>
+                <output>
+                    KP GP HMBHZVXKPGRRY IKV HEHPXPJ HGURY XP CTRY G YKTPJ OGP BG
+                    on an exceptionally hot e_enin_ ea_ly in __ly a yo_n_ _an ca
 
-                        OH KTV KW VIH JGUUHV XP FIXBI IH RKNJHN XP BGUZHPVHUD ZRGBH
-                        _e o_t of the _a__et in _hich he lod_ed in ca_pente__ place
+                    OH KTV KW VIH JGUUHV XP FIXBI IH RKNJHN XP BGUZHPVHUD ZRGBH
+                    _e o_t of the _a__et in _hich he lod_ed in ca_pente__ place
 
-                        GPN FGRSHN DRKFRY GD VIKTJI XP IHDXVGVXKP VKFGUND SKSTDISXP
-                        and _al_ed _lo_ly a_ tho__h in he_itation to_a_d_ _o___h_in
+                    GPN FGRSHN DRKFRY GD VIKTJI XP IHDXVGVXKP VKFGUND SKSTDISXP
+                    and _al_ed _lo_ly a_ tho__h in he_itation to_a_d_ _o___h_in
 
-                        QUXNJH IH IGN DTBBHDDWTRRY GEKXNHN OHHVXPJ IXD RGPNRGNY KP V
-                        __id_e he had __cce__f_lly a_oided _eetin_ hi_ landlady on t
+                    QUXNJH IH IGN DTBBHDDWTRRY GEKXNHN OHHVXPJ IXD RGPNRGNY KP V
+                    __id_e he had __cce__f_lly a_oided _eetin_ hi_ landlady on t
 
-                        IH DVGXUBGDH IXD JGUUHV FGD TPNHU VIH UKKW KW G IXJI WXEHDVK
-                        he _tai_ca_e hi_ _a__et _a_ _nde_ the _oof of a hi_h fi_e_to
+                    IH DVGXUBGDH IXD JGUUHV FGD TPNHU VIH UKKW KW G IXJI WXEHDVK
+                    he _tai_ca_e hi_ _a__et _a_ _nde_ the _oof of a hi_h fi_e_to
 
-                        UXHN IKTDH GPN FGD OKUH RXSH G BTZQKGUN VIGP G UKKO VIH RGPN
-                        _ied ho__e and _a_ _o_e li_e a c_p_oa_d than a _oo_ the land
+                    UXHN IKTDH GPN FGD OKUH RXSH G BTZQKGUN VIGP G UKKO VIH RGPN
+                    _ied ho__e and _a_ _o_e li_e a c_p_oa_d than a _oo_ the land
 
-                        RGNY FIK ZUKEXNHN IXO FXVI JGUUHV NXPPHUD GPN GVVHPNGPBH RXE
-                        lady _ho p_o_ided hi_ _ith _a__et dinne__ and attendance li_
-                    </output>
-                </console>
-            </sidebyside>
+                    RGNY FIK ZUKEXNHN IXO FXVI JGUUHV NXPPHUD GPN GVVHPNGPBH RXE
+                    lady _ho p_o_ided hi_ _ith _a__et dinne__ and attendance li_
+                </output>
+            </console>
             <p>
                 At this point, the human brain becomes wonderfully competent at filling in blanks, even without knowing the source text; making reasonable guesses allows you to deduce all of the remaining mappings of the encoding. The only letter not occuring in the original encrypted message was <c>L</c>. Make sure you know what character was mapped to <c>L</c> in the encryption!
             </p>

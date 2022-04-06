@@ -49,19 +49,19 @@
             <p>
                 To perform Playfair's cipher, the first step is to generate a shared secret, called the <term>key phrase</term>. This can be any memorable phrase in the target alphabet. For instance, we could choose the phrase <q>Go Patriots! Talons up!</q> in an excess of school spirit. Next we have to clean up the passphrase, which takes a few steps. First, convert all alphabetic characters to capitals, throw away all non-alphabetic characters, and append the alphabet <m>\mathcal{E}</m> to the end of the key phrase. For our example, that would give us
             </p>
-            <sidebyside>
-                <pre>
+            <program>
+                <input>
                     GOPATRIOTSTALONSUPABCDEFGHIJKLMNOPQRSTUVWXYZ
-                </pre>
-            </sidebyside>
+                </input>
+            </program>
             <p>
                 Next, replace all <c>I</c> characters with <c>J</c> characters. This is necessary as the algorithm relies on a 25-letter alphabet, and since <c>J</c> looks similar to <c>I</c> but is an uncommon letter we merge all the <c>I</c> and <c>J</c> characters together. Then remove all multiple instances of a letter. This process applied to our key phrase results in a pre-processed key phrase of
             </p>
-            <sidebyside>
-                <pre>
+            <program>
+                <input>
                     GOPATRJSLNUBCDEFHKMQVWXYZ
-                </pre>
-            </sidebyside>
+                </input>
+            </program>
             <!-- PLAYFAIR GRID -->
             <p>
                 Now we write the <term>Playfair grid</term>. In a <m>5\times 5</m> grid, starting in the top left, write the letters of the pre-processed key phrase. For our key phrase, this produces the following:
@@ -77,15 +77,13 @@
             </p>
             <p>
                 Convert the message to capitals, then replace all <c>I</c> characters with <c>J</c>. We begin breaking our message into two-letter pairs called <term>digraphs</term>, but we never want a digraph to contain the same letter twice. When that happens, we will insert an <c>X</c> between the two letters, unless the letters are both <c>X</c>; in that case, insert a <c>Q</c>. This turns our message into the following: </p>
-            <sidebyside>
-                <console>
-                    <output>
-                        TH EB OX OK KE EP ER RE MA JN SX SE
-                        QU ES TE RE DT HE SU QX QU ES TJ ON
-                        RE MA JN SB JZ AR RE TA XQ XA VJ ER
-                    </output>
-                </console>
-            </sidebyside>
+            <program>
+                <input>
+                    TH EB OX OK KE EP ER RE MA JN SX SE
+                    QU ES TE RE DT HE SU QX QU ES TJ ON
+                    RE MA JN SB JZ AR RE TA XQ XA VJ ER
+                </input>
+            </program>
             <!-- Applying encryption -->
             <p>
                 To encrypt this processed message, we work one digraph at a time, drawing a box in the Playfair grid around each pair of letters. For the digraph <c>TH</c> in our grid, that looks like this:
@@ -128,12 +126,12 @@
             <p>
                 Frequently the ciphertext will be displayed in blocks of a fixed number of characters. Using an odd block size might incline a spy to think that Playfair's cipher was not being used! To reverse Playfair's cipher and decrypt our blocked ciphertext
             </p>
-            <sidebyside>
-                <pre>
+            <program>
+                <input>
                     OQUCPWPHQ CCTUNNUYL SRCPNCFEC NNQNUEAQB
                     RCKZFECNO NTJNUYLSR JCNWGLNUG TZKYPWRUN
-                </pre>
-            </sidebyside>
+                </input>
+            </program>
             <p> we simply feed the ciphertext back into the same grid, but this time use a left shift instead of right shift and an up shift instead of a down shift.
             </p>
         </example>

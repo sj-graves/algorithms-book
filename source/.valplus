@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "Jing"
+jing ~/mathbook/schema/pretext.rng ./aam-main.ptx | more
+echo "Validation Plus"
+xsltproc -xinclude ~/mathbook/schema/pretext-validation-plus.xsl ./aam-main.ptx | more

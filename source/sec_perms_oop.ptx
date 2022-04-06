@@ -160,12 +160,10 @@
             <p>
                 After executing this <c>class</c> block containing a valid <c>__init__</c> method, all that is necessary to create a new <c>MyClass</c> object is to assign the class to a name.
             </p>
-            <sidebyside>
-                <console>
-                    <prompt>>>> </prompt>
-                    <input>new_obj = MyClass(arg0, arg1, arg2, keya = "bob", keyb = "larry")</input>
-                </console>
-            </sidebyside>
+            <console>
+                <prompt>>>> </prompt>
+                <input>new_obj = MyClass(arg0, arg1, arg2, keya = "bob", keyb = "larry")</input>
+            </console>
             <p>
                 Using the class name <c>MyClass</c> as a function invokes the <c>__init__</c> method in such a way that the name <c>new_obj</c> is associated with an object of <c>MyClass</c> and then automatically used as the <c>self</c> argument of the <c>__init__</c> method.
             </p>
