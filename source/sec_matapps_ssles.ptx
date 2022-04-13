@@ -194,30 +194,32 @@
         <theorem xml:id='thm-elem_matrices'>
             <title>Elementary matrices</title>
             <statement>
-                Let <m>I_n\in\Mats{m,m}</m> be the unique <term>identity matrix of size <m>m</m></term>, satisfying
-                <me>
-                    \entry{I_m}{r,c} = \begin{cases}1,\amp r=c\\ 0,\amp r\neq c\end{cases}
-                </me>.
-                Moreover, let
-                <md>
-                    <mrow>
-                        I_m \amp\xto{\rswap{k}{\ell}} S_{k,\ell}
-                        \amp
-                        I_m \amp\xto{\rscale{\alpha}{k}} M_{\alpha, k}
-                        \amp
-                        I_m \amp\xto{\relim{\alpha}{k}{\ell}} E_{\alpha,k,\ell}
-                    </mrow>
-                </md>.
-                Then for any <m>A\in\Mats{m,n}</m>,
-                <md>
-                    <mrow>
-                        A\amp\xto{\rswap{k}{\ell}} S_{k,\ell} A
-                        \amp
-                        A\amp\xto{\rscale{\alpha}{k}} M_{\alpha,k} A
-                        \amp
-                        A\amp\xto{\relim{\alpha}{k}{\ell}} E_{\alpha,k,\ell} A
-                    </mrow>
-                </md>.
+                <p>
+                    Let <m>I_n\in\Mats{m,m}</m> be the unique <term>identity matrix</term> of size <m>m</m>, satisfying
+                    <me>
+                        \entry{I_m}{r,c} = \begin{cases}1,\amp r=c\\ 0,\amp r\neq c\end{cases}
+                    </me>.
+                    Moreover, let
+                    <md>
+                        <mrow>
+                            I_m \amp\xto{\rswap{k}{\ell}} S_{k,\ell}
+                            \amp
+                            I_m \amp\xto{\rscale{\alpha}{k}} M_{\alpha, k}
+                            \amp
+                            I_m \amp\xto{\relim{\alpha}{k}{\ell}} E_{\alpha,k,\ell}
+                        </mrow>
+                    </md>.
+                    Then for any <m>A\in\Mats{m,n}</m>,
+                    <md>
+                        <mrow>
+                            A\amp\xto{\rswap{k}{\ell}} S_{k,\ell} A
+                            \amp
+                            A\amp\xto{\rscale{\alpha}{k}} M_{\alpha,k} A
+                            \amp
+                            A\amp\xto{\relim{\alpha}{k}{\ell}} E_{\alpha,k,\ell} A
+                        </mrow>
+                    </md>.
+                </p>
             </statement>
         </theorem>
         <p>

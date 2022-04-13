@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<chapter xml:id="ch-gtalgos" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Graph Theory Algorithms</title>
+    <introduction>
+        <p>
+            In this final chapter we revisit our initial example along with several other examples of algorithms from the discipline of graph theory.
+        </p>
+    </introduction>
+    <xi:include href="./sec_gtalgos_basics.ptx" />
+    <xi:include href="./sec_gtalgos_mst.ptx" />
+    <xi:include href="./sec_gtalgos_shortestpath.ptx" />
+    <xi:include href="./sec_gtalgos_maxflowmincut.ptx" />
+</chapter>

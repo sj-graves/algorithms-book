@@ -1,0 +1,738 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<section xml:id="sec-gtalgos-mst" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Minimum spanning trees and forests</title>
+    <shorttitle>Minimum spanning trees</shorttitle>
+    <introduction>
+        <p>
+            We revisit the original idea for the text, the <term>minimum spanning tree.</term> To begin we will need a precise definition.
+        </p>
+        <definition xml:id="defn-weighted_graph">
+            <title>Weighted graphs</title>
+            <statement>
+                <p>
+                    A <term>weighted graph</term> is an ordered triple <m>\Gamma=(V,E,w)</m> where <m>V</m> is a set of vertices, <m>E</m> is a set edges, and <m>w:E\to \Reals</m> is a <term>edge-weight function</term>.
+                </p>
+                <p>
+                    A <term>weighted digraph</term> is an ordered triple <m>\arr{\Gamma}=(V,A,w)</m> where the edge set <m>E</m> is replaced by a set of ordered pairs of vertices, which are called <term>arrows</term> or <term>directed edges</term>. The weight function then is <m>w:A\to\Reals</m>.
+                </p>
+            </statement>
+        </definition>
+        <p>
+            The problem of finding a <term>spanning tree</term> in a connected graph is identical to the problem of finding a <term>minimum spanning tree</term> in a connected weighted graph, since in the former case you can have the weight function be constant-valued. There are two algorithms commonly used to teach this topic: the Jarn&#237;k-Prim algorithm and Kruskal's algorithm, the latter of which will produce a <term>minimum spanning forest</term> consisting of minimum spanning trees of each component of the original graph.
+        </p>
+    </introduction>
+    <subsection xml:id="sub-gtalgos-mst-jarnik_prim">
+        <title>Jarn&#237;k-Prim Algorithm</title>
+        <p>
+            The first algorithm we will explore to build a minimum spanning tree was developed by Czech mathematician Vojt&#277;ch Jarn&#237;k in 1930 and then independently rediscovered by Robert Prim in 1957 and Edsger Dijkstra in 1959. The weights of each edge are considered exactly to be costs of adding the edge to the graph. Unfortunately, without the introduction of a more complicated data structure than we have previously discussed we must implement the algorithm in a sub-optimal way. Using arrays or lists the computational complexity of the algorithm is <m>O(\abs{V}^2)</m>; optimal strategies involve the use of heaps.
+        </p>
+        <p>
+            The idea of the algorithm is very simple, and the implementation can be made simple at the cost of longer run times. Suppose there is a finite weighted graph <m>\Gamma=(V,E)</m> with weight function <m>w:E\to\mathbb{R}^+</m> and a cost function <m>C:V\to\mathbb{R}^+\cup\set{\infty}</m> such that initially <m>C(v)=\infty</m> for all <m>v\in V</m>. Choose a vertex <m>v_0\in V</m> and set <m>C(v_0) = 0</m>, and let <m>V(T) = \set{v_0}</m> be the ordered set of vertices of a tree.
+        </p>
+        <p>
+            The algorithm proceeds from here inductively: suppose <m>u</m> is the vertex most recently added to <m>V(T)</m> and let <m>N(u)</m> be the neighbors of <m>u</m> in <m>\Gamma</m> which are not already vertices of <m>T</m>. For each <m>v\in N(u)</m>, let <m>C(v) = \min(C(v),C(u)+w(uv))</m>. In the case where the cost of a vertex <m>v</m> is changed, denote <m>u</m> as the predecessor of <m>v</m>. After so considering each vertex, any vertex of <m>V\setminus V(T)</m> of least cost is the next vertex to add to <m>V(T)</m>. As long as the original graph is connected, every vertex will eventually be added to <m>V(T)</m>, and since no edge is added between a new vertex and an old vertex of <m>V(T)</m>, the result is necessarily a tree.
+        </p>
+
+        <example>
+            <title>An example applying the Jarn&#237;k-Prim algorithm</title>
+            <statement>
+                <p>
+                    Consider a graph with the following weighted edges:
+                </p>
+                <tabular>
+                    <col /><col halign="center" />
+                    <col /><col halign="center" />
+                    <col /><col halign="center" />
+                    <col /><col halign="center" />
+                    <row bottom="major">
+                        <cell><m>v_iv_j</m></cell>
+                        <cell><m>w(v_iv_j)</m></cell>
+                        <cell><m>v_iv_j</m></cell>
+                        <cell><m>w(v_iv_j)</m></cell>
+                        <cell><m>v_iv_j</m></cell>
+                        <cell><m>w(v_iv_j)</m></cell>
+                        <cell><m>v_iv_j</m></cell>
+                        <cell><m>w(v_iv_j)</m></cell>
+                    </row>
+                    <row>
+                        <cell><m> v_{0}v_{3} </m></cell>
+                        <cell> 1 </cell>
+                        <cell><m> v_{0}v_{4} </m></cell>
+                        <cell> 2 </cell>
+                        <cell><m> v_{0}v_{5} </m></cell>
+                        <cell> 4 </cell>
+                        <cell><m> v_{0}v_{8} </m></cell>
+                        <cell> 1 </cell>
+                    </row>
+                    <row>
+                        <cell><m> v_{0}v_{9} </m></cell>
+                        <cell> 9 </cell>
+                        <cell><m> v_{1}v_{2} </m></cell>
+                        <cell> 5 </cell>
+                        <cell><m> v_{1}v_{6} </m></cell>
+                        <cell> 10 </cell>
+                        <cell><m> v_{1}v_{8} </m></cell>
+                        <cell> 4 </cell>
+                    </row>
+                    <row>
+                        <cell><m> v_{2}v_{6} </m></cell>
+                        <cell> 8 </cell>
+                        <cell><m> v_{2}v_{7} </m></cell>
+                        <cell> 5 </cell>
+                        <cell><m> v_{2}v_{8} </m></cell>
+                        <cell> 7 </cell>
+                        <cell><m> v_{3}v_{4} </m></cell>
+                        <cell> 5 </cell>
+                    </row>
+                    <row>
+                        <cell><m> v_{3}v_{7} </m></cell>
+                        <cell> 7 </cell>
+                        <cell><m> v_{3}v_{9} </m></cell>
+                        <cell> 9 </cell>
+                        <cell><m> v_{4}v_{8} </m></cell>
+                        <cell> 9 </cell>
+                        <cell><m> v_{4}v_{9} </m></cell>
+                        <cell> 7 </cell>
+                    </row>
+                    <row>
+                        <cell><m> v_{5}v_{7} </m></cell>
+                        <cell> 9 </cell>
+                        <cell><m> v_{5}v_{8} </m></cell>
+                        <cell> 5 </cell>
+                        <cell><m> v_{5}v_{9} </m></cell>
+                        <cell> 7 </cell>
+                        <cell><m> v_{6}v_{8} </m></cell>
+                        <cell> 10 </cell>
+                    </row>
+                </tabular>
+                <p>
+                    We will asume that the first vertex to be added is <m>v_0</m>, so that <m>C(0)=0</m> and <m>C(i)=\infty</m>, for each <m>i=2, 3, \dotsc, 9</m>. Adding <m>v_0</m> to <m>V(t)</m> updates the cost and predecessor functions to the following:
+                </p>
+                <tabular>
+                    <col halign="right" right="minor" />
+                    <col halign="center"/>
+                    <col halign="center"/>
+                    <col halign="center"/>
+                    <col halign="center"/>
+                    <col halign="center" right='minor'/>
+                    <col halign="center"/>
+                    <col halign="center"/>
+                    <col halign="center"/>
+                    <col halign="center"/>
+                    <col halign="center"/>
+                    <row bottom="major">
+                        <cell><m>i</m></cell>
+                        <cell>0</cell>
+                        <cell>1</cell>
+                        <cell>2</cell>
+                        <cell>3</cell>
+                        <cell>4</cell>
+                        <cell>5</cell>
+                        <cell>6</cell>
+                        <cell>7</cell>
+                        <cell>8</cell>
+                        <cell>9</cell>
+                    </row>
+                    <row>
+                        <cell><m>C(v_i)</m></cell>
+                        <cell>0*</cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell>1</cell>
+                        <cell>2</cell>
+                        <cell>4</cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell>1</cell>
+                        <cell>9</cell>
+                    </row>
+                    <row>
+                        <cell><m>P(v_i)</m></cell>
+                        <cell>*</cell>
+                        <cell>?</cell>
+                        <cell>?</cell>
+                        <cell>0</cell>
+                        <cell>0</cell>
+                        <cell>0</cell>
+                        <cell>?</cell>
+                        <cell>?</cell>
+                        <cell>0</cell>
+                        <cell>0</cell>
+                    </row>
+                </tabular>
+                <p>
+                    The notation <m>C(v_0)=0^*</m> indicates that the vertex has already been added and does not need to be considered. Consulting the table, we see that the least expensive and least indexed vertex to next add to the tree is <m>v_3</m>.
+                </p>
+                <p>
+                    The neighbors of <m>v_3</m> are <m>v_4</m>, <m>v_7</m>, and <m>v_9</m>, but the cost to add <m>v_4</m> with predecessor <m>v_3</m> is <m>1+4=5>2=C(4)</m> and <m>1+9 = 10>9 = C(9)</m>; hence the only change is to vertex <m>v_7</m>.
+                </p>
+                <tabular>
+                    <col halign="right" right="minor" />
+                    <col halign="center"/>
+                    <col halign="center"/>
+                    <col halign="center"/>
+                    <col halign="center"/>
+                    <col halign="center" right='minor'/>
+                    <col halign="center"/>
+                    <col halign="center"/>
+                    <col halign="center"/>
+                    <col halign="center"/>
+                    <col halign="center"/>
+                    <row bottom="major">
+                        <cell><m>i</m></cell>
+                        <cell>0</cell>
+                        <cell>1</cell>
+                        <cell>2</cell>
+                        <cell>3</cell>
+                        <cell>4</cell>
+                        <cell>5</cell>
+                        <cell>6</cell>
+                        <cell>7</cell>
+                        <cell>8</cell>
+                        <cell>9</cell>
+                    </row>
+                    <row>
+                        <cell><m>C(v_i)</m></cell>
+                        <cell>0*</cell>
+                        <cell><m>\infty</m></cell>
+                        <cell><m>\infty</m></cell>
+                        <cell>1*</cell>
+                        <cell>2</cell>
+                        <cell>4</cell>
+                        <cell><m>\infty</m></cell>
+                        <cell>8</cell>
+                        <cell>1</cell>
+                        <cell>9</cell>
+                    </row>
+                    <row>
+                        <cell><m>P(v_i)</m></cell>
+                        <cell>*</cell>
+                        <cell>?</cell>
+                        <cell>?</cell>
+                        <cell>0</cell>
+                        <cell>0</cell>
+                        <cell>0</cell>
+                        <cell>?</cell>
+                        <cell>3</cell>
+                        <cell>0</cell>
+                        <cell>0</cell>
+                    </row>
+                </tabular>
+                <p>
+                    Proceeding in this manner, we generate the cost table.
+                </p>
+                <table>
+                    <title>Table of iterations of the cost function.</title>
+                    <tabular>
+                        <row bottom="major">
+                            <cell>Step</cell>
+                            <cell><m>v_0</m></cell>
+                            <cell><m>v_1</m></cell>
+                            <cell><m>v_2</m></cell>
+                            <cell><m>v_3</m></cell>
+                            <cell><m>v_4</m></cell>
+                            <cell><m>v_5</m></cell>
+                            <cell><m>v_6</m></cell>
+                            <cell><m>v_7</m></cell>
+                            <cell><m>v_8</m></cell>
+                            <cell><m>v_9</m></cell>
+                        </row>
+                        <row>
+                            <cell> 0 </cell>
+                            <cell> 0* </cell>
+                            <cell> <m>\infty</m></cell>
+                            <cell> <m>\infty</m></cell>
+                            <cell> <m>\infty</m></cell>
+                            <cell> <m>\infty</m></cell>
+                            <cell> <m>\infty</m></cell>
+                            <cell> <m>\infty</m></cell>
+                            <cell> <m>\infty</m></cell>
+                            <cell> <m>\infty</m></cell>
+                            <cell> <m>\infty</m></cell>
+                        </row>
+                        <row>
+                            <cell>1</cell>
+                            <cell>0*</cell>
+                            <cell> <m>\infty</m></cell>
+                            <cell> <m>\infty</m></cell>
+                            <cell>1*</cell>
+                            <cell>2</cell>
+                            <cell>4</cell>
+                            <cell> <m>\infty</m></cell>
+                            <cell> <m>\infty</m></cell>
+                            <cell>1</cell>
+                            <cell>9</cell>
+                        </row>
+                        <row>
+                            <cell>2</cell>
+                            <cell>0*</cell>
+                            <cell> <m>\infty</m></cell>
+                            <cell> <m>\infty</m></cell>
+                            <cell> 1* </cell>
+                            <cell>2</cell>
+                            <cell>4</cell>
+                            <cell> <m>\infty</m></cell>
+                            <cell>8</cell>
+                            <cell>1*</cell>
+                            <cell>9</cell>
+                        </row>
+                        <row>
+                            <cell>3</cell>
+                            <cell>0*</cell>
+                            <cell>5</cell>
+                            <cell>8</cell>
+                            <cell>1*</cell>
+                            <cell>2*</cell>
+                            <cell>4</cell>
+                            <cell>10</cell>
+                            <cell>8</cell>
+                            <cell>1*</cell>
+                            <cell>7</cell>
+                        </row>
+                    </tabular>
+                </table>
+                <p>
+                    After this point, no changes are made to the cost function, and vertices are added in order of least cost. Next we produce the table of predecessors.
+                </p>
+                <table>
+                    <title>Table of iterations of the predecessor function.</title>
+                    <tabular>
+                        <row bottom="major">
+                            <cell>Step</cell>
+                            <cell><m>v_0</m></cell>
+                            <cell><m>v_1</m></cell>
+                            <cell><m>v_2</m></cell>
+                            <cell><m>v_3</m></cell>
+                            <cell><m>v_4</m></cell>
+                            <cell><m>v_5</m></cell>
+                            <cell><m>v_6</m></cell>
+                            <cell><m>v_7</m></cell>
+                            <cell><m>v_8</m></cell>
+                            <cell><m>v_9</m></cell>
+                        </row>
+                        <row>
+                            <cell> 0 </cell>
+                            <cell> * </cell>
+                            <cell> </cell>
+                            <cell> </cell>
+                            <cell> </cell>
+                            <cell> </cell>
+                            <cell> </cell>
+                            <cell> </cell>
+                            <cell> </cell>
+                            <cell> </cell>
+                            <cell> </cell>
+                        </row>
+                        <row>
+                            <cell>1</cell>
+                            <cell>*</cell>
+                            <cell> </cell>
+                            <cell> </cell>
+                            <cell> 0</cell>
+                            <cell> 0</cell>
+                            <cell> 0</cell>
+                            <cell> </cell>
+                            <cell> </cell>
+                            <cell> 0</cell>
+                            <cell> 0</cell>
+                        </row>
+                        <row>
+                            <cell> 2</cell>
+                            <cell> *</cell>
+                            <cell> </cell>
+                            <cell> </cell>
+                            <cell> 0</cell>
+                            <cell> 0</cell>
+                            <cell> 0</cell>
+                            <cell> </cell>
+                            <cell> 3</cell>
+                            <cell> 0</cell>
+                            <cell> 0</cell>
+                        </row>
+                        <row>
+                            <cell> 3</cell>
+                            <cell> *</cell>
+                            <cell> 8</cell>
+                            <cell> 8</cell>
+                            <cell> 0</cell>
+                            <cell> 0</cell>
+                            <cell> 0</cell>
+                            <cell> 8</cell>
+                            <cell> 3</cell>
+                            <cell> 0</cell>
+                            <cell> 4</cell>
+                        </row>
+                    </tabular>
+                </table>
+            </statement>
+        </example>
+
+    </subsection>
+    <subsection xml:id="sub-gtalgos-mst-minheaps">
+        <title>Min Heaps</title>
+        <definition>
+            <statement>
+                <p>
+                    A <term>min heap</term> is a special data structure representing a rooted tree, with the condition that a <em>parent vertex</em> is always ordered <em>before</em> its <em>children</em>.
+                </p>
+            </statement>
+        </definition>
+
+        <p>
+            Heaps provide extremely efficient algorithms when knowing the position of a minimal (or maximal, for a max heap) element of a data set is necessary. Hence they are the optimal data structure for Dijkstra's algorithm, and they provide a very efficient data structure for storing the vertices of a graph when using the Jarn&#237;k-Prim Algorithm to produce a minimum spanning tree of a connected graph.
+        </p>
+        <p>
+            There is a standard way to develop a heap class representing a binary min heap. The data is stored in a list such that the children of the element stored in index <m>i</m> are stored in indices <m>2i+1</m> and <m>2i+2</m>, and with every insertion into the heap the array is rebalanced to maintain this heap condition. While this is of course a <em>fascinating</em> algorithm, the implementation of a heap data structure to produce an optimized version of this algorithm, or any other algorithm, is beyond the current scope of this text.
+        </p>
+    </subsection>
+    <subsection xml:id="sub-gtalgos-mst-kruskal">
+        <title>Kruskal's algorithm</title>
+        <introduction>
+            <p>
+                Joseph Kruskal first published his solution to the minimum spanning tree problem in 1956; again, this is a wonderful, almost intuitive algorithm, which hinges on an awesome use of mathematical induction. The caveat is that the weight function for Kruskal's algorithm must be a non-negative function, <m>w:E\to \set{x\geq 0:x\in \mathbb{R}}</m>.
+            </p>
+
+            <theorem>
+                <statement>
+                    <p>
+                        If <m>\Gamma=(V,E)</m> is a forest and <m>uv\in E</m> is an edge where <m>u</m> and <m>v</m> are not in the same component of <m>\Gamma</m>, then <m>\Gamma'=(V,E\cup\set{uv})</m> is a forest.
+                    </p>
+                </statement>
+            </theorem>
+
+            <proof>
+                <p>
+                    Suppose <m>\Gamma=(V,\set{~})</m> is a totally disconnected graph, and let <m>u_0,u_1\in V</m>. Then <m>u_0</m> and <m>u_1</m> are (naturally) in separate components. The graph <m>\Gamma'=(V,\set{u_0,u_1})</m> contains no cycles, since a graph with only one edge cannot contain a cycle.
+                </p>
+
+                <p>
+                    Suppose <m>\Gamma=(V,E)</m> is a forest and <m>u_0,u_1\in V</m> are vertices in different components of <m>\Gamma</m>. Assume, towards a contradiction, that <m>\Gamma=(V,E\cup\set{u_0u_1})</m> contains a cycle. Then there is a cycle <m>C=(v_0,e_1,v_1,e_2,v_2,\ldots,v_{n-1},e_n,v_n=v_0)</m> where <m>v_i\in V</m> and <m>v_i\neq v_j</m> when <m>i\neq j</m> and <m>\set{i,j}\neq\set{0,n}</m>. If <m>u_0u_1\neq e_j</m> for any <m>j\in\set{1,2,\ldots,n}</m>, then we have contradicted the assumption that <m>\Gamma</m> was a forest. On the other hand, if <m>u_0u_1\in \set{e_1,e_2,\ldots,e_n}</m>, then we may relabel the cycle <m>C=(v_0=u_0, e_1, v_1, e_2, v_2, \ldots, v_{n-1}=u_1, e_n=u_0u_1, v_n=u_0=v_0)</m>. But then <m>(v_0=u_0, e_1, v_1, e_2, v_2, \ldots, v_{n-1}=u_1)</m> is a <m>u_0,u_1</m>-path, contradicting the assumption that <m>u_0</m> and <m>u_1</m> are in different components of <m>\Gamma</m>. In either case, we have a contradiction.
+                </p>
+            </proof>
+
+            <p>
+                Hence we have an immediate method of producing a spanning forest <mdash /> include any edge which does not connect components. More importantly, we have all that is necessary for Kruskal's algorithm: if the graph is weighted, the edge of minimal weight which does not introduce a cycle is added in every iteration.
+            </p>
+            <algorithm>
+                <title>Kruskal's Spanning Tree algorithm</title>
+                <statement>
+                    <p>
+                        Let <m>{\Gamma=(V,E,w)}</m> be a weighted graph where <m>V=\set{v_1,v_2,\ldots,v_n}</m> and <m>E=\set{e_1,e_2,\ldots, e_m}</m> such that <m>w(e_i)\leq w(e_j)</m> whenever <m>i\lt j</m>.
+
+
+                    <ol>
+                        <li><p>
+                            Suppose <m>C_1 = \set{v_1}</m>, <m>C_2=\set{v_2}</m>, <ellipsis />, <m>C_n=\set{V_n}</m>, and <m>E_0= \set{~}</m>
+                            </p></li>
+                        <li><p>
+                            For each <m>j=1,2,\ldots,m</m>, let <m>uv=e_j</m>. Do the following:
+                            <ol>
+                                <li><p>
+                                    If <m>u\in C_k</m> and <m>v\in C_\ell</m> and <m>C_k\neq C_\ell</m> where <m>k\lt \ell</m>, then let <m>C_k = C_k\cup C_\ell</m> and let <m>E_{j} = E_{j-1}\cup\set{e_j}</m>. Otherwise, let <m>E_{j} = E_{j-1}</m>.
+                                    </p></li>
+                            </ol></p>
+                        </li>
+                        <li><p>
+                            <m>\Gamma' = (V,E_m)</m> is a minimum spanning tree for <m>\Gamma</m>.
+                            </p></li>
+                        </ol>
+                    </p>
+                </statement>
+            </algorithm>
+
+
+
+            <example>
+                <title>Applying Kruskal's Algorithm</title>
+                <statement>
+                    <p>
+                        Consider the graph with the following weighted edges:
+                        <!-- Here's the edge list:
+                    [(0, 3, 1), (0, 4, 2), (0, 5, 4), (0, 8, 1), (0, 9, 9), (1, 2, 5), (1, 6, 10), (1, 8, 4),
+                     (2, 6, 8), (2, 7, 5), (2, 8, 7), (3, 4, 5), (3, 7, 7), (3, 9, 9), (4, 8, 9), (4, 9, 7),
+                     (5, 7, 9), (5, 8, 5), (5, 9, 7), (6, 8, 10)]
+                    -->
+                    </p>
+                    <tabular halign='center'>
+                        <row bottom='major'>
+                            <cell> Weight </cell> <cell right='minor'> Edge </cell>
+                            <cell> Weight </cell> <cell right='minor'> Edge </cell>
+                            <cell> Weight </cell> <cell right='minor'> Edge </cell>
+                            <cell> Weight </cell> <cell> Edge </cell>
+                        </row>
+                        <row>
+                            <cell> 1 </cell> <cell right='minor'> <m>v_{0}v_{3}</m></cell>
+                            <cell> 4 </cell> <cell right='minor'> <m>v_{1}v_{8}</m></cell>
+                            <cell> 7 </cell> <cell right='minor'> <m>v_{2}v_{8}</m></cell>
+                            <cell> 9 </cell> <cell> <m>v_{0}v_{9}</m></cell>
+                        </row>
+                        <row>
+                            <cell> 1 </cell> <cell right='minor'> <m>v_{4}v_{8}</m></cell>
+                            <cell> 5 </cell> <cell right='minor'> <m>v_{1}v_{2}</m></cell>
+                            <cell> 7 </cell> <cell right='minor'> <m>v_{3}v_{7}</m></cell>
+                            <cell> 9 </cell> <cell> <m>v_{3}v_{9}</m></cell>
+                        </row>
+                        <row>
+                            <cell> 2 </cell> <cell right='minor'> <m>v_{0}v_{4}</m></cell>
+                            <cell> 5 </cell> <cell right='minor'> <m>v_{2}v_{7}</m></cell>
+                            <cell> 7 </cell> <cell right='minor'> <m>v_{4}v_{9}</m></cell>
+                            <cell> 9 </cell> <cell> <m>v_{5}v_{7}</m></cell>
+                        </row>
+                        <row>
+                            <cell> 2 </cell> <cell right='minor'> <m>v_{0}v_{8}</m></cell>
+                            <cell> 5 </cell> <cell right='minor'> <m>v_{3}v_{4}</m></cell>
+                            <cell> 7 </cell> <cell right='minor'> <m>v_{5}v_{9}</m></cell>
+                            <cell> 10 </cell> <cell> <m>v_{1}v_{6}</m></cell>
+                        </row>
+                        <row>
+                            <cell> 4 </cell> <cell right='minor'> <m>v_{0}v_{5}</m></cell>
+                            <cell> 5 </cell> <cell right='minor'> <m>v_{5}v_{8}</m></cell>
+                            <cell> 8 </cell> <cell right='minor'> <m>v_{2}v_{6}</m></cell>
+                            <cell> 10 </cell> <cell> <m>v_{6}v_{8}</m></cell>
+                        </row>
+                    </tabular>
+                    <p>
+                        The graph <m>\Gamma</m> with this edge set on <m>V=\set{v_0,v_1,\ldots,v_9}</m> and weight function <m>w</m> is depicted in <xref ref="fig_kruskal_exmp" text="type-hybrid"/>. To begin applying Kruskal's algorithm to find a spanning tree of <m>\Gamma</m> with minimal weight, we assign each vertex to its own component; thus, the partition of the vertices is
+                        <me>
+                            \mathcal{C} = \set{C_0=\set{v_0}, C_1=\set{v_1}, C_2=\set{v_2},\ldots,C_{9}=\set{v_9}}.
+                        </me>
+                    </p>
+                    <figure xml:id="fig_kruskal_exmp">
+                        <caption> A weighted graph <m>\Gamma</m>.</caption>
+                        <image width='50%' xml:id="img-weighted_kruskal">
+                            <xi:include href="./img_weighted_kruskal.ptx" />
+                        </image>
+                    </figure>
+                    <p>
+                        For the sake of abbreviated notation, we define the function <m>c:V\to V</m> such that <m>c(u)=v</m> if and only if <m>u\in C_v</m>. The algorithm proceeds as follows: the edge of least weight is <m>v_0v_3</m>, with <m>w(v_0v_3) = 1</m>. Since <m>c(v_0)=0\neq 3=c(v_3)</m>, the edge <m>v_0v_3</m> can be included in the tree. We will merge the component <m>C_0</m> into <m>C_3</m>, since the two components are of equal size and <m>0 &lt; 3</m>. Hence we make <m>C_0=\set{}</m> and <m>C_3=\set{v_0,v_3}</m>. The next edge of least weight is <m>v_4v_8</m>, also with <m>w(v_4v_8)=1</m>; since <m>c(v_4)=4</m> and <m>c(v_8)=8</m>, we must merge <m>C_4</m> and <m>C_8</m> just as we did <m>C_0</m> and <m>C_3</m>. The process is tabulated below.
+                    </p>
+
+                    <table>
+                        <title>
+                            Tabulation of steps of Kruskal's Algorithm
+                        </title>
+                        <tabular halign='center'>
+                            <col right='minor'/>
+                            <col />
+                            <col />
+                            <col />
+                            <col />
+                            <col right='minor' />
+                            <col />
+                            <row bottom='major'>
+                                <cell> Step </cell>
+                                <cell> Weight </cell>
+                                <cell><m>u</m></cell>
+                                <cell><m>c(u)</m></cell>
+                                <cell><m>v</m></cell>
+                                <cell><m>c(v)</m></cell>
+                                <cell>Include <m>uv</m>?</cell>
+                            </row>
+                            <row>
+                                <cell> 0</cell>
+                                <cell> 1 </cell>
+                                <cell> <m>v_{0}</m> </cell>
+                                <cell> 0 </cell>
+                                <cell> <m>v_{3}</m> </cell>
+                                <cell> 3 </cell>
+                                <cell> True </cell>
+                            </row>
+                            <row>
+                                <cell> 1</cell> <cell> 1 </cell>
+                                <cell> <m>v_{4}</m> </cell>
+                                <cell> 4 </cell>
+                                <cell> <m>v_{8}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> True </cell></row>
+                            <row>
+                                <cell> 2</cell> <cell> 2 </cell>
+                                <cell> <m>v_{0}</m> </cell>
+                                <cell> 3 </cell>
+                                <cell> <m>v_{4}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> True </cell></row>
+                            <row>
+                                <cell> 3</cell> <cell> 2 </cell>
+                                <cell> <m>v_{0}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> <m>v_{8}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> False </cell></row>
+                            <row>
+                                <cell> 4</cell> <cell> 4 </cell>
+                                <cell> <m>v_{0}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> <m>v_{5}</m> </cell>
+                                <cell> 5 </cell>
+                                <cell> True </cell></row>
+                            <row>
+                                <cell> 5</cell> <cell> 4 </cell>
+                                <cell> <m>v_{1}</m> </cell>
+                                <cell> 1 </cell>
+                                <cell> <m>v_{8}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> True </cell></row>
+                            <row>
+                                <cell> 6</cell> <cell> 5 </cell>
+                                <cell> <m>v_{1}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> <m>v_{2}</m> </cell>
+                                <cell> 2 </cell>
+                                <cell> True </cell></row>
+                            <row>
+                                <cell> 7</cell> <cell> 5 </cell>
+                                <cell> <m>v_{2}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> <m>v_{7}</m> </cell>
+                                <cell> 7 </cell>
+                                <cell> True </cell></row>
+                            <row>
+                                <cell> 8</cell> <cell> 5 </cell>
+                                <cell> <m>v_{3}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> <m>v_{4}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> False </cell></row>
+                            <row>
+                                <cell> 9</cell> <cell> 5 </cell>
+                                <cell> <m>v_{5}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> <m>v_{8}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> False </cell></row>
+                            <row>
+                                <cell> 10</cell> <cell> 7 </cell>
+                                <cell> <m>v_{2}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> <m>v_{8}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> False </cell></row>
+                            <row>
+                                <cell> 11</cell> <cell> 7 </cell>
+                                <cell> <m>v_{3}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> <m>v_{7}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> False </cell></row>
+                            <row>
+                                <cell> 12</cell> <cell> 7 </cell>
+                                <cell> <m>v_{4}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> <m>v_{9}</m> </cell>
+                                <cell> 9 </cell>
+                                <cell> True </cell></row>
+                            <row>
+                                <cell> 13</cell> <cell> 7 </cell>
+                                <cell> <m>v_{5}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> <m>v_{9}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> False </cell></row>
+                            <row>
+                                <cell> 14</cell> <cell> 8 </cell>
+                                <cell> <m>v_{2}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> <m>v_{6}</m> </cell>
+                                <cell> 6 </cell>
+                                <cell> True </cell></row>
+                            <row>
+                                <cell> 15</cell> <cell> 9 </cell>
+                                <cell> <m>v_{0}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> <m>v_{9}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> False </cell></row>
+                            <row>
+                                <cell> 16</cell> <cell> 9 </cell>
+                                <cell> <m>v_{3}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> <m>v_{9}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> False </cell></row>
+                            <row>
+                                <cell> 17</cell> <cell> 9 </cell>
+                                <cell> <m>v_{5}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> <m>v_{7}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> False </cell></row>
+                            <row>
+                                <cell> 18</cell> <cell> 10 </cell>
+                                <cell> <m>v_{1}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> <m>v_{6}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> False </cell></row>
+                            <row>
+                                <cell> 19</cell> <cell> 10 </cell>
+                                <cell> <m>v_{6}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> <m>v_{8}</m> </cell>
+                                <cell> 8 </cell>
+                                <cell> False </cell></row>
+                        </tabular>
+                    </table>
+                    <figure xml:id="fig_kruskal_exmp_completed" >
+                        <caption>The same graph <m>\Gamma</m> with the minimum spanning tree discovered via Kruskal's algorithm highlighted with red edges.</caption>
+                        <image width='50%' xml:id="img-weighted_kruskal_mst">
+                            <xi:include href="./img_weighted_kruskal_mst.ptx" />
+                        </image>
+                    </figure>
+
+                </statement>
+            </example>
+        </introduction>
+
+        <subsubsection>
+            <title>Implementing Kruskal's algorithm</title>
+
+
+            <p>
+                In a very naive approach to Kruskal's algorithm, the function <m>c(v)</m> reporting the component of vertex <m>v</m> is not implemented. This requires two searches through the components for each edge. We avoid this at the cost of storing both the component of each vertex as well as the vertices in each component.
+            </p>
+            <listing>
+                <caption>A Python implementation of Kruskal's algorithm.</caption>
+                <program language='python'>
+                    <input>
+                        def kruskal(verts, wedges, verbose=False):
+                            WE = sorted((l,u,v) for u,v,l in wedges)
+
+                            comp_of = {v:v for v in verts}
+                            vert_of = {v:[v] for v in verts}
+
+                            keep = []
+                            dump = []
+                            out_grid = []
+                            for i,(w,u,v) in enumerate(WE):
+                                cu, cv = comp_of[u], comp_of[v]
+                                row = [w,u,cu,v,cv,cu!=cv]
+                                out_grid.append( row )
+                                if cu==cv:
+                                    dump.append( (u,v,w) )
+                                    continue
+                                keep.append( (u,v,w) )
+                                if len(vert_of[cu]) > len(vert_of[cv]):
+                                    v,u = u,v
+                                    cu,cv = cv,cu
+                                vert_of[cv] += vert_of[cu]
+                                while len(vert_of[cu])>0:
+                                    comp_of[vert_of[cu].pop()] = cv
+                            if verbose:
+                                out_grid = [["Weight", "u", "C(u)", "v", "C(v)", "Include?"]]
+                                out_grid += [[str(entr) for entr in row] for row in out_grid]
+                                mc = [max(len(out_grid[r][c]) for r in range(len(out_grid))) for c in range(len(out_grid[0]))]
+                                new_out_grid = [[] for _ in out_grid]
+                                for c in range(len(out_grid[0])):
+                                    for r in range(len(out_grid)):
+                                        new_out_grid[r].append(("{x:>%d}"% mc[c]).format(x=out_grid[r][c]))
+                                print( "\n".join([" | ".join(row) for row in new_out_grid]))
+                            return keep,dump
+                    </input>
+                </program>
+            </listing>
+        </subsubsection>
+
+    </subsection>
+</section>
+

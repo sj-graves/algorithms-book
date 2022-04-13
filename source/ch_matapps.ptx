@@ -10,5 +10,5 @@
     <xi:include href="./sec_matapps_ssles.ptx"/>
     <xi:include href="./sec_matapps_gjepp.ptx" />
     <xi:include href="./sec_matapps_ludecomp.ptx"/>
-    <xi:include href="./sec_matapps_qrfactor.ptx"/>
+<!--     <xi:include href="./sec_matapps_qrfactor.ptx"/> -->
 </chapter>

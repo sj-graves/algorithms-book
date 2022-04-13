@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!-- [(0, 3, 1), (4, 8, 1), (0, 4, 2), (0, 5, 4), (1, 8, 4), (1, 2, 5), (2, 7, 5), (4, 9, 7), (2, 6, 8)] -->
+<latex-image>
+    \definecolor{vc0}{rgb}{1,1,1}
+    \definecolor{ec0}{rgb}{0, 0, 0}
+    \definecolor{ec1}{rgb}{1,0,0}
+    {\begin{tikzpicture}[xscale = 5.0, yscale=4,
+        vx_0/.style = {circle, draw, set=vs_0, fill=vc0, inner sep = 1pt}]
+    \node (0) [vx_0] at (0.0,1.0) { \tt 0};
+    \node (1) [vx_0] at (0.5,2.0) { \tt 1};
+    \node (2) [vx_0] at (1.25,1.25) { \tt 2};
+    \node (3) [vx_0] at (1.0,0.0) { \tt 3};
+    \node (4) [vx_0] at (0.5,0.75) { \tt 4};
+    \node (5) [vx_0] at (2.0,1.0) { \tt 5};
+    \node (6) [vx_0] at (1.5,2.0) { \tt 6};
+    \node (7) [vx_0] at (2.0,0.0) { \tt 7};
+    \node (8) [vx_0] at (0.75,1.25) { \tt 8};
+    \node (9) [vx_0] at (0.0,0.0) { \tt 9};
+    \graph[edge quotes={inner sep=1pt, fill=vc0, text=blue}]{(import nodes);
+    (0)--["1", thick, ec1] (3),
+    (0)--["2", thick, ec1] (4),
+    (0)--["4", thick, ec1] (5),
+    (0)--["2", ec0] (8),
+    (0)--["9", ec0] (9),
+    (1)--["5", thick, ec1] (2),
+    (1)--["10", ec0] (6),
+    (1)--["4", thick, ec1] (8),
+    (2)--["8", thick, ec1] (6),
+    (2)--["5", thick, ec1] (7),
+    (3)--["7", ec0] (7),
+    (3)--["9", ec0] (9),
+    (4)--["1", ec0] (8),
+    (4)--["7", thick, ec1] (9),
+    (5)--["9", ec0] (7),
+    (5)--["5", ec0] (8),
+    (2)--["7", ec0] (8),
+    (5)--["7", ec0] (9),
+    (3)--["5", ec0] (4),
+    (6)--["10", ec0] (8);};
+    \end{tikzpicture}}
+</latex-image>

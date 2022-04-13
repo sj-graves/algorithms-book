@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<section xml:id="sec-gtalgos-basics" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Graph basics</title>
+    <definition xml:id="defn-graph">
+        <title>Graph</title>
+        <statement>
+            <p>
+                A <term>graph</term> is an ordered pair <m>\Gamma=(V,E)</m>, where <m>V</m> is a set of <term>vertices</term> and <m>E</m> is a set of <term>edges</term>, where edges are unordered pairs of distinct vertices. That is,
+                <me>
+                    E \subseteq \set{\set{u,v}:u,v\in V}.
+                </me>
+            </p>
+
+            <p>
+                In order to simplify notation, we will write <m>uv</m> instead of <m>\set{u,v}</m> for an edge.
+            </p>
+        </statement>
+    </definition>
+
+    <remark>
+        <p>
+            There are many, many different formulations for the definition of a graph. Some definitions are suffiently relaxed that an edge can loop back from a vertex to itself <mdash /> these are generally called <em>loops</em>. Likewise, edges can be defined as independent objects with <em>endpoints</em>, which allows for more than one edge to have vertices <m>u</m> and <m>v</m> as endpoints. We make the distinction that graphs which have loops or multiple edges are <em>multigraphs</em>. In fact some graph theorists extend the definition even further to allow edges to have more than two vertices
+        </p>
+    </remark>
+    <example xml:id="exmp-petersen_graph">
+        <title>The Petersen graph</title>
+        <statement>
+            <p>
+                A famous example of a graph is the <term>Petersen graph</term>, <m>\Pi</m>. Here it is drawn with its vertex set consisting of the collection of subsets of size 2 of the set <m>\set{0,1,2,3,4}</m>, with an edge between vertices if and only if they are disjoint as sets. This labeling of the Petersen graph is convenient for several application in <em>algebraic graph theory</em>.
+            </p>
+            <image xml:id="img-petersen_graph" width="50%">
+            <xi:include href="img_petersen_graph.ptx" />
+        </image>
+        </statement>
+    </example>
+
+    <definition xml:id="defn-adjacent">
+        <title>Adjacent and incident</title>
+        <statement>
+            <p>
+                Two vertices <m>v_0,v_1\in V(\Gamma)</m> are <term>adjacent</term> if and only if <m>v_0v_1\in E(\Gamma)</m>. An edge <m>e\in E(\Gamma)</m> is <term>incident</term> with a vertex <m>v_0\in V(\Gamma)</m> if and only if there is another vertex <m>v_1\in V(\Gamma)</m> such that <m>v_0v_1 = e</m>.
+            </p>
+        </statement>
+    </definition>
+
+    <definition xml:id="defn-vertex_degree">
+        <title>Vertex degree</title>
+        <statement>
+            <p>
+                The <term>degree</term> of a vertex <m>v\in V(\Gamma)</m> is the number of vertices adjacent to <m>v</m>; that is,
+                <me>
+                    d(v) = \abs{\set{u\in V:uv\in E}}
+                </me>. Another term for the vertex degree is <term>valence</term>, as borrowed from chemistry, and historically some authors have preferred <m>\rho(v)</m> to denote valence.
+            </p>
+        </statement>
+    </definition>
+
+    <definition xml:id="defn-subgraph">
+        <title>Subgraphs</title>
+        <statement>
+            <p>
+                A graph <m>\Gamma'=(V', E')</m> is a <term>subgraph</term> of <m>\Gamma=(V,E)</m> if and only if <m>V'\subseteq V</m> and <m>E'\subseteq E</m>. The subgraph <m>\Gamma'</m> is the <term>subgraph of <m>\Gamma</m> induced by <m>V'</m></term> if and only if <m>E' = \set{uv\in E: u,v\in V'}</m>. That is, <m>\Gamma'</m> is an induced subgraph of <m>\Gamma</m> if and only if every edge of <m>\Gamma</m> between vertices of <m>\Gamma'</m> is an edge of <m>\Gamma'</m>. There are many competing notations for induced subgraphs, but we will denote the induced subgraph of <m>V'</m> in <m>\Gamma</m> by <m>\Gamma[V']</m>.
+            </p>
+        </statement>
+    </definition>
+    <example xml:id="exmp-petersen_subgraph">
+        <title>Some subgraphs of the Petersen graph</title>
+        <p>
+            If we relabel the vertices of the Petersen graph <m>\Pi</m> as
+            <md>
+                <mrow>
+                    v_0 \amp = \set{0,1}, \amp
+                    v_1 \amp = \set{1,2}, \amp
+                    v_2 \amp = \set{2,3}, \amp
+                    v_3 \amp = \set{3,4}, \amp
+                    v_4 \amp = \set{0,4},
+                </mrow>
+                <mrow>
+                    v_5 \amp = \set{2,4}, \amp
+                    v_6 \amp = \set{0,3}, \amp
+                    v_7 \amp = \set{1,4}, \amp
+                    v_8 \amp = \set{0,2}, \amp
+                    v_9 \amp = \set{1,3},
+                </mrow>
+            </md>
+            then the subgraph <m>\Pi[V']</m> induced by <m>V'=\set{v_0,v_2,v_3,v_7,v_8}</m> has edge set
+            <m>E' = \set{v_0v_2, v_0v_3, v_2v_7, v_3v_8, v_7v_8}</m>, highlighted in red.
+        </p>
+        <image xml:id="img-petersen_subgraph" width="50%">
+            <xi:include href="./img_petersen_subgraph.ptx" />
+        </image>
+    </example>
+    <definition xml:id="defn-graph_isomorphism">
+        <title>Graph isomorphism</title>
+        <statement>
+            <p>
+                Two graphs <m>\Gamma=(V,E)</m> and <m>\Gamma'=(V',E')</m> are <term>isomorphic</term> if there is a function <m>\phi:V\to V'</m> such that the following three conditions hold.
+                <dl>
+                    <li><title>Injective</title><p>
+                            If <m>v_0,v_1\in V</m> with <m>v_0\neq v_1</m>, then <m>\phi(v_0)\neq\phi(v_1)</m>.
+                        </p></li>
+                    <li><title>Surjective</title><p>
+                            If <m>v'\in V'</m>, then there is some <m>v\in V</m> such that <m>\phi(v)=v'</m>.
+                        </p></li>
+                    <li><title>Graph Homomorphism</title><p>
+                        <m>v_0v_1\in E</m> if and only if <m>v_0'v_1'\in E'</m> with <m>\phi(v_0)=v_0'</m> and <m>\phi(v_1)=v_1'</m>.
+                        </p></li>
+                </dl>
+            </p>
+            <p>
+                If such a function exists, we write <m>\Gamma\cong \Gamma'</m>.
+            </p>
+        </statement>
+    </definition>
+    <p>
+        Each of these conditions independently are important, but their combination is essential in graph theory: a graph isomorphism is an <em>adjacency-preserving bijection between vertex sets</em>.
+    </p>
+    <definition xml:id="defn-graph_automorphism">
+        <title>Graph automorphism</title>
+        <statement>
+            <p>
+                Let <m>\Gamma=(V,E)</m>. A permutation <m>\phi:V\to V</m> which satisfies condition (3) of the definition of <xref ref="defn-graph_isomorphism" text="title" /> is a <term>graph automorphism</term>. The set of all automorphisms of a graph <m>\Gamma</m> is denoted <m>\Aut\Gamma</m>.
+            </p>
+        </statement>
+    </definition>
+    <example xml:id="exmp-isom_not_equal">
+        <title>Isomorphism is not equality</title>
+        <statement>
+            <p>
+                Consider the graphs
+                <me>
+                    K_4 = (\set{a,b,c,d}, \set{uv:u,v\in V, u\neq v})
+                </me> and
+                <me>
+                    K_4' = (\set{v_0,v_1,v_2,v_3},\set{v_iv_j: i,j\in\set{0,1,2,3}, i\lt j})
+                </me>. Since <m>V(K_4)\neq V(K_4')</m>, obviously <m>K_4\neq K_4'</m>. However choosing any bijection <m>\phi:\set{a,b,c,d}\to\set{v_0,v_1,v_2,v_3}</m> suffices to produce a graph isomorphism from <m>K_4</m> to <m>K_4'</m>, so <m>K_4\cong K_4'</m>
+            </p>
+        </statement>
+    </example>
+    <definition xml:id="defn-path">
+        <title>Paths</title>
+        <statement>
+            <p>
+                Suppose <m>\Gamma=(V,E)</m> is a graph and <m>u,v\in V</m>. A <term>path</term> between <m>u</m> and <m>v</m> is any sequence
+                <me>
+                    (u=v_0, e_1, v_0, e_2, v_1, \ldots, v_{n-1}, e_n, v_n = v)
+                </me>
+                such that <m>e_i = v_{i-1}v_i</m> for each <m>i\in\set{1,2,\ldots,n}</m> and <m>v_i\neq v_j</m> if <m>i\neq j</m>. This can also be called a <term><m>u,v</m>-path</term>. A path containing <m>n</m> edges is a path of <term>length</term> <m>n</m>.
+            </p>
+        </statement>
+    </definition>
+    <definition xml:id="defn-graph_distance">
+        <title>Graph distance</title>
+        <statement>
+            <p>
+                Let <m>\Gamma=(V,E)</m> be a graph and <m>v_0, v_1\in V</m>.  The <term>distance from <m>v_0</m> to <m>v_1</m></term> is the length of a shortest path between <m>v_0</m> and <m>v_1</m>.
+                If no such path exists, the distance from <m>v_0</m> to <m>v_1</m> is <m>\infty</m>. Distance between <m>v_0</m> and <m>v_1</m> in the graph <m>\Gamma</m> is sometimes denoted <m>d_\Gamma(v_0,v_1)</m>, which can be easily confused with the notation for degree.
+            </p>
+        </statement>
+    </definition>
+    <definition xml:id="defn-cycle_graphs">
+        <title>Cycles in graphs</title>
+        <statement>
+            <p>
+                A <term>cycle</term> is a sequence
+                <me>
+                    (v_0,e_1,v_0, e_2, v_1, \ldots, v_{n-1}, e_n, v_n = v_0)
+                </me>
+                such that <m>e_i = v_{i-1}v_i</m> for each <m>i\in\set{1,2,\ldots,n}</m> and <m>v_i\neq v_j</m> if <m>i\neq j</m> except for <m>v_0=v_n</m>. A cycle containing <m>n</m> edges is an <m>n</m>-cycle, and is isomorphic to the cycle graph <m>C_n=(\mathbb{Z}_n, \set{ab:a,b\in\mathbb{Z}_n, a-b\equiv 1\mod(n)}</m>.
+            </p>
+        </statement>
+    </definition>
+    <example xml:id="exmp-cylces_in_petersen">
+        <title>Paths and a cycle in the Petersen graph</title>
+        <p>
+            It is easy to draw the Petersen graph with two distinct (and openly disjoint) <m>v_0,v_3</m>-paths, one highlighted in red and the other in blue. The union of the red and blue paths is a 9-cycle in <m>\Pi</m>.
+        </p>
+        <image xml:id="img-petersen_cycle" width="50%">
+            <xi:include href="./img_petersen_cycle.ptx" />
+        </image>
+    </example>
+    <definition xml:id="defn-connected_graph">
+        <title>Connected graphs</title>
+        <statement>
+            <p>
+                The graph <m>\Gamma</m> is <term>connected</term> if and only if for any two distinct vertices <m>v_0,v_1\in V</m> there is at least one <m>v_0,v_1</m>-path.
+            </p>
+        </statement>
+    </definition>
+    <definition xml:id="defn-graph_component">
+        <title>Components of a graph</title>
+        <statement>
+            <p>
+                A subgraph <m>\Gamma'=(V',E')</m> of a graph <m>\Gamma=(V,E)</m> is a <term>component</term> of <m>\Gamma</m> if and only if <m>\Gamma'=\Gamma[V']</m> and <m>\Gamma[V'\cup\set{v}</m> is disconnected for any vertex <m>v\in V\setminus V'</m>. Clearly, a connected graph has only one component.
+            </p>
+        </statement>
+    </definition>
+    <definition xml:id="defn-tree">
+        <title>Trees and forests</title>
+        <statement>
+            <p>
+                A connected graph containing no cycles is called a <term>tree</term>. An arbitrary graph containing no cycles is called a <term>forest</term>. For a given graph <m>\Gamma=(V,E)</m>, a forest <m>\Phi=(V,E')</m> where <m>E'\subseteq E</m> is called a <term>spanning forest</term>. A <term>spanning tree</term> of a connected graph is defined analogously.
+            </p>
+        </statement>
+    </definition>
+    <p>
+        These are just a few of the basic definitions of graph theory. It is a subject which is very appealing for research as the problems are often visually interesting. Since problems in the field are very accessible, some mathematicians are mildly derogatory towards graph theory, calling the field <q>recreational mathematics.</q> If that is so, then the vast number of graph theorists are perhaps the luckiest of all mathematicians: their chosen field of research is seen to be fun and games by their colleagues!
+    </p>
+    <p>
+        All joking aside, graph theory and the larger discipline of combinatorics are deeply applicable fields. There are many pratical, real world problems which are modeled by discrete systems (rather than continuous systems, such as used in differential equations or traditional applied math courses), and graph theory techniques are often the best solution to these problems. So while combinatorics is not generally considered part of applied mathematics, it is very much <em>applicable mathematics</em>.
+    </p>
+
+
+</section>

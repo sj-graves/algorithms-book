@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<latex-image>
+\begin{tikzpicture}
+    \draw \foreach \q/\v in {90/0,162/1,234/2,306/3,18/4}{
+        (\q:1) node (v_\v) {$v_\v$}
+    }
+    \foreach \q/\v in {90/5, 162/6, 234/7, 306/8, 18/9}{
+        (\q:2.5) node (v_\v) {$v_\v$}
+    }
+    (v_5) -- (v_6) -- (v_7) -- (v_2)
+    (v_1) -- (v_6)
+    (v_4) -- (v_9)
+    (v_7) -- (v_8) (v_3) -- (v_0)
+    ;
+    \draw [thick, red]
+    (v_0) -- (v_5) -- (v_9) -- (v_8) -- (v_3)
+    ;
+    \draw [thick, blue]
+    (v_0) -- (v_2) -- (v_4) -- (v_1) -- (v_3);
+\end{tikzpicture}
+</latex-image>

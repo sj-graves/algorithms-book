@@ -322,6 +322,7 @@
             A crucial and easy-to-miss part of the <m>PA=LU</m> algorithm is Step (2.b.iii); in order to store the values for <m>L</m> in place of the unnecessary zeroes which normally appear below the diagonal of a matrix in row-echelon form, it is essential that only the values to the right of the diagonal be recomputed during the elimination steps. The elimination which actually is known to send values to zero must not do so, otherwise the lower triangular matrix <m>L</m> is lost. The following is a method implementing our algorithm, suitable fo inclusion in the <c>AlgoMatrix</c> class.
         </p>
         <listing>
+            <caption>An implementation of the <m>PA=LU</m> algorithm using partial pivoting.</caption>
             <program language='python'>
                 <input>
                     def palu(self, debug=False):
@@ -372,7 +373,6 @@
                         return P,L,U
                 </input>
             </program>
-            <caption>An implementation of the <m>PA=LU</m> algorithm using partial pivoting.</caption>
         </listing>
     </subsection>
 </section>

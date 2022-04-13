@@ -61,7 +61,7 @@
         </p-->
 
         <p>
-            We can recast <xref ref="eq_incons" /> into a matrix-vector multiplication problem <m>A\vec{x}=\vec{b}</m> easily, letting <m>A = \left[\vec{A}_1\mid\vec{A}_2\right]\in\Mats{3,2}</m>, <m>\vec{x}\in\Comps^2</m>, and <m>\vec{b}\in\Comps^3</m> be given by
+            We can recast <xref ref="eq_incons" /> into a matrix-vector multiplication problem <m>A\vec{x}=\vec{b}</m> easily, letting <m>A = \left[\vec{A}_0\mid\vec{A}_1\right]\in\Mats{3,2}</m>, <m>\vec{x}\in\Comps^2</m>, and <m>\vec{b}\in\Comps^3</m> be given by
             <md>
                 <mrow>
                     A \amp= \begin{bmatrix}
@@ -73,16 +73,50 @@
                     \vec{b} \amp = \cvec{4\\9\\6}
                 </mrow>
             </md>.
-            Unfortunately, it should be plain that <m>\vec{b}</m> is not a linear combination of <m>\vec{A}_1</m> and <m>\vec{A}_2</m>, due to the entries in the 0th and 2nd indices.
+            Unfortunately, it should be plain that <m>\vec{b}</m> is not a linear combination of <m>\vec{A}_0</m> and <m>\vec{A}_1</m>, due to the entries in the 0th and 2nd indices. Recalling the definition <xref provisional="defn-lincomb_span" text="title" />, we extend our question: if there is no solution <m>\vec{x}</m> to <m>A\vec{x}=\vec{b}</m>, can we find a value <m>\vec{x'}</m> so that <m>\vec{b'} = A\vec{x'}</m> minimizes <m>\abs{\vec{b}-\vec{b'}}</m>?
         </p>
         <p>
-            Recalling the definition <xref ref="defn-lincomb_span" text="title" /> allows us to recast our problem in linear algebra terminology <mdash /> we need to find the vector <m>\barx{x}</m> in the span of <m>\set{\vec{v}_1,\vec{v}_2}</m> which is nearest to <m>\vec{b}</m>. Since we are working with real coefficients, it makes perfect sense to assume that the vector space in which we are working is <m>\R^n</m>, and this allows us to appeal to our knowledge of Euclidean geometry.
-            <!--A convenient fact of working over the real numbers is that we already know how to do this: the shortest path from a line <m>\ell</m> to a point <m>P</m> not on the line is the vector <m>\vec{r}</m> from <m>X\in\ell</m> to <m>P</m> where the line <m>\overline{XP}</m> is perpendicular to <m>\ell</m>. To extend this idea to higher dimensions, the vector <m>\vec{r}</m> must be <em>orthogonal</em> to any other vector <m>\vec{v}</m> in the linear subspace<fn>Line, plane, or hyperplane!</fn>.-->
+        Observe that if
+            <m>
+                \mathcal{A} = \set{\vec{A}_0,\dotsc,\vec{A}_{n-1}}\subset \Comps^m
+            </m> and
+            <m>
+                A = \left[ \vec{A}_1 \mid \cdots \mid A_{n-1} \right] \in \Mats{m,n}
+            </m>, then <m>\spanset{\mathcal{A}} = \set{A\vec{x}:x\in\Comps^n}</m>.
         </p>
-
-        <theorem>
+        <p>
+            EVERYTHING AFTER THIS IS A HOT MESS AND NEEDS REVISION.
+        </p>
+        <theorem xml:id="thm-shortest_distance_subspace">
             <statement>
-                The shortest path from a line <m>\ell</m> to a point <m>P</m> not on <m>\ell</m> is the vector <m>\vec{r}</m> with tail at a point <m>X\in \ell</m> and head <m>P</m>, such that the line <m>\overline{XP}</m> is perpendicular to <m>\ell</m>.
+                <p>
+                    Let
+                    <md>
+                        <mrow>
+                            \mathcal{A} \amp= \set{\vec{A}_0,\dotsc,\vec{A}_{n-1}}\subset \Comps^m,
+                        </mrow>
+                        <mrow>
+                            A \amp= \left[ \vec{A}_1 \mid \cdots \mid A_{n-1} \right] \in \Mats{m,n},
+                        </mrow>
+                    </md> let
+                    <m>
+                        \mathcal{Q}=\set{\vec{q}_0,\dotsc,\vec{q}_{k-1}}
+                    </m> be an orthonormal basis for
+                    <m>
+                        \spanset{\mathcal{A}}=\set{A\vec{x}:\vec{x}\in\Comps^n}
+                    </m>, and define
+                    <me>
+                        \vec{b'} = A\vec{x'} = \sum_{i=0}^{k-1}\hip{\vec{q}_i}{\vec{b}}\vec{q}_i
+                    </me>. Then for all <m>\vec{x}\in\Comps^n</m>,
+                    <ul>
+                        <li><p>
+                            <m>\abs{\vec{b}-A\vec{x'}} \leq \abs{\vec{b} - A\vec{x}}</m> and
+                            </p></li>
+                        <li><p>
+                            <m>\hip{\vec{b}-\vec{b'}}{A\vec{x}} = 0</m>.
+                            </p></li>
+                    </ul>
+                </p>
             </statement>
         </theorem>
         <p>

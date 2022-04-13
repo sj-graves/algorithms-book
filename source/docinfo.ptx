@@ -17,12 +17,9 @@
     <macros>
         <!-- I'll include macros here as I need them in rewriting the text. -->
         \usepackage{mathtools}
-
         \DeclareMathOperator{\fixedset}{fix}
         \DeclareMathOperator{\support}{supp}
         \DeclareMathOperator{\lcm}{lcm}
-
-<!--         \newcommand{\mathscr}[1]{\mathcal{#1}} -->
 
         \newcommand{\set}[1]{\left\{#1\right\}}
         \newcommand{\upto}[1]{\set{0,1,\dotsc,#1-1}}
@@ -35,7 +32,8 @@
         \newcommand{\fix}[1]{\fixedset{#1}}
         \newcommand{\supp}[1]{\support{#1}}
         \newcommand{\xto}[1]{\xrightarrow{#1}}
-<!--         \newcommand{\lcm}[1]{\leastcommonmultiple{#1}} -->
+        \newcommand{\arr}[1]{\overrightarrow{#1}}
+
         \newcommand{\rem}{\%}
         \newcommand{\divides}{\mid}
         \newcommand{\Nats}{\mathbb{N}}
@@ -52,11 +50,12 @@
         \newcommand{\entry}[2]{\left[#1\right]_{#2}}
         \newcommand{\hip}[2]{\left\langle#1,#2\right\rangle}
         \newcommand{\conj}[1]{\overline{#1}}
-<!--         \newcommand{\norm}[1]{\|#1\|} -->
+
+        \newcommand{\dist}[3]{d_{#1}\left(#2,#3\right)}
         \newcommand{\norm}[1]{\left\|#1\right\|}
         \DeclareMathOperator{\spn}{span}
         \newcommand{\spanset}[1]{\spn #1}
-
+        \DeclareMathOperator{\Aut}{Aut}
         \newcommand{\rswap}[2]{R_{#1}\leftrightarrow R_{#2}}
         \newcommand{\rscale}[2]{\left(#1\right) R_{#2}}
         \newcommand{\relim}[3]{\left(#1\right) R_{#2}+R_{#3}}
