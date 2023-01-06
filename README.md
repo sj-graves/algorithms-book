@@ -1,4 +1,13 @@
 # Algorithms for Applied Math
 ## 2021-2022 Revision
 
-As often is the case, I'm working on revising the AAM text. The hope is to make the text (and the course) more attractive to those learning to code for the first time, and provide a lower barrier to entry to (a)  new math majors who haven't yet taken 3425, etc., and (b) students who have little to no coding experience. Simultaneously, I want to make the text more attractive as a resource to students who have programmed previously but have little exposure to interesting mathematical algorithms.
+The current version of the text after the 2021-2022 revision is substantially different from the old version, and focused on a project-centric approach to learning. As currently written it is compiled using version 1.3.0 of the PreTeXt-CLI. Please see [Section 5.2: The PreTeXt-CLI](https://pretextbook.org/doc/guide/html/processing-CLI.html#processing-CLI) of [The PreTeXt Guide](https://pretextbook.org/doc/guide/html/guide-toc.html) for more details.
+
+```bash
+pip install pretext
+pip install pretext --upgrade
+python -m pretext generate all
+python -m pretext build html
+```
+
+There is likely a future revision in the works. Stay tuned for the IMPaRT revision to AAM!
