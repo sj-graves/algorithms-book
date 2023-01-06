@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Errors and exception handling</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="AAM: Algorithms for Applied Mathematics">
+<meta property="book:author" content="Stephen J. Graves">
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'color', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+  },
+  chtml: {
+    scale: 0.98,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/color', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.2/pretext_search.js"></script><link href="https://pretextbook.org/css/0.6/pretext_search.css" rel="stylesheet" type="text/css">
+<script>js_version = 0.2</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.2/pretext.js"></script><script>miniversion=0.1</script><script src="https://pretextbook.org/js/0.2/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/0.2/user_preferences.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/dejavu-serif" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wdth,wght@8..144,50..150,100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75..100,300..800&amp;display=swap" rel="stylesheet">
+<link href="https://pretextbook.org/css/0.6/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/shell_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/navbar_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/colors_pastel_blue_orange.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/setcolors.css" rel="stylesheet" type="text/css">
+</head>
+<body class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead"><div class="ptx-banner">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="AAM.html"><span class="title">AAM: Algorithms for Applied Mathematics</span></a></h1>
+<p class="byline">Stephen J. Graves</p>
+</div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
+</div>
+</div></header><nav id="ptx-navbar" class="navbar"><button class="toc-toggle button" aria-label="Show or hide table of contents"><span class="icon">☰</span><span class="name">Contents</span></button><button id="user-preferences-button" class="user-preferences-button button" title="Modify user preferences"><span id="theavatarbutton" class="name">You!</span><div id="preferences_menu_holder" class="hidden"><ol id="preferences_menu" style="font-family: 'Roboto Serif', serif;">
+<li data-env="avatar" tabindex="-1">Choose avatar<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden avatar">
+<li data-val="You!" tabindex="-1">
+<span id="theYou!" class="avatarcheck">✔️</span>You!</li>
+<li data-val="😺" tabindex="-1">
+<span id="the😺" class="avatarcheck"></span>😺</li>
+<li data-val="👤" tabindex="-1">
+<span id="the👤" class="avatarcheck"></span>👤</li>
+<li data-val="👽" tabindex="-1">
+<span id="the👽" class="avatarcheck"></span>👽</li>
+<li data-val="🐶" tabindex="-1">
+<span id="the🐶" class="avatarcheck"></span>🐶</li>
+<li data-val="🐼" tabindex="-1">
+<span id="the🐼" class="avatarcheck"></span>🐼</li>
+<li data-val="🌈" tabindex="-1">
+<span id="the🌈" class="avatarcheck"></span>🌈</li>
+</ol>
+</li>
+<li data-env="fontfamily" tabindex="-1">Font family<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden fontfamily">
+<li data-val="face" data-change="OS" tabindex="-1" style="font-family: 'Open Sans'">
+<span id="theOS" class="ffcheck">✔️</span><span class="name">Open Sans</span><span class="sample">AaBbCc 123 PreTeXt</span>
+</li>
+<li data-val="face" data-change="RS" tabindex="-1" style="font-family: 'Roboto Serif'">
+<span id="theRS" class="ffcheck"></span><span class="name">Roboto Serif</span><span class="sample">AaBbCc 123 PreTeXt</span>
+</li>
+</ol>
+</li>
+<li data-env="font" tabindex="-1">Adjust font<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden fonts">
+<li>Size</li>
+<li><span id="thesize">12</span></li>
+<li data-val="size" data-change="-1" tabindex="-1" style="font-size: 80%">Smaller</li>
+<li data-val="size" data-change="1" tabindex="-1" style="font-size: 110%">Larger</li>
+<li>Width</li>
+<li><span id="thewdth">100</span></li>
+<li data-val="wdth" data-change="-5" tabindex="-1" style="font-variation-settings: 'wdth' 60">narrower</li>
+<li data-val="wdth" data-change="5" tabindex="-1" style="font-variation-settings: 'wdth' 150">wider</li>
+<li>Weight</li>
+<li><span id="thewght">400</span></li>
+<li data-val="wght" data-change="-50" tabindex="-1" style="font-weight: 200">thinner</li>
+<li data-val="wght" data-change="50" tabindex="-1" style="font-weight: 700">heavier</li>
+<li>Letter spacing</li>
+<li>
+<span id="thelspace">0</span><span class="byunits">/200</span>
+</li>
+<li data-val="lspace" data-change="-1" tabindex="-1">closer</li>
+<li data-val="lspace" data-change="1" tabindex="-1">f a r t h e r</li>
+<li>Word spacing</li>
+<li>
+<span id="thewspace">0</span><span class="byunits">/50</span>
+</li>
+<li data-val="wspace" data-change="-1" tabindex="-1">smaller gap </li>
+<li data-val="wspace" data-change="1" tabindex="-1">larger gap</li>
+<li>Line Spacing</li>
+<li>
+<span id="theheight">135</span><span class="byunits">/100</span>
+</li>
+<li data-val="height" data-change="-5" tabindex="-1" style="line-height: 1">closer<br>together</li>
+<li data-val="height" data-change="5" tabindex="-1" style="line-height: 1.75">further<br>apart</li>
+</ol>
+</li>
+<li data-env="atmosphere" tabindex="-1">Light/dark mode<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden atmosphere">
+<li data-val="default" tabindex="-1">
+<span id="thedefault" class="atmospherecheck">✔️</span>default</li>
+<li data-val="pastel" tabindex="-1">
+<span id="thepastel" class="atmospherecheck"></span>pastel</li>
+<li data-val="darktwilight" tabindex="-1">
+<span id="thedarktwilight" class="atmospherecheck"></span>twilight</li>
+<li data-val="dark" tabindex="-1">
+<span id="thedark" class="atmospherecheck"></span>dark</li>
+<li data-val="darkmidnight" tabindex="-1">
+<span id="thedarkmidnight" class="atmospherecheck"></span>midnight</li>
+</ol>
+</li>
+<li data-env="ruler" tabindex="-1">Reading ruler<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden ruler">
+<li data-val="none" tabindex="-1">
+<span id="thenone" class="rulercheck">✔️</span>none</li>
+<li data-val="underline" tabindex="-1">
+<span id="theunderline" class="rulercheck"></span>underline</li>
+<li data-val="lunderline" tabindex="-1">
+<span id="thelunderline" class="rulercheck"></span>L-underline</li>
+<li data-val="greybar" tabindex="-1">
+<span id="thegreybar" class="rulercheck"></span>grey bar</li>
+<li data-val="lightbox" tabindex="-1">
+<span id="thelightbox" class="rulercheck"></span>light box</li>
+<li data-val="sunrise" tabindex="-1">
+<span id="thesunrise" class="rulercheck"></span>sunrise</li>
+<li data-val="sunriseunderline" tabindex="-1">
+<span id="thesunriseunderline" class="rulercheck"></span>sunrise underline</li>
+<li class="moveQ">Motion by:</li>
+<li data-val="mouse" tabindex="-1">
+<span id="themouse" class="motioncheck">✔️</span>follow the mouse</li>
+<li data-val="arrow" tabindex="-1">
+<span id="thearrow" class="motioncheck"></span>up/down arrows - not yet</li>
+<li data-val="eye" tabindex="-1">
+<span id="theeye" class="motioncheck"></span>eye tracking - not yet</li>
+</ol>
+</li>
+</ol></div></button><span class="treebuttons"><a class="previous-button button" href="sec-intro-functions.html" title="Previous"><span class="icon">&lt;</span><span class="name">Prev</span></a><a class="up-button button" href="app-python.html" title="Up"><span class="icon">^</span><span class="name">Up</span></a><a class="next-button button" href="appendix-lists.html" title="Next"><span class="name">Next</span><span class="icon">&gt;</span></a></span><div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\usepackage{mathtools}
+\DeclareMathOperator{\fixedset}{fix}
+\DeclareMathOperator{\support}{supp}
+\DeclareMathOperator{\lcm}{lcm}
+
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\upto}[1]{\set{0,1,\dotsc,#1-1}}
+\newcommand{\seq}[1]{\left(#1\right)}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\after}{\circ}
+\newcommand{\sym}[1]{\mathcal{S}_{#1}}
+\newcommand{\fix}[1]{\fixedset{#1}}
+\newcommand{\supp}[1]{\support{#1}}
+\newcommand{\xto}[1]{\xrightarrow{#1}}
+\newcommand{\arr}[1]{\overrightarrow{#1}}
+
+\newcommand{\rem}{\%}
+\newcommand{\divides}{\mid}
+\newcommand{\Nats}{\mathbb{N}}
+\newcommand{\Ints}{\mathbb{Z}}
+\newcommand{\Zp}{\Ints^+}
+\newcommand{\Rats}{\mathbb{Q}}
+\newcommand{\Reals}{\mathbb{R}}
+\newcommand{\Comps}{\mathbb{C}}
+\newcommand{\Mats}[1]{\mathbb{M}_{#1}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\cvec}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\newcommand{\vv}{\vec{v}}
+\newcommand{\CV}[1]{\Comps^{#1}}
+\newcommand{\entry}[2]{\left[#1\right]_{#2}}
+\newcommand{\hip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\conj}[1]{\overline{#1}}
+
+\newcommand{\dist}[3]{d_{#1}\left(#2,#3\right)}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\DeclareMathOperator{\spn}{span}
+\newcommand{\spanset}[1]{\spn #1}
+\DeclareMathOperator{\Aut}{Aut}
+\newcommand{\rswap}[2]{R_{#1}\leftrightarrow R_{#2}}
+\newcommand{\rscale}[2]{\left(#1\right) R_{#2}}
+\newcommand{\relim}[3]{\left(#1\right) R_{#2}+R_{#3}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar"><nav id="ptx-toc" class="depth2"><ul class="structural">
+<li>
+<div class="toc-item"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="AAM-fm-col.html" class="internal"><span class="title">Colophon</span></a></div></li>
+<li><div class="toc-item"><a href="AAM-fm-ack.html" class="internal"><span class="title">Acknowledgements</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="ch-intro.html" class="internal"><span class="codenumber">1</span> <span class="title">Welcome!</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="sec-intro-mst.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Connecting a network</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-intro-mst.html#subsec-intro-mst-example" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Working from an example</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-mst.html#subsec-intro-mst-algorithm" class="internal"><span class="codenumber">1.1.2</span> <span class="title">Algorithm</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="sec-intro-kidrsa.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Familiarity with Python</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="ch-perms.html" class="internal"><span class="codenumber">2</span> <span class="title">Permutations</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="sec-perms-def.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Mathematical permutations</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-perms-def.html#sub-perms-def-linenotations" class="internal"><span class="codenumber">2.1.1</span> <span class="title">One-line and two-line notations</span></a></div></li>
+<li>
+<div class="toc-item"><a href="sec-perms-def.html#sub-perms-def-groups" class="internal"><span class="codenumber">2.1.2</span> <span class="title">Permutation groups</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-perms-def.html#subsub-perms-def-groups-products" class="internal"><span class="codenumber">2.1.2.1</span> <span class="title">Calculating permutation products</span></a></div></li>
+<li><div class="toc-item"><a href="sec-perms-def.html#subsub-perms-def-groups-multprops" class="internal"><span class="codenumber">2.1.2.2</span> <span class="title">Properties of permutation multiplication</span></a></div></li>
+<li><div class="toc-item"><a href="sec-perms-def.html#subsub-perms-def-groups-absalg" class="internal"><span class="codenumber">2.1.2.3</span> <span class="title">Abstract algebra and permutation groups</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="sec-perms-def.html#sub-perms-def-cycles" class="internal"><span class="codenumber">2.1.3</span> <span class="title">Cycles and disjoint cycle decomposition</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-perms-oop.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Permutations in Python</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-perms-oop.html#sec-perms-oop_classes" class="internal"><span class="codenumber">2.2.1</span> <span class="title">Classes</span></a></div></li>
+<li><div class="toc-item"><a href="sec-perms-oop.html#sub-perms-oop_instantiation" class="internal"><span class="codenumber">2.2.2</span> <span class="title">Creating new objects</span></a></div></li>
+<li><div class="toc-item"><a href="sec-perms-oop.html#sub-perms-oop_validation" class="internal"><span class="codenumber">2.2.3</span> <span class="title">Input validation</span></a></div></li>
+<li><div class="toc-item"><a href="sec-perms-oop.html#sub-perms-oop_adding_methods" class="internal"><span class="codenumber">2.2.4</span> <span class="title">Additional methods</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="ch-crypto.html" class="internal"><span class="codenumber">3</span> <span class="title">Simple Cryptography</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="sec-crypto-subst.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Simple substitution ciphers</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-crypto-subst.html#sub-crypto-subst-simple" class="internal"><span class="codenumber">3.1.1</span> <span class="title">Monoalphabetic substitution</span></a></div></li>
+<li><div class="toc-item"><a href="sec-crypto-subst.html#sub-crypto-subst-freqanalysis" class="internal"><span class="codenumber">3.1.2</span> <span class="title">Frequency analysis</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-crypto-classic.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Other classical ciphers</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-crypto-classic.html#sub-crypto-classic-digraphs" class="internal"><span class="codenumber">3.2.1</span> <span class="title">Increasing the alphabet: Playfair's cipher</span></a></div></li>
+<li>
+<div class="toc-item"><a href="sec-crypto-classic.html#sub-crypto-classic-poly" class="internal"><span class="codenumber">3.2.2</span> <span class="title">Polyalphabetic substitution</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-crypto-classic.html#ssub-crypto-classic-tabularecta" class="internal"><span class="codenumber">3.2.2.1</span> <span class="title">The tabula recta</span></a></div></li>
+<li><div class="toc-item"><a href="sec-crypto-classic.html#ssub-crypto-classic-vigenere" class="internal"><span class="codenumber">3.2.2.2</span> <span class="title">Vigenère ciphers and the index of coincidence</span></a></div></li>
+<li><div class="toc-item"><a href="sec-crypto-classic.html#ssub-crypto-classic-onetimepad" class="internal"><span class="codenumber">3.2.2.3</span> <span class="title">One-time pads</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="sec-crypto-classic.html#sub-crypto-classic-enigma" class="internal"><span class="codenumber">3.2.3</span> <span class="title">The Enigma cipher</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-crypto-proj.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Crypto in Python</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-crypto-proj.html#sub-crypto-proj-manual_decryption" class="internal"><span class="codenumber">3.3.1</span> <span class="title">Demonstrating understanding</span></a></div></li>
+<li><div class="toc-item"><a href="sec-crypto-proj.html#sub-crypto-proj-implementations" class="internal"><span class="codenumber">3.3.2</span> <span class="title">Implementing cryptography</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="ch-linalg.html" class="internal"><span class="codenumber">4</span> <span class="title">Linear Algebra</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="sec-linalg-vectors.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Vectors</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-linalg-vectors.html#sub-linalg-vectors-axioms" class="internal"><span class="codenumber">4.1.1</span> <span class="title">Vector space axioms</span></a></div></li>
+<li><div class="toc-item"><a href="sec-linalg-vectors.html#sub-linalg-vectors-colvecs" class="internal"><span class="codenumber">4.1.2</span> <span class="title">Column vectors</span></a></div></li>
+<li><div class="toc-item"><a href="sec-linalg-vectors.html#sub-linalg-vectors-lintrans" class="internal"><span class="codenumber">4.1.3</span> <span class="title">Linear transformations</span></a></div></li>
+<li><div class="toc-item"><a href="sec-linalg-vectors.html#sub-linalg-vectors-inner_prods" class="internal"><span class="codenumber">4.1.4</span> <span class="title">Inner product spaces</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-linalg-vecproj.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Vectors in Python</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-linalg-vecproj.html#sub-vecproj-init_and_repr" class="internal"><span class="codenumber">4.2.1</span> <span class="title">Getting started with initialization and representation</span></a></div></li>
+<li><div class="toc-item"><a href="sec-linalg-vecproj.html#sub-vecproj-add_and_mul" class="internal"><span class="codenumber">4.2.2</span> <span class="title">Vector addition and scalar multiplication</span></a></div></li>
+<li><div class="toc-item"><a href="sec-linalg-vecproj.html#sub-vecproj-extras" class="internal"><span class="codenumber">4.2.3</span> <span class="title">Additional class methods</span></a></div></li>
+<li><div class="toc-item"><a href="sec-linalg-vecproj.html#sub-vecproj-computations" class="internal"><span class="codenumber">4.2.4</span> <span class="title">“Simple” computations</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-linalg-matrices.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Complex matrices</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-linalg-matrices.html#sub-linalg-matrices-matrix_vector_product" class="internal"><span class="codenumber">4.3.1</span> <span class="title">Matrix-vector products</span></a></div></li>
+<li><div class="toc-item"><a href="sec-linalg-matrices.html#sub-linalg-matrices-matrix_matrix_product" class="internal"><span class="codenumber">4.3.2</span> <span class="title">Matrix-matrix products</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-linalg-matproj.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Matrices in Python</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-linalg-matproj.html#sub-linalg-matproj-basics" class="internal"><span class="codenumber">4.4.1</span> <span class="title"><code class="code-inline tex2jax_ignore">AlgoMatrix</code> basics</span></a></div></li>
+<li><div class="toc-item"><a href="sec-linalg-matproj.html#sub-linalg-matproj-named_methods" class="internal"><span class="codenumber">4.4.2</span> <span class="title">Named <code class="code-inline tex2jax_ignore">AlgoMatrix</code> methods</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="ch-matrix-apps.html" class="internal"><span class="codenumber">5</span> <span class="title">Matrix Applications</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="sec-matapps-ssles.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Solving Systems of Linear Equations</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-matapps-ssles.html#sub-matapps-sles-rowops" class="internal"><span class="codenumber">5.1.1</span> <span class="title">Elementary row operations</span></a></div></li>
+<li><div class="toc-item"><a href="sec-matapps-ssles.html#sub-matapps-sles-row_equivalence" class="internal"><span class="codenumber">5.1.2</span> <span class="title">Row equivalence and solutions to SLEs</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-matapps-gje_proj.html" class="internal"><span class="codenumber">5.2</span> <span class="title">GJE in Python</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-matapps-gje_proj.html#sub-matapps-gje_np" class="internal"><span class="codenumber">5.2.1</span> <span class="title">Gauss-Jordan elimination with naive pivoting</span></a></div></li>
+<li><div class="toc-item"><a href="sec-matapps-gje_proj.html#sub-matapps-gje_naive_flaw" class="internal"><span class="codenumber">5.2.2</span> <span class="title">Swamping: the computational flaw in naive pivoting</span></a></div></li>
+<li><div class="toc-item"><a href="sec-matapps-gje_proj.html#sub-matapps-gje_pp" class="internal"><span class="codenumber">5.2.3</span> <span class="title">Gauss-Jordan elimination with partial pivoting</span></a></div></li>
+<li><div class="toc-item"><a href="sec-matapps-gje_proj.html#sub-matapps-implement_gje_pp" class="internal"><span class="codenumber">5.2.4</span> <span class="title">Implementing GJE with PP</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-matapps-ludecomp.html" class="internal"><span class="codenumber">5.3</span> <span class="title"><span class="process-math">\(PA=LU\)</span> Decomposition</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-matapps-ludecomp.html#sub-matapps-ludecomp-theory" class="internal"><span class="codenumber">5.3.1</span> <span class="title">Special factors</span></a></div></li>
+<li><div class="toc-item"><a href="sec-matapps-ludecomp.html#sub-matapps-ludecomp-solving" class="internal"><span class="codenumber">5.3.2</span> <span class="title">Solving systems via <span class="process-math">\(LU\)</span> decomposition</span></a></div></li>
+<li><div class="toc-item"><a href="sec-matapps-ludecomp.html#sub-matapps-ludecomp-algo" class="internal"><span class="codenumber">5.3.3</span> <span class="title">Algorithms for <span class="process-math">\(LU\)</span> decomposition</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="ch-gtalgos.html" class="internal"><span class="codenumber">6</span> <span class="title">Graph Theory Algorithms</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-gtalgos-basics.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Graph basics</span></a></div></li>
+<li>
+<div class="toc-item"><a href="sec-gtalgos-mst.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Minimum spanning trees</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-gtalgos-mst.html#sub-gtalgos-mst-jarnik_prim" class="internal"><span class="codenumber">6.2.1</span> <span class="title">Jarník-Prim Algorithm</span></a></div></li>
+<li><div class="toc-item"><a href="sec-gtalgos-mst.html#sub-gtalgos-mst-minheaps" class="internal"><span class="codenumber">6.2.2</span> <span class="title">Min Heaps</span></a></div></li>
+<li>
+<div class="toc-item"><a href="sec-gtalgos-mst.html#sub-gtalgos-mst-kruskal" class="internal"><span class="codenumber">6.2.3</span> <span class="title">Kruskal's algorithm</span></a></div>
+<ul class="structural"><li><div class="toc-item"><a href="sec-gtalgos-mst.html#subsubsection-7" class="internal"><span class="codenumber">6.2.3.1</span> <span class="title">Implementing Kruskal's algorithm</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-gtalgos-shortestpath.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Shortest Paths</span></a></div>
+<ul class="structural"><li>
+<div class="toc-item"><a href="sec-gtalgos-shortestpath.html#sub-gtalgos-shortestpath-dijkstra" class="internal"><span class="codenumber">6.3.1</span> <span class="title">Dijkstra's Algorithm</span></a></div>
+<ul class="structural"><li><div class="toc-item"><a href="sec-gtalgos-shortestpath.html#subsubsection-8" class="internal"><span class="codenumber">6.3.1.1</span> <span class="title">A full example of Dijkstra's algorithm</span></a></div></li></ul>
+</li></ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-gtalgos-maxflowmincut.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Maximizing flow</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-gtalgos-maxflowmincut.html#sec-MaxFlow-MaxFlow" class="internal"><span class="codenumber">6.4.1</span> <span class="title">Max flow</span></a></div></li>
+<li><div class="toc-item"><a href="sec-gtalgos-maxflowmincut.html#sec-MaxFlow-DinitzAlgo" class="internal"><span class="codenumber">6.4.2</span> <span class="title">Dinitz' Algorithm</span></a></div></li>
+<li><div class="toc-item"><a href="sec-gtalgos-maxflowmincut.html#sec-MaxFlow-DinitzImpl" class="internal"><span class="codenumber">6.4.3</span> <span class="title">Implementing Dinitz' Algorithm</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="aam-backmatter.html" class="internal"><span class="title">Back Matter</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="app-python.html" class="internal"><span class="codenumber">A</span> <span class="title">Python crash course</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="sec-intro-idle.html" class="internal"><span class="codenumber">A.1</span> <span class="title">Getting started with Python</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-intro-idle.html#sub-intro-idle-gettingidle" class="internal"><span class="codenumber">A.1.1</span> <span class="title">Getting IDLE</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-idle.html#sub-intro-idle-interactivemode" class="internal"><span class="codenumber">A.1.2</span> <span class="title">Interactive Mode</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-idle.html#sub-intro-idle-firstprogram" class="internal"><span class="codenumber">A.1.3</span> <span class="title">A first Python module</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-intro_basicdata.html" class="internal"><span class="codenumber">A.2</span> <span class="title">Basic data types</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-intro_basicdata.html#sub-intro-basicdata-numbers" class="internal"><span class="codenumber">A.2.1</span> <span class="title">Numerical data types</span></a></div></li>
+<li>
+<div class="toc-item"><a href="sec-intro_basicdata.html#sub-intro-basicdata-other" class="internal"><span class="codenumber">A.2.2</span> <span class="title">Non-numeric data types</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-intro_basicdata.html#subsub-intro-basicdata-other-bool" class="internal"><span class="codenumber">A.2.2.1</span> <span class="title">Boolean variables</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro_basicdata.html#subsub-intro-basicdata-other-str" class="internal"><span class="codenumber">A.2.2.2</span> <span class="title">Strings</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-intro-containers.html" class="internal"><span class="codenumber">A.3</span> <span class="title">Container data types</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="sec-intro-containers.html#sub-intro-containers-lists" class="internal"><span class="codenumber">A.3.1</span> <span class="title">The <code class="code-inline tex2jax_ignore">list</code> data type</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-intro-containers.html#subsub-intro-containers-lists-slices" class="internal"><span class="codenumber">A.3.1.1</span> <span class="title">Indexing and slicing</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-containers.html#subsub-intro-containers-lists-ops_meths" class="internal"><span class="codenumber">A.3.1.2</span> <span class="title">Operators and methods</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-containers.html#subsub-intro-containers-lists-mutable" class="internal"><span class="codenumber">A.3.1.3</span> <span class="title">Mutability</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="sec-intro-containers.html#sub-intro-containers-tuples" class="internal"><span class="codenumber">A.3.2</span> <span class="title">The <code class="code-inline tex2jax_ignore">tuple</code> data type</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-containers.html#sub-intro-containers-dicts" class="internal"><span class="codenumber">A.3.3</span> <span class="title">The <code class="code-inline tex2jax_ignore">dict</code> data type</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-containers.html#subsection-53" class="internal"><span class="codenumber">A.3.4</span> <span class="title">Sets are a special container</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-intro-iteration.html" class="internal"><span class="codenumber">A.4</span> <span class="title">Iteration</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-intro-iteration.html#sub-intro-iteration-for" class="internal"><span class="codenumber">A.4.1</span> <span class="title">For loops</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-iteration.html#sub-intro-iteration-while" class="internal"><span class="codenumber">A.4.2</span> <span class="title">While loops</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-intro-functions.html" class="internal"><span class="codenumber">A.5</span> <span class="title">Functions and conditional statements</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-intro-functions.html#sub-intro-functions-def" class="internal"><span class="codenumber">A.5.1</span> <span class="title"><code class="code-inline tex2jax_ignore">def</code>ining new functions</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-functions.html#subsec-into-functions-conditionals" class="internal"><span class="codenumber">A.5.2</span> <span class="title">Controlling flow of programs</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-functions.html#sub-intro-functions-collatz" class="internal"><span class="codenumber">A.5.3</span> <span class="title">The Collatz Conjecture</span></a></div></li>
+</ul>
+</li>
+<li class="active">
+<div class="toc-item"><a href="sec-intro-errors.html" class="internal"><span class="codenumber">A.6</span> <span class="title">Errors and exception handling</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-intro-errors.html#sub-intro-errors-exceptions" class="internal"><span class="codenumber">A.6.1</span> <span class="title">Exceptions</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-errors.html#sub-intro-errors-handling" class="internal"><span class="codenumber">A.6.2</span> <span class="title">Handling exceptions</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-errors.html#sub-intro-errors-flow" class="internal"><span class="codenumber">A.6.3</span> <span class="title">Controlling the flow of a program</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-errors.html#sub-intro-errors-bugs" class="internal"><span class="codenumber">A.6.4</span> <span class="title">Semantic errors, or bugs</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="appendix-lists.html" class="internal"><span class="codenumber">B</span> <span class="title">Finding ideas quickly</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="app-find-defs.html" class="internal"><span class="codenumber">B.1</span> <span class="title">Definitions</span></a></div></li>
+<li><div class="toc-item"><a href="app-find-tech.html" class="internal"><span class="codenumber">B.2</span> <span class="title">Technology and Algorithms</span></a></div></li>
+<li><div class="toc-item"><a href="app-find-results.html" class="internal"><span class="codenumber">B.3</span> <span class="title">Lemmas, Propositions, and Theorems</span></a></div></li>
+<li><div class="toc-item"><a href="app-find-projects.html" class="internal"><span class="codenumber">B.4</span> <span class="title">Projects</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="appendix-gfdl.html" class="internal"><span class="codenumber">C</span> <span class="title">GNU Free Documentation License</span></a></div></li>
+<li><div class="toc-item"><a href="colophon-2.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content">
+<section class="section" id="sec-intro-errors"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">A.6</span> <span class="title">Errors and exception handling</span>
+</h2>
+<section class="introduction" id="introduction-68"><div class="para" id="p-1006">There's only one way for a program to run correctly, but so many different ways errors can appear. Some errors are easy to diagnose and fix and others can ruin whole days trying to pin down. Errors in programming fall broadly into two classes: exceptions and bugs.</div></section><section class="subsection" id="sub-intro-errors-exceptions"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">A.6.1</span> <span class="title">Exceptions</span>
+</h3>
+<div class="para" id="p-1007">Exceptions are those errors which (left untreated) stop the execution of code abruptly. On the scale of all possible errors, this is clearly worse than <em class="emphasis">executes flawlessly</em>, but not much. In Python an <code class="code-inline tex2jax_ignore">Exception</code> is a special data type which is used for all sorts of regularly-occurring programming errors. The following are some of the more common exceptions which arise when working with Python, in no particular order.</div>
+<article class="technology computation-like" id="tech-syntaxerror"><h4 class="heading">
+<span class="type">Technology</span><span class="space"> </span><span class="codenumber">A.6.1</span><span class="period">.</span><span class="space"> </span><span class="title">Syntax Error.</span>
+</h4> <div class="para" id="p-1008">A Python <code class="code-inline tex2jax_ignore">SyntaxError</code> is the programming equivalent of a grammatically incorrect sentence, where you've written something which violates the basic rules of the Python language. Python will show you in the <dfn class="terminology">error message</dfn> exactly where your Syntax error occurs. Here's an example:</div> <figure class="listing figure-like" id="list-syntaxerror"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="console"><span class="prompt unselectable">&gt;&gt;&gt; </span><b>foo = "This is a test"
+</b><span class="prompt unselectable">&gt;&gt;&gt; </span><b>bar =
+</b>SyntaxError: invalid syntax
+</pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">A.6.2<span class="period">.</span></span><span class="space"> </span>An example which will produce a <code class="code-inline tex2jax_ignore">SyntaxError</code></figcaption></figure></article><article class="technology computation-like" id="tech-indexerror"><h4 class="heading">
+<span class="type">Technology</span><span class="space"> </span><span class="codenumber">A.6.3</span><span class="period">.</span><span class="space"> </span><span class="title">Index errors.</span>
+</h4> <div class="para" id="p-1009">An <code class="code-inline tex2jax_ignore">IndexError</code> is raised when you try to access an index of a container with “regular” indexing (like lists, tuples, and strings, but not dictionaries) but outside the bounds of the valid indices.</div> <figure class="listing figure-like" id="list-indexerror"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="console"><span class="prompt unselectable">&gt;&gt;&gt; </span><b>foo = "this is a string"
+</b><span class="prompt unselectable">&gt;&gt;&gt; </span><b>bar = len(foo) + 5
+</b><span class="prompt unselectable">&gt;&gt;&gt; </span><b>foo[bar]
+</b>Traceback (most recent call last):
+  File "&lt;pyshell#8&gt;", line 1, in &lt;module&gt;
+    foo[bar]
+IndexError: string index out of range
+</pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">A.6.4<span class="period">.</span></span><span class="space"> </span>An example which will produce a <code class="code-inline tex2jax_ignore">IndexError</code></figcaption></figure></article><article class="technology computation-like" id="tech-keyerror"><h4 class="heading">
+<span class="type">Technology</span><span class="space"> </span><span class="codenumber">A.6.5</span><span class="period">.</span><span class="space"> </span><span class="title">Key errors.</span>
+</h4> <div class="para" id="p-1010">The <code class="code-inline tex2jax_ignore">KeyError</code> is closely related to the <code class="code-inline tex2jax_ignore">IndexError</code>, but for dictionaries! If a key is attempted to be referenced which has not been declared to have a value, a <code class="code-inline tex2jax_ignore">KeyError</code> will result.</div> <figure class="listing figure-like" id="list-keyerror"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="console"><span class="prompt unselectable">&gt;&gt;&gt; </span><b>foo = {'bob':[1, 'the shrimp'], (2,3): (1,2,3,'the pineapple')}
+</b><span class="prompt unselectable">&gt;&gt;&gt; </span><b>print( list( foo.keys() ) )
+</b>['bob', (2, 3)]
+<span class="prompt unselectable">&gt;&gt;&gt; </span><b>print( foo['bar'] )
+</b>Traceback (most recent call last):
+  File "&lt;pyshell#3&gt;", line 1, in &lt;module&gt;
+    print( foo['bar'] )
+KeyError: 'bar'
+</pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">A.6.6<span class="period">.</span></span><span class="space"> </span>An example which will produce a <code class="code-inline tex2jax_ignore">KeyError</code></figcaption></figure></article><article class="technology computation-like" id="tech-typeerror"><h4 class="heading">
+<span class="type">Technology</span><span class="space"> </span><span class="codenumber">A.6.7</span><span class="period">.</span><span class="space"> </span><span class="title">Type errors.</span>
+</h4> <div class="para" id="p-1011">Another very common error is the <code class="code-inline tex2jax_ignore">TypeError</code>, which is raised whenever the data type of a variable used in a computation is unexpected by the function being called. For instance, many mathematical functions expect numerical input, but the Python interpreter won't know the error exists until it attempts to execute the expression.</div> <figure class="listing figure-like" id="list-typeerror"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="console"><span class="prompt unselectable">&gt;&gt;&gt; </span><b>"This is a string"/2
+</b>Traceback (most recent call last)
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+TypeError: unsupported operand type(s) for /: 'str' and 'int'
+</pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">A.6.8<span class="period">.</span></span><span class="space"> </span>An example which will produce a <code class="code-inline tex2jax_ignore">TypeError</code></figcaption></figure></article><div class="para" id="p-1012">There are many other types of errors which will be encountered as you try to write codes, too many to describe. Other common exceptions you might see are <code class="code-inline tex2jax_ignore">ValueError</code>, <code class="code-inline tex2jax_ignore">AttributeError</code>, <code class="code-inline tex2jax_ignore">DivideByZeroError</code>, and one which I use frequently as a control mechanism, <code class="code-inline tex2jax_ignore">RuntimeError</code>. In most cases, the well written code underlying whatever you are attempting involves a <code class="code-inline tex2jax_ignore">raise</code> command, the method by which an exception is generally triggered. A notable exception to this is the <code class="code-inline tex2jax_ignore">KeyboardInterrupt</code>, which us useful to remember: it is triggered by pressign <code class="code-inline tex2jax_ignore">Ctrl-C</code> on your keyboard while a program is running in Python.</div></section><section class="subsection" id="sub-intro-errors-handling"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">A.6.2</span> <span class="title">Handling exceptions</span>
+</h3>
+<div class="para" id="p-1013">There is a school of engineering design called by many names which expresses the belief that “a system should only fail into a known state” or that “a system that fails should do so securely.” Applied to programming this idea is expressed in <dfn class="terminology">exception handling</dfn> where  violations of the logic of a program are anticipated and treated before they occur. As we should perhaps expect, Python implements this with a block data structure, the <code class="code-inline tex2jax_ignore">try:... except:...</code> block.</div>
+<article class="technology computation-like" id="tech-try-except"><h4 class="heading">
+<span class="type">Technology</span><span class="space"> </span><span class="codenumber">A.6.9</span><span class="period">.</span><span class="space"> </span><span class="title">Python exception handling.</span>
+</h4> <div class="para" id="p-1014">Any exception generated in the indented block following a <code class="code-inline tex2jax_ignore">try:</code> command will attempt to be caught by one of a sequence of <code class="code-inline tex2jax_ignore">except ... :</code> blocks which follow. As only one exception is generated at a time, this behaves as an <code class="code-inline tex2jax_ignore">if:... elif:...</code> sequence; for instance, if one of the blocks begins with <code class="code-inline tex2jax_ignore">except RuntimeError as error_message:</code>, then that block will only be executed when the body of the <code class="code-inline tex2jax_ignore">try:</code> block raises a <code class="code-inline tex2jax_ignore">RuntimeError(...)</code>; the optional argument to the error is named <code class="code-inline tex2jax_ignore">error_message</code> within this <code class="code-inline tex2jax_ignore">except</code> block.</div> <div class="para" id="p-1015">These exceptions are usually triggered by a <code class="code-inline tex2jax_ignore">raise</code> command. Here is a meaningless example demonstrating the use of the structure.</div> <figure class="listing figure-like" id="listing-49"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">n = 1
+try:
+    if n==1:
+        raise RuntimeError('First error')
+    elif n==2:
+        raise ValueError('Second error')
+    else:
+        raise TypeError('Third error')
+except RuntimeError as error_message:
+    print "We have encountered a RuntimeError, specifically {0}".format(error_message)
+    pass
+except:
+    print "All errors but RuntimeErrors are caught here!"
+    pass
+print "The program now exits cleanly."
+</code></pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">A.6.10<span class="period">.</span></span><span class="space"> </span>An example of a <code class="code-inline tex2jax_ignore">try:... except:... </code> block</figcaption></figure></article><div class="para" id="p-1016">The code listing in <a href="" class="xref" data-knowl="./knowl/tech-try-except.html" title="Technology A.6.9: Python exception handling">Technology A.6.9</a> is intentionally stupid. The code doesn't actually do anything except demonstrate the <code class="code-inline tex2jax_ignore">try:... except:...</code> block structure.</div>
+<article class="exercise exercise-like" id="exc-memoization"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exc-memoization"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">A.6.11</span><span class="period">.</span><span class="space"> </span><span class="title">Memo-ization.</span>
+</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exc-memoization"><article class="exercise exercise-like"><div class="para" id="p-1017">A cool use of dictionaries and the <code class="code-inline tex2jax_ignore">try:... except:...</code> block is called <dfn class="terminology">memo-ization</dfn>, although it is usually written without the hyphen. Consider the following implementation of the Collatz sequence.</div>
+<figure class="listing figure-like" id="list-memoized-collatz"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">coll_mem = {1:[1], 2:[2,1], 4:[4,2,1]}
+def memoized_coll(x):
+    try:
+        return coll_mem[x]
+    except KeyError:
+        if not type(x)==int or x&lt;1:
+            return None
+        elif x%2==0:
+            next_val = x//2
+        else:
+            next_val = 3 * x + 1
+        coll_mem[x] = [x] + memoized_coll(next_val)
+        return coll_mem[x]
+</code></pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">A.6.12<span class="period">.</span></span><span class="space"> </span>An implementation of the Collatz sequence problem using a dictionary to store previously-computed resluts.</figcaption></figure><div class="para" id="p-1018">Picking apart the code, we see that first it sets up a dictionary of known values. Then when asked to produce the Collatz sequence from a given input, the function tries to return the value stored in that key of the dictionary. If no such key exists, a <code class="code-inline tex2jax_ignore">KeyError</code> is generated; when that happens, the program falls back on the <span class="process-math">\(3x+1\)</span> form of generating the sequence.</div>
+<div class="para" id="p-1019">Suppose this task is iterated over all integers up to some given value; that is, <span class="process-math">\(x=1,2,3,\dotsc\)</span> are checked. For a given input value <span class="process-math">\(x\text{,}\)</span> when will the memoized version of the function always have the key stored in the dictionary? What has to happen to the <code class="code-inline tex2jax_ignore">next_val</code> in the sequence for this to be the case?</div></article></div>
+<article class="remark remark-like" id="rem-recursion"><h4 class="heading">
+<span class="type">Remark</span><span class="space"> </span><span class="codenumber">A.6.13</span><span class="period">.</span><span class="space"> </span><span class="title">Recursively-defined functions.</span>
+</h4> <div class="para" id="p-1020">A function like <code class="code-inline tex2jax_ignore">memoized_coll</code> in <a href="" class="xref" data-knowl="./knowl/exc-memoization.html" title="Checkpoint A.6.11: Memo-ization">Checkpoint A.6.11</a> which refers to itself is a <dfn class="terminology">recursive</dfn> function. Typically the first recursively-defined function seen by students is the function which defines the <dfn class="terminology">Fibonacci sequence</dfn>, <span class="process-math">\(F_{n+2} = F_{n+1} + F_n\)</span> for <span class="process-math">\(n\in\Nats\)</span> when <span class="process-math">\(F_0 = F_1 = 1\text{.}\)</span>
+</div></article></section><section class="subsection" id="sub-intro-errors-flow"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">A.6.3</span> <span class="title">Controlling the flow of a program</span>
+</h3>
+<div class="para" id="p-1021">Generating errors via the <code class="code-inline tex2jax_ignore">raise</code> command is an extremely powerful way to disrupt the flow of a program. A <code class="code-inline tex2jax_ignore">raise</code> statement outside of a <code class="code-inline tex2jax_ignore">try:... except:...</code> block will halt the program, so they are to be used sparingly. Two other statements which modify the flow of a program in an abrupt way are <code class="code-inline tex2jax_ignore">continue</code> and <code class="code-inline tex2jax_ignore">break</code>.</div>
+<article class="technology computation-like" id="tech-continue"><h4 class="heading">
+<span class="type">Technology</span><span class="space"> </span><span class="codenumber">A.6.14</span><span class="period">.</span><span class="space"> </span><span class="title">Python <code class="code-inline tex2jax_ignore">continue</code> statements.</span>
+</h4> <div class="para" id="p-1022">When <code class="code-inline tex2jax_ignore">continue</code> is encountered during the execution of a loop, the current step of the loop immediately completes and the loop condition is reevaluated, moving to the next object in a <code class="code-inline tex2jax_ignore">for</code> loop or retesting the conditional of a <code class="code-inline tex2jax_ignore">while</code> loop.</div> <div class="para" id="p-1023">This is particularly useful in cases where the code must handle cases for the loop which do nothing, or are exempt from the behavior encoded in the block structure of the loop, but that do not halt the execution of the loop.</div></article><article class="technology computation-like" id="tech-break"><h4 class="heading">
+<span class="type">Technology</span><span class="space"> </span><span class="codenumber">A.6.15</span><span class="period">.</span><span class="space"> </span><span class="title">Python <code class="code-inline tex2jax_ignore">break</code> statements.</span>
+</h4> <div class="para" id="p-1024">When <code class="code-inline tex2jax_ignore">break</code> is encountered in the execution of a loop, the loop immediately terminates and the program continues past the looping block structure. Unlike with a <code class="code-inline tex2jax_ignore">continue</code> statement, any further elements over which a <code class="code-inline tex2jax_ignore">for</code> loop was programmed to iterate are skipped.</div></article></section><section class="subsection" id="sub-intro-errors-bugs"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">A.6.4</span> <span class="title">Semantic errors, or bugs</span>
+</h3>
+<div class="para" id="p-1025">When left unhandled, exceptions halt the flow of the program, which may be undesirable but at least allows the programmer to detect that an error has occurred with great ease. On the other hand, <dfn class="terminology">semantic errors</dfn> are discreet.</div>
+<article class="definition definition-like" id="def-semantic-error"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">A.6.16</span><span class="period">.</span><span class="space"> </span><span class="title">Semantic errors are bugs.</span>
+</h4> <div class="para" id="p-1026">A <dfn class="terminology">semantic error</dfn> or <dfn class="terminology">bug</dfn> occurs when a program appears to work, but produces a result other than what was expected. This can occur either due to an error in the algorithm or an error in the implementation of the algorithm.</div></article><div class="para" id="p-1027">Bugs are called semantic errors because they do not violate the syntactic rules of the language, but rather are syntactically valid but semantically meaningless. The following English sentence is likewise grammatically well-formed but semantically meaningless:</div>
+<blockquote class="blockquote" id="blockquote-1">
+<div class="para" id="p-1028">Colorless green ideas sleep furiously.</div> <cite class="attribution">―Noam Chomsky, Syntactic Structures, 1957</cite>
+</blockquote>
+<div class="para" id="p-1029">Semantic errors are sometiems difficult to remedy; one strategy is to simulate the execution of a code by hand, writing down all of the state changes of variables as they occur to see when the error actually arises. Many programming IDEs include automatic debuggers which assist with this, allowing for more complicated problems to be remedied. For a discussion on why software errors are called bugs, see <a class="external" href="https://en.wikipedia.org/wiki/Debugging#Etymology" target="_blank">Wikipedia.</a><a href="" data-knowl="" class="id-ref fn-knowl original" data-refid="hk-fn-13" id="fn-13"><sup> 13 </sup></a>
+</div></section></section><div class="hidden-content tex2jax_ignore" id="hk-fn-13"><div class="fn"><code class="code-inline tex2jax_ignore">en.wikipedia.org/wiki/Debugging#Etymology</code></div></div>
+</div>
+<div class="ptx-content-footer">
+<a class="previous-button button" href="sec-intro-functions.html" title="Previous"><span class="icon">&lt;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon">^</span><span class="name">Top</span></a><a class="next-button button" href="appendix-lists.html" title="Next"><span class="name">Next</span><span class="icon">&gt;</span></a>
+</div></main>
+</div>
+<div class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org"><div class="name">Authored in PreTeXt</div>
+<div class="logo"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="338 3000 8772 6866"><g style="stroke-width:.025in; stroke:black; fill:none"><polyline points="472,3590 472,9732 " style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259 "></path><path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0  472  9732 "></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496 "></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,3496 A 4241 4241  0  0  1  4724  3590 "></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,9259 A 4507 4507  0  0  1  4724  9448 "></path><polyline points="5385,4299 4062,8125 " style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="8598,3496 8598,9259 " style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="850,3496 850,9259 " style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="4960,9685 4488,9685 " style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="3070,4582 1889,6141 3070,7700 " style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="6418,4582 7600,6141 6418,7700 " style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="8976,3590 8976,9732 " style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732 "></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy"><div class="name">Powered by Runestone</div>
+<img class="logo" title="Powered by Runestone" src="https://runestone.academy/runestone/static/rectangle_badge.png" alt="Powered by Runestone"></a><a class="mathjax-logo" href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a>
+</div>
+</body>
+</html>

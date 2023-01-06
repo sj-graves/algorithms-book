@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="task exercise-like"><h5 class="heading">
+<span class="type">Task</span><span class="space"> </span><span class="codenumber">4.1.c</span><span class="period">.</span><span class="space"> </span><span class="title">Representation method.</span>
+</h5>
+<div class="para">Since <code class="code-inline tex2jax_ignore">__repr__</code> is supposed to produce the string which would exactly recreate your object if it were used as input, we do not want to produce any interesting column vector output. Implement the following:</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def entries(self):
+    '''Return the tuple of entries/components of self.'''
+    return self._components
+
+def __repr__(self):
+    '''Faithful string representation of AlgoVector'''
+    return str(self.entries())
+</code></pre></div>
+<div class="para">In your <code class="code-inline tex2jax_ignore">aam_proj4.py</code> file, test that everything is working by checking the output of the following:</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">vec1 = AlgoVector([0+1j, 1+0j, 1+1j])
+vec2 = AlgoVector([1j, 1, '1+1j'])
+print(vec1)
+print(vec2)
+</code></pre></div></article><span class="incontext"><a href="sec-linalg-vecproj.html#task-57" class="internal">in-context</a></span>
+</body>
+</html>

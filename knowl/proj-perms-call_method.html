@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.5</span><span class="period">.</span><span class="space"> </span><span class="title">Calling <code class="code-inline tex2jax_ignore">AlgoPerm</code>.</span>
+</h4>
+<div class="introduction"><div class="para">There is a mathematically important reason and a computationally important reason to define this method. Mathematically, the method is important because permutations are functions, and functions are callable. Computationally it is important because we don't want to have to worry about exactly how the <code class="code-inline tex2jax_ignore">AlgoPerm</code> class is written in order to use it. Specifically, once we write the <code class="code-inline tex2jax_ignore">__call__</code> method we don't have to keep track of the <code class="code-inline tex2jax_ignore">AlgoPerm._mapping</code> most of the time, because we can instead use function notation.</div></div>
+<article class="task exercise-like"><h5 class="heading"><span class="codenumber">(a)</span></h5>
+<div class="para">Define a <code class="code-inline tex2jax_ignore">__call__</code> method in your <code class="code-inline tex2jax_ignore">AlgoPerm</code> class.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __call__(self, other):
+    """Perform self(other)"""
+    try:
+        return self._mapping[other]
+    except KeyError:
+        raise ValueError(f"{other} is not in the domain of {self}")
+</code></pre></div></article><article class="task exercise-like"><h5 class="heading"><span class="codenumber">(b)</span></h5>
+<div class="para">Test your new method in <code class="code-inline tex2jax_ignore">aam_proj2.py</code> by adding <code class="code-inline tex2jax_ignore">print(a(8))</code> and <code class="code-inline tex2jax_ignore">print(b(31))</code> lines. Diagnose what occurs and why.</div></article></article><span class="incontext"><a href="sec-perms-oop.html#proj-perms-call_method" class="internal">in-context</a></span>
+</body>
+</html>

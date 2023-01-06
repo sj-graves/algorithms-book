@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def clean_to_source(layered_cap, vertex, source):
+    if vertex!=source and len(successors(layered_cap, vertex)) == 0:
+        for w in predecessors(layered_cap, vertex):
+            layered_cap[w][vertex] = 0
+            if len(successors(layered_cap, w))==0:
+                layered_cap = clean_to_source(layered_cap, w, source)
+    return layered_cap
+
+def clean_to_target(layered_cap, vertex, target):
+    if vertex!=target and len(predecessors(layered_cap, vertex))==0:
+        for w in successors(layered_cap, vertex):
+            layered_cap[vertex][w] = 0
+            if predecessors(layered_cap, w) in ([vertex], []):
+                layered_cap = clean_to_target(layered_cap, w, target)
+    return layered_cap
+</code></pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">6.4.17<span class="period">.</span></span><span class="space"> </span>Cleaning functions for layered graph maintenance in Dinitz' algorithm</figcaption></figure><span class="incontext"><a href="sec-gtalgos-maxflowmincut.html#list-dinitz_cleaning_functions" class="internal">in-context</a></span>
+</body>
+</html>

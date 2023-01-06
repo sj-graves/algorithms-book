@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="technology computation-like"><h4 class="heading">
+<span class="type">Technology</span><span class="space"> </span><span class="codenumber">A.6.5</span><span class="period">.</span><span class="space"> </span><span class="title">Key errors.</span>
+</h4> <div class="para">The <code class="code-inline tex2jax_ignore">KeyError</code> is closely related to the <code class="code-inline tex2jax_ignore">IndexError</code>, but for dictionaries! If a key is attempted to be referenced which has not been declared to have a value, a <code class="code-inline tex2jax_ignore">KeyError</code> will result.</div> <figure class="listing figure-like"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="console"><span class="prompt unselectable">&gt;&gt;&gt; </span><b>foo = {'bob':[1, 'the shrimp'], (2,3): (1,2,3,'the pineapple')}
+</b><span class="prompt unselectable">&gt;&gt;&gt; </span><b>print( list( foo.keys() ) )
+</b>['bob', (2, 3)]
+<span class="prompt unselectable">&gt;&gt;&gt; </span><b>print( foo['bar'] )
+</b>Traceback (most recent call last):
+  File "&lt;pyshell#3&gt;", line 1, in &lt;module&gt;
+    print( foo['bar'] )
+KeyError: 'bar'
+</pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">A.6.6<span class="period">.</span></span><span class="space"> </span>An example which will produce a <code class="code-inline tex2jax_ignore">KeyError</code></figcaption></figure></article><span class="incontext"><a href="sec-intro-errors.html#tech-keyerror" class="internal">in-context</a></span>
+</body>
+</html>

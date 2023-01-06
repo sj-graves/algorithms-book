@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="example example-like"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">6.4.8</span><span class="period">.</span><span class="space"> </span><span class="title">Continued from previous example..</span>
+</h4>
+<figure class="figure figure-like"><div class="image-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><img src="generated/latex-image/backflow.svg" role="img" class="contained"></div>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">6.4.9<span class="period">.</span></span><span class="space"> </span>(A) An augmenting path with flow value <span class="process-math">\(f^*=8\)</span> in <span class="process-math">\(\Lambda\)</span> from <a href="" class="xref" data-knowl="./knowl/exmp_capnet_1.html" title="Example 6.4.5: Applying Dinitz' algorithm">Example 6.4.5</a>. (B) After updating the residual capacities of edges in <span class="process-math">\(E_\ell\text{,}\)</span> the edge <span class="process-math">\(v_2v_5\)</span> was saturated and therefore removed. This leaves <span class="process-math">\(v_2\)</span> with no successor vertices, so the edge <span class="process-math">\(v_1v_2\)</span> (shown with reduced capacity) must also be removed as no additional flow can move from <span class="process-math">\(v_1\)</span> to <span class="process-math">\(v_5\)</span> along <span class="process-math">\(v_1v_2\text{.}\)</span> (C) The graph <span class="process-math">\(\Lambda\)</span> after maintenance.</figcaption></figure> <div class="para">In our graph <span class="process-math">\(\Lambda\text{,}\)</span> <span class="process-math">\(u_0=s=v_1\)</span> has only two successors: <span class="process-math">\(v_2\)</span> and <span class="process-math">\(v_3\text{.}\)</span> Choosing <span class="process-math">\(u_1=v_2\text{,}\)</span> we see that the only successor of <span class="process-math">\(u_1\)</span> in <span class="process-math">\(\Lambda\)</span> is <span class="process-math">\(v_5=t\text{,}\)</span> so <span class="process-math">\(u_2=v_5\text{.}\)</span> Our augmenting path is then <span class="process-math">\((v_1,v_2,v_5)\text{;}\)</span> as this flow only consists of two edges of capacities <span class="process-math">\(50\)</span> and <span class="process-math">\(8\)</span> respectively, it is clear that <span class="process-math">\(f^*=\min\set{50,8}=8\text{.}\)</span>
+</div> <div class="para logical">
+<div class="para">The current flow in our graph is <span class="process-math">\(f(u,v)=0\)</span> for all <span class="process-math">\(uv\in E\text{,}\)</span> and we now have an augmenting path and flow. So we update the flow value to accommodate the augmentation:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+f(u,v) = \begin{cases}8, \amp  uv\in\set{v_1v_2,v_2v_5} \\ 0, \amp uv\in E\setminus\set{v_1v_2,v_2v_5}.
+\end{cases}
+\end{equation*}
+</div>
+</div> <div class="para">We update our residual capacities and see that edge <span class="process-math">\(v_2v_5\)</span> is now saturated; removing this edge from <span class="process-math">\(E_\ell\)</span> we find that now <span class="process-math">\(v_2\)</span> has no successors and so all edges terminating at <span class="process-math">\(v_2\)</span> must also be removed in graph maintenance.</div> <div class="para logical">
+<div class="para">Having maintained the graph, we see that the path <span class="process-math">\((v_1,v_3,v_5)\)</span> remains and permits another augmenting flow of <span class="process-math">\(f^*=10\text{.}\)</span> Again updating, we have</div>
+<div class="displaymath process-math">
+\begin{equation*}
+f(u,v) = \begin{cases}8, \amp  uv\in\set{v_1v_2,v_2v_5} \\
+10, \amp  uv\in\set{v_1v_3,v_3v_5} \\
+0, \amp uv\in E\setminus\set{v_1v_2,v_1v_3,v_2v_5,v_3v_5}.
+\end{cases}
+\end{equation*}
+</div>
+</div> <div class="para">Now no augmenting flows remain in <span class="process-math">\(\Lambda\)</span> after maintenance, as <span class="process-math">\(v_1v_3\)</span> is saturated and hence <span class="process-math">\(v_3\)</span> has no predecessors in <span class="process-math">\(\Lambda\text{.}\)</span>
+</div> <div class="para">In order to continue to augment the flow, we must again determine the residual capacities and build a new residual graph <span class="process-math">\(\Delta_f\)</span> taking into account the current flow <span class="process-math">\(f\text{.}\)</span>
+</div></article><span class="incontext"><a href="sec-gtalgos-maxflowmincut.html#example-23" class="internal">in-context</a></span>
+</body>
+</html>

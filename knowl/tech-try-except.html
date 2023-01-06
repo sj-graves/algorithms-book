@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="technology computation-like"><h4 class="heading">
+<span class="type">Technology</span><span class="space"> </span><span class="codenumber">A.6.9</span><span class="period">.</span><span class="space"> </span><span class="title">Python exception handling.</span>
+</h4> <div class="para">Any exception generated in the indented block following a <code class="code-inline tex2jax_ignore">try:</code> command will attempt to be caught by one of a sequence of <code class="code-inline tex2jax_ignore">except ... :</code> blocks which follow. As only one exception is generated at a time, this behaves as an <code class="code-inline tex2jax_ignore">if:... elif:...</code> sequence; for instance, if one of the blocks begins with <code class="code-inline tex2jax_ignore">except RuntimeError as error_message:</code>, then that block will only be executed when the body of the <code class="code-inline tex2jax_ignore">try:</code> block raises a <code class="code-inline tex2jax_ignore">RuntimeError(...)</code>; the optional argument to the error is named <code class="code-inline tex2jax_ignore">error_message</code> within this <code class="code-inline tex2jax_ignore">except</code> block.</div> <div class="para">These exceptions are usually triggered by a <code class="code-inline tex2jax_ignore">raise</code> command. Here is a meaningless example demonstrating the use of the structure.</div> <figure class="listing figure-like"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">n = 1
+try:
+    if n==1:
+        raise RuntimeError('First error')
+    elif n==2:
+        raise ValueError('Second error')
+    else:
+        raise TypeError('Third error')
+except RuntimeError as error_message:
+    print "We have encountered a RuntimeError, specifically {0}".format(error_message)
+    pass
+except:
+    print "All errors but RuntimeErrors are caught here!"
+    pass
+print "The program now exits cleanly."
+</code></pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">A.6.10<span class="period">.</span></span><span class="space"> </span>An example of a <code class="code-inline tex2jax_ignore">try:... except:... </code> block</figcaption></figure></article><span class="incontext"><a href="sec-intro-errors.html#tech-try-except" class="internal">in-context</a></span>
+</body>
+</html>

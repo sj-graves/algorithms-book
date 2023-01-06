@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="task exercise-like"><h5 class="heading">
+<span class="type">Task</span><span class="space"> </span><span class="codenumber">5.1.b</span><span class="period">.</span><span class="space"> </span><span class="title">Scaling a row.</span>
+</h5>
+<div class="introduction"><div class="para">Similarly to (a), we first work on a <code class="code-inline tex2jax_ignore">list</code>.</div></div>
+<article class="task exercise-like"><h6 class="heading"><span class="codenumber">(i)</span></h6>
+<div class="para">Suppose that <code class="code-inline tex2jax_ignore">grid</code> is a list of <span class="process-math">\(m\)</span> entries and <span class="process-math">\(0\leq r_1\lt m\text{,}\)</span> and suppose <span class="process-math">\(\alpha\in\Comps\text{.}\)</span> Suppose further that the element of <code class="code-inline tex2jax_ignore">grid</code> in index <span class="process-math">\(r_1\)</span> is a container, like a <code class="code-inline tex2jax_ignore">list</code> or <code class="code-inline tex2jax_ignore">tuple</code>. How could you create a new version of that container whose elements have all been multiplied by <span class="process-math">\(\alpha\text{?}\)</span>
+</div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(ii)</span></h6>
+<div class="para">Complete the following function in your <code class="code-inline tex2jax_ignore">aam_proj6.py</code> file to produce the effect described in the function's docstring.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def gscale(grid, alpha, r1):
+    """Return a list whose elements are identical to those of grid,
+        except in the index r1, which has been scaled by a factor
+        of alpha."""
+    temp_entry = [ ]
+    for entry in grid[r1]:
+        temp_entry.append( None )
+    # Build out on the next line using slicing and addition.
+    out = None
+    return out
+</code></pre></div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(iii)</span></h6>
+<div class="para">Adapt the function <code class="code-inline tex2jax_ignore">gscale</code> from the previous subtask to the following method in your <code class="code-inline tex2jax_ignore">AlgoMatrix.py</code> class file.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def rscale(self, alpha, r1):
+    """Return the AlgoMatrix obtained from self by scaling the row
+        with index r1 by a factor of alpha."""
+    out = None
+    return AlgoMatrix(out)
+</code></pre></div></article></article><span class="incontext"><a href="sec-matapps-gje_proj.html#task-110" class="internal">in-context</a></span>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.12</span><span class="period">.</span><span class="space"> </span><span class="title"><code class="code-inline tex2jax_ignore">AlgoMatrix</code> augmentation.</span>
+</h4> <div class="para">We should easily see how to use our special definition of initialization by lists of column vectors to perform augmentation. In fact, augmentation is the reason why that option for initialization is a good idea!</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def augment(self, right):
+'''Return the augmented matrix [self|right]'''
+m,n = self.dims()
+if type(right) == AlgoVector:
+if len(right)==m:
+return AlgoMatrix( self.columns() + tuple([right]) )
+else:
+raise ValueError('Dimension mismatch')
+elif type(right) == AlgoMatrix:
+p,q = right.dims()
+if p==m:
+return AlgoMatrix( self.columns() + right.columns() )
+else:
+raise ValueError('Dimension mismatch')
+else:
+raise TypeError(f'Cannot augment AlgoMatrix by {type(right)}.')
+</code></pre></div> <div class="para">In <code class="code-inline tex2jax_ignore">aam_proj5.py</code>, test this by printing the matrices <span class="process-math">\([A|B]\)</span> and <span class="process-math">\([B|A]\text{;}\)</span> are they equal?</div></article><span class="incontext"><a href="sec-linalg-matproj.html#proj-matproj-augmentation" class="internal">in-context</a></span>
+</body>
+</html>

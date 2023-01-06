@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="technology computation-like"><h4 class="heading">
+<span class="type">Technology</span><span class="space"> </span><span class="codenumber">2.2.8</span><span class="period">.</span><span class="space"> </span><span class="title">Function argument lists.</span>
+</h4> <div class="para">In <a href="" class="xref" data-knowl="./knowl/list-__init__.html" title="Listing 2.2.7">Listing 2.2.7</a> we see two special arguments used in a function definition, <code class="code-inline tex2jax_ignore">*args</code> and <code class="code-inline tex2jax_ignore">**kwargs</code>. The names of the local variables defined by these arguments are respectively <code class="code-inline tex2jax_ignore">args</code> and <code class="code-inline tex2jax_ignore">kwargs</code>. The first, <code class="code-inline tex2jax_ignore">args</code>, consists of a tuple of all <dfn class="terminology">positionally-determined arguments</dfn> passed to the function. The second, <code class="code-inline tex2jax_ignore">kwargs</code>, consists of a dictionary whose keys are the keywords of arguments passed to the function, and the associated values are the values of those arguments.</div> <figure class="listing figure-like"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="console"><span class="prompt unselectable">&gt;&gt;&gt; </span><b>def my_func(*args, **kwargs):
+</b><span class="prompt unselectable">...     </span><b>print(type(args), len(args))
+</b><span class="prompt unselectable">...     </span><b>print(type(kwargs), list(kwargs.items()))
+</b><span class="prompt unselectable">...     </span><b>
+</b><span class="prompt unselectable">&gt;&gt;&gt; </span><b>my_func(13, 17, 19,
+</b><span class="prompt unselectable">...     </span><b>keya="a first keyword argument"
+</b><span class="prompt unselectable">...     </span><b>keyb="A SECOND!!" )
+</b>&lt;class 'tuple'&gt; 3
+&lt;class 'dict'&gt; [('keya', 'a first keyword argument'), ('keyb', 'A SECOND!!')]
+</pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">2.2.9<span class="period">.</span></span><span class="space"> </span>Functions allowing arbitrary arguments</figcaption></figure></article><span class="incontext"><a href="sec-perms-oop.html#tech-argument_lists" class="internal">in-context</a></span>
+</body>
+</html>

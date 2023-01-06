@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="task exercise-like"><h6 class="heading">
+<span class="type">Task</span><span class="space"> </span><span class="codenumber">4.2.b.ii</span><span class="period">.</span>
+</h6>
+<div class="para">With a working <code class="code-inline tex2jax_ignore">__add__</code> method, include the following in your <code class="code-inline tex2jax_ignore">AlgoVector</code> class</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __radd__(self, left):
+    '''return left+self'''
+    # This should never trigger with left being an AlgoVector, so...
+    raise TypeError(f'Cannot add {type(left)} and AlgoVector.')
+</code></pre></div></article><span class="incontext"><a href="sec-linalg-vecproj.html#task-68" class="internal">in-context</a></span>
+</body>
+</html>

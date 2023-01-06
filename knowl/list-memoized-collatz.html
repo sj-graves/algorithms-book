@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">coll_mem = {1:[1], 2:[2,1], 4:[4,2,1]}
+def memoized_coll(x):
+    try:
+        return coll_mem[x]
+    except KeyError:
+        if not type(x)==int or x&lt;1:
+            return None
+        elif x%2==0:
+            next_val = x//2
+        else:
+            next_val = 3 * x + 1
+        coll_mem[x] = [x] + memoized_coll(next_val)
+        return coll_mem[x]
+</code></pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">A.6.12<span class="period">.</span></span><span class="space"> </span>An implementation of the Collatz sequence problem using a dictionary to store previously-computed resluts.</figcaption></figure><span class="incontext"><a href="sec-intro-errors.html#list-memoized-collatz" class="internal">in-context</a></span>
+</body>
+</html>

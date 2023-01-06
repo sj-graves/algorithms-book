@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="task exercise-like"><h5 class="heading">
+<span class="type">Task</span><span class="space"> </span><span class="codenumber">2.3.a</span><span class="period">.</span>
+</h5>
+<div class="para">Implement your algorithm in the <code class="code-inline tex2jax_ignore">AlgoPerm</code> class. Begin by editing the <code class="code-inline tex2jax_ignore">__init__</code> method of <code class="code-inline tex2jax_ignore">AlgoPerm</code> so that it looks as follows:</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __init__(self, mapping, domain=None):
+    # Check to see whether mapping provides a valid permutation.
+    if type(mapping) == dict:
+        # This is effectively two-line notation. Each value must also be a key.
+        #
+        # Change the following line to validate the input!!!
+        keyset_equals_valueset = False
+        #
+        if keyset_equals_valueset:
+            # This use of '.copy()' has to do with data in memory versus
+            #    the name of a variable.
+            map_dict = mapping.copy()
+        else:
+            raise ValueError("Mapping does not specify valid permutation as dictionary.")
+    elif type(mapping) == list:
+        # One-line notation. Have to check that the mapping corresponds to
+        # the list [1, 2, ..., k] for some k.
+        #
+        # Change the following line to validate the input!!!
+        valid_oneline = False
+        #
+        if valid_oneline:
+            # build the mapping dictionary
+            map_dict = { }
+            for i in range(maxx):
+                map_dict[i+1] = mapping[i]
+        else:
+            raise ValueError("Mapping does not specify valid one-line notation.")
+    elif type(mapping) == tuple:
+        # Cycle notation. This is tricky! Skip it for now.
+        raise NotImplementedError("Cannot currently define a permutation from cycle tuples")
+    else:
+        raise TypeError(f"Mapping must be list (oneline notation), tuple (cycle notation), or dictionary, not {type(mapping)}.")
+    #
+    # We'll rewrite this later:
+    if domain!=None:
+        pass
+    set_domain = set(map_dict.keys())
+
+    # Assign the value of map_dict into the self.mapping attribute
+    self._mapping = map_dict
+
+    # Set all attributes other than the canonical data storage.
+    self._domain = set_domain
+</code></pre></div>
+<div class="para">If you copied and pasted that into your file, it is likely that you are having errors. Try typing it in by hand instead.</div></article><span class="incontext"><a href="sec-perms-oop.html#task-24" class="internal">in-context</a></span>
+</body>
+</html>

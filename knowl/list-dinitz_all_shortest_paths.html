@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def all_shortest_paths(vertex_set, warrows, source):
+    # Note: float('inf') represents Infinity.
+    unvisited_distance = [(0,source)]
+    unvisited_distance += [(float('inf'), v) for v in vertex_set if v!=source]
+    distance = {v:d for d,v in unvisited_distance}
+    predecessor = {v:[] for v in vertex_set}
+    visited = [ ]
+    while len(visited) &lt; len(vertex_set):
+        # find nearest unvisited vertex
+        unvisited_distance.sort()
+        du, u = unvisited_distance.pop(0)
+        for v, cap_uv in warrows[u].items():
+            if v in visited: continue
+            elif (du + 1 &lt;= distance[v]) and (cap_uv &gt; 0):
+                unvisited_distance.remove( (distance[v], v) )
+                distance[v] = du + 1
+                if u not in predecessor[v]:
+                    predecessor[v].append( u )
+                unvisited_distance.append( (distance[v], v) )
+        visited.append( u )
+    return predecessor
+</code></pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">6.4.13<span class="period">.</span></span><span class="space"> </span>Implementation of <a href="" class="xref" data-knowl="./knowl/alg_mod_dijkstra.html" title="Algorithm 6.4.4: Modified Dikstra: All Shortest Paths from s">Algorithm 6.4.4</a> returning the lists of predecessors of each vertex.</figcaption></figure><span class="incontext"><a href="sec-gtalgos-maxflowmincut.html#list-dinitz_all_shortest_paths" class="internal">in-context</a></span>
+</body>
+</html>

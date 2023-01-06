@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def dinitz(vertex_set, capacity, source, target, debug=False):
+    cap_edges = [(u,v,c) for u,out_arrows in capacity.items() for v,c in out_arrows.items()]
+    # Initialize Zero Flow
+    total_flow = 0
+    flow = {u:{v:0 for v in out_arrows.keys()} for u,out_arrows in capacity.items()}
+    for u,v,c in cap_edges:
+        try:
+            flow[v][u] = 0
+        except:
+            flow[v] = {u:0}
+    while True:
+        # Create residual capacity
+        res_capacity = {u:{v:c-flow[u][v] for v,c in out_arrows.items()} for u,out_arrows in capacity.items()}
+        for u,v,c in cap_edges:
+            try:
+                res_capacity[v][u] = flow[u][v]
+            except KeyError:
+                res_capacity[v] = {u:flow[u][v]}
+
+        res_capacity = {u:{v:c for v,c in out_arrows.items() if c&gt;0} for u,out_arrows in res_capacity.items()}
+        if debug: print(f"Residual Capacities computed:\n{res_capacity}")
+        # Create layered graph
+        pred = all_shortest_paths(vertex_set, res_capacity, source)
+        back_cap = build_back_arrows(vertex_set, res_capacity, pred)
+        pred = all_shortest_paths(vertex_set, back_cap, target)
+        layered_capacity = build_back_arrows(vertex_set, back_cap, pred)
+        if debug: print(f"Layered Graph computed:\n{layered_capacity}")
+        if layered_capacity[source] == {}:
+            print(f"Maximum flow of {total_flow} achieved.")
+            break
+        try:
+            # Repeatedly find augmenting paths
+            while True:
+                ap, af = pathfinding(layered_capacity, source, target)
+                if debug: print(f"Augmenting path {ap} of capacity {af} found.")
+                total_flow += af
+                for u,v in zip(ap[:-1],ap[1:]):
+                    flow[u][v] += af
+                layered_capacity = maintain_layers(layered_capacity, ap, af, source, target)
+                if debug: print(f"After maintenance, layered graph is:\n{layered_capacity}")
+        except:
+            if debug: print(f"No more augmenting paths.")
+            continue
+    # prune empty flows
+    flow = {u:{v:f for v,f in flow_arrows.items() if f&gt;0} for u,flow_arrows in flow.items()}
+    return flow
+</code></pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">6.4.19<span class="period">.</span></span><span class="space"> </span>Dinitz algorithm implemented in Python</figcaption></figure><span class="incontext"><a href="sec-gtalgos-maxflowmincut.html#list-dinitz" class="internal">in-context</a></span>
+</body>
+</html>

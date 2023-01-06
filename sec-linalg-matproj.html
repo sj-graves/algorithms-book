@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<html lang="en-US">
+<head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Project: Matrices in Python</title>
+<meta name="Keywords" content="Authored in PreTeXt">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta property="og:type" content="book">
+<meta property="book:title" content="AAM: Algorithms for Applied Mathematics">
+<meta property="book:author" content="Stephen J. Graves">
+<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+window.MathJax = {
+  tex: {
+    inlineMath: [['\\(','\\)']],
+    tags: "none",
+    tagSide: "right",
+    tagIndent: ".8em",
+    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'color', 'newcommand', 'knowl']}
+  },
+  options: {
+    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
+    processHtmlClass: "process-math",
+  },
+  chtml: {
+    scale: 0.98,
+    mtextInheritFont: true
+  },
+  loader: {
+    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/color', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
+    paths: {pretext: "https://pretextbook.org/js/lib"},
+  },
+  startup: {
+    pageReady() {
+      return MathJax.startup.defaultPageReady().then(function () {
+      console.log("in ready function");
+      rsMathReady();
+      }
+    )}
+  },
+};
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.2/pretext_search.js"></script><link href="https://pretextbook.org/css/0.6/pretext_search.css" rel="stylesheet" type="text/css">
+<script>js_version = 0.2</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.2/pretext.js"></script><script>miniversion=0.1</script><script src="https://pretextbook.org/js/0.2/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/0.2/user_preferences.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+</script><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.cdnfonts.com/css/dejavu-serif" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wdth,wght@8..144,50..150,100..900&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75..100,300..800&amp;display=swap" rel="stylesheet">
+<link href="https://pretextbook.org/css/0.6/pretext.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/shell_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/banner_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/navbar_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/toc_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/style_default.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/colors_pastel_blue_orange.css" rel="stylesheet" type="text/css">
+<link href="https://pretextbook.org/css/0.6/setcolors.css" rel="stylesheet" type="text/css">
+</head>
+<body class="pretext book ignore-math">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead"><div class="ptx-banner">
+<a id="logo-link" href=""></a><div class="title-container">
+<h1 class="heading"><a href="AAM.html"><span class="title">AAM: Algorithms for Applied Mathematics</span></a></h1>
+<p class="byline">Stephen J. Graves</p>
+</div>
+<div id="searchresultsplaceholder" style="display: none">
+<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
+</h2>
+<div id="searchempty"><span>No results.</span></div>
+<ol id="searchresults"></ol>
+</div>
+</div></header><nav id="ptx-navbar" class="navbar"><button class="toc-toggle button" aria-label="Show or hide table of contents"><span class="icon">☰</span><span class="name">Contents</span></button><button id="user-preferences-button" class="user-preferences-button button" title="Modify user preferences"><span id="theavatarbutton" class="name">You!</span><div id="preferences_menu_holder" class="hidden"><ol id="preferences_menu" style="font-family: 'Roboto Serif', serif;">
+<li data-env="avatar" tabindex="-1">Choose avatar<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden avatar">
+<li data-val="You!" tabindex="-1">
+<span id="theYou!" class="avatarcheck">✔️</span>You!</li>
+<li data-val="😺" tabindex="-1">
+<span id="the😺" class="avatarcheck"></span>😺</li>
+<li data-val="👤" tabindex="-1">
+<span id="the👤" class="avatarcheck"></span>👤</li>
+<li data-val="👽" tabindex="-1">
+<span id="the👽" class="avatarcheck"></span>👽</li>
+<li data-val="🐶" tabindex="-1">
+<span id="the🐶" class="avatarcheck"></span>🐶</li>
+<li data-val="🐼" tabindex="-1">
+<span id="the🐼" class="avatarcheck"></span>🐼</li>
+<li data-val="🌈" tabindex="-1">
+<span id="the🌈" class="avatarcheck"></span>🌈</li>
+</ol>
+</li>
+<li data-env="fontfamily" tabindex="-1">Font family<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden fontfamily">
+<li data-val="face" data-change="OS" tabindex="-1" style="font-family: 'Open Sans'">
+<span id="theOS" class="ffcheck">✔️</span><span class="name">Open Sans</span><span class="sample">AaBbCc 123 PreTeXt</span>
+</li>
+<li data-val="face" data-change="RS" tabindex="-1" style="font-family: 'Roboto Serif'">
+<span id="theRS" class="ffcheck"></span><span class="name">Roboto Serif</span><span class="sample">AaBbCc 123 PreTeXt</span>
+</li>
+</ol>
+</li>
+<li data-env="font" tabindex="-1">Adjust font<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden fonts">
+<li>Size</li>
+<li><span id="thesize">12</span></li>
+<li data-val="size" data-change="-1" tabindex="-1" style="font-size: 80%">Smaller</li>
+<li data-val="size" data-change="1" tabindex="-1" style="font-size: 110%">Larger</li>
+<li>Width</li>
+<li><span id="thewdth">100</span></li>
+<li data-val="wdth" data-change="-5" tabindex="-1" style="font-variation-settings: 'wdth' 60">narrower</li>
+<li data-val="wdth" data-change="5" tabindex="-1" style="font-variation-settings: 'wdth' 150">wider</li>
+<li>Weight</li>
+<li><span id="thewght">400</span></li>
+<li data-val="wght" data-change="-50" tabindex="-1" style="font-weight: 200">thinner</li>
+<li data-val="wght" data-change="50" tabindex="-1" style="font-weight: 700">heavier</li>
+<li>Letter spacing</li>
+<li>
+<span id="thelspace">0</span><span class="byunits">/200</span>
+</li>
+<li data-val="lspace" data-change="-1" tabindex="-1">closer</li>
+<li data-val="lspace" data-change="1" tabindex="-1">f a r t h e r</li>
+<li>Word spacing</li>
+<li>
+<span id="thewspace">0</span><span class="byunits">/50</span>
+</li>
+<li data-val="wspace" data-change="-1" tabindex="-1">smaller gap </li>
+<li data-val="wspace" data-change="1" tabindex="-1">larger gap</li>
+<li>Line Spacing</li>
+<li>
+<span id="theheight">135</span><span class="byunits">/100</span>
+</li>
+<li data-val="height" data-change="-5" tabindex="-1" style="line-height: 1">closer<br>together</li>
+<li data-val="height" data-change="5" tabindex="-1" style="line-height: 1.75">further<br>apart</li>
+</ol>
+</li>
+<li data-env="atmosphere" tabindex="-1">Light/dark mode<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden atmosphere">
+<li data-val="default" tabindex="-1">
+<span id="thedefault" class="atmospherecheck">✔️</span>default</li>
+<li data-val="pastel" tabindex="-1">
+<span id="thepastel" class="atmospherecheck"></span>pastel</li>
+<li data-val="darktwilight" tabindex="-1">
+<span id="thedarktwilight" class="atmospherecheck"></span>twilight</li>
+<li data-val="dark" tabindex="-1">
+<span id="thedark" class="atmospherecheck"></span>dark</li>
+<li data-val="darkmidnight" tabindex="-1">
+<span id="thedarkmidnight" class="atmospherecheck"></span>midnight</li>
+</ol>
+</li>
+<li data-env="ruler" tabindex="-1">Reading ruler<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+<ol class="hidden ruler">
+<li data-val="none" tabindex="-1">
+<span id="thenone" class="rulercheck">✔️</span>none</li>
+<li data-val="underline" tabindex="-1">
+<span id="theunderline" class="rulercheck"></span>underline</li>
+<li data-val="lunderline" tabindex="-1">
+<span id="thelunderline" class="rulercheck"></span>L-underline</li>
+<li data-val="greybar" tabindex="-1">
+<span id="thegreybar" class="rulercheck"></span>grey bar</li>
+<li data-val="lightbox" tabindex="-1">
+<span id="thelightbox" class="rulercheck"></span>light box</li>
+<li data-val="sunrise" tabindex="-1">
+<span id="thesunrise" class="rulercheck"></span>sunrise</li>
+<li data-val="sunriseunderline" tabindex="-1">
+<span id="thesunriseunderline" class="rulercheck"></span>sunrise underline</li>
+<li class="moveQ">Motion by:</li>
+<li data-val="mouse" tabindex="-1">
+<span id="themouse" class="motioncheck">✔️</span>follow the mouse</li>
+<li data-val="arrow" tabindex="-1">
+<span id="thearrow" class="motioncheck"></span>up/down arrows - not yet</li>
+<li data-val="eye" tabindex="-1">
+<span id="theeye" class="motioncheck"></span>eye tracking - not yet</li>
+</ol>
+</li>
+</ol></div></button><span class="treebuttons"><a class="previous-button button" href="sec-linalg-matrices.html" title="Previous"><span class="icon">&lt;</span><span class="name">Prev</span></a><a class="up-button button" href="ch-linalg.html" title="Up"><span class="icon">^</span><span class="name">Up</span></a><a class="next-button button" href="ch-matrix-apps.html" title="Next"><span class="name">Next</span><span class="icon">&gt;</span></a></span><div class="searchbox"><div class="searchwidget">
+<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
+</div></div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\usepackage{mathtools}
+\DeclareMathOperator{\fixedset}{fix}
+\DeclareMathOperator{\support}{supp}
+\DeclareMathOperator{\lcm}{lcm}
+
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\upto}[1]{\set{0,1,\dotsc,#1-1}}
+\newcommand{\seq}[1]{\left(#1\right)}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\newcommand{\after}{\circ}
+\newcommand{\sym}[1]{\mathcal{S}_{#1}}
+\newcommand{\fix}[1]{\fixedset{#1}}
+\newcommand{\supp}[1]{\support{#1}}
+\newcommand{\xto}[1]{\xrightarrow{#1}}
+\newcommand{\arr}[1]{\overrightarrow{#1}}
+
+\newcommand{\rem}{\%}
+\newcommand{\divides}{\mid}
+\newcommand{\Nats}{\mathbb{N}}
+\newcommand{\Ints}{\mathbb{Z}}
+\newcommand{\Zp}{\Ints^+}
+\newcommand{\Rats}{\mathbb{Q}}
+\newcommand{\Reals}{\mathbb{R}}
+\newcommand{\Comps}{\mathbb{C}}
+\newcommand{\Mats}[1]{\mathbb{M}_{#1}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\cvec}[1]{\begin{bmatrix}#1\end{bmatrix}}
+\newcommand{\vv}{\vec{v}}
+\newcommand{\CV}[1]{\Comps^{#1}}
+\newcommand{\entry}[2]{\left[#1\right]_{#2}}
+\newcommand{\hip}[2]{\left\langle#1,#2\right\rangle}
+\newcommand{\conj}[1]{\overline{#1}}
+
+\newcommand{\dist}[3]{d_{#1}\left(#2,#3\right)}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\DeclareMathOperator{\spn}{span}
+\newcommand{\spanset}[1]{\spn #1}
+\DeclareMathOperator{\Aut}{Aut}
+\newcommand{\rswap}[2]{R_{#1}\leftrightarrow R_{#2}}
+\newcommand{\rscale}[2]{\left(#1\right) R_{#2}}
+\newcommand{\relim}[3]{\left(#1\right) R_{#2}+R_{#3}}
+\newcommand{\lt}{&lt;}
+\newcommand{\gt}{&gt;}
+\newcommand{\amp}{&amp;}
+\definecolor{fillinmathshade}{gray}{0.9}
+\newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
+\)</span></div>
+<div class="ptx-page">
+<div id="ptx-sidebar"><nav id="ptx-toc" class="depth2"><ul class="structural">
+<li>
+<div class="toc-item"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="AAM-fm-col.html" class="internal"><span class="title">Colophon</span></a></div></li>
+<li><div class="toc-item"><a href="AAM-fm-ack.html" class="internal"><span class="title">Acknowledgements</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="ch-intro.html" class="internal"><span class="codenumber">1</span> <span class="title">Welcome!</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="sec-intro-mst.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Connecting a network</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-intro-mst.html#subsec-intro-mst-example" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Working from an example</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-mst.html#subsec-intro-mst-algorithm" class="internal"><span class="codenumber">1.1.2</span> <span class="title">Algorithm</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="sec-intro-kidrsa.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Familiarity with Python</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="ch-perms.html" class="internal"><span class="codenumber">2</span> <span class="title">Permutations</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="sec-perms-def.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Mathematical permutations</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-perms-def.html#sub-perms-def-linenotations" class="internal"><span class="codenumber">2.1.1</span> <span class="title">One-line and two-line notations</span></a></div></li>
+<li>
+<div class="toc-item"><a href="sec-perms-def.html#sub-perms-def-groups" class="internal"><span class="codenumber">2.1.2</span> <span class="title">Permutation groups</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-perms-def.html#subsub-perms-def-groups-products" class="internal"><span class="codenumber">2.1.2.1</span> <span class="title">Calculating permutation products</span></a></div></li>
+<li><div class="toc-item"><a href="sec-perms-def.html#subsub-perms-def-groups-multprops" class="internal"><span class="codenumber">2.1.2.2</span> <span class="title">Properties of permutation multiplication</span></a></div></li>
+<li><div class="toc-item"><a href="sec-perms-def.html#subsub-perms-def-groups-absalg" class="internal"><span class="codenumber">2.1.2.3</span> <span class="title">Abstract algebra and permutation groups</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="sec-perms-def.html#sub-perms-def-cycles" class="internal"><span class="codenumber">2.1.3</span> <span class="title">Cycles and disjoint cycle decomposition</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-perms-oop.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Permutations in Python</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-perms-oop.html#sec-perms-oop_classes" class="internal"><span class="codenumber">2.2.1</span> <span class="title">Classes</span></a></div></li>
+<li><div class="toc-item"><a href="sec-perms-oop.html#sub-perms-oop_instantiation" class="internal"><span class="codenumber">2.2.2</span> <span class="title">Creating new objects</span></a></div></li>
+<li><div class="toc-item"><a href="sec-perms-oop.html#sub-perms-oop_validation" class="internal"><span class="codenumber">2.2.3</span> <span class="title">Input validation</span></a></div></li>
+<li><div class="toc-item"><a href="sec-perms-oop.html#sub-perms-oop_adding_methods" class="internal"><span class="codenumber">2.2.4</span> <span class="title">Additional methods</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="ch-crypto.html" class="internal"><span class="codenumber">3</span> <span class="title">Simple Cryptography</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="sec-crypto-subst.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Simple substitution ciphers</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-crypto-subst.html#sub-crypto-subst-simple" class="internal"><span class="codenumber">3.1.1</span> <span class="title">Monoalphabetic substitution</span></a></div></li>
+<li><div class="toc-item"><a href="sec-crypto-subst.html#sub-crypto-subst-freqanalysis" class="internal"><span class="codenumber">3.1.2</span> <span class="title">Frequency analysis</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-crypto-classic.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Other classical ciphers</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-crypto-classic.html#sub-crypto-classic-digraphs" class="internal"><span class="codenumber">3.2.1</span> <span class="title">Increasing the alphabet: Playfair's cipher</span></a></div></li>
+<li>
+<div class="toc-item"><a href="sec-crypto-classic.html#sub-crypto-classic-poly" class="internal"><span class="codenumber">3.2.2</span> <span class="title">Polyalphabetic substitution</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-crypto-classic.html#ssub-crypto-classic-tabularecta" class="internal"><span class="codenumber">3.2.2.1</span> <span class="title">The tabula recta</span></a></div></li>
+<li><div class="toc-item"><a href="sec-crypto-classic.html#ssub-crypto-classic-vigenere" class="internal"><span class="codenumber">3.2.2.2</span> <span class="title">Vigenère ciphers and the index of coincidence</span></a></div></li>
+<li><div class="toc-item"><a href="sec-crypto-classic.html#ssub-crypto-classic-onetimepad" class="internal"><span class="codenumber">3.2.2.3</span> <span class="title">One-time pads</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="sec-crypto-classic.html#sub-crypto-classic-enigma" class="internal"><span class="codenumber">3.2.3</span> <span class="title">The Enigma cipher</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-crypto-proj.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Crypto in Python</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-crypto-proj.html#sub-crypto-proj-manual_decryption" class="internal"><span class="codenumber">3.3.1</span> <span class="title">Demonstrating understanding</span></a></div></li>
+<li><div class="toc-item"><a href="sec-crypto-proj.html#sub-crypto-proj-implementations" class="internal"><span class="codenumber">3.3.2</span> <span class="title">Implementing cryptography</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="ch-linalg.html" class="internal"><span class="codenumber">4</span> <span class="title">Linear Algebra</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="sec-linalg-vectors.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Vectors</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-linalg-vectors.html#sub-linalg-vectors-axioms" class="internal"><span class="codenumber">4.1.1</span> <span class="title">Vector space axioms</span></a></div></li>
+<li><div class="toc-item"><a href="sec-linalg-vectors.html#sub-linalg-vectors-colvecs" class="internal"><span class="codenumber">4.1.2</span> <span class="title">Column vectors</span></a></div></li>
+<li><div class="toc-item"><a href="sec-linalg-vectors.html#sub-linalg-vectors-lintrans" class="internal"><span class="codenumber">4.1.3</span> <span class="title">Linear transformations</span></a></div></li>
+<li><div class="toc-item"><a href="sec-linalg-vectors.html#sub-linalg-vectors-inner_prods" class="internal"><span class="codenumber">4.1.4</span> <span class="title">Inner product spaces</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-linalg-vecproj.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Vectors in Python</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-linalg-vecproj.html#sub-vecproj-init_and_repr" class="internal"><span class="codenumber">4.2.1</span> <span class="title">Getting started with initialization and representation</span></a></div></li>
+<li><div class="toc-item"><a href="sec-linalg-vecproj.html#sub-vecproj-add_and_mul" class="internal"><span class="codenumber">4.2.2</span> <span class="title">Vector addition and scalar multiplication</span></a></div></li>
+<li><div class="toc-item"><a href="sec-linalg-vecproj.html#sub-vecproj-extras" class="internal"><span class="codenumber">4.2.3</span> <span class="title">Additional class methods</span></a></div></li>
+<li><div class="toc-item"><a href="sec-linalg-vecproj.html#sub-vecproj-computations" class="internal"><span class="codenumber">4.2.4</span> <span class="title">“Simple” computations</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-linalg-matrices.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Complex matrices</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-linalg-matrices.html#sub-linalg-matrices-matrix_vector_product" class="internal"><span class="codenumber">4.3.1</span> <span class="title">Matrix-vector products</span></a></div></li>
+<li><div class="toc-item"><a href="sec-linalg-matrices.html#sub-linalg-matrices-matrix_matrix_product" class="internal"><span class="codenumber">4.3.2</span> <span class="title">Matrix-matrix products</span></a></div></li>
+</ul>
+</li>
+<li class="active">
+<div class="toc-item"><a href="sec-linalg-matproj.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Matrices in Python</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-linalg-matproj.html#sub-linalg-matproj-basics" class="internal"><span class="codenumber">4.4.1</span> <span class="title"><code class="code-inline tex2jax_ignore">AlgoMatrix</code> basics</span></a></div></li>
+<li><div class="toc-item"><a href="sec-linalg-matproj.html#sub-linalg-matproj-named_methods" class="internal"><span class="codenumber">4.4.2</span> <span class="title">Named <code class="code-inline tex2jax_ignore">AlgoMatrix</code> methods</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="ch-matrix-apps.html" class="internal"><span class="codenumber">5</span> <span class="title">Matrix Applications</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="sec-matapps-ssles.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Solving Systems of Linear Equations</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-matapps-ssles.html#sub-matapps-sles-rowops" class="internal"><span class="codenumber">5.1.1</span> <span class="title">Elementary row operations</span></a></div></li>
+<li><div class="toc-item"><a href="sec-matapps-ssles.html#sub-matapps-sles-row_equivalence" class="internal"><span class="codenumber">5.1.2</span> <span class="title">Row equivalence and solutions to SLEs</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-matapps-gje_proj.html" class="internal"><span class="codenumber">5.2</span> <span class="title">GJE in Python</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-matapps-gje_proj.html#sub-matapps-gje_np" class="internal"><span class="codenumber">5.2.1</span> <span class="title">Gauss-Jordan elimination with naive pivoting</span></a></div></li>
+<li><div class="toc-item"><a href="sec-matapps-gje_proj.html#sub-matapps-gje_naive_flaw" class="internal"><span class="codenumber">5.2.2</span> <span class="title">Swamping: the computational flaw in naive pivoting</span></a></div></li>
+<li><div class="toc-item"><a href="sec-matapps-gje_proj.html#sub-matapps-gje_pp" class="internal"><span class="codenumber">5.2.3</span> <span class="title">Gauss-Jordan elimination with partial pivoting</span></a></div></li>
+<li><div class="toc-item"><a href="sec-matapps-gje_proj.html#sub-matapps-implement_gje_pp" class="internal"><span class="codenumber">5.2.4</span> <span class="title">Implementing GJE with PP</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-matapps-ludecomp.html" class="internal"><span class="codenumber">5.3</span> <span class="title"><span class="process-math">\(PA=LU\)</span> Decomposition</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-matapps-ludecomp.html#sub-matapps-ludecomp-theory" class="internal"><span class="codenumber">5.3.1</span> <span class="title">Special factors</span></a></div></li>
+<li><div class="toc-item"><a href="sec-matapps-ludecomp.html#sub-matapps-ludecomp-solving" class="internal"><span class="codenumber">5.3.2</span> <span class="title">Solving systems via <span class="process-math">\(LU\)</span> decomposition</span></a></div></li>
+<li><div class="toc-item"><a href="sec-matapps-ludecomp.html#sub-matapps-ludecomp-algo" class="internal"><span class="codenumber">5.3.3</span> <span class="title">Algorithms for <span class="process-math">\(LU\)</span> decomposition</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="ch-gtalgos.html" class="internal"><span class="codenumber">6</span> <span class="title">Graph Theory Algorithms</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-gtalgos-basics.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Graph basics</span></a></div></li>
+<li>
+<div class="toc-item"><a href="sec-gtalgos-mst.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Minimum spanning trees</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-gtalgos-mst.html#sub-gtalgos-mst-jarnik_prim" class="internal"><span class="codenumber">6.2.1</span> <span class="title">Jarník-Prim Algorithm</span></a></div></li>
+<li><div class="toc-item"><a href="sec-gtalgos-mst.html#sub-gtalgos-mst-minheaps" class="internal"><span class="codenumber">6.2.2</span> <span class="title">Min Heaps</span></a></div></li>
+<li>
+<div class="toc-item"><a href="sec-gtalgos-mst.html#sub-gtalgos-mst-kruskal" class="internal"><span class="codenumber">6.2.3</span> <span class="title">Kruskal's algorithm</span></a></div>
+<ul class="structural"><li><div class="toc-item"><a href="sec-gtalgos-mst.html#subsubsection-7" class="internal"><span class="codenumber">6.2.3.1</span> <span class="title">Implementing Kruskal's algorithm</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-gtalgos-shortestpath.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Shortest Paths</span></a></div>
+<ul class="structural"><li>
+<div class="toc-item"><a href="sec-gtalgos-shortestpath.html#sub-gtalgos-shortestpath-dijkstra" class="internal"><span class="codenumber">6.3.1</span> <span class="title">Dijkstra's Algorithm</span></a></div>
+<ul class="structural"><li><div class="toc-item"><a href="sec-gtalgos-shortestpath.html#subsubsection-8" class="internal"><span class="codenumber">6.3.1.1</span> <span class="title">A full example of Dijkstra's algorithm</span></a></div></li></ul>
+</li></ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-gtalgos-maxflowmincut.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Maximizing flow</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-gtalgos-maxflowmincut.html#sec-MaxFlow-MaxFlow" class="internal"><span class="codenumber">6.4.1</span> <span class="title">Max flow</span></a></div></li>
+<li><div class="toc-item"><a href="sec-gtalgos-maxflowmincut.html#sec-MaxFlow-DinitzAlgo" class="internal"><span class="codenumber">6.4.2</span> <span class="title">Dinitz' Algorithm</span></a></div></li>
+<li><div class="toc-item"><a href="sec-gtalgos-maxflowmincut.html#sec-MaxFlow-DinitzImpl" class="internal"><span class="codenumber">6.4.3</span> <span class="title">Implementing Dinitz' Algorithm</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="aam-backmatter.html" class="internal"><span class="title">Back Matter</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="app-python.html" class="internal"><span class="codenumber">A</span> <span class="title">Python crash course</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="sec-intro-idle.html" class="internal"><span class="codenumber">A.1</span> <span class="title">Getting started with Python</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-intro-idle.html#sub-intro-idle-gettingidle" class="internal"><span class="codenumber">A.1.1</span> <span class="title">Getting IDLE</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-idle.html#sub-intro-idle-interactivemode" class="internal"><span class="codenumber">A.1.2</span> <span class="title">Interactive Mode</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-idle.html#sub-intro-idle-firstprogram" class="internal"><span class="codenumber">A.1.3</span> <span class="title">A first Python module</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-intro_basicdata.html" class="internal"><span class="codenumber">A.2</span> <span class="title">Basic data types</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-intro_basicdata.html#sub-intro-basicdata-numbers" class="internal"><span class="codenumber">A.2.1</span> <span class="title">Numerical data types</span></a></div></li>
+<li>
+<div class="toc-item"><a href="sec-intro_basicdata.html#sub-intro-basicdata-other" class="internal"><span class="codenumber">A.2.2</span> <span class="title">Non-numeric data types</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-intro_basicdata.html#subsub-intro-basicdata-other-bool" class="internal"><span class="codenumber">A.2.2.1</span> <span class="title">Boolean variables</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro_basicdata.html#subsub-intro-basicdata-other-str" class="internal"><span class="codenumber">A.2.2.2</span> <span class="title">Strings</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-intro-containers.html" class="internal"><span class="codenumber">A.3</span> <span class="title">Container data types</span></a></div>
+<ul class="structural">
+<li>
+<div class="toc-item"><a href="sec-intro-containers.html#sub-intro-containers-lists" class="internal"><span class="codenumber">A.3.1</span> <span class="title">The <code class="code-inline tex2jax_ignore">list</code> data type</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-intro-containers.html#subsub-intro-containers-lists-slices" class="internal"><span class="codenumber">A.3.1.1</span> <span class="title">Indexing and slicing</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-containers.html#subsub-intro-containers-lists-ops_meths" class="internal"><span class="codenumber">A.3.1.2</span> <span class="title">Operators and methods</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-containers.html#subsub-intro-containers-lists-mutable" class="internal"><span class="codenumber">A.3.1.3</span> <span class="title">Mutability</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="sec-intro-containers.html#sub-intro-containers-tuples" class="internal"><span class="codenumber">A.3.2</span> <span class="title">The <code class="code-inline tex2jax_ignore">tuple</code> data type</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-containers.html#sub-intro-containers-dicts" class="internal"><span class="codenumber">A.3.3</span> <span class="title">The <code class="code-inline tex2jax_ignore">dict</code> data type</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-containers.html#subsection-53" class="internal"><span class="codenumber">A.3.4</span> <span class="title">Sets are a special container</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-intro-iteration.html" class="internal"><span class="codenumber">A.4</span> <span class="title">Iteration</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-intro-iteration.html#sub-intro-iteration-for" class="internal"><span class="codenumber">A.4.1</span> <span class="title">For loops</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-iteration.html#sub-intro-iteration-while" class="internal"><span class="codenumber">A.4.2</span> <span class="title">While loops</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-intro-functions.html" class="internal"><span class="codenumber">A.5</span> <span class="title">Functions and conditional statements</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-intro-functions.html#sub-intro-functions-def" class="internal"><span class="codenumber">A.5.1</span> <span class="title"><code class="code-inline tex2jax_ignore">def</code>ining new functions</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-functions.html#subsec-into-functions-conditionals" class="internal"><span class="codenumber">A.5.2</span> <span class="title">Controlling flow of programs</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-functions.html#sub-intro-functions-collatz" class="internal"><span class="codenumber">A.5.3</span> <span class="title">The Collatz Conjecture</span></a></div></li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="sec-intro-errors.html" class="internal"><span class="codenumber">A.6</span> <span class="title">Errors and exception handling</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="sec-intro-errors.html#sub-intro-errors-exceptions" class="internal"><span class="codenumber">A.6.1</span> <span class="title">Exceptions</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-errors.html#sub-intro-errors-handling" class="internal"><span class="codenumber">A.6.2</span> <span class="title">Handling exceptions</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-errors.html#sub-intro-errors-flow" class="internal"><span class="codenumber">A.6.3</span> <span class="title">Controlling the flow of a program</span></a></div></li>
+<li><div class="toc-item"><a href="sec-intro-errors.html#sub-intro-errors-bugs" class="internal"><span class="codenumber">A.6.4</span> <span class="title">Semantic errors, or bugs</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<div class="toc-item"><a href="appendix-lists.html" class="internal"><span class="codenumber">B</span> <span class="title">Finding ideas quickly</span></a></div>
+<ul class="structural">
+<li><div class="toc-item"><a href="app-find-defs.html" class="internal"><span class="codenumber">B.1</span> <span class="title">Definitions</span></a></div></li>
+<li><div class="toc-item"><a href="app-find-tech.html" class="internal"><span class="codenumber">B.2</span> <span class="title">Technology and Algorithms</span></a></div></li>
+<li><div class="toc-item"><a href="app-find-results.html" class="internal"><span class="codenumber">B.3</span> <span class="title">Lemmas, Propositions, and Theorems</span></a></div></li>
+<li><div class="toc-item"><a href="app-find-projects.html" class="internal"><span class="codenumber">B.4</span> <span class="title">Projects</span></a></div></li>
+</ul>
+</li>
+<li><div class="toc-item"><a href="appendix-gfdl.html" class="internal"><span class="codenumber">C</span> <span class="title">GNU Free Documentation License</span></a></div></li>
+<li><div class="toc-item"><a href="colophon-2.html" class="internal"><span class="title">Colophon</span></a></div></li>
+</ul>
+</li>
+</ul></nav></div>
+<main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sec-linalg-matproj"><h2 class="heading hide-type">
+<span class="type">Section</span> <span class="codenumber">4.4</span> <span class="title">Project: Matrices in Python</span>
+</h2>
+<article class="objectives goal-like" id="objectives-7"><h3 class="heading"><span class="type">Objectives</span></h3>
+<div class="introduction" id="introduction-38"><div class="para" id="p-515">With a good understanding of how to implement vectors in the <code class="code-inline tex2jax_ignore">AlgoVector</code> class, moving to an implementation of matrices is a matter of extension rather than new definitions.</div></div>
+<ol class="decimal">
+<li id="li-101">
+<div class="para" id="p-516">Create a class <code class="code-inline tex2jax_ignore">AlgoMatrix</code> of matrices in Python, including the following methods:</div>
+<div class="para logical" id="p-517"><ol class="lower-alpha">
+<li id="li-102"><div class="para" id="p-518">In <a href="" class="xref" data-knowl="./knowl/proj-matproj-init.html" title="Activity 4.6: AlgoMatrix initialization">Activity 4.6</a>, <code class="code-inline tex2jax_ignore">__init__</code> and <code class="code-inline tex2jax_ignore">__repr__</code>
+</div></li>
+<li id="li-103"><div class="para" id="p-519">In <a href="" class="xref" data-knowl="./knowl/proj-matprok-entries_and_equality.html" title="Activity 4.7: Matrix entries and testing equality">Activity 4.7</a>, <code class="code-inline tex2jax_ignore">dims(self)</code> which returns the row and column dimensions of <code class="code-inline tex2jax_ignore">self</code> as a tuple, as well as <code class="code-inline tex2jax_ignore">__str__</code>, <code class="code-inline tex2jax_ignore">__getitem__</code>, and <code class="code-inline tex2jax_ignore">__eq__</code>
+</div></li>
+<li id="li-104"><div class="para" id="p-520">In <a href="" class="xref" data-knowl="./knowl/proj-matproj-multiplication.html" title="Activity 4.8: Multiplication in AlgoMatrix">Activity 4.8</a>, <code class="code-inline tex2jax_ignore">__mul__ </code> and <code class="code-inline tex2jax_ignore">
+                                __rmul__</code>
+</div></li>
+<li id="li-105"><div class="para" id="p-521">In <a href="" class="xref" data-knowl="./knowl/proj-matproj-addition.html" title="Activity 4.9: Addition in AlgoMatrix">Activity 4.9</a>, <code class="code-inline tex2jax_ignore">__add__</code> and <code class="code-inline tex2jax_ignore">
+                                __radd__</code>
+</div></li>
+</ol></div>
+</li>
+<li id="li-106">
+<div class="para" id="p-522">Add the following additional methods to the <code class="code-inline tex2jax_ignore">AlgoVector</code> class:</div>
+<div class="para logical" id="p-523"><ol class="lower-alpha">
+<li id="li-107"><div class="para" id="p-524">In <a href="" class="xref" data-knowl="./knowl/proj-matproj-column_matrices.html" title="Activity 4.10: AlgoMatrix as column matrices">Activity 4.10</a>, <code class="code-inline tex2jax_ignore">column(self,
+                                col_index)</code> which returns the column vector in the index <code class="code-inline tex2jax_ignore">
+                                col_index</code> of <code class="code-inline tex2jax_ignore">self</code>, as well as <code class="code-inline tex2jax_ignore">columns(self)</code> which returns a tuple of all column vectors of <code class="code-inline tex2jax_ignore">self</code>
+</div></li>
+<li id="li-108"><div class="para" id="p-525">In <a href="" class="xref" data-knowl="./knowl/proj-matproj-conjugate.html" title="Activity 4.11: Complex conjugate of an AlgoMatrix">Activity 4.11</a>, <code class="code-inline tex2jax_ignore">conjugate(self)</code> which returns the conjugate matrix of <code class="code-inline tex2jax_ignore">self</code>
+</div></li>
+<li id="li-109"><div class="para" id="p-526">In <a href="" class="xref" data-knowl="./knowl/proj-matproj-augmentation.html" title="Activity 4.12: AlgoMatrix augmentation">Activity 4.12</a>, <code class="code-inline tex2jax_ignore">augment(self, right)</code> which performs augmentation of the matrix <code class="code-inline tex2jax_ignore">self</code> by an object <code class="code-inline tex2jax_ignore">
+                                right</code> of appropriate type and dimensions.</div></li>
+<li id="li-110"><div class="para" id="p-527">In <a href="" class="xref" data-knowl="./knowl/proj-matproj-transpose.html" title="Activity 4.13: Transpose of an AlgoMatrix">Activity 4.13</a>, <code class="code-inline tex2jax_ignore">transpose(self)</code> which returns the transpose matrix of <code class="code-inline tex2jax_ignore">self</code>, described below.</div></li>
+</ol></div>
+</li>
+<li id="li-111"><div class="para" id="p-528">Test your <code class="code-inline tex2jax_ignore">AlgoVector</code> by making some computations in your <code class="code-inline tex2jax_ignore">aam_proj5.py</code> file.</div></li>
+</ol></article><section class="subsection" id="sub-linalg-matproj-basics"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">4.4.1</span> <span class="title"><code class="code-inline tex2jax_ignore">AlgoMatrix</code> basics</span>
+</h3>
+<div class="para" id="p-529">We would like to consider two different methods of initializing an <code class="code-inline tex2jax_ignore">AlgoMatrix</code>. The default is to allow any rectangular grid of complex numbers, but to encourage the idea that a matrix <span class="process-math">\(A \in \Mats{m,n}\)</span> can be represented <span class="process-math">\(A=\left[\vec{A}_0 |
+\vec{A}_1 | \cdots | \vec{A}_{n-1} \right]\)</span> , where <span class="process-math">\(\entry{A}{r,c} =
+\entry{\vec{A}_c}{r}\)</span> for appropriate <span class="process-math">\(r\)</span> and <span class="process-math">\(c\text{,}\)</span> we will also permit a list of vectors all of the same length.</div>
+<article class="activity project-like" id="proj-matproj-init"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.6</span><span class="period">.</span><span class="space"> </span><span class="title"><code class="code-inline tex2jax_ignore">AlgoMatrix</code> initialization.</span>
+</h4>
+<div class="introduction" id="introduction-39"><div class="para" id="p-530">In order to develop the <code class="code-inline tex2jax_ignore">__init__(self, grid)</code> method, we have to validate the input. We will allow the initialization to fail naturally if we attempt to index into <code class="code-inline tex2jax_ignore">grid</code> and it is not an indexable object.</div></div>
+<article class="task exercise-like" id="task-77"><h5 class="heading">
+<span class="codenumber">(a)</span><span class="space"> </span><span class="title">Setting up your files.</span>
+</h5>
+<div class="para" id="p-531">The main class file should be <code class="code-inline tex2jax_ignore">AlgoMatrix.py</code> with an appropriate header followed by <code class="code-inline tex2jax_ignore">from AlgoVector import *</code>. The testing and worknig file should be <code class="code-inline tex2jax_ignore">aam_proj5.py</code> with an appropriate header. Further, the initializtion method should begin as follows:</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">class AlgoMatrix:
+def __init__(self, grid):
+'''Initialize an AlgoMatrix from 'grid', which is either a list
+of list (or tuple or tuple or some combination thereof) of
+complex values, or a list (or tuple) of AlgoVector objects.'''
+try:
+if type(grid[0]) == AlgoVector:
+# This will get filled in during the next task
+else:
+# This will get filled in during the next after that
+# Then we have to write the exception handler, because without an
+# 'except:' block this will cause a SyntaxError
+</code></pre></div></article><article class="task exercise-like" id="task-78"><h5 class="heading">
+<span class="codenumber">(b)</span><span class="space"> </span><span class="title">A list of <code class="code-inline tex2jax_ignore">AlgoVector</code> objects.</span>
+</h5>
+<div class="para" id="p-532">Inside the first step of the validation, the important things to check are to determine whether remaining elements of <code class="code-inline tex2jax_ignore">grid</code> are actually <code class="code-inline tex2jax_ignore">AlgoVector</code> objects and also to determine that all have the same length. Replace the above code with the following, making modifications as necessary:</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">if type(grid[0]) == AlgoVector:
+n = len(grid)
+# The next line works as long as AlgoVector has a __len__ method!
+m = len(grid[0])
+new_grid = [ ]
+for x in grid[0].entries():
+new_grid.append( [x] )
+for vec in grid[1:]:
+if type(vec) != AlgoVector:
+raise TypeError('Malformed list of AlgoVector objects')
+elif len(vec) != m:
+raise ValueError('Malformed list of AlgoVector objects')
+else:
+for r in range(m):
+# Now you have to fill in: we want to add the rth entry of
+# the current vector, vec, to the rth row of new_grid.
+continue
+else:
+# This will get filled in during the next task
+</code></pre></div></article><article class="task exercise-like" id="task-79"><h5 class="heading">
+<span class="codenumber">(c)</span><span class="space"> </span><span class="title">A list of lists of <code class="code-inline tex2jax_ignore">complex</code>-compatible objects.</span>
+</h5>
+<div class="para" id="p-533">This execution path proceeds slightly more smoothly, as the input is not of a form which is trying to specify a matrix in the transpose order of columns before rows. Complete the following:</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">else:
+m = len(grid)
+n = len(grid[0])
+new_grid = [ ]
+for r in range(m):
+if len(grid[r]) != n:
+raise ValueError('Malformed grid of complex numbers')
+new_grid.append( [ ] )
+for c in range(n):
+# What do we want to actually append into our new rows?
+new_grid[-1].append( complex( 0 ) )
+</code></pre></div></article><article class="task exercise-like" id="task-80"><h5 class="heading">
+<span class="codenumber">(d)</span><span class="space"> </span><span class="title">Handling exceptions.</span>
+</h5>
+<div class="para" id="p-534">As it turns out, we actually want to stop the execution of the program if any of the generated exceptions come up. This is handled by simply putting the command <code class="code-inline tex2jax_ignore">
+                    raise</code> in the <code class="code-inline tex2jax_ignore">except:...</code> block without any argument. This causes the exception which brought about the problem to be passed up to the next level; this could be a <code class="code-inline tex2jax_ignore">try:... except:...</code> block in a calling function, or it could be the main execution loop of Python. In the latter case, this causes an error and stops execution of your code!</div>
+<div class="para" id="p-535">Of course, you also have to store the important data attributes outside the exception handler, since the assignment of attributes is the final step of creating a usable class object.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">except:
+raise
+self._data = tuple(tuple(row) for row in new_grid)
+self._row_dim = len(new_grid)
+self._col_dim = len(new_grid[0])
+</code></pre></div></article><article class="task exercise-like" id="task-81"><h5 class="heading">
+<span class="codenumber">(e)</span><span class="space"> </span><span class="title">Representation.</span>
+</h5>
+<div class="para" id="p-536">Representing the object is next. Return the <code class="code-inline tex2jax_ignore">str</code> version of <code class="code-inline tex2jax_ignore">self._data</code> instead of <code class="code-inline tex2jax_ignore">"None"</code> in the below code.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __repr__(self):
+return "None"
+</code></pre></div></article><article class="task exercise-like" id="task-82"><h5 class="heading">
+<span class="codenumber">(f)</span><span class="space"> </span><span class="title">Test your work up to this point!</span>
+</h5>
+<div class="para logical" id="p-537">
+<div class="para">At this point you have a substantial amount of code, although you are not finished. Test your work in <code class="code-inline tex2jax_ignore">aam_proj5.py</code> by creating the following matrices and vectors:</div>
+<div class="displaymath process-math" id="md-17">
+\begin{align*}
+A \amp= \begin{bmatrix}
+1 \amp 2 \amp 3 \\
+-2 \amp 1 \amp -3 \\
+-3 \amp 2 \amp -1
+\end{bmatrix} \amp
+\vec{b}_1 \amp= \cvec{3+4j\\5+12j\\7+24j} \amp
+\vec{b}_2 \amp= \cvec{1-\frac12 j\\2-\frac13 j \\ 3-\frac14 j} \amp
+B \amp= [\vec{b}_1|\vec{b}_2]
+\end{align*}
+</div>
+<div class="para">.</div>
+</div>
+<div class="para" id="p-538">Explicitly print the representation of these matrices using <code class="code-inline tex2jax_ignore">
+                    print(repr(a_matrix))</code>, where <code class="code-inline tex2jax_ignore">a_matrix</code> is replaced by the variable names you choose for <span class="process-math">\(A\)</span> and <span class="process-math">\(B\text{.}\)</span>
+</div></article></article><div class="para" id="p-539">Before we get to operations involving multiple objects, we want to set up bracket notation for matrices. Just as we use <span class="process-math">\(\entry{A}{r,c}\)</span> to represent the entry in the rth-indexed row and cth-indexed column of a matrix <span class="process-math">\(A\in\Mats{m,n}\text{,}\)</span> we want to use <code class="code-inline tex2jax_ignore">the_mat[r,c]</code> to represent the same object for an <code class="code-inline tex2jax_ignore">AlgoMatrix</code> called <code class="code-inline tex2jax_ignore">
+            the_mat</code>. We implement this using <code class="code-inline tex2jax_ignore">__getitem__</code> but we have to be slightly careful about the arguments to the method.</div>
+<article class="activity project-like" id="proj-matprok-entries_and_equality"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.7</span><span class="period">.</span><span class="space"> </span><span class="title">Matrix entries and testing equality.</span>
+</h4>
+<article class="task exercise-like" id="task-83"><h5 class="heading">
+<span class="codenumber">(a)</span><span class="space"> </span><span class="title">Matrix dimension.</span>
+</h5>
+<div class="para" id="p-540">Since a <code class="code-inline tex2jax_ignore">dims</code> function is necessary in order to check that the input to <code class="code-inline tex2jax_ignore">
+                    __getitem__</code> falls within the range of valid indices, as well as to check matrix equality, we first define a <code class="code-inline tex2jax_ignore">dims(self)</code> method.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def dims(self):
+'''Return the (row,column) dimensions of self.'''
+return (self._row_dim, self._col_dim)
+</code></pre></div></article><article class="task exercise-like" id="task-84"><h5 class="heading">
+<span class="codenumber">(b)</span><span class="space"> </span><span class="title">Fetching from an index.</span>
+</h5>
+<div class="para" id="p-541">The only care necessary is to make sure that the pair of indices is passed as a single variable. Implement the following.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __getitem__(self, index_pair):
+'''if r,c == index_pair, return self[r,c]'''
+r,c = index_pair
+m,n = self.dims()
+if r not in range(m) or c not in range(n):
+raise IndexError('No such entry.')
+else:
+# What needs to be returned?
+</code></pre></div></article><article class="task exercise-like" id="task-85"><h5 class="heading">
+<span class="codenumber">(c)</span><span class="space"> </span><span class="title">Well-formatted output.</span>
+</h5>
+<div class="para" id="p-542">While the <code class="code-inline tex2jax_ignore">__repr__</code> method is sufficient for a class file, it will be difficult to see whether or not your matrices are correct in tuple-of-tuples form. Implement this <code class="code-inline tex2jax_ignore">__str__</code> method.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __str__(self):
+"""Return a human-readable matrix of self"""
+# This is highly condensed code. Copy it exactly and change nothing.
+try:
+return self._nice_str
+except AttributeError:
+m,n = self.dims()
+str_mat = [[str(self[r,c]).replace('(','').replace(')','') for c in
+range(n)] for r in range(m)]
+clen = [max( len(str_mat[r][c]) for r in range(m) ) for c in range(n)]
+str_mat = [[("{s:&gt;%d}"%clen[c]).format(s=str_mat[r][c]) for c in range(n)]
+for r in range(m)]
+str_mat = [("[ "+', '.join(row) + " ]") for row in str_mat]
+str_mat = "[" + "\n ".join(str_mat) + "]"
+self._nice_str = str_mat
+return str_mat
+</code></pre></div></article><article class="task exercise-like" id="task-86"><h5 class="heading">
+<span class="codenumber">(d)</span><span class="space"> </span><span class="title">Testing matrix equality.</span>
+</h5>
+<div class="para" id="p-543">Three things need to be tested when executing <code class="code-inline tex2jax_ignore">__eq__(self, right)</code>: firstly, the argument <code class="code-inline tex2jax_ignore">right</code> must be of type <code class="code-inline tex2jax_ignore">AlgoMatrix</code>; secondly, the dimensions of <code class="code-inline tex2jax_ignore">self</code> and <code class="code-inline tex2jax_ignore">right</code> must agree; thirdly, the values in each entry of <code class="code-inline tex2jax_ignore">self</code> and of <code class="code-inline tex2jax_ignore">right</code> must agree. Good thing we defined <code class="code-inline tex2jax_ignore">__getitem__</code>! Implement the following, determining whether each of <code class="code-inline tex2jax_ignore">
+                    bool_1</code>, <code class="code-inline tex2jax_ignore">bool_2</code>, and <code class="code-inline tex2jax_ignore">bool_3</code> needs to be <code class="code-inline tex2jax_ignore">True</code> or <code class="code-inline tex2jax_ignore">False</code> .</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __eq__(self, right):
+if type(self) == type(right):
+if self.dims() == right.dims():
+m,n = self.dims()
+for r in range(m):
+for c in range(n):
+if self[r,c] != right[r,c]:
+return bool_1
+return bool_2
+return bool_3
+</code></pre></div></article><article class="task exercise-like" id="task-87"><h5 class="heading">
+<span class="codenumber">(e)</span><span class="space"> </span><span class="title">Testing your work.</span>
+</h5>
+<div class="para" id="p-544">In your <code class="code-inline tex2jax_ignore">aam_proj5.py</code> file, print the matrices <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> you defined previously, this time just using the <code class="code-inline tex2jax_ignore">print(...)</code> command as normal. Also find the dimensions using your program, and check to see if <span class="process-math">\(A=B\)</span> .</div></article></article><div class="para" id="p-545">Since we have included our <code class="code-inline tex2jax_ignore">AlgoVector</code> class from the beginning, it makes sense to analyze matrix multiplication in three distinct forms: two forms where the matrix is the multiplier (left factor) and one where it is the multiplicand (right factor).</div>
+<article class="activity project-like" id="proj-matproj-multiplication"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.8</span><span class="period">.</span><span class="space"> </span><span class="title">Multiplication in <code class="code-inline tex2jax_ignore">AlgoMatrix</code>.</span>
+</h4>
+<div class="introduction" id="introduction-40"><div class="para" id="p-546">The two forms of multiplication with a matrix as the multiplier are matrix-vector multiplication and matrix-matrix multiplication. In each case, there is a consideration as to the size of the multiplicand as compared to the size of the multiplier, and those sizes will need to be checked during input validation. The only other valid multiplication case occurs when a non-matrix is the multiplier and the matrix is the multiplicand, which only occurs during scalar multiplication; therefore in that case the only constraint is to check that the scalar is in fact a complex number.</div></div>
+<article class="task exercise-like" id="task-88"><h5 class="heading">
+<span class="codenumber">(a)</span><span class="space"> </span><span class="title"><code class="code-inline tex2jax_ignore">AlgoMatrix</code> as multiplier: <code class="code-inline tex2jax_ignore">__mul__</code>.</span>
+</h5>
+<div class="introduction" id="introduction-41">
+<div class="para" id="p-547">Begin with the following:</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __mul__(self, right):
+'''Return self*right, which necessitates that right be an AlgoVector
+or another AlgoMatrix.'''
+if type(right) == type(self):
+# This is matrix-matrix multiplication
+pass
+elif type(right) == AlgoVector:
+# This is matrix-vector multiplication
+pass
+else:
+raise TypeError(f'Cannot multiply AlgoMatrix*{type(right)}')
+</code></pre></div>
+</div>
+<article class="task exercise-like" id="task-89"><h6 class="heading">
+<span class="codenumber">(i)</span><span class="space"> </span><span class="title">Matrix-matrix multiplication.</span>
+</h6>
+<div class="para" id="p-548">While it is best to define matrix-matrix multiplication as iterated matrix-vector multiplication, that is not the optimal way to implement the product. Instead, it's best to check the dimensions of the two matrices and proceed to build the product of <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> by using <span class="process-math">\(\entry{AB}{r,c}
+= \sum_{k=0}^{n-1}\entry{A}{r,k}\entry{B}{k,c}\)</span> when <span class="process-math">\(A\in\Mats{m,n}\)</span> and <span class="process-math">\(B\in\Mats{n,q}\text{.}\)</span>
+</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">if type(right) == type(self):
+# This is matrix-matrix multiplication
+m,n = self.dims()
+p,q = right.dims()
+# What condition needs to be checked on this line to ensure
+# dimensions are correct?
+if condition:
+new_grid = [ ]
+# How many rows has the product matrix?
+for r in range( number_of_rows ):
+new_grid.append( [ ] )
+# How many columns has the product matrix?
+for c in range( number_of_columns ):
+total = 0
+# How many terms must be summed?
+for k in range( number_of_terms ):
+total += self[r,k] * right[k,c]
+new_grid[-1].append(total)
+return AlgoMatrix(new_grid)
+else:
+raise ValueError("Dimension mismatch")
+</code></pre></div>
+<div class="para" id="p-549">Note that as usual there are several places where that code must be modified to work correctly.</div></article><article class="task exercise-like" id="task-90"><h6 class="heading">
+<span class="codenumber">(ii)</span><span class="space"> </span><span class="title">Matrix-vector multiplication.</span>
+</h6>
+<div class="para" id="p-550">Recall that according to its definition, a matrix-vector product is a linear combination of vectors. Once again the best way to define the product is not the most efficient way to compute it; we instead use the component-wise approach to build the result as a list using <span class="process-math">\(\entry{A\vv}{r} =
+\sum_{c=0}^{n-1} \entry{A}{r,c}\entry{\vv}{c}\)</span> where <span class="process-math">\(A\in\Mats{m,n}\)</span> and <span class="process-math">\(\vv\in\CV{n}\text{.}\)</span>
+</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">elif type(right) == AlgoVector:
+# This is matrix-vector multiplication
+m,n = self.dims()
+if len(right) == n:
+# The dimensions of the vector and matrix are compatible
+new_list = [ ]
+for c in range(n):
+new_list.append( )
+else:
+raise ValueError("Dimension mismatch")
+</code></pre></div></article></article><article class="task exercise-like" id="task-91"><h5 class="heading">
+<span class="codenumber">(b)</span><span class="space"> </span><span class="title"><code class="code-inline tex2jax_ignore">AlgoMatrix</code> as multiplicand.</span>
+</h5>
+<div class="para" id="p-551">Unlike vectors, since matrix-matrix multiplication exists there is a use case for matrices being the multiplicand. However that particular use case is handled in Python (via order of operations) by left multiplication and <code class="code-inline tex2jax_ignore">__mul__</code>. Therefore all we need to implement in the <code class="code-inline tex2jax_ignore">__rmul__</code> method is scalar-matrix multiplication, which operates the same way in <code class="code-inline tex2jax_ignore">AlgoMatrix</code> as in <code class="code-inline tex2jax_ignore">AlgoVector</code>, extended to handle both rows and columns.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __rmul__(self, left):
+try:
+scalar = complex(left)
+except:
+raise TypeError(f"Invalid scalar {left} for AlgoMatrix multiplication")
+new_grid = [ ]
+m,n = self.dims()
+for r in range(m):
+new_grid.append( [ ] )
+for c in range(n):
+#
+# What has to go in the inner lists?
+# Append that to new_grid[-1]
+#
+continue
+return AlgoMatrix(new_grid)
+</code></pre></div></article><article class="task exercise-like" id="task-92"><h5 class="heading">
+<span class="codenumber">(c)</span><span class="space"> </span><span class="title">Test your work up to this point!</span>
+</h5>
+<div class="para logical" id="p-552">
+<div class="para">Now define a new <code class="code-inline tex2jax_ignore">AlgoMatrix</code> in your <code class="code-inline tex2jax_ignore">aam_proj5.py</code> file, representing the matrix</div>
+<div class="displaymath process-math">
+\begin{equation*}
+I_3 = \begin{bmatrix}
+1 \amp 0 \amp 0\\
+0 \amp 1 \amp 0\\
+0 \amp 0 \amp 1
+\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">and test your multiplication code to see if <span class="process-math">\(1A\)</span> and <span class="process-math">\(I_3A\)</span> are equal.</div>
+</div></article></article><div class="para" id="p-553">Compared to multiplication, addition inside <span class="process-math">\(\Mats{m,n}\)</span> is a breeze.</div>
+<article class="activity project-like" id="proj-matproj-addition"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.9</span><span class="period">.</span><span class="space"> </span><span class="title">Addition in <code class="code-inline tex2jax_ignore">AlgoMatrix</code>.</span>
+</h4> <div class="para" id="p-554">Implementation of addition follows the pattern in <code class="code-inline tex2jax_ignore">AlgoMatrix</code> that was established in <code class="code-inline tex2jax_ignore">AlgoVector</code>: raise an error for <code class="code-inline tex2jax_ignore">__radd__</code> and do the straightforward computation in <code class="code-inline tex2jax_ignore">__add__</code>. Since other types natively do not add with <code class="code-inline tex2jax_ignore">AlgoMatrix</code> we can safely let the failure to allow an <code class="code-inline tex2jax_ignore">AlgoMatrix</code> to be a right-summand to fall onto the left addition of the other class.</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __add__(self, right):
+'''Return self+right'''
+# validate type of right
+if TEST_CONDITION1:
+# Compare dimensions
+m,n = self.dims()
+p,q = right.dims()
+if TEST_CONDITION2:
+new_grid = [ ]
+for r in range(m):
+new_grid.append( [ ] )
+for c in range(n):
+#
+# What has to go in the inner lists?
+# Append that to new_grid[-1]
+# Remember: we implemented bracket notation!
+#
+return AlgoMatrix(new_grid)
+else:
+raise ValueError("Dimension mismatch")
+else:
+raise TypeError(f"Cannot add AlgoMatrix and {type(right)}")
+</code></pre></div> <div class="para" id="p-555">Test this in your <code class="code-inline tex2jax_ignore">aam_proj5.py</code> file by checking to see that <span class="process-math">\(A+A = 2A\text{.}\)</span>
+</div></article></section><section class="subsection" id="sub-linalg-matproj-named_methods"><h3 class="heading hide-type">
+<span class="type">Subsection</span> <span class="codenumber">4.4.2</span> <span class="title">Named <code class="code-inline tex2jax_ignore">AlgoMatrix</code> methods</span>
+</h3>
+<div class="para" id="p-556">In addition to the <code class="code-inline tex2jax_ignore">AlgoMatrix.dims()</code> method we defined above, we should create some other named methods.</div>
+<article class="activity project-like" id="proj-matproj-column_matrices"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.10</span><span class="period">.</span><span class="space"> </span><span class="title"><code class="code-inline tex2jax_ignore">AlgoMatrix</code> as column matrices.</span>
+</h4>
+<div class="introduction" id="introduction-42"><div class="para" id="p-557">The notation <span class="process-math">\(A=\left[\vec{A}_0 | \vec{A}_1 | \cdots | \vec{A}_{n-1}\right]\)</span> for a matrix <span class="process-math">\(A\in\Mats{m,n}\)</span> is sometimes called <dfn class="terminology">augmented notation</dfn>. Regardless of what the notation is called, its use implies that we sometimes wish to isolate a particular column vector of a matrix, or consider the list of all column vectors.</div></div>
+<article class="task exercise-like" id="task-93"><h5 class="heading">
+<span class="codenumber">(a)</span><span class="space"> </span><span class="title">Isolating a single column vector.</span>
+</h5>
+<div class="para" id="p-558">First we write a method which produces a particular indexed column vector.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def column(self, col_index):
+"""Return the column vector of self in the given column index."""
+if col_index not in range(self._col_dim):
+raise IndexError(f'Bad column index {col_index}.')
+else:
+new_list = [ ]
+for r in range(self._row_dim):
+#
+# Here we only want a list, not a grid; what must
+# be in the rth row of the output vector?
+#
+continue
+return AlgoVector(new_list)
+</code></pre></div></article><article class="task exercise-like" id="task-94"><h5 class="heading">
+<span class="codenumber">(b)</span><span class="space"> </span><span class="title">Creating the tuple of all column vectors.</span>
+</h5>
+<div class="para" id="p-559">We can leverage the just-written <code class="code-inline tex2jax_ignore">AlgoMatrix.column(col_index)</code> method to create a method which returns a tuple of all the column vectors of a matrix.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def columns(self):
+'''Return a tuple of all column vectors of self'''
+new_list = [ ]
+#
+# Write this yourself!
+#
+return tuple(new_list)
+</code></pre></div></article><article class="task exercise-like" id="task-95"><h5 class="heading">
+<span class="codenumber">(c)</span><span class="space"> </span><span class="title">Test your work up to this point!</span>
+</h5>
+<div class="para" id="p-560">Once again, what we already have used in <code class="code-inline tex2jax_ignore">aam_proj5.py</code> can be utilized to test if your code is working. Try the following, replacing the variable name <code class="code-inline tex2jax_ignore">
+                    B</code> with the name of your matrix <span class="process-math">\(B\text{.}\)</span>
+</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">print(AlgoMatrix(B.columns()) == B)
+</code></pre></div></article></article><div class="para" id="p-561">Now move on to implementing conjugation, where <span class="process-math">\(\entry{\conj{A}}{r,c} =
+\conj{\entry{A}{r,c}}\text{.}\)</span>
+</div>
+<article class="activity project-like" id="proj-matproj-conjugate"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.11</span><span class="period">.</span><span class="space"> </span><span class="title">Complex conjugate of an <code class="code-inline tex2jax_ignore">AlgoMatrix</code>.</span>
+</h4> <div class="para" id="p-562">This activity is no more complicated than it was for vectors, except in the use of the nested loop structure.</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def conjugate(self):
+'''Return the complex conjugate of self.'''
+new_grid = [ ]
+for r in range(self._row_dim):
+new_grid.append( [ ] )
+for c in range(self._col_dim):
+#
+# What do we append to new_grid[-1] this time?
+#
+continue
+return AlgoMatrix(new_grid)
+</code></pre></div> <div class="para" id="p-563">Test this in <code class="code-inline tex2jax_ignore">aam_proj5.py</code> by printing <span class="process-math">\(\conj{A}\text{.}\)</span>
+</div></article><div class="para" id="p-564">As a sort of reverse procedure of the <code class="code-inline tex2jax_ignore">column</code> and <code class="code-inline tex2jax_ignore">columns</code> methods defined above, we define augmentation of a matrix.: given a matrix <span class="process-math">\(A\in\Mats{m,n}\)</span> and a vector <span class="process-math">\(\vv\in\CV{m}\text{,}\)</span> you can augment <span class="process-math">\(A\)</span> by <span class="process-math">\(\vv\text{,}\)</span> resulting in a matrix <span class="process-math">\(\left[A | \vv\right]\)</span> with columns in indices 0 through <span class="process-math">\(n-1\)</span> exactly the columns of <span class="process-math">\(A\)</span> but with the vector <span class="process-math">\(\vv\)</span> as a column of index <span class="process-math">\(n\text{.}\)</span> Moreover, given a matrix <span class="process-math">\(B\in\Mats{m,q}\text{,}\)</span> the similarly-defined matrix <span class="process-math">\(\left[A|B\right]\)</span> has columns with indices 0 through <span class="process-math">\(n-1\)</span> equal to the corresponding column of <span class="process-math">\(A\text{,}\)</span> but additionally another <span class="process-math">\(q\)</span> columns, where the column indexed <span class="process-math">\(n+c\)</span> is the column of <span class="process-math">\(B\)</span> with index <span class="process-math">\(c\text{.}\)</span>
+</div>
+<article class="definition definition-like" id="defn-matrix_augmentation"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.4.1</span><span class="period">.</span><span class="space"> </span><span class="title">Augmented matrices.</span>
+</h4> <div class="para logical" id="p-565">
+<div class="para">Let <span class="process-math">\(m,n,q\in\Zp\)</span> be given, and suppose <span class="process-math">\(A\in\Mats{m,n}\text{,}\)</span> <span class="process-math">\(B\in\Mats{m,q}\text{,}\)</span> and <span class="process-math">\(\vv\in\CV{m}\text{.}\)</span> Then we can define the matrix <span class="process-math">\(A\)</span> <dfn class="terminology">augmented</dfn> by <span class="process-math">\(B\)</span> to be the matrix <span class="process-math">\([A|B]\in\Mats{m,n+q}\text{.}\)</span> While proper use of notation dictates that the entries should be <span class="process-math">\(\entry{[A|B]}{r,c}\text{,}\)</span> we suppress the inner brackets and allow that <span class="process-math">\([A|B]\)</span> is the unique matrix satisfying</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\entry{A|B}{r,c} = \begin{cases}
+\entry{A}{r,c} \amp c\in\set{0,1,\dotsc,n-1} \\
+\entry{B}{r,c-n} \amp c\in\set{n,n+1,\dotsc,n+(q-1)}
+\end{cases}
+\end{equation*}
+</div>
+<div class="para">.</div>
+</div> <div class="para logical" id="p-566">
+<div class="para">Similarly, <span class="process-math">\([A|\vv]\in\Mats{m,n+1}\)</span> is the matrix <span class="process-math">\(A\)</span> augmented by <span class="process-math">\(\vv\text{,}\)</span> satisfying</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\entry{A|\vv}{r,c} = \begin{cases}
+\entry{A}{r,c} \amp c\in\set{0,1,\dotsc,n-1} \\
+\entry{vv}{r} \amp c=n
+\end{cases}
+\end{equation*}
+</div>
+</div></article><article class="example example-like" id="exmp-matrix_augmentation"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">4.4.2</span><span class="period">.</span><span class="space"> </span><span class="title">Some augmented matrices.</span>
+</h4>
+<div class="para logical" id="p-567">
+<div class="para">Consider the following matrices and vector:</div>
+<div class="displaymath process-math" id="md-18">
+\begin{align*}
+A \amp= \begin{bmatrix}
+1+1j \amp 1-2j \amp 1-3j \\
+-1+2j \amp 2+2j \amp 1-4j \\
+-1+3j \amp -1+4j \amp 3+3j
+\end{bmatrix} \amp
+B \amp= \begin{bmatrix}
+1 \amp \frac12 \amp \frac13 \\
+\frac12 \amp \frac13 \amp \frac14 \\
+\frac13 \amp \frac14 \amp \frac15
+\end{bmatrix} \amp
+\vv \amp= \cvec{1+j\\1+\sqrt{2}j\\1+\sqrt{3}j}
+\end{align*}
+</div>
+<div class="para">Then by augmentation we have the matrices <span class="process-math">\([A|B]\)</span> and <span class="process-math">\([A|\vv]\)</span> given by</div>
+<div class="displaymath process-math" id="md-19">
+\begin{align*}
+[A|B] \amp= \begin{bmatrix}
+1+1j \amp 1-2j \amp 1-3j \amp 1 \amp \frac12 \amp \frac13 \\
+-1+2j \amp 2+2j \amp 1-4j \amp \frac12 \amp \frac13 \amp \frac14 \\
+-1+3j \amp -1+4j \amp 3+3j \amp \frac13 \amp \frac14 \amp \frac15
+\end{bmatrix}\\
+[A|\vv] \amp= \begin{bmatrix}
+1+1j \amp 1-2j \amp 1-3j \amp 1+1j\\
+-1+2j \amp 2+2j \amp 1-4j \amp 1+\sqrt{2}j\\
+-1+3j \amp -1+4j \amp 3+3j \amp 1+\sqrt{3}j
+\end{bmatrix}
+\end{align*}
+</div>
+<div class="para">.</div>
+</div></article><article class="activity project-like" id="proj-matproj-augmentation"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.12</span><span class="period">.</span><span class="space"> </span><span class="title"><code class="code-inline tex2jax_ignore">AlgoMatrix</code> augmentation.</span>
+</h4> <div class="para" id="p-568">We should easily see how to use our special definition of initialization by lists of column vectors to perform augmentation. In fact, augmentation is the reason why that option for initialization is a good idea!</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def augment(self, right):
+'''Return the augmented matrix [self|right]'''
+m,n = self.dims()
+if type(right) == AlgoVector:
+if len(right)==m:
+return AlgoMatrix( self.columns() + tuple([right]) )
+else:
+raise ValueError('Dimension mismatch')
+elif type(right) == AlgoMatrix:
+p,q = right.dims()
+if p==m:
+return AlgoMatrix( self.columns() + right.columns() )
+else:
+raise ValueError('Dimension mismatch')
+else:
+raise TypeError(f'Cannot augment AlgoMatrix by {type(right)}.')
+</code></pre></div> <div class="para" id="p-569">In <code class="code-inline tex2jax_ignore">aam_proj5.py</code>, test this by printing the matrices <span class="process-math">\([A|B]\)</span> and <span class="process-math">\([B|A]\text{;}\)</span> are they equal?</div></article><div class="para" id="p-570">Now for something completely different! We discussed that every matrix <span class="process-math">\(A\in\Mats{m,n}\)</span> is associated with a linear transformation <span class="process-math">\(T_A:\CV{n}\to\CV{m}\)</span> defined by <span class="process-math">\(T_A(\vv)
+= A\vv\)</span> for every <span class="process-math">\(\vv\in\CV{n}\text{.}\)</span> We did not discuss the existence of the matrix transpose, which provides a function with domain <span class="process-math">\(\CV{m}\)</span> and codomain <span class="process-math">\(\CV{n}\)</span> which is related to <span class="process-math">\(T_A\)</span> but is generally not <span class="process-math">\(T_A^{-1}\text{,}\)</span> an amazing but interesting fact!</div>
+<article class="definition definition-like" id="defn-matrix_transpose"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">4.4.3</span><span class="period">.</span><span class="space"> </span><span class="title">Transpose of a matrix.</span>
+</h4> <div class="para logical" id="p-571">
+<div class="para">Suppose that <span class="process-math">\(A\in\Mats{m,n}\text{.}\)</span> Then there is a unique matrix called the <dfn class="terminology">transpose</dfn> of <span class="process-math">\(A\text{,}\)</span> denoted <span class="process-math">\(A^T\in\Mats{n,m}\text{,}\)</span> satisfying</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\entry{A^T}{c,r} = \entry{A}{r,c}
+\end{equation*}
+</div>
+<div class="para">for all <span class="process-math">\({r\in\set{0,1,\dotsc,m-1}}\)</span> and <span class="process-math">\({c\in\set{0,1,\dotsc,n-1}}\text{.}\)</span>
+</div>
+</div> <div class="para" id="p-572">Further, the linear transformation associated with <span class="process-math">\(A^T\)</span> is necessarily <span class="process-math">\(T_{A^T}:\CV{m}\to\CV{n}\)</span> given by <span class="process-math">\(T_{A^T}(\vv) = A^T\vv\)</span> for any <span class="process-math">\(\vv\in\CV{m}\text{.}\)</span>
+</div></article><div class="para" id="p-573">The relationship between the dimensions of <span class="process-math">\(A\)</span> and <span class="process-math">\(A^T\)</span> ensure the following theorem.</div>
+<article class="theorem theorem-like" id="thm-matrix_transpose_products"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.4.4</span><span class="period">.</span><span class="space"> </span><span class="title">Certain matrix products always exist.</span>
+</h4>
+<div class="para" id="p-574">Suppose that <span class="process-math">\(A\in\Mats{m,n}\text{,}\)</span> so that <span class="process-math">\(A^T\in\Mats{n,m}\text{.}\)</span> Then both <span class="process-math">\(A^TA\)</span> and <span class="process-math">\(AA^T\)</span> exist, with <span class="process-math">\(A^TA\in\Mats{n,n}\)</span> and <span class="process-math">\(AA^T\in\Mats{m,m}\text{.}\)</span>
+</div></article><article class="activity project-like" id="proj-matproj-transpose"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.13</span><span class="period">.</span><span class="space"> </span><span class="title">Transpose of an <code class="code-inline tex2jax_ignore">AlgoMatrix</code>.</span>
+</h4> <div class="para" id="p-575">The definition in terms of entries using bracket notation makes the transpose mostly simple to define; care needs to be taken to make sure the dimension is correct.</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def transpose(self):
+'''Return the matrix transpose of self.'''
+new_grid = [ ]
+for c in range(self._col_dim):
+new_grid.append( [ ] )
+for r in range(self._row_dim):
+#
+# Do not be fooled! Append the correct entry of self
+# in this position to new_grid[-1]
+#
+continue
+return AlgoMatrix(new_grid)
+</code></pre></div> <div class="para logical" id="p-576">
+<div class="para">To test this, calculate the following in <code class="code-inline tex2jax_ignore">aam_proj5.py</code>:</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A^T, B^T, (AB)^T, B^TA^T
+\end{equation*}
+</div>
+<div class="para">and then draw a conclusion about the relationship between <span class="process-math">\(A^T\text{,}\)</span> <span class="process-math">\(B^T\text{,}\)</span> and <span class="process-math">\((AB)^T\)</span> .</div>
+</div></article></section></section></div>
+<div class="ptx-content-footer">
+<a class="previous-button button" href="sec-linalg-matrices.html" title="Previous"><span class="icon">&lt;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon">^</span><span class="name">Top</span></a><a class="next-button button" href="ch-matrix-apps.html" title="Next"><span class="name">Next</span><span class="icon">&gt;</span></a>
+</div></main>
+</div>
+<div class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org"><div class="name">Authored in PreTeXt</div>
+<div class="logo"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="338 3000 8772 6866"><g style="stroke-width:.025in; stroke:black; fill:none"><polyline points="472,3590 472,9732 " style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259 "></path><path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0  472  9732 "></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496 "></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,3496 A 4241 4241  0  0  1  4724  3590 "></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,9259 A 4507 4507  0  0  1  4724  9448 "></path><polyline points="5385,4299 4062,8125 " style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="8598,3496 8598,9259 " style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="850,3496 850,9259 " style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="4960,9685 4488,9685 " style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="3070,4582 1889,6141 3070,7700 " style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="6418,4582 7600,6141 6418,7700 " style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="8976,3590 8976,9732 " style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732 "></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy"><div class="name">Powered by Runestone</div>
+<img class="logo" title="Powered by Runestone" src="https://runestone.academy/runestone/static/rectangle_badge.png" alt="Powered by Runestone"></a><a class="mathjax-logo" href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a>
+</div>
+</body>
+</html>

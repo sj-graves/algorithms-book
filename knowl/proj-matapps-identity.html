@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.3</span><span class="period">.</span><span class="space"> </span><span class="title">Identity matrices.</span>
+</h4> <div class="para">Write a function in <code class="code-inline tex2jax_ignore">aam_proj6.py</code> which returns the identity <code class="code-inline tex2jax_ignore">AlgoMatrix</code> of size <code class="code-inline tex2jax_ignore">cols</code>.</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def idmat(cols):
+    """Return the identity matrix of size cols"""
+    if type(cols) != int:
+        raise TypeError("Bad size")
+    elif cols &lt;= 0:
+        raise ValueError("Bad size")
+    out = [ ]
+    for r in range(cols):
+        out.append( [ ] )
+        for c in range(cols):
+            if r==c:
+                out.append(None)
+            else:
+                out.append(None)
+    return AlgoMatrix(out)
+</code></pre></div></article><span class="incontext"><a href="sec-matapps-gje_proj.html#proj-matapps-identity" class="internal">in-context</a></span>
+</body>
+</html>

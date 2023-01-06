@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<h5 class="heading"><span class="type">Paragraph</span></h5>
+<div class="para logical">
+<div class="para">When the while loop in step (2) terminates, the matrix <span class="process-math">\(P\)</span> is the correct permutation matrix, and we may simply extract the values of <span class="process-math">\(L\)</span> and <span class="process-math">\(U\)</span> from <span class="process-math">\(A\text{.}\)</span>
+</div>
+<ol class="lower-alpha">
+<li><div class="para logical">
+<div class="para">Let <span class="process-math">\(L\in\Mats{n,n}\)</span> be the matrix satisfying</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\entry{L}{r,c} = \begin{cases}
+0,\amp\text{if }r\lt c \\
+1,\amp\text{if }r=c\\
+\entry{A}{r,c},\amp\text{if }r\gt c
+\end{cases}
+\end{equation*}
+</div>
+</div></li>
+<li><div class="para logical">
+<div class="para">Let <span class="process-math">\(U\in\Mats{n,n}\)</span> be the matrix satisfying</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\entry{U}{r,c} = \begin{cases}
+0,\amp\text{if }r\gt c\\
+\entry{A}{r,c},\amp\text{if }r\leq c
+\end{cases}
+\end{equation*}
+</div>
+</div></li>
+</ol>
+</div>
+<span class="incontext"><a href="sec-matapps-ludecomp.html#p-722" class="internal">in-context</a></span>
+</body>
+</html>

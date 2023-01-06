@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.1</span><span class="period">.</span><span class="space"> </span><span class="title">Implementing the elementary row operations.</span>
+</h4>
+<div class="introduction"><div class="para">We want to build these carefully so that <code class="code-inline tex2jax_ignore">AlgoMatrix</code> has <code class="code-inline tex2jax_ignore">rswap</code>, <code class="code-inline tex2jax_ignore">rscale</code>, and <code class="code-inline tex2jax_ignore">relim</code> methods which return row-equivalent matrices having performed the appropriate operation.</div></div>
+<article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(a)</span><span class="space"> </span><span class="title">Swapping rows.</span>
+</h5>
+<div class="introduction"><div class="para">We first want to build a function which swaps elements in a <code class="code-inline tex2jax_ignore">list</code>; if we can build such a function, it is an easy application to be able to swap rows in a <code class="code-inline tex2jax_ignore">AlgoMatrix</code>.</div></div>
+<article class="task exercise-like"><h6 class="heading"><span class="codenumber">(i)</span></h6>
+<div class="para">Suppose that <code class="code-inline tex2jax_ignore">grid</code> is a list of <span class="process-math">\(m\)</span> entries and <span class="process-math">\(0\leq r_1\lt r_2 \lt m\)</span> are valid indices of <code class="code-inline tex2jax_ignore">grid</code>. What is the slice of <code class="code-inline tex2jax_ignore">grid</code> prior to <span class="process-math">\(r_1\text{?}\)</span> What is the slice of <code class="code-inline tex2jax_ignore">grid</code> containing only the <span class="process-math">\(r_1\)</span>th entry of <code class="code-inline tex2jax_ignore">grid</code>? What is the slice of <code class="code-inline tex2jax_ignore">grid</code> between indices <span class="process-math">\(r_1\)</span> and <span class="process-math">\(r_2\)</span> but not containing either? What is the slice of <code class="code-inline tex2jax_ignore">grid</code> containing only the <span class="process-math">\(r_2\)</span>th element of <code class="code-inline tex2jax_ignore">grid</code>? And finally, what is the slice of <code class="code-inline tex2jax_ignore">grid</code> beyond the index <span class="process-math">\(r_2\)</span> not containing the element in index <span class="process-math">\(r_2\text{?}\)</span>
+</div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(ii)</span></h6>
+<div class="para">How could you add together the slices from the preceding part to swap the elements in indices <span class="process-math">\(r_1\)</span> and <span class="process-math">\(r_2\)</span> of <code class="code-inline tex2jax_ignore">grid</code>?</div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(iii)</span></h6>
+<div class="para">Complete the following function in your <code class="code-inline tex2jax_ignore">aam_proj6.py</code> file by setting <code class="code-inline tex2jax_ignore">out</code> to the appropriate value <em class="emphasis">in a single line</em>.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def gswap(grid, r1, r2):
+    """Return a list consisting of the contents of grid with elements
+        in indices r1 and r2 swapped."""
+    out = None
+    return out
+</code></pre></div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(iv)</span></h6>
+<div class="para">Adapt the function <code class="code-inline tex2jax_ignore">gswap</code> from the previous subtask to the following method in your <code class="code-inline tex2jax_ignore">AlgoMatrix.py</code> class file.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def rswap(self, r1, r2):
+    """Return the AlgoMatrix obtained from self by swapping rows
+        with indices r1 and r2."""
+    out = None
+    return AlgoMatrix(out)
+</code></pre></div></article></article><article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(b)</span><span class="space"> </span><span class="title">Scaling a row.</span>
+</h5>
+<div class="introduction"><div class="para">Similarly to (a), we first work on a <code class="code-inline tex2jax_ignore">list</code>.</div></div>
+<article class="task exercise-like"><h6 class="heading"><span class="codenumber">(i)</span></h6>
+<div class="para">Suppose that <code class="code-inline tex2jax_ignore">grid</code> is a list of <span class="process-math">\(m\)</span> entries and <span class="process-math">\(0\leq r_1\lt m\text{,}\)</span> and suppose <span class="process-math">\(\alpha\in\Comps\text{.}\)</span> Suppose further that the element of <code class="code-inline tex2jax_ignore">grid</code> in index <span class="process-math">\(r_1\)</span> is a container, like a <code class="code-inline tex2jax_ignore">list</code> or <code class="code-inline tex2jax_ignore">tuple</code>. How could you create a new version of that container whose elements have all been multiplied by <span class="process-math">\(\alpha\text{?}\)</span>
+</div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(ii)</span></h6>
+<div class="para">Complete the following function in your <code class="code-inline tex2jax_ignore">aam_proj6.py</code> file to produce the effect described in the function's docstring.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def gscale(grid, alpha, r1):
+    """Return a list whose elements are identical to those of grid,
+        except in the index r1, which has been scaled by a factor
+        of alpha."""
+    temp_entry = [ ]
+    for entry in grid[r1]:
+        temp_entry.append( None )
+    # Build out on the next line using slicing and addition.
+    out = None
+    return out
+</code></pre></div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(iii)</span></h6>
+<div class="para">Adapt the function <code class="code-inline tex2jax_ignore">gscale</code> from the previous subtask to the following method in your <code class="code-inline tex2jax_ignore">AlgoMatrix.py</code> class file.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def rscale(self, alpha, r1):
+    """Return the AlgoMatrix obtained from self by scaling the row
+        with index r1 by a factor of alpha."""
+    out = None
+    return AlgoMatrix(out)
+</code></pre></div></article></article><article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(c)</span><span class="space"> </span><span class="title">Eliminating one row using a scalar multiple of another.</span>
+</h5>
+<div class="introduction"><div class="para">This task is a combination of tasks (a) and (b).</div></div>
+<article class="task exercise-like"><h6 class="heading"><span class="codenumber">(i)</span></h6>
+<div class="para">Complete the following function in your <code class="code-inline tex2jax_ignore">aam_proj6.py</code> file to produce the effect described in the function's docstring.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def gelim(grid, alpha, r1, r2):
+    """Return a list whose elements are identical to those of grid,
+        except in the index r2, which has been modified by adding to
+        it term-by-term the elements of the entry in index r1 scaled
+        by a factor of alpha."""
+    temp_entry = [ ]
+    for entry1, entry2 in zip(grid[r1], grid[r2]):
+        temp_entry.append( None )
+    # Build out on the next line using slicing and addition.
+    out = None
+    return out
+</code></pre></div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(ii)</span></h6>
+<div class="para">In your <code class="code-inline tex2jax_ignore">AlgoMatrix.py</code> class file, complete the method below by adapting the <code class="code-inline tex2jax_ignore">gelim</code> function.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def relim(self, alpha, r1, r2):
+    """Return a row-equivalent matrix to self which is obtained
+        by performing the elimination operation which adds to the
+        row with index r2 term-by-term the elements of the row
+        with index r1 scaled by alpha."""
+    out = None
+    return AlgoMatrix(out)
+</code></pre></div></article></article></article><span class="incontext"><a href="sec-matapps-gje_proj.html#proj-matapps-elem_row_ops" class="internal">in-context</a></span>
+</body>
+</html>

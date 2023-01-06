@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="problem example-like"><h4 class="heading">
+<span class="type">Problem</span><span class="space"> </span><span class="codenumber">1.1.6</span><span class="period">.</span><span class="space"> </span><span class="title">A 50-edge network.</span>
+</h4>
+<div class="para">The connections of a network are given below as a table of triples <span class="process-math">\((u,v,w(u,v))\text{.}\)</span> Find the least expensive set <span class="process-math">\(F\)</span> of edges needed to connect the components of this network.</div> <figure class="table table-like"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">1.1.7<span class="period">.</span></span><span class="space"> </span>The weighted edges of a 50-edge network</figcaption><div class="tabular-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><table class="tabular">
+<tr>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\((u,v,w(u,v))\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\((u,v,w(u,v))\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\((u,v,w(u,v))\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\((u,v,w(u,v))\)</span></td>
+<td class="l m b3 r0 l0 t0 lines"><span class="process-math">\((u,v,w(u,v))\)</span></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">(0, 1, 8)</td>
+<td class="l m b0 r0 l0 t0 lines">(2, 4, 1)</td>
+<td class="l m b0 r0 l0 t0 lines">(4, 13, 1)</td>
+<td class="l m b0 r0 l0 t0 lines">(5, 17, 6)</td>
+<td class="l m b0 r0 l0 t0 lines">(9, 16, 8)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">(0, 3, 3)</td>
+<td class="l m b0 r0 l0 t0 lines">(2, 10, 9)</td>
+<td class="l m b0 r0 l0 t0 lines">(4, 15, 5)</td>
+<td class="l m b0 r0 l0 t0 lines">(5, 19, 7)</td>
+<td class="l m b0 r0 l0 t0 lines">(9, 17, 6)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">(0, 4, 8)</td>
+<td class="l m b0 r0 l0 t0 lines">(2, 11, 5)</td>
+<td class="l m b0 r0 l0 t0 lines">(4, 16, 9)</td>
+<td class="l m b0 r0 l0 t0 lines">(6, 12, 8)</td>
+<td class="l m b0 r0 l0 t0 lines">(10, 13, 7)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">(0, 8, 10)</td>
+<td class="l m b0 r0 l0 t0 lines">(2, 18, 8)</td>
+<td class="l m b0 r0 l0 t0 lines">(4, 18, 3)</td>
+<td class="l m b0 r0 l0 t0 lines">(7, 8, 9)</td>
+<td class="l m b0 r0 l0 t0 lines">(10, 16, 8)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">(0, 10, 4)</td>
+<td class="l m b0 r0 l0 t0 lines">(2, 19, 6)</td>
+<td class="l m b0 r0 l0 t0 lines">(5, 6, 5)</td>
+<td class="l m b0 r0 l0 t0 lines">(7, 13, 3)</td>
+<td class="l m b0 r0 l0 t0 lines">(11, 12, 10)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">(0, 13, 1)</td>
+<td class="l m b0 r0 l0 t0 lines">(3, 5, 10)</td>
+<td class="l m b0 r0 l0 t0 lines">(5, 7, 8)</td>
+<td class="l m b0 r0 l0 t0 lines">(7, 15, 10)</td>
+<td class="l m b0 r0 l0 t0 lines">(11, 18, 8)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">(0, 16, 4)</td>
+<td class="l m b0 r0 l0 t0 lines">(3, 13, 9)</td>
+<td class="l m b0 r0 l0 t0 lines">(5, 8, 10)</td>
+<td class="l m b0 r0 l0 t0 lines">(7, 18, 6)</td>
+<td class="l m b0 r0 l0 t0 lines">(12, 19, 1)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">(1, 4, 4)</td>
+<td class="l m b0 r0 l0 t0 lines">(3, 14, 6)</td>
+<td class="l m b0 r0 l0 t0 lines">(5, 10, 8)</td>
+<td class="l m b0 r0 l0 t0 lines">(8, 11, 1)</td>
+<td class="l m b0 r0 l0 t0 lines">(13, 14, 7)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">(1, 6, 10)</td>
+<td class="l m b0 r0 l0 t0 lines">(3, 19, 6)</td>
+<td class="l m b0 r0 l0 t0 lines">(5, 14, 6)</td>
+<td class="l m b0 r0 l0 t0 lines">(8, 19, 7)</td>
+<td class="l m b0 r0 l0 t0 lines">(15, 17, 7)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines">(1, 18, 5)</td>
+<td class="l m b0 r0 l0 t0 lines">(4, 10, 5)</td>
+<td class="l m b0 r0 l0 t0 lines">(5, 16, 4)</td>
+<td class="l m b0 r0 l0 t0 lines">(9, 15, 5)</td>
+<td class="l m b0 r0 l0 t0 lines">(16, 18, 9)</td>
+</tr>
+</table></div></figure> <div class="para">Your solution should include all the steps, but your answer will consist only of the set of included edges.</div>
+<div class="solutions"><a href="" class="answer-knowl original" data-knowl="./knowl/answer-1-hidden.html" title="Answer 1.1.6.1"><span class="type">Answer</span><span class="period">.</span></a></div></article><span class="incontext"><a href="sec-intro-mst.html#problem-1" class="internal">in-context</a></span>
+</body>
+</html>

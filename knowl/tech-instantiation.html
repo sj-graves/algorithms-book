@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="technology computation-like"><h4 class="heading">
+<span class="type">Technology</span><span class="space"> </span><span class="codenumber">2.2.6</span><span class="period">.</span><span class="space"> </span><span class="title">Python object instantiation.</span>
+</h4> <div class="para">Important methods for Python classes often have a strange naming convention, having the form <code class="code-inline tex2jax_ignore">__methodname__</code>. The first of these we will use is the <dfn class="terminology">initialization method</dfn>, called <code class="code-inline tex2jax_ignore">__init__</code>. It is very important that the <code class="code-inline tex2jax_ignore">__init__</code> method must have at least the <code class="code-inline tex2jax_ignore">self</code> argument, along with arguments for any other information which must be known when creating a new object.</div> <figure class="listing figure-like"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">class MyClass:
+    """This is the class docstring which is printed by `help(MyClass)`"""
+    def __init__(self, *args, **kwargs):
+        statement_1
+        statement_2
+        statement_3
+        ...
+</code></pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">2.2.7<span class="period">.</span></span><span class="space"> </span>The <code class="code-inline tex2jax_ignore">__init__</code> method for a <code class="code-inline tex2jax_ignore">class</code> definition</figcaption></figure> <div class="para">After executing this <code class="code-inline tex2jax_ignore">class</code> block containing a valid <code class="code-inline tex2jax_ignore">__init__</code> method, all that is necessary to create a new <code class="code-inline tex2jax_ignore">MyClass</code> object is to assign the class to a name.</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="console"><span class="prompt unselectable">&gt;&gt;&gt; </span><b>new_obj = MyClass(arg0, arg1, arg2, keya = "bob", keyb = "larry")
+</b></pre></div> <div class="para">Using the class name <code class="code-inline tex2jax_ignore">MyClass</code> as a function invokes the <code class="code-inline tex2jax_ignore">__init__</code> method in such a way that the name <code class="code-inline tex2jax_ignore">new_obj</code> is associated with an object of <code class="code-inline tex2jax_ignore">MyClass</code> and then automatically used as the <code class="code-inline tex2jax_ignore">self</code> argument of the <code class="code-inline tex2jax_ignore">__init__</code> method.</div></article><span class="incontext"><a href="sec-perms-oop.html#tech-instantiation" class="internal">in-context</a></span>
+</body>
+</html>

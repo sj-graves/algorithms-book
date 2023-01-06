@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">n = 1
+try:
+    if n==1:
+        raise RuntimeError('First error')
+    elif n==2:
+        raise ValueError('Second error')
+    else:
+        raise TypeError('Third error')
+except RuntimeError as error_message:
+    print "We have encountered a RuntimeError, specifically {0}".format(error_message)
+    pass
+except:
+    print "All errors but RuntimeErrors are caught here!"
+    pass
+print "The program now exits cleanly."
+</code></pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">A.6.10<span class="period">.</span></span><span class="space"> </span>An example of a <code class="code-inline tex2jax_ignore">try:... except:... </code> block</figcaption></figure><span class="incontext"><a href="sec-intro-errors.html#listing-49" class="internal">in-context</a></span>
+</body>
+</html>

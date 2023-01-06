@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<h5 class="heading"><span class="type">Paragraph</span></h5>
+<div class="para logical">
+<div class="para">Let</div>
+<div class="displaymath process-math">
+\begin{align*}
+A \amp= \begin{bmatrix}10^{-20}\amp 1 \\ 1 \amp 2\end{bmatrix} \amp
+\vec{b} \amp= \cvec{1\\4}
+\end{align*}
+</div>
+<div class="para">and consider the SLE with augmented matrix <span class="process-math">\([A\mid\vec{b}]\text{.}\)</span> Then following the naive algorithm and using exact arithmetic, we have</div>
+<div class="displaymath process-math">
+\begin{align*}
+[A\mid \vec{b}] \xto{\rscale{10^{20}}{0}}
+\amp\begin{bmatrix}
+1 \amp 10^{20} \amp 10^{20} \\
+1 \amp 2 \amp 4
+\end{bmatrix}\\
+\xto{\relim{-1}{0}{1}}
+\amp\begin{bmatrix}
+1 \amp 10^{20} \amp 10^{20} \\
+0 \amp 2-10^{20} \amp 4-10^{20}
+\end{bmatrix}\\
+\xto{\rscale{1/(2-10^{20})}{1}}
+\amp\begin{bmatrix}
+1 \amp 10^{20} \amp 10^{20} \\
+0 \amp 1 \amp \frac{4-10^{20}}{2-10^{20}}
+\end{bmatrix}\\
+\xto{\relim{-10^{20}}{1}{0}}
+\amp\begin{bmatrix}
+1 \amp 0 \amp 10^{20}\left(1- \frac{4-10^{20}}{2-10^{20}} \right) \\
+0 \amp 1 \amp \frac{4-10^{20}}{2-10^{20}}
+\end{bmatrix}
+\end{align*}
+</div>
+<div class="para">If our solution vector is <span class="process-math">\(\vec{x}\text{,}\)</span> then we see</div>
+<div class="displaymath process-math">
+\begin{align*}
+\entry{\vec{x}}{0} \amp= 10^{20}\left(1- \frac{4-10^{20}}{2-10^{20}} \right)\\
+\amp= 10^{20}\left(\frac{2-10^{20}-4+10^{20}}{2-10^{20}} \right)\\
+\amp = 2\left(\frac{10^{20}}{10^{20}-2}\right)\\
+\amp= 2\left(\frac{100000000000000000000}{99999999999999999998}\right)
+\approx 2\\
+\end{align*}
+<p class="intertext">and</p>
+\begin{align*}
+\entry{\vec{x}}{1} \amp= \frac{10^{20}-4}{10^{20}-2}\\
+\amp = \frac{99999999999999999996}{99999999999999999998} \approx 1\text{.}
+\end{align*}
+</div>
+</div>
+<span class="incontext"><a href="sec-matapps-gje_proj.html#p-652" class="internal">in-context</a></span>
+</body>
+</html>

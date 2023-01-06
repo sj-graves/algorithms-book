@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="task exercise-like"><h5 class="heading">
+<span class="type">Task</span><span class="space"> </span><span class="codenumber">4.1.b</span><span class="period">.</span><span class="space"> </span><span class="title">Initialization algorithm.</span>
+</h5>
+<div class="introduction">
+<div class="para">As always, it is important to start by considering what validation must be performed on the input to the <code class="code-inline tex2jax_ignore">__init__</code> method for the new class. Since we want to create vectors from a <code class="code-inline tex2jax_ignore">list</code> or <code class="code-inline tex2jax_ignore">tuple</code> of entries, we will specify our <code class="code-inline tex2jax_ignore">__init__</code> method as follows, which determines both the names of the arguments to the method as well as the important attribute name for the class:</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __init__(self, entries):
+    '''The initialization method for class AlgoVector'''
+    # perform all validation
+    # build the data that will replace None below:
+    self._components = None
+</code></pre></div>
+</div>
+<article class="task exercise-like"><h6 class="heading"><span class="codenumber">(i)</span></h6>
+<div class="para">What is a good way to ensure that <code class="code-inline tex2jax_ignore">type(entries)</code> is either <code class="code-inline tex2jax_ignore">list</code> or <code class="code-inline tex2jax_ignore">tuple</code>? Implement that and replace the first comment line in the above code.</div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(ii)</span></h6>
+<div class="para">Since not every literal element of <code class="code-inline tex2jax_ignore">entries</code> will have the <code class="code-inline tex2jax_ignore">complex</code> type, we need to build a new list whose elements are the original elements of <code class="code-inline tex2jax_ignore">entries</code> cast into the <code class="code-inline tex2jax_ignore">complex</code> type; we have done this before using a <code class="code-inline tex2jax_ignore">for</code> loop. Replace the second comment line in the above code with the appropriate for loop, storing the correct list of data in a local variable.</div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(iii)</span></h6>
+<div class="para">We definitely do not want to have mutable vectors. Replace the line <code class="code-inline tex2jax_ignore">self._components = None</code>, assigning to the attribute the <code class="code-inline tex2jax_ignore">tuple</code> of whatever list you constructed in the previous step.</div></article><div class="conclusion"><div class="para">You should now have a functional <code class="code-inline tex2jax_ignore">__init__</code> method which defines exactly one attribute.</div></div></article><span class="incontext"><a href="sec-linalg-vecproj.html#task-53" class="internal">in-context</a></span>
+</body>
+</html>

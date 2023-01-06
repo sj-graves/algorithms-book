@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def kruskal(verts, wedges, verbose=False):
+    WE = sorted((l,u,v) for u,v,l in wedges)
+
+    comp_of = {v:v for v in verts}
+    vert_of = {v:[v] for v in verts}
+
+    keep = []
+    dump = []
+    out_grid = []
+    for i,(w,u,v) in enumerate(WE):
+        cu, cv = comp_of[u], comp_of[v]
+        row = [w,u,cu,v,cv,cu!=cv]
+        out_grid.append( row )
+        if cu==cv:
+            dump.append( (u,v,w) )
+            continue
+        keep.append( (u,v,w) )
+        if len(vert_of[cu]) &gt; len(vert_of[cv]):
+            v,u = u,v
+            cu,cv = cv,cu
+        vert_of[cv] += vert_of[cu]
+        while len(vert_of[cu])&gt;0:
+            comp_of[vert_of[cu].pop()] = cv
+    if verbose:
+        out_grid = [["Weight", "u", "C(u)", "v", "C(v)", "Include?"]]
+        out_grid += [[str(entr) for entr in row] for row in out_grid]
+        mc = [max(len(out_grid[r][c]) for r in range(len(out_grid))) for c in range(len(out_grid[0]))]
+        new_out_grid = [[] for _ in out_grid]
+        for c in range(len(out_grid[0])):
+            for r in range(len(out_grid)):
+                new_out_grid[r].append(("{x:&gt;%d}"% mc[c]).format(x=out_grid[r][c]))
+        print( "\n".join([" | ".join(row) for row in new_out_grid]))
+    return keep,dump
+</code></pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">6.2.12<span class="period">.</span></span><span class="space"> </span>A Python implementation of Kruskal's algorithm.</figcaption></figure><span class="incontext"><a href="sec-gtalgos-mst.html#listing-16" class="internal">in-context</a></span>
+</body>
+</html>

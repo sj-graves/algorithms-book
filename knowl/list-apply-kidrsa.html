@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def kidrsa(key, msg):
+    """Apply KidRSA using key = (n,x) to encrypt or decrypt
+        the message msg, which is either a string to be encrypted
+        or a list of integers to be decrypted."""
+    n,x = key
+    if type(msg) == str:
+        # We were given a string, so we must be trying to encrypt,
+        # so first we have to encode the string.
+        msg_list = [ 65 ] ########### FIX THIS ###########
+    elif type(msg) == list:
+        # We were given a list, so we must be trying to decrypt,
+        # so let's just make msg_list a copy of msg.
+        msg_list = msg[:]
+    # Now we can apply the kidRSA_single function to everything
+    # in msg_list.
+    out_list = [ ]
+    for number in msg_list:
+        out_list.append( 65 ) ########### FIX THIS ###########
+    if type(msg) == list:
+        # We must need to decode whatever we've decrypted.
+        return "A"  ########### FIX THIS ###########
+    else:
+        # Otherwise we want to return the list of encrypted
+        # integers without trying to decode it.
+        return [65] ########### FIX THIS ###########
+</code></pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">1.2.9<span class="period">.</span></span><span class="space"> </span>Applying KidRSA to messages</figcaption></figure><span class="incontext"><a href="sec-intro-kidrsa.html#list-apply-kidrsa" class="internal">in-context</a></span>
+</body>
+</html>

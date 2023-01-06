@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="task exercise-like"><h5 class="heading">
+<span class="type">Task</span><span class="space"> </span><span class="codenumber">4.2.a</span><span class="period">.</span><span class="space"> </span><span class="title">Scalar-vector multiplication.</span>
+</h5>
+<div class="introduction">
+<div class="para">In order to be very explicit with our algorithms, we need to enforce the notion that scalar multiplication is actually <em class="emphasis">scalar-vector</em> multiplication. That means our <code class="code-inline tex2jax_ignore">AlgoVector</code> must be the right-hand factor, so we want <code class="code-inline tex2jax_ignore">__mul__(self, right)</code> to always produce an error and for <code class="code-inline tex2jax_ignore">__rmul__(self, left)</code> to be carefully defined.</div> <div class="para">To be very precise with notation, in a product <span class="process-math">\(x\cdot y\text{,}\)</span> the value <span class="process-math">\(x\)</span> is the <dfn class="terminology">multiplier</dfn> and <span class="process-math">\(y\)</span> is the <dfn class="terminology">multiplicand</dfn>. This terminology is not often used since most people never advance in mathematics to the point where multiplication is non-commutative.</div>
+</div>
+<article class="task exercise-like"><h6 class="heading"><span class="codenumber">(i)</span></h6>
+<div class="para">Add a <code class="code-inline tex2jax_ignore">__mul__(self, right)</code> method to your <code class="code-inline tex2jax_ignore">AlgoVector</code> class which always raises a <code class="code-inline tex2jax_ignore">TypeError</code>, indicating by the error message that left-multiplication by <code class="code-inline tex2jax_ignore">AlgoVector</code> is invalid.</div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(ii)</span></h6>
+<div class="para">Now add the following to the class:</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __rmul__(self, left):
+    '''Return left*self'''
+    try:
+        scalar = complex(left)
+    except TypeError:
+        raise TypeError(f"{left} is unsuitable scalar for scalar-vecprojtor multiplication.")
+    new_entries = [ ]
+    for x in self.entries():
+        # Fix the following line.
+        new_entries.append( None )
+    return AlgoVector(new_entries)
+</code></pre></div>
+<div class="para">Fix the <code class="code-inline tex2jax_ignore">for</code> loop so that it works correctly.</div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(iii)</span></h6>
+<div class="para">Test your multiplication code by trying <code class="code-inline tex2jax_ignore">0*vec1</code>, <code class="code-inline tex2jax_ignore">'1-1j'*vec2</code>, and <code class="code-inline tex2jax_ignore">vec1*9</code>.</div></article></article><span class="incontext"><a href="sec-linalg-vecproj.html#task-62" class="internal">in-context</a></span>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.2</span><span class="period">.</span><span class="space"> </span><span class="title">Implement Gauss-Jordan Elimination with Partial Pivoting.</span>
+</h4> <div class="para">Complete the following in <code class="code-inline tex2jax_ignore">AlgoMatrix.py</code> by replacing the well-marked comments with the appropriate code.</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def gje(self, ncols=None):
+    '''Perform Gauss-Jordan elimination with Partial Pivoting on the first
+        ncols of self; if ncols is not specified, perform the algorithm on
+        the entire matrix.'''
+    m, n = self.dims()
+    if ncols in range(n):
+        max_col = ncols
+    elif ncols == None:
+        max_col = n
+    else:
+        raise ValueError("Invalid number of columns to left of augmentation.")
+    r, c = 0, 0
+    grid = AlgoMatrix(self._data)
+    while r&lt; m and c&lt; max_col:
+        # Pivot Selection
+        temp_max = abs(grid[r, c])
+        piv_row = r
+        for r_prime in range(r+1, m):
+            # Find the greatest modulus entry in the subcolumn
+            if abs(grid[r_prime, c]) &gt; temp_max:
+                temp_max = abs(grid[r_prime, c])
+                piv_row = r_prime
+        if temp_max == 0:
+            #
+            # Something needs to happen here to move the process to the
+            # next column; the continue line below makes the process
+            # go back to the beginning of the while loop, which is
+            # necessary. What must change to make the process move to
+            # the next column? Replace this comment.
+            #
+            continue
+        elif piv_row != r:
+            # Swap rows, we found a bigger pivot!
+            #
+            # Remember that grid is an AlgoMatrix and that the
+            # row operations produce a new row-equivalent matrix
+            # rather than changing self.
+            #
+            grid = None
+        if grid[r, c] != 1:
+            # Scale pivot row
+            alpha = grid[r, c]
+            #
+            # Remember that grid is an AlgoMatrix and that the
+            # row operations produce a new row-equivalent matrix
+            # rather than changing self.
+            #
+            grid = None
+        for r_prime in range(m):
+            # Eliminate column entries outside pivot row
+            if r_prime == r: continue
+            alpha = grid[r_prime, c]
+            #
+            # Remember that grid is an AlgoMatrix and that the
+            # row operations produce a new row-equivalent matrix
+            # rather than changing self.
+            #
+            grid = None
+        # Step down and right
+        r += 1
+        c += 1
+    return grid
+</code></pre></div></article><span class="incontext"><a href="sec-matapps-gje_proj.html#proj-matapps-gje" class="internal">in-context</a></span>
+</body>
+</html>

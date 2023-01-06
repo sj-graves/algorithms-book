@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="task exercise-like"><h5 class="heading">
+<span class="type">Task</span><span class="space"> </span><span class="codenumber">4.6.b</span><span class="period">.</span><span class="space"> </span><span class="title">A list of <code class="code-inline tex2jax_ignore">AlgoVector</code> objects.</span>
+</h5>
+<div class="para">Inside the first step of the validation, the important things to check are to determine whether remaining elements of <code class="code-inline tex2jax_ignore">grid</code> are actually <code class="code-inline tex2jax_ignore">AlgoVector</code> objects and also to determine that all have the same length. Replace the above code with the following, making modifications as necessary:</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">if type(grid[0]) == AlgoVector:
+n = len(grid)
+# The next line works as long as AlgoVector has a __len__ method!
+m = len(grid[0])
+new_grid = [ ]
+for x in grid[0].entries():
+new_grid.append( [x] )
+for vec in grid[1:]:
+if type(vec) != AlgoVector:
+raise TypeError('Malformed list of AlgoVector objects')
+elif len(vec) != m:
+raise ValueError('Malformed list of AlgoVector objects')
+else:
+for r in range(m):
+# Now you have to fill in: we want to add the rth entry of
+# the current vector, vec, to the rth row of new_grid.
+continue
+else:
+# This will get filled in during the next task
+</code></pre></div></article><span class="incontext"><a href="sec-linalg-matproj.html#task-78" class="internal">in-context</a></span>
+</body>
+</html>

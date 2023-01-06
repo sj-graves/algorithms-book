@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="example example-like"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">5.2.6</span><span class="period">.</span><span class="space"> </span><span class="title">Drain the swamp!</span>
+</h4>
+<div class="para logical">
+<div class="para">Let</div>
+<div class="displaymath process-math">
+\begin{align*}
+A \amp= \begin{bmatrix}
+1.0\times 10^{-20}\amp 1.0 \\ 1.0 \amp 2.0\end{bmatrix} \amp
+\vec{b} \amp= \cvec{1.0\\4.0}
+\end{align*}
+</div>
+<div class="para">and consider the SLE with augmented matrix <span class="process-math">\([A\mid\vec{b}]\text{.}\)</span> Then following the partial pivoting algorithm and using exact arithmetic, we have to swap rows immediately, obtaining</div>
+<div class="displaymath process-math">
+\begin{align*}
+[A\mid \vec{b}] \xto{\rswap{0}{1}}
+\amp\begin{bmatrix}
+1.0 \amp 2.0 \amp 4.0 \\
+1.0\times 10^{-20}\amp 1.0 \amp 1.0
+\end{bmatrix}\\
+\xto{\relim{-10^{-20}}{0}{1}}
+\amp\begin{bmatrix}
+1.0 \amp 2.0 \amp 4.0 \\
+0.0 \amp 1.0 \amp 1.0
+\end{bmatrix}\\
+\xto{\relim{-2}{1}{0}}
+\amp\begin{bmatrix}
+1.0 \amp 0.0 \amp 2.0 \\
+0.0 \amp 1.0 \amp 1.0
+\end{bmatrix}\\
+\end{align*}
+<p class="intertext">giving a solution vector of</p>
+\begin{align*}
+\vec{x} \amp= \cvec{2.0\\1.0}\text{.}
+\end{align*}
+</div>
+<div class="para">This was our approximate solution in the exact case; we have lost some precision, but very, very little.</div>
+</div></article><span class="incontext"><a href="sec-matapps-gje_proj.html#exmp-drain_the_swamp" class="internal">in-context</a></span>
+</body>
+</html>

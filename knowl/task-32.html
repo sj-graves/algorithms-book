@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="task exercise-like"><h5 class="heading">
+<span class="type">Task</span><span class="space"> </span><span class="codenumber">2.6.d</span><span class="period">.</span>
+</h5>
+<div class="para">
+<dfn class="terminology">Operator overloading</dfn> is the fancy name for when we have one symbol (such as <code class="code-inline tex2jax_ignore">*</code>) which must perform multiple tasks in multiple different contexts. All of the double-underscore <code class="code-inline tex2jax_ignore">__methods__</code> we have been working with are the means by which Python performs operator overloading. Rather than continuing to use <code class="code-inline tex2jax_ignore">after</code> for composition, it becomes much easier to use Python's multiplication operator <code class="code-inline tex2jax_ignore">*</code> as we use it mathematically.</div>
+<div class="para">Overload the <code class="code-inline tex2jax_ignore">*</code> operator for <code class="code-inline tex2jax_ignore">AlgoPerm</code> by defining the following new method.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __mul__(self, right):
+    """Implement self*right."""
+    return self.after(right)
+</code></pre></div>
+<div class="para">Since we know it is very important to be consistent with your left and right multiplication, we now note that the <dfn class="terminology">left multiplication</dfn> of <code class="code-inline tex2jax_ignore">self*right</code> is effected using <code class="code-inline tex2jax_ignore">__mul__(self, right)</code> and the <dfn class="terminology">right multiplication</dfn> of <code class="code-inline tex2jax_ignore">left * self</code> is effected using a different method, <code class="code-inline tex2jax_ignore">__rmul__(self, left)</code>. There is an <dfn class="terminology">order of operations</dfn> in Python just as in mathematics, and Python checks for a valid left multiplication before checking for a valid right multiplication.</div></article><span class="incontext"><a href="sec-perms-oop.html#task-32" class="internal">in-context</a></span>
+</body>
+</html>

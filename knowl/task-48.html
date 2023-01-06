@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="task exercise-like"><h6 class="heading">
+<span class="type">Task</span><span class="space"> </span><span class="codenumber">3.3.d.i</span><span class="period">.</span>
+</h6>
+<div class="para">Start the method as below. The lines beginning with <code class="code-inline tex2jax_ignore">####</code> will be changed.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def cycle_tuples(self):
+    '''Return self in disjoint cycle notation as a tuple of tuples. Single-element tuples
+        will be left off unless self is the identity, in which case this will return
+        ((x,),), which is the tuple-of-tuples notation for the identity permutation when
+        x is the minimum element of self.domain()'''
+    try:
+        # If self has an attribute _cycle_tuples, this will work.
+        return self._cycle_tuples
+        # if not, it will raise an AttributeError, which is handled by...
+    except AttributeError:
+        # Since tuples are immutable, everything must be created as a list.
+        list_of_cycles = [ ]
+        # In order to create the cycle decomposition, we need an ordered list
+        #    of all the domain elements which are not fixed by self, but in
+        #    a mutable way. The following should work!
+        symbol_list = sorted(self.support())
+        #### This is the part you will work out in successive steps.
+        ####    It will involve some looping so these three comments will
+        ####    end up being removed and replaced by a nested while loop.
+        if list_of_cycles == [ ]:
+            # Inside this block, we see that self is the identity.
+            self._cycle_tuples = ( ( min(self.domain()), ), )
+            # To be nice for our next method, let's define the string version as well.
+            self._cycle_tuples = f"({min(self.domain())})"
+        else:
+            # Otherwise we've create a list containing tuples of each interesting
+            #    cycle in the decomposition of self.
+            self._cycle_tuples = tuple(list_of_cycles)
+            # And we have to be a little more careful with the string version here
+            self._cycle_string = ''
+            for cyc in list_of_cycles:
+                self._cycle_string += str(cyc)
+        # Now we've defined the interesting attribute of self, so return it.
+        return self._cycle_tuples
+</code></pre></div></article><span class="incontext"><a href="sec-crypto-proj.html#task-48" class="internal">in-context</a></span>
+</body>
+</html>

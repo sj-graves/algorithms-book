@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<figure class="listing figure-like"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def predecessors(warrows:dict, vertex):
+    return [w for w,nbrs in warrows.items() if vertex in nbrs.keys() and warrows[w][vertex] &gt; 0 ]
+
+def successors(warrows:dict, vertex):
+    return [w for w,c in warrows[vertex].items() if c&gt;0]
+</code></pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">6.4.16<span class="period">.</span></span><span class="space"> </span>Predecessor and successor functions for layered graph maintenance in Dinitz' algorithm</figcaption></figure><span class="incontext"><a href="sec-gtalgos-maxflowmincut.html#list-dinitz_preds_succs" class="internal">in-context</a></span>
+</body>
+</html>

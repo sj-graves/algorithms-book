@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<h5 class="heading"><span class="type">Paragraph</span></h5>
+<div class="para">We can use <a href="" class="xref" data-knowl="./knowl/algo-euclid-gcd-inverses.html" title="Algorithm 1.2.14: Euclid's Algorithm Extended">Euclid's Algorithm Extended</a> to reverse-engineer the number <span class="process-math">\(d\)</span> of a KidRSA triple <span class="process-math">\((n,e,d)\)</span> if we know <span class="process-math">\((n,e)\text{,}\)</span> because <span class="process-math">\(d\)</span> is simply the reciprocal of <span class="process-math">\(e\)</span> modulo <span class="process-math">\(n\text{.}\)</span> Write a new function called <code class="code-inline tex2jax_ignore">big_gcd</code> which modifies your previous <code class="code-inline tex2jax_ignore">gcd</code> function by adding exactly two lines: <code class="code-inline tex2jax_ignore">t = [0,1]</code> and <code class="code-inline tex2jax_ignore"> t.append( t[-2] - q * t[-1] )</code>. You'll need to determine carefully where these lines must be added.</div>
+<span class="incontext"><a href="sec-intro-kidrsa.html#p-97" class="internal">in-context</a></span>
+</body>
+</html>

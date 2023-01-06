@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="task exercise-like"><h5 class="heading">
+<span class="type">Task</span><span class="space"> </span><span class="codenumber">3.3.e</span><span class="period">.</span><span class="space"> </span><span class="title">Permutation rotations.</span>
+</h5>
+<div class="para">The key component of the Enigma machine is in its physical rotation of the permutations. The physical mechanism made this extremely straightforward, and we can use careful slicing to cause the same change. Suppose we defined <code class="code-inline tex2jax_ignore">sigma = AlgoPerm([5,4,3,0,1,2])</code>, which is <span class="process-math">\(\sigma=(0,5,2,3)(1,4)\text{.}\)</span> We want to define a method <code class="code-inline tex2jax_ignore">rotate(self, steps)</code> which has the following outputs:</div>
+<figure class="table table-like"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.3.1<span class="period">.</span></span><span class="space"> </span>Rotations of the permutation <span class="process-math">\(\sigma=(0,5,2,3)(1,4)\)</span></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<tr>
+<td class="l m b1 r0 l0 t0 lines">Input</td>
+<td class="l m b1 r0 l0 t0 lines">Output (in cycle notation)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">sigma.rotate(0)</code></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\((0,5,2,3)(1,4)\)</span></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">sigma.rotate(1)</code></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\((0,4,2)(1,3)\)</span></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">sigma.rotate(7)</code></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\((0,4,2)(1,3)\)</span></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">sigma.rotate(-1)</code></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\((0,2,4)(1,5)\)</span></td>
+</tr>
+</table></div></figure><div class="para">Implement the <code class="code-inline tex2jax_ignore">rotate(self, steps)</code> method.</div></article><span class="incontext"><a href="sec-crypto-proj.html#task-51" class="internal">in-context</a></span>
+</body>
+</html>

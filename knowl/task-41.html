@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="task exercise-like"><h5 class="heading">
+<span class="type">Task</span><span class="space"> </span><span class="codenumber">3.2.b</span><span class="period">.</span>
+</h5>
+<div class="introduction">
+<div class="para">Remember that <code class="code-inline tex2jax_ignore">ord('A')</code> is 65, so to find the alphabet index of a capital letter stored as a string <code class="code-inline tex2jax_ignore">x</code> would require using <code class="code-inline tex2jax_ignore">ord(x)-65</code>. If we write <span class="process-math">\([D]_{i,j}\)</span> to mean the entry in the <span class="process-math">\(i\)</span>th row and <span class="process-math">\(j\)</span>th column of the numerical DIANA matrix given above, then we now have from task (a) a mathematical formula for the value of <span class="process-math">\([D]_{i,j}\text{.}\)</span> Since that value is the encrypted value of a message character with index <code class="code-inline tex2jax_ignore">i</code> using key character <code class="code-inline tex2jax_ignore">j</code>, we can build a DIANA cipher!</div> <div class="para">The first step to applying the DIANA cipher given a cryptographic key <code class="code-inline tex2jax_ignore">key</code> and a message <code class="code-inline tex2jax_ignore">msg</code> is to ensure that both message and key consist only of capital letters, and that the cryptographic key is either already as long as the message or has been extended by repetition to be at least as long as the message. Then the key and message can be converted to lists of integers, which then can be processed through the DIANA cipher. In order to decrypt a message, we must acknowledge that the DIANA cipher is that it is an <dfn class="terminology">involution</dfn>: <span class="process-math">\(k=[D]_{i,j}\)</span> if and only if <span class="process-math">\(i=[D]_{k,j}\text{.}\)</span>
+</div>
+</div>
+<article class="task exercise-like"><h6 class="heading"><span class="codenumber">(i)</span></h6>
+<div class="para">Write a detailed step-by-step algorithm on paper to explain the DIANA cipher.</div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(ii)</span></h6>
+<div class="para">Create a function <code class="code-inline tex2jax_ignore">diana(key, msg)</code> which performs the DIANA cipher using an input string <code class="code-inline tex2jax_ignore">key</code> to encrypt and decrypt a message string <code class="code-inline tex2jax_ignore">msg</code>, which works correctly whether <code class="code-inline tex2jax_ignore">msg</code> is plaintext or ciphertext.</div></article></article><span class="incontext"><a href="sec-crypto-proj.html#task-41" class="internal">in-context</a></span>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<h5 class="heading"><span class="type">Paragraph</span></h5>
+<div class="para logical">
+<div class="para">While <span class="process-math">\(\abs{V'}\lt \abs{V}\text{,}\)</span> repeat the following steps:</div>
+<ol class="lower-alpha">
+<li><div class="para logical">
+<div class="para">Let <span class="process-math">\(u\in V\setminus V'\)</span> be an unvisited vertex nearest to <span class="process-math">\(s\text{;}\)</span> that is,</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\dist{\Delta_f}{s}{u}=\min\set{\dist{\Delta_f}{s}{v}:v\in V\setminus V'}.
+\end{equation*}
+</div>
+</div></li>
+<li><div class="para logical">
+<div class="para">For each <span class="process-math">\(v\in V\setminus V'\)</span> such that <span class="process-math">\(uv\in E_f\text{,}\)</span> <span class="process-math">\(\dist{\Delta_f}{s}{u}+1\leq \dist{\Delta_f}{s}{v}\text{,}\)</span> and <span class="process-math">\(c_f(u,v)&gt;0\text{:}\)</span>
+</div>
+<ol class="lower-roman">
+<li><div class="para">update the distance to <span class="process-math">\(v\)</span> by setting <span class="process-math">\(\dist{\Delta_f}{s}{v}=\dist{\Delta_f}{s}{u}+1\text{,}\)</span> and</div></li>
+<li><div class="para">update the set of predecessors of <span class="process-math">\(v\text{,}\)</span> <span class="process-math">\(p(v)\text{,}\)</span> to include <span class="process-math">\(u\text{.}\)</span>
+</div></li>
+</ol>
+</div></li>
+<li><div class="para">Add <span class="process-math">\(u\)</span> to <span class="process-math">\(V'\text{.}\)</span>
+</div></li>
+</ol>
+</div>
+<span class="incontext"><a href="sec-gtalgos-maxflowmincut.html#p-817" class="internal">in-context</a></span>
+</body>
+</html>

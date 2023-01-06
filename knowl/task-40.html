@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="task exercise-like"><h5 class="heading">
+<span class="type">Task</span><span class="space"> </span><span class="codenumber">3.2.a</span><span class="period">.</span>
+</h5>
+<div class="para">Use a <dfn class="terminology">nested for loop</dfn> to create a list-of-lists containing the DIANA cipher. You'll need to create a mathematical formula (involving remainders!) for the element of the <span class="process-math">\(m\)</span>th row and <span class="process-math">\(k\)</span>th column of the DIANA matrix, where <span class="process-math">\(k,m\in\set{0,\dotsc,25}\text{.}\)</span>
+</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">diana = [ ]
+for m in range( 26 ):
+    new_row = [ ]
+    for k in range( 26 ):
+        # CHANGE THIS to the correct value involving k and m
+        new_row.append( 0 )
+    diana.append( new_row )
+print( diana )
+</code></pre></div></article><span class="incontext"><a href="sec-crypto-proj.html#task-40" class="internal">in-context</a></span>
+</body>
+</html>

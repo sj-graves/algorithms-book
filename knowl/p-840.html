@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<h5 class="heading"><span class="type">Paragraph</span></h5>
+<div class="para">About graph maintenance: there are several different ways that this can be handled, all with the same result but different in individual process. Dinitz originally kept track of the endpoints of edges which became saturated as the algorithm updated the residual capacities along an augmenting path. After these capacities were updated, the algorithm processed through lists of vertices which might have been left with either no successors or no predecessors. In our implementation, we opt for a recursive solution: when an edge <span class="process-math">\(uv\in E_\ell\)</span> becomes saturated, we call a process <em class="emphasis">Clean-to-source</em> on its head vertex <span class="process-math">\(u\)</span> and then a process <em class="emphasis">Clean-to-Target</em> on its tail vertex <span class="process-math">\(v\text{.}\)</span> These two processes behave similarly, but in opposite directions. The first, <em class="emphasis">Clean-to-source</em>, determines whether <span class="process-math">\(u\)</span> has any successors; if not, <em class="emphasis">Clean-to-source</em> is run on each predecessor <span class="process-math">\(w\)</span> of <span class="process-math">\(u\text{.}\)</span> Likewise <em class="emphasis">Clean-to-Target</em> checks whether <span class="process-math">\(v\)</span> has any predecessors, and if not, <em class="emphasis">Clean-to-Target</em> is run on each successor <span class="process-math">\(w\)</span> of <span class="process-math">\(v\text{.}\)</span>
+</div>
+<span class="incontext"><a href="sec-gtalgos-maxflowmincut.html#p-840" class="internal">in-context</a></span>
+</body>
+</html>

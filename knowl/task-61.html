@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="task exercise-like"><h6 class="heading">
+<span class="type">Task</span><span class="space"> </span><span class="codenumber">4.1.d.iii</span><span class="period">.</span>
+</h6>
+<div class="para">Now we can write an equality-testing code, implemented via the <code class="code-inline tex2jax_ignore">__eq__</code> method. Fix the following, and add it to your class file.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __eq__(self, other):
+    '''Return self==other, as vectors'''
+    if type(other) != AlgoVector or len(other) != len(self):
+        return False
+    else:
+        compare = [ ]
+        for k in range(len(self)):
+            # Use our __getitem__ to add the appropriate True or False
+            # value to the list `compare`
+            compare.append(  None  )
+        # The `all` command returns True if every element of the input
+        # list evaluates to True. It's like a massive "and" statement.
+        return all(compare)
+</code></pre></div></article><span class="incontext"><a href="sec-linalg-vecproj.html#task-61" class="internal">in-context</a></span>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="task exercise-like"><h5 class="heading">
+<span class="type">Task</span><span class="space"> </span><span class="codenumber">4.7.c</span><span class="period">.</span><span class="space"> </span><span class="title">Well-formatted output.</span>
+</h5>
+<div class="para">While the <code class="code-inline tex2jax_ignore">__repr__</code> method is sufficient for a class file, it will be difficult to see whether or not your matrices are correct in tuple-of-tuples form. Implement this <code class="code-inline tex2jax_ignore">__str__</code> method.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __str__(self):
+"""Return a human-readable matrix of self"""
+# This is highly condensed code. Copy it exactly and change nothing.
+try:
+return self._nice_str
+except AttributeError:
+m,n = self.dims()
+str_mat = [[str(self[r,c]).replace('(','').replace(')','') for c in
+range(n)] for r in range(m)]
+clen = [max( len(str_mat[r][c]) for r in range(m) ) for c in range(n)]
+str_mat = [[("{s:&gt;%d}"%clen[c]).format(s=str_mat[r][c]) for c in range(n)]
+for r in range(m)]
+str_mat = [("[ "+', '.join(row) + " ]") for row in str_mat]
+str_mat = "[" + "\n ".join(str_mat) + "]"
+self._nice_str = str_mat
+return str_mat
+</code></pre></div></article><span class="incontext"><a href="sec-linalg-matproj.html#task-85" class="internal">in-context</a></span>
+</body>
+</html>

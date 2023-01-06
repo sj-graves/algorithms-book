@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="task exercise-like"><h5 class="heading">
+<span class="type">Task</span><span class="space"> </span><span class="codenumber">4.1.d</span><span class="period">.</span><span class="space"> </span><span class="title">Equality of vectors.</span>
+</h5>
+<div class="introduction">
+<div class="para">While the two vectors <code class="code-inline tex2jax_ignore">vec1</code> and <code class="code-inline tex2jax_ignore">vec2</code> produced in the previous step should be equal, adding the line <code class="code-inline tex2jax_ignore">print(vec1 == vec2)</code> to your <code class="code-inline tex2jax_ignore">aam_proj4.py</code> file will quickly demonstrate that they are not equal, as far as Python is concerned. Without a <code class="code-inline tex2jax_ignore">__eq__</code> method, the only way to detemine quality that Python has is to check the memory used by each object, which is not mathematically an interesting notion of equality.</div> <div class="para">Recalling that two column vectors are equal precisely when they agree in each entry, we see that we need a few more tools to define <code class="code-inline tex2jax_ignore">__eq__</code> properly.</div>
+</div>
+<article class="task exercise-like"><h6 class="heading"><span class="codenumber">(i)</span></h6>
+<div class="para">The <code class="code-inline tex2jax_ignore">__getitem__</code> method is used by Python to allow indexing into a container type. To be more specific, when we type <code class="code-inline tex2jax_ignore">container[index]</code>, the Python interpreter translates that to <code class="code-inline tex2jax_ignore">container.__getitem__(index)</code>.</div>
+<div class="para">Add the following to your <code class="code-inline tex2jax_ignore">AlgoVector.py</code> file, in such a way that <code class="code-inline tex2jax_ignore">print(vec1[1])</code> evaluated at the end of <code class="code-inline tex2jax_ignore">aam_proj4.py</code> will produce the output <code class="code-inline tex2jax_ignore">(1+0j)</code>.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __getitem__(self, entry_index):
+    '''Return self[entry_index]'''
+    the_entries = self.entries()
+    # Fix the following line so this method works.
+    return None
+</code></pre></div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(ii)</span></h6>
+<div class="para">Another build-in that we've used for containers which we now must define is the method to handle <code class="code-inline tex2jax_ignore">len</code>. Unsurprisingly this is defined by <code class="code-inline tex2jax_ignore">__len__</code>. Add this to your class file.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __len__(self):
+    '''Return len(self)'''
+    return len(self.entries())
+</code></pre></div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(iii)</span></h6>
+<div class="para">Now we can write an equality-testing code, implemented via the <code class="code-inline tex2jax_ignore">__eq__</code> method. Fix the following, and add it to your class file.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __eq__(self, other):
+    '''Return self==other, as vectors'''
+    if type(other) != AlgoVector or len(other) != len(self):
+        return False
+    else:
+        compare = [ ]
+        for k in range(len(self)):
+            # Use our __getitem__ to add the appropriate True or False
+            # value to the list `compare`
+            compare.append(  None  )
+        # The `all` command returns True if every element of the input
+        # list evaluates to True. It's like a massive "and" statement.
+        return all(compare)
+</code></pre></div></article><div class="conclusion"><div class="para">You should now be able to test <code class="code-inline tex2jax_ignore">print(vec1 == vec2)</code> at the end of the <code class="code-inline tex2jax_ignore">aam_proj4.py</code> file and get the mathematically correct answer.</div></div></article><span class="incontext"><a href="sec-linalg-vecproj.html#task-58" class="internal">in-context</a></span>
+</body>
+</html>

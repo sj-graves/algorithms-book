@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="task exercise-like"><h5 class="heading">
+<span class="type">Task</span><span class="space"> </span><span class="codenumber">4.8.a</span><span class="period">.</span><span class="space"> </span><span class="title"><code class="code-inline tex2jax_ignore">AlgoMatrix</code> as multiplier: <code class="code-inline tex2jax_ignore">__mul__</code>.</span>
+</h5>
+<div class="introduction">
+<div class="para">Begin with the following:</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __mul__(self, right):
+'''Return self*right, which necessitates that right be an AlgoVector
+or another AlgoMatrix.'''
+if type(right) == type(self):
+# This is matrix-matrix multiplication
+pass
+elif type(right) == AlgoVector:
+# This is matrix-vector multiplication
+pass
+else:
+raise TypeError(f'Cannot multiply AlgoMatrix*{type(right)}')
+</code></pre></div>
+</div>
+<article class="task exercise-like"><h6 class="heading">
+<span class="codenumber">(i)</span><span class="space"> </span><span class="title">Matrix-matrix multiplication.</span>
+</h6>
+<div class="para">While it is best to define matrix-matrix multiplication as iterated matrix-vector multiplication, that is not the optimal way to implement the product. Instead, it's best to check the dimensions of the two matrices and proceed to build the product of <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> by using <span class="process-math">\(\entry{AB}{r,c}
+= \sum_{k=0}^{n-1}\entry{A}{r,k}\entry{B}{k,c}\)</span> when <span class="process-math">\(A\in\Mats{m,n}\)</span> and <span class="process-math">\(B\in\Mats{n,q}\text{.}\)</span>
+</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">if type(right) == type(self):
+# This is matrix-matrix multiplication
+m,n = self.dims()
+p,q = right.dims()
+# What condition needs to be checked on this line to ensure
+# dimensions are correct?
+if condition:
+new_grid = [ ]
+# How many rows has the product matrix?
+for r in range( number_of_rows ):
+new_grid.append( [ ] )
+# How many columns has the product matrix?
+for c in range( number_of_columns ):
+total = 0
+# How many terms must be summed?
+for k in range( number_of_terms ):
+total += self[r,k] * right[k,c]
+new_grid[-1].append(total)
+return AlgoMatrix(new_grid)
+else:
+raise ValueError("Dimension mismatch")
+</code></pre></div>
+<div class="para">Note that as usual there are several places where that code must be modified to work correctly.</div></article><article class="task exercise-like"><h6 class="heading">
+<span class="codenumber">(ii)</span><span class="space"> </span><span class="title">Matrix-vector multiplication.</span>
+</h6>
+<div class="para">Recall that according to its definition, a matrix-vector product is a linear combination of vectors. Once again the best way to define the product is not the most efficient way to compute it; we instead use the component-wise approach to build the result as a list using <span class="process-math">\(\entry{A\vv}{r} =
+\sum_{c=0}^{n-1} \entry{A}{r,c}\entry{\vv}{c}\)</span> where <span class="process-math">\(A\in\Mats{m,n}\)</span> and <span class="process-math">\(\vv\in\CV{n}\text{.}\)</span>
+</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">elif type(right) == AlgoVector:
+# This is matrix-vector multiplication
+m,n = self.dims()
+if len(right) == n:
+# The dimensions of the vector and matrix are compatible
+new_list = [ ]
+for c in range(n):
+new_list.append( )
+else:
+raise ValueError("Dimension mismatch")
+</code></pre></div></article></article><span class="incontext"><a href="sec-linalg-matproj.html#task-88" class="internal">in-context</a></span>
+</body>
+</html>

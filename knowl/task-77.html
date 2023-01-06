@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="task exercise-like"><h5 class="heading">
+<span class="type">Task</span><span class="space"> </span><span class="codenumber">4.6.a</span><span class="period">.</span><span class="space"> </span><span class="title">Setting up your files.</span>
+</h5>
+<div class="para">The main class file should be <code class="code-inline tex2jax_ignore">AlgoMatrix.py</code> with an appropriate header followed by <code class="code-inline tex2jax_ignore">from AlgoVector import *</code>. The testing and worknig file should be <code class="code-inline tex2jax_ignore">aam_proj5.py</code> with an appropriate header. Further, the initializtion method should begin as follows:</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">class AlgoMatrix:
+def __init__(self, grid):
+'''Initialize an AlgoMatrix from 'grid', which is either a list
+of list (or tuple or tuple or some combination thereof) of
+complex values, or a list (or tuple) of AlgoVector objects.'''
+try:
+if type(grid[0]) == AlgoVector:
+# This will get filled in during the next task
+else:
+# This will get filled in during the next after that
+# Then we have to write the exception handler, because without an
+# 'except:' block this will cause a SyntaxError
+</code></pre></div></article><span class="incontext"><a href="sec-linalg-matproj.html#task-77" class="internal">in-context</a></span>
+</body>
+</html>

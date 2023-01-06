@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="example example-like"><h4 class="heading">
+<span class="type">Example</span><span class="space"> </span><span class="codenumber">3.1.8</span><span class="period">.</span><span class="space"> </span><span class="title">Breaking a simple substitution by frequency analysis.</span>
+</h4> <div class="para">Consider the following text:</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-none">KP GP HMBHZVXKPGRRY IKV HEHPXPJ HGURY XP CTRY G YKTPJ OGP
+BGOH KTV KW VIH JGUUHV XP FIXBI IH RKNJHN XP BGUZHPVHUD
+ZRGBH GPN FGRSHN DRKFRY GD VIKTJI XP IHDXVGVXKP VKFGUND
+SKSTDISXP QUXNJH IH IGN DTBBHDDWTRRY GEKXNHN OHHVXPJ IXD
+RGPNRGNY KP VIH DVGXUBGDH IXD JGUUHV FGD TPNHU VIH UKKW KW
+G IXJI WXEHDVKUXHN IKTDH GPN FGD OKUH RXSH G BTZQKGUN VIGP
+G UKKO VIH RGPNRGNY FIK ZUKEXNHN IXO FXVI JGUUHV NXPPHUD
+GPN GVVHPNGPBH RXEHN KP VIH WRKKU QHRKF GPN HEHUY VXOH IH
+FHPV KTV IH FGD KQRXJHN VK ZGDD IHU SXVBIHP VIH NKKU KW
+FIXBI XPEGUXGQRY DVKKN KZHP GPN HGBI VXOH IH ZGDDHN VIH
+YKTPJ OGP IGN G DXBS WUXJIVHPHN WHHRXPJ FIXBI OGNH IXO
+DBKFR GPN WHHR GDIGOHN IH FGD IKZHRHDDRY XP NHQV VK IXD
+RGPNRGNY GPN FGD GWUGXN KW OHHVXPJ IHU VIXD FGD PKV QHBGTDH
+IH FGD BKFGUNRY GPN GQCHBV ATXVH VIH BKPVUGUY QTV WKU DKOH
+VXOH ZGDV IH IGN QHHP XP GP KEHUDVUGXPHN XUUXVGQRH BKPNXVXKP
+EHUJXPJ KP IYZKBIKPNUXG IH IGN QHBKOH DK BKOZRHVHRY GQDKUQHN
+XP IXODHRW GPN XDKRGVHN WUKO IXD WHRRKFD VIGV IH NUHGNHN
+OHHVXPJ PKV KPRY IXD RGPNRGNY QTV GPYKPH GV GRR IH FGD
+BUTDIHN QY ZKEHUVY QTV VIH GPMXHVXHD KW IXD ZKDXVXKP IGN KW
+RGVH BHGDHN VK FHXJI TZKP IXO IH IGN JXEHP TZ GVVHPNXPJ VK
+OGVVHUD KW ZUGBVXBGR XOZKUVGPBH IH IGN RKDV GRR NHDXUH VK NK
+DK PKVIXPJ VIGV GPY RGPNRGNY BKTRN NK IGN G UHGR VHUUKU WKU
+IXO QTV VK QH DVKZZHN KP VIH DVGXUD VK QH WKUBHN VK RXDVHP
+VK IHU VUXEXGR XUUHRHEGPV JKDDXZ VK ZHDVHUXPJ NHOGPND WKU
+ZGYOHPV VIUHGVD GPN BKOZRGXPVD GPN VK UGBS IXD QUGXPD WKU
+HMBTDHD VK ZUHEGUXBGVH VK RXH  PK UGVIHU VIGP VIGV IH FKTRN
+BUHHZ NKFP VIH DVGXUD RXSH G BGV GPN DRXZ KTV TPDHHP
+</code></pre></div> <div class="para">Applying frequency analysis to this text, we see the following:</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">[(148, 'H'), (121, 'G'), (105, 'V'), (102, 'K'), (90, 'P'),
+(87, 'X'), (82, 'I'), (76, 'N'), (74, 'D'), (70, 'U'),
+(58, 'R'), (37, 'B'), (27, 'Z'), (27, 'O'), (26, 'T'),
+(25, 'Y'), (24, 'J'), (24, 'F'), (23, 'W'), (21, 'Q'),
+(14, 'E'), (9, 'S'), (3, 'M'), (2, 'C'), (1, 'A')]
+</code></pre></div> <div class="para">A first guess we can make from this analysis is that the letter <code class="code-inline tex2jax_ignore">H</code> in the ciphertext is probably an <code class="code-inline tex2jax_ignore">E</code> in the original passage. However, the passage is actually too short to get much more than that from the frequencies of single letters, so instead we use additional clues. The frequencies of three-letter words (not trigraphs, but whole words) are as follows:</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">[(12, 'GPN'), (11, 'VIH'), (8, 'IGN'), (8, 'FGD'), (7, 'IXD'),
+(4, 'WKU'), (4, 'QTV'), (4, 'IXO'), (3, 'KTV'), (3, 'IHU'),
+(2, 'PKV'), (2, 'OGP'), (2, 'GRR'), (1, 'RXH'), (1, 'IKV'),
+(1, 'GPY'), (1, 'FIK'), (1, 'BGV')]
+</code></pre></div> <div class="para">Since we see <code class="code-inline tex2jax_ignore">GPN</code> and <code class="code-inline tex2jax_ignore">VIH</code> at the front of that list, and we already suspect that <code class="code-inline tex2jax_ignore">H</code> has replaced <code class="code-inline tex2jax_ignore">E</code>, we now have a strong argument that <code class="code-inline tex2jax_ignore">GPN</code> is actually <code class="code-inline tex2jax_ignore">AND</code> and <code class="code-inline tex2jax_ignore">VIH</code> is actually <code class="code-inline tex2jax_ignore">THE</code>. Here's a code that allows for replacement of guesses in a pair of “decoder strings”, passed as a two-element list called <code class="code-inline tex2jax_ignore">decoder</code>.</div> <figure class="listing figure-like"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def test_decode(cmsg, decoder, chars=40):
+    decoder_dict = {}
+    for x,y in zip(decoder[0],decoder[1]):
+        decoder_dict[x] = y
+    msg_blanks = [ ]
+    for x in cmsg:
+        if x in decoder[0]:
+            y = decoder_dict[x]
+            msg_blanks += [y.lower()]
+        else:
+            msg_blanks += '_'
+    out = [ ]
+    for i in range(len(cmsg)//chars + 1):
+        out.append( "".join(cmsg[i*chars:(i+1)*chars] ))
+        out.append( "".join(msg_blanks[i*chars:(i+1)*chars] ))
+        out.append("")
+    return "\n".join(out)
+
+trial = [' VIHGPN',' THEAND']
+print(test_decode(cmsg, trial, 60))
+</code></pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">3.1.9<span class="period">.</span></span><span class="space"> </span>A code to test the decoding guesses determined by frequency analysis of a monoalphabetic substitution</figcaption></figure> <div class="para">Assuming <code class="code-inline tex2jax_ignore">cmsg</code> in the listing above is the encrypted message of this problem, here is the beginning of the output of <code class="code-inline tex2jax_ignore">test_decode(cmsg, trial, 60)</code>:</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="console">KP GP HMBHZVXKPGRRY IKV HEHPXPJ HGURY XP CTRY G YKTPJ OGP BG
+_n an e__e_t__na___ h_t e_en_n_ ea___ _n ____ a ___n_ _an _a
+
+OH KTV KW VIH JGUUHV XP FIXBI IH RKNJHN XP BGUZHPVHUD ZRGBH
+_e __t __ the _a__et _n _h__h he __d_ed _n _a__ente__ __a_e
+
+GPN FGRSHN DRKFRY GD VIKTJI XP IHDXVGVXKP VKFGUND SKSTDISXP
+and _a__ed ______ a_ th___h _n he__tat__n t__a_d_ _____h__n
+
+QUXNJH IH IGN DTBBHDDWTRRY GEKXNHN OHHVXPJ IXD RGPNRGNY KP V
+___d_e he had ____e_______ a___ded _eet_n_ h__ _and_ad_ _n t
+
+IH DVGXUBGDH IXD JGUUHV FGD TPNHU VIH UKKW KW G IXJI WXEHDVK
+he _ta___a_e h__ _a__et _a_ _nde_ the ____ __ a h__h ___e_t_
+
+UXHN IKTDH GPN FGD OKUH RXSH G BTZQKGUN VIGP G UKKO VIH RGPN
+__ed h___e and _a_ ___e ___e a _____a_d than a ____ the _and
+
+RGNY FIK ZUKEXNHN IXO FXVI JGUUHV NXPPHUD GPN GVVHPNGPBH RXE
+_ad_ _h_ _____ded h__ __th _a__et d_nne__ and attendan_e ___
+</pre></div> <div class="para">We have no guarantee that the decoding we've supplied is absolutely correct, but the last line shows a clear indication that it might be: the word <code class="code-inline tex2jax_ignore">attendan_e</code> is most likely <code class="code-inline tex2jax_ignore">attendance</code>; this tells us that <code class="code-inline tex2jax_ignore">B</code> probably maps to <code class="code-inline tex2jax_ignore">C</code>. Moreover, we see several times the undecrypted word <code class="code-inline tex2jax_ignore">KW</code>; since the first word <code class="code-inline tex2jax_ignore">KP</code> is decoded as <code class="code-inline tex2jax_ignore">_n</code>, it is likely that <code class="code-inline tex2jax_ignore">K</code> should decode to either <code class="code-inline tex2jax_ignore">I</code> or <code class="code-inline tex2jax_ignore">O</code>, but the most commonly used two-letter word in English is “of”. Moreover, we see the third word <code class="code-inline tex2jax_ignore">HMBHZVXKPGRRY</code> of the encoded message ends with <code class="code-inline tex2jax_ignore">RRY</code>. It is very common in English to see words ending “-lly”, so we reason that <code class="code-inline tex2jax_ignore">RY</code> should decode to <code class="code-inline tex2jax_ignore">LY</code>, giving us a <dfn class="terminology">fixed point</dfn>: the letter <code class="code-inline tex2jax_ignore">Y</code> appears to have been encoded to itself! But then that would make the translation of the third word (after all these substitutions) <code class="code-inline tex2jax_ignore">e_ce_t_onally</code>. As a first guess to that, we suppose that it is <code class="code-inline tex2jax_ignore">exceptionally</code>, giving us the decoding of <code class="code-inline tex2jax_ignore">MZX</code> as <code class="code-inline tex2jax_ignore">XPI</code>. Since <code class="code-inline tex2jax_ignore">X</code> and <code class="code-inline tex2jax_ignore">P</code> are nowhere near the most-frequently used letters, this is exceptional deduction on our part!</div> <div class="para">We change <code class="code-inline tex2jax_ignore">trial</code> in the above code and try again:</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="console"><span class="prompt unselectable">&gt;&gt;&gt; </span><b>trial = [' VIHGPNBKWRYMZ',' THEANDCOFLYXP']
+</b>KP GP HMBHZVXKPGRRY IKV HEHPXPJ HGURY XP CTRY G YKTPJ OGP BG
+on an exceptionally hot e_enin_ ea_ly in __ly a yo_n_ _an ca
+
+OH KTV KW VIH JGUUHV XP FIXBI IH RKNJHN XP BGUZHPVHUD ZRGBH
+_e o_t of the _a__et in _hich he lod_ed in ca_pente__ place
+
+GPN FGRSHN DRKFRY GD VIKTJI XP IHDXVGVXKP VKFGUND SKSTDISXP
+and _al_ed _lo_ly a_ tho__h in he_itation to_a_d_ _o___h_in
+
+QUXNJH IH IGN DTBBHDDWTRRY GEKXNHN OHHVXPJ IXD RGPNRGNY KP V
+__id_e he had __cce__f_lly a_oided _eetin_ hi_ landlady on t
+
+IH DVGXUBGDH IXD JGUUHV FGD TPNHU VIH UKKW KW G IXJI WXEHDVK
+he _tai_ca_e hi_ _a__et _a_ _nde_ the _oof of a hi_h fi_e_to
+
+UXHN IKTDH GPN FGD OKUH RXSH G BTZQKGUN VIGP G UKKO VIH RGPN
+_ied ho__e and _a_ _o_e li_e a c_p_oa_d than a _oo_ the land
+
+RGNY FIK ZUKEXNHN IXO FXVI JGUUHV NXPPHUD GPN GVVHPNGPBH RXE
+lady _ho p_o_ided hi_ _ith _a__et dinne__ and attendance li_
+</pre></div> <div class="para">At this point, the human brain becomes wonderfully competent at filling in blanks, even without knowing the source text; making reasonable guesses allows you to deduce all of the remaining mappings of the encoding. The only letter not occuring in the original encrypted message was <code class="code-inline tex2jax_ignore">L</code>. Make sure you know what character was mapped to <code class="code-inline tex2jax_ignore">L</code> in the encryption!</div></article><span class="incontext"><a href="sec-crypto-subst.html#exmp-breaking_simple_substitution" class="internal">in-context</a></span>
+</body>
+</html>
