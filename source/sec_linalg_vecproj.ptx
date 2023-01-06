@@ -203,7 +203,7 @@
             <title>Overloading <c>+</c> and <c>*</c></title>
             <introduction>
                 <p>
-                    In <xref provisional="sec-linalg-matrices" /> we will discover that <c>scalar * AlgoVector</c> is not the only use case for <c>*</c> with vectors; however, until we develop those ideas all that needs to be checked to verify that multiplication will operate is to ensure that the other factor in the product is able to be represented as a <c>complex</c>. On the other hand, in order for vector addition to make sense, not only must summands be complex vectors, they must be vectors of the same dimension.
+                    In <xref ref="sec-linalg-matrices" /> we will discover that <c>scalar * AlgoVector</c> is not the only use case for <c>*</c> with vectors; however, until we develop those ideas all that needs to be checked to verify that multiplication will operate is to ensure that the other factor in the product is able to be represented as a <c>complex</c>. On the other hand, in order for vector addition to make sense, not only must summands be complex vectors, they must be vectors of the same dimension.
                 </p>
             </introduction>
             <task>

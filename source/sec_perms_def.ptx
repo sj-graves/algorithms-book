@@ -299,7 +299,7 @@
                         </image>
                     </figure>
                     <p>
-                        This idea will be extended when we talk about cryptography later in <xref provisional="ch-cryptography" />.
+                        This idea will be extended when we talk about cryptography later in <xref ref="ch-crypto" />.
                     </p>
                 </statement>
             </example>

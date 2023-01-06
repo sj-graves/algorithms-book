@@ -254,7 +254,7 @@ NameError: name 'y' is not defined</output>
                 </p>
             </technology>
             <p>
-                Boolean data types are used extensively to control the flow of execution of an algorithm, as can be seen in <xref ref="alg-intro-kruskal" /> and later in <xref provisional="sec-flowcontrol"/>.
+                Boolean data types are used extensively to control the flow of execution of an algorithm, as can be seen in <xref ref="alg-intro-kruskal" /> and later in <xref ref="subsec-into-functions-conditionals"/>.
             </p>
         </subsubsection>
         <subsubsection xml:id="subsub-intro-basicdata-other-str">
