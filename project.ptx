@@ -36,6 +36,7 @@
   </targets>
   <executables>
       <tex>lualatex</tex>
+      <xelatex>xelatex</xelatex>
       <pdfsvg>pdf2svg</pdfsvg>
       <asy>asy</asy>
       <sage>sage</sage>
