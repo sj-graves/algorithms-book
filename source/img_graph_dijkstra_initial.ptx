@@ -3,7 +3,7 @@
 <latex-image>
 \definecolor{vc0}{rgb}{1,1,1}
 \definecolor{ec0}{rgb}{0, 0, 0}
-{\begin{tikzpicture}[xscale = 3.06, yscale=2.37,
+{\begin{tikzpicture}[xscale = 3.06, yscale=2.37, new set=vs_0,
     vx_0/.style = {circle, draw, set=vs_0, fill=vc0, inner sep = 1pt}]
 \node (1) [vx_0] at (1.312,0.725) { \tt 1};
 \node (2) [vx_0] at (1.286,-0.005) { \tt 2};
