@@ -5,34 +5,34 @@
     <shorttitle>Matrices in Python</shorttitle>
     <objectives>
         <introduction>
-            <p> With a good understanding of how to implement vectors in the <c>AlgoVector</c>
-                class, moving to an implementation of matrices is a matter of extension rather than
-                new definitions. </p>
+            <p> 
+                With a good understanding of how to implement vectors in the <c>AlgoVector</c> class, moving to an implementation of matrices is a matter of extension rather than new definitions. 
+            </p>
         </introduction>
         <ol>
             <li>
-                <p> Create a class <c>AlgoMatrix</c> of matrices in Python, including the following
-                    methods: </p>
+                <p> 
+                    Create a class <c>AlgoMatrix</c> of matrices in Python, including the following methods: </p>
                 <p>
                     <ol>
                         <li>
-                            <p> In <xref ref='proj-matproj-init' />, <c>__init__</c> and <c>__repr__</c>
+                            <p> 
+                                In <xref ref='proj-matproj-init' />, <c>__init__</c> and <c>__repr__</c>.
                             </p>
                         </li>
                         <li>
-                            <p> In <xref ref="proj-matprok-entries_and_equality" />, <c>dims(self)</c>
-                                which returns the row and column dimensions of <c>self</c> as a
-                                tuple, as well as <c>__str__</c>, <c>__getitem__</c>, and <c>__eq__</c>
+                            <p> 
+                                In <xref ref="proj-matprok-entries_and_equality" />, <c>dims(self)</c> which returns the row and column dimensions of <c>self</c> as a tuple, as well as <c>__str__</c>, <c>__getitem__</c>, and <c>__eq__</c>.
                             </p>
                         </li>
                         <li>
-                            <p> In <xref ref='proj-matproj-multiplication' />, <c>__mul__ </c> and <c>
-                                __rmul__</c>
+                            <p> 
+                                In <xref ref='proj-matproj-multiplication' />, <c>__mul__ </c> and <c>__rmul__</c>
                             </p>
                         </li>
                         <li>
-                            <p> In <xref ref='proj-matproj-addition' />, <c>__add__</c> and <c>
-                                __radd__</c>
+                            <p> 
+                                In <xref ref='proj-matproj-addition' />, <c>__add__</c> and <c>__radd__</c>
                             </p>
                         </li>
                     </ol>
@@ -43,71 +43,66 @@
                 <p>
                     <ol>
                         <li>
-                            <p> In <xref ref='proj-matproj-column_matrices' />, <c>column(self,
-                                col_index)</c> which returns the column vector in the index <c>
-                                col_index</c> of <c>self</c>, as well as <c>columns(self)</c> which
-                                returns a tuple of all column vectors of <c>self</c>
+                            <p> 
+                                In <xref ref='proj-matproj-column_matrices' />, <c>column(self, col_index)</c> which returns the column vector in the index <c>col_index</c> of <c>self</c>, as well as <c>columns(self)</c> which returns a tuple of all column vectors of <c>self</c> 
                             </p>
                         </li>
                         <li>
-                            <p> In <xref ref='proj-matproj-conjugate' />, <c>conjugate(self)</c>
-                                which returns the conjugate matrix of <c>self</c>
+                            <p> 
+                                In <xref ref='proj-matproj-conjugate' />, <c>conjugate(self)</c> which returns the conjugate matrix of <c>self</c>
                             </p>
                         </li>
                         <li>
-                            <p> In <xref ref='proj-matproj-augmentation' />, <c>augment(self, right)</c>
-                                which performs augmentation of the matrix <c>self</c> by an object <c>
-                                right</c> of appropriate type and dimensions. </p>
+                            <p> 
+                                In <xref ref='proj-matproj-augmentation' />, <c>augment(self, right)</c> which performs augmentation of the matrix <c>self</c> by an object <c>right</c> of appropriate type and dimensions. 
+                            </p>
                         </li>
                         <li>
-                            <p> In <xref ref="proj-matproj-transpose" />, <c>transpose(self)</c>
-                                which returns the transpose matrix of <c>self</c>, described below. </p>
+                            <p> 
+                                In <xref ref="proj-matproj-transpose" />, <c>transpose(self)</c> which returns the transpose matrix of <c>self</c>, described below.
+                            </p>
                         </li>
                     </ol>
                 </p>
             </li>
             <li>
-                <p> Test your <c>AlgoVector</c> by making some computations in your <c>aam_proj5.py</c>
-                    file. </p>
+                <p> 
+                    Test your <c>AlgoVector</c> by making some computations in your <c>aam_proj5.py</c> file. </p>
             </li>
         </ol>
     </objectives>
     <subsection xml:id="sub-linalg-matproj-basics">
         <title><c>AlgoMatrix</c> basics</title>
-        <p> We would like to consider two different methods of initializing an <c>AlgoMatrix</c>.
-            The default is to allow any rectangular grid of complex numbers, but to encourage the
-            idea that a matrix <m>A \in \Mats{m,n}</m> can be represented <m>A=\left[\vec{A}_0 |
-            \vec{A}_1 | \cdots | \vec{A}_{n-1} \right]</m> , where <m>\entry{A}{r,c} =
-            \entry{\vec{A}_c}{r}</m> for appropriate <m>r</m> and <m>c</m>, we will also permit a
-            list of vectors all of the same length. </p>
+        <p> 
+            We would like to consider two different methods of initializing an <c>AlgoMatrix</c>. The default is to allow any rectangular grid of complex numbers, but to encourage the idea that a matrix <m>A \in \Mats{m,n}</m> can be represented <m>A=\left[\vec{A}_0 | \vec{A}_1 | \cdots | \vec{A}_{n-1} \right]</m> , where <m>\entry{A}{r,c} = \entry{\vec{A}_c}{r}</m> for appropriate <m>r</m> and <m>c</m>, we will also permit a list of vectors all of the same length.
+        </p>
         <activity xml:id='proj-matproj-init'>
             <title><c>AlgoMatrix</c> initialization</title>
             <introduction>
-                <p> In order to develop the <c>__init__(self, grid)</c> method, we have to validate
-                    the input. We will allow the initialization to fail naturally if we attempt to
-                    index into <c>grid</c> and it is not an indexable object. </p>
+                <p> 
+                    In order to develop the <c>__init__(self, grid)</c> method, we have to validate the input. We will allow the initialization to fail naturally if we attempt to index into <c>grid</c> and it is not an indexable object.
+                </p>
             </introduction>
             <task>
                 <title>Setting up your files</title>
-                <p> The main class file should be <c>AlgoMatrix.py</c> with an appropriate header
-                    followed by <c>from AlgoVector import *</c>. The testing and worknig file should
-                    be <c>aam_proj5.py</c> with an appropriate header. Further, the initializtion
-                    method should begin as follows: </p>
+                <p> 
+                    The main class file should be <c>AlgoMatrix.py</c> with an appropriate header followed by <c>from AlgoVector import *</c>. The testing and worknig file should be <c>aam_proj5.py</c> with an appropriate header. Further, the initializtion method should begin as follows:
+                </p>
                 <program language='python'>
                     <!--12345678_1_2345678_2_2345678_3_2345678_4_2345678_5_2345678_6_2345678_7 -->
                     <input>
                         class AlgoMatrix:
-                        def __init__(self, grid):
-                        '''Initialize an AlgoMatrix from 'grid', which is either a list
-                        of list (or tuple or tuple or some combination thereof) of
-                        complex values, or a list (or tuple) of AlgoVector objects.'''
-                        try:
-                        if type(grid[0]) == AlgoVector:
-                        # This will get filled in during the next task
-                        else:
-                        # This will get filled in during the next after that
-                        # Then we have to write the exception handler, because without an
-                        # 'except:' block this will cause a SyntaxError
+                            def __init__(self, grid):
+                                '''Initialize an AlgoMatrix from 'grid', which is either a list
+                                of list (or tuple or tuple or some combination thereof) of
+                                complex values, or a list (or tuple) of AlgoVector objects.'''
+                            try:
+                                if type(grid[0]) == AlgoVector:
+                                    # This will get filled in during the next task
+                                else:
+                                    # This will get filled in during the next after that
+                            # Then we have to write the exception handler, because without an
+                            # 'except:' block this will cause a SyntaxError
                     </input>
                 </program>
             </task>
@@ -115,76 +110,69 @@
                 <title>A list of <c>AlgoVector</c> objects</title>
                 <p> Inside the first step of the validation, the important things to check are to
                     determine whether remaining elements of <c>grid</c> are actually <c>AlgoVector</c>
-                    objects and also to determine that all have the same length. Replace the above
+                    objects and also to determine that all have the same length. Correct the above
                     code with the following, making modifications as necessary: </p>
                 <program language='python'>
                     <!--12345678_1_2345678_2_2345678_3_2345678_4_2345678_5_2345678_6_2345678_7 -->
                     <input>
                         if type(grid[0]) == AlgoVector:
-                        n = len(grid)
-                        # The next line works as long as AlgoVector has a __len__ method!
-                        m = len(grid[0])
-                        new_grid = [ ]
-                        for x in grid[0].entries():
-                        new_grid.append( [x] )
-                        for vec in grid[1:]:
-                        if type(vec) != AlgoVector:
-                        raise TypeError('Malformed list of AlgoVector objects')
-                        elif len(vec) != m:
-                        raise ValueError('Malformed list of AlgoVector objects')
+                            n = len(grid)
+                            # The next line works as long as AlgoVector has a __len__ method!
+                            m = len(grid[0])
+                            new_grid = [ ]
+                            for x in grid[0].entries():
+                                new_grid.append( [x] )
+                            for vec in grid[1:]:
+                                if type(vec) != AlgoVector:
+                                    raise TypeError('Malformed list of AlgoVector objects')
+                                elif len(vec) != m:
+                                    raise ValueError('Malformed list of AlgoVector objects')
+                                else:
+                                    for r in range(m):
+                                        # Now you have to fill in: we want to add the rth entry of
+                                        # the current vector, vec, to the rth row of new_grid.
+                                        continue
                         else:
-                        for r in range(m):
-                        # Now you have to fill in: we want to add the rth entry of
-                        # the current vector, vec, to the rth row of new_grid.
-                        continue
-                        else:
-                        # This will get filled in during the next task
+                            # This will get filled in during the next task
                     </input>
                 </program>
             </task>
             <task>
                 <title>A list of lists of <c>complex</c>-compatible objects</title>
                 <p>
-                    This execution path proceeds slightly more smoothly, as the input is not of a
-                    form which is trying to specify a matrix in the transpose order of columns
-                    before rows. Complete the following:
+                    This execution path proceeds slightly more smoothly, as the input is not of a form which is trying to specify a matrix in the transpose order of columns before rows. Complete the following:
                 </p>
                 <program language='python'>
                     <!--12345678_1_2345678_2_2345678_3_2345678_4_2345678_5_2345678_6_2345678_7 -->
                     <input>
                         else:
-                        m = len(grid)
-                        n = len(grid[0])
-                        new_grid = [ ]
-                        for r in range(m):
-                        if len(grid[r]) != n:
-                        raise ValueError('Malformed grid of complex numbers')
-                        new_grid.append( [ ] )
-                        for c in range(n):
-                        # What do we want to actually append into our new rows?
-                        new_grid[-1].append( complex( 0 ) )
+                            m = len(grid)
+                            n = len(grid[0])
+                            new_grid = [ ]
+                            for r in range(m):
+                                if len(grid[r]) != n:
+                                    raise ValueError('Malformed grid of complex numbers')
+                                new_grid.append( [ ] )
+                                for c in range(n):
+                                    # What do we want to actually append into our new rows?
+                                    # The next line inserts dummy values of 0 in all positions
+                                    new_grid[-1].append( complex( 0 ) )
                     </input>
                 </program>
             </task>
             <task>
                 <title>Handling exceptions</title>
-                <p> As it turns out, we actually want to stop the execution of the program if any of
-                    the generated exceptions come up. This is handled by simply putting the command <c>
-                    raise</c> in the <c>except:...</c> block without any argument. This causes the
-                    exception which brought about the problem to be passed up to the next level;
-                    this could be a <c>try:... except:...</c> block in a calling function, or it
-                    could be the main execution loop of Python. In the latter case, this causes an
-                    error and stops execution of your code! </p>
+                <p> 
+                    As it turns out, we actually want to stop the execution of the program if any of the generated exceptions come up. This is handled by simply putting the command <c>raise</c> in the <c>except:...</c> block without any argument. This causes the exception which brought about the problem to be passed up to the next level; this could be a <c>try:... except:...</c> block in a calling function, or it could be the main execution loop of Python. In the latter case, this causes an error and stops execution of your code!
+                </p>
                 <p>
-                    Of course, you also have to store the important data attributes outside the
-                    exception handler, since the assignment of attributes is the final step of
-                    creating a usable class object.
+                    Of course, you also have to store the important data attributes outside the exception handler, since the assignment of attributes is the final step of creating a usable class object.
                 </p>
                 <program language='python'>
                     <!--12345678_1_2345678_2_2345678_3_2345678_4_2345678_5_2345678_6_2345678_7_2345678_8 -->
                     <input>
                         except:
-                        raise
+                            raise
                         self._data = tuple(tuple(row) for row in new_grid)
                         self._row_dim = len(new_grid)
                         self._col_dim = len(new_grid[0])
@@ -193,21 +181,21 @@
             </task>
             <task>
                 <title>Representation</title>
-                <p> Representing the object is next. Return the <c>str</c> version of <c>self._data</c>
-                    instead of <c>"None"</c> in the below code. </p>
+                <p> 
+                    Representing the object is next. Return the <c>str</c> version of <c>self._data</c> instead of <c>"None"</c> in the below code. </p>
                 <program language='python'>
                     <!--12345678_1_2345678_2_2345678_3_2345678_4_2345678_5_2345678_6_2345678_7_2345678_8 -->
                     <input>
                         def __repr__(self):
-                        return "None"
+                            return "None"
                     </input>
                 </program>
             </task>
             <task>
                 <title>Test your work up to this point!</title>
-                <p> At this point you have a substantial amount of code, although you are not
-                    finished. Test your work in <c>aam_proj5.py</c> by creating the following
-                    matrices and vectors: <md>
+                <p> 
+                    At this point you have a substantial amount of code, although you are not finished. Test your work in <c>aam_proj5.py</c> by creating the following matrices and vectors:
+                    <md>
                         <mrow>
                             A \amp= \begin{bmatrix}
                             1 \amp 2 \amp 3 \\
@@ -218,132 +206,112 @@
                             \vec{b}_2 \amp= \cvec{1-\frac12 j\\2-\frac13 j \\ 3-\frac14 j} \amp
                             B \amp= [\vec{b}_1|\vec{b}_2]
                         </mrow>
-                    </md>
-                    .
+                    </md>.
                 </p>
-                <p> Explicitly print the representation of these matrices using <c>
-                    print(repr(a_matrix))</c>, where <c>a_matrix</c> is replaced by the variable
-                    names you choose for <m>A</m> and <m>B</m>. </p>
+                <p> 
+                    Explicitly print the representation of these matrices using <c> print(repr(a_matrix))</c>, where <c>a_matrix</c> is replaced by the variable names you choose for <m>A</m> and <m>B</m>.
+                </p>
             </task>
         </activity>
-        <p> Before we get to operations involving multiple objects, we want to set up bracket
-            notation for matrices. Just as we use <m>\entry{A}{r,c}</m> to represent the entry in
-            the rth-indexed row and cth-indexed column of a matrix <m>A\in\Mats{m,n}</m>, we want to
-            use <c>the_mat[r,c]</c> to represent the same object for an <c>AlgoMatrix</c> called <c>
-            the_mat</c>. We implement this using <c>__getitem__</c> but we have to be slightly
-            careful about the arguments to the method. </p>
+        <p> 
+            Before we get to operations involving multiple objects, we want to set up bracket notation for matrices. Just as we use <m>\entry{A}{r,c}</m> to represent the entry in the rth-indexed row and cth-indexed column of a matrix <m>A\in\Mats{m,n}</m>, we want to use <c>the_mat[r,c]</c> to represent the same object for an <c>AlgoMatrix</c> called <c> the_mat</c>. We implement this using <c>__getitem__</c> but we have to be slightly careful about the arguments to the method.
+        </p>
         <activity xml:id="proj-matprok-entries_and_equality">
             <title>Matrix entries and testing equality</title>
             <task>
                 <title>Matrix dimension</title>
-                <p> Since a <c>dims</c> function is necessary in order to check that the input to <c>
-                    __getitem__</c> falls within the range of valid indices, as well as to check
-                    matrix equality, we first define a <c>dims(self)</c> method. </p>
+                <p> 
+                    Since a <c>dims</c> function is necessary in order to check that the input to <c>__getitem__</c> falls within the range of valid indices, as well as to check matrix equality, we first define a <c>dims(self)</c> method.
+                </p>
                 <program language='python'>
                     <!--12345678_1_2345678_2_2345678_3_2345678_4_2345678_5_2345678_6_2345678_7_2345678_8 -->
                     <input>
                         def dims(self):
-                        '''Return the (row,column) dimensions of self.'''
-                        return (self._row_dim, self._col_dim)
+                            '''Return the (row,column) dimensions of self.'''
+                            return (self._row_dim, self._col_dim)
                     </input>
                 </program>
             </task>
             <task>
                 <title>Fetching from an index</title>
                 <p>
-                    The only care necessary is to make sure that the pair of indices is passed as a
-                    single variable. Implement the following.
+                    The only care necessary is to make sure that the pair of indices is passed as a single variable. Implement the following.
                 </p>
                 <program language='python'>
                     <!--12345678_1_2345678_2_2345678_3_2345678_4_2345678_5_2345678_6_2345678_7_2345678_8 -->
                     <input>
                         def __getitem__(self, index_pair):
-                        '''if r,c == index_pair, return self[r,c]'''
-                        r,c = index_pair
-                        m,n = self.dims()
-                        if r not in range(m) or c not in range(n):
-                        raise IndexError('No such entry.')
-                        else:
-                        # What needs to be returned?
+                            '''if r,c == index_pair, return self[r,c]'''
+                            r,c = index_pair
+                            m,n = self.dims()
+                            if r not in range(m) or c not in range(n):
+                                raise IndexError('No such entry.')
+                            else:
+                                # What needs to be returned?
                     </input>
                 </program>
             </task>
             <task>
                 <title>Well-formatted output</title>
-                <p> While the <c>__repr__</c> method is sufficient for a class file, it will be
-                    difficult to see whether or not your matrices are correct in tuple-of-tuples
-                    form. Implement this <c>__str__</c> method. </p>
+                <p> 
+                    While the <c>__repr__</c> method is sufficient for a class file, it will be difficult to see whether or not your matrices are correct in tuple-of-tuples form. Implement this <c>__str__</c> method.
+                </p>
                 <program language='python'>
                     <input>
                         def __str__(self):
-                        """Return a human-readable matrix of self"""
-                        # This is highly condensed code. Copy it exactly and change nothing.
-                        try:
-                        return self._nice_str
-                        except AttributeError:
-                        m,n = self.dims()
-                        str_mat = [[str(self[r,c]).replace('(','').replace(')','') for c in
-                        range(n)] for r in range(m)]
-                        clen = [max( len(str_mat[r][c]) for r in range(m) ) for c in range(n)]
-                        str_mat = [[("{s:>%d}"%clen[c]).format(s=str_mat[r][c]) for c in range(n)]
-                        for r in range(m)]
-                        str_mat = [("[ "+', '.join(row) + " ]") for row in str_mat]
-                        str_mat = "[" + "\n ".join(str_mat) + "]"
-                        self._nice_str = str_mat
-                        return str_mat
+                            """Return a human-readable matrix of self"""
+                            # This is highly condensed code. Copy it exactly and change nothing.
+                            try:
+                                return self._nice_str
+                            except AttributeError:
+                                m,n = self.dims()
+                                str_mat = [[str(self[r,c]).replace('(','').replace(')','') for c in
+                                range(n)] for r in range(m)]
+                                clen = [max( len(str_mat[r][c]) for r in range(m) ) for c in range(n)]
+                                str_mat = [[("{s:>%d}"%clen[c]).format(s=str_mat[r][c]) for c in range(n)]
+                                for r in range(m)]
+                                    str_mat = [("[ "+', '.join(row) + " ]") for row in str_mat]
+                                str_mat = "[" + "\n ".join(str_mat) + "]"
+                                self._nice_str = str_mat
+                                return str_mat
                     </input>
                 </program>
             </task>
             <task>
                 <title>Testing matrix equality</title>
-                <p> Three things need to be tested when executing <c>__eq__(self, right)</c>:
-                    firstly, the argument <c>right</c> must be of type <c>AlgoMatrix</c>; secondly,
-                    the dimensions of <c>self</c> and <c>right</c> must agree; thirdly, the values
-                    in each entry of <c>self</c> and of <c>right</c> must agree. Good thing we
-                    defined <c>__getitem__</c>! Implement the following, determining whether each of <c>
-                    bool_1</c>, <c>bool_2</c>, and <c>bool_3</c> needs to be <c>True</c> or <c>False</c>
-                    .
+                <p> 
+                    Three things need to be tested when executing <c>__eq__(self, right)</c>: firstly, the argument <c>right</c> must be of type <c>AlgoMatrix</c>; secondly, the dimensions of <c>self</c> and <c>right</c> must agree; thirdly, the values in each entry of <c>self</c> and of <c>right</c> must agree. Good thing we defined <c>__getitem__</c>! Implement the following, determining whether each of <c> bool_1</c>, <c>bool_2</c>, and <c>bool_3</c> needs to be <c>True</c> or <c>False</c>.
                 </p>
                 <program language='python'>
                     <!--12345678_1_2345678_2_2345678_3_2345678_4_2345678_5_2345678_6_2345678_7_2345678_8 -->
                     <input>
-                        def __eq__(self, right):
-                        if type(self) == type(right):
-                        if self.dims() == right.dims():
-                        m,n = self.dims()
-                        for r in range(m):
-                        for c in range(n):
-                        if self[r,c] != right[r,c]:
-                        return bool_1
-                        return bool_2
+                        if type(self) != type(right) or self.dims() != right.dims():
+                            return bool_1
+                        else:
+                            m,n = self.dims()
+                            for r in range(m):
+                                for c in range(n):
+                                    if self[r,c] != right[r,c]:
+                                        return bool_2
                         return bool_3
                     </input>
                 </program>
             </task>
             <task>
                 <title>Testing your work</title>
-                <p> In your <c>aam_proj5.py</c> file, print the matrices <m>A</m> and <m>B</m> you
-                    defined previously, this time just using the <c>print(...)</c> command as
-                    normal. Also find the dimensions using your program, and check to see if <m>A=B</m>
-                    .
+                <p> 
+                    In your <c>aam_proj5.py</c> file, print the matrices <m>A</m> and <m>B</m> you defined previously, this time just using the <c>print(...)</c> command as normal. Also find the dimensions using your program, and check to see if <m>A=B</m>.
                 </p>
             </task>
         </activity>
-        <p> Since we have included our <c>AlgoVector</c> class from the beginning, it makes sense to
-            analyze matrix multiplication in three distinct forms: two forms where the matrix is the
-            multiplier (left factor) and one where it is the multiplicand (right factor). </p>
+        <p> 
+            Since we have included our <c>AlgoVector</c> class from the beginning, it makes sense to analyze matrix multiplication in three distinct forms: two forms where the matrix is the multiplier (left factor) and one where it is the multiplicand (right factor). 
+        </p>
         <activity xml:id='proj-matproj-multiplication'>
             <title>Multiplication in <c>AlgoMatrix</c></title>
             <introduction>
                 <p>
-                    The two forms of multiplication with a matrix as the multiplier are
-                    matrix-vector multiplication and matrix-matrix multiplication. In each case,
-                    there is a consideration as to the size of the multiplicand as compared to the
-                    size of the multiplier, and those sizes will need to be checked during input
-                    validation. The only other valid multiplication case occurs when a non-matrix is
-                    the multiplier and the matrix is the multiplicand, which only occurs during
-                    scalar multiplication; therefore in that case the only constraint is to check
-                    that the scalar is in fact a complex number.
+                    The two forms of multiplication with a matrix as the multiplier are matrix-vector multiplication and matrix-matrix multiplication. In each case, there is a consideration as to the size of the multiplicand as compared to the size of the multiplier, and those sizes will need to be checked during input validation. The only other valid multiplication case occurs when a non-matrix is the multiplier and the matrix is the multiplicand, which only occurs during scalar multiplication; therefore in that case the only constraint is to check that the scalar is in fact a complex number.
                 </p>
             </introduction>
             <task>
@@ -356,216 +324,213 @@
                         <!--12345678_1_2345678_2_2345678_3_2345678_4_2345678_5_2345678_6_2345678_7_2345678_8 -->
                         <input>
                             def __mul__(self, right):
-                            '''Return self*right, which necessitates that right be an AlgoVector
-                            or another AlgoMatrix.'''
-                            if type(right) == type(self):
-                            # This is matrix-matrix multiplication
-                            pass
-                            elif type(right) == AlgoVector:
-                            # This is matrix-vector multiplication
-                            pass
-                            else:
-                            raise TypeError(f'Cannot multiply AlgoMatrix*{type(right)}')
+                                '''Return self*right, which necessitates that right be an AlgoVector
+                                    or another AlgoMatrix.'''
+                                if type(right) == type(self):
+                                    # This is matrix-matrix multiplication
+                                    pass
+                                elif type(right) == AlgoVector:
+                                    # This is matrix-vector multiplication
+                                    pass
+                                else:
+                                    raise TypeError(f'Cannot multiply AlgoMatrix*{type(right)}')
                         </input>
                     </program>
                 </introduction>
                 <task>
                     <title>Matrix-matrix multiplication</title>
-                    <p> While it is best to define matrix-matrix multiplication as iterated
-                        matrix-vector multiplication, that is not the optimal way to implement the
-                        product. Instead, it's best to check the dimensions of the two matrices and
-                        proceed to build the product of <m>A</m> and <m>B</m> by using <m>\entry{AB}{r,c}
-                        = \sum_{k=0}^{n-1}\entry{A}{r,k}\entry{B}{k,c}</m> when <m>A\in\Mats{m,n}</m>
-                        and <m>B\in\Mats{n,q}</m>. </p>
+                    <p> 
+                        While it is best to define matrix-matrix multiplication as iterated matrix-vector multiplication, that is not the optimal way to implement the product. Instead, it's best to check the dimensions of the two matrices and proceed to build the product of <m>A</m> and <m>B</m> by using <m>\entry{AB}{r,c} = \sum_{k=0}^{n-1}\entry{A}{r,k}\entry{B}{k,c}</m> when <m>A\in\Mats{m,n}</m> and <m>B\in\Mats{n,q}</m>.
+                    </p>
                     <program language='python'>
                         <!--12345678_1_2345678_2_2345678_3_2345678_4_2345678_5_2345678_6_2345678_7_2345678_8 -->
                         <input>
                             if type(right) == type(self):
-                            # This is matrix-matrix multiplication
-                            m,n = self.dims()
-                            p,q = right.dims()
-                            # What condition needs to be checked on this line to ensure
-                            # dimensions are correct?
-                            if condition:
-                            new_grid = [ ]
-                            # How many rows has the product matrix?
-                            for r in range( number_of_rows ):
-                            new_grid.append( [ ] )
-                            # How many columns has the product matrix?
-                            for c in range( number_of_columns ):
-                            total = 0
-                            # How many terms must be summed?
-                            for k in range( number_of_terms ):
-                            total += self[r,k] * right[k,c]
-                            new_grid[-1].append(total)
-                            return AlgoMatrix(new_grid)
-                            else:
-                            raise ValueError("Dimension mismatch")
+                                # This is matrix-matrix multiplication
+                                m,n = self.dims()
+                                p,q = right.dims()
+                                # What condition needs to be checked on this line to ensure
+                                # dimensions are correct? Change CONDITION on the following line.
+                                if CONDITION:
+                                    new_grid = [ ]
+                                    # How many rows has the product matrix?
+                                    for r in range( number_of_rows ):
+                                        new_grid.append( [ ] )
+                                        # How many columns has the product matrix?
+                                        for c in range( number_of_columns ):
+                                        total = 0
+                                        # How many terms must be summed?
+                                        for k in range( number_of_terms ):
+                                            total += self[r,k] * right[k,c]
+                                        new_grid[-1].append(total)
+                                    return AlgoMatrix(new_grid)
+                                else:
+                                    raise ValueError("Dimension mismatch")
                         </input>
                     </program>
                     <p>
-                        Note that as usual there are several places where that code must be modified
-                        to work correctly.
+                        Note that as usual there are several places where that code must be modified to work correctly.
                     </p>
                 </task>
                 <task>
                     <title>Matrix-vector multiplication</title>
-                    <p> Recall that according to its definition, a matrix-vector product is a linear
-                        combination of vectors. Once again the best way to define the product is not
-                        the most efficient way to compute it; we instead use the component-wise
-                        approach to build the result as a list using <m>\entry{A\vv}{r} =
-                        \sum_{c=0}^{n-1} \entry{A}{r,c}\entry{\vv}{c}</m> where <m>A\in\Mats{m,n}</m>
-                        and <m>\vv\in\CV{n}</m>. </p>
+                    <p> 
+                        Recall that according to its definition, a matrix-vector product is a linear combination of vectors. Once again the best way to define the product is not the most efficient way to compute it; we instead use the component-wise approach to build the result as a list using <m>\entry{A\vv}{r} = \sum_{c=0}^{n-1} \entry{A}{r,c}\entry{\vv}{c}</m> where <m>A\in\Mats{m,n}</m> and <m>\vv\in\CV{n}</m>.
+                    </p>
                     <program language='python'>
                         <input>
                             elif type(right) == AlgoVector:
-                            # This is matrix-vector multiplication
-                            m,n = self.dims()
-                            if len(right) == n:
-                            # The dimensions of the vector and matrix are compatible
-                            new_list = [ ]
-                            for c in range(n):
-                            new_list.append( )
-                            else:
-                            raise ValueError("Dimension mismatch")
+                                # This is matrix-vector multiplication
+                                m,n = self.dims()
+                                if len(right) == n:
+                                    # The dimensions of the vector and matrix are compatible
+                                    new_list = [ ]
+                                    for c in range(n):
+                                        new_list.append( SOMETHING )
+                                else:
+                                    raise ValueError("Dimension mismatch")
                         </input>
                     </program>
                 </task>
             </task>
             <task>
                 <title><c>AlgoMatrix</c> as multiplicand</title>
-                <p> Unlike vectors, since matrix-matrix multiplication exists there is a use case
-                    for matrices being the multiplicand. However that particular use case is handled
-                    in Python (via order of operations) by left multiplication and <c>__mul__</c>.
-                    Therefore all we need to implement in the <c>__rmul__</c> method is
-                    scalar-matrix multiplication, which operates the same way in <c>AlgoMatrix</c>
-                    as in <c>AlgoVector</c>, extended to handle both rows and columns. </p>
+                <p> 
+                    Unlike vectors, since matrix-matrix multiplication exists there is a use case for matrices being the multiplicand. However that particular use case is handled in Python (via order of operations) by left multiplication and <c>__mul__</c>. Therefore all we need to implement in the <c>__rmul__</c> method is scalar-matrix multiplication, which operates the same way in <c>AlgoMatrix</c> as in <c>AlgoVector</c>, extended to handle both rows and columns.
+                </p>
                 <program language='python'>
                     <input>
                         def __rmul__(self, left):
-                        try:
-                        scalar = complex(left)
-                        except:
-                        raise TypeError(f"Invalid scalar {left} for AlgoMatrix multiplication")
-                        new_grid = [ ]
-                        m,n = self.dims()
-                        for r in range(m):
-                        new_grid.append( [ ] )
-                        for c in range(n):
-                        #
-                        # What has to go in the inner lists?
-                        # Append that to new_grid[-1]
-                        #
-                        continue
-                        return AlgoMatrix(new_grid)
+                            try:
+                                scalar = complex(left)
+                            except:
+                                raise TypeError(f"Invalid scalar {left} for AlgoMatrix multiplication")
+                            new_grid = [ ]
+                            m,n = self.dims()
+                            for r in range(m):
+                                new_grid.append( [ ] )
+                                for c in range(n):
+                                    #
+                                    # What has to go in the inner lists?
+                                    # Append that to new_grid[-1]
+                                    #
+                                    continue
+                            return AlgoMatrix(new_grid)
                     </input>
                 </program>
             </task>
             <task>
                 <title>Test your work up to this point!</title>
-                <p> Now define a new <c>AlgoMatrix</c> in your <c>aam_proj5.py</c> file,
-                    representing the matrix <me>
+                <p> 
+                    Now define a new <c>AlgoMatrix</c> in your <c>aam_proj5.py</c> file, representing the matrix 
+                    <me>
                         I_3 = \begin{bmatrix}
                         1 \amp 0 \amp 0\\
                         0 \amp 1 \amp 0\\
                         0 \amp 0 \amp 1
                         \end{bmatrix}
                     </me>
-                    and test your multiplication code to see if <m>1A</m> and <m>I_3A</m> are equal. </p>
+                    and test your multiplication code to see if <m>1A</m> and <m>I_3A</m> are equal.
+                </p>
             </task>
         </activity>
-        <p> Compared to multiplication, addition inside <m>\Mats{m,n}</m> is a breeze. </p>
+        <p> 
+            Compared to multiplication, addition inside <m>\Mats{m,n}</m> is a breeze.
+        </p>
         <activity xml:id='proj-matproj-addition'>
             <title>Addition in <c>AlgoMatrix</c></title>
-            <p> Implementation of addition follows the pattern in <c>AlgoMatrix</c> that was
-                established in <c>AlgoVector</c>: raise an error for <c>__radd__</c> and do the
-                straightforward computation in <c>__add__</c>. Since other types natively do not add
-                with <c>AlgoMatrix</c> we can safely let the failure to allow an <c>AlgoMatrix</c>
-                to be a right-summand to fall onto the left addition of the other class. </p>
+            <p> 
+                Implementation of addition follows the pattern in <c>AlgoMatrix</c> that was established in <c>AlgoVector</c>: raise an error for <c>__radd__</c> and do the straightforward computation in <c>__add__</c>. Since other types natively do not add with <c>AlgoMatrix</c> we can safely let the failure to allow an <c>AlgoMatrix</c> to be a right-summand to fall onto the left addition of the other class.
+            </p>
             <program language='python'>
                 <input>
                     def __add__(self, right):
-                    '''Return self+right'''
-                    # validate type of right
-                    if TEST_CONDITION1:
-                    # Compare dimensions
-                    m,n = self.dims()
-                    p,q = right.dims()
-                    if TEST_CONDITION2:
-                    new_grid = [ ]
-                    for r in range(m):
-                    new_grid.append( [ ] )
-                    for c in range(n):
-                    #
-                    # What has to go in the inner lists?
-                    # Append that to new_grid[-1]
-                    # Remember: we implemented bracket notation!
-                    #
-                    return AlgoMatrix(new_grid)
-                    else:
-                    raise ValueError("Dimension mismatch")
-                    else:
-                    raise TypeError(f"Cannot add AlgoMatrix and {type(right)}")
+                        '''Return self+right'''
+                        # validate type of right
+                        if TEST_CONDITION1:
+                            # Compare dimensions
+                            m,n = self.dims()
+                            p,q = right.dims()
+                            if TEST_CONDITION2:
+                                new_grid = [ ]
+                                for r in range(m):
+                                    new_grid.append( [ ] )
+                                    for c in range(n):
+                                    #
+                                    # What has to go in the inner lists?
+                                    # Append that to new_grid[-1]
+                                    # Remember: we implemented bracket notation!
+                                    #
+                                    continue
+                                return AlgoMatrix(new_grid)
+                            else:
+                                raise ValueError("Dimension mismatch")
+                        else:
+                            raise TypeError(f"Cannot add AlgoMatrix and {type(right)}")
                 </input>
             </program>
-            <p> Test this in your <c>aam_proj5.py</c> file by checking to see that <m>A+A = 2A</m>. </p>
+            <p> 
+                Test this in your <c>aam_proj5.py</c> file by checking to see that <m>A+A = 2A</m>.
+            </p>
         </activity>
     </subsection>
     <subsection xml:id='sub-linalg-matproj-named_methods'>
         <title>Named <c>AlgoMatrix</c> methods</title>
-        <p> In addition to the <c>AlgoMatrix.dims()</c> method we defined above, we should create
-            some other named methods. </p>
+        <p> 
+            In addition to the <c>AlgoMatrix.dims()</c> method we defined above, we should create some other named methods. 
+        </p>
         <activity xml:id='proj-matproj-column_matrices'>
             <title><c>AlgoMatrix</c> as column matrices</title>
             <introduction>
-                <p> The notation <m>A=\left[\vec{A}_0 | \vec{A}_1 | \cdots | \vec{A}_{n-1}\right]</m>
-                    for a matrix <m>A\in\Mats{m,n}</m> is sometimes called <term>augmented notation</term>.
-                    Regardless of what the notation is called, its use implies that we sometimes
-                    wish to isolate a particular column vector of a matrix, or consider the list of
-                    all column vectors. </p>
+                <p> 
+                    The notation <m>A=\left[\vec{A}_0 | \vec{A}_1 | \cdots | \vec{A}_{n-1}\right]</m> for a matrix <m>A\in\Mats{m,n}</m> is sometimes called <term>augmented notation</term>. Regardless of what the notation is called, its use implies that we sometimes wish to isolate a particular column vector of a matrix, or consider the list of all column vectors.
+                </p>
             </introduction>
             <task>
                 <title>Isolating a single column vector</title>
-                <p>First we write a method which produces a particular indexed column vector.</p>
+                <p>
+                    First we write a method which produces a particular indexed column vector.
+                </p>
                 <program language='python'>
                     <input>
                         def column(self, col_index):
-                        """Return the column vector of self in the given column index."""
-                        if col_index not in range(self._col_dim):
-                        raise IndexError(f'Bad column index {col_index}.')
-                        else:
-                        new_list = [ ]
-                        for r in range(self._row_dim):
-                        #
-                        # Here we only want a list, not a grid; what must
-                        # be in the rth row of the output vector?
-                        #
-                        continue
-                        return AlgoVector(new_list)
+                            """Return the column vector of self in the given column index."""
+                            if col_index not in range(self._col_dim):
+                                raise IndexError(f'Bad column index {col_index}.')
+                            else:
+                                new_list = [ ]
+                                for r in range(self._row_dim):
+                                    #
+                                    # Here we only want a list, not a grid; what must
+                                    # be in the rth row of the output vector?
+                                    #
+                                    continue
+                                return AlgoVector(new_list)
                     </input>
                 </program>
             </task>
             <task>
                 <title>Creating the tuple of all column vectors</title>
-                <p> We can leverage the just-written <c>AlgoMatrix.column(col_index)</c> method to
-                    create a method which returns a tuple of all the column vectors of a matrix. </p>
+                <p> 
+                    We can leverage the just-written <c>AlgoMatrix.column(col_index)</c> method to create a method which returns a tuple of all the column vectors of a matrix.
+                </p>
                 <program language='python'>
                     <input>
                         def columns(self):
-                        '''Return a tuple of all column vectors of self'''
-                        new_list = [ ]
-                        #
-                        # Write this yourself!
-                        #
-                        return tuple(new_list)
+                            '''Return a tuple of all column vectors of self'''
+                            new_list = [ ]
+                            #
+                            # Write this yourself!
+                            #
+                            return tuple(new_list)
                     </input>
                 </program>
             </task>
             <task>
                 <title>Test your work up to this point!</title>
-                <p> Once again, what we already have used in <c>aam_proj5.py</c> can be utilized to
-                    test if your code is working. Try the following, replacing the variable name <c>
-                    B</c> with the name of your matrix <m>B</m>. </p>
+                <p> 
+                    Once again, what we already have used in <c>aam_proj5.py</c> can be utilized to test if your code is working. Try the following, replacing the variable name <c> B</c> with the name of your matrix <m>B</m>.
+                </p>
                 <program language='python'>
                     <input>
                         print(AlgoMatrix(B.columns()) == B)
@@ -573,8 +538,9 @@
                 </program>
             </task>
         </activity>
-        <p> Now move on to implementing conjugation, where <m>\entry{\conj{A}}{r,c} =
-            \conj{\entry{A}{r,c}}</m>. </p>
+        <p> 
+            Now move on to implementing conjugation, where <m>\entry{\conj{A}}{r,c} = \conj{\entry{A}{r,c}}</m>.
+        </p>
         <activity xml:id='proj-matproj-conjugate'>
             <title>Complex conjugate of an <c>AlgoMatrix</c></title>
             <p>
@@ -584,47 +550,40 @@
             <program language='python'>
                 <input>
                     def conjugate(self):
-                    '''Return the complex conjugate of self.'''
-                    new_grid = [ ]
-                    for r in range(self._row_dim):
-                    new_grid.append( [ ] )
-                    for c in range(self._col_dim):
-                    #
-                    # What do we append to new_grid[-1] this time?
-                    #
-                    continue
-                    return AlgoMatrix(new_grid)
+                        '''Return the complex conjugate of self.'''
+                        new_grid = [ ]
+                        for r in range(self._row_dim):
+                            new_grid.append( [ ] )
+                            for c in range(self._col_dim):
+                                #
+                                # What do we append to new_grid[-1] this time?
+                                #
+                                continue
+                        return AlgoMatrix(new_grid)
                 </input>
             </program>
-            <p> Test this in <c>aam_proj5.py</c> by printing <m>\conj{A}</m>. </p>
+            <p>
+                Test this in <c>aam_proj5.py</c> by printing <m>\conj{A}</m>.
+            </p>
         </activity>
-        <p> As a sort of reverse procedure of the <c>column</c> and <c>columns</c> methods defined
-            above, we define augmentation of a matrix.: given a matrix <m>A\in\Mats{m,n}</m> and a
-            vector <m>\vv\in\CV{m}</m>, you can augment <m>A</m> by <m>\vv</m>, resulting in a
-            matrix <m>\left[A | \vv\right]</m> with columns in indices 0 through <m>n-1</m> exactly
-            the columns of <m>A</m> but with the vector <m>\vv</m> as a column of index <m>n</m>.
-            Moreover, given a matrix <m>B\in\Mats{m,q}</m>, the similarly-defined matrix <m>
-            \left[A|B\right]</m> has columns with indices 0 through <m>n-1</m> equal to the
-            corresponding column of <m>A</m>, but additionally another <m>q</m> columns, where the
-            column indexed <m>n+c</m> is the column of <m>B</m> with index <m>c</m>. </p>
+        <p> 
+            As a sort of reverse procedure of the <c>column</c> and <c>columns</c> methods defined above, we define augmentation of a matrix.: given a matrix <m>A\in\Mats{m,n}</m> and a vector <m>\vv\in\CV{m}</m>, you can augment <m>A</m> by <m>\vv</m>, resulting in a matrix <m>\left[A | \vv\right]</m> with columns in indices 0 through <m>n-1</m> exactly the columns of <m>A</m> but with the vector <m>\vv</m> as a column of index <m>n</m>. Moreover, given a matrix <m>B\in\Mats{m,q}</m>, the similarly-defined matrix <m> \left[A|B\right]</m> has columns with indices 0 through <m>n-1</m> equal to the corresponding column of <m>A</m>, but additionally another <m>q</m> columns, where the column indexed <m>n+c</m> is the column of <m>B</m> with index <m>c</m>.
+        </p>
         <definition xml:id='defn-matrix_augmentation'>
             <title>Augmented matrices</title>
             <statement>
-                <p> Let <m>m,n,q\in\Zp</m> be given, and suppose <m>A\in\Mats{m,n}</m>, <m>
-                    B\in\Mats{m,q}</m>, and <m>\vv\in\CV{m}</m>. Then we can define the matrix <m>A</m> <term>
-                    augmented</term> by <m>B</m> to be the matrix <m>[A|B]\in\Mats{m,n+q}</m>. While
-                    proper use of notation dictates that the entries should be <m>\entry{[A|B]}{r,c}</m>,
-                    we suppress the inner brackets and allow that <m>[A|B]</m> is the unique matrix
-                    satisfying <me>
+                <p> 
+                    Let <m>m,n,q\in\Zp</m> be given, and suppose <m>A\in\Mats{m,n}</m>, <m> B\in\Mats{m,q}</m>, and <m>\vv\in\CV{m}</m>. Then we can define the matrix <m>A</m> <term> augmented</term> by <m>B</m> to be the matrix <m>[A|B]\in\Mats{m,n+q}</m>. While proper use of notation dictates that the entries should be <m>\entry{[A|B]}{r,c}</m>, we suppress the inner brackets and allow that <m>[A|B]</m> is the unique matrix satisfying
+                    <me>
                         \entry{A|B}{r,c} = \begin{cases}
                         \entry{A}{r,c} \amp c\in\set{0,1,\dotsc,n-1} \\
                         \entry{B}{r,c-n} \amp c\in\set{n,n+1,\dotsc,n+(q-1)}
                         \end{cases}
-                    </me>
-                    .
+                    </me>.
                 </p>
-                <p> Similarly, <m>[A|\vv]\in\Mats{m,n+1}</m> is the matrix <m>A</m> augmented by <m>
-                    \vv</m>, satisfying <me>
+                <p> 
+                    Similarly, <m>[A|\vv]\in\Mats{m,n+1}</m> is the matrix <m>A</m> augmented by <m>\vv</m>, satisfying
+                    <me>
                         \entry{A|\vv}{r,c} = \begin{cases}
                         \entry{A}{r,c} \amp c\in\set{0,1,\dotsc,n-1} \\
                         \entry{vv}{r} \amp c=n
@@ -636,128 +595,127 @@
         <example xml:id="exmp-matrix_augmentation">
             <title>Some augmented matrices</title>
             <statement>
-                <p> Consider the following matrices and vector: <md>
+                <p> 
+                    Consider the following matrices and vector:
+                    <md>
                         <mrow>
                             A \amp= \begin{bmatrix}
-                            1+1j \amp 1-2j \amp 1-3j \\
-                            -1+2j \amp 2+2j \amp 1-4j \\
-                            -1+3j \amp -1+4j \amp 3+3j
+                                1+1j \amp 1-2j \amp 1-3j \\
+                                -1+2j \amp 2+2j \amp 1-4j \\
+                                -1+3j \amp -1+4j \amp 3+3j
                             \end{bmatrix} \amp
                             B \amp= \begin{bmatrix}
-                            1 \amp \frac12 \amp \frac13 \\
-                            \frac12 \amp \frac13 \amp \frac14 \\
-                            \frac13 \amp \frac14 \amp \frac15
+                                1 \amp \frac12 \amp \frac13 \\
+                                \frac12 \amp \frac13 \amp \frac14 \\
+                                \frac13 \amp \frac14 \amp \frac15
                             \end{bmatrix} \amp
                             \vv \amp= \cvec{1+j\\1+\sqrt{2}j\\1+\sqrt{3}j}
                         </mrow>
                     </md>
-                    Then by augmentation we have the matrices <m>[A|B]</m> and <m>[A|\vv]</m> given
-                    by <md>
+                    Then by augmentation we have the matrices <m>[A|B]</m> and <m>[A|\vv]</m> given by
+                    <md>
                         <mrow>
                             [A|B] \amp= \begin{bmatrix}
-                            1+1j \amp 1-2j \amp 1-3j \amp 1 \amp \frac12 \amp \frac13 \\
-                            -1+2j \amp 2+2j \amp 1-4j \amp \frac12 \amp \frac13 \amp \frac14 \\
-                            -1+3j \amp -1+4j \amp 3+3j \amp \frac13 \amp \frac14 \amp \frac15
-                    \end{bmatrix}
+                                1+1j \amp 1-2j \amp 1-3j \amp 1 \amp \frac12 \amp \frac13 \\
+                                -1+2j \amp 2+2j \amp 1-4j \amp \frac12 \amp \frac13 \amp \frac14 \\
+                                -1+3j \amp -1+4j \amp 3+3j \amp \frac13 \amp \frac14 \amp \frac15
+                            \end{bmatrix}
                         </mrow>
                         <mrow>
                             [A|\vv] \amp= \begin{bmatrix}
-                            1+1j \amp 1-2j \amp 1-3j \amp 1+1j\\
-                            -1+2j \amp 2+2j \amp 1-4j \amp 1+\sqrt{2}j\\
-                            -1+3j \amp -1+4j \amp 3+3j \amp 1+\sqrt{3}j
+                                1+1j \amp 1-2j \amp 1-3j \amp 1+1j\\
+                                -1+2j \amp 2+2j \amp 1-4j \amp 1+\sqrt{2}j\\
+                                -1+3j \amp -1+4j \amp 3+3j \amp 1+\sqrt{3}j
                             \end{bmatrix}
                         </mrow>
-                    </md>
-                    .
+                    </md>.
                 </p>
             </statement>
         </example>
         <activity xml:id='proj-matproj-augmentation'>
             <title><c>AlgoMatrix</c> augmentation</title>
             <p>
-                We should easily see how to use our special definition of initialization by lists of
-                column vectors to perform augmentation. In fact, augmentation is the reason why that
-                option for initialization is a good idea!
+                We should easily see how to use our special definition of initialization by lists of column vectors to perform augmentation. In fact, augmentation is the reason why that option for initialization is a good idea!
             </p>
             <program language='python'>
                 <input>
                     def augment(self, right):
-                    '''Return the augmented matrix [self|right]'''
-                    m,n = self.dims()
-                    if type(right) == AlgoVector:
-                    if len(right)==m:
-                    return AlgoMatrix( self.columns() + tuple([right]) )
-                    else:
-                    raise ValueError('Dimension mismatch')
-                    elif type(right) == AlgoMatrix:
-                    p,q = right.dims()
-                    if p==m:
-                    return AlgoMatrix( self.columns() + right.columns() )
-                    else:
-                    raise ValueError('Dimension mismatch')
-                    else:
-                    raise TypeError(f'Cannot augment AlgoMatrix by {type(right)}.')
+                        '''Return the augmented matrix [self|right]'''
+                        m,n = self.dims()
+                        if type(right) == AlgoVector:
+                            if len(right)==m:
+                                return AlgoMatrix( self.columns() + tuple([right]) )
+                            else:
+                                raise ValueError('Dimension mismatch')
+                        elif type(right) == AlgoMatrix:
+                            p,q = right.dims()
+                            if p==m:
+                                return AlgoMatrix( self.columns() + right.columns() )
+                            else:
+                                raise ValueError('Dimension mismatch')
+                        else:
+                            raise TypeError(f'Cannot augment AlgoMatrix by {type(right)}.')
                 </input>
             </program>
-            <p> In <c>aam_proj5.py</c>, test this by printing the matrices <m>[A|B]</m> and <m>[B|A]</m>;
-                are they equal? </p>
+            <p> 
+                In <c>aam_proj5.py</c>, test this by printing the matrices <m>[A|B]</m> and <m>[B|A]</m>; are they equal?
+            </p>
         </activity>
-        <p> Now for something completely different! We discussed that every matrix <m>A\in\Mats{m,n}</m>
-            is associated with a linear transformation <m>T_A:\CV{n}\to\CV{m}</m> defined by <m>T_A(\vv)
-            = A\vv</m> for every <m>\vv\in\CV{n}</m>. We did not discuss the existence of the matrix
-            transpose, which provides a function with domain <m>\CV{m}</m> and codomain <m>\CV{n}</m>
-            which is related to <m>T_A</m> but is generally not <m>T_A^{-1}</m>, an amazing but
-            interesting fact! </p>
+        <p> 
+            Now for something completely different! We discussed that every matrix <m>A\in\Mats{m,n}</m> is associated with a linear transformation <m>T_A:\CV{n}\to\CV{m}</m> defined by <m>T_A(\vv) = A\vv</m> for every <m>\vv\in\CV{n}</m>. We did not discuss the existence of the matrix transpose, which provides a function with domain <m>\CV{m}</m> and codomain <m>\CV{n}</m> which is related to <m>T_A</m> but is generally not <m>T_A^{-1}</m>, an amazing but interesting fact!
+        </p>
         <definition xml:id="defn-matrix_transpose">
             <title>Transpose of a matrix</title>
             <statement>
-                <p> Suppose that <m>A\in\Mats{m,n}</m>. Then there is a unique matrix called the <term>
-                    transpose</term> of <m>A</m>, denoted <m>A^T\in\Mats{n,m}</m>, satisfying <me>
-                    \entry{A^T}{c,r} = \entry{A}{r,c}
+                <p> 
+                    Suppose that <m>A\in\Mats{m,n}</m>. Then there is a unique matrix called the <term>transpose</term> of <m>A</m>, denoted <m>A^T\in\Mats{n,m}</m>, satisfying 
+                    <me>
+                        \entry{A^T}{c,r} = \entry{A}{r,c}
                     </me>
-                    for all <m>{r\in\set{0,1,\dotsc,m-1}}</m> and <m>{c\in\set{0,1,\dotsc,n-1}}</m>. </p>
-                <p> Further, the linear transformation associated with <m>A^T</m> is necessarily <m>
-                    T_{A^T}:\CV{m}\to\CV{n}</m> given by <m>T_{A^T}(\vv) = A^T\vv</m> for any <m>
-                    \vv\in\CV{m}</m>. </p>
+                    for all <m>{r\in\set{0,1,\dotsc,m-1}}</m> and <m>{c\in\set{0,1,\dotsc,n-1}}</m>.
+                </p>
+                <p> 
+                    Further, the linear transformation associated with <m>A^T</m> is necessarily <m>T_{A^T}:\CV{m}\to\CV{n}</m> given by <m>T_{A^T}(\vv) = A^T\vv</m> for any <m>\vv\in\CV{m}</m>.
+                </p>
             </statement>
         </definition>
-        <p> The relationship between the dimensions of <m>A</m> and <m>A^T</m> ensure the following
-            theorem. </p>
+        <p> 
+            The relationship between the dimensions of <m>A</m> and <m>A^T</m> ensure the following theorem.
+        </p>
         <theorem xml:id='thm-matrix_transpose_products'>
             <title>Certain matrix products always exist</title>
             <statement>
-                <p> Suppose that <m>A\in\Mats{m,n}</m>, so that <m>A^T\in\Mats{n,m}</m>. Then both <m>
-                    A^TA</m> and <m>AA^T</m> exist, with <m>A^TA\in\Mats{n,n}</m> and <m>
-                    AA^T\in\Mats{m,m}</m>. </p>
+                <p> 
+                    Suppose that <m>A\in\Mats{m,n}</m>, so that <m>A^T\in\Mats{n,m}</m>. Then both <m>A^TA</m> and <m>AA^T</m> exist, with <m>A^TA\in\Mats{n,n}</m> and <m>AA^T\in\Mats{m,m}</m>.
+                </p>
             </statement>
         </theorem>
         <activity xml:id="proj-matproj-transpose">
             <title>Transpose of an <c>AlgoMatrix</c></title>
             <p>
-                The definition in terms of entries using bracket notation makes the transpose mostly
-                simple to define; care needs to be taken to make sure the dimension is correct.
+                The definition in terms of entries using bracket notation makes the transpose mostly simple to define; care needs to be taken to make sure the dimension is correct.
             </p>
             <program language='python'>
                 <input>
                     def transpose(self):
-                    '''Return the matrix transpose of self.'''
-                    new_grid = [ ]
-                    for c in range(self._col_dim):
-                    new_grid.append( [ ] )
-                    for r in range(self._row_dim):
-                    #
-                    # Do not be fooled! Append the correct entry of self
-                    # in this position to new_grid[-1]
-                    #
-                    continue
-                    return AlgoMatrix(new_grid)
+                        '''Return the matrix transpose of self.'''
+                        new_grid = [ ]
+                        for c in range(self._col_dim):
+                            new_grid.append( [ ] )
+                            for r in range(self._row_dim):
+                                #
+                                # Do not be fooled! Append the correct entry of self
+                                # in this position to new_grid[-1]
+                                #
+                                continue
+                        return AlgoMatrix(new_grid)
                 </input>
             </program>
-            <p> To test this, calculate the following in <c>aam_proj5.py</c>: <me>
+            <p> 
+                To test this, calculate the following in <c>aam_proj5.py</c>: 
+                <me>
                     A^T, B^T, (AB)^T, B^TA^T
-                </me> and then draw
-                a conclusion about the relationship between <m>A^T</m>, <m>B^T</m>, and <m>(AB)^T</m>
-                .
+                </me> and then draw a conclusion about the relationship between <m>A^T</m>, <m>B^T</m>, and <m>(AB)^T</m>.
             </p>
         </activity>
     </subsection>
