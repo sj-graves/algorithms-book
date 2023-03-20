@@ -16,16 +16,17 @@
 </h5>
 <div class="para">This execution path proceeds slightly more smoothly, as the input is not of a form which is trying to specify a matrix in the transpose order of columns before rows. Complete the following:</div>
 <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">else:
-m = len(grid)
-n = len(grid[0])
-new_grid = [ ]
-for r in range(m):
-if len(grid[r]) != n:
-raise ValueError('Malformed grid of complex numbers')
-new_grid.append( [ ] )
-for c in range(n):
-# What do we want to actually append into our new rows?
-new_grid[-1].append( complex( 0 ) )
+    m = len(grid)
+    n = len(grid[0])
+    new_grid = [ ]
+    for r in range(m):
+        if len(grid[r]) != n:
+            raise ValueError('Malformed grid of complex numbers')
+        new_grid.append( [ ] )
+        for c in range(n):
+            # What do we want to actually append into our new rows?
+            # The next line inserts dummy values of 0 in all positions
+            new_grid[-1].append( complex( 0 ) )
 </code></pre></div></article><span class="incontext"><a href="sec-linalg-matproj.html#task-79" class="internal">in-context</a></span>
 </body>
 </html>

@@ -14,19 +14,18 @@
 <article class="task exercise-like"><h6 class="heading">
 <span class="type">Task</span><span class="space"> </span><span class="codenumber">4.8.a.ii</span><span class="period">.</span><span class="space"> </span><span class="title">Matrix-vector multiplication.</span>
 </h6>
-<div class="para">Recall that according to its definition, a matrix-vector product is a linear combination of vectors. Once again the best way to define the product is not the most efficient way to compute it; we instead use the component-wise approach to build the result as a list using <span class="process-math">\(\entry{A\vv}{r} =
-\sum_{c=0}^{n-1} \entry{A}{r,c}\entry{\vv}{c}\)</span> where <span class="process-math">\(A\in\Mats{m,n}\)</span> and <span class="process-math">\(\vv\in\CV{n}\text{.}\)</span>
+<div class="para">Recall that according to its definition, a matrix-vector product is a linear combination of vectors. Once again the best way to define the product is not the most efficient way to compute it; we instead use the component-wise approach to build the result as a list using <span class="process-math">\(\entry{A\vv}{r} = \sum_{c=0}^{n-1} \entry{A}{r,c}\entry{\vv}{c}\)</span> where <span class="process-math">\(A\in\Mats{m,n}\)</span> and <span class="process-math">\(\vv\in\CV{n}\text{.}\)</span>
 </div>
 <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">elif type(right) == AlgoVector:
-# This is matrix-vector multiplication
-m,n = self.dims()
-if len(right) == n:
-# The dimensions of the vector and matrix are compatible
-new_list = [ ]
-for c in range(n):
-new_list.append( )
-else:
-raise ValueError("Dimension mismatch")
+    # This is matrix-vector multiplication
+    m,n = self.dims()
+    if len(right) == n:
+        # The dimensions of the vector and matrix are compatible
+        new_list = [ ]
+        for c in range(n):
+            new_list.append( SOMETHING )
+    else:
+        raise ValueError("Dimension mismatch")
 </code></pre></div></article><span class="incontext"><a href="sec-linalg-matproj.html#task-90" class="internal">in-context</a></span>
 </body>
 </html>

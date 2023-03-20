@@ -16,18 +16,18 @@
 </h5>
 <div class="para">First we write a method which produces a particular indexed column vector.</div>
 <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def column(self, col_index):
-"""Return the column vector of self in the given column index."""
-if col_index not in range(self._col_dim):
-raise IndexError(f'Bad column index {col_index}.')
-else:
-new_list = [ ]
-for r in range(self._row_dim):
-#
-# Here we only want a list, not a grid; what must
-# be in the rth row of the output vector?
-#
-continue
-return AlgoVector(new_list)
+    """Return the column vector of self in the given column index."""
+    if col_index not in range(self._col_dim):
+        raise IndexError(f'Bad column index {col_index}.')
+    else:
+        new_list = [ ]
+        for r in range(self._row_dim):
+            #
+            # Here we only want a list, not a grid; what must
+            # be in the rth row of the output vector?
+            #
+            continue
+        return AlgoVector(new_list)
 </code></pre></div></article><span class="incontext"><a href="sec-linalg-matproj.html#task-93" class="internal">in-context</a></span>
 </body>
 </html>

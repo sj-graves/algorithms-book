@@ -14,11 +14,10 @@
 <article class="task exercise-like"><h5 class="heading">
 <span class="type">Task</span><span class="space"> </span><span class="codenumber">4.6.d</span><span class="period">.</span><span class="space"> </span><span class="title">Handling exceptions.</span>
 </h5>
-<div class="para">As it turns out, we actually want to stop the execution of the program if any of the generated exceptions come up. This is handled by simply putting the command <code class="code-inline tex2jax_ignore">
-                    raise</code> in the <code class="code-inline tex2jax_ignore">except:...</code> block without any argument. This causes the exception which brought about the problem to be passed up to the next level; this could be a <code class="code-inline tex2jax_ignore">try:... except:...</code> block in a calling function, or it could be the main execution loop of Python. In the latter case, this causes an error and stops execution of your code!</div>
+<div class="para">As it turns out, we actually want to stop the execution of the program if any of the generated exceptions come up. This is handled by simply putting the command <code class="code-inline tex2jax_ignore">raise</code> in the <code class="code-inline tex2jax_ignore">except:...</code> block without any argument. This causes the exception which brought about the problem to be passed up to the next level; this could be a <code class="code-inline tex2jax_ignore">try:... except:...</code> block in a calling function, or it could be the main execution loop of Python. In the latter case, this causes an error and stops execution of your code!</div>
 <div class="para">Of course, you also have to store the important data attributes outside the exception handler, since the assignment of attributes is the final step of creating a usable class object.</div>
 <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">except:
-raise
+    raise
 self._data = tuple(tuple(row) for row in new_grid)
 self._row_dim = len(new_grid)
 self._col_dim = len(new_grid[0])

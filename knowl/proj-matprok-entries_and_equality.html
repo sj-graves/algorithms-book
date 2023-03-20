@@ -17,61 +17,59 @@
 <article class="task exercise-like"><h5 class="heading">
 <span class="codenumber">(a)</span><span class="space"> </span><span class="title">Matrix dimension.</span>
 </h5>
-<div class="para">Since a <code class="code-inline tex2jax_ignore">dims</code> function is necessary in order to check that the input to <code class="code-inline tex2jax_ignore">
-                    __getitem__</code> falls within the range of valid indices, as well as to check matrix equality, we first define a <code class="code-inline tex2jax_ignore">dims(self)</code> method.</div>
+<div class="para">Since a <code class="code-inline tex2jax_ignore">dims</code> function is necessary in order to check that the input to <code class="code-inline tex2jax_ignore">__getitem__</code> falls within the range of valid indices, as well as to check matrix equality, we first define a <code class="code-inline tex2jax_ignore">dims(self)</code> method.</div>
 <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def dims(self):
-'''Return the (row,column) dimensions of self.'''
-return (self._row_dim, self._col_dim)
+    '''Return the (row,column) dimensions of self.'''
+    return (self._row_dim, self._col_dim)
 </code></pre></div></article><article class="task exercise-like"><h5 class="heading">
 <span class="codenumber">(b)</span><span class="space"> </span><span class="title">Fetching from an index.</span>
 </h5>
 <div class="para">The only care necessary is to make sure that the pair of indices is passed as a single variable. Implement the following.</div>
 <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __getitem__(self, index_pair):
-'''if r,c == index_pair, return self[r,c]'''
-r,c = index_pair
-m,n = self.dims()
-if r not in range(m) or c not in range(n):
-raise IndexError('No such entry.')
-else:
-# What needs to be returned?
+    '''if r,c == index_pair, return self[r,c]'''
+    r,c = index_pair
+    m,n = self.dims()
+    if r not in range(m) or c not in range(n):
+        raise IndexError('No such entry.')
+    else:
+        # What needs to be returned?
 </code></pre></div></article><article class="task exercise-like"><h5 class="heading">
 <span class="codenumber">(c)</span><span class="space"> </span><span class="title">Well-formatted output.</span>
 </h5>
 <div class="para">While the <code class="code-inline tex2jax_ignore">__repr__</code> method is sufficient for a class file, it will be difficult to see whether or not your matrices are correct in tuple-of-tuples form. Implement this <code class="code-inline tex2jax_ignore">__str__</code> method.</div>
 <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __str__(self):
-"""Return a human-readable matrix of self"""
-# This is highly condensed code. Copy it exactly and change nothing.
-try:
-return self._nice_str
-except AttributeError:
-m,n = self.dims()
-str_mat = [[str(self[r,c]).replace('(','').replace(')','') for c in
-range(n)] for r in range(m)]
-clen = [max( len(str_mat[r][c]) for r in range(m) ) for c in range(n)]
-str_mat = [[("{s:&gt;%d}"%clen[c]).format(s=str_mat[r][c]) for c in range(n)]
-for r in range(m)]
-str_mat = [("[ "+', '.join(row) + " ]") for row in str_mat]
-str_mat = "[" + "\n ".join(str_mat) + "]"
-self._nice_str = str_mat
-return str_mat
+    """Return a human-readable matrix of self"""
+    # This is highly condensed code. Copy it exactly and change nothing.
+    try:
+        return self._nice_str
+    except AttributeError:
+        m,n = self.dims()
+        str_mat = [[str(self[r,c]).replace('(','').replace(')','') for c in
+        range(n)] for r in range(m)]
+        clen = [max( len(str_mat[r][c]) for r in range(m) ) for c in range(n)]
+        str_mat = [[("{s:&gt;%d}"%clen[c]).format(s=str_mat[r][c]) for c in range(n)]
+        for r in range(m)]
+            str_mat = [("[ "+', '.join(row) + " ]") for row in str_mat]
+        str_mat = "[" + "\n ".join(str_mat) + "]"
+        self._nice_str = str_mat
+        return str_mat
 </code></pre></div></article><article class="task exercise-like"><h5 class="heading">
 <span class="codenumber">(d)</span><span class="space"> </span><span class="title">Testing matrix equality.</span>
 </h5>
-<div class="para">Three things need to be tested when executing <code class="code-inline tex2jax_ignore">__eq__(self, right)</code>: firstly, the argument <code class="code-inline tex2jax_ignore">right</code> must be of type <code class="code-inline tex2jax_ignore">AlgoMatrix</code>; secondly, the dimensions of <code class="code-inline tex2jax_ignore">self</code> and <code class="code-inline tex2jax_ignore">right</code> must agree; thirdly, the values in each entry of <code class="code-inline tex2jax_ignore">self</code> and of <code class="code-inline tex2jax_ignore">right</code> must agree. Good thing we defined <code class="code-inline tex2jax_ignore">__getitem__</code>! Implement the following, determining whether each of <code class="code-inline tex2jax_ignore">
-                    bool_1</code>, <code class="code-inline tex2jax_ignore">bool_2</code>, and <code class="code-inline tex2jax_ignore">bool_3</code> needs to be <code class="code-inline tex2jax_ignore">True</code> or <code class="code-inline tex2jax_ignore">False</code> .</div>
-<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __eq__(self, right):
-if type(self) == type(right):
-if self.dims() == right.dims():
-m,n = self.dims()
-for r in range(m):
-for c in range(n):
-if self[r,c] != right[r,c]:
-return bool_1
-return bool_2
+<div class="para">Three things need to be tested when executing <code class="code-inline tex2jax_ignore">__eq__(self, right)</code>: firstly, the argument <code class="code-inline tex2jax_ignore">right</code> must be of type <code class="code-inline tex2jax_ignore">AlgoMatrix</code>; secondly, the dimensions of <code class="code-inline tex2jax_ignore">self</code> and <code class="code-inline tex2jax_ignore">right</code> must agree; thirdly, the values in each entry of <code class="code-inline tex2jax_ignore">self</code> and of <code class="code-inline tex2jax_ignore">right</code> must agree. Good thing we defined <code class="code-inline tex2jax_ignore">__getitem__</code>! Implement the following, determining whether each of <code class="code-inline tex2jax_ignore"> bool_1</code>, <code class="code-inline tex2jax_ignore">bool_2</code>, and <code class="code-inline tex2jax_ignore">bool_3</code> needs to be <code class="code-inline tex2jax_ignore">True</code> or <code class="code-inline tex2jax_ignore">False</code>.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">if type(self) != type(right) or self.dims() != right.dims():
+    return bool_1
+else:
+    m,n = self.dims()
+    for r in range(m):
+        for c in range(n):
+            if self[r,c] != right[r,c]:
+                return bool_2
 return bool_3
 </code></pre></div></article><article class="task exercise-like"><h5 class="heading">
 <span class="codenumber">(e)</span><span class="space"> </span><span class="title">Testing your work.</span>
 </h5>
-<div class="para">In your <code class="code-inline tex2jax_ignore">aam_proj5.py</code> file, print the matrices <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> you defined previously, this time just using the <code class="code-inline tex2jax_ignore">print(...)</code> command as normal. Also find the dimensions using your program, and check to see if <span class="process-math">\(A=B\)</span> .</div></article></article><span class="incontext"><a href="sec-linalg-matproj.html#proj-matprok-entries_and_equality" class="internal">in-context</a></span>
+<div class="para">In your <code class="code-inline tex2jax_ignore">aam_proj5.py</code> file, print the matrices <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> you defined previously, this time just using the <code class="code-inline tex2jax_ignore">print(...)</code> command as normal. Also find the dimensions using your program, and check to see if <span class="process-math">\(A=B\text{.}\)</span>
+</div></article></article><span class="incontext"><a href="sec-linalg-matproj.html#proj-matprok-entries_and_equality" class="internal">in-context</a></span>
 </body>
 </html>

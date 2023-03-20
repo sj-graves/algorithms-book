@@ -16,13 +16,13 @@
 </h5>
 <div class="para">The only care necessary is to make sure that the pair of indices is passed as a single variable. Implement the following.</div>
 <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __getitem__(self, index_pair):
-'''if r,c == index_pair, return self[r,c]'''
-r,c = index_pair
-m,n = self.dims()
-if r not in range(m) or c not in range(n):
-raise IndexError('No such entry.')
-else:
-# What needs to be returned?
+    '''if r,c == index_pair, return self[r,c]'''
+    r,c = index_pair
+    m,n = self.dims()
+    if r not in range(m) or c not in range(n):
+        raise IndexError('No such entry.')
+    else:
+        # What needs to be returned?
 </code></pre></div></article><span class="incontext"><a href="sec-linalg-matproj.html#task-84" class="internal">in-context</a></span>
 </body>
 </html>

@@ -14,30 +14,29 @@
 <article class="task exercise-like"><h6 class="heading">
 <span class="type">Task</span><span class="space"> </span><span class="codenumber">4.8.a.i</span><span class="period">.</span><span class="space"> </span><span class="title">Matrix-matrix multiplication.</span>
 </h6>
-<div class="para">While it is best to define matrix-matrix multiplication as iterated matrix-vector multiplication, that is not the optimal way to implement the product. Instead, it's best to check the dimensions of the two matrices and proceed to build the product of <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> by using <span class="process-math">\(\entry{AB}{r,c}
-= \sum_{k=0}^{n-1}\entry{A}{r,k}\entry{B}{k,c}\)</span> when <span class="process-math">\(A\in\Mats{m,n}\)</span> and <span class="process-math">\(B\in\Mats{n,q}\text{.}\)</span>
+<div class="para">While it is best to define matrix-matrix multiplication as iterated matrix-vector multiplication, that is not the optimal way to implement the product. Instead, it's best to check the dimensions of the two matrices and proceed to build the product of <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> by using <span class="process-math">\(\entry{AB}{r,c} = \sum_{k=0}^{n-1}\entry{A}{r,k}\entry{B}{k,c}\)</span> when <span class="process-math">\(A\in\Mats{m,n}\)</span> and <span class="process-math">\(B\in\Mats{n,q}\text{.}\)</span>
 </div>
 <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">if type(right) == type(self):
-# This is matrix-matrix multiplication
-m,n = self.dims()
-p,q = right.dims()
-# What condition needs to be checked on this line to ensure
-# dimensions are correct?
-if condition:
-new_grid = [ ]
-# How many rows has the product matrix?
-for r in range( number_of_rows ):
-new_grid.append( [ ] )
-# How many columns has the product matrix?
-for c in range( number_of_columns ):
-total = 0
-# How many terms must be summed?
-for k in range( number_of_terms ):
-total += self[r,k] * right[k,c]
-new_grid[-1].append(total)
-return AlgoMatrix(new_grid)
-else:
-raise ValueError("Dimension mismatch")
+    # This is matrix-matrix multiplication
+    m,n = self.dims()
+    p,q = right.dims()
+    # What condition needs to be checked on this line to ensure
+    # dimensions are correct? Change CONDITION on the following line.
+    if CONDITION:
+        new_grid = [ ]
+        # How many rows has the product matrix?
+        for r in range( number_of_rows ):
+            new_grid.append( [ ] )
+            # How many columns has the product matrix?
+            for c in range( number_of_columns ):
+            total = 0
+            # How many terms must be summed?
+            for k in range( number_of_terms ):
+                total += self[r,k] * right[k,c]
+            new_grid[-1].append(total)
+        return AlgoMatrix(new_grid)
+    else:
+        raise ValueError("Dimension mismatch")
 </code></pre></div>
 <div class="para">Note that as usual there are several places where that code must be modified to work correctly.</div></article><span class="incontext"><a href="sec-linalg-matproj.html#task-89" class="internal">in-context</a></span>
 </body>

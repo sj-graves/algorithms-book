@@ -16,21 +16,21 @@
 </h5>
 <div class="para">Unlike vectors, since matrix-matrix multiplication exists there is a use case for matrices being the multiplicand. However that particular use case is handled in Python (via order of operations) by left multiplication and <code class="code-inline tex2jax_ignore">__mul__</code>. Therefore all we need to implement in the <code class="code-inline tex2jax_ignore">__rmul__</code> method is scalar-matrix multiplication, which operates the same way in <code class="code-inline tex2jax_ignore">AlgoMatrix</code> as in <code class="code-inline tex2jax_ignore">AlgoVector</code>, extended to handle both rows and columns.</div>
 <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __rmul__(self, left):
-try:
-scalar = complex(left)
-except:
-raise TypeError(f"Invalid scalar {left} for AlgoMatrix multiplication")
-new_grid = [ ]
-m,n = self.dims()
-for r in range(m):
-new_grid.append( [ ] )
-for c in range(n):
-#
-# What has to go in the inner lists?
-# Append that to new_grid[-1]
-#
-continue
-return AlgoMatrix(new_grid)
+    try:
+        scalar = complex(left)
+    except:
+        raise TypeError(f"Invalid scalar {left} for AlgoMatrix multiplication")
+    new_grid = [ ]
+    m,n = self.dims()
+    for r in range(m):
+        new_grid.append( [ ] )
+        for c in range(n):
+            #
+            # What has to go in the inner lists?
+            # Append that to new_grid[-1]
+            #
+            continue
+    return AlgoMatrix(new_grid)
 </code></pre></div></article><span class="incontext"><a href="sec-linalg-matproj.html#task-91" class="internal">in-context</a></span>
 </body>
 </html>
