@@ -17,6 +17,7 @@
     <macros>
         <!-- I'll include macros here as I need them in rewriting the text. -->
         \usepackage{mathtools}
+        \usepackage{euler}
         \DeclareMathOperator{\fixedset}{fix}
         \DeclareMathOperator{\support}{supp}
         \DeclareMathOperator{\lcm}{lcm}

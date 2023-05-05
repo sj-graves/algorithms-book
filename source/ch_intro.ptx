@@ -9,7 +9,10 @@
     <title>Welcome!</title>
     <introduction>
         <p>
-            We introduce the concept of an algorithm not from the theory with formal definitions, but instead choose to begin with a particular exercise from graph theory, the solution to which involves creating an algorithm.
+            Algorithms for Applied Mathematics (AAM) has one purpose: to introduce students to enough algorithm design and practical coding experience that they will be able to use simple codes in an attempt to solve <q>non-routine problems.</q> Unfortunately, what exactly constitutes a <q>non-routine problem</q> is open to exploration, and most problems which can be described in a simple way are fairly routine. The power of algorithmic thinking is that very simple tools can be combined in subtle ways to provide insight into complicated problems.
+        </p>
+        <p>
+            We begin with a classic problem from graph theory which demonstrates exactly this idea.
         </p>
     </introduction>
     <!-- <xi:include href="./sec_intro_shortest_path.ptx" /> -->
