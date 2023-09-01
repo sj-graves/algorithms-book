@@ -89,6 +89,10 @@ GitHub.sublime-settings
 .dropbox.attr
 .dropbox.cache
 
-# Ignore all of the settings from Obsidian.md
-AAM-PKV/.obsidian
+# Ignore the frequently-changing workspace information from Obsidian.md
+AAM-PKV/.obsidian/workspace.json
+AAM-PKV/.obsidian/appearance.json
 
+# Swap files
+*.swp
+.*.swp
