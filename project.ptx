@@ -35,7 +35,8 @@
     </target>
   </targets>
   <executables>
-      <tex>lualatex</tex>
+      <latex>lualatex</latex>
+      <pdflatex>pdflatex</pdflatex>
       <xelatex>xelatex</xelatex>
       <pdfsvg>pdf2svg</pdfsvg>
       <asy>asy</asy>

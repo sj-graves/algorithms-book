@@ -89,3 +89,6 @@ GitHub.sublime-settings
 .dropbox.attr
 .dropbox.cache
 
+# Ignore all of the settings from Obsidian.md
+AAM-PKV/.obsidian
+
