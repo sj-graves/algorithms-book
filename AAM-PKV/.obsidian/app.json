@@ -1,5 +1,6 @@
 {
   "showLineNumber": true,
   "propertiesInDocument": "source",
-  "livePreview": false
+  "livePreview": false,
+  "alwaysUpdateLinks": true
 }

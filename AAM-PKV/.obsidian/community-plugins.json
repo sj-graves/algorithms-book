@@ -1,4 +1,7 @@
 [
   "table-editor-obsidian",
-  "obsidian-linter"
+  "obsidian-linter",
+  "templater-obsidian",
+  "obsidian-text-format",
+  "obsidian-trim-whitespace"
 ]
