@@ -29,11 +29,11 @@
             This appendix serves as a rapid introduction to the basics of programming in Python, with the intent of getting readers through to solving mathematical problems computationally in as little time as possible.
         </p>
     </introduction>
-    <xi:include href="./appsec_python_idle.ptx" />
-    <xi:include href="./appsec_python_basicdata.ptx" />
-    <xi:include href="./appsec_python_containers.ptx" />
-    <xi:include href="./appsec_python_iteration.ptx" />
-    <xi:include href="./appsec_python_functions.ptx" />
-    <xi:include href="./appsec_python_errors.ptx" />
+    <xi:include href="./sec_python_idle.ptx" />
+    <xi:include href="./sec_python_basicdata.ptx" />
+    <xi:include href="./sec_python_containers.ptx" />
+    <xi:include href="./sec_python_iteration.ptx" />
+    <xi:include href="./sec_python_functions.ptx" />
+    <xi:include href="./sec_python_errors.ptx" />
 
 </appendix>
