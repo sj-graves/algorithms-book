@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <backmatter xmlns:xi="http://www.w3.org/2001/XInclude" xml:id="aam-backmatter">
-    <xi:include href="./app_python.ptx" />
+    <xi:include href="./ch_python/app_python.ptx" />
 <!--     <xi:include href="./app_projects.ptx" /> -->
     <xi:include href="./app_lists.ptx" />
 
