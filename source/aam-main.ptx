@@ -9,12 +9,12 @@
         <!-- FRONTMATTER -->
         <xi:include href="./aam_frontmatter.ptx" />
         <!-- CHAPTERS -->
-        <xi:include href="./ch_intro.ptx"  />
-        <xi:include href="./ch_perms.ptx"  />
-        <xi:include href="./ch_crypto.ptx" />
-        <xi:include href="./ch_linalg.ptx" />
-        <xi:include href="./ch_matapps.ptx" />
-        <xi:include href="./ch_gtalgos.ptx" />
+        <xi:include href="./ch_intro/ch_intro.ptx"  />
+        <xi:include href="./ch_perms/ch_perms.ptx"  />
+        <xi:include href="./ch_crypto/ch_crypto.ptx" />
+        <xi:include href="./ch_linalg/ch_linalg.ptx" />
+        <xi:include href="./ch_matapps/ch_matapps.ptx" />
+        <xi:include href="./ch_gtalgos/ch_gtalgos.ptx" />
         <!-- BACKMATTER -->
         <xi:include href="./aam_backmatter.ptx" />
     </book>

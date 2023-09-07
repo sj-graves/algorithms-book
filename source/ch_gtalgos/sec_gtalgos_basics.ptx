@@ -30,7 +30,7 @@
                 A famous example of a graph is the <term>Petersen graph</term>, <m>\Pi</m>. Here it is drawn with its vertex set consisting of the collection of subsets of size 2 of the set <m>\set{0,1,2,3,4}</m>, with an edge between vertices if and only if they are disjoint as sets. This labeling of the Petersen graph is convenient for several application in <em>algebraic graph theory</em>.
             </p>
             <image xml:id="img-petersen_graph" width="50%">
-            <xi:include href="img_petersen_graph.ptx" />
+            <xi:include href="../imgs/img_petersen_graph.ptx" />
         </image>
         </statement>
     </example>
@@ -88,7 +88,7 @@
             <m>E' = \set{v_0v_2, v_0v_3, v_2v_7, v_3v_8, v_7v_8}</m>, highlighted in red.
         </p>
         <image xml:id="img-petersen_subgraph" width="50%">
-            <xi:include href="./img_petersen_subgraph.ptx" />
+            <xi:include href="../imgs/img_petersen_subgraph.ptx" />
         </image>
     </example>
     <definition xml:id="defn-graph_isomorphism">
@@ -177,7 +177,7 @@
             It is easy to draw the Petersen graph with two distinct (and openly disjoint) <m>v_0,v_3</m>-paths, one highlighted in red and the other in blue. The union of the red and blue paths is a 9-cycle in <m>\Pi</m>.
         </p>
         <image xml:id="img-petersen_cycle" width="50%">
-            <xi:include href="./img_petersen_cycle.ptx" />
+            <xi:include href="../imgs/img_petersen_cycle.ptx" />
         </image>
     </example>
     <definition xml:id="defn-connected_graph">

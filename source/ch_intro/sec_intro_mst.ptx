@@ -21,7 +21,7 @@
         <figure xml:id="fig-smallnetwork">
             <caption>A small network with connection costs.</caption>
             <image width="50%" xml:id="img-smallnetwork">
-                <xi:include href="./img_intro_smallnet.ptx" />
+                <xi:include href="../imgs/img_intro_smallnet.ptx" />
             </image>
         </figure>
         <p>

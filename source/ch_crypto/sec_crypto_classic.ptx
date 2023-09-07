@@ -69,7 +69,7 @@
             <figure xml:id="fig-playfair_grid">
                 <caption>Playfair grid for the key phrase <q>Go Patriots! Talons up!</q></caption>
                 <image xml:id="img-playfair_grid" width="30%">
-                    <xi:include href="img_playfair_grid.ptx" />
+                    <xi:include href="../imgs/img_playfair_grid.ptx" />
                 </image>
             </figure>
             <p>
@@ -91,7 +91,7 @@
             <figure xml:id="fig-playfair-boxed">
                 <caption>Playfair grid for the key phrase <q>Go Patriots! Talons up!</q> with the digraph <c>TH</c> boxed in red, <c>EB</c> boxed in blue, and <c>MA</c> boxed in green.</caption>
                 <image xml:id="img-playfair-boxed" width = "30%">
-                    <xi:include href="img_playfair_boxed.ptx" />
+                    <xi:include href="../imgs/img_playfair_boxed.ptx" />
                 </image>
             </figure>
             <p>

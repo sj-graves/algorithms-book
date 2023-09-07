@@ -501,7 +501,7 @@
                     <figure xml:id="fig_kruskal_exmp">
                         <caption> A weighted graph <m>\Gamma</m>.</caption>
                         <image width='50%' xml:id="img-weighted_kruskal">
-                            <xi:include href="./img_weighted_kruskal.ptx" />
+                            <xi:include href="../imgs/img_weighted_kruskal.ptx" />
                         </image>
                     </figure>
                     <p>
@@ -676,7 +676,7 @@
                     <figure xml:id="fig_kruskal_exmp_completed" >
                         <caption>The same graph <m>\Gamma</m> with the minimum spanning tree discovered via Kruskal's algorithm highlighted with red edges.</caption>
                         <image width='50%' xml:id="img-weighted_kruskal_mst">
-                            <xi:include href="./img_weighted_kruskal_mst.ptx" />
+                            <xi:include href="../imgs/img_weighted_kruskal_mst.ptx" />
                         </image>
                     </figure>
 

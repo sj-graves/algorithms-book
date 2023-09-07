@@ -295,7 +295,7 @@
                     <figure xml:id="fig-stackedpermproduct">
                         <caption>A stacked permutation product diagram demonstrating <m>\sigma_5\sigma_4\sigma_3\sigma_2\sigma_1(1) = 7</m>.</caption>
                         <image xml:id="img-stackedpermproduct" width="50%">
-                            <xi:include href="./img_perms_stackedpermproduct.ptx" />
+                            <xi:include href="../imgs/img_perms_stackedpermproduct.ptx" />
                         </image>
                     </figure>
                     <p>
@@ -385,7 +385,7 @@
                     <figure xml:id="fig-permprod-noncomm">
                         <caption>Permutation products (as a composition) are not commutative.</caption>
                         <image xml:id="img-permprod-noncomm" width="75%">
-                            <xi:include href="./img_permprod_noncomm.ptx" />
+                            <xi:include href="../imgs/img_permprod_noncomm.ptx" />
                         </image>
                     </figure>
                     <p>
