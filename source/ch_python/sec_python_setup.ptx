@@ -24,7 +24,7 @@
             running commands at the command line:
         </p>
         <console prompt="$ ">
-            <prompt># </prompt>
+            <prompt>$ </prompt>
             <input>
                 touch myface
             </input>
@@ -43,20 +43,21 @@
                 <li>
                     <title>Windows</title>
                     <p>
-                        Notepad++
+                        <alert>Notepad++</alert>, from <url href="https://notepad-plus-plus.org/" />
                     </p>
                 </li>
                 <li>
                     <title>MacOS</title>
                     <p>
-                        TextEdit, gedit
+                        <alert>TextEdit</alert> (ships with MacOS); <alert>gedit</alert> from <url
+                            href="https://wiki.gnome.org/Apps/Gedit" />
                     </p>
                 </li>
                 <li>
                     <title>Linux (GUI)</title>
-                    <p>
-                        gedit
-                    </p>
+                    <p> Depends on desktop, but they all come with one. I like <alert>gedit</alert>
+                        if using Gnome, from <url
+                            href="https://wiki.gnome.org/Apps/Gedit" />. </p>
                 </li>
                 <li>
                     <title>Linux (CLI)</title>
@@ -70,25 +71,6 @@
             a simple as a text editor. If you want something more sophisticated but not
             over-powered, you can use <c>geany</c>; this is technically an <term>integrated
             development environment</term> rather than a text editor. </p>
-        <!-- <aside>
-            <p> I highly recommend using a free and open-source text editor. VS Code is excellent
-                but has some warnings: <ul>
-                    <li>
-                        <p>
-                            the pre-compiled version from Microsoft has tracking telemetry installed
-                and
-                            is not distributed under an open source license;
-                        </p>
-                    </li>
-                    <li>
-                        <p>there are a plethora of extensions available which turn VS Code into an <term>integrated
-                development environment</term>, which is great for programmers but bad for
-                beginners. We will avoid using any of the features that lead to laziness.</p>
-                    </li>
-                </ul>
-                I use Notepad++ on Windows and gedit on Linux, but a FOSS variant of VS Code
-                (VSCodium) for actual development. </p>
-        </aside> -->
     </subsection>
     <subsection xml:id="sub-python-setup-python">
         <title>Obtain Python</title>
@@ -117,73 +99,85 @@
             </console>
         </listing>
         <p> If this second case occurs, type <c>quit()</c> to exit Python and return to your
-            terminal. If it does not, you need Python: go to <url href="https://python.org"/> and follow the download directions appropriate for your operating system.</p>
+            terminal. If it does not, you need Python: go to <url href="https://python.org" /> and
+            follow the download directions appropriate for your operating system.</p>
     </subsection>
-    <!-- <subsection xml:id="sub-python-setup-interactivemode">
-        <title>Interactive Mode</title>
+    <subsection xml:id="sub-python-setup-working">
+        <title>Working environment</title>
+        <p> It's a good idea to have a dedicated <term>working environment</term> for your course
+            work. I like to create a subdirectory in my <c>Documents</c> directory called <c>aam</c>
+            and do all my work there, keeping all of the files associated with each project in a
+            subdirectory of that. It makes everything nice and hierarchical and easy to find, rather
+            than scrolling through a long list of files all dumped in one folder (or on the
+            desktop)! </p>
+    </subsection>
+    <subsection xml:id="sub-python-setup-firstprogram">
+        <title>A first Python script</title>
+        <p> We've alread seen that executing <c>python3</c> from the command line will allow us to
+            enter Python's interactive mode, but generally speaking you won't use that mode very
+            often. Most of the time you'll work with programs saved in separate files, called <term>
+            scripts</term>. It is normal to name Python scripts as files ending in the <c>.py</c>
+            extension. </p>
         <p>
-            When you first run IDLE, you're greeted with a box that looks like this:
-
-        </p>
-        <listing xml:id='list-starting_idle'>
-            <title>Starting IDLE</title>
-            <console>
-                <output>
-                    Python 3.10.0 (tags/v3.10.0:b494f59, Oct 4 2021, 19:00:18) [MSC v.1929 64 bit
-                    (AMD64)] on win32
-                    Type "help", "copyright", "credits" or "license()" for more information.
-                </output>
-                <prompt>&gt;&gt;&gt; </prompt>
-                <input> </input>
-            </console>
-        </listing>
-        <p> Different versions of IDLE may have some sort of dividing line where the prompt <q>
-            &gt;&gt;&gt;</q> is separated from the input, and the color scheme of the IDLE window
-            can be configured by the user, so the window might look different depending upon who is
-            using it. </p>
-        <p>
-            When you type commands at the prompt and press enter (or return), they are executed.
+            Using your text editor, start a new file, and type the following exactly into it.
         </p>
         <listing>
-            <title>The Python prompt for Interactive Mode</title>
-            <console>
-                <prompt>&gt;&gt;&gt; </prompt>
-                <input>2 + (3 / 5 ** 4)</input>
-                <output>2.0048</output>
-            </console>
+            <caption>A first Python script</caption>
+            <program language="python3">
+                <input>
+                    # Name: Frodo Baggins
+                    print("Hello world!")
+                    print("Hello yourself")
+                    print('Type this exactly the way that I have typed it')
+                    print("Don't change anything, even if you feel 'smart.'")
+                    print("""\tSometimes things don't do what you would expect, and\n
+                          that's\t\tokay""")
+                </input>
+            </program>
         </listing>
         <p>
-            Interactive mode is of limited use, but is very good for doing quick calculations or
-            checking to see if your syntax is correct.
+            Save that file in as <c>prj01_01.py</c>. Then navigate in your terminal to the directory where you saved the file, and run the following command.
         </p>
-        <definition xml:id="def-intro-syntax">
-            <title>Syntax</title>
-            <statement>
-                <p> The <term>syntax</term> of a programming language is the set of rules which
-                    decide what combinations of symbols are meaningful in the language. </p>
-            </statement>
-        </definition>
-        <p> Python was designed to be as easy to write and read as possible, and to be very easy to
-            go from an algorithm to a working program. Anything more complicated than a single line
-            will be written in a <term>module</term>, which is a sequence of Python commands saved
-            in a text file (usually with file extension <c>.py</c>). Python modules can be opened,
-            edited, and executed all within IDLE. </p>
-        <technology xml:id="tech-quitting-python">
-            <title>Quitting Python</title>
-            <p>
-                If you're using Python via IDLE, just close all of your IDLE windows to quit the
-                program. If not, you can use
-            </p>
-            <console>
-                <prompt>>>> </prompt>
-                <input>quit()</input>
-                <output />
-            </console>
-        </technology>
-    </subsection> -->
-    <subsection xml:id="sub-python-setup-firstprogram">
-        <title>A first Python module</title>
+        <console>
+            <prompt>$ </prompt>
+            <input>
+                python3 prj01_01.py
+            </input>
+        </console>
         <p>
+            You should get the following output.
+        </p>
+        <console>
+            <output>
+                Hello world!
+                Hello yourself
+                Type this exactly the way that I have typed it
+                Don't change anything, even if you feel 'smart.'
+                Sometimes things don't do what you would expect, and
+
+                    that's okay
+            </output>
+        </console>
+        <remark>
+            <p> It is <em>very important</em> that you actually type the given code in by hand <em>exactly
+                as it is written</em>. There are two reasons for this: </p>
+
+            <p>
+                <ol>
+                    <li>
+                        Attention to detail is a very important difference between people who are
+                        good at their job and people who are merely mediocre.
+                    </li>
+
+                    <li>
+                        Sometimes the point of an exercise will be to fix something which has
+                        intentionally been written as broken.
+                    </li>
+
+                </ol>
+            </p>
+        </remark>
+        <!-- <p>
             From within IDLE, do the following:
         </p>
         <p>
@@ -234,6 +228,6 @@
         <p> All of your actual work in Python should be done in modules, which are also called <em>
             scripts</em>. It is convenient to have one folder where you keep all of your Python
             code, and even more convenient to name your Python modules sensibly so that they can be
-            reused if ever you have the need. </p>
+            reused if ever you have the need. </p> -->
     </subsection>
 </section>
