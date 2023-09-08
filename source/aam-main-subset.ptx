@@ -14,8 +14,8 @@
 <!--         <xi:include href="./ch_crypto.ptx" /> -->
 <!--         <xi:include href="./ch_linalg.ptx" /> -->
 <!--         <xi:include href="./ch_matapps.ptx" /> -->
-        <xi:include href="./ch_gtalgos.ptx" />
+        <!-- <xi:include href="./ch_gtalgos.ptx" /> -->
         <!-- BACKMATTER -->
-<!--         <xi:include href="./aam_backmatter.ptx" /> -->
+        <xi:include href="./aam_backmatter.ptx" />
     </book>
 </pretext>

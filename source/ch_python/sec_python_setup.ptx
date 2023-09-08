@@ -23,7 +23,8 @@
             While your actual terminal might look different, this is what we will use to demonstrate
             running commands at the command line:
         </p>
-        <console prompt="$">
+        <console prompt="$ ">
+            <prompt># </prompt>
             <input>
                 touch myface
             </input>
@@ -36,61 +37,89 @@
             want to work with a plain text editor that does not have any additional bells and
             whistles.
         </p>
-        <table>
-            <title>Text Editors by OS</title>
-            <tabular>
-                <row header="yes" bottom="major">
-                    <cell>OS</cell>
-                    <cell>Editors</cell>
-                </row>
-                <row>
-                    <cell>Windows</cell>
-                    <cell>Notepad++, VS Code</cell>
-                </row>
-                <row>
-                    <cell>MacOS</cell>
-                    <cell>TextEdit, gedit, VS Code</cell>
-                </row>
-                <row>
-                    <cell>Linux (GUI)</cell>
-                    <cell>gedit, VS Code</cell>
-                </row>
-                <row>
-                    <cell>Linux (CLI)</cell>
-                    <cell>Vim, Emacs, nano</cell>
-                </row>
-            </tabular>
-        </table>
-        <p> I highly recommend using a free and open-source text editor. VS Code is excellent but
-            has some warnings: <ul>
+        <list>
+            <title>Text editors by OS</title>
+            <dl>
                 <li>
+                    <title>Windows</title>
                     <p>
-                        the pre-compiled version from Microsoft has tracking telemetry installed and
-            is not distributed under an open source license;
+                        Notepad++
                     </p>
                 </li>
                 <li>
-                    <p>there are a plethora of extensions available which turn VS Code into an <term>integrated
-            development environment</term>, which is great for programmers but bad for beginners. We
-            will avoid using any of the features that lead to laziness.</p>
+                    <title>MacOS</title>
+                    <p>
+                        TextEdit, gedit
+                    </p>
                 </li>
-            </ul>
-            I use Notepad++ on Windows and gedit on Linux, but a FOSS variant of VS Code (VSCodium)
-            for actual development. </p>
+                <li>
+                    <title>Linux (GUI)</title>
+                    <p>
+                        gedit
+                    </p>
+                </li>
+                <li>
+                    <title>Linux (CLI)</title>
+                    <p>
+                        <c>vim</c>, <c>emacs</c>, <c>nano</c>
+                    </p>
+                </li>
+            </dl>
+        </list>
+        <p> I highly recommend using free and open-source software (FOSS), especially for something
+            a simple as a text editor. If you want something more sophisticated but not
+            over-powered, you can use <c>geany</c>; this is technically an <term>integrated
+            development environment</term> rather than a text editor. </p>
+        <!-- <aside>
+            <p> I highly recommend using a free and open-source text editor. VS Code is excellent
+                but has some warnings: <ul>
+                    <li>
+                        <p>
+                            the pre-compiled version from Microsoft has tracking telemetry installed
+                and
+                            is not distributed under an open source license;
+                        </p>
+                    </li>
+                    <li>
+                        <p>there are a plethora of extensions available which turn VS Code into an <term>integrated
+                development environment</term>, which is great for programmers but bad for
+                beginners. We will avoid using any of the features that lead to laziness.</p>
+                    </li>
+                </ul>
+                I use Notepad++ on Windows and gedit on Linux, but a FOSS variant of VS Code
+                (VSCodium) for actual development. </p>
+        </aside> -->
     </subsection>
     <subsection xml:id="sub-python-setup-python">
         <title>Obtain Python</title>
         <p>
-            Getting Python installed is pretty easy, but you might already have it. Open your terminal and try the following:
+            Getting Python installed is pretty easy, but you might already have it. Open your
+            terminal and try the following:
         </p>
-        <console prompt="$">
+        <console>
+            <prompt>$ </prompt>
             <input>
                 python3
             </input>
         </console>
-
+        <p> You should get one of two responses: the terminal will either tell you that no such
+            command is known (and possibly suggest where to get such a command) or you'll enter the <term>Python
+            interpreter</term>, which will look like so: </p>
+        <listing>
+            <caption>An interactive Python session</caption>
+            <console>
+                <output>
+                    Python 3.10.12 (main, Jun 11 2023, 05:26:28) [GCC 11.4.0] on linux
+                    Type "help", "copyright", "credits" or "license" for more information.
+                </output>
+                <prompt>&gt;&gt;&gt; </prompt>
+                <input />
+            </console>
+        </listing>
+        <p> If this second case occurs, type <c>quit()</c> to exit Python and return to your
+            terminal. If it does not, you need Python: go to <url href="https://python.org"/> and follow the download directions appropriate for your operating system.</p>
     </subsection>
-    <subsection xml:id="sub-python-setup-interactivemode">
+    <!-- <subsection xml:id="sub-python-setup-interactivemode">
         <title>Interactive Mode</title>
         <p>
             When you first run IDLE, you're greeted with a box that looks like this:
@@ -151,7 +180,7 @@
                 <output />
             </console>
         </technology>
-    </subsection>
+    </subsection> -->
     <subsection xml:id="sub-python-setup-firstprogram">
         <title>A first Python module</title>
         <p>
