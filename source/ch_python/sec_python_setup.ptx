@@ -1,0 +1,210 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<section xml:id="sec-python-setup" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <title>Getting started with Python</title>
+    <introduction>
+        <p> We began with a neat practical algorithm. Unfortunately, even with a very good
+            understanding of the problem and its solution a beginner is not ready to turn the
+            complete algorithm into a working computer code, or <term>program</term>. To get started
+            with Python, you need three tools: a <term>terminal
+            </term>, an <term>editor</term>, and the <term>Python interprer</term>
+            itself. </p>
+    </introduction>
+
+    <subsection xml:id="sub-python-setup-terminal">
+        <title>Working in a terminal</title>
+        <p> Every modern computer operating system comes with a <term>terminal</term>, also called
+            the <term>command line</term>. Whether or not you have used it previously depends upon
+            how you generally use your computer. </p>
+        <p> In Windows, the best terminal to use is <term>PowerShell</term>; in MacOS and most
+            graphical Linux desktops, it is called <term>Terminal</term>. If you happen to use Linux
+            from the command line, you're already where you need to be. </p>
+        <p>
+            While your actual terminal might look different, this is what we will use to demonstrate
+            running commands at the command line:
+        </p>
+        <console prompt="$">
+            <input>
+                touch myface
+            </input>
+        </console>
+    </subsection>
+    <subsection xml:id="sub-python-setup-editor">
+        <title>Text editors</title>
+        <p>
+            There are so many text editors that it is pointless to try to list them all. Ideally you
+            want to work with a plain text editor that does not have any additional bells and
+            whistles.
+        </p>
+        <table>
+            <title>Text Editors by OS</title>
+            <tabular>
+                <row header="yes" bottom="major">
+                    <cell>OS</cell>
+                    <cell>Editors</cell>
+                </row>
+                <row>
+                    <cell>Windows</cell>
+                    <cell>Notepad++, VS Code</cell>
+                </row>
+                <row>
+                    <cell>MacOS</cell>
+                    <cell>TextEdit, gedit, VS Code</cell>
+                </row>
+                <row>
+                    <cell>Linux (GUI)</cell>
+                    <cell>gedit, VS Code</cell>
+                </row>
+                <row>
+                    <cell>Linux (CLI)</cell>
+                    <cell>Vim, Emacs, nano</cell>
+                </row>
+            </tabular>
+        </table>
+        <p> I highly recommend using a free and open-source text editor. VS Code is excellent but
+            has some warnings: <ul>
+                <li>
+                    <p>
+                        the pre-compiled version from Microsoft has tracking telemetry installed and
+            is not distributed under an open source license;
+                    </p>
+                </li>
+                <li>
+                    <p>there are a plethora of extensions available which turn VS Code into an <term>integrated
+            development environment</term>, which is great for programmers but bad for beginners. We
+            will avoid using any of the features that lead to laziness.</p>
+                </li>
+            </ul>
+            I use Notepad++ on Windows and gedit on Linux, but a FOSS variant of VS Code (VSCodium)
+            for actual development. </p>
+    </subsection>
+    <subsection xml:id="sub-python-setup-python">
+        <title>Obtain Python</title>
+        <p>
+            Getting Python installed is pretty easy, but you might already have it. Open your terminal and try the following:
+        </p>
+        <console prompt="$">
+            <input>
+                python3
+            </input>
+        </console>
+
+    </subsection>
+    <subsection xml:id="sub-python-setup-interactivemode">
+        <title>Interactive Mode</title>
+        <p>
+            When you first run IDLE, you're greeted with a box that looks like this:
+
+        </p>
+        <listing xml:id='list-starting_idle'>
+            <title>Starting IDLE</title>
+            <console>
+                <output>
+                    Python 3.10.0 (tags/v3.10.0:b494f59, Oct 4 2021, 19:00:18) [MSC v.1929 64 bit
+                    (AMD64)] on win32
+                    Type "help", "copyright", "credits" or "license()" for more information.
+                </output>
+                <prompt>&gt;&gt;&gt; </prompt>
+                <input> </input>
+            </console>
+        </listing>
+        <p> Different versions of IDLE may have some sort of dividing line where the prompt <q>
+            &gt;&gt;&gt;</q> is separated from the input, and the color scheme of the IDLE window
+            can be configured by the user, so the window might look different depending upon who is
+            using it. </p>
+        <p>
+            When you type commands at the prompt and press enter (or return), they are executed.
+        </p>
+        <listing>
+            <title>The Python prompt for Interactive Mode</title>
+            <console>
+                <prompt>&gt;&gt;&gt; </prompt>
+                <input>2 + (3 / 5 ** 4)</input>
+                <output>2.0048</output>
+            </console>
+        </listing>
+        <p>
+            Interactive mode is of limited use, but is very good for doing quick calculations or
+            checking to see if your syntax is correct.
+        </p>
+        <definition xml:id="def-intro-syntax">
+            <title>Syntax</title>
+            <statement>
+                <p> The <term>syntax</term> of a programming language is the set of rules which
+                    decide what combinations of symbols are meaningful in the language. </p>
+            </statement>
+        </definition>
+        <p> Python was designed to be as easy to write and read as possible, and to be very easy to
+            go from an algorithm to a working program. Anything more complicated than a single line
+            will be written in a <term>module</term>, which is a sequence of Python commands saved
+            in a text file (usually with file extension <c>.py</c>). Python modules can be opened,
+            edited, and executed all within IDLE. </p>
+        <technology xml:id="tech-quitting-python">
+            <title>Quitting Python</title>
+            <p>
+                If you're using Python via IDLE, just close all of your IDLE windows to quit the
+                program. If not, you can use
+            </p>
+            <console>
+                <prompt>>>> </prompt>
+                <input>quit()</input>
+                <output />
+            </console>
+        </technology>
+    </subsection>
+    <subsection xml:id="sub-python-setup-firstprogram">
+        <title>A first Python module</title>
+        <p>
+            From within IDLE, do the following:
+        </p>
+        <p>
+            <ol>
+                <li>
+                    <p> Open a new file, either from the File menu or pressing <c>Ctrl-N</c>. </p>
+                </li>
+                <li>
+                    <p> Type <c>print("Hello, world!")</c> in the blank file. </p>
+                </li>
+                <li>
+                    <p> Save it somewhere memorable (like a Python folder on your desktop) as <c>
+                        hello_world.py</c>
+                    </p>
+                </li>
+                <li>
+                    <p>From the Run menu, select Run Module, or press <c>F5</c> on your keyboard. </p>
+                </li>
+            </ol>
+        </p>
+        <p>
+            After a second, you should see some output in the IDLE Shell window, like so:
+        </p>
+        <listing xml:id="list-hello_world_output">
+            <title>The output of running the <q>Hello, World!</q> module.</title>
+            <console>
+                <output>= RESTART: C:/Users/sgraves/OneDrive - The University of Texas at
+                    Tyler/Python/hello_world.py
+                    Hello, world!
+                </output>
+                <prompt>&gt;&gt;&gt; </prompt>
+                <input />
+            </console>
+        </listing>
+        <p>
+            Congratulations! You can no longer say you have never written a computer program.
+        </p>
+        <p>
+            We will frequently be writing modules and listing code examples in the text, so they
+            will appear like so:
+        </p>
+        <listing xml:id="list-hello_world">
+            <title>The <q>Hello, world!</q> program</title>
+            <program language="python">
+                <input>print("Hello, world!")</input>
+            </program>
+        </listing>
+        <p> All of your actual work in Python should be done in modules, which are also called <em>
+            scripts</em>. It is convenient to have one folder where you keep all of your Python
+            code, and even more convenient to name your Python modules sensibly so that they can be
+            reused if ever you have the need. </p>
+    </subsection>
+</section>

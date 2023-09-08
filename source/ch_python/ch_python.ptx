@@ -5,7 +5,7 @@
     <objectives>
         <ol>
             <li><p>
-                Introduce IDLE
+                Setting up to work with Python
                 </p></li>
             <li><p>
                 Work with basic data types
@@ -26,10 +26,10 @@
     </objectives>
     <introduction>
         <p>
-            This appendix serves as a rapid introduction to the basics of programming in Python, with the intent of getting readers through to solving mathematical problems computationally in as little time as possible.
+            This portion of the text serves as an incredibly brief introduction to the basics of programming in Python, with the intent of getting readers through to solving mathematical problems computationally in as little time as possible. This is 
         </p>
     </introduction>
-    <xi:include href="./sec_python_idle.ptx" />
+    <xi:include href="./sec_python_setup.ptx" />
     <xi:include href="./sec_python_basicdata.ptx" />
     <xi:include href="./sec_python_containers.ptx" />
     <xi:include href="./sec_python_iteration.ptx" />
