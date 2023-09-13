@@ -59,8 +59,15 @@ Since these are commonly used examples, give them stubs of class files so that t
 1. Start with a math problem to make them think "procedurally" about math. I still like "minimum spanning tree" because they might come up with Kruskal's algorithm or Jarnik-Prim.
 2. Python Crash Course 1 - basics, data types, loops, conditionals
 3. Python Crash Course 2 - functions, OOP, classes & methods
-4. Encryption 1 - Kid RSA
-5. Encryption 2 - One Time Pads (XOR)
-6. Matrix arithmetic
+4. Encryption 1 - Kid RSA/RSA
+5. Encryption 2 - One Time Pads (traditional vs. XOR)
+6. Matrix arithmetic (applied OOP)
 7. Gauss Jordan Elimination using Multiplication by Elementary Matrices
-8. ???
+8. 
+9.
+10.
+11.
+12.
+13.
+14.
+15.
