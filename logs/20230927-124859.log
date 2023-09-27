@@ -1,0 +1,318 @@
+INFO    : PreTeXt project found in `/home/sjgraves/Documents/algorithms-book`.
+WARNING : Using CLI version 2.0.2 but project's `requirements.txt`
+WARNING : is configured to use 1.8.1. Consider either installing
+WARNING : CLI version 1.8.1 or running `pretext init --refresh`
+WARNING : to update `requirements.txt` to match 2.0.2.
+INFO    : Since no target was supplied, we will use "html".
+
+INFO    : converting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx to svg graphics for placement in /home/sjgraves/Documents/algorithms-book/generated-assets/latex-image
+INFO    : extracting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx
+INFO    : string parameters passed to extraction stylesheet: {'publisher': '/home/sjgraves/Documents/algorithms-book/publication/publication.ptx', 'subtree': 'img-smallnetwork'}
+INFO    : discovering source file's directory name: /home/sjgraves/Documents/algorithms-book/source
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/generated-assets
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/assets
+INFO    : XSL conversion of /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx by /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : comprehensive messages, warnings, and errors:
+INFO    : successful application of /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : converting img-smallnetwork.tex to img-smallnetwork.pdf
+INFO    : cropping img-smallnetwork.pdf to cropped-img-smallnetwork.pdf
+INFO    : renaming cropped-img-smallnetwork.pdf to img-smallnetwork.pdf
+INFO    : converting img-smallnetwork.pdf to img-smallnetwork.svg
+INFO    : converting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx to svg graphics for placement in /home/sjgraves/Documents/algorithms-book/generated-assets/latex-image
+INFO    : extracting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx
+INFO    : string parameters passed to extraction stylesheet: {'publisher': '/home/sjgraves/Documents/algorithms-book/publication/publication.ptx', 'subtree': 'img-stackedpermproduct'}
+INFO    : discovering source file's directory name: /home/sjgraves/Documents/algorithms-book/source
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/generated-assets
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/assets
+INFO    : XSL conversion of /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx by /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : comprehensive messages, warnings, and errors:
+INFO    : successful application of /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : converting img-stackedpermproduct.tex to img-stackedpermproduct.pdf
+INFO    : cropping img-stackedpermproduct.pdf to cropped-img-stackedpermproduct.pdf
+INFO    : renaming cropped-img-stackedpermproduct.pdf to img-stackedpermproduct.pdf
+INFO    : converting img-stackedpermproduct.pdf to img-stackedpermproduct.svg
+INFO    : converting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx to svg graphics for placement in /home/sjgraves/Documents/algorithms-book/generated-assets/latex-image
+INFO    : extracting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx
+INFO    : string parameters passed to extraction stylesheet: {'publisher': '/home/sjgraves/Documents/algorithms-book/publication/publication.ptx', 'subtree': 'img-permprod-noncomm'}
+INFO    : discovering source file's directory name: /home/sjgraves/Documents/algorithms-book/source
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/generated-assets
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/assets
+INFO    : XSL conversion of /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx by /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : comprehensive messages, warnings, and errors:
+INFO    : successful application of /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : converting img-permprod-noncomm.tex to img-permprod-noncomm.pdf
+INFO    : cropping img-permprod-noncomm.pdf to cropped-img-permprod-noncomm.pdf
+INFO    : renaming cropped-img-permprod-noncomm.pdf to img-permprod-noncomm.pdf
+INFO    : converting img-permprod-noncomm.pdf to img-permprod-noncomm.svg
+INFO    : converting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx to svg graphics for placement in /home/sjgraves/Documents/algorithms-book/generated-assets/latex-image
+INFO    : extracting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx
+INFO    : string parameters passed to extraction stylesheet: {'publisher': '/home/sjgraves/Documents/algorithms-book/publication/publication.ptx', 'subtree': 'img-playfair_grid'}
+INFO    : discovering source file's directory name: /home/sjgraves/Documents/algorithms-book/source
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/generated-assets
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/assets
+INFO    : XSL conversion of /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx by /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : comprehensive messages, warnings, and errors:
+INFO    : successful application of /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : converting img-playfair_grid.tex to img-playfair_grid.pdf
+INFO    : cropping img-playfair_grid.pdf to cropped-img-playfair_grid.pdf
+INFO    : renaming cropped-img-playfair_grid.pdf to img-playfair_grid.pdf
+INFO    : converting img-playfair_grid.pdf to img-playfair_grid.svg
+INFO    : converting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx to svg graphics for placement in /home/sjgraves/Documents/algorithms-book/generated-assets/latex-image
+INFO    : extracting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx
+INFO    : string parameters passed to extraction stylesheet: {'publisher': '/home/sjgraves/Documents/algorithms-book/publication/publication.ptx', 'subtree': 'img-playfair-boxed'}
+INFO    : discovering source file's directory name: /home/sjgraves/Documents/algorithms-book/source
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/generated-assets
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/assets
+INFO    : XSL conversion of /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx by /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : comprehensive messages, warnings, and errors:
+INFO    : successful application of /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : converting img-playfair-boxed.tex to img-playfair-boxed.pdf
+INFO    : cropping img-playfair-boxed.pdf to cropped-img-playfair-boxed.pdf
+INFO    : renaming cropped-img-playfair-boxed.pdf to img-playfair-boxed.pdf
+INFO    : converting img-playfair-boxed.pdf to img-playfair-boxed.svg
+INFO    : converting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx to svg graphics for placement in /home/sjgraves/Documents/algorithms-book/generated-assets/latex-image
+INFO    : extracting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx
+INFO    : string parameters passed to extraction stylesheet: {'publisher': '/home/sjgraves/Documents/algorithms-book/publication/publication.ptx', 'subtree': 'img-petersen_graph'}
+INFO    : discovering source file's directory name: /home/sjgraves/Documents/algorithms-book/source
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/generated-assets
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/assets
+INFO    : XSL conversion of /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx by /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : comprehensive messages, warnings, and errors:
+INFO    : successful application of /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : converting img-petersen_graph.tex to img-petersen_graph.pdf
+INFO    : cropping img-petersen_graph.pdf to cropped-img-petersen_graph.pdf
+INFO    : renaming cropped-img-petersen_graph.pdf to img-petersen_graph.pdf
+INFO    : converting img-petersen_graph.pdf to img-petersen_graph.svg
+INFO    : converting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx to svg graphics for placement in /home/sjgraves/Documents/algorithms-book/generated-assets/latex-image
+INFO    : extracting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx
+INFO    : string parameters passed to extraction stylesheet: {'publisher': '/home/sjgraves/Documents/algorithms-book/publication/publication.ptx', 'subtree': 'img-petersen_subgraph'}
+INFO    : discovering source file's directory name: /home/sjgraves/Documents/algorithms-book/source
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/generated-assets
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/assets
+INFO    : XSL conversion of /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx by /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : comprehensive messages, warnings, and errors:
+INFO    : successful application of /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : converting img-petersen_subgraph.tex to img-petersen_subgraph.pdf
+INFO    : cropping img-petersen_subgraph.pdf to cropped-img-petersen_subgraph.pdf
+INFO    : renaming cropped-img-petersen_subgraph.pdf to img-petersen_subgraph.pdf
+INFO    : converting img-petersen_subgraph.pdf to img-petersen_subgraph.svg
+INFO    : converting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx to svg graphics for placement in /home/sjgraves/Documents/algorithms-book/generated-assets/latex-image
+INFO    : extracting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx
+INFO    : string parameters passed to extraction stylesheet: {'publisher': '/home/sjgraves/Documents/algorithms-book/publication/publication.ptx', 'subtree': 'img-petersen_cycle'}
+INFO    : discovering source file's directory name: /home/sjgraves/Documents/algorithms-book/source
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/generated-assets
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/assets
+INFO    : XSL conversion of /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx by /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : comprehensive messages, warnings, and errors:
+INFO    : successful application of /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : converting img-petersen_cycle.tex to img-petersen_cycle.pdf
+INFO    : cropping img-petersen_cycle.pdf to cropped-img-petersen_cycle.pdf
+INFO    : renaming cropped-img-petersen_cycle.pdf to img-petersen_cycle.pdf
+INFO    : converting img-petersen_cycle.pdf to img-petersen_cycle.svg
+INFO    : converting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx to svg graphics for placement in /home/sjgraves/Documents/algorithms-book/generated-assets/latex-image
+INFO    : extracting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx
+INFO    : string parameters passed to extraction stylesheet: {'publisher': '/home/sjgraves/Documents/algorithms-book/publication/publication.ptx', 'subtree': 'img-weighted_kruskal'}
+INFO    : discovering source file's directory name: /home/sjgraves/Documents/algorithms-book/source
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/generated-assets
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/assets
+INFO    : XSL conversion of /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx by /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : comprehensive messages, warnings, and errors:
+INFO    : successful application of /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : converting img-weighted_kruskal.tex to img-weighted_kruskal.pdf
+INFO    : cropping img-weighted_kruskal.pdf to cropped-img-weighted_kruskal.pdf
+INFO    : renaming cropped-img-weighted_kruskal.pdf to img-weighted_kruskal.pdf
+INFO    : converting img-weighted_kruskal.pdf to img-weighted_kruskal.svg
+INFO    : converting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx to svg graphics for placement in /home/sjgraves/Documents/algorithms-book/generated-assets/latex-image
+INFO    : extracting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx
+INFO    : string parameters passed to extraction stylesheet: {'publisher': '/home/sjgraves/Documents/algorithms-book/publication/publication.ptx', 'subtree': 'img-weighted_kruskal_mst'}
+INFO    : discovering source file's directory name: /home/sjgraves/Documents/algorithms-book/source
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/generated-assets
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/assets
+INFO    : XSL conversion of /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx by /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : comprehensive messages, warnings, and errors:
+INFO    : successful application of /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : converting img-weighted_kruskal_mst.tex to img-weighted_kruskal_mst.pdf
+INFO    : cropping img-weighted_kruskal_mst.pdf to cropped-img-weighted_kruskal_mst.pdf
+INFO    : renaming cropped-img-weighted_kruskal_mst.pdf to img-weighted_kruskal_mst.pdf
+INFO    : converting img-weighted_kruskal_mst.pdf to img-weighted_kruskal_mst.svg
+INFO    : converting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx to svg graphics for placement in /home/sjgraves/Documents/algorithms-book/generated-assets/latex-image
+INFO    : extracting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx
+INFO    : string parameters passed to extraction stylesheet: {'publisher': '/home/sjgraves/Documents/algorithms-book/publication/publication.ptx', 'subtree': 'img-graph_dijkstra_initial'}
+INFO    : discovering source file's directory name: /home/sjgraves/Documents/algorithms-book/source
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/generated-assets
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/assets
+INFO    : XSL conversion of /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx by /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : comprehensive messages, warnings, and errors:
+INFO    : successful application of /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : converting img-graph_dijkstra_initial.tex to img-graph_dijkstra_initial.pdf
+INFO    : cropping img-graph_dijkstra_initial.pdf to cropped-img-graph_dijkstra_initial.pdf
+INFO    : renaming cropped-img-graph_dijkstra_initial.pdf to img-graph_dijkstra_initial.pdf
+INFO    : converting img-graph_dijkstra_initial.pdf to img-graph_dijkstra_initial.svg
+INFO    : converting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx to svg graphics for placement in /home/sjgraves/Documents/algorithms-book/generated-assets/latex-image
+INFO    : extracting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx
+INFO    : string parameters passed to extraction stylesheet: {'publisher': '/home/sjgraves/Documents/algorithms-book/publication/publication.ptx', 'subtree': 'forwardflow'}
+INFO    : discovering source file's directory name: /home/sjgraves/Documents/algorithms-book/source
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/generated-assets
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/assets
+INFO    : XSL conversion of /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx by /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : comprehensive messages, warnings, and errors:
+INFO    : successful application of /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : converting forwardflow.tex to forwardflow.pdf
+INFO    : cropping forwardflow.pdf to cropped-forwardflow.pdf
+INFO    : renaming cropped-forwardflow.pdf to forwardflow.pdf
+INFO    : converting forwardflow.pdf to forwardflow.svg
+INFO    : converting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx to svg graphics for placement in /home/sjgraves/Documents/algorithms-book/generated-assets/latex-image
+INFO    : extracting latex-image pictures from /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx
+INFO    : string parameters passed to extraction stylesheet: {'publisher': '/home/sjgraves/Documents/algorithms-book/publication/publication.ptx', 'subtree': 'backflow'}
+INFO    : discovering source file's directory name: /home/sjgraves/Documents/algorithms-book/source
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/generated-assets
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/assets
+INFO    : XSL conversion of /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx by /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : comprehensive messages, warnings, and errors:
+INFO    : successful application of /home/sjgraves/.ptx/xsl/extract-latex-image.xsl
+INFO    : converting backflow.tex to backflow.pdf
+INFO    : cropping backflow.pdf to cropped-backflow.pdf
+INFO    : renaming cropped-backflow.pdf to backflow.pdf
+INFO    : converting backflow.pdf to backflow.svg
+INFO    : Removing temporary directory /tmp/tmpycxisq3z
+INFO    : Removing temporary directory /tmp/tmp8fbh23t5
+INFO    : Removing temporary directory /tmp/tmp59ed6x0b
+INFO    : Removing temporary directory /tmp/tmpx1syh6mm
+INFO    : Removing temporary directory /tmp/tmpzllfjr1o
+INFO    : Removing temporary directory /tmp/tmpoiz9jkj9
+INFO    : Removing temporary directory /tmp/tmpa2d1xj92
+INFO    : Removing temporary directory /tmp/tmp4enn8afm
+INFO    : Removing temporary directory /tmp/tmpvzkltj1o
+INFO    : Removing temporary directory /tmp/tmp4_2a6rw9
+INFO    : Removing temporary directory /tmp/tmppgltv7ft
+INFO    : Removing temporary directory /tmp/tmpopvuyrxi
+INFO    : Removing temporary directory /tmp/tmp0in778wn
+INFO    : Preparing to build into /home/sjgraves/Documents/algorithms-book/output/html.
+INFO    : discovering source file's directory name: /home/sjgraves/Documents/algorithms-book/source
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../generated-assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/generated-assets
+INFO    : verifying and expanding input directory: /home/sjgraves/Documents/algorithms-book/source/../assets
+INFO    : input directory expanded to absolute path: /home/sjgraves/Documents/algorithms-book/assets
+INFO    : Runestone Services (via PreTeXt repository): version 7.1.2
+INFO    : Runestone Services (using newer, via online CDN query): version 7.1.6
+INFO    : converting /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx to HTML in /tmp/tmp5hgywci9
+INFO    : XSL conversion of /home/sjgraves/Documents/algorithms-book/source/aam-main.ptx by /home/sjgraves/.ptx/xsl/pretext-html.xsl
+INFO    : comprehensive messages, warnings, and errors:
+INFO    :     * PTX:DEPRECATE: (2023-08-28) the "prompt" element of a "console" has been deprecated.  In its place, an "input" can have a @prompt attribute, or you can place a session-wide (not document-wide) @prompt attribute on the "console" element.  Until then, we will try to honor your intent. (86 times)
+INFO    :     *              located within: "list-instantiating_ints" (xml:id)
+INFO    :     *              located within: "tech-instantiation" (xml:id), "Python object instantiation" (title)
+INFO    :     *              located within: "list-argument_lists" (xml:id)
+INFO    :     *              located within: "list-argument_lists" (xml:id)
+INFO    :     *              located within: "list-argument_lists" (xml:id)
+INFO    :     *              located within: "list-argument_lists" (xml:id)
+INFO    :     *              located within: "list-argument_lists" (xml:id)
+INFO    :     *              located within: "list-argument_lists" (xml:id)
+INFO    :     *              located within: "list-argument_lists" (xml:id)
+INFO    :     *              located within: "list-dict-keys_values_items" (xml:id)
+INFO    :     *              located within: "list-dict-keys_values_items" (xml:id)
+INFO    :     *              located within: "list-dict-keys_values_items" (xml:id)
+INFO    :     *              located within: "list-dict-keys_values_items" (xml:id)
+INFO    :     *              located within: "list-dict-keys_values_items" (xml:id)
+INFO    :     *              located within: "list-dict-keys_values_items" (xml:id)
+INFO    :     *              located within: "list-dict-keys_values_items" (xml:id)
+INFO    :     *              located within: "list-min-max" (xml:id)
+INFO    :     *              located within: "list-min-max" (xml:id)
+INFO    :     *              located within: "list-sorted" (xml:id)
+INFO    :     *              located within: "exmp-breaking_simple_substitution" (xml:id), "Breaking a simple substitution by frequency analysis" (title)
+INFO    :     *              located within: "exmp-elem_row_ops" (xml:id), "Examples of the elementary row operations" (title)
+INFO    :     *              located within: "sub-python-setup-terminal" (xml:id), "Working in a terminal" (title)
+INFO    :     *              located within: "sub-python-setup-python" (xml:id), "Obtain Python" (title)
+INFO    :     *              located within: "sub-python-setup-python" (xml:id), "Obtain Python" (title)
+INFO    :     *              located within: "sub-python-setup-firstprogram" (xml:id), "A first Python script" (title)
+INFO    :     *              located within: "tech-help" (xml:id), "The help command" (title)
+INFO    :     *              located within: "lst-assign_vs_equals" (xml:id)
+INFO    :     *              located within: "lst-assign_vs_equals" (xml:id)
+INFO    :     *              located within: "lst-assign_vs_equals" (xml:id)
+INFO    :     *              located within: "list-import_math" (xml:id)
+INFO    :     *              located within: "list-import_math" (xml:id)
+INFO    :     *              located within: "list-integer_bools" (xml:id)
+INFO    :     *              located within: "list-integer_bools" (xml:id)
+INFO    :     *              located within: "list-valid_strings" (xml:id)
+INFO    :     *              located within: "list-valid_strings" (xml:id)
+INFO    :     *              located within: "list-valid_strings" (xml:id)
+INFO    :     *              located within: "list-valid_strings" (xml:id)
+INFO    :     *              located within: "list-valid_strings" (xml:id)
+INFO    :     *              located within: "list-valid_strings" (xml:id)
+INFO    :     *              located within: "list-valid_strings" (xml:id)
+INFO    :     *              located within: "list-valid_strings" (xml:id)
+INFO    :     *              located within: "list-valid_strings" (xml:id)
+INFO    :     *              located within: "list-string-mod" (xml:id)
+INFO    :     *              located within: "list-string-mod" (xml:id)
+INFO    :     *              located within: "list-string-mod" (xml:id)
+INFO    :     *              located within: "list-string-dot-format" (xml:id)
+INFO    :     *              located within: "list-string-dot-format" (xml:id)
+INFO    :     *              located within: "list-string-dot-format" (xml:id)
+INFO    :     *              located within: "list-string-dot-format" (xml:id)
+INFO    :     *              located within: "list-fstring" (xml:id)
+INFO    :     *              located within: "list-fstring" (xml:id)
+INFO    :     *              located within: "list-fstring" (xml:id)
+INFO    :     *              located within: "list-fstring" (xml:id)
+INFO    :     *              located within: "list-fstring" (xml:id)
+INFO    :     *              located within: "list-lists" (xml:id)
+INFO    :     *              located within: "list-lists" (xml:id)
+INFO    :     *              located within: "list-lists" (xml:id)
+INFO    :     *              located within: "list-lists" (xml:id)
+INFO    :     *              located within: "subsub-intro-containers-lists-slices" (xml:id), "Indexing and slicing" (title)
+INFO    :     *              located within: "subsub-intro-containers-lists-slices" (xml:id), "Indexing and slicing" (title)
+INFO    :     *              located within: "subsub-intro-containers-lists-slices" (xml:id), "Indexing and slicing" (title)
+INFO    :     *              located within: "subsub-intro-containers-lists-slices" (xml:id), "Indexing and slicing" (title)
+INFO    :     *              located within: "subsub-intro-containers-lists-slices" (xml:id), "Indexing and slicing" (title)
+INFO    :     *              located within: "subsub-intro-containers-lists-slices" (xml:id), "Indexing and slicing" (title)
+INFO    :     *              located within: "subsub-intro-containers-lists-slices" (xml:id), "Indexing and slicing" (title)
+INFO    :     *              located within: "subsub-intro-containers-lists-slices" (xml:id), "Indexing and slicing" (title)
+INFO    :     *              located within: "subsub-intro-containers-lists-slices" (xml:id), "Indexing and slicing" (title)
+INFO    :     *              located within: "subsub-intro-containers-lists-slices" (xml:id), "Indexing and slicing" (title)
+INFO    :     *              located within: "subsub-intro-containers-lists-ops_meths" (xml:id), "Operators and methods" (title)
+INFO    :     *              located within: "subsub-intro-containers-lists-ops_meths" (xml:id), "Operators and methods" (title)
+INFO    :     *              located within: "list-defining-sets" (xml:id)
+INFO    :     *              located within: "list-defining-sets" (xml:id)
+INFO    :     *              located within: "list-defining-sets" (xml:id)
+INFO    :     *              located within: "tech-rangefunction" (xml:id), "The range function" (title)
+INFO    :     *              located within: "tech-rangefunction" (xml:id), "The range function" (title)
+INFO    :     *              located within: "tech-rangefunction" (xml:id), "The range function" (title)
+INFO    :     *              located within: "tech-rangefunction" (xml:id), "The range function" (title)
+INFO    :     *              located within: "list-syntaxerror" (xml:id)
+INFO    :     *              located within: "list-syntaxerror" (xml:id)
+INFO    :     *              located within: "list-indexerror" (xml:id)
+INFO    :     *              located within: "list-indexerror" (xml:id)
+INFO    :     *              located within: "list-indexerror" (xml:id)
+INFO    :     *              located within: "list-keyerror" (xml:id)
+INFO    :     *              located within: "list-keyerror" (xml:id)
+INFO    :     *              located within: "list-keyerror" (xml:id)
+INFO    :     *              located within: "list-typeerror" (xml:id)
+INFO    :     * --------------
+INFO    : successful application of /home/sjgraves/.ptx/xsl/pretext-html.xsl
+INFO    : 
+Success! Run `pretext view` to see the results.
+
