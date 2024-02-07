@@ -5,7 +5,7 @@
 <!--*         https://pretextbook.org          *-->
 <!--*                                          *-->
 <!--********************************************-->
-<html lang="en-US">
+<html lang="en-US" dir="ltr">
 <head xmlns:og="http://ogp.me/ns#" xmlns:book="https://ogp.me/ns/book#">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Mathematical permutations</title>
@@ -14,173 +14,102 @@
 <meta property="og:type" content="book">
 <meta property="book:title" content="AAM: Algorithms for Applied Mathematics">
 <meta property="book:author" content="Stephen J. Graves">
-<script>var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
+<script>
+var runestoneMathReady = new Promise((resolve) => window.rsMathReady = resolve);
 window.MathJax = {
-  tex: {
-    inlineMath: [['\\(','\\)']],
-    tags: "none",
-    tagSide: "right",
-    tagIndent: ".8em",
-    packages: {'[+]': ['base', 'extpfeil', 'ams', 'amscd', 'color', 'newcommand', 'knowl']}
+  "tex": {
+    "inlineMath": [
+      [
+        "\\(",
+        "\\)"
+      ]
+    ],
+    "tags": "none",
+    "tagSide": "right",
+    "tagIndent": ".8em",
+    "packages": {
+      "[+]": [
+        "base",
+        "extpfeil",
+        "ams",
+        "amscd",
+        "color",
+        "newcommand",
+        "knowl"
+      ]
+    }
   },
-  options: {
-    ignoreHtmlClass: "tex2jax_ignore|ignore-math",
-    processHtmlClass: "process-math",
+  "options": {
+    "ignoreHtmlClass": "tex2jax_ignore|ignore-math",
+    "processHtmlClass": "process-math"
   },
-  chtml: {
-    scale: 0.98,
-    mtextInheritFont: true
+  "chtml": {
+    "scale": 0.98,
+    "mtextInheritFont": true
   },
-  loader: {
-    load: ['input/asciimath', '[tex]/extpfeil', '[tex]/amscd', '[tex]/color', '[tex]/newcommand', '[pretext]/mathjaxknowl3.js'],
-    paths: {pretext: "https://pretextbook.org/js/lib"},
+  "loader": {
+    "load": [
+      "input/asciimath",
+      "[tex]/extpfeil",
+      "[tex]/amscd",
+      "[tex]/color",
+      "[tex]/newcommand",
+      "[pretext]/mathjaxknowl3.js"
+    ],
+    "paths": {
+      "pretext": "_static/pretext/js/lib"
+    }
   },
-  startup: {
+  "startup": {
     pageReady() {
       return MathJax.startup.defaultPageReady().then(function () {
       console.log("in ready function");
       rsMathReady();
       }
     )}
-  },
+  }
 };
 </script><script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/themes/prism.css" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://unpkg.com/lunr/lunr.js"></script><script src="lunr-pretext-search-index.js"></script><script src="https://pretextbook.org/js/0.2/pretext_search.js"></script><link href="https://pretextbook.org/css/0.6/pretext_search.css" rel="stylesheet" type="text/css">
-<script>js_version = 0.2</script><script src="https://pretextbook.org/js/lib/jquery.min.js"></script><script src="https://pretextbook.org/js/lib/jquery.sticky.js"></script><script src="https://pretextbook.org/js/lib/jquery.espy.min.js"></script><script src="https://pretextbook.org/js/0.2/pretext.js"></script><script>miniversion=0.1</script><script src="https://pretextbook.org/js/0.2/pretext_add_on.js?x=1"></script><script src="https://pretextbook.org/js/0.2/user_preferences.js"></script><script src="https://pretextbook.org/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/components/prism-core.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/autoloader/prism-autoloader.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.js" integrity="sha512-dubtf8xMHSQlExGRQ5R7toxHLgSDZ0K7AunqPWHXmJQ8XyVIG19S1T95gBxlAeGOK02P4Da2RTnQz0Za0H0ebQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-numbers/prism-line-numbers.min.css" integrity="sha512-cbQXwDFK7lj2Fqfkuxbo5iD1dSbLlJGXGpfTDqbggqjHJeyzx88I3rfwjS38WJag/ihH7lzuGlGHpDBymLirZQ==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.css" integrity="sha512-nXlJLUeqPMp1Q3+Bd8Qds8tXeRVQscMscwysJm821C++9w6WtsFbJjPenZ8cQVMXyqSAismveQJc0C1splFDCA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.26.0/plugins/line-highlight/prism-line-highlight.min.js" integrity="sha512-93uCmm0q+qO5Lb1huDqr7tywS8A2TFA+1/WHvyiWaK6/pvsFl6USnILagntBx8JnVbQH5s3n0vQZY6xNthNfKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.9/lunr.min.js" integrity="sha512-4xUl/d6D6THrAnXAwGajXkoWaeMNwEKK4iNfq5DotEbLPAfk6FSxSP3ydNxqDgCw1c/0Z1Jg6L8h2j+++9BZmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><script src="lunr-pretext-search-index.js" async=""></script><script src="_static/pretext/js/pretext_search.js"></script><link href="_static/pretext/css/pretext_search.css" rel="stylesheet" type="text/css">
+<script src="_static/pretext/js/lib/jquery.min.js"></script><script src="_static/pretext/js/lib/jquery.sticky.js"></script><script src="_static/pretext/js/lib/jquery.espy.min.js"></script><script src="_static/pretext/js/pretext.js"></script><script src="_static/pretext/js/pretext_add_on.js?x=1"></script><script src="_static/pretext/js/user_preferences.js"></script><script src="_static/pretext/js/lib/knowl.js"></script><!--knowl.js code controls Sage Cells within knowls--><script>sagecellEvalName='Evaluate (Sage)';
 </script><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.cdnfonts.com/css/dejavu-serif" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Serif:opsz,wdth,wght@8..144,50..150,100..900&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wdth,wght@75..100,300..800&amp;display=swap" rel="stylesheet">
-<link href="https://pretextbook.org/css/0.6/pretext.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.6/pretext_add_on.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.6/shell_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.6/banner_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.6/navbar_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.6/toc_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.6/knowls_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.6/style_default.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.6/colors_pastel_blue_orange.css" rel="stylesheet" type="text/css">
-<link href="https://pretextbook.org/css/0.6/setcolors.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+<link href="_static/pretext/css/pretext.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/pretext_add_on.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/shell_default.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/banner_default.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/navbar_default.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/toc_default.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/knowls_default.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/style_default.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/colors_pastel_blue_orange.css" rel="stylesheet" type="text/css">
+<link href="_static/pretext/css/setcolors.css" rel="stylesheet" type="text/css">
 </head>
 <body class="pretext book ignore-math">
-<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead"><div class="ptx-banner">
-<a id="logo-link" href=""></a><div class="title-container">
+<a class="assistive" href="#ptx-content">Skip to main content</a><header id="ptx-masthead" class="ptx-masthead"><div class="ptx-banner">
+<a id="logo-link" class="logo-link" target="_blank" href=""></a><div class="title-container">
 <h1 class="heading"><a href="AAM.html"><span class="title">AAM: Algorithms for Applied Mathematics</span></a></h1>
 <p class="byline">Stephen J. Graves</p>
 </div>
-<div id="searchresultsplaceholder" style="display: none">
-<button id="closesearchresults" onclick="document.getElementById('searchresultsplaceholder').style.display = 'none'; return false;">x</button><h2>Search Results: <span id="searchterms"></span>
-</h2>
-<div id="searchempty"><span>No results.</span></div>
-<ol id="searchresults"></ol>
+</div></header><nav id="ptx-navbar" class="ptx-navbar navbar"><button class="toc-toggle button" title="Contents"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5d2;</span><span class="name">Contents</span></button><div class="searchbox">
+<div class="searchwidget"><button id="searchbutton" class="searchbutton button" type="button" title="Search book"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe8b6;</span><span class="name">Search Book</span></button></div>
+<div id="searchresultsplaceholder" class="searchresultsplaceholder" style="display: none">
+<div class="search-results-controls">
+<input aria-label="Search term" id="ptxsearch" class="ptxsearch" type="text" name="terms" placeholder="Search term"><button title="Close search" id="closesearchresults" class="closesearchresults"><span class="material-symbols-outlined">close</span></button>
 </div>
-</div></header><nav id="ptx-navbar" class="navbar"><button class="toc-toggle button" aria-label="Show or hide table of contents"><span class="icon">☰</span><span class="name">Contents</span></button><button id="user-preferences-button" class="user-preferences-button button" title="Modify user preferences"><span id="theavatarbutton" class="name">You!</span><div id="preferences_menu_holder" class="hidden"><ol id="preferences_menu" style="font-family: 'Roboto Serif', serif;">
-<li data-env="avatar" tabindex="-1">Choose avatar<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
-<ol class="hidden avatar">
-<li data-val="You!" tabindex="-1">
-<span id="theYou!" class="avatarcheck">✔️</span>You!</li>
-<li data-val="😺" tabindex="-1">
-<span id="the😺" class="avatarcheck"></span>😺</li>
-<li data-val="👤" tabindex="-1">
-<span id="the👤" class="avatarcheck"></span>👤</li>
-<li data-val="👽" tabindex="-1">
-<span id="the👽" class="avatarcheck"></span>👽</li>
-<li data-val="🐶" tabindex="-1">
-<span id="the🐶" class="avatarcheck"></span>🐶</li>
-<li data-val="🐼" tabindex="-1">
-<span id="the🐼" class="avatarcheck"></span>🐼</li>
-<li data-val="🌈" tabindex="-1">
-<span id="the🌈" class="avatarcheck"></span>🌈</li>
-</ol>
-</li>
-<li data-env="fontfamily" tabindex="-1">Font family<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
-<ol class="hidden fontfamily">
-<li data-val="face" data-change="OS" tabindex="-1" style="font-family: 'Open Sans'">
-<span id="theOS" class="ffcheck">✔️</span><span class="name">Open Sans</span><span class="sample">AaBbCc 123 PreTeXt</span>
-</li>
-<li data-val="face" data-change="RS" tabindex="-1" style="font-family: 'Roboto Serif'">
-<span id="theRS" class="ffcheck"></span><span class="name">Roboto Serif</span><span class="sample">AaBbCc 123 PreTeXt</span>
-</li>
-</ol>
-</li>
-<li data-env="font" tabindex="-1">Adjust font<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
-<ol class="hidden fonts">
-<li>Size</li>
-<li><span id="thesize">12</span></li>
-<li data-val="size" data-change="-1" tabindex="-1" style="font-size: 80%">Smaller</li>
-<li data-val="size" data-change="1" tabindex="-1" style="font-size: 110%">Larger</li>
-<li>Width</li>
-<li><span id="thewdth">100</span></li>
-<li data-val="wdth" data-change="-5" tabindex="-1" style="font-variation-settings: 'wdth' 60">narrower</li>
-<li data-val="wdth" data-change="5" tabindex="-1" style="font-variation-settings: 'wdth' 150">wider</li>
-<li>Weight</li>
-<li><span id="thewght">400</span></li>
-<li data-val="wght" data-change="-50" tabindex="-1" style="font-weight: 200">thinner</li>
-<li data-val="wght" data-change="50" tabindex="-1" style="font-weight: 700">heavier</li>
-<li>Letter spacing</li>
-<li>
-<span id="thelspace">0</span><span class="byunits">/200</span>
-</li>
-<li data-val="lspace" data-change="-1" tabindex="-1">closer</li>
-<li data-val="lspace" data-change="1" tabindex="-1">f a r t h e r</li>
-<li>Word spacing</li>
-<li>
-<span id="thewspace">0</span><span class="byunits">/50</span>
-</li>
-<li data-val="wspace" data-change="-1" tabindex="-1">smaller gap </li>
-<li data-val="wspace" data-change="1" tabindex="-1">larger gap</li>
-<li>Line Spacing</li>
-<li>
-<span id="theheight">135</span><span class="byunits">/100</span>
-</li>
-<li data-val="height" data-change="-5" tabindex="-1" style="line-height: 1">closer<br>together</li>
-<li data-val="height" data-change="5" tabindex="-1" style="line-height: 1.75">further<br>apart</li>
-</ol>
-</li>
-<li data-env="atmosphere" tabindex="-1">Light/dark mode<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
-<ol class="hidden atmosphere">
-<li data-val="default" tabindex="-1">
-<span id="thedefault" class="atmospherecheck">✔️</span>default</li>
-<li data-val="pastel" tabindex="-1">
-<span id="thepastel" class="atmospherecheck"></span>pastel</li>
-<li data-val="darktwilight" tabindex="-1">
-<span id="thedarktwilight" class="atmospherecheck"></span>twilight</li>
-<li data-val="dark" tabindex="-1">
-<span id="thedark" class="atmospherecheck"></span>dark</li>
-<li data-val="darkmidnight" tabindex="-1">
-<span id="thedarkmidnight" class="atmospherecheck"></span>midnight</li>
-</ol>
-</li>
-<li data-env="ruler" tabindex="-1">Reading ruler<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
-<ol class="hidden ruler">
-<li data-val="none" tabindex="-1">
-<span id="thenone" class="rulercheck">✔️</span>none</li>
-<li data-val="underline" tabindex="-1">
-<span id="theunderline" class="rulercheck"></span>underline</li>
-<li data-val="lunderline" tabindex="-1">
-<span id="thelunderline" class="rulercheck"></span>L-underline</li>
-<li data-val="greybar" tabindex="-1">
-<span id="thegreybar" class="rulercheck"></span>grey bar</li>
-<li data-val="lightbox" tabindex="-1">
-<span id="thelightbox" class="rulercheck"></span>light box</li>
-<li data-val="sunrise" tabindex="-1">
-<span id="thesunrise" class="rulercheck"></span>sunrise</li>
-<li data-val="sunriseunderline" tabindex="-1">
-<span id="thesunriseunderline" class="rulercheck"></span>sunrise underline</li>
-<li class="moveQ">Motion by:</li>
-<li data-val="mouse" tabindex="-1">
-<span id="themouse" class="motioncheck">✔️</span>follow the mouse</li>
-<li data-val="arrow" tabindex="-1">
-<span id="thearrow" class="motioncheck"></span>up/down arrows - not yet</li>
-<li data-val="eye" tabindex="-1">
-<span id="theeye" class="motioncheck"></span>eye tracking - not yet</li>
-</ol>
-</li>
-</ol></div></button><span class="treebuttons"><a class="previous-button button" href="ch-perms.html" title="Previous"><span class="icon">&lt;</span><span class="name">Prev</span></a><a class="up-button button" href="ch-perms.html" title="Up"><span class="icon">^</span><span class="name">Up</span></a><a class="next-button button" href="sec-perms-oop.html" title="Next"><span class="name">Next</span><span class="icon">&gt;</span></a></span><div class="searchbox"><div class="searchwidget">
-<input id="ptxsearch" type="text" name="terms" placeholder="Search" onchange="doSearch()"><button id="searchbutton" type="button" onclick="doSearch()">🔍</button>
-</div></div></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\usepackage{mathtools}
+<h2 class="search-results-heading">Search Results: </h2>
+<div id="searchempty" class="searchempty"><span>No results.</span></div>
+<ol id="searchresults" class="searchresults"></ol>
+</div>
+</div>
+<span class="nav-other-controls"></span><span class="treebuttons"><a class="previous-button button" href="ch-perms.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="up-button button" href="ch-perms.html" title="Up"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Up</span></a><a class="next-button button" href="sec-perms-oop.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a></span></nav><div id="latex-macros" class="hidden-content process-math" style="display:none"><span class="process-math">\(\usepackage{mathtools}
 \DeclareMathOperator{\fixedset}{fix}
 \DeclareMathOperator{\support}{supp}
 \DeclareMathOperator{\lcm}{lcm}
@@ -230,305 +159,305 @@ window.MathJax = {
 \newcommand{\fillinmath}[1]{\mathchoice{\colorbox{fillinmathshade}{$\displaystyle     \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\textstyle        \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptstyle      \phantom{\,#1\,}$}}{\colorbox{fillinmathshade}{$\scriptscriptstyle\phantom{\,#1\,}$}}}
 \)</span></div>
 <div class="ptx-page">
-<div id="ptx-sidebar"><nav id="ptx-toc" class="depth2"><ul class="structural">
-<li>
-<div class="toc-item"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="AAM-fm-col.html" class="internal"><span class="title">Colophon</span></a></div></li>
-<li><div class="toc-item"><a href="AAM-fm-ack.html" class="internal"><span class="title">Acknowledgements</span></a></div></li>
+<div id="ptx-sidebar" class="ptx-sidebar"><nav id="ptx-toc" class="ptx-toc depth2"><ul class="structural contains-active toc-item-list">
+<li class="toc-item toc-frontmatter">
+<div class="toc-title-box"><a href="frontmatter.html" class="internal"><span class="title">Front Matter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="AAM-fm-col.html" class="internal"><span class="title">Colophon</span></a></div></li>
+<li class="toc-item toc-acknowledgement"><div class="toc-title-box"><a href="AAM-fm-ack.html" class="internal"><span class="title">Acknowledgements</span></a></div></li>
 </ul>
 </li>
-<li>
-<div class="toc-item"><a href="ch-intro.html" class="internal"><span class="codenumber">1</span> <span class="title">Welcome!</span></a></div>
-<ul class="structural">
-<li>
-<div class="toc-item"><a href="sec-intro-mst.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Connecting a network</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-intro-mst.html#subsec-intro-mst-example" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Working from an example</span></a></div></li>
-<li><div class="toc-item"><a href="sec-intro-mst.html#subsec-intro-mst-algorithm" class="internal"><span class="codenumber">1.1.2</span> <span class="title">Algorithm</span></a></div></li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-intro.html" class="internal"><span class="codenumber">1</span> <span class="title">Welcome!</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-intro-mst.html" class="internal"><span class="codenumber">1.1</span> <span class="title">Connecting a network</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro-mst.html#subsec-intro-mst-example" class="internal"><span class="codenumber">1.1.1</span> <span class="title">Working from an example</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro-mst.html#subsec-intro-mst-algorithm" class="internal"><span class="codenumber">1.1.2</span> <span class="title">Algorithm</span></a></div></li>
 </ul>
 </li>
-<li><div class="toc-item"><a href="sec-intro-kidrsa.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Familiarity with Python</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-intro-kidrsa.html" class="internal"><span class="codenumber">1.2</span> <span class="title">Familiarity with Python</span></a></div></li>
 </ul>
 </li>
-<li>
-<div class="toc-item"><a href="ch-perms.html" class="internal"><span class="codenumber">2</span> <span class="title">Permutations</span></a></div>
-<ul class="structural">
-<li class="active">
-<div class="toc-item"><a href="sec-perms-def.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Mathematical permutations</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-perms-def.html#sub-perms-def-linenotations" class="internal"><span class="codenumber">2.1.1</span> <span class="title">One-line and two-line notations</span></a></div></li>
-<li>
-<div class="toc-item"><a href="sec-perms-def.html#sub-perms-def-groups" class="internal"><span class="codenumber">2.1.2</span> <span class="title">Permutation groups</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-perms-def.html#subsub-perms-def-groups-products" class="internal"><span class="codenumber">2.1.2.1</span> <span class="title">Calculating permutation products</span></a></div></li>
-<li><div class="toc-item"><a href="sec-perms-def.html#subsub-perms-def-groups-multprops" class="internal"><span class="codenumber">2.1.2.2</span> <span class="title">Properties of permutation multiplication</span></a></div></li>
-<li><div class="toc-item"><a href="sec-perms-def.html#subsub-perms-def-groups-absalg" class="internal"><span class="codenumber">2.1.2.3</span> <span class="title">Abstract algebra and permutation groups</span></a></div></li>
+<li class="toc-item toc-chapter contains-active">
+<div class="toc-title-box"><a href="ch-perms.html" class="internal"><span class="codenumber">2</span> <span class="title">Permutations</span></a></div>
+<ul class="structural toc-item-list contains-active">
+<li class="toc-item toc-section active">
+<div class="toc-title-box"><a href="sec-perms-def.html" class="internal"><span class="codenumber">2.1</span> <span class="title">Mathematical permutations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-perms-def.html#sub-perms-def-linenotations" class="internal"><span class="codenumber">2.1.1</span> <span class="title">One-line and two-line notations</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-perms-def.html#sub-perms-def-groups" class="internal"><span class="codenumber">2.1.2</span> <span class="title">Permutation groups</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-perms-def.html#subsub-perms-def-groups-products" class="internal"><span class="codenumber">2.1.2.1</span> <span class="title">Calculating permutation products</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-perms-def.html#subsub-perms-def-groups-multprops" class="internal"><span class="codenumber">2.1.2.2</span> <span class="title">Properties of permutation multiplication</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-perms-def.html#subsub-perms-def-groups-absalg" class="internal"><span class="codenumber">2.1.2.3</span> <span class="title">Abstract algebra and permutation groups</span></a></div></li>
 </ul>
 </li>
-<li><div class="toc-item"><a href="sec-perms-def.html#sub-perms-def-cycles" class="internal"><span class="codenumber">2.1.3</span> <span class="title">Cycles and disjoint cycle decomposition</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-perms-def.html#sub-perms-def-cycles" class="internal"><span class="codenumber">2.1.3</span> <span class="title">Cycles and disjoint cycle decomposition</span></a></div></li>
 </ul>
 </li>
-<li>
-<div class="toc-item"><a href="sec-perms-oop.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Permutations in Python</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-perms-oop.html#sec-perms-oop_classes" class="internal"><span class="codenumber">2.2.1</span> <span class="title">Classes</span></a></div></li>
-<li><div class="toc-item"><a href="sec-perms-oop.html#sub-perms-oop_instantiation" class="internal"><span class="codenumber">2.2.2</span> <span class="title">Creating new objects</span></a></div></li>
-<li><div class="toc-item"><a href="sec-perms-oop.html#sub-perms-oop_validation" class="internal"><span class="codenumber">2.2.3</span> <span class="title">Input validation</span></a></div></li>
-<li><div class="toc-item"><a href="sec-perms-oop.html#sub-perms-oop_adding_methods" class="internal"><span class="codenumber">2.2.4</span> <span class="title">Additional methods</span></a></div></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<div class="toc-item"><a href="ch-crypto.html" class="internal"><span class="codenumber">3</span> <span class="title">Simple Cryptography</span></a></div>
-<ul class="structural">
-<li>
-<div class="toc-item"><a href="sec-crypto-subst.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Simple substitution ciphers</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-crypto-subst.html#sub-crypto-subst-simple" class="internal"><span class="codenumber">3.1.1</span> <span class="title">Monoalphabetic substitution</span></a></div></li>
-<li><div class="toc-item"><a href="sec-crypto-subst.html#sub-crypto-subst-freqanalysis" class="internal"><span class="codenumber">3.1.2</span> <span class="title">Frequency analysis</span></a></div></li>
-</ul>
-</li>
-<li>
-<div class="toc-item"><a href="sec-crypto-classic.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Other classical ciphers</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-crypto-classic.html#sub-crypto-classic-digraphs" class="internal"><span class="codenumber">3.2.1</span> <span class="title">Increasing the alphabet: Playfair's cipher</span></a></div></li>
-<li>
-<div class="toc-item"><a href="sec-crypto-classic.html#sub-crypto-classic-poly" class="internal"><span class="codenumber">3.2.2</span> <span class="title">Polyalphabetic substitution</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-crypto-classic.html#ssub-crypto-classic-tabularecta" class="internal"><span class="codenumber">3.2.2.1</span> <span class="title">The tabula recta</span></a></div></li>
-<li><div class="toc-item"><a href="sec-crypto-classic.html#ssub-crypto-classic-vigenere" class="internal"><span class="codenumber">3.2.2.2</span> <span class="title">Vigenère ciphers and the index of coincidence</span></a></div></li>
-<li><div class="toc-item"><a href="sec-crypto-classic.html#ssub-crypto-classic-onetimepad" class="internal"><span class="codenumber">3.2.2.3</span> <span class="title">One-time pads</span></a></div></li>
-</ul>
-</li>
-<li><div class="toc-item"><a href="sec-crypto-classic.html#sub-crypto-classic-enigma" class="internal"><span class="codenumber">3.2.3</span> <span class="title">The Enigma cipher</span></a></div></li>
-</ul>
-</li>
-<li>
-<div class="toc-item"><a href="sec-crypto-proj.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Crypto in Python</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-crypto-proj.html#sub-crypto-proj-manual_decryption" class="internal"><span class="codenumber">3.3.1</span> <span class="title">Demonstrating understanding</span></a></div></li>
-<li><div class="toc-item"><a href="sec-crypto-proj.html#sub-crypto-proj-implementations" class="internal"><span class="codenumber">3.3.2</span> <span class="title">Implementing cryptography</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-perms-oop.html" class="internal"><span class="codenumber">2.2</span> <span class="title">Permutations in Python</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-perms-oop.html#sec-perms-oop_classes" class="internal"><span class="codenumber">2.2.1</span> <span class="title">Classes</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-perms-oop.html#sub-perms-oop_instantiation" class="internal"><span class="codenumber">2.2.2</span> <span class="title">Creating new objects</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-perms-oop.html#sub-perms-oop_validation" class="internal"><span class="codenumber">2.2.3</span> <span class="title">Input validation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-perms-oop.html#sub-perms-oop_adding_methods" class="internal"><span class="codenumber">2.2.4</span> <span class="title">Additional methods</span></a></div></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
-<div class="toc-item"><a href="ch-linalg.html" class="internal"><span class="codenumber">4</span> <span class="title">Linear Algebra</span></a></div>
-<ul class="structural">
-<li>
-<div class="toc-item"><a href="sec-linalg-vectors.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Vectors</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-linalg-vectors.html#sub-linalg-vectors-axioms" class="internal"><span class="codenumber">4.1.1</span> <span class="title">Vector space axioms</span></a></div></li>
-<li><div class="toc-item"><a href="sec-linalg-vectors.html#sub-linalg-vectors-colvecs" class="internal"><span class="codenumber">4.1.2</span> <span class="title">Column vectors</span></a></div></li>
-<li><div class="toc-item"><a href="sec-linalg-vectors.html#sub-linalg-vectors-lintrans" class="internal"><span class="codenumber">4.1.3</span> <span class="title">Linear transformations</span></a></div></li>
-<li><div class="toc-item"><a href="sec-linalg-vectors.html#sub-linalg-vectors-inner_prods" class="internal"><span class="codenumber">4.1.4</span> <span class="title">Inner product spaces</span></a></div></li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-crypto.html" class="internal"><span class="codenumber">3</span> <span class="title">Simple Cryptography</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-crypto-subst.html" class="internal"><span class="codenumber">3.1</span> <span class="title">Simple substitution ciphers</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-crypto-subst.html#sub-crypto-subst-simple" class="internal"><span class="codenumber">3.1.1</span> <span class="title">Monoalphabetic substitution</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-crypto-subst.html#sub-crypto-subst-freqanalysis" class="internal"><span class="codenumber">3.1.2</span> <span class="title">Frequency analysis</span></a></div></li>
 </ul>
 </li>
-<li>
-<div class="toc-item"><a href="sec-linalg-vecproj.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Vectors in Python</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-linalg-vecproj.html#sub-vecproj-init_and_repr" class="internal"><span class="codenumber">4.2.1</span> <span class="title">Getting started with initialization and representation</span></a></div></li>
-<li><div class="toc-item"><a href="sec-linalg-vecproj.html#sub-vecproj-add_and_mul" class="internal"><span class="codenumber">4.2.2</span> <span class="title">Vector addition and scalar multiplication</span></a></div></li>
-<li><div class="toc-item"><a href="sec-linalg-vecproj.html#sub-vecproj-extras" class="internal"><span class="codenumber">4.2.3</span> <span class="title">Additional class methods</span></a></div></li>
-<li><div class="toc-item"><a href="sec-linalg-vecproj.html#sub-vecproj-computations" class="internal"><span class="codenumber">4.2.4</span> <span class="title">“Simple” computations</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-crypto-classic.html" class="internal"><span class="codenumber">3.2</span> <span class="title">Other classical ciphers</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-crypto-classic.html#sub-crypto-classic-digraphs" class="internal"><span class="codenumber">3.2.1</span> <span class="title">Increasing the alphabet: Playfair’s cipher</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-crypto-classic.html#sub-crypto-classic-poly" class="internal"><span class="codenumber">3.2.2</span> <span class="title">Polyalphabetic substitution</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-crypto-classic.html#ssub-crypto-classic-tabularecta" class="internal"><span class="codenumber">3.2.2.1</span> <span class="title">The tabula recta</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-crypto-classic.html#ssub-crypto-classic-vigenere" class="internal"><span class="codenumber">3.2.2.2</span> <span class="title">Vigenère ciphers and the index of coincidence</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-crypto-classic.html#ssub-crypto-classic-onetimepad" class="internal"><span class="codenumber">3.2.2.3</span> <span class="title">One-time pads</span></a></div></li>
 </ul>
 </li>
-<li>
-<div class="toc-item"><a href="sec-linalg-matrices.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Complex matrices</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-linalg-matrices.html#sub-linalg-matrices-matrix_vector_product" class="internal"><span class="codenumber">4.3.1</span> <span class="title">Matrix-vector products</span></a></div></li>
-<li><div class="toc-item"><a href="sec-linalg-matrices.html#sub-linalg-matrices-matrix_matrix_product" class="internal"><span class="codenumber">4.3.2</span> <span class="title">Matrix-matrix products</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-crypto-classic.html#sub-crypto-classic-enigma" class="internal"><span class="codenumber">3.2.3</span> <span class="title">The Enigma cipher</span></a></div></li>
 </ul>
 </li>
-<li>
-<div class="toc-item"><a href="sec-linalg-matproj.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Matrices in Python</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-linalg-matproj.html#sub-linalg-matproj-basics" class="internal"><span class="codenumber">4.4.1</span> <span class="title"><code class="code-inline tex2jax_ignore">AlgoMatrix</code> basics</span></a></div></li>
-<li><div class="toc-item"><a href="sec-linalg-matproj.html#sub-linalg-matproj-named_methods" class="internal"><span class="codenumber">4.4.2</span> <span class="title">Named <code class="code-inline tex2jax_ignore">AlgoMatrix</code> methods</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-crypto-proj.html" class="internal"><span class="codenumber">3.3</span> <span class="title">Crypto in Python</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-crypto-proj.html#sub-crypto-proj-manual_decryption" class="internal"><span class="codenumber">3.3.1</span> <span class="title">Demonstrating understanding</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-crypto-proj.html#sub-crypto-proj-implementations" class="internal"><span class="codenumber">3.3.2</span> <span class="title">Implementing cryptography</span></a></div></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
-<div class="toc-item"><a href="ch-matrix-apps.html" class="internal"><span class="codenumber">5</span> <span class="title">Matrix Applications</span></a></div>
-<ul class="structural">
-<li>
-<div class="toc-item"><a href="sec-matapps-ssles.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Solving Systems of Linear Equations</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-matapps-ssles.html#sub-matapps-sles-rowops" class="internal"><span class="codenumber">5.1.1</span> <span class="title">Elementary row operations</span></a></div></li>
-<li><div class="toc-item"><a href="sec-matapps-ssles.html#sub-matapps-sles-row_equivalence" class="internal"><span class="codenumber">5.1.2</span> <span class="title">Row equivalence and solutions to SLEs</span></a></div></li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-linalg.html" class="internal"><span class="codenumber">4</span> <span class="title">Linear Algebra</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-linalg-vectors.html" class="internal"><span class="codenumber">4.1</span> <span class="title">Vectors</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-linalg-vectors.html#sub-linalg-vectors-axioms" class="internal"><span class="codenumber">4.1.1</span> <span class="title">Vector space axioms</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-linalg-vectors.html#sub-linalg-vectors-colvecs" class="internal"><span class="codenumber">4.1.2</span> <span class="title">Column vectors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-linalg-vectors.html#sub-linalg-vectors-lintrans" class="internal"><span class="codenumber">4.1.3</span> <span class="title">Linear transformations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-linalg-vectors.html#sub-linalg-vectors-inner_prods" class="internal"><span class="codenumber">4.1.4</span> <span class="title">Inner product spaces</span></a></div></li>
 </ul>
 </li>
-<li>
-<div class="toc-item"><a href="sec-matapps-gje_proj.html" class="internal"><span class="codenumber">5.2</span> <span class="title">GJE in Python</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-matapps-gje_proj.html#sub-matapps-gje_np" class="internal"><span class="codenumber">5.2.1</span> <span class="title">Gauss-Jordan elimination with naive pivoting</span></a></div></li>
-<li><div class="toc-item"><a href="sec-matapps-gje_proj.html#sub-matapps-gje_naive_flaw" class="internal"><span class="codenumber">5.2.2</span> <span class="title">Swamping: the computational flaw in naive pivoting</span></a></div></li>
-<li><div class="toc-item"><a href="sec-matapps-gje_proj.html#sub-matapps-gje_pp" class="internal"><span class="codenumber">5.2.3</span> <span class="title">Gauss-Jordan elimination with partial pivoting</span></a></div></li>
-<li><div class="toc-item"><a href="sec-matapps-gje_proj.html#sub-matapps-implement_gje_pp" class="internal"><span class="codenumber">5.2.4</span> <span class="title">Implementing GJE with PP</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-linalg-vecproj.html" class="internal"><span class="codenumber">4.2</span> <span class="title">Vectors in Python</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-linalg-vecproj.html#sub-vecproj-init_and_repr" class="internal"><span class="codenumber">4.2.1</span> <span class="title">Getting started with initialization and representation</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-linalg-vecproj.html#sub-vecproj-add_and_mul" class="internal"><span class="codenumber">4.2.2</span> <span class="title">Vector addition and scalar multiplication</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-linalg-vecproj.html#sub-vecproj-extras" class="internal"><span class="codenumber">4.2.3</span> <span class="title">Additional class methods</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-linalg-vecproj.html#sub-vecproj-computations" class="internal"><span class="codenumber">4.2.4</span> <span class="title">“Simple” computations</span></a></div></li>
 </ul>
 </li>
-<li>
-<div class="toc-item"><a href="sec-matapps-ludecomp.html" class="internal"><span class="codenumber">5.3</span> <span class="title"><span class="process-math">\(PA=LU\)</span> Decomposition</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-matapps-ludecomp.html#sub-matapps-ludecomp-theory" class="internal"><span class="codenumber">5.3.1</span> <span class="title">Special factors</span></a></div></li>
-<li><div class="toc-item"><a href="sec-matapps-ludecomp.html#sub-matapps-ludecomp-solving" class="internal"><span class="codenumber">5.3.2</span> <span class="title">Solving systems via <span class="process-math">\(LU\)</span> decomposition</span></a></div></li>
-<li><div class="toc-item"><a href="sec-matapps-ludecomp.html#sub-matapps-ludecomp-algo" class="internal"><span class="codenumber">5.3.3</span> <span class="title">Algorithms for <span class="process-math">\(LU\)</span> decomposition</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-linalg-matrices.html" class="internal"><span class="codenumber">4.3</span> <span class="title">Complex matrices</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-linalg-matrices.html#sub-linalg-matrices-matrix_vector_product" class="internal"><span class="codenumber">4.3.1</span> <span class="title">Matrix-vector products</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-linalg-matrices.html#sub-linalg-matrices-matrix_matrix_product" class="internal"><span class="codenumber">4.3.2</span> <span class="title">Matrix-matrix products</span></a></div></li>
 </ul>
 </li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-linalg-matproj.html" class="internal"><span class="codenumber">4.4</span> <span class="title">Matrices in Python</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-linalg-matproj.html#sub-linalg-matproj-basics" class="internal"><span class="codenumber">4.4.1</span> <span class="title"><code class="code-inline tex2jax_ignore">AlgoMatrix</code> basics</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-linalg-matproj.html#sub-linalg-matproj-named_methods" class="internal"><span class="codenumber">4.4.2</span> <span class="title">Named <code class="code-inline tex2jax_ignore">AlgoMatrix</code> methods</span></a></div></li>
 </ul>
-</li>
-<li>
-<div class="toc-item"><a href="ch-gtalgos.html" class="internal"><span class="codenumber">6</span> <span class="title">Graph Theory Algorithms</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-gtalgos-basics.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Graph basics</span></a></div></li>
-<li>
-<div class="toc-item"><a href="sec-gtalgos-mst.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Minimum spanning trees</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-gtalgos-mst.html#sub-gtalgos-mst-jarnik_prim" class="internal"><span class="codenumber">6.2.1</span> <span class="title">Jarník-Prim Algorithm</span></a></div></li>
-<li><div class="toc-item"><a href="sec-gtalgos-mst.html#sub-gtalgos-mst-minheaps" class="internal"><span class="codenumber">6.2.2</span> <span class="title">Min Heaps</span></a></div></li>
-<li>
-<div class="toc-item"><a href="sec-gtalgos-mst.html#sub-gtalgos-mst-kruskal" class="internal"><span class="codenumber">6.2.3</span> <span class="title">Kruskal's algorithm</span></a></div>
-<ul class="structural"><li><div class="toc-item"><a href="sec-gtalgos-mst.html#subsubsection-7" class="internal"><span class="codenumber">6.2.3.1</span> <span class="title">Implementing Kruskal's algorithm</span></a></div></li></ul>
 </li>
 </ul>
 </li>
-<li>
-<div class="toc-item"><a href="sec-gtalgos-shortestpath.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Shortest Paths</span></a></div>
-<ul class="structural"><li>
-<div class="toc-item"><a href="sec-gtalgos-shortestpath.html#sub-gtalgos-shortestpath-dijkstra" class="internal"><span class="codenumber">6.3.1</span> <span class="title">Dijkstra's Algorithm</span></a></div>
-<ul class="structural"><li><div class="toc-item"><a href="sec-gtalgos-shortestpath.html#subsubsection-8" class="internal"><span class="codenumber">6.3.1.1</span> <span class="title">A full example of Dijkstra's algorithm</span></a></div></li></ul>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-matrix-apps.html" class="internal"><span class="codenumber">5</span> <span class="title">Matrix Applications</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matapps-ssles.html" class="internal"><span class="codenumber">5.1</span> <span class="title">Solving Systems of Linear Equations</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matapps-ssles.html#sub-matapps-sles-rowops" class="internal"><span class="codenumber">5.1.1</span> <span class="title">Elementary row operations</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matapps-ssles.html#sub-matapps-sles-row_equivalence" class="internal"><span class="codenumber">5.1.2</span> <span class="title">Row equivalence and solutions to SLEs</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matapps-gje_proj.html" class="internal"><span class="codenumber">5.2</span> <span class="title">GJE in Python</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matapps-gje_proj.html#sub-matapps-gje_np" class="internal"><span class="codenumber">5.2.1</span> <span class="title">Gauss-Jordan elimination with naive pivoting</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matapps-gje_proj.html#sub-matapps-gje_naive_flaw" class="internal"><span class="codenumber">5.2.2</span> <span class="title">Swamping: the computational flaw in naive pivoting</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matapps-gje_proj.html#sub-matapps-gje_pp" class="internal"><span class="codenumber">5.2.3</span> <span class="title">Gauss-Jordan elimination with partial pivoting</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matapps-gje_proj.html#sub-matapps-implement_gje_pp" class="internal"><span class="codenumber">5.2.4</span> <span class="title">Implementing GJE with PP</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-matapps-ludecomp.html" class="internal"><span class="codenumber">5.3</span> <span class="title"><span class="process-math">\(PA=LU\)</span> Decomposition</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matapps-ludecomp.html#sub-matapps-ludecomp-theory" class="internal"><span class="codenumber">5.3.1</span> <span class="title">Special factors</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matapps-ludecomp.html#sub-matapps-ludecomp-solving" class="internal"><span class="codenumber">5.3.2</span> <span class="title">Solving systems via <span class="process-math">\(LU\)</span> decomposition</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-matapps-ludecomp.html#sub-matapps-ludecomp-algo" class="internal"><span class="codenumber">5.3.3</span> <span class="title">Algorithms for <span class="process-math">\(LU\)</span> decomposition</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-chapter">
+<div class="toc-title-box"><a href="ch-gtalgos.html" class="internal"><span class="codenumber">6</span> <span class="title">Graph Theory Algorithms</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="sec-gtalgos-basics.html" class="internal"><span class="codenumber">6.1</span> <span class="title">Graph basics</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-gtalgos-mst.html" class="internal"><span class="codenumber">6.2</span> <span class="title">Minimum spanning trees</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-gtalgos-mst.html#sub-gtalgos-mst-jarnik_prim" class="internal"><span class="codenumber">6.2.1</span> <span class="title">Jarník-Prim Algorithm</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-gtalgos-mst.html#sub-gtalgos-mst-minheaps" class="internal"><span class="codenumber">6.2.2</span> <span class="title">Min Heaps</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-gtalgos-mst.html#sub-gtalgos-mst-kruskal" class="internal"><span class="codenumber">6.2.3</span> <span class="title">Kruskal’s algorithm</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-gtalgos-mst.html#sub-gtalgos-mst-kruskal-3" class="internal"><span class="codenumber">6.2.3.1</span> <span class="title">Implementing Kruskal’s algorithm</span></a></div></li></ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-gtalgos-shortestpath.html" class="internal"><span class="codenumber">6.3</span> <span class="title">Shortest Paths</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-gtalgos-shortestpath.html#sub-gtalgos-shortestpath-dijkstra" class="internal"><span class="codenumber">6.3.1</span> <span class="title">Dijkstra’s Algorithm</span></a></div>
+<ul class="structural toc-item-list"><li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-gtalgos-shortestpath.html#sub-gtalgos-shortestpath-dijkstra-3" class="internal"><span class="codenumber">6.3.1.1</span> <span class="title">A full example of Dijkstra’s algorithm</span></a></div></li></ul>
 </li></ul>
 </li>
-<li>
-<div class="toc-item"><a href="sec-gtalgos-maxflowmincut.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Maximizing flow</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-gtalgos-maxflowmincut.html#sec-MaxFlow-MaxFlow" class="internal"><span class="codenumber">6.4.1</span> <span class="title">Max flow</span></a></div></li>
-<li><div class="toc-item"><a href="sec-gtalgos-maxflowmincut.html#sec-MaxFlow-DinitzAlgo" class="internal"><span class="codenumber">6.4.2</span> <span class="title">Dinitz' Algorithm</span></a></div></li>
-<li><div class="toc-item"><a href="sec-gtalgos-maxflowmincut.html#sec-MaxFlow-DinitzImpl" class="internal"><span class="codenumber">6.4.3</span> <span class="title">Implementing Dinitz' Algorithm</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-gtalgos-maxflowmincut.html" class="internal"><span class="codenumber">6.4</span> <span class="title">Maximizing flow</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-gtalgos-maxflowmincut.html#sec-MaxFlow-MaxFlow" class="internal"><span class="codenumber">6.4.1</span> <span class="title">Max flow</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-gtalgos-maxflowmincut.html#sec-MaxFlow-DinitzAlgo" class="internal"><span class="codenumber">6.4.2</span> <span class="title">Dinitz’ Algorithm</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-gtalgos-maxflowmincut.html#sec-MaxFlow-DinitzImpl" class="internal"><span class="codenumber">6.4.3</span> <span class="title">Implementing Dinitz’ Algorithm</span></a></div></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
-<div class="toc-item"><a href="aam-backmatter.html" class="internal"><span class="title">Back Matter</span></a></div>
-<ul class="structural">
-<li>
-<div class="toc-item"><a href="app-python.html" class="internal"><span class="codenumber">A</span> <span class="title">Python crash course</span></a></div>
-<ul class="structural">
-<li>
-<div class="toc-item"><a href="sec-intro-idle.html" class="internal"><span class="codenumber">A.1</span> <span class="title">Getting started with Python</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-intro-idle.html#sub-intro-idle-gettingidle" class="internal"><span class="codenumber">A.1.1</span> <span class="title">Getting IDLE</span></a></div></li>
-<li><div class="toc-item"><a href="sec-intro-idle.html#sub-intro-idle-interactivemode" class="internal"><span class="codenumber">A.1.2</span> <span class="title">Interactive Mode</span></a></div></li>
-<li><div class="toc-item"><a href="sec-intro-idle.html#sub-intro-idle-firstprogram" class="internal"><span class="codenumber">A.1.3</span> <span class="title">A first Python module</span></a></div></li>
+<li class="toc-item toc-backmatter">
+<div class="toc-title-box"><a href="aam-backmatter.html" class="internal"><span class="title">Back Matter</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-appendix">
+<div class="toc-title-box"><a href="app-python.html" class="internal"><span class="codenumber">A</span> <span class="title">Python crash course</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-intro-idle.html" class="internal"><span class="codenumber">A.1</span> <span class="title">Getting started with Python</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro-idle.html#sub-intro-idle-gettingidle" class="internal"><span class="codenumber">A.1.1</span> <span class="title">Getting IDLE</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro-idle.html#sub-intro-idle-interactivemode" class="internal"><span class="codenumber">A.1.2</span> <span class="title">Interactive Mode</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro-idle.html#sub-intro-idle-firstprogram" class="internal"><span class="codenumber">A.1.3</span> <span class="title">A first Python module</span></a></div></li>
 </ul>
 </li>
-<li>
-<div class="toc-item"><a href="sec-intro_basicdata.html" class="internal"><span class="codenumber">A.2</span> <span class="title">Basic data types</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-intro_basicdata.html#sub-intro-basicdata-numbers" class="internal"><span class="codenumber">A.2.1</span> <span class="title">Numerical data types</span></a></div></li>
-<li>
-<div class="toc-item"><a href="sec-intro_basicdata.html#sub-intro-basicdata-other" class="internal"><span class="codenumber">A.2.2</span> <span class="title">Non-numeric data types</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-intro_basicdata.html#subsub-intro-basicdata-other-bool" class="internal"><span class="codenumber">A.2.2.1</span> <span class="title">Boolean variables</span></a></div></li>
-<li><div class="toc-item"><a href="sec-intro_basicdata.html#subsub-intro-basicdata-other-str" class="internal"><span class="codenumber">A.2.2.2</span> <span class="title">Strings</span></a></div></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<div class="toc-item"><a href="sec-intro-containers.html" class="internal"><span class="codenumber">A.3</span> <span class="title">Container data types</span></a></div>
-<ul class="structural">
-<li>
-<div class="toc-item"><a href="sec-intro-containers.html#sub-intro-containers-lists" class="internal"><span class="codenumber">A.3.1</span> <span class="title">The <code class="code-inline tex2jax_ignore">list</code> data type</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-intro-containers.html#subsub-intro-containers-lists-slices" class="internal"><span class="codenumber">A.3.1.1</span> <span class="title">Indexing and slicing</span></a></div></li>
-<li><div class="toc-item"><a href="sec-intro-containers.html#subsub-intro-containers-lists-ops_meths" class="internal"><span class="codenumber">A.3.1.2</span> <span class="title">Operators and methods</span></a></div></li>
-<li><div class="toc-item"><a href="sec-intro-containers.html#subsub-intro-containers-lists-mutable" class="internal"><span class="codenumber">A.3.1.3</span> <span class="title">Mutability</span></a></div></li>
-</ul>
-</li>
-<li><div class="toc-item"><a href="sec-intro-containers.html#sub-intro-containers-tuples" class="internal"><span class="codenumber">A.3.2</span> <span class="title">The <code class="code-inline tex2jax_ignore">tuple</code> data type</span></a></div></li>
-<li><div class="toc-item"><a href="sec-intro-containers.html#sub-intro-containers-dicts" class="internal"><span class="codenumber">A.3.3</span> <span class="title">The <code class="code-inline tex2jax_ignore">dict</code> data type</span></a></div></li>
-<li><div class="toc-item"><a href="sec-intro-containers.html#subsection-53" class="internal"><span class="codenumber">A.3.4</span> <span class="title">Sets are a special container</span></a></div></li>
-</ul>
-</li>
-<li>
-<div class="toc-item"><a href="sec-intro-iteration.html" class="internal"><span class="codenumber">A.4</span> <span class="title">Iteration</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-intro-iteration.html#sub-intro-iteration-for" class="internal"><span class="codenumber">A.4.1</span> <span class="title">For loops</span></a></div></li>
-<li><div class="toc-item"><a href="sec-intro-iteration.html#sub-intro-iteration-while" class="internal"><span class="codenumber">A.4.2</span> <span class="title">While loops</span></a></div></li>
-</ul>
-</li>
-<li>
-<div class="toc-item"><a href="sec-intro-functions.html" class="internal"><span class="codenumber">A.5</span> <span class="title">Functions and conditional statements</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-intro-functions.html#sub-intro-functions-def" class="internal"><span class="codenumber">A.5.1</span> <span class="title"><code class="code-inline tex2jax_ignore">def</code>ining new functions</span></a></div></li>
-<li><div class="toc-item"><a href="sec-intro-functions.html#subsec-into-functions-conditionals" class="internal"><span class="codenumber">A.5.2</span> <span class="title">Controlling flow of programs</span></a></div></li>
-<li><div class="toc-item"><a href="sec-intro-functions.html#sub-intro-functions-collatz" class="internal"><span class="codenumber">A.5.3</span> <span class="title">The Collatz Conjecture</span></a></div></li>
-</ul>
-</li>
-<li>
-<div class="toc-item"><a href="sec-intro-errors.html" class="internal"><span class="codenumber">A.6</span> <span class="title">Errors and exception handling</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="sec-intro-errors.html#sub-intro-errors-exceptions" class="internal"><span class="codenumber">A.6.1</span> <span class="title">Exceptions</span></a></div></li>
-<li><div class="toc-item"><a href="sec-intro-errors.html#sub-intro-errors-handling" class="internal"><span class="codenumber">A.6.2</span> <span class="title">Handling exceptions</span></a></div></li>
-<li><div class="toc-item"><a href="sec-intro-errors.html#sub-intro-errors-flow" class="internal"><span class="codenumber">A.6.3</span> <span class="title">Controlling the flow of a program</span></a></div></li>
-<li><div class="toc-item"><a href="sec-intro-errors.html#sub-intro-errors-bugs" class="internal"><span class="codenumber">A.6.4</span> <span class="title">Semantic errors, or bugs</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-intro_basicdata.html" class="internal"><span class="codenumber">A.2</span> <span class="title">Basic data types</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro_basicdata.html#sub-intro-basicdata-numbers" class="internal"><span class="codenumber">A.2.1</span> <span class="title">Numerical data types</span></a></div></li>
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-intro_basicdata.html#sub-intro-basicdata-other" class="internal"><span class="codenumber">A.2.2</span> <span class="title">Non-numeric data types</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-intro_basicdata.html#subsub-intro-basicdata-other-bool" class="internal"><span class="codenumber">A.2.2.1</span> <span class="title">Boolean variables</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-intro_basicdata.html#subsub-intro-basicdata-other-str" class="internal"><span class="codenumber">A.2.2.2</span> <span class="title">Strings</span></a></div></li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
-<div class="toc-item"><a href="appendix-lists.html" class="internal"><span class="codenumber">B</span> <span class="title">Finding ideas quickly</span></a></div>
-<ul class="structural">
-<li><div class="toc-item"><a href="app-find-defs.html" class="internal"><span class="codenumber">B.1</span> <span class="title">Definitions</span></a></div></li>
-<li><div class="toc-item"><a href="app-find-tech.html" class="internal"><span class="codenumber">B.2</span> <span class="title">Technology and Algorithms</span></a></div></li>
-<li><div class="toc-item"><a href="app-find-results.html" class="internal"><span class="codenumber">B.3</span> <span class="title">Lemmas, Propositions, and Theorems</span></a></div></li>
-<li><div class="toc-item"><a href="app-find-projects.html" class="internal"><span class="codenumber">B.4</span> <span class="title">Projects</span></a></div></li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-intro-containers.html" class="internal"><span class="codenumber">A.3</span> <span class="title">Container data types</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection">
+<div class="toc-title-box"><a href="sec-intro-containers.html#sub-intro-containers-lists" class="internal"><span class="codenumber">A.3.1</span> <span class="title">The <code class="code-inline tex2jax_ignore">list</code> data type</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-intro-containers.html#subsub-intro-containers-lists-slices" class="internal"><span class="codenumber">A.3.1.1</span> <span class="title">Indexing and slicing</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-intro-containers.html#subsub-intro-containers-lists-ops_meths" class="internal"><span class="codenumber">A.3.1.2</span> <span class="title">Operators and methods</span></a></div></li>
+<li class="toc-item toc-subsubsection"><div class="toc-title-box"><a href="sec-intro-containers.html#subsub-intro-containers-lists-mutable" class="internal"><span class="codenumber">A.3.1.3</span> <span class="title">Mutability</span></a></div></li>
 </ul>
 </li>
-<li><div class="toc-item"><a href="appendix-gfdl.html" class="internal"><span class="codenumber">C</span> <span class="title">GNU Free Documentation License</span></a></div></li>
-<li><div class="toc-item"><a href="colophon-2.html" class="internal"><span class="title">Colophon</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro-containers.html#sub-intro-containers-tuples" class="internal"><span class="codenumber">A.3.2</span> <span class="title">The <code class="code-inline tex2jax_ignore">tuple</code> data type</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro-containers.html#sub-intro-containers-dicts" class="internal"><span class="codenumber">A.3.3</span> <span class="title">The <code class="code-inline tex2jax_ignore">dict</code> data type</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro-containers.html#sec-intro-containers-6" class="internal"><span class="codenumber">A.3.4</span> <span class="title">Sets are a special container</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-intro-iteration.html" class="internal"><span class="codenumber">A.4</span> <span class="title">Iteration</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro-iteration.html#sub-intro-iteration-for" class="internal"><span class="codenumber">A.4.1</span> <span class="title">For loops</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro-iteration.html#sub-intro-iteration-while" class="internal"><span class="codenumber">A.4.2</span> <span class="title">While loops</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-intro-functions.html" class="internal"><span class="codenumber">A.5</span> <span class="title">Functions and conditional statements</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro-functions.html#sub-intro-functions-def" class="internal"><span class="codenumber">A.5.1</span> <span class="title"><code class="code-inline tex2jax_ignore">def</code>ining new functions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro-functions.html#subsec-into-functions-conditionals" class="internal"><span class="codenumber">A.5.2</span> <span class="title">Controlling flow of programs</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro-functions.html#sub-intro-functions-collatz" class="internal"><span class="codenumber">A.5.3</span> <span class="title">The Collatz Conjecture</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-section">
+<div class="toc-title-box"><a href="sec-intro-errors.html" class="internal"><span class="codenumber">A.6</span> <span class="title">Errors and exception handling</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro-errors.html#sub-intro-errors-exceptions" class="internal"><span class="codenumber">A.6.1</span> <span class="title">Exceptions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro-errors.html#sub-intro-errors-handling" class="internal"><span class="codenumber">A.6.2</span> <span class="title">Handling exceptions</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro-errors.html#sub-intro-errors-flow" class="internal"><span class="codenumber">A.6.3</span> <span class="title">Controlling the flow of a program</span></a></div></li>
+<li class="toc-item toc-subsection"><div class="toc-title-box"><a href="sec-intro-errors.html#sub-intro-errors-bugs" class="internal"><span class="codenumber">A.6.4</span> <span class="title">Semantic errors, or bugs</span></a></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-item toc-appendix">
+<div class="toc-title-box"><a href="appendix-lists.html" class="internal"><span class="codenumber">B</span> <span class="title">Finding ideas quickly</span></a></div>
+<ul class="structural toc-item-list">
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="app-find-defs.html" class="internal"><span class="codenumber">B.1</span> <span class="title">Definitions</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="app-find-tech.html" class="internal"><span class="codenumber">B.2</span> <span class="title">Technology and Algorithms</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="app-find-results.html" class="internal"><span class="codenumber">B.3</span> <span class="title">Lemmas, Propositions, and Theorems</span></a></div></li>
+<li class="toc-item toc-section"><div class="toc-title-box"><a href="app-find-projects.html" class="internal"><span class="codenumber">B.4</span> <span class="title">Projects</span></a></div></li>
+</ul>
+</li>
+<li class="toc-item toc-appendix"><div class="toc-title-box"><a href="appendix-gfdl.html" class="internal"><span class="codenumber">C</span> <span class="title">GNU Free Documentation License</span></a></div></li>
+<li class="toc-item toc-colophon"><div class="toc-title-box"><a href="aam-backmatter-4.html" class="internal"><span class="title">Colophon</span></a></div></li>
 </ul>
 </li>
 </ul></nav></div>
 <main class="ptx-main"><div id="ptx-content" class="ptx-content"><section class="section" id="sec-perms-def"><h2 class="heading hide-type">
-<span class="type">Section</span> <span class="codenumber">2.1</span> <span class="title">Mathematical permutations</span>
+<span class="type">Section</span><span class="space"> </span><span class="codenumber">2.1</span><span class="space"> </span><span class="title">Mathematical permutations</span>
 </h2>
-<section class="introduction" id="introduction-8"><div class="para" id="p-106">Our first topic introduces a special kind of function; recall from differential calculus that a <dfn class="terminology">function</dfn> is a rule <span class="process-math">\(f\)</span> which assigns to each value in a set <span class="process-math">\(A\)</span> exactly one value in a set <span class="process-math">\(B\text{.}\)</span> We denote this by <span class="process-math">\(f:A\to B\)</span> and name the sets <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> respectively the <dfn class="terminology">domain</dfn> and <dfn class="terminology">codomain</dfn> of <span class="process-math">\(f\text{.}\)</span> Moreover, if <span class="process-math">\(a\in A\)</span> is assigned by <span class="process-math">\(f\)</span> to the value <span class="process-math">\(b\in B\text{,}\)</span> we write <span class="process-math">\(b=f(a)\text{.}\)</span>
+<section class="introduction" id="sec-perms-def-2"><div class="para" id="sec-perms-def-2-1">Our first topic introduces a special kind of function; recall from differential calculus that a <dfn class="terminology">function</dfn> is a rule <span class="process-math">\(f\)</span> which assigns to each value in a set <span class="process-math">\(A\)</span> exactly one value in a set <span class="process-math">\(B\text{.}\)</span> We denote this by <span class="process-math">\(f:A\to B\)</span> and name the sets <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> respectively the <dfn class="terminology">domain</dfn> and <dfn class="terminology">codomain</dfn> of <span class="process-math">\(f\text{.}\)</span> Moreover, if <span class="process-math">\(a\in A\)</span> is assigned by <span class="process-math">\(f\)</span> to the value <span class="process-math">\(b\in B\text{,}\)</span> we write <span class="process-math">\(b=f(a)\text{.}\)</span>
 </div> <article class="definition definition-like" id="def-permutation"><h3 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.1</span><span class="period">.</span><span class="space"> </span><span class="title">Permutation.</span>
-</h3> <div class="para logical" id="p-107">
+</h3> <div class="para logical" id="def-permutation-2-1">
 <div class="para">Suppose <span class="process-math">\(A\)</span> is a set. Then a function <span class="process-math">\(\sigma:A\to A\)</span> is a <dfn class="terminology">permutation of <span class="process-math">\(A\)</span></dfn> if and only if <span class="process-math">\(\sigma\)</span> satisfies the following two criteria:</div>
 <ul class="disc">
-<li id="li-25"><div class="para" id="p-108">(Surjective/Onto) For each element <span class="process-math">\(a\in A\text{,}\)</span> there is an element <span class="process-math">\(a'\in A\)</span> such that <span class="process-math">\({\sigma(a') = a}\text{.}\)</span>
+<li id="def-permutation-2-1-5-1"><div class="para" id="def-permutation-2-1-5-1-1">(Surjective/Onto) For each element <span class="process-math">\(a\in A\text{,}\)</span> there is an element <span class="process-math">\(a'\in A\)</span> such that <span class="process-math">\({\sigma(a') = a}\text{.}\)</span>
 </div></li>
-<li id="li-26"><div class="para" id="p-109">(Injective/One-to-one) For any elements <span class="process-math">\(a,b\in A\text{,}\)</span> if <span class="process-math">\(f(a)=f(b)\)</span> then <span class="process-math">\(a=b\text{.}\)</span>
+<li id="def-permutation-2-1-5-2"><div class="para" id="def-permutation-2-1-5-2-1">(Injective/One-to-one) For any elements <span class="process-math">\(a,b\in A\text{,}\)</span> if <span class="process-math">\(f(a)=f(b)\)</span> then <span class="process-math">\(a=b\text{.}\)</span>
 </div></li>
 </ul>
-</div></article> <div class="para" id="p-110">Functions which are both one-to-one and onto are also called <em class="emphasis">bijections</em>, so an easier definition of a permutation <span class="process-math">\(\sigma\)</span> of <span class="process-math">\(A\)</span> is that <span class="process-math">\(\sigma\)</span> is a bijection from <span class="process-math">\(A\)</span> to itself. It is important to note that the definition of a permutation of <span class="process-math">\(A\)</span> does not require that the set <span class="process-math">\(A\)</span> be finite. However, we will be considering only finite sets as a rule.</div> <article class="convention remark-like" id="conv-english-and-bracketn"><h3 class="heading">
+</div></article> <div class="para" id="sec-perms-def-2-3">Functions which are both one-to-one and onto are also called <em class="emphasis">bijections</em>, so an easier definition of a permutation <span class="process-math">\(\sigma\)</span> of <span class="process-math">\(A\)</span> is that <span class="process-math">\(\sigma\)</span> is a bijection from <span class="process-math">\(A\)</span> to itself. It is important to note that the definition of a permutation of <span class="process-math">\(A\)</span> does not require that the set <span class="process-math">\(A\)</span> be finite. However, we will be considering only finite sets as a rule.</div> <article class="convention remark-like" id="conv-english-and-bracketn"><h3 class="heading">
 <span class="type">Convention</span><span class="space"> </span><span class="codenumber">2.1.2</span><span class="period">.</span>
 </h3>
-<div class="para logical" id="p-111">
+<div class="para logical" id="conv-english-and-bracketn-1">
 <div class="para">There are certain sets we will use frequently in our study of permutations, namely the set of letters of the English alphabet and subsets of the natural numbers. For convenience sake, we denote them as follows:</div>
 <ul class="disc">
-<li id="li-27"><div class="para" id="p-112">
+<li id="conv-english-and-bracketn-1-1-1"><div class="para" id="conv-english-and-bracketn-1-1-1-1">
 <span class="process-math">\(\mathcal{E}\)</span> is the set of letters in the English alphabet.</div></li>
-<li id="li-28"><div class="para" id="p-113">
+<li id="conv-english-and-bracketn-1-1-2"><div class="para" id="conv-english-and-bracketn-1-1-2-1">
 <span class="process-math">\([n] = \set{0,1,2,3,\ldots,n-1}\)</span> whenever <span class="process-math">\(n\in \Nats\text{.}\)</span>
 </div></li>
 </ul>
-</div> <div class="para" id="p-114">For a finite set <span class="process-math">\(A\)</span> which is not a subset of <span class="process-math">\([n]\)</span> for any <span class="process-math">\(n\text{,}\)</span> we denote the set of all permutations of <span class="process-math">\(A\)</span> by <span class="process-math">\(\sym{A}\text{.}\)</span>
+</div> <div class="para" id="conv-english-and-bracketn-2">For a finite set <span class="process-math">\(A\)</span> which is not a subset of <span class="process-math">\([n]\)</span> for any <span class="process-math">\(n\text{,}\)</span> we denote the set of all permutations of <span class="process-math">\(A\)</span> by <span class="process-math">\(\sym{A}\text{.}\)</span>
 </div></article></section><section class="subsection" id="sub-perms-def-linenotations"><h3 class="heading hide-type">
-<span class="type">Subsection</span> <span class="codenumber">2.1.1</span> <span class="title">One-line and two-line notations</span>
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber">2.1.1</span><span class="space"> </span><span class="title">One-line and two-line notations</span>
 </h3>
-<div class="para" id="p-115">There are several distinct ways of representing permutations which are useful in different situations. The first two are <em class="emphasis">one-line notation</em> and <em class="emphasis">two-line notation</em>.</div>
+<div class="para" id="sub-perms-def-linenotations-2">There are several distinct ways of representing permutations which are useful in different situations. The first two are <em class="emphasis">one-line notation</em> and <em class="emphasis">two-line notation</em>.</div>
 <article class="definition definition-like" id="def-linenotations"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.3</span><span class="period">.</span><span class="space"> </span><span class="title">Two-line notation.</span>
-</h4> <div class="para logical" id="p-116">
+</h4> <div class="para logical" id="def-linenotations-2-1">
 <div class="para">Let <span class="process-math">\(\sigma\in\sym{A}\)</span> be a permutation of a set <span class="process-math">\(A=\set{a_1,a_2,\dotsc,a_n}\text{.}\)</span> Then the <dfn class="terminology">two-line notation</dfn> for <span class="process-math">\(\sigma\)</span> is</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -547,7 +476,7 @@ a_1 \amp a_2 \amp a_3 \amp \cdots \amp a_n \\
 </div></article><article class="convention remark-like" id="conv-oneline"><h4 class="heading">
 <span class="type">Convention</span><span class="space"> </span><span class="codenumber">2.1.4</span><span class="period">.</span>
 </h4>
-<div class="para logical" id="p-117">
+<div class="para logical" id="conv-oneline-1">
 <div class="para">There is considerable disagreement in the literature as to whether the symbols in one-line notation should be separated by a comma, a space, or nothing at all. We adopt the convention that permutations listed in one-line notation will have no spaces between symbols for permutations of just a few symbols, but with a space between symbols for longer permutations. For instance,</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -565,7 +494,7 @@ a_1 \amp a_2 \amp a_3 \amp \cdots \amp a_n \\
 </div>
 <div class="para">will be represented by <span class="process-math">\(\gamma = 10~3~2~9~4~8~7~5~1~6\text{.}\)</span>
 </div>
-</div></article><div class="para logical" id="p-118">
+</div></article><div class="para logical" id="sub-perms-def-linenotations-5">
 <div class="para">Two line notation is especially useful when there is no natural order for the symbols in the set being permuted. For example, if <span class="process-math">\(A=\set{\clubsuit, \diamondsuit, \heartsuit, \spadesuit, \nabla, \surd, \infty}\text{,}\)</span> then the following is a valid permutation of <span class="process-math">\(A\text{:}\)</span>
 </div>
 <div class="displaymath process-math">
@@ -579,15 +508,14 @@ a_1 \amp a_2 \amp a_3 \amp \cdots \amp a_n \\
 \end{equation*}
 </div>
 </div>
-<div class="para" id="p-119">Since the set <span class="process-math">\(A=\set{\clubsuit, \diamondsuit, \heartsuit, \spadesuit, \nabla, \sqrt{x}, \infty}\)</span> defined above has no clear order, we should not impose one in order to use one-line notation to represent <span class="process-math">\(\phi\text{.}\)</span>
+<div class="para" id="sub-perms-def-linenotations-6">Since the set <span class="process-math">\(A=\set{\clubsuit, \diamondsuit, \heartsuit, \spadesuit, \nabla, \sqrt{x}, \infty}\)</span> defined above has no clear order, we should not impose one in order to use one-line notation to represent <span class="process-math">\(\phi\text{.}\)</span>
 </div>
-<article class="exercise exercise-like" id="exc-perms-s4"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exc-perms-s4"><h4 class="heading">
+<details id="exc-perms-s4" class="exercise exercise-like born-hidden-knowl"><summary><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">2.1.5</span><span class="period">.</span><span class="space"> </span><span class="title">Permutations of <span class="process-math">\(\set{1,2,3,4}\)</span>.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exc-perms-s4"><article class="exercise exercise-like"><div class="para" id="p-120">List all permutations of the set <span class="process-math">\(\set{1,2,3,4}\)</span> in one-line notation.</div>
-<div class="solutions">
-<a href="" data-knowl="" class="id-ref answer-knowl original" data-refid="hk-answer-2" id="answer-2"><span class="type">Answer</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-answer-2"><div class="answer solution-like"><div class="para logical" id="p-121">
+</h4></summary><article class="exercise exercise-like"><div class="para" id="exc-perms-s4-2-1">List all permutations of the set <span class="process-math">\(\set{1,2,3,4}\)</span> in one-line notation.</div>
+<div class="solutions"><details id="exc-perms-s4-3" class="answer solution-like born-hidden-knowl"><summary><span class="type">Answer</span><span class="period">.</span></summary><div class="answer solution-like"><div class="para logical" id="exc-perms-s4-3-1">
 <div class="para">The permutations of <span class="process-math">\(\set{1,2,3,4}\)</span> are</div>
-<div class="displaymath process-math" id="md-8">
+<div class="displaymath process-math" id="exc-perms-s4-3-1-2">
 \begin{align*}
 1~2~3~4 \amp\amp 1~2~4~3 \amp\amp 1~3~2~4 \amp\amp
 1~3~4~2 \amp\amp 1~4~2~3 \amp\amp 1~4~3~2\\
@@ -599,13 +527,12 @@ a_1 \amp a_2 \amp a_3 \amp \cdots \amp a_n \\
 4~2~3~1 \amp\amp 4~3~1~2 \amp\amp 4~3~2~1\text{.}
 \end{align*}
 </div>
-</div></div></div>
-</div></article></div></section><section class="subsection" id="sub-perms-def-groups"><h3 class="heading hide-type">
-<span class="type">Subsection</span> <span class="codenumber">2.1.2</span> <span class="title">Permutation groups</span>
+</div></div></details></div></article></details></section><section class="subsection" id="sub-perms-def-groups"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber">2.1.2</span><span class="space"> </span><span class="title">Permutation groups</span>
 </h3>
-<section class="introduction" id="introduction-9"><div class="para" id="p-122">Since permutations of a set <span class="process-math">\(A\)</span> are bijections from <span class="process-math">\(A\)</span> to <span class="process-math">\(A\text{,}\)</span> each element of <span class="process-math">\(\sym{A}\)</span> has the same domain and codomain; thus they can be composed.</div> <article class="definition definition-like" id="def-composition"><h4 class="heading">
+<section class="introduction" id="sub-perms-def-groups-2"><div class="para" id="sub-perms-def-groups-2-1">Since permutations of a set <span class="process-math">\(A\)</span> are bijections from <span class="process-math">\(A\)</span> to <span class="process-math">\(A\text{,}\)</span> each element of <span class="process-math">\(\sym{A}\)</span> has the same domain and codomain; thus they can be composed.</div> <article class="definition definition-like" id="def-composition"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.6</span><span class="period">.</span><span class="space"> </span><span class="title">Permutation composition.</span>
-</h4> <div class="para logical" id="p-123">
+</h4> <div class="para logical" id="def-composition-2-1">
 <div class="para">Suppose <span class="process-math">\(\sigma,\tau\in S_A\)</span> for some set <span class="process-math">\(A\text{.}\)</span> Then the <dfn class="terminology">composition</dfn> of <span class="process-math">\(\tau\)</span> after <span class="process-math">\(\sigma\)</span> is the function <span class="process-math">\(\tau\circ\sigma:A\to A\)</span> defined by</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -615,13 +542,13 @@ a_1 \amp a_2 \amp a_3 \amp \cdots \amp a_n \\
 <div class="para">for each <span class="process-math">\(a\in A\text{.}\)</span> Moreover, the composition symbol <span class="process-math">\(\circ\)</span> will be suppressed, and we will write <span class="process-math">\(\tau\sigma\)</span> as a product rather than a composition.</div>
 </div></article> <article class="remark remark-like" id="rem-after"><h4 class="heading">
 <span class="type">Remark</span><span class="space"> </span><span class="codenumber">2.1.7</span><span class="period">.</span><span class="space"> </span><span class="title">Composition order.</span>
-</h4> <div class="para" id="p-124">We must be careful to always consider permutation multiplication in the correct order. An easy way to remember this is to think of the composition symbol as being pronounced “after”. Then <span class="process-math">\(\tau\sigma = \tau\after\sigma\)</span> is the permutation which performs <span class="process-math">\(\tau\)</span> after performing <span class="process-math">\(\sigma\text{.}\)</span>
-</div></article> <div class="para" id="p-125">We need not prove that the composition of permutations exists and is a function, but we do need to be careful to show that it is a permutation: that is, we must show that if <span class="process-math">\(\sigma,\tau\in \sym{A}\)</span> for a set <span class="process-math">\(A\text{,}\)</span> then both <span class="process-math">\(\tau\sigma,\sigma\tau\in\sym{A}\text{.}\)</span> When an operator (like <span class="process-math">\(\circ\)</span>) on a set satisfies the property that its output remains in the set, it is a <dfn class="terminology">closed</dfn> operator.</div> <article class="theorem theorem-like" id="thm-perm-multiplication-closed"><h4 class="heading">
+</h4> <div class="para" id="rem-after-2">We must be careful to always consider permutation multiplication in the correct order. An easy way to remember this is to think of the composition symbol as being pronounced “after”. Then <span class="process-math">\(\tau\sigma = \tau\after\sigma\)</span> is the permutation which performs <span class="process-math">\(\tau\)</span> after performing <span class="process-math">\(\sigma\text{.}\)</span>
+</div></article> <div class="para" id="sub-perms-def-groups-2-4">We need not prove that the composition of permutations exists and is a function, but we do need to be careful to show that it is a permutation: that is, we must show that if <span class="process-math">\(\sigma,\tau\in \sym{A}\)</span> for a set <span class="process-math">\(A\text{,}\)</span> then both <span class="process-math">\(\tau\sigma,\sigma\tau\in\sym{A}\text{.}\)</span> When an operator (like <span class="process-math">\(\circ\)</span>) on a set satisfies the property that its output remains in the set, it is a <dfn class="terminology">closed</dfn> operator.</div> <article class="theorem theorem-like" id="thm-perm-multiplication-closed"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.1.8</span><span class="period">.</span><span class="space"> </span><span class="title"><span class="process-math">\(\sym{A}\)</span> is closed under composition.</span>
 </h4>
-<div class="para" id="p-126">Let <span class="process-math">\(A\)</span> be a set and <span class="process-math">\(\sym{A}\)</span> the set of permutations of <span class="process-math">\(A\text{,}\)</span> and suppose <span class="process-math">\(\sigma,\tau\in\sym{A}\text{.}\)</span> Then <span class="process-math">\(\sigma\after\tau\in\sym{A}\)</span> and <span class="process-math">\(\tau\after\sigma\in\sym{A}\text{.}\)</span>
-</div></article><article class="hiddenproof" id="proof-4"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-4"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-4"><article class="hiddenproof"><div class="para" id="p-127">Let <span class="process-math">\(\sigma,\tau\in\sym{A}\)</span> for a set <span class="process-math">\(A\text{.}\)</span> It suffices to show that <span class="process-math">\(\tau\sigma\in\sym{A}\text{,}\)</span> for then the case <span class="process-math">\(\sigma\tau\in\sym{A}\)</span> holds by a symmetric argument exchanging the roles of <span class="process-math">\(\sigma\)</span> and <span class="process-math">\(\tau\text{.}\)</span>
-</div> <div class="para" id="p-128">In order to show that <span class="process-math">\(\tau\sigma\)</span> is injective, suppose that <span class="process-math">\(a_1,a_2\in A\)</span> such that <span class="process-math">\((\tau\sigma)(a_1) = (\tau\sigma)(a_2).\)</span> Then by definition, <span class="process-math">\(\tau(\sigma(a_1)) = \tau(\sigma(a_2))\text{;}\)</span> but since <span class="process-math">\(\tau\)</span> is injective, this necessitates that <span class="process-math">\(\sigma(a_1) = \sigma(a_2)\text{.}\)</span> In turn, since <span class="process-math">\(\sigma\)</span> is injective, we have that <span class="process-math">\(a_1 = a_2\text{,}\)</span> and thus have shown that <span class="process-math">\(a_1=a_2\)</span> whenever <span class="process-math">\((\tau\sigma)(a_1) = (\tau\sigma)(a_2)\text{.}\)</span> Therefore <span class="process-math">\(\tau\sigma\)</span> is injective.</div> <div class="para logical" id="p-129">
+<div class="para" id="thm-perm-multiplication-closed-2-1">Let <span class="process-math">\(A\)</span> be a set and <span class="process-math">\(\sym{A}\)</span> the set of permutations of <span class="process-math">\(A\text{,}\)</span> and suppose <span class="process-math">\(\sigma,\tau\in\sym{A}\text{.}\)</span> Then <span class="process-math">\(\sigma\after\tau\in\sym{A}\)</span> and <span class="process-math">\(\tau\after\sigma\in\sym{A}\text{.}\)</span>
+</div></article><details id="thm-perm-multiplication-closed-3" class="hiddenproof born-hidden-knowl"><summary><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></summary><article class="hiddenproof"><div class="para" id="thm-perm-multiplication-closed-3-1">Let <span class="process-math">\(\sigma,\tau\in\sym{A}\)</span> for a set <span class="process-math">\(A\text{.}\)</span> It suffices to show that <span class="process-math">\(\tau\sigma\in\sym{A}\text{,}\)</span> for then the case <span class="process-math">\(\sigma\tau\in\sym{A}\)</span> holds by a symmetric argument exchanging the roles of <span class="process-math">\(\sigma\)</span> and <span class="process-math">\(\tau\text{.}\)</span>
+</div> <div class="para" id="thm-perm-multiplication-closed-3-2">In order to show that <span class="process-math">\(\tau\sigma\)</span> is injective, suppose that <span class="process-math">\(a_1,a_2\in A\)</span> such that <span class="process-math">\((\tau\sigma)(a_1) = (\tau\sigma)(a_2).\)</span> Then by definition, <span class="process-math">\(\tau(\sigma(a_1)) = \tau(\sigma(a_2))\text{;}\)</span> but since <span class="process-math">\(\tau\)</span> is injective, this necessitates that <span class="process-math">\(\sigma(a_1) = \sigma(a_2)\text{.}\)</span> In turn, since <span class="process-math">\(\sigma\)</span> is injective, we have that <span class="process-math">\(a_1 = a_2\text{,}\)</span> and thus have shown that <span class="process-math">\(a_1=a_2\)</span> whenever <span class="process-math">\((\tau\sigma)(a_1) = (\tau\sigma)(a_2)\text{.}\)</span> Therefore <span class="process-math">\(\tau\sigma\)</span> is injective.</div> <div class="para logical" id="thm-perm-multiplication-closed-3-3">
 <div class="para">In order to show that <span class="process-math">\(\tau\sigma\)</span> is surjective, let <span class="process-math">\(a_3\in A\text{.}\)</span> Since <span class="process-math">\(\tau\)</span> is surjective, there is some <span class="process-math">\(a_2\in A\)</span> such that <span class="process-math">\(\tau(a_2) = a_3\text{;}\)</span> likewise, since <span class="process-math">\(\sigma\)</span> is surjective, there is some <span class="process-math">\(a_1\in A\)</span> such that <span class="process-math">\(\sigma(a_1)=a_2\text{.}\)</span> But then</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -629,23 +556,23 @@ a_1 \amp a_2 \amp a_3 \amp \cdots \amp a_n \\
 \end{equation*}
 </div>
 <div class="para">and hence <span class="process-math">\(a_3\in (\tau\sigma)(A)\text{.}\)</span> Since our selection of <span class="process-math">\(a_3\)</span> was arbitrary, we have that <span class="process-math">\(\tau\sigma\)</span> is surjective.</div>
-</div> <div class="para" id="p-130">As we have shown <span class="process-math">\(\tau\sigma\)</span> to be both injective and surjective on <span class="process-math">\(A\text{,}\)</span> we have establised <span class="process-math">\(\tau\sigma\in\sym{A}\)</span> as desired.</div></article></div> <div class="para" id="p-131">Closure is only one of the many important properties of the multiplication operator. The next most common property we expect operators to have is the associative property.</div> <article class="definition definition-like" id="def-associativity"><h4 class="heading">
+</div> <div class="para" id="thm-perm-multiplication-closed-3-4">As we have shown <span class="process-math">\(\tau\sigma\)</span> to be both injective and surjective on <span class="process-math">\(A\text{,}\)</span> we have establised <span class="process-math">\(\tau\sigma\in\sym{A}\)</span> as desired.</div></article></details> <div class="para" id="sub-perms-def-groups-2-6">Closure is only one of the many important properties of the multiplication operator. The next most common property we expect operators to have is the associative property.</div> <article class="definition definition-like" id="def-associativity"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.9</span><span class="period">.</span><span class="space"> </span><span class="title">Associative multiplication.</span>
-</h4> <div class="para" id="p-132">Multiplication is <dfn class="terminology">associative</dfn> if and only if <span class="process-math">\((ab)c = a(bc).\)</span>
+</h4> <div class="para" id="def-associativity-2-1">Multiplication is <dfn class="terminology">associative</dfn> if and only if <span class="process-math">\((ab)c = a(bc).\)</span>
 </div></article> <article class="theorem theorem-like" id="thm-permprod-assoc"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.1.10</span><span class="period">.</span><span class="space"> </span><span class="title">Composition in <span class="process-math">\(\sym{A}\)</span> is associative.</span>
 </h4>
-<div class="para logical" id="p-133">
+<div class="para logical" id="thm-permprod-assoc-2-1">
 <div class="para">Let <span class="process-math">\(A\)</span> be a set, and suppose <span class="process-math">\(\rho,\sigma,\tau\in\sym{A}\text{.}\)</span> Then</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \rho\after(\sigma\after\tau) = (\rho\after\sigma)\after\tau\text{.}
 \end{equation*}
 </div>
-</div></article><article class="hiddenproof" id="proof-5"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-5"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-5"><article class="hiddenproof"><div class="para logical" id="p-134">
+</div></article><details id="thm-permprod-assoc-3" class="hiddenproof born-hidden-knowl"><summary><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></summary><article class="hiddenproof"><div class="para logical" id="thm-permprod-assoc-3-1">
 <div class="para">Let <span class="process-math">\(\rho,\sigma,\tau\in\sym{A}\)</span> for a set <span class="process-math">\(A\text{.}\)</span> Then for every <span class="process-math">\(a\in A\text{,}\)</span>
 </div>
-<div class="displaymath process-math" id="md-9">
+<div class="displaymath process-math" id="thm-permprod-assoc-3-1-4">
 \begin{align*}
 (\rho\after(\sigma\after\tau))(a)
 \amp= \rho((\sigma\after\tau)(a))\\
@@ -655,34 +582,34 @@ a_1 \amp a_2 \amp a_3 \amp \cdots \amp a_n \\
 \end{align*}
 </div>
 <div class="para">with all equalities justified by the definition of composition.</div>
-</div></article></div> <div class="para" id="p-135">Since multiplication is associative, we can safely write <span class="process-math">\(\rho\sigma\tau\)</span> rather than <span class="process-math">\(\rho(\sigma\tau)\text{,}\)</span> since the product is unique as long as the relative order of the terms is preserved: <span class="process-math">\(\rho\)</span> must be applied after <span class="process-math">\(\sigma\text{,}\)</span> which must be applied after <span class="process-math">\(\tau\text{.}\)</span>
+</div></article></details> <div class="para" id="sub-perms-def-groups-2-9">Since multiplication is associative, we can safely write <span class="process-math">\(\rho\sigma\tau\)</span> rather than <span class="process-math">\(\rho(\sigma\tau)\text{,}\)</span> since the product is unique as long as the relative order of the terms is preserved: <span class="process-math">\(\rho\)</span> must be applied after <span class="process-math">\(\sigma\text{,}\)</span> which must be applied after <span class="process-math">\(\tau\text{.}\)</span>
 </div></section><section class="subsubsection" id="subsub-perms-def-groups-products"><h4 class="heading hide-type">
-<span class="type">Subsubsection</span> <span class="codenumber">2.1.2.1</span> <span class="title">Calculating permutation products</span>
+<span class="type">Subsubsection</span><span class="space"> </span><span class="codenumber">2.1.2.1</span><span class="space"> </span><span class="title">Calculating permutation products</span>
 </h4>
-<div class="para" id="p-136">Calculating products of permutations can be a frustrating exercise. Thankfully, there is a simple algorithm to determine the product.</div>
+<div class="para" id="subsub-perms-def-groups-products-2">Calculating products of permutations can be a frustrating exercise. Thankfully, there is a simple algorithm to determine the product.</div>
 <article class="algorithm theorem-like" id="alg-permproducts"><h5 class="heading">
 <span class="type">Algorithm</span><span class="space"> </span><span class="codenumber">2.1.11</span><span class="period">.</span><span class="space"> </span><span class="title">Left-multiplication of permutations.</span>
 </h5>
-<div class="para" id="p-137">Suppose <span class="process-math">\(\sigma_1,\sigma_2,\dotsc,\sigma_k\)</span> are permutations of the set <span class="process-math">\(A=\set{a_1,a_2,\dotsc,a_n}\text{,}\)</span> and further suppose the product <span class="process-math">\(\sigma_k\circ\sigma_{k-1}\circ\cdots\circ\sigma_2\circ\sigma_1\)</span> is desired.</div> <div class="para logical" id="p-138"><ol class="decimal"><li id="li-29"><div class="para logical" id="p-139">
+<div class="para" id="alg-permproducts-2-1">Suppose <span class="process-math">\(\sigma_1,\sigma_2,\dotsc,\sigma_k\)</span> are permutations of the set <span class="process-math">\(A=\set{a_1,a_2,\dotsc,a_n}\text{,}\)</span> and further suppose the product <span class="process-math">\(\sigma_k\circ\sigma_{k-1}\circ\cdots\circ\sigma_2\circ\sigma_1\)</span> is desired.</div> <div class="para logical" id="alg-permproducts-2-2"><ol class="decimal"><li id="alg-permproducts-2-2-1-1"><div class="para logical" id="alg-permproducts-2-2-1-1-1">
 <div class="para">For each <span class="process-math">\(i\in [n]\text{,}\)</span> do the following:</div>
 <ol class="lower-alpha">
-<li id="li-30"><div class="para" id="p-140">Let <span class="process-math">\(x=a_i\text{.}\)</span>
+<li id="alg-permproducts-2-2-1-1-1-2-1"><div class="para" id="alg-permproducts-2-2-1-1-1-2-1-1">Let <span class="process-math">\(x=a_i\text{.}\)</span>
 </div></li>
-<li id="li-31"><div class="para logical" id="p-141">
+<li id="alg-permproducts-2-2-1-1-1-2-2"><div class="para logical" id="alg-permproducts-2-2-1-1-1-2-2-1">
 <div class="para">For each <span class="process-math">\(j\in[k]\text{,}\)</span> do the following:</div>
-<ol class="lower-roman"><li id="li-32"><div class="para" id="p-142">Update <span class="process-math">\(x = \sigma_j(x)\text{.}\)</span>
+<ol class="lower-roman"><li id="alg-permproducts-2-2-1-1-1-2-2-1-2-1"><div class="para" id="alg-permproducts-2-2-1-1-1-2-2-1-2-1-1">Update <span class="process-math">\(x = \sigma_j(x)\text{.}\)</span>
 </div></li></ol>
 </div></li>
-<li id="li-33"><div class="para" id="p-143">Write <span class="process-math">\((\sigma_k\circ\sigma_{k-1}\circ\cdots\circ\sigma_2\circ\sigma_1)(a_i) = x\text{.}\)</span>
+<li id="alg-permproducts-2-2-1-1-1-2-3"><div class="para" id="alg-permproducts-2-2-1-1-1-2-3-1">Write <span class="process-math">\((\sigma_k\circ\sigma_{k-1}\circ\cdots\circ\sigma_2\circ\sigma_1)(a_i) = x\text{.}\)</span>
 </div></li>
 </ol>
-</div></li></ol></div></article><div class="para" id="p-144">This algorithm can be effectively visualized (for a small number of permutations) using a diagram, as follows.</div>
+</div></li></ol></div></article><div class="para" id="subsub-perms-def-groups-products-4">This algorithm can be effectively visualized (for a small number of permutations) using a diagram, as follows.</div>
 <article class="example example-like" id="exmp-permproducts-stack"><h5 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.12</span><span class="period">.</span><span class="space"> </span><span class="title">Stacking permutation products.</span>
 </h5>
-<div class="para logical" id="p-145">
+<div class="para logical" id="exmp-permproducts-stack-2-1">
 <div class="para">Consider the permutations</div>
-<div class="displaymath process-math" id="md-10">
+<div class="displaymath process-math" id="exmp-permproducts-stack-2-1-1">
 \begin{align*}
 \sigma_1 \amp = 10~3~4~6~9~2~5~8~1~7,\\
 \sigma_2 \amp = 7~10~2~9~3~1~4~6~8~5,\\
@@ -693,14 +620,14 @@ a_1 \amp a_2 \amp a_3 \amp \cdots \amp a_n \\
 </div>
 <div class="para">and suppose we want to determine the product <span class="process-math">\(\sigma_5\sigma_4\sigma_3\sigma_2\sigma_1\text{.}\)</span> Now write the two-line notation for each permutation in a single column, where the top of the column is the rightmost permutation in the product; in this case, <span class="process-math">\(\sigma_1\text{.}\)</span> To find the value of <span class="process-math">\(\sigma_5\sigma_4\sigma_3\sigma_2\sigma_1(1)\text{,}\)</span> for instance, you can trace the output of a permutation into the input of the next permutation, and so on.</div>
 </div> <figure class="figure figure-like" id="fig-stackedpermproduct"><div class="image-box" style="width: 50%; margin-left: 25%; margin-right: 25%;"><img src="generated/latex-image/img-stackedpermproduct.svg" role="img" class="contained"></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.1.13<span class="period">.</span></span><span class="space"> </span>A stacked permutation product diagram demonstrating <span class="process-math">\(\sigma_5\sigma_4\sigma_3\sigma_2\sigma_1(1) = 7\text{.}\)</span></figcaption></figure> <div class="para" id="p-146">This idea will be extended when we talk about cryptography later in <a href="ch-crypto.html" class="internal" title="Chapter 3: Simple Cryptography">Chapter 3</a>.</div></article></section><section class="subsubsection" id="subsub-perms-def-groups-multprops"><h4 class="heading hide-type">
-<span class="type">Subsubsection</span> <span class="codenumber">2.1.2.2</span> <span class="title">Properties of permutation multiplication</span>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.1.13<span class="period">.</span></span><span class="space"> </span>A stacked permutation product diagram demonstrating <span class="process-math">\(\sigma_5\sigma_4\sigma_3\sigma_2\sigma_1(1) = 7\text{.}\)</span></figcaption></figure> <div class="para" id="exmp-permproducts-stack-2-3">This idea will be extended when we talk about cryptography later in <a href="ch-crypto.html" class="internal" title="Chapter 3: Simple Cryptography">Chapter 3</a>.</div></article></section><section class="subsubsection" id="subsub-perms-def-groups-multprops"><h4 class="heading hide-type">
+<span class="type">Subsubsection</span><span class="space"> </span><span class="codenumber">2.1.2.2</span><span class="space"> </span><span class="title">Properties of permutation multiplication</span>
 </h4>
-<div class="para" id="p-147">Having defined multiplication of permutations, it is natural to consider whether there is a <em class="emphasis">multiplicative identity</em>.</div>
+<div class="para" id="subsub-perms-def-groups-multprops-2">Having defined multiplication of permutations, it is natural to consider whether there is a <em class="emphasis">multiplicative identity</em>.</div>
 <article class="definition definition-like" id="def-identity-perm"><h5 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.14</span><span class="period">.</span><span class="space"> </span><span class="title">Identity permutation.</span>
-</h5> <div class="para" id="p-148">Suppose <span class="process-math">\(A\)</span> is a set, and let <span class="process-math">\(e_A:A\to A\)</span> be the function such that <span class="process-math">\(e_A(a)=a\)</span> for each <span class="process-math">\(a\in A\text{.}\)</span> Then <span class="process-math">\(e_A\)</span> is the <dfn class="terminology">identity permutation on <span class="process-math">\(A\)</span></dfn>. When the set <span class="process-math">\(A\)</span> being permuted is clear by context, the identity permutation will simply be denoted <span class="process-math">\(e\text{.}\)</span>
-</div> <div class="para logical" id="p-149">
+</h5> <div class="para" id="def-identity-perm-2-1">Suppose <span class="process-math">\(A\)</span> is a set, and let <span class="process-math">\(e_A:A\to A\)</span> be the function such that <span class="process-math">\(e_A(a)=a\)</span> for each <span class="process-math">\(a\in A\text{.}\)</span> Then <span class="process-math">\(e_A\)</span> is the <dfn class="terminology">identity permutation on <span class="process-math">\(A\)</span></dfn>. When the set <span class="process-math">\(A\)</span> being permuted is clear by context, the identity permutation will simply be denoted <span class="process-math">\(e\text{.}\)</span>
+</div> <div class="para logical" id="def-identity-perm-2-2">
 <div class="para">Particularly, if <span class="process-math">\(A=\set{a_1,a_2,\dotsc,a_n}\)</span> is a finite set, then</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -710,26 +637,25 @@ a_1 \amp a_2 \amp \cdots \amp a_n
 \end{bmatrix}.
 \end{equation*}
 </div>
-</div></article><div class="para" id="p-150">Having a good algorithm for permutation products inspires us to want to apply the same permutation repeatedly, and so we can define the power of a permutation.</div>
+</div></article><div class="para" id="subsub-perms-def-groups-multprops-4">Having a good algorithm for permutation products inspires us to want to apply the same permutation repeatedly, and so we can define the power of a permutation.</div>
 <article class="definition definition-like" id="def-perm-powers"><h5 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.15</span><span class="period">.</span><span class="space"> </span><span class="title">Natural powers of a permutation.</span>
-</h5> <div class="para" id="p-151">Let <span class="process-math">\(A\)</span> be a set and <span class="process-math">\(\sigma\in\sym{A}\text{.}\)</span> Define <span class="process-math">\(\sigma^0 = e_A\text{,}\)</span> and for each <span class="process-math">\(k\in\Zp\)</span> define recursively <span class="process-math">\(\sigma^k = \sigma(\sigma^{k-1})\)</span> to be the <dfn class="terminology">kth power</dfn> of <span class="process-math">\(\sigma\text{.}\)</span>
+</h5> <div class="para" id="def-perm-powers-2-1">Let <span class="process-math">\(A\)</span> be a set and <span class="process-math">\(\sigma\in\sym{A}\text{.}\)</span> Define <span class="process-math">\(\sigma^0 = e_A\text{,}\)</span> and for each <span class="process-math">\(k\in\Zp\)</span> define recursively <span class="process-math">\(\sigma^k = \sigma(\sigma^{k-1})\)</span> to be the <dfn class="terminology">kth power</dfn> of <span class="process-math">\(\sigma\text{.}\)</span>
 </div></article><article class="definition definition-like" id="def-perm-inverse"><h5 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.16</span><span class="period">.</span><span class="space"> </span><span class="title">Inverse of a permutation.</span>
-</h5> <div class="para" id="p-152">Suppose <span class="process-math">\(\sigma,\tau\in\sym{A}\)</span> for some set <span class="process-math">\(A\text{.}\)</span> Then <span class="process-math">\(\tau\)</span> is an <dfn class="terminology">inverse</dfn> of <span class="process-math">\(\sigma\)</span> if and only if <span class="process-math">\(\sigma\tau = e_A = \tau\sigma\text{.}\)</span>
+</h5> <div class="para" id="def-perm-inverse-2-1">Suppose <span class="process-math">\(\sigma,\tau\in\sym{A}\)</span> for some set <span class="process-math">\(A\text{.}\)</span> Then <span class="process-math">\(\tau\)</span> is an <dfn class="terminology">inverse</dfn> of <span class="process-math">\(\sigma\)</span> if and only if <span class="process-math">\(\sigma\tau = e_A = \tau\sigma\text{.}\)</span>
 </div></article><article class="theorem theorem-like" id="thm-perm-inverse-unique"><h5 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.1.17</span><span class="period">.</span><span class="space"> </span><span class="title">Unique inverses.</span>
 </h5>
-<div class="para" id="p-153">Suppose <span class="process-math">\(\rho,\sigma,\tau\in S_A\)</span> such that <span class="process-math">\(\rho\sigma=e_A=\sigma\rho\)</span> and <span class="process-math">\(\tau\sigma=e_A=\sigma\tau\text{.}\)</span> Then <span class="process-math">\(\rho=\tau\text{.}\)</span>
-</div></article><article class="hiddenproof" id="proof-6"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-6"><h5 class="heading"><span class="type">Proof<span class="period">.</span></span></h5></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-6"><article class="hiddenproof"><div class="para logical" id="p-154">
+<div class="para" id="thm-perm-inverse-unique-2-1">Suppose <span class="process-math">\(\rho,\sigma,\tau\in S_A\)</span> such that <span class="process-math">\(\rho\sigma=e_A=\sigma\rho\)</span> and <span class="process-math">\(\tau\sigma=e_A=\sigma\tau\text{.}\)</span> Then <span class="process-math">\(\rho=\tau\text{.}\)</span>
+</div></article><details id="thm-perm-inverse-unique-3" class="hiddenproof born-hidden-knowl"><summary><h5 class="heading"><span class="type">Proof<span class="period">.</span></span></h5></summary><article class="hiddenproof"><div class="para logical" id="thm-perm-inverse-unique-3-1">
 <div class="para">If <span class="process-math">\(\rho\text{,}\)</span> <span class="process-math">\(\sigma\text{,}\)</span> and <span class="process-math">\(\tau\)</span> are as hypothesized, then</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \rho = \rho e_A = \rho(\sigma \tau) = (\rho\sigma)\tau) = e_A\tau = \tau.\text{.}
 \end{equation*}
 </div>
-</div></article></div>
-<div class="para logical" id="p-155">
+</div></article></details><div class="para logical" id="subsub-perms-def-groups-multprops-8">
 <div class="para">Having inverses we can extend the definition of powers of permutations to all integer powers: if <span class="process-math">\(\sigma\in\sym{A}\)</span> for some set <span class="process-math">\(A\text{,}\)</span> then</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -745,30 +671,30 @@ e_A, \amp \text{ if }k=0 \\
 <article class="example example-like" id="exmp-permprod-noncomm"><h5 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.18</span><span class="period">.</span><span class="space"> </span><span class="title">Composition is not commutative.</span>
 </h5>
-<div class="para" id="p-156">We need to note that composition is <em class="emphasis">not commutative</em>. Generally speaking for <span class="process-math">\(\sigma,\tau\in\sym{A}\text{,}\)</span> <span class="process-math">\(\sigma\tau\neq\tau\sigma\text{.}\)</span> To demonstrate, consider the simple permutations <span class="process-math">\(\tau_1 = 23451\)</span> and <span class="process-math">\(\tau_2 = 54213\)</span> on the set <span class="process-math">\([5]\text{.}\)</span>
+<div class="para" id="exmp-permprod-noncomm-2-1">We need to note that composition is <em class="emphasis">not commutative</em>. Generally speaking for <span class="process-math">\(\sigma,\tau\in\sym{A}\text{,}\)</span> <span class="process-math">\(\sigma\tau\neq\tau\sigma\text{.}\)</span> To demonstrate, consider the simple permutations <span class="process-math">\(\tau_1 = 23451\)</span> and <span class="process-math">\(\tau_2 = 54213\)</span> on the set <span class="process-math">\([5]\text{.}\)</span>
 </div> <figure class="figure figure-like" id="fig-permprod-noncomm"><div class="image-box" style="width: 75%; margin-left: 12.5%; margin-right: 12.5%;"><img src="generated/latex-image/img-permprod-noncomm.svg" role="img" class="contained"></div>
-<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.1.19<span class="period">.</span></span><span class="space"> </span>Permutation products (as a composition) are not commutative.</figcaption></figure> <div class="para" id="p-157">The color pattern indicates the output of each permutation, so we see <span class="process-math">\(\tau_2\tau_1 = 42135\text{,}\)</span> but <span class="process-math">\(\tau_1\tau_2 = 15324\text{.}\)</span>
+<figcaption><span class="type">Figure</span><span class="space"> </span><span class="codenumber">2.1.19<span class="period">.</span></span><span class="space"> </span>Permutation products (as a composition) are not commutative.</figcaption></figure> <div class="para" id="exmp-permprod-noncomm-2-3">The color pattern indicates the output of each permutation, so we see <span class="process-math">\(\tau_2\tau_1 = 42135\text{,}\)</span> but <span class="process-math">\(\tau_1\tau_2 = 15324\text{.}\)</span>
 </div></article></section><section class="subsubsection" id="subsub-perms-def-groups-absalg"><h4 class="heading hide-type">
-<span class="type">Subsubsection</span> <span class="codenumber">2.1.2.3</span> <span class="title">Abstract algebra and permutation groups</span>
+<span class="type">Subsubsection</span><span class="space"> </span><span class="codenumber">2.1.2.3</span><span class="space"> </span><span class="title">Abstract algebra and permutation groups</span>
 </h4>
 <article class="definition definition-like" id="def-group"><h5 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.20</span><span class="period">.</span><span class="space"> </span><span class="title">Groups.</span>
-</h5> <div class="para" id="p-158">A <dfn class="terminology">group</dfn> <span class="process-math">\((G,*)\)</span> is a set <span class="process-math">\(G\)</span> along with a closed associative operation <span class="process-math">\(*\)</span> which has an identity element <span class="process-math">\(e_G\)</span> and for which each element <span class="process-math">\(g\in G\)</span> has a unique inverse <span class="process-math">\(g^{-1}\in G\text{.}\)</span>
+</h5> <div class="para" id="def-group-2-1">A <dfn class="terminology">group</dfn> <span class="process-math">\((G,*)\)</span> is a set <span class="process-math">\(G\)</span> along with a closed associative operation <span class="process-math">\(*\)</span> which has an identity element <span class="process-math">\(e_G\)</span> and for which each element <span class="process-math">\(g\in G\)</span> has a unique inverse <span class="process-math">\(g^{-1}\in G\text{.}\)</span>
 </div></article><article class="definition definition-like" id="def-symmetric-group"><h5 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.21</span><span class="period">.</span><span class="space"> </span><span class="title">Symmetric Group.</span>
-</h5> <div class="para" id="p-159">If <span class="process-math">\(A\)</span> is a set, then <span class="process-math">\(\sym{A}\)</span> is the <dfn class="terminology">symmetric group</dfn> over <span class="process-math">\(A\text{,}\)</span> and <span class="process-math">\(\sym{n}\)</span> is the <dfn class="terminology">symmetric group over <span class="process-math">\(n\)</span> symbols</dfn>.</div></article><div class="para" id="p-160">The study of group theory was inspired by the work of Lagrange on generalizations of permutation groups. This and many other topics are introduced to undergraduate math majors in their first course in Abstract Algebra, which is almost totally focused on group theory. An important result in group theory  is <em class="emphasis">Cayley's Theorem</em>, which is especially important for those working with groups in an applied setting.</div>
+</h5> <div class="para" id="def-symmetric-group-2-1">If <span class="process-math">\(A\)</span> is a set, then <span class="process-math">\(\sym{A}\)</span> is the <dfn class="terminology">symmetric group</dfn> over <span class="process-math">\(A\text{,}\)</span> and <span class="process-math">\(\sym{n}\)</span> is the <dfn class="terminology">symmetric group over <span class="process-math">\(n\)</span> symbols</dfn>.</div></article><div class="para" id="subsub-perms-def-groups-absalg-4">The study of group theory was inspired by the work of Lagrange on generalizations of permutation groups. This and many other topics are introduced to undergraduate math majors in their first course in Abstract Algebra, which is almost totally focused on group theory. An important result in group theory  is <em class="emphasis">Cayley’s Theorem</em>, which is especially important for those working with groups in an applied setting.</div>
 <article class="definition definition-like" id="def-group-isomorphism"><h5 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.22</span><span class="period">.</span><span class="space"> </span><span class="title">Group isomorphism.</span>
-</h5> <div class="para" id="p-161">Suppose <span class="process-math">\((G,*)\)</span> and <span class="process-math">\((H,\cdot)\)</span> are groups, and suppose there is a bijection <span class="process-math">\(\phi:G\to H\)</span> such that <span class="process-math">\(\phi(g_1*g_2) = \phi(g_1)\cdot\phi(g_2)\)</span> for every <span class="process-math">\(g_1,g_2\in G\text{.}\)</span> Then <span class="process-math">\(G\)</span> is <dfn class="terminology">isomorphic</dfn> to <span class="process-math">\(H\)</span> and the bijection <span class="process-math">\(\phi\)</span> is a <dfn class="terminology">group isomorphism</dfn>.</div></article><article class="theorem theorem-like" id="thm-cayleys-theorem"><h5 class="heading">
-<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.1.23</span><span class="period">.</span><span class="space"> </span><span class="title">Cayley's Theorem.</span>
+</h5> <div class="para" id="def-group-isomorphism-2-1">Suppose <span class="process-math">\((G,*)\)</span> and <span class="process-math">\((H,\cdot)\)</span> are groups, and suppose there is a bijection <span class="process-math">\(\phi:G\to H\)</span> such that <span class="process-math">\(\phi(g_1*g_2) = \phi(g_1)\cdot\phi(g_2)\)</span> for every <span class="process-math">\(g_1,g_2\in G\text{.}\)</span> Then <span class="process-math">\(G\)</span> is <dfn class="terminology">isomorphic</dfn> to <span class="process-math">\(H\)</span> and the bijection <span class="process-math">\(\phi\)</span> is a <dfn class="terminology">group isomorphism</dfn>.</div></article><article class="theorem theorem-like" id="thm-cayleys-theorem"><h5 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.1.23</span><span class="period">.</span><span class="space"> </span><span class="title">Cayley’s Theorem.</span>
 </h5>
-<div class="para" id="p-162">Every abstract group is isomorphic to a subgroup of a symmetric group.</div></article><div class="para" id="p-163">Technically, a subgroup hasn't yet been defined, but it is simply a subset of a group which satisfies the definition of a group under the same operation as its parent group.</div></section></section><section class="subsection" id="sub-perms-def-cycles"><h3 class="heading hide-type">
-<span class="type">Subsection</span> <span class="codenumber">2.1.3</span> <span class="title">Cycles and disjoint cycle decomposition</span>
+<div class="para" id="thm-cayleys-theorem-2-1">Every abstract group is isomorphic to a subgroup of a symmetric group.</div></article><div class="para" id="subsub-perms-def-groups-absalg-7">Technically, a subgroup hasn’t yet been defined, but it is simply a subset of a group which satisfies the definition of a group under the same operation as its parent group.</div></section></section><section class="subsection" id="sub-perms-def-cycles"><h3 class="heading hide-type">
+<span class="type">Subsection</span><span class="space"> </span><span class="codenumber">2.1.3</span><span class="space"> </span><span class="title">Cycles and disjoint cycle decomposition</span>
 </h3>
-<div class="para" id="p-164">Having now built all the definitions and theory necessary for an algebraic study of groups, we introduce the preferred notation for writing permutations used by group theorists. Called the <em class="emphasis">disjoint cycle notation</em>, it allows several important characteristics of permutations to be made very visible.</div>
+<div class="para" id="sub-perms-def-cycles-2">Having now built all the definitions and theory necessary for an algebraic study of groups, we introduce the preferred notation for writing permutations used by group theorists. Called the <em class="emphasis">disjoint cycle notation</em>, it allows several important characteristics of permutations to be made very visible.</div>
 <article class="definition definition-like" id="def-fixedpts-supports"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.24</span><span class="period">.</span><span class="space"> </span><span class="title">Fixed points and supports of permutations.</span>
-</h4> <div class="para logical" id="p-165">
+</h4> <div class="para logical" id="def-fixedpts-supports-2-1">
 <div class="para">Suppose <span class="process-math">\(a\in A\)</span> and <span class="process-math">\(\sigma\in S_A\text{.}\)</span> Then <dfn class="terminology"><span class="process-math">\(\sigma\)</span> fixes <span class="process-math">\(a\)</span></dfn>, or equivalently <span class="process-math">\(a\)</span> is a <dfn class="terminology">fixed point of <span class="process-math">\(\sigma\)</span></dfn>, if and only if <span class="process-math">\(\sigma(a)=a\text{.}\)</span> These elements are collected into a set</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -781,17 +707,17 @@ e_A, \amp \text{ if }k=0 \\
 \supp{\sigma} = \set{a\in A: \sigma(a)\neq a}.
 \end{equation*}
 </div>
-</div></article><div class="para" id="p-166">There is an interesting type of permutation whose behavior on its support behaves in a predictable fashion.</div>
+</div></article><div class="para" id="sub-perms-def-cycles-4">There is an interesting type of permutation whose behavior on its support behaves in a predictable fashion.</div>
 <article class="definition definition-like" id="def-cyclic-permutation"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.25</span><span class="period">.</span><span class="space"> </span><span class="title">Cyclic permutations.</span>
-</h4> <div class="para logical" id="p-167">
+</h4> <div class="para logical" id="def-cyclic-permutation-2-1">
 <div class="para">Let <span class="process-math">\(i_1, i_2, \ldots, i_r\)</span> be distinct integers in <span class="process-math">\([n]\text{,}\)</span> where <span class="process-math">\(n\geq r\text{.}\)</span> Suppose <span class="process-math">\(\alpha\in S_n\)</span> has <span class="process-math">\(\supp{\alpha} = \set{i_1,i_2,\dotsc,i_r}\)</span> and also that</div>
 <div class="displaymath process-math">
 \begin{equation*}
 \alpha(i_1)=i_2, \alpha(i_2)=i_3, \ldots \alpha(i_{r-1})=i_r, \alpha(i_r)=i_1.
 \end{equation*}
 </div>
-</div> <div class="para logical" id="p-168">
+</div> <div class="para logical" id="def-cyclic-permutation-2-2">
 <div class="para">Then <span class="process-math">\(\alpha\)</span> is an <dfn class="terminology"><span class="process-math">\(r\)</span>-cycle</dfn>, or equivalently a <dfn class="terminology">cycle of length <span class="process-math">\(r\)</span></dfn>, and is denoted in <dfn class="terminology">cycle notation</dfn> by</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -805,45 +731,41 @@ e_A, \amp \text{ if }k=0 \\
 \end{equation*}
 </div>
 <div class="para">when necessary for clarity.</div>
-</div></article><div class="para" id="p-169">An interesting result of the definition of cycles is that every <span class="process-math">\(1\)</span>-cycle is equivalent to the identity: if <span class="process-math">\(a\in[n]\)</span> and <span class="process-math">\(\alpha=(a)\text{,}\)</span> then <span class="process-math">\(\supp{\alpha} = \emptyset\text{,}\)</span> so <span class="process-math">\(\fix{\alpha}=[n]\)</span> and <span class="process-math">\(\alpha=e\text{.}\)</span> For this reason it is common to write the identity in <span class="process-math">\(\sym{n}\)</span> as <span class="process-math">\((1)\text{.}\)</span>
+</div></article><div class="para" id="sub-perms-def-cycles-6">An interesting result of the definition of cycles is that every <span class="process-math">\(1\)</span>-cycle is equivalent to the identity: if <span class="process-math">\(a\in[n]\)</span> and <span class="process-math">\(\alpha=(a)\text{,}\)</span> then <span class="process-math">\(\supp{\alpha} = \emptyset\text{,}\)</span> so <span class="process-math">\(\fix{\alpha}=[n]\)</span> and <span class="process-math">\(\alpha=e\text{.}\)</span> For this reason it is common to write the identity in <span class="process-math">\(\sym{n}\)</span> as <span class="process-math">\((1)\text{.}\)</span>
 </div>
-<article class="exercise exercise-like" id="exc-perms-support"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exc-perms-support"><h4 class="heading">
+<details id="exc-perms-support" class="exercise exercise-like born-hidden-knowl"><summary><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">2.1.26</span><span class="period">.</span><span class="space"> </span><span class="title">Behavior of permutation supports.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exc-perms-support"><article class="exercise exercise-like"><div class="para" id="p-170">Suppose <span class="process-math">\(\alpha\in\sym{N}\)</span> and suppose <span class="process-math">\(x\in \supp{\alpha}\text{.}\)</span> Prove that <span class="process-math">\(\alpha(x)\in\supp{\alpha}.\)</span>
+</h4></summary><article class="exercise exercise-like"><div class="para" id="exc-perms-support-2-1">Suppose <span class="process-math">\(\alpha\in\sym{N}\)</span> and suppose <span class="process-math">\(x\in \supp{\alpha}\text{.}\)</span> Prove that <span class="process-math">\(\alpha(x)\in\supp{\alpha}.\)</span>
 </div>
-<div class="solutions">
-<a href="" data-knowl="" class="id-ref solution-knowl original" data-refid="hk-solution-1" id="solution-1"><span class="type">Solution</span><span class="period">.</span></a><div class="hidden-content tex2jax_ignore" id="hk-solution-1"><div class="solution solution-like"><div class="para" id="p-171">If <span class="process-math">\(\alpha\in\sym{N}\)</span> and <span class="process-math">\(x\in \supp{\alpha}\text{,}\)</span> but we assume towards a contradiction that <span class="process-math">\(\alpha(x)\in\fix{\alpha}\text{,}\)</span> then we have <span class="process-math">\(\alpha(x) = \alpha(\alpha(x))\text{,}\)</span> but <span class="process-math">\(x\neq\alpha(x)\text{;}\)</span> this contradicts that <span class="process-math">\(\alpha\)</span> is injective! Hence it must be that <span class="process-math">\(\alpha(x)\in\supp{\alpha}\text{.}\)</span>
-</div></div></div>
-</div></article></div>
-<article class="definition definition-like" id="def-disjoint-cycles"><h4 class="heading">
+<div class="solutions"><details id="exc-perms-support-3" class="solution solution-like born-hidden-knowl"><summary><span class="type">Solution</span><span class="period">.</span></summary><div class="solution solution-like"><div class="para" id="exc-perms-support-3-1">If <span class="process-math">\(\alpha\in\sym{N}\)</span> and <span class="process-math">\(x\in \supp{\alpha}\text{,}\)</span> but we assume towards a contradiction that <span class="process-math">\(\alpha(x)\in\fix{\alpha}\text{,}\)</span> then we have <span class="process-math">\(\alpha(x) = \alpha(\alpha(x))\text{,}\)</span> but <span class="process-math">\(x\neq\alpha(x)\text{;}\)</span> this contradicts that <span class="process-math">\(\alpha\)</span> is injective! Hence it must be that <span class="process-math">\(\alpha(x)\in\supp{\alpha}\text{.}\)</span>
+</div></div></details></div></article></details><article class="definition definition-like" id="def-disjoint-cycles"><h4 class="heading">
 <span class="type">Definition</span><span class="space"> </span><span class="codenumber">2.1.27</span><span class="period">.</span><span class="space"> </span><span class="title">Disjoint cycles.</span>
-</h4> <div class="para" id="p-172">Two cycles <span class="process-math">\(\alpha\)</span> and <span class="process-math">\(\beta\)</span> are <dfn class="terminology">disjoint</dfn> if and only if <span class="process-math">\(\supp{\alpha}\cap\supp{\beta} = \emptyset.\)</span>
-</div></article><div class="para" id="p-173">While it is not true in the general case, one of the important reasons we consider cyclic permutations is that disjoint cycles commute.</div>
+</h4> <div class="para" id="def-disjoint-cycles-2-1">Two cycles <span class="process-math">\(\alpha\)</span> and <span class="process-math">\(\beta\)</span> are <dfn class="terminology">disjoint</dfn> if and only if <span class="process-math">\(\supp{\alpha}\cap\supp{\beta} = \emptyset.\)</span>
+</div></article><div class="para" id="sub-perms-def-cycles-9">While it is not true in the general case, one of the important reasons we consider cyclic permutations is that disjoint cycles commute.</div>
 <article class="lemma theorem-like" id="lem-disjoint-cycles-commute"><h4 class="heading">
 <span class="type">Lemma</span><span class="space"> </span><span class="codenumber">2.1.28</span><span class="period">.</span><span class="space"> </span><span class="title">Disjoint cyclic permutations commute.</span>
 </h4>
-<div class="para" id="p-174">Let <span class="process-math">\(n\in\Zp\text{.}\)</span> If <span class="process-math">\(\alpha\)</span> and <span class="process-math">\(\beta\)</span> are disjoint cycles in <span class="process-math">\(S_n\text{,}\)</span> then <span class="process-math">\(\alpha\beta=\beta\alpha\text{.}\)</span>
-</div></article><article class="hiddenproof" id="proof-7"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-7"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-7"><article class="hiddenproof"><div class="para logical" id="p-175">
-<div class="para">Suppose <span class="process-math">\(\alpha,\beta\in\sym{n}\)</span> are disjoint cycles and <span class="process-math">\(x\in[n]\text{.}\)</span> First assume <span class="process-math">\(x\in\supp{\alpha}\text{.}\)</span> Since <span class="process-math">\(\supp{\alpha}\cap\supp{\beta}=\emptyset\text{,}\)</span> it must be that <span class="process-math">\(x\in\fix{\beta}\text{.}\)</span> However by <a href="" class="xref" data-knowl="./knowl/exc-perms-support.html" title="Checkpoint 2.1.26: Behavior of permutation supports">Checkpoint 2.1.26</a> we know <span class="process-math">\(\alpha(x)\in\supp{\alpha}\text{,}\)</span> so likewise <span class="process-math">\(\alpha(x)\in\\fix{\beta}\text{.}\)</span> But then</div>
-<div class="displaymath process-math" data-contains-math-knowls="./knowl/exc-perms-support.html">
+<div class="para" id="lem-disjoint-cycles-commute-2-1">Let <span class="process-math">\(n\in\Zp\text{.}\)</span> If <span class="process-math">\(\alpha\)</span> and <span class="process-math">\(\beta\)</span> are disjoint cycles in <span class="process-math">\(S_n\text{,}\)</span> then <span class="process-math">\(\alpha\beta=\beta\alpha\text{.}\)</span>
+</div></article><details id="lem-disjoint-cycles-commute-3" class="hiddenproof born-hidden-knowl"><summary><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></summary><article class="hiddenproof"><div class="para logical" id="lem-disjoint-cycles-commute-3-1">
+<div class="para">Suppose <span class="process-math">\(\alpha,\beta\in\sym{n}\)</span> are disjoint cycles and <span class="process-math">\(x\in[n]\text{.}\)</span> First assume <span class="process-math">\(x\in\supp{\alpha}\text{.}\)</span> Since <span class="process-math">\(\supp{\alpha}\cap\supp{\beta}=\emptyset\text{,}\)</span> it must be that <span class="process-math">\(x\in\fix{\beta}\text{.}\)</span> However by <a href="" class="xref" data-knowl="./knowl/xref/exc-perms-support.html" title="Checkpoint 2.1.26: Behavior of permutation supports">Checkpoint 2.1.26</a> we know <span class="process-math">\(\alpha(x)\in\supp{\alpha}\text{,}\)</span> so likewise <span class="process-math">\(\alpha(x)\in\\fix{\beta}\text{.}\)</span> But then</div>
+<div class="displaymath process-math" data-contains-math-knowls="./knowl/xref/exc-perms-support.html">
 \begin{equation*}
 (\alpha\beta)(x) = \alpha(\beta(x)) = \alpha(x) = \beta(\alpha(x)) = (\beta\alpha(x)).
 \end{equation*}
 </div>
 <div class="para">By an analogous argument, if we instead assume <span class="process-math">\(x\in\supp{\beta}\)</span> then <span class="process-math">\((\alpha\beta)(x)=(\beta\alpha)(x)\text{.}\)</span>
 </div>
-</div> <div class="para logical" id="p-176">
+</div> <div class="para logical" id="lem-disjoint-cycles-commute-3-2">
 <div class="para">Since <span class="process-math">\(\alpha\)</span> and <span class="process-math">\(\beta\)</span> are disjoint, there is no <span class="process-math">\(x\in\supp{\alpha}\cap\supp{\beta}\text{.}\)</span> So finally, we assume <span class="process-math">\(x\in\fix{\alpha}\cap\fix{\beta}\text{;}\)</span> but then obviously</div>
 <div class="displaymath process-math">
 \begin{equation*}
 (\alpha\beta)(x)=\alpha(\beta(x))=\alpha(x)=x=\beta(x) = \beta(\alpha(x)) = (\beta\alpha)(x).
 \end{equation*}
 </div>
-</div></article></div>
-<article class="theorem theorem-like" id="thm-cycdecomp"><h4 class="heading">
+</div></article></details><article class="theorem theorem-like" id="thm-cycdecomp"><h4 class="heading">
 <span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.1.29</span><span class="period">.</span><span class="space"> </span><span class="title">Disjoint cycle decomposition.</span>
 </h4>
-<div class="para" id="p-177">Every permutation in <span class="process-math">\(\sym{n}\)</span> is either a cycle or a product of disjoint cycles.</div></article><article class="hiddenproof" id="proof-8"><a href="" data-knowl="" class="id-ref proof-knowl original" data-refid="hk-proof-8"><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-proof-8"><article class="hiddenproof"><div class="para logical" id="p-178">
+<div class="para" id="thm-cycdecomp-2-1">Every permutation in <span class="process-math">\(\sym{n}\)</span> is either a cycle or a product of disjoint cycles.</div></article><details id="thm-cycdecomp-3" class="hiddenproof born-hidden-knowl"><summary><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></summary><article class="hiddenproof"><div class="para logical" id="thm-cycdecomp-3-1">
 <div class="para">If <span class="process-math">\(\sigma\)</span> is the identity, we write <span class="process-math">\(\sigma=(1)\)</span> and the proof is trivial. Therefore let us suppose <span class="process-math">\(\sigma\in\sym{n}\)</span> is not the identity, so that <span class="process-math">\(\supp{\sigma}\neq\emptyset\text{.}\)</span> Then let <span class="process-math">\(a_1 = \min\supp{\sigma}\text{.}\)</span> Since <span class="process-math">\([n]\)</span> is finite, the set <span class="process-math">\(\set{k\in\Zp:\sigma^k(a_1)\neq a_1}\)</span> must be finite; let</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -851,13 +773,12 @@ k_1 = 1+\max\set{k\in\Zp:\sigma^k(a_1)\neq a_1}\text{.}
 \end{equation*}
 </div>
 <div class="para">But then <span class="process-math">\(\sigma^{k_1}(a_1) = a_1\text{,}\)</span> or <span class="process-math">\(\sigma\)</span> is not a permutation! Therefore we can define <span class="process-math">\(\alpha_1 = (\sigma^{0}(a_1), \sigma^1(a_1), \dotsc, \sigma^{k_1-1}(a_1))\text{,}\)</span> and we have constructed <span class="process-math">\(\alpha_1\)</span> to be a cyclic permutation.</div>
-</div> <div class="para" id="p-179">Proceeding in the same manner, define <span class="process-math">\(a_j\)</span> to be the mimimal element of <span class="process-math">\(\supp{\sigma}\)</span> which is not an element of <span class="process-math">\(\supp{\alpha_i}\)</span> for any <span class="process-math">\(i\lt j\text{.}\)</span> Then define <span class="process-math">\(k_j = 1+\max\set{k\in\Zp:\sigma^{k}(a_j)\neq a_j}\)</span> so that <span class="process-math">\(\alpha_j = (\sigma^{0}(a_j), \sigma^1(a_j), \dotsc, \sigma^{k_j-1}(a_j))\)</span> is a cyclic permutation. Let the set of indices be <span class="process-math">\(J\text{.}\)</span> By our construction, <span class="process-math">\(\supp{\alpha_i}\cap\supp{\alpha_j}=\emptyset\)</span> whenever <span class="process-math">\(i\lt j\text{.}\)</span>
-</div> <div class="para" id="p-180">By the finiteness of <span class="process-math">\([n]\)</span> and the preceding construction, we have <span class="process-math">\(\sigma=\prod_{j\in J}\alpha_j\)</span> as desired.</div></article></div>
-<div class="para" id="p-181">Moreover, this decomposition into disjoint cycles can be written uniquely up to the order in which the cycles appear, and the proof of the preceding theorem gives us exactly the method we use to obtain the decomposition.</div>
+</div> <div class="para" id="thm-cycdecomp-3-2">Proceeding in the same manner, define <span class="process-math">\(a_j\)</span> to be the mimimal element of <span class="process-math">\(\supp{\sigma}\)</span> which is not an element of <span class="process-math">\(\supp{\alpha_i}\)</span> for any <span class="process-math">\(i\lt j\text{.}\)</span> Then define <span class="process-math">\(k_j = 1+\max\set{k\in\Zp:\sigma^{k}(a_j)\neq a_j}\)</span> so that <span class="process-math">\(\alpha_j = (\sigma^{0}(a_j), \sigma^1(a_j), \dotsc, \sigma^{k_j-1}(a_j))\)</span> is a cyclic permutation. Let the set of indices be <span class="process-math">\(J\text{.}\)</span> By our construction, <span class="process-math">\(\supp{\alpha_i}\cap\supp{\alpha_j}=\emptyset\)</span> whenever <span class="process-math">\(i\lt j\text{.}\)</span>
+</div> <div class="para" id="thm-cycdecomp-3-3">By the finiteness of <span class="process-math">\([n]\)</span> and the preceding construction, we have <span class="process-math">\(\sigma=\prod_{j\in J}\alpha_j\)</span> as desired.</div></article></details><div class="para" id="sub-perms-def-cycles-12">Moreover, this decomposition into disjoint cycles can be written uniquely up to the order in which the cycles appear, and the proof of the preceding theorem gives us exactly the method we use to obtain the decomposition.</div>
 <article class="example example-like" id="exmp-disjoint-cycles"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.30</span><span class="period">.</span><span class="space"> </span><span class="title">Writing a permutation in disjoint cycle notation.</span>
 </h4>
-<div class="para logical" id="p-182">
+<div class="para logical" id="exmp-disjoint-cycles-2-1">
 <div class="para">Consider the permutation <span class="process-math">\(\sigma\)</span> written in one-line notation as</div>
 <div class="displaymath process-math">
 \begin{equation*}
@@ -871,7 +792,7 @@ k_1 = 1+\max\set{k\in\Zp:\sigma^k(a_1)\neq a_1}\text{.}
 \end{equation*}
 </div>
 <div class="para">for some <span class="process-math">\(r\leq n\text{.}\)</span> In fact,</div>
-<div class="displaymath process-math" id="md-11">
+<div class="displaymath process-math" id="exmp-disjoint-cycles-2-1-7">
 \begin{gather*}
 1 \xto{\sigma} 8 \xto{\sigma} 3 \xto{\sigma} 5 \xto{\sigma} 4 \xto{\sigma} 9 \xto{\sigma} 10 \xto{\sigma} 2 \xto{\sigma} 1
 \end{gather*}
@@ -882,14 +803,14 @@ k_1 = 1+\max\set{k\in\Zp:\sigma^k(a_1)\neq a_1}\text{.}
 \sigma = (1~8~3~5~4~9~10~2)(6)(7).
 \end{equation*}
 </div>
-</div></article><div class="para" id="p-183">While cycle notation is useful for many purposes, some find it difficult to multiply permutations written in their cycle decompositions. Remember <a href="" class="xref" data-knowl="./knowl/rem-after.html" title="Remark 2.1.7: Composition order">Remark 2.1.7</a>! Multiplication of permutations is always left composition using “after”. All permutations are applied in right-to-left order.</div>
+</div></article><div class="para" id="sub-perms-def-cycles-14">While cycle notation is useful for many purposes, some find it difficult to multiply permutations written in their cycle decompositions. Remember <a href="" class="xref" data-knowl="./knowl/xref/rem-after.html" title="Remark 2.1.7: Composition order">Remark 2.1.7</a>! Multiplication of permutations is always left composition using “after”. All permutations are applied in right-to-left order.</div>
 <article class="example example-like" id="exmp-products_of_cycles"><h4 class="heading">
 <span class="type">Example</span><span class="space"> </span><span class="codenumber">2.1.31</span><span class="period">.</span><span class="space"> </span><span class="title">Products of cycles.</span>
 </h4>
-<div class="para logical" id="p-184">
+<div class="para logical" id="exmp-products_of_cycles-2-1">
 <div class="para">Consider the following permutations in <span class="process-math">\(\sym{8}\text{:}\)</span>
 </div>
-<div class="displaymath process-math" id="md-12">
+<div class="displaymath process-math" id="exmp-products_of_cycles-2-1-2">
 \begin{align*}
 \rho \amp= (1~2~7~4)(3~5~6~8)\\
 \sigma \amp= (1~3~5~8~2~4)\\
@@ -952,13 +873,12 @@ k_1 = 1+\max\set{k\in\Zp:\sigma^k(a_1)\neq a_1}\text{.}
 <td class="l m b0 r0 l0 t0 lines"><span class="process-math">\((1~3~5~8~2~4)(8) = 2\)</span></td>
 <td class="l m b0 r0 l0 t0 lines"><span class="process-math">\((1~2~7~4)(3~5~6~8)(2) = 7\)</span></td>
 </tr>
-</table></div></figure> <div class="para" id="p-185">So we write <span class="process-math">\(\rho\sigma\tau = (1~5~3)(2)(4~6~8~7) = (1~5~3)(4~6~8~7).\)</span>
-</div></article><article class="exercise exercise-like" id="exc-calc-perm-prods"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exc-calc-perm-prods"><h4 class="heading">
+</table></div></figure> <div class="para" id="exmp-products_of_cycles-2-3">So we write <span class="process-math">\(\rho\sigma\tau = (1~5~3)(2)(4~6~8~7) = (1~5~3)(4~6~8~7).\)</span>
+</div></article><details id="exc-calc-perm-prods" class="exercise exercise-like born-hidden-knowl"><summary><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">2.1.33</span><span class="period">.</span><span class="space"> </span><span class="title">Calculating products in cycle notation.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exc-calc-perm-prods"><article class="exercise exercise-like"><div class="para" id="p-186">From <a href="" class="xref" data-knowl="./knowl/exmp-products_of_cycles.html" title="Example 2.1.31: Products of cycles">Products of cycles</a> there are six ways to arrange a product of <span class="process-math">\(\rho\text{,}\)</span> <span class="process-math">\(\sigma\text{,}\)</span> and <span class="process-math">\(\tau\text{;}\)</span> find the other five and write them in cycle notation.</div></article></div>
-<article class="exercise exercise-like" id="exc-calc-perm-powers"><a href="" data-knowl="" class="id-ref exercise-knowl original" data-refid="hk-exc-calc-perm-powers"><h4 class="heading">
+</h4></summary><article class="exercise exercise-like"><div class="para" id="exc-calc-perm-prods-2-1">From <a href="" class="xref" data-knowl="./knowl/xref/exmp-products_of_cycles.html" title="Example 2.1.31: Products of cycles">Products of cycles</a> there are six ways to arrange a product of <span class="process-math">\(\rho\text{,}\)</span> <span class="process-math">\(\sigma\text{,}\)</span> and <span class="process-math">\(\tau\text{;}\)</span> find the other five and write them in cycle notation.</div></article></details><details id="exc-calc-perm-powers" class="exercise exercise-like born-hidden-knowl"><summary><h4 class="heading">
 <span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">2.1.34</span><span class="period">.</span><span class="space"> </span><span class="title">Calculating powers using cycle notation.</span>
-</h4></a></article><div class="hidden-content tex2jax_ignore" id="hk-exc-calc-perm-powers"><article class="exercise exercise-like"><div class="para logical" id="p-187">
+</h4></summary><article class="exercise exercise-like"><div class="para logical" id="exc-calc-perm-powers-2-1">
 <div class="para">Use the long permutation in <span class="process-math">\(\sym{24}\)</span>
 </div>
 <div class="displaymath process-math">
@@ -968,15 +888,13 @@ k_1 = 1+\max\set{k\in\Zp:\sigma^k(a_1)\neq a_1}\text{.}
 </div>
 <div class="para">to investigate powers of permutations. What does the cycle decomposition allow you to do in finding <span class="process-math">\(\sigma^k\text{?}\)</span>
 </div>
-</div></article></div></section></section></div>
+</div></article></details></section></section></div>
 <div class="ptx-content-footer">
-<a class="previous-button button" href="ch-perms.html" title="Previous"><span class="icon">&lt;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon">^</span><span class="name">Top</span></a><a class="next-button button" href="sec-perms-oop.html" title="Next"><span class="name">Next</span><span class="icon">&gt;</span></a>
+<a class="previous-button button" href="ch-perms.html" title="Previous"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cb;</span><span class="name">Prev</span></a><a class="top-button button" href="#" title="Top"><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5ce;</span><span class="name">Top</span></a><a class="next-button button" href="sec-perms-oop.html" title="Next"><span class="name">Next</span><span class="icon material-symbols-outlined" aria-hidden="true">&#xe5cc;</span></a>
 </div></main>
 </div>
-<div class="ptx-page-footer">
-<a class="pretext-link" href="https://pretextbook.org"><div class="name">Authored in PreTeXt</div>
-<div class="logo"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="338 3000 8772 6866"><g style="stroke-width:.025in; stroke:black; fill:none"><polyline points="472,3590 472,9732 " style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259 "></path><path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0  472  9732 "></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496 "></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,3496 A 4241 4241  0  0  1  4724  3590 "></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,9259 A 4507 4507  0  0  1  4724  9448 "></path><polyline points="5385,4299 4062,8125 " style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="8598,3496 8598,9259 " style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="850,3496 850,9259 " style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="4960,9685 4488,9685 " style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="3070,4582 1889,6141 3070,7700 " style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="6418,4582 7600,6141 6418,7700 " style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round; "></polyline><polyline points="8976,3590 8976,9732 " style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732 "></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy"><div class="name">Powered by Runestone</div>
-<img class="logo" title="Powered by Runestone" src="https://runestone.academy/runestone/static/rectangle_badge.png" alt="Powered by Runestone"></a><a class="mathjax-logo" href="https://www.mathjax.org"><img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax"></a>
+<div id="ptx-page-footer" class="ptx-page-footer">
+<a class="pretext-link" href="https://pretextbook.org" title="PreTeXt"><div class="logo"><svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="338 3000 8772 6866"><g style="stroke-width:.025in; stroke:black; fill:none"><polyline points="472,3590 472,9732 " style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "></polyline><path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259"></path><path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0   472  9732"></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496"></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,3496  A 4241 4241  0  0  1  4724  3590"></path><path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,9259  A 4507 4507  0  0  1  4724  9448"></path><polyline points="5385,4299 4062,8125" style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8598,3496 8598,9259" style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="850,3496 850,9259" style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="4960,9685 4488,9685" style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="3070,4582 1889,6141 3070,7700" style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="6418,4582 7600,6141 6418,7700" style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round;"></polyline><polyline points="8976,3590 8976,9732" style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round;"></polyline><path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732"></path></g></svg></div></a><a class="runestone-link" href="https://runestone.academy" title="Runestone Academy"><img class="logo" src="https://runestone.academy/runestone/static/images/RAIcon_cropped.png"></a><a class="mathjax-link" href="https://www.mathjax.org" title="MathJax"><img class="logo" src="https://www.mathjax.org/badge/badge-square-2.png"></a>
 </div>
 </body>
 </html>

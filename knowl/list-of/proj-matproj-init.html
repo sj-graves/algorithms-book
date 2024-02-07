@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.6</span><span class="period">.</span><span class="space"> </span><span class="title"><code class="code-inline tex2jax_ignore">AlgoMatrix</code> initialization.</span>
+</h4>
+<div class="introduction"><div class="para">In order to develop the <code class="code-inline tex2jax_ignore">__init__(self, grid)</code> method, we have to validate the input. We will allow the initialization to fail naturally if we attempt to index into <code class="code-inline tex2jax_ignore">grid</code> and it is not an indexable object.</div></div>
+<article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(a)</span><span class="space"> </span><span class="title">Setting up your files.</span>
+</h5>
+<div class="para">The main class file should be <code class="code-inline tex2jax_ignore">AlgoMatrix.py</code> with an appropriate header followed by <code class="code-inline tex2jax_ignore">from AlgoVector import *</code>. The testing and worknig file should be <code class="code-inline tex2jax_ignore">aam_proj5.py</code> with an appropriate header. Further, the initializtion method should begin as follows:</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">class AlgoMatrix:
+    def __init__(self, grid):
+        '''Initialize an AlgoMatrix from 'grid', which is either a list
+        of list (or tuple or tuple or some combination thereof) of
+        complex values, or a list (or tuple) of AlgoVector objects.'''
+    try:
+        if type(grid[0]) == AlgoVector:
+            # This will get filled in during the next task
+        else:
+            # This will get filled in during the next after that
+    # Then we have to write the exception handler, because without an
+    # 'except:' block this will cause a SyntaxError
+</code></pre></div></article><article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(b)</span><span class="space"> </span><span class="title">A list of <code class="code-inline tex2jax_ignore">AlgoVector</code> objects.</span>
+</h5>
+<div class="para">Inside the first step of the validation, the important things to check are to determine whether remaining elements of <code class="code-inline tex2jax_ignore">grid</code> are actually <code class="code-inline tex2jax_ignore">AlgoVector</code> objects and also to determine that all have the same length. Correct the above code with the following, making modifications as necessary:</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">if type(grid[0]) == AlgoVector:
+    n = len(grid)
+    # The next line works as long as AlgoVector has a __len__ method!
+    m = len(grid[0])
+    new_grid = [ ]
+    for x in grid[0].entries():
+        new_grid.append( [x] )
+    for vec in grid[1:]:
+        if type(vec) != AlgoVector:
+            raise TypeError('Malformed list of AlgoVector objects')
+        elif len(vec) != m:
+            raise ValueError('Malformed list of AlgoVector objects')
+        else:
+            for r in range(m):
+                # Now you have to fill in: we want to add the rth entry of
+                # the current vector, vec, to the rth row of new_grid.
+                continue
+else:
+    # This will get filled in during the next task
+</code></pre></div></article><article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(c)</span><span class="space"> </span><span class="title">A list of lists of <code class="code-inline tex2jax_ignore">complex</code>-compatible objects.</span>
+</h5>
+<div class="para">This execution path proceeds slightly more smoothly, as the input is not of a form which is trying to specify a matrix in the transpose order of columns before rows. Complete the following:</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">else:
+    m = len(grid)
+    n = len(grid[0])
+    new_grid = [ ]
+    for r in range(m):
+        if len(grid[r]) != n:
+            raise ValueError('Malformed grid of complex numbers')
+        new_grid.append( [ ] )
+        for c in range(n):
+            # What do we want to actually append into our new rows?
+            # The next line inserts dummy values of 0 in all positions
+            new_grid[-1].append( complex( 0 ) )
+</code></pre></div></article><article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(d)</span><span class="space"> </span><span class="title">Handling exceptions.</span>
+</h5>
+<div class="para">As it turns out, we actually want to stop the execution of the program if any of the generated exceptions come up. This is handled by simply putting the command <code class="code-inline tex2jax_ignore">raise</code> in the <code class="code-inline tex2jax_ignore">except:...</code> block without any argument. This causes the exception which brought about the problem to be passed up to the next level; this could be a <code class="code-inline tex2jax_ignore">try:... except:...</code> block in a calling function, or it could be the main execution loop of Python. In the latter case, this causes an error and stops execution of your code!</div>
+<div class="para">Of course, you also have to store the important data attributes outside the exception handler, since the assignment of attributes is the final step of creating a usable class object.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">except:
+    raise
+self._data = tuple(tuple(row) for row in new_grid)
+self._row_dim = len(new_grid)
+self._col_dim = len(new_grid[0])
+</code></pre></div></article><article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(e)</span><span class="space"> </span><span class="title">Representation.</span>
+</h5>
+<div class="para">Representing the object is next. Return the <code class="code-inline tex2jax_ignore">str</code> version of <code class="code-inline tex2jax_ignore">self._data</code> instead of <code class="code-inline tex2jax_ignore">"None"</code> in the below code.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __repr__(self):
+    return "None"
+</code></pre></div></article><article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(f)</span><span class="space"> </span><span class="title">Test your work up to this point!</span>
+</h5>
+<div class="para logical">
+<div class="para">At this point you have a substantial amount of code, although you are not finished. Test your work in <code class="code-inline tex2jax_ignore">aam_proj5.py</code> by creating the following matrices and vectors:</div>
+<div class="displaymath process-math">
+\begin{align*}
+A \amp= \begin{bmatrix}
+1 \amp 2 \amp 3 \\
+-2 \amp 1 \amp -3 \\
+-3 \amp 2 \amp -1
+\end{bmatrix} \amp
+\vec{b}_1 \amp= \cvec{3+4j\\5+12j\\7+24j} \amp
+\vec{b}_2 \amp= \cvec{1-\frac12 j\\2-\frac13 j \\ 3-\frac14 j} \amp
+B \amp= [\vec{b}_1|\vec{b}_2]\text{.}
+\end{align*}
+</div>
+</div>
+<div class="para">Explicitly print the representation of these matrices using <code class="code-inline tex2jax_ignore"> print(repr(a_matrix))</code>, where <code class="code-inline tex2jax_ignore">a_matrix</code> is replaced by the variable names you choose for <span class="process-math">\(A\)</span> and <span class="process-math">\(B\text{.}\)</span>
+</div></article></article><span class="incontext"><a class="internal" href="sec-linalg-matproj.html#proj-matproj-init">in-context</a></span>
+</body>
+</html>

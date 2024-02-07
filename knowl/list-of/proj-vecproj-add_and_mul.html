@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.2</span><span class="period">.</span><span class="space"> </span><span class="title">Overloading <code class="code-inline tex2jax_ignore">+</code> and <code class="code-inline tex2jax_ignore">*</code>.</span>
+</h4>
+<div class="introduction"><div class="para">In <a href="sec-linalg-matrices.html" class="internal" title="Section 4.3: Matrices over \CV{n}">Section 4.3</a> we will discover that <code class="code-inline tex2jax_ignore">scalar * AlgoVector</code> is not the only use case for <code class="code-inline tex2jax_ignore">*</code> with vectors; however, until we develop those ideas all that needs to be checked to verify that multiplication will operate is to ensure that the other factor in the product is able to be represented as a <code class="code-inline tex2jax_ignore">complex</code>. On the other hand, in order for vector addition to make sense, not only must summands be complex vectors, they must be vectors of the same dimension.</div></div>
+<article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(a)</span><span class="space"> </span><span class="title">Scalar-vector multiplication.</span>
+</h5>
+<div class="introduction">
+<div class="para">In order to be very explicit with our algorithms, we need to enforce the notion that scalar multiplication is actually <em class="emphasis">scalar-vector</em> multiplication. That means our <code class="code-inline tex2jax_ignore">AlgoVector</code> must be the right-hand factor, so we want <code class="code-inline tex2jax_ignore">__mul__(self, right)</code> to always produce an error and for <code class="code-inline tex2jax_ignore">__rmul__(self, left)</code> to be carefully defined.</div> <div class="para">To be very precise with notation, in a product <span class="process-math">\(x\cdot y\text{,}\)</span> the value <span class="process-math">\(x\)</span> is the <dfn class="terminology">multiplier</dfn> and <span class="process-math">\(y\)</span> is the <dfn class="terminology">multiplicand</dfn>. This terminology is not often used since most people never advance in mathematics to the point where multiplication is non-commutative.</div>
+</div>
+<article class="task exercise-like"><h6 class="heading"><span class="codenumber">(i)</span></h6>
+<div class="para">Add a <code class="code-inline tex2jax_ignore">__mul__(self, right)</code> method to your <code class="code-inline tex2jax_ignore">AlgoVector</code> class which always raises a <code class="code-inline tex2jax_ignore">TypeError</code>, indicating by the error message that left-multiplication by <code class="code-inline tex2jax_ignore">AlgoVector</code> is invalid.</div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(ii)</span></h6>
+<div class="para">Now add the following to the class:</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __rmul__(self, left):
+    '''Return left*self'''
+    try:
+        scalar = complex(left)
+    except TypeError:
+        raise TypeError(f"{left} is unsuitable scalar for scalar-vecprojtor multiplication.")
+    new_entries = [ ]
+    for x in self.entries():
+        # Fix the following line.
+        new_entries.append( None )
+    return AlgoVector(new_entries)
+</code></pre></div>
+<div class="para">Fix the <code class="code-inline tex2jax_ignore">for</code> loop so that it works correctly.</div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(iii)</span></h6>
+<div class="para">Test your multiplication code by trying <code class="code-inline tex2jax_ignore">0*vec1</code>, <code class="code-inline tex2jax_ignore">'1-1j'*vec2</code>, and <code class="code-inline tex2jax_ignore">vec1*9</code>.</div></article></article><article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(b)</span><span class="space"> </span><span class="title">Vector addition.</span>
+</h5>
+<div class="introduction"><div class="para">Since we know from <a href="" class="xref" data-knowl="./knowl/xref/def-vector_space.html" title="Definition 4.1.2: Vector space">4.1.2</a> that vector addition is commutative, we will want <code class="code-inline tex2jax_ignore">vec1 + vec2</code> to have the same result as <code class="code-inline tex2jax_ignore">vec2 + vec1</code>. However the order of operations for Python defaults to attempting <code class="code-inline tex2jax_ignore">__add__</code> before <code class="code-inline tex2jax_ignore">__radd__</code>, which means that <code class="code-inline tex2jax_ignore">__radd__</code> must always raise an error once <code class="code-inline tex2jax_ignore">__add__</code> is correctly defined.</div></div>
+<article class="task exercise-like"><h6 class="heading"><span class="codenumber">(i)</span></h6>
+<div class="para">Implement addition using this code, and replace the comment so that the code works.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __add__(self, right):
+    '''return self+right'''
+    if type(right)==AlgoVector:
+        if len(right)==len(self):
+            new_entries = [ ]
+            # You can't just loop over the elements of self, and you can't
+            # zip(...) self and right together because we haven't made
+            # AlgoVector zip-able. Create in this spot a for loop that makes
+            # the remaining lines of this method do the right thing.
+            #
+            return AlgoVector(new_entries)
+        else:
+            raise ValueError("AlgoVectors have different lengths.")
+    else:
+        raise TypeError(f"Cannot add AlgoVector and {type(right)}.")
+</code></pre></div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(ii)</span></h6>
+<div class="para">With a working <code class="code-inline tex2jax_ignore">__add__</code> method, include the following in your <code class="code-inline tex2jax_ignore">AlgoVector</code> class</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __radd__(self, left):
+    '''return left+self'''
+    # This should never trigger with left being an AlgoVector, so...
+    raise TypeError(f'Cannot add {type(left)} and AlgoVector.')
+</code></pre></div></article></article></article><span class="incontext"><a class="internal" href="sec-linalg-vecproj.html#proj-vecproj-add_and_mul">in-context</a></span>
+</body>
+</html>

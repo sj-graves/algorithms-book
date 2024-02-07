@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h3 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">1.2</span><span class="period">.</span><span class="space"> </span><span class="title">Using Python as a simple calculator.</span>
+</h3>
+<article class="task exercise-like"><h4 class="heading"><span class="codenumber">(a)</span></h4>
+<div class="para">In the file created in <a href="" class="xref" data-knowl="./knowl/xref/prj-kidrsa-files.html" title="Activity 1.1: KidRSA project files">Activity 1.1</a>, declare values for <code class="code-inline tex2jax_ignore">a</code>, <code class="code-inline tex2jax_ignore">b</code>, <code class="code-inline tex2jax_ignore">a_prime</code>, and <code class="code-inline tex2jax_ignore">b_prime</code>. The variable names in Python cannot include the prime symbol, hence the change of name.</div>
+<div class="para">Make sure you include <dfn class="terminology">comments</dfn> in your code explaining what you’re doing. Comments are lines (or ends of lines) which begin with the symbol called either “pound” or “hash”, specifically <code class="code-inline tex2jax_ignore">#</code>.</div></article><article class="task exercise-like"><h4 class="heading"><span class="codenumber">(b)</span></h4>
+<div class="para">Calculate the values of <code class="code-inline tex2jax_ignore">M</code>, <code class="code-inline tex2jax_ignore">e</code>, <code class="code-inline tex2jax_ignore">d</code>, and <code class="code-inline tex2jax_ignore">n</code> from <code class="code-inline tex2jax_ignore">a</code>, <code class="code-inline tex2jax_ignore">b</code>, <code class="code-inline tex2jax_ignore">a_prime</code>, and <code class="code-inline tex2jax_ignore">b_prime</code> using Python, as explained in <a href="" class="xref" data-knowl="./knowl/xref/alg-kidrsa.html" title="Algorithm 1.2.2: Kid RSA Key Generation">Kid RSA Key Generation</a>. Make sure your program displays the public and private key using statements such as <code class="code-inline tex2jax_ignore">print(f"Public key: {(n,e)}")</code>.</div></article><article class="task exercise-like"><h4 class="heading"><span class="codenumber">(c)</span></h4>
+<div class="para">Prove mathematically that there is a value <span class="process-math">\(k\in\Ints\)</span> such that <span class="process-math">\(ed = nk+1\text{,}\)</span> and verify that your code works by printing the result of <code class="code-inline tex2jax_ignore">(e * d) % n</code>.</div></article><article class="task exercise-like"><h4 class="heading"><span class="codenumber">(d)</span></h4>
+<div class="para">Write a function which takes <code class="code-inline tex2jax_ignore">a</code>, <code class="code-inline tex2jax_ignore">b</code>, <code class="code-inline tex2jax_ignore">a_prime</code>, and <code class="code-inline tex2jax_ignore">b_prime</code> as input and returns the key values <code class="code-inline tex2jax_ignore">(n,e)</code> and <code class="code-inline tex2jax_ignore">(n,d)</code>.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def kidrsa_keygen(a, b, a_prime, b_prime):
+    """A function generating KidRSA keypairs."""
+    #
+    # Fill in the code to calculate n, e, d
+    #
+    return (n,e,d)
+</code></pre></div></article></article><span class="incontext"><a class="internal" href="sec-intro-kidrsa.html#prj-kidrsa-calculator">in-context</a></span>
+</body>
+</html>

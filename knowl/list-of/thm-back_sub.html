@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="theorem theorem-like"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">5.3.5</span><span class="period">.</span><span class="space"> </span><span class="title">Solution via back substitution.</span>
+</h4>
+<div class="para logical">
+<div class="para">Given an invertible upper triangular matrix <span class="process-math">\(U\in\Mats{n,n}\)</span> and a vector <span class="process-math">\(\vec{y}\text{,}\)</span> the solution <span class="process-math">\(\vec{x}\)</span> to the matrix-vector product equation <span class="process-math">\(U\vec{x}=\vec{y}\)</span> satisfies</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\entry{\vec{x}}{r} =
+\left(
+\entry{\vec{y}}{r} - \sum_{c=r+1}^{n-1}\entry{U}{r,c}\entry{\vec{x}}{c}
+\right)/\entry{U}{r,r}\text{,}
+\end{equation*}
+</div>
+<div class="para">and as such solving for <span class="process-math">\(\entry{x}{r}\)</span> in the order of <span class="process-math">\(r = n-1,n-2,\dotsc,2,1,0\)</span> involves only direct substitution.</div>
+</div></article><span class="incontext"><a class="internal" href="sec-matapps-ludecomp.html#thm-back_sub">in-context</a></span>
+</body>
+</html>

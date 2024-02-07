@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="technology computation-like"><h4 class="heading">
+<span class="type">Technology</span><span class="space"> </span><span class="codenumber">A.5.4</span><span class="period">.</span><span class="space"> </span><span class="title">Conditional statements.</span>
+</h4> <div class="para">The <code class="code-inline tex2jax_ignore">if:... elif:... else:...</code> structure permits a program to execute different subroutines depending upon the state of various <dfn class="terminology">conditional variables.</dfn> Consider the following example.</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">if cond1:
+    # If cond1 evaluate to True, do the following:
+    opt_function1(...)
+elif cond2:
+    # If cond1 evaluates to False but cond2 evaluates to True, do the
+    # following:
+    opt_function2(...)
+else:
+    # If none of the conditions in the original if or any subsequent
+    # elif statements evaluates to True, then do the following:
+    else_function(...)
+</code></pre></div> <div class="para">After an <code class="code-inline tex2jax_ignore">if:... elif:... else:...</code> block executes, the program does not repeat it (because it is a conditional statement, not an iteration) but returns to the same level of indentation as the original <code class="code-inline tex2jax_ignore">if:</code> and continues the execution.</div></article><span class="incontext"><a class="internal" href="sec-intro-functions.html#tech-if_elif_else">in-context</a></span>
+</body>
+</html>

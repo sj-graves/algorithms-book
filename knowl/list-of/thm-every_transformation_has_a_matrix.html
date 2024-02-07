@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="theorem theorem-like"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">4.3.8</span><span class="period">.</span><span class="space"> </span><span class="title">Matrix representation of a transformation.</span>
+</h4>
+<div class="para">Let <span class="process-math">\(L:\CV{n}\to\CV{m}\)</span> be a linear transformation. Then there is a matrix <span class="process-math">\(A\in\Mats{m,n}\)</span> such that <span class="process-math">\(L=T_A\text{.}\)</span>
+</div></article><details class="hiddenproof born-hidden-knowl"><summary><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></summary><article class="hiddenproof"><div class="para logical">
+<div class="para">For each <span class="process-math">\(c\in\set{0,\dotsc,n-1}\text{,}\)</span> let <span class="process-math">\(\vec{e}_c\in\CV{m}\)</span> be the vector satisfying</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\entry{\vec{e}_c}{r} = \begin{cases}
+0 \amp \text{if }r\neq c \\
+1 \amp \text{if }r=c
+\end{cases}\text{.}
+\end{equation*}
+</div>
+<div class="para">Further, define <span class="process-math">\(\vec{A}_c = L(\vec{e}_c)\)</span> for each <span class="process-math">\(c\text{.}\)</span> It is left as an exercise to the reader to verify that the matrix</div>
+<div class="displaymath process-math">
+\begin{equation*}
+A=\left[\vec{A}_1|\cdots|\vec{A}_{n-1}\right]
+\end{equation*}
+</div>
+<div class="para">satisfies <span class="process-math">\(T_A = L\text{.}\)</span>
+</div>
+</div></article></details><span class="incontext"><a class="internal" href="sec-linalg-matrices.html#thm-every_transformation_has_a_matrix">in-context</a></span>
+</body>
+</html>

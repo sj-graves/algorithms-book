@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="exercise exercise-like"><h4 class="heading">
+<span class="type">Checkpoint</span><span class="space"> </span><span class="codenumber">A.6.11</span><span class="period">.</span><span class="space"> </span><span class="title">Memo-ization.</span>
+</h4>
+<div class="para">A cool use of dictionaries and the <code class="code-inline tex2jax_ignore">try:... except:...</code> block is called <dfn class="terminology">memo-ization</dfn>, although it is usually written without the hyphen. Consider the following implementation of the Collatz sequence.</div>
+<figure class="listing figure-like"><div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">coll_mem = {1:[1], 2:[2,1], 4:[4,2,1]}
+def memoized_coll(x):
+    try:
+        return coll_mem[x]
+    except KeyError:
+        if not type(x)==int or x&lt;1:
+            return None
+        elif x%2==0:
+            next_val = x//2
+        else:
+            next_val = 3 * x + 1
+        coll_mem[x] = [x] + memoized_coll(next_val)
+        return coll_mem[x]
+</code></pre></div>
+<figcaption><span class="type">Listing</span><span class="space"> </span><span class="codenumber">A.6.12<span class="period">.</span></span><span class="space"> </span>An implementation of the Collatz sequence problem using a dictionary to store previously-computed resluts.</figcaption></figure><div class="para">Picking apart the code, we see that first it sets up a dictionary of known values. Then when asked to produce the Collatz sequence from a given input, the function tries to return the value stored in that key of the dictionary. If no such key exists, a <code class="code-inline tex2jax_ignore">KeyError</code> is generated; when that happens, the program falls back on the <span class="process-math">\(3x+1\)</span> form of generating the sequence.</div>
+<div class="para">Suppose this task is iterated over all integers up to some given value; that is, <span class="process-math">\(x=1,2,3,\dotsc\)</span> are checked. For a given input value <span class="process-math">\(x\text{,}\)</span> when will the memoized version of the function always have the key stored in the dictionary? What has to happen to the <code class="code-inline tex2jax_ignore">next_val</code> in the sequence for this to be the case?</div></article><span class="incontext"><a class="internal" href="sec-intro-errors.html#exc-memoization">in-context</a></span>
+</body>
+</html>

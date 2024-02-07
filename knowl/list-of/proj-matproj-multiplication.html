@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.8</span><span class="period">.</span><span class="space"> </span><span class="title">Multiplication in <code class="code-inline tex2jax_ignore">AlgoMatrix</code>.</span>
+</h4>
+<div class="introduction"><div class="para">The two forms of multiplication with a matrix as the multiplier are matrix-vector multiplication and matrix-matrix multiplication. In each case, there is a consideration as to the size of the multiplicand as compared to the size of the multiplier, and those sizes will need to be checked during input validation. The only other valid multiplication case occurs when a non-matrix is the multiplier and the matrix is the multiplicand, which only occurs during scalar multiplication; therefore in that case the only constraint is to check that the scalar is in fact a complex number.</div></div>
+<article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(a)</span><span class="space"> </span><span class="title"><code class="code-inline tex2jax_ignore">AlgoMatrix</code> as multiplier: <code class="code-inline tex2jax_ignore">__mul__</code>.</span>
+</h5>
+<div class="introduction">
+<div class="para">Begin with the following:</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __mul__(self, right):
+    '''Return self*right, which necessitates that right be an AlgoVector
+        or another AlgoMatrix.'''
+    if type(right) == type(self):
+        # This is matrix-matrix multiplication
+        pass
+    elif type(right) == AlgoVector:
+        # This is matrix-vector multiplication
+        pass
+    else:
+        raise TypeError(f'Cannot multiply AlgoMatrix*{type(right)}')
+</code></pre></div>
+</div>
+<article class="task exercise-like"><h6 class="heading">
+<span class="codenumber">(i)</span><span class="space"> </span><span class="title">Matrix-matrix multiplication.</span>
+</h6>
+<div class="para">While it is best to define matrix-matrix multiplication as iterated matrix-vector multiplication, that is not the optimal way to implement the product. Instead, it’s best to check the dimensions of the two matrices and proceed to build the product of <span class="process-math">\(A\)</span> and <span class="process-math">\(B\)</span> by using <span class="process-math">\(\entry{AB}{r,c} = \sum_{k=0}^{n-1}\entry{A}{r,k}\entry{B}{k,c}\)</span> when <span class="process-math">\(A\in\Mats{m,n}\)</span> and <span class="process-math">\(B\in\Mats{n,q}\text{.}\)</span>
+</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">if type(right) == type(self):
+    # This is matrix-matrix multiplication
+    m,n = self.dims()
+    p,q = right.dims()
+    # What condition needs to be checked on this line to ensure
+    # dimensions are correct? Change CONDITION on the following line.
+    if CONDITION:
+        new_grid = [ ]
+        # How many rows has the product matrix?
+        for r in range( number_of_rows ):
+            new_grid.append( [ ] )
+            # How many columns has the product matrix?
+            for c in range( number_of_columns ):
+            total = 0
+            # How many terms must be summed?
+            for k in range( number_of_terms ):
+                total += self[r,k] * right[k,c]
+            new_grid[-1].append(total)
+        return AlgoMatrix(new_grid)
+    else:
+        raise ValueError("Dimension mismatch")
+</code></pre></div>
+<div class="para">Note that as usual there are several places where that code must be modified to work correctly.</div></article><article class="task exercise-like"><h6 class="heading">
+<span class="codenumber">(ii)</span><span class="space"> </span><span class="title">Matrix-vector multiplication.</span>
+</h6>
+<div class="para">Recall that according to its definition, a matrix-vector product is a linear combination of vectors. Once again the best way to define the product is not the most efficient way to compute it; we instead use the component-wise approach to build the result as a list using <span class="process-math">\(\entry{A\vv}{r} = \sum_{c=0}^{n-1} \entry{A}{r,c}\entry{\vv}{c}\)</span> where <span class="process-math">\(A\in\Mats{m,n}\)</span> and <span class="process-math">\(\vv\in\CV{n}\text{.}\)</span>
+</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">elif type(right) == AlgoVector:
+    # This is matrix-vector multiplication
+    m,n = self.dims()
+    if len(right) == n:
+        # The dimensions of the vector and matrix are compatible
+        new_list = [ ]
+        for c in range(n):
+            new_list.append( SOMETHING )
+    else:
+        raise ValueError("Dimension mismatch")
+</code></pre></div></article></article><article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(b)</span><span class="space"> </span><span class="title"><code class="code-inline tex2jax_ignore">AlgoMatrix</code> as multiplicand.</span>
+</h5>
+<div class="para">Unlike vectors, since matrix-matrix multiplication exists there is a use case for matrices being the multiplicand. However that particular use case is handled in Python (via order of operations) by left multiplication and <code class="code-inline tex2jax_ignore">__mul__</code>. Therefore all we need to implement in the <code class="code-inline tex2jax_ignore">__rmul__</code> method is scalar-matrix multiplication, which operates the same way in <code class="code-inline tex2jax_ignore">AlgoMatrix</code> as in <code class="code-inline tex2jax_ignore">AlgoVector</code>, extended to handle both rows and columns.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __rmul__(self, left):
+    try:
+        scalar = complex(left)
+    except:
+        raise TypeError(f"Invalid scalar {left} for AlgoMatrix multiplication")
+    new_grid = [ ]
+    m,n = self.dims()
+    for r in range(m):
+        new_grid.append( [ ] )
+        for c in range(n):
+            #
+            # What has to go in the inner lists?
+            # Append that to new_grid[-1]
+            #
+            continue
+    return AlgoMatrix(new_grid)
+</code></pre></div></article><article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(c)</span><span class="space"> </span><span class="title">Test your work up to this point!</span>
+</h5>
+<div class="para logical">
+<div class="para">Now define a new <code class="code-inline tex2jax_ignore">AlgoMatrix</code> in your <code class="code-inline tex2jax_ignore">aam_proj5.py</code> file, representing the matrix</div>
+<div class="displaymath process-math">
+\begin{equation*}
+I_3 = \begin{bmatrix}
+1 \amp 0 \amp 0\\
+0 \amp 1 \amp 0\\
+0 \amp 0 \amp 1
+\end{bmatrix}
+\end{equation*}
+</div>
+<div class="para">and test your multiplication code to see if <span class="process-math">\(1A\)</span> and <span class="process-math">\(I_3A\)</span> are equal.</div>
+</div></article></article><span class="incontext"><a class="internal" href="sec-linalg-matproj.html#proj-matproj-multiplication">in-context</a></span>
+</body>
+</html>

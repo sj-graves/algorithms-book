@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="algorithm theorem-like"><h4 class="heading">
+<span class="type">Algorithm</span><span class="space"> </span><span class="codenumber">3.2.1</span><span class="period">.</span><span class="space"> </span><span class="title">Playfair’s cipher.</span>
+</h4>
+<div class="para">Assume that we have a string <code class="code-inline tex2jax_ignore">pmsg</code> consisting of a message written in English plaintext which we wish to encrypt via Playfair.</div>
+<div class="para logical"><ol class="decimal">
+<li><div class="para">Choose and share a key phrase, a short English plaintext.</div></li>
+<li><div class="para">Pre-process the key phrase into the <dfn class="terminology">Playfair grid</dfn> using <a href="" class="xref" data-knowl="./knowl/xref/algo-playfair_key_preprocessing.html" title="Algorithm 3.2.5: Playfair’s cipher: pre-processing the key phrase">Algorithm 3.2.5</a>.</div></li>
+<li><div class="para">Process the plaintext <code class="code-inline tex2jax_ignore">pmsg</code> into encryptable digraphs using <a href="" class="xref" data-knowl="./knowl/xref/algo-playfair_creating_digraphs.html" title="Algorithm 3.2.6: Playfair’s cipher: creating digraphs from an original message">Algorithm 3.2.6</a>.</div></li>
+<li><div class="para">Create an empty list <code class="code-inline tex2jax_ignore">enc_digraphs</code> to eventually contain all of the encrypted digraphs.</div></li>
+<li><div class="para">Perform Playfair’s cipher on each entry of the list <code class="code-inline tex2jax_ignore">digraphs</code> one at a time using <a href="" class="xref" data-knowl="./knowl/xref/algo-playfair_encrypting_digraphs.html" title="Algorithm 3.2.7: Playfair’s cipher: encrypting digraphs">Algorithm 3.2.7</a>, adding the encrypted version of each to <code class="code-inline tex2jax_ignore">enc_digraphs</code>.</div></li>
+</ol></div></article><span class="incontext"><a class="internal" href="sec-crypto-classic.html#algo-playfair_cipher">in-context</a></span>
+</body>
+</html>

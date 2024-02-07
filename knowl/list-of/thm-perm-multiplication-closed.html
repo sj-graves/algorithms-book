@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="theorem theorem-like"><h4 class="heading">
+<span class="type">Theorem</span><span class="space"> </span><span class="codenumber">2.1.8</span><span class="period">.</span><span class="space"> </span><span class="title"><span class="process-math">\(\sym{A}\)</span> is closed under composition.</span>
+</h4>
+<div class="para">Let <span class="process-math">\(A\)</span> be a set and <span class="process-math">\(\sym{A}\)</span> the set of permutations of <span class="process-math">\(A\text{,}\)</span> and suppose <span class="process-math">\(\sigma,\tau\in\sym{A}\text{.}\)</span> Then <span class="process-math">\(\sigma\after\tau\in\sym{A}\)</span> and <span class="process-math">\(\tau\after\sigma\in\sym{A}\text{.}\)</span>
+</div></article><details class="hiddenproof born-hidden-knowl"><summary><h4 class="heading"><span class="type">Proof<span class="period">.</span></span></h4></summary><article class="hiddenproof"><div class="para">Let <span class="process-math">\(\sigma,\tau\in\sym{A}\)</span> for a set <span class="process-math">\(A\text{.}\)</span> It suffices to show that <span class="process-math">\(\tau\sigma\in\sym{A}\text{,}\)</span> for then the case <span class="process-math">\(\sigma\tau\in\sym{A}\)</span> holds by a symmetric argument exchanging the roles of <span class="process-math">\(\sigma\)</span> and <span class="process-math">\(\tau\text{.}\)</span>
+</div> <div class="para">In order to show that <span class="process-math">\(\tau\sigma\)</span> is injective, suppose that <span class="process-math">\(a_1,a_2\in A\)</span> such that <span class="process-math">\((\tau\sigma)(a_1) = (\tau\sigma)(a_2).\)</span> Then by definition, <span class="process-math">\(\tau(\sigma(a_1)) = \tau(\sigma(a_2))\text{;}\)</span> but since <span class="process-math">\(\tau\)</span> is injective, this necessitates that <span class="process-math">\(\sigma(a_1) = \sigma(a_2)\text{.}\)</span> In turn, since <span class="process-math">\(\sigma\)</span> is injective, we have that <span class="process-math">\(a_1 = a_2\text{,}\)</span> and thus have shown that <span class="process-math">\(a_1=a_2\)</span> whenever <span class="process-math">\((\tau\sigma)(a_1) = (\tau\sigma)(a_2)\text{.}\)</span> Therefore <span class="process-math">\(\tau\sigma\)</span> is injective.</div> <div class="para logical">
+<div class="para">In order to show that <span class="process-math">\(\tau\sigma\)</span> is surjective, let <span class="process-math">\(a_3\in A\text{.}\)</span> Since <span class="process-math">\(\tau\)</span> is surjective, there is some <span class="process-math">\(a_2\in A\)</span> such that <span class="process-math">\(\tau(a_2) = a_3\text{;}\)</span> likewise, since <span class="process-math">\(\sigma\)</span> is surjective, there is some <span class="process-math">\(a_1\in A\)</span> such that <span class="process-math">\(\sigma(a_1)=a_2\text{.}\)</span> But then</div>
+<div class="displaymath process-math">
+\begin{equation*}
+(\tau\sigma)(a_1) = \tau(\sigma(a_1)) = \tau(a_2) = a_3,
+\end{equation*}
+</div>
+<div class="para">and hence <span class="process-math">\(a_3\in (\tau\sigma)(A)\text{.}\)</span> Since our selection of <span class="process-math">\(a_3\)</span> was arbitrary, we have that <span class="process-math">\(\tau\sigma\)</span> is surjective.</div>
+</div> <div class="para">As we have shown <span class="process-math">\(\tau\sigma\)</span> to be both injective and surjective on <span class="process-math">\(A\text{,}\)</span> we have establised <span class="process-math">\(\tau\sigma\in\sym{A}\)</span> as desired.</div></article></details><span class="incontext"><a class="internal" href="sec-perms-def.html#thm-perm-multiplication-closed">in-context</a></span>
+</body>
+</html>

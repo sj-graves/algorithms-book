@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">5.4</span><span class="period">.</span><span class="space"> </span><span class="title">Inverse matrices.</span>
+</h4> <div class="para">Use augmentation, Gauss-Jordan elimination, and the creation of an <code class="code-inline tex2jax_ignore">AlgoMatrix</code> from a slice of the columns of another <code class="code-inline tex2jax_ignore">AlgoMatrix</code> together to add the following method to the <code class="code-inline tex2jax_ignore">AlgoMatrix</code> class:</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def inverse(self):
+    """Return the inverse of self if self is a nonsingular square matrix."""
+    m, n = self.dims()
+    if m == n:
+        # Build the correct augmented matrix
+        augmentation = None
+        bigger_mat = None
+        # Find the RREF matrix row-equivalent to it.
+        rref_bigger_mat = None
+        # Extract the correct columns from it as slices
+        left_submat = None
+        right_submat = None
+        # Return the answer
+        if SOME_NICE_CONDITION:
+            return AlgoMatrix(THE_CORRECT_INPUT)
+        else:
+            raise ValueError("Singular matrix")
+    else:
+        raise ValueError("Non-square matrices are not invertible.")
+</code></pre></div></article><span class="incontext"><a class="internal" href="sec-matapps-gje_proj.html#proj-matapps-inverse">in-context</a></span>
+</body>
+</html>

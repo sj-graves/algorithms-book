@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="algorithm theorem-like"><h4 class="heading">
+<span class="type">Algorithm</span><span class="space"> </span><span class="codenumber">6.4.11</span><span class="period">.</span><span class="space"> </span><span class="title">Maintenance of layered graph.</span>
+</h4>
+<div class="para logical">
+<div class="para">Suppose <span class="process-math">\(\Lambda = (V,E_\ell,c_\ell,s,t)\)</span> is the layered graph structure output from two successive applications of <a href="" class="xref" data-knowl="./knowl/xref/alg_mod_dijkstra.html" title="Algorithm 6.4.4: Modified Dikstra: All Shortest Paths from s">Algorithm 6.4.4</a>, that <span class="process-math">\(P=\set{s=u_0,u_1,\ldots,u_{n-1},u_n=t}\)</span> is an augmenting path with augmenting flow value <span class="process-math">\(f^*\text{.}\)</span>
+</div>
+<ol class="decimal">
+<li><div class="para">For each <span class="process-math">\(i\in\set{0,1,2,\ldots,n-1}\text{,}\)</span> update <span class="process-math">\(c_\ell(u_i,u_{i+1})\)</span> by subtracting from it the value <span class="process-math">\(f^*\text{.}\)</span>
+</div></li>
+<li><div class="para logical">
+<div class="para">For an edge <span class="process-math">\(uv\in E_\ell\)</span> where after updating, <span class="process-math">\(c_\ell(u,v)=0\text{,}\)</span> do the following:</div>
+<ol class="lower-alpha">
+<li>
+<span class="heading"><span class="title">Clean-to-source from a vertex <span class="process-math">\(u\)</span>.</span></span><div class="para logical"><ol class="lower-roman">
+<li><div class="para logical">
+<div class="para">The vertex <span class="process-math">\(u\)</span> has no successors in <span class="process-math">\(\Lambda\)</span> precisely when</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\set{w\in V: c_\ell(u,w)&gt;0}=\set{}.
+\end{equation*}
+</div>
+</div></li>
+<li><div class="para">If <span class="process-math">\(u\)</span> has no successors and is not the source vertex <span class="process-math">\(s\text{,}\)</span> consider the set <span class="process-math">\({P=\set{w\in V:c_\ell(w,u)&gt;0}}\)</span> of predecessors of <span class="process-math">\(u\text{.}\)</span>
+</div></li>
+<li><div class="para">For each <span class="process-math">\(w\in P\text{,}\)</span> set <span class="process-math">\(c_\ell(w,u)=0\text{.}\)</span> For each <span class="process-math">\(w\in P\)</span> with no successors other than <span class="process-math">\(u\text{,}\)</span> <em class="emphasis">clean-to-source from the vertex <span class="process-math">\(w\)</span></em>.</div></li>
+</ol></div>
+</li>
+<li>
+<span class="heading"><span class="title">Clean-to-target from a vertex <span class="process-math">\(v\)</span>.</span></span><div class="para logical"><ol class="lower-roman">
+<li><div class="para logical">
+<div class="para">The vertex <span class="process-math">\(v\)</span> has no predecessors in <span class="process-math">\(\Lambda\)</span> precisely when</div>
+<div class="displaymath process-math">
+\begin{equation*}
+\set{w\in V:c_\ell(w,v)&gt;0}=\set{}\text{.}
+\end{equation*}
+</div>
+</div></li>
+<li><div class="para">If <span class="process-math">\(v\)</span> has no sucessors and is not the target vertex <span class="process-math">\(t\text{,}\)</span> consider the set <span class="process-math">\(S=\set{w\in V:c_\ell(v,w)&gt;0}\)</span> of successors of <span class="process-math">\(v\text{.}\)</span>
+</div></li>
+<li><div class="para">For each <span class="process-math">\(w\in S\text{,}\)</span> set <span class="process-math">\(c_\ell(v,w)=0\text{.}\)</span> For each <span class="process-math">\(w\in S\)</span> with no predecessors other than <span class="process-math">\(v\text{,}\)</span> <em class="emphasis">clean-to-target from the vertex <span class="process-math">\(w\)</span></em>.</div></li>
+</ol></div>
+</li>
+</ol>
+</div></li>
+<li><div class="para">After both cleaning processes have finished for all saturated edges, remove from <span class="process-math">\(E_\ell\)</span> any edge <span class="process-math">\(uv\)</span> with <span class="process-math">\(c_\ell(u,v)=0\text{.}\)</span>
+</div></li>
+</ol>
+</div></article><span class="incontext"><a class="internal" href="sec-gtalgos-maxflowmincut.html#alg_maint">in-context</a></span>
+</body>
+</html>

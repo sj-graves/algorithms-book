@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.1</span><span class="period">.</span><span class="space"> </span><span class="title">Initialization of the <code class="code-inline tex2jax_ignore">AlgoVector</code> class.</span>
+</h4>
+<div class="introduction"><div class="para">We will want to work in two files again: a file <code class="code-inline tex2jax_ignore">AlgoVector.py</code> containing your class definition and a file <code class="code-inline tex2jax_ignore">aam_proj4.py</code> containing all testing code.</div></div>
+<article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(a)</span><span class="space"> </span><span class="title">Files and headers.</span>
+</h5>
+<div class="para">Make sure both files have appropriate headers, and start the <code class="code-inline tex2jax_ignore">aam_proj4.py</code> file with <code class="code-inline tex2jax_ignore">from AlgoVector import *</code> so that you have access to your class definition.</div></article><article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(b)</span><span class="space"> </span><span class="title">Initialization algorithm.</span>
+</h5>
+<div class="introduction">
+<div class="para">As always, it is important to start by considering what validation must be performed on the input to the <code class="code-inline tex2jax_ignore">__init__</code> method for the new class. Since we want to create vectors from a <code class="code-inline tex2jax_ignore">list</code> or <code class="code-inline tex2jax_ignore">tuple</code> of entries, we will specify our <code class="code-inline tex2jax_ignore">__init__</code> method as follows, which determines both the names of the arguments to the method as well as the important attribute name for the class:</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __init__(self, entries):
+    '''The initialization method for class AlgoVector'''
+    # perform all validation
+    # build the data that will replace None below:
+    self._components = None
+</code></pre></div>
+</div>
+<article class="task exercise-like"><h6 class="heading"><span class="codenumber">(i)</span></h6>
+<div class="para">What is a good way to ensure that <code class="code-inline tex2jax_ignore">type(entries)</code> is either <code class="code-inline tex2jax_ignore">list</code> or <code class="code-inline tex2jax_ignore">tuple</code>? Implement that and replace the first comment line in the above code.</div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(ii)</span></h6>
+<div class="para">Since not every literal element of <code class="code-inline tex2jax_ignore">entries</code> will have the <code class="code-inline tex2jax_ignore">complex</code> type, we need to build a new list whose elements are the original elements of <code class="code-inline tex2jax_ignore">entries</code> cast into the <code class="code-inline tex2jax_ignore">complex</code> type; we have done this before using a <code class="code-inline tex2jax_ignore">for</code> loop. Replace the second comment line in the above code with the appropriate for loop, storing the correct list of data in a local variable.</div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(iii)</span></h6>
+<div class="para">We definitely do not want to have mutable vectors. Replace the line <code class="code-inline tex2jax_ignore">self._components = None</code>, assigning to the attribute the <code class="code-inline tex2jax_ignore">tuple</code> of whatever list you constructed in the previous step.</div></article><div class="conclusion"><div class="para">You should now have a functional <code class="code-inline tex2jax_ignore">__init__</code> method which defines exactly one attribute.</div></div></article><article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(c)</span><span class="space"> </span><span class="title">Representation method.</span>
+</h5>
+<div class="para">Since <code class="code-inline tex2jax_ignore">__repr__</code> is supposed to produce the string which would exactly recreate your object if it were used as input, we do not want to produce any interesting column vector output. Implement the following:</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def entries(self):
+    '''Return the tuple of entries/components of self.'''
+    return self._components
+
+def __repr__(self):
+    '''Faithful string representation of AlgoVector'''
+    return str(self.entries())
+</code></pre></div>
+<div class="para">In your <code class="code-inline tex2jax_ignore">aam_proj4.py</code> file, test that everything is working by checking the output of the following:</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">vec1 = AlgoVector([0+1j, 1+0j, 1+1j])
+vec2 = AlgoVector([1j, 1, '1+1j'])
+print(vec1)
+print(vec2)
+</code></pre></div></article><article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(d)</span><span class="space"> </span><span class="title">Equality of vectors.</span>
+</h5>
+<div class="introduction">
+<div class="para">While the two vectors <code class="code-inline tex2jax_ignore">vec1</code> and <code class="code-inline tex2jax_ignore">vec2</code> produced in the previous step should be equal, adding the line <code class="code-inline tex2jax_ignore">print(vec1 == vec2)</code> to your <code class="code-inline tex2jax_ignore">aam_proj4.py</code> file will quickly demonstrate that they are not equal, as far as Python is concerned. Without a <code class="code-inline tex2jax_ignore">__eq__</code> method, the only way to detemine quality that Python has is to check the memory used by each object, which is not mathematically an interesting notion of equality.</div> <div class="para">Recalling that two column vectors are equal precisely when they agree in each entry, we see that we need a few more tools to define <code class="code-inline tex2jax_ignore">__eq__</code> properly.</div>
+</div>
+<article class="task exercise-like"><h6 class="heading"><span class="codenumber">(i)</span></h6>
+<div class="para">The <code class="code-inline tex2jax_ignore">__getitem__</code> method is used by Python to allow indexing into a container type. To be more specific, when we type <code class="code-inline tex2jax_ignore">container[index]</code>, the Python interpreter translates that to <code class="code-inline tex2jax_ignore">container.__getitem__(index)</code>.</div>
+<div class="para">Add the following to your <code class="code-inline tex2jax_ignore">AlgoVector.py</code> file, in such a way that <code class="code-inline tex2jax_ignore">print(vec1[1])</code> evaluated at the end of <code class="code-inline tex2jax_ignore">aam_proj4.py</code> will produce the output <code class="code-inline tex2jax_ignore">(1+0j)</code>.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __getitem__(self, entry_index):
+    '''Return self[entry_index]'''
+    the_entries = self.entries()
+    # Fix the following line so this method works.
+    return None
+</code></pre></div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(ii)</span></h6>
+<div class="para">Another build-in that we’ve used for containers which we now must define is the method to handle <code class="code-inline tex2jax_ignore">len</code>. Unsurprisingly this is defined by <code class="code-inline tex2jax_ignore">__len__</code>. Add this to your class file.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __len__(self):
+    '''Return len(self)'''
+    return len(self.entries())
+</code></pre></div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(iii)</span></h6>
+<div class="para">Now we can write an equality-testing code, implemented via the <code class="code-inline tex2jax_ignore">__eq__</code> method. Fix the following, and add it to your class file.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __eq__(self, other):
+    '''Return self==other, as vectors'''
+    if type(other) != AlgoVector or len(other) != len(self):
+        return False
+    else:
+        compare = [ ]
+        for k in range(len(self)):
+            # Use our __getitem__ to add the appropriate True or False
+            # value to the list `compare`
+            compare.append(  None  )
+        # The `all` command returns True if every element of the input
+        # list evaluates to True. It's like a massive "and" statement.
+        return all(compare)
+</code></pre></div></article><div class="conclusion"><div class="para">You should now be able to test <code class="code-inline tex2jax_ignore">print(vec1 == vec2)</code> at the end of the <code class="code-inline tex2jax_ignore">aam_proj4.py</code> file and get the mathematically correct answer.</div></div></article></article><span class="incontext"><a class="internal" href="sec-linalg-vecproj.html#proj-vecproj-init_and_repr">in-context</a></span>
+</body>
+</html>

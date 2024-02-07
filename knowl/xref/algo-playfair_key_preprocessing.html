@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="algorithm theorem-like"><h4 class="heading">
+<span class="type">Algorithm</span><span class="space"> </span><span class="codenumber">3.2.5</span><span class="period">.</span><span class="space"> </span><span class="title">Playfair’s cipher: pre-processing the key phrase.</span>
+</h4>
+<div class="para">Suppose <code class="code-inline tex2jax_ignore">key_phrase</code> is a string consisting of the original chosen key phrase.</div>
+<div class="para logical"><ol class="decimal">
+<li><div class="para">Convert all alphabetic characters of <code class="code-inline tex2jax_ignore">key_phrase</code> into capitals and discard any non-alphabetic characters.</div></li>
+<li><div class="para">Add the full alphabet <span class="process-math">\(\mathcal{E}\)</span> to the end of <code class="code-inline tex2jax_ignore">key_phrase</code>, in normal alphabetic order.</div></li>
+<li><div class="para">Replace all <code class="code-inline tex2jax_ignore">I</code> characters in <code class="code-inline tex2jax_ignore">key_phrase</code> with a <code class="code-inline tex2jax_ignore">J</code>.</div></li>
+<li><div class="para">Remove all repetitions of a character from <code class="code-inline tex2jax_ignore">key_phrase</code> until what is left is a list of 25 non-repeating capital letters.</div></li>
+<li><div class="para">Write these 25 characters into the positions of a <span class="process-math">\(5\times 5\)</span> grid, beginning at the top left entry. This is the <dfn class="terminology">Playfair grid</dfn>.</div></li>
+</ol></div></article><span class="incontext"><a class="internal" href="sec-crypto-classic.html#algo-playfair_key_preprocessing">in-context</a></span>
+</body>
+</html>

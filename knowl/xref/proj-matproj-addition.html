@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">4.9</span><span class="period">.</span><span class="space"> </span><span class="title">Addition in <code class="code-inline tex2jax_ignore">AlgoMatrix</code>.</span>
+</h4> <div class="para">Implementation of addition follows the pattern in <code class="code-inline tex2jax_ignore">AlgoMatrix</code> that was established in <code class="code-inline tex2jax_ignore">AlgoVector</code>: raise an error for <code class="code-inline tex2jax_ignore">__radd__</code> and do the straightforward computation in <code class="code-inline tex2jax_ignore">__add__</code>. Since other types natively do not add with <code class="code-inline tex2jax_ignore">AlgoMatrix</code> we can safely let the failure to allow an <code class="code-inline tex2jax_ignore">AlgoMatrix</code> to be a right-summand to fall onto the left addition of the other class.</div> <div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __add__(self, right):
+    '''Return self+right'''
+    # validate type of right
+    if TEST_CONDITION1:
+        # Compare dimensions
+        m,n = self.dims()
+        p,q = right.dims()
+        if TEST_CONDITION2:
+            new_grid = [ ]
+            for r in range(m):
+                new_grid.append( [ ] )
+                for c in range(n):
+                #
+                # What has to go in the inner lists?
+                # Append that to new_grid[-1]
+                # Remember: we implemented bracket notation!
+                #
+                continue
+            return AlgoMatrix(new_grid)
+        else:
+            raise ValueError("Dimension mismatch")
+    else:
+        raise TypeError(f"Cannot add AlgoMatrix and {type(right)}")
+</code></pre></div> <div class="para">Test this in your <code class="code-inline tex2jax_ignore">aam_proj5.py</code> file by checking to see that <span class="process-math">\(A+A = 2A\text{.}\)</span>
+</div></article><span class="incontext"><a class="internal" href="sec-linalg-matproj.html#proj-matproj-addition">in-context</a></span>
+</body>
+</html>

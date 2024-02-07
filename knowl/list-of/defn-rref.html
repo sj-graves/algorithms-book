@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="definition definition-like"><h4 class="heading">
+<span class="type">Definition</span><span class="space"> </span><span class="codenumber">5.1.10</span><span class="period">.</span><span class="space"> </span><span class="title">Reduced row-echelon form.</span>
+</h4> <div class="para logical">
+<div class="para">A matrix <span class="process-math">\(A\in\Mats{m,n}\)</span> is in <dfn class="terminology">reduced row-echelon form</dfn>, abbreviated <dfn class="terminology">RREF</dfn>, if and only if it satisfies the following conditions:</div>
+<dl class="description-list">
+<dt>ZR@B: Zero-Rows at the Bottom</dt>
+<dd><div class="para">Any row of <span class="process-math">\(A\)</span> consisting only of zeros has a greater row index than any row containing any nonzero elements; visually this is further “down” in the matrix.</div></dd>
+<dt>LMNZ=1: Leftmost Nonzeros Equal 1</dt>
+<dd><div class="para">In any row of <span class="process-math">\(A\)</span> not consisting only of zeros, the leftmost nonzero (LMNZ) entry is a 1. The <dfn class="terminology">LMNZ</dfn> is the nonzero entry of least column index.</div></dd>
+<dt>LMNZKC: Leftmost Nonzeros Kill Columns</dt>
+<dd><div class="para">In a column containing a LMNZ, the only nonzero entry in the column is the LMNZ.</div></dd>
+<dt>LMNZGDR: Leftmost Nonzeros Go Down and Right</dt>
+<dd><div class="para">If rows index <span class="process-math">\(k\)</span> and <span class="process-math">\(\ell\)</span> have <span class="process-math">\(k\lt\ell\text{,}\)</span> then the column index of the LMNZ in row <span class="process-math">\(k\)</span> is less than the column index of the LMNZ in row <span class="process-math">\(\ell\text{;}\)</span> visually that makes the LMNZs go down and right, starting in the upper left corner of the matrix.</div></dd>
+</dl>
+</div> <div class="para">These can be formalized in terms of entry notation using brackets, but it is not fully necessary to do so. Moreover, let <span class="process-math">\(D=\set{d_0,d_1,\dotsc,d_{s-1}}\)</span> be the set of column indices containing LMNZs; these are called <dfn class="terminology">pivot columns</dfn>, as another term for the matrix position containing a LMNZ is a <dfn class="terminology">pivot position</dfn>. Similarly let <span class="process-math">\(F=\set{f_0,f_1,\dotsc,f_{n-s-1}}\)</span> be the complementary set of column indices not containing a LMNZ, so that <span class="process-math">\(D\cup F = \upto{n}\text{.}\)</span>
+</div></article><span class="incontext"><a class="internal" href="sec-matapps-ssles.html#defn-rref">in-context</a></span>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">2.6</span><span class="period">.</span><span class="space"> </span><span class="title"><code class="code-inline tex2jax_ignore">AlgoPerm</code> methods for <code class="code-inline tex2jax_ignore">domain</code> and <code class="code-inline tex2jax_ignore">after</code>.</span>
+</h4>
+<article class="task exercise-like"><h5 class="heading"><span class="codenumber">(a)</span></h5>
+<div class="para">Define a <code class="code-inline tex2jax_ignore">domain</code> method for <code class="code-inline tex2jax_ignore">AlgoPerm</code> as follows.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def domain(self):
+    """Return the set consisting of the domain of self."""
+    return self._domain
+</code></pre></div>
+<div class="para">While we could just continue to access the <code class="code-inline tex2jax_ignore">_domain</code> attribute, it is <em class="emphasis">good programming style</em> to not refer directly to attributes, but instead use methods to access their values.</div></article><article class="task exercise-like"><h5 class="heading"><span class="codenumber">(b)</span></h5>
+<div class="para">Define a <code class="code-inline tex2jax_ignore">after</code> method for <code class="code-inline tex2jax_ignore">AlgoPerm</code>, beginning as follows.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def after(self, other):
+    """Return the AlgoPerm obtained by composition of self after other."""
+    if some_error_condition:
+        # 1. Validate that other is an AlgoPerm
+        pass
+    elif some_other_error:
+        # 2. Validate that the domain of other is a subset of the domain of self
+        pass
+    else:
+        # Otherwise, define an empty new mapping dictionary
+        new_mapping = { }
+        # 3. Iterate over all the elements of the domain of other, making the
+        #    correct assignments in new_mapping
+        #
+        # 4. Iterate over all the elements of the domain of self which are
+        #    not in the domain of other, making the correct assignments
+        #    in new_mapping
+        #
+        # Return the correct AlgoPerm
+        return AlgoPerm(new_mapping)
+</code></pre></div></article><article class="task exercise-like"><h5 class="heading"><span class="codenumber">(c)</span></h5>
+<div class="para">The new method <code class="code-inline tex2jax_ignore">after</code> has several steps described in comments. Finish the code so that the result of <code class="code-inline tex2jax_ignore">print(a.after(b))</code> in your <code class="code-inline tex2jax_ignore">aam_proj2.py</code> file is <code class="code-inline tex2jax_ignore">{1: 1, 2: 5, 3: 3, 4: 6, 5: 2, 6: 4, 7: 10, 8: 9, 9: 8, 10: 7}</code>. <em class="emphasis">Hint: You should see what methods are available for the <code class="code-inline tex2jax_ignore">set</code> class, by looking at <code class="code-inline tex2jax_ignore">help(set)</code></em>.</div></article><article class="task exercise-like"><h5 class="heading"><span class="codenumber">(d)</span></h5>
+<div class="para">
+<dfn class="terminology">Operator overloading</dfn> is the fancy name for when we have one symbol (such as <code class="code-inline tex2jax_ignore">*</code>) which must perform multiple tasks in multiple different contexts. All of the double-underscore <code class="code-inline tex2jax_ignore">__methods__</code> we have been working with are the means by which Python performs operator overloading. Rather than continuing to use <code class="code-inline tex2jax_ignore">after</code> for composition, it becomes much easier to use Python’s multiplication operator <code class="code-inline tex2jax_ignore">*</code> as we use it mathematically.</div>
+<div class="para">Overload the <code class="code-inline tex2jax_ignore">*</code> operator for <code class="code-inline tex2jax_ignore">AlgoPerm</code> by defining the following new method.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def __mul__(self, right):
+    """Implement self*right."""
+    return self.after(right)
+</code></pre></div>
+<div class="para">Since we know it is very important to be consistent with your left and right multiplication, we now note that the <dfn class="terminology">left multiplication</dfn> of <code class="code-inline tex2jax_ignore">self*right</code> is effected using <code class="code-inline tex2jax_ignore">__mul__(self, right)</code> and the <dfn class="terminology">right multiplication</dfn> of <code class="code-inline tex2jax_ignore">left * self</code> is effected using a different method, <code class="code-inline tex2jax_ignore">__rmul__(self, left)</code>. There is an <dfn class="terminology">order of operations</dfn> in Python just as in mathematics, and Python checks for a valid left multiplication before checking for a valid right multiplication.</div></article></article><span class="incontext"><a class="internal" href="sec-perms-oop.html#proj-perms-after_method">in-context</a></span>
+</body>
+</html>

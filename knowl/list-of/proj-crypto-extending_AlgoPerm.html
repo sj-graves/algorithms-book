@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<!--********************************************-->
+<!--*       Generated from PreTeXt source      *-->
+<!--*                                          *-->
+<!--*         https://pretextbook.org          *-->
+<!--*                                          *-->
+<!--********************************************-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="robots" content="noindex, nofollow">
+</head>
+<body class="ignore-math">
+<article class="activity project-like"><h4 class="heading">
+<span class="type">Activity</span><span class="space"> </span><span class="codenumber">3.3</span><span class="period">.</span><span class="space"> </span><span class="title">Extending the <code class="code-inline tex2jax_ignore">AlgoPerm</code> class.</span>
+</h4>
+<article class="task exercise-like"><h5 class="heading"><span class="codenumber">(a)</span></h5>
+<div class="para">Begin by copying <code class="code-inline tex2jax_ignore">AlgoPerm.py</code> into a new file, called <code class="code-inline tex2jax_ignore">ExtendedAlgoPerm.py</code>. All your changes to the <code class="code-inline tex2jax_ignore">AlgoPerm</code> class will be performed in the <code class="code-inline tex2jax_ignore">ExtendedAlgoPerm.py</code> file.</div></article><article class="task exercise-like"><h5 class="heading"><span class="codenumber">(b)</span></h5>
+<div class="para">The <code class="code-inline tex2jax_ignore">__init__</code> method of your <code class="code-inline tex2jax_ignore">AlgoPerm</code> class must first be extended to allow for the mapping to represent the disjoint cycle decomposition of the permutation of <span class="process-math">\(\set{0,1,2,\dotsc,k-1}\text{.}\)</span> Here is a function which takes a tuple of tuples and converts it into an appropriate mapping dictionary.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def mapping_from_tuples(tuple_of_tuples):
+    bad_cycles = ValueError("Badly formatted tuple for cycle notation.")
+    map_dict = { }
+    for cyc in tuple_of_tuples:
+        if type(cyc) != tuple:
+            # It might still be bad input.
+            raise bad_cycles
+        else:
+            # So now we know it's a tuple of tuples.
+            for i,x in enumerate(cyc):
+                # i is the index and x is the element of the cycle
+                if x in map_dict.keys():
+                    # This is a bad disjoint cycle notation! Not a bijection!
+                    raise bad_cycles
+                try:
+                    y = cyc[i+1]
+                    # This will work unless we're at the end of the cycle already
+                except IndexError:
+                    y = cyc[0]
+                # Now y = f(x), if f is this permutation.
+                map_dict[x] = y
+    # Once that's done we've walked through the whole support
+    #   of the permutation, and now we have to make sure the
+    #   fixed set is in the domain as well.
+    max_value = max(map_dict.keys())
+    for x in range(1 + max_value):
+        if x in map_dict.keys():
+            # We've already seen this x, move along.
+            continue
+        else:
+            map_dict[x] = x
+    # Now map_dict is the right dictionary to use to build an
+    #   AlgoPerm, so rewrite this code into your own words!
+    return map_dict
+</code></pre></div>
+<div class="para">In order to fix your <code class="code-inline tex2jax_ignore">__init__</code> file, this function must be rewritten! Do so.</div></article><article class="task exercise-like"><h5 class="heading"><span class="codenumber">(c)</span></h5>
+<div class="para">Add a <code class="code-inline tex2jax_ignore">support</code> method to the class, as follows:</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def support(self):
+    supp = [ ]
+    for x in self.domain():
+        if x==self(x):
+            continue
+        else:
+            supp.append( x )
+    return set(supp)
+</code></pre></div></article><article class="task exercise-like"><h5 class="heading"><span class="codenumber">(d)</span></h5>
+<div class="introduction"><div class="para">Now that <code class="code-inline tex2jax_ignore">AlgoPerm.__init__</code> has been rewritten to allow input such as <code class="code-inline tex2jax_ignore">AlgoPerm( ((0,),(1,2,3),(4,),(5,6,7)) )</code>, we must include code to display our permutations in disjoint cycle notation as well as returning them as tuples of tuples. We will introduce two new methods: <code class="code-inline tex2jax_ignore">cycle_tuples</code> and <code class="code-inline tex2jax_ignore">cycle_string</code>. Since the code for <code class="code-inline tex2jax_ignore">cycle_tuples</code> involves some looping, we are going to add a neat feature to our class. Specifically, we will make use of a <code class="code-inline tex2jax_ignore">try:... except:...</code> block so that no matter how many times we call the <code class="code-inline tex2jax_ignore">cycle_tuples</code> method, the computation is only performed once.</div></div>
+<article class="task exercise-like"><h6 class="heading"><span class="codenumber">(i)</span></h6>
+<div class="para">Start the method as below. The lines beginning with <code class="code-inline tex2jax_ignore">####</code> will be changed.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def cycle_tuples(self):
+    '''Return self in disjoint cycle notation as a tuple of tuples. Single-element tuples
+        will be left off unless self is the identity, in which case this will return
+        ((x,),), which is the tuple-of-tuples notation for the identity permutation when
+        x is the minimum element of self.domain()'''
+    try:
+        # If self has an attribute _cycle_tuples, this will work.
+        return self._cycle_tuples
+        # if not, it will raise an AttributeError, which is handled by...
+    except AttributeError:
+        # Since tuples are immutable, everything must be created as a list.
+        list_of_cycles = [ ]
+        # In order to create the cycle decomposition, we need an ordered list
+        #    of all the domain elements which are not fixed by self, but in
+        #    a mutable way. The following should work!
+        symbol_list = sorted(self.support())
+        #### This is the part you will work out in successive steps.
+        ####    It will involve some looping so these three comments will
+        ####    end up being removed and replaced by a nested while loop.
+        if list_of_cycles == [ ]:
+            # Inside this block, we see that self is the identity.
+            self._cycle_tuples = ( ( min(self.domain()), ), )
+            # To be nice for our next method, let's define the string version as well.
+            self._cycle_tuples = f"({min(self.domain())})"
+        else:
+            # Otherwise we've create a list containing tuples of each interesting
+            #    cycle in the decomposition of self.
+            self._cycle_tuples = tuple(list_of_cycles)
+            # And we have to be a little more careful with the string version here
+            self._cycle_string = ''
+            for cyc in list_of_cycles:
+                self._cycle_string += str(cyc)
+        # Now we've defined the interesting attribute of self, so return it.
+        return self._cycle_tuples
+</code></pre></div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(ii)</span></h6>
+<div class="para">The algorithm for producing the disjoint cycle notation appeared in the first section of this chapter, in <a href="" class="xref" data-knowl="./knowl/xref/exmp-disjoint-cycles.html" title="Example 2.1.30: Writing a permutation in disjoint cycle notation">Example 2.1.30</a>. It consists of a loop which puts elements of the domain into cycles, starting with the minimum element of the support, and proceeding until all of the support elements have either been placed into cycles or discarded; only the elements of the support need to be considered because disjoint cycle notation does not include single-element cycles unless the permutation is the identity!</div>
+<div class="para">The while loop must repeat as long as <code class="code-inline tex2jax_ignore">symbol_list</code> is non-empty. The first task inside the <code class="code-inline tex2jax_ignore">while</code> loop will be to remove the 0th-indexed element from <code class="code-inline tex2jax_ignore">symbol_list</code>. This is exactly what the <code class="code-inline tex2jax_ignore">list.pop(index)</code> method does: it returns the element in the specified <code class="code-inline tex2jax_ignore">index</code> from the list, and simultaneously removes it from the list. Thus <code class="code-inline tex2jax_ignore">x = symbol_list.pop(0)</code> will always assign the 0th-indexed element of <code class="code-inline tex2jax_ignore">symbol_list</code> to <code class="code-inline tex2jax_ignore">x</code> and shorten <code class="code-inline tex2jax_ignore">symbol_list</code> by removing its 0th-indexed element.</div>
+<div class="para">Next a new list must be created representing the cycle which is about to be created: <code class="code-inline tex2jax_ignore">new_cycle = [ x ]</code>.</div>
+<div class="para">In order to create the cycle, we must iterate until the image of the last element appended to <code class="code-inline tex2jax_ignore">new_cycle</code> is equal to the initial element of <code class="code-inline tex2jax_ignore">new_cycle</code>. Since we have defined the <code class="code-inline tex2jax_ignore">__call__</code> method, we can check this as the condition of a while loop by testing to see if <code class="code-inline tex2jax_ignore">self( new_cycle[-1] )</code> differs from <code class="code-inline tex2jax_ignore">new_cycle[0]</code>. So long as these two are unequal, we must assign a new variable <code class="code-inline tex2jax_ignore">y = self( new_cycle[-1] )</code>, then remove <code class="code-inline tex2jax_ignore">y</code> from <code class="code-inline tex2jax_ignore">symbol_list</code> using the <code class="code-inline tex2jax_ignore">list.remove(...)</code> method, and finally append <code class="code-inline tex2jax_ignore">y</code> to the end of <code class="code-inline tex2jax_ignore">new_cycle</code>.</div>
+<div class="para">Once that loop has completed, we simply check if <code class="code-inline tex2jax_ignore">new_cycle</code> is a single-element list: if so, we skip to the next iteration of the outer while loop using <code class="code-inline tex2jax_ignore">continue</code>. Otherwise, we append <code class="code-inline tex2jax_ignore">tuple( new_cycle )</code> to our <code class="code-inline tex2jax_ignore">list_of_cycles</code>. This completes the nested while loop!</div>
+<div class="para">Convert that explanation into code and replace the <code class="code-inline tex2jax_ignore">####</code> lines.</div></article><article class="task exercise-like"><h6 class="heading"><span class="codenumber">(iii)</span></h6>
+<div class="para">Having written the <code class="code-inline tex2jax_ignore">cycle_tuples</code> method in such a way that its execution saves the <code class="code-inline tex2jax_ignore">_cycle_string</code> attribute, we now have an easy way to write the <code class="code-inline tex2jax_ignore">cycle_string</code> method, again using the <code class="code-inline tex2jax_ignore">try:... except AttributeError:...</code> block.</div>
+<div class="code-box" style="width: 100%; margin-left: 0%; margin-right: 0%;"><pre class="program"><code class="language-py">def cycle_string(self):
+    try:
+        return self._cycle_string
+    except AttributeError:
+        # If the attribute wasn't defined, we need to run the cycle_tuples method,
+        #    but we don't need its output so we'll just let it run without saving
+        #    the returned value.
+        self.cycle_tuples()
+        return self._cycle_string
+</code></pre></div>
+<div class="para">An alternative way to perform that same function safely is to use the builtin <code class="code-inline tex2jax_ignore">hasattr(value, attr_name)</code> function; this function takes any object as <code class="code-inline tex2jax_ignore">value</code> and any string as <code class="code-inline tex2jax_ignore">attr_name</code> and returns <code class="code-inline tex2jax_ignore">True</code> if <code class="code-inline tex2jax_ignore">value</code> has an attribute with the same name as the contents of the<code class="code-inline tex2jax_ignore">attr_name</code> string.</div>
+<div class="para">Implement <code class="code-inline tex2jax_ignore">cycle_string</code> as a method using an <code class="code-inline tex2jax_ignore">if:... else:...</code> block instead of <code class="code-inline tex2jax_ignore">try:... except:...</code>
+</div></article></article><article class="task exercise-like"><h5 class="heading">
+<span class="codenumber">(e)</span><span class="space"> </span><span class="title">Permutation rotations.</span>
+</h5>
+<div class="para">The key component of the Enigma machine is in its physical rotation of the permutations. The physical mechanism made this extremely straightforward, and we can use careful slicing to cause the same change. Suppose we defined <code class="code-inline tex2jax_ignore">sigma = AlgoPerm([5,4,3,0,1,2])</code>, which is <span class="process-math">\(\sigma=(0,5,2,3)(1,4)\text{.}\)</span> We want to define a method <code class="code-inline tex2jax_ignore">rotate(self, steps)</code> which has the following outputs:</div>
+<figure class="table table-like"><figcaption><span class="type">Table</span><span class="space"> </span><span class="codenumber">3.3.1<span class="period">.</span></span><span class="space"> </span>Rotations of the permutation <span class="process-math">\(\sigma=(0,5,2,3)(1,4)\)</span></figcaption><div class="tabular-box natural-width"><table class="tabular">
+<tr>
+<td class="l m b1 r0 l0 t0 lines">Input</td>
+<td class="l m b1 r0 l0 t0 lines">Output (in cycle notation)</td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">sigma.rotate(0)</code></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\((0,5,2,3)(1,4)\)</span></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">sigma.rotate(1)</code></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\((0,4,2)(1,3)\)</span></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">sigma.rotate(7)</code></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\((0,4,2)(1,3)\)</span></td>
+</tr>
+<tr>
+<td class="l m b0 r0 l0 t0 lines"><code class="code-inline tex2jax_ignore">sigma.rotate(-1)</code></td>
+<td class="l m b0 r0 l0 t0 lines"><span class="process-math">\((0,2,4)(1,5)\)</span></td>
+</tr>
+</table></div></figure><div class="para">Implement the <code class="code-inline tex2jax_ignore">rotate(self, steps)</code> method.</div></article></article><span class="incontext"><a class="internal" href="sec-crypto-proj.html#proj-crypto-extending_AlgoPerm">in-context</a></span>
+</body>
+</html>
