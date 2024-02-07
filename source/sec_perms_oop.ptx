@@ -579,12 +579,14 @@
                     <input>
                         def after(self, other):
                             """Return the AlgoPerm obtained by composition of self after other."""
-                            # 1. Validate that other is an AlgoPerm
-                            #
-                            # 2. Validate that the domain of other is a subset of the domain of self
-                            #
-                            # Otherwise, define an empty new mapping dictionary
+                            if some_error_condition:
+                                # 1. Validate that other is an AlgoPerm
+                                pass
+                            elif some_other_error:
+                                # 2. Validate that the domain of other is a subset of the domain of self
+                                pass
                             else:
+                                # Otherwise, define an empty new mapping dictionary
                                 new_mapping = { }
                                 # 3. Iterate over all the elements of the domain of other, making the
                                 #    correct assignments in new_mapping
